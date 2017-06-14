@@ -17,11 +17,14 @@ npm -v
 
 * Install Ionic, cordova and node_modules
     ```bash
+    $ npm install -g ionic cordova
+    ```
+* or update Ionic
+    ```bash
     $ npm uninstall -g ionic cordova
     $ npm install -g ionic cordova
-    $ npm install
     ```
-
+    
 * Google Maps Plugin
 
    ```bash
@@ -52,8 +55,25 @@ $ ionic cordova build ios
 
 ## User Guide
 
-## Existing Features
+## Features
 
+### Existing Features
+
+* Display event of CarpeStudentem
+* Launch carpooling app https://www.commuty.net
+* Launch Resto4u app 
+* Help Desk, How to connect to the university network
+* Maps with point of interest on campus
+
+### Future Features
+
+* Display News of UCL
+* Display course schedule (ADE)
+* Add course schedule to your calendar
+* Display Libraries schedule and more informations
+* Authentication with OAuth 2.0 
+* Studentbook and Staffbook
+* Display Sports schedule
 
 
 ## Contribution
