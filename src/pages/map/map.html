@@ -1,0 +1,118 @@
+<!--
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Map</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="presentFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <div #pleaseConnect id="please-connect">
+    <p>Please connect to the Internet...</p>
+  </div>
+
+  <div id="container">
+    <div #map id="map"></div>
+  </div>
+  <ion-card>
+    <ion-item (click)="presentSelector()">
+      <ion-icon name="create" item-left large></ion-icon>
+      <h2>{{selectedLocation.title}}</h2>
+      <p>{{selectedLocation.adress}}</p>
+    </ion-item>
+    <ion-item>
+      <button ion-button icon-left clear item-right (click)="toggleMarker(selectedLocation.title)">
+        <ion-icon name="pin"></ion-icon>
+        Pin
+      </button>
+    </ion-item>
+  </ion-card>
+  <ion-item>
+    <button ion-button block (click)="presentFilter()" [hidden]="showLocationList" icon-right>
+      Show Location List
+      <ion-icon name="arrow-dropdown"></ion-icon>
+    </button>
+    <button ion-button block (click)="presentFilter()" [hidden]="!showLocationList" icon-right>
+      Mask Location List
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-card *ngFor="let zone of zones" [hidden]="!showLocationList">
+    <ion-card-header (click)="toggleDetails(zone)">
+      {{zone.name}}
+      <ion-icon color="primary" [name]="zone.icon"></ion-icon>
+    </ion-card-header>
+
+    <ion-item-divider [hidden]="!zone.showDetails">
+      Auditoires
+    </ion-item-divider>
+
+    <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.showDetails">
+      <div item-content (click)="toggleLocation(auditore, zone.auditoires.listChecked, i)">
+        <h3>{{auditoire.nom}}</h3>
+        <p>{{auditoire.adresse}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider [hidden]="!zone.showDetails">
+      Bibliothèques
+    </ion-item-divider>
+
+    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.showDetails">
+      <div item-content (click)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)">
+        <h3>{{bibli.nom}}</h3>
+        <p>{{bibli.adresse}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider [hidden]="!zone.showDetails">
+      Restaurants Universitaires
+    </ion-item-divider>
+
+    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.showDetails">
+      <div item-content (click)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)">
+        <h3>{{restau.nom}}</h3>
+        <p>{{restau.adresse}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider [hidden]="!zone.showDetails">
+      Parkings
+    </ion-item-divider>
+
+    <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.showDetails">
+      <div item-content (click)="toggleLocation(parking, zone.parkings.listChecked, i)">
+        <h3>{{parking.nom}}</h3>
+      </div>
+      <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary" (click)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
+    </ion-item>
+  </ion-card>
+</ion-content>

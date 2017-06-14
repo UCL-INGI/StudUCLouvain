@@ -1,0 +1,1247 @@
+{
+   "author": "mdeman",
+   "zones" : [
+
+        {
+             "nom" : "Sciences et technologies",
+             "auditoires" : [
+                 {
+                     "nom"  : "Croix du Sud",
+                     "sigle" : "SUD",
+                     "cnt_places": 1888,
+                     "cnt_auditoires" : 18,
+                     "adresse" : "Place Croix du SUD - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsud.gif",
+                     "coord": {
+                         "lat" : "50.6662282",
+                         "lng": "4.6195734"
+                     }
+
+                 },
+                 {
+                     "nom"  : "Cyclotron",
+                     "sigle" : "CYCL",
+                     "cnt_places": 392,
+                     "cnt_auditoires" : 10,
+                     "adresse" : "Chemin du Cyclotron 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcycl.gif",
+                     "coord": {
+                         "lat" : "50.6660998",
+                         "lng": "4.6239607"
+                     }
+                 },
+                 {
+                     "nom"  : "Lavoisier",
+                     "sigle" : "LAVO",
+                     "cnt_places": 148,
+                     "cnt_auditoires" : 3,
+                     "adresse" : "Place Louis Pasteur, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollavo.gif",
+                     "coord": {
+                         "lat" : "50.6694534",
+                         "lng": "4.619427"
+                     }
+                 },
+                 {
+                     "nom"  : "Mercator",
+                     "sigle" : "MERC",
+                     "cnt_places": 530,
+                     "cnt_auditoires" : 15,
+                     "adresse" : "Place Louis Pasteur, 3 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmerc.gif",
+                     "coord": {
+                         "lat" : "50.6694534",
+                         "lng": "4.619427"
+                     }
+                 },
+                 {
+                     "nom"  : "Marie Curie",
+                     "sigle" : "MCUR",
+                     "cnt_places": 96,
+                     "cnt_auditoires" : 4,
+                     "adresse" : "rue du Compas, 3 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmcur.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Pierre Curie",
+                     "sigle" : "PCUR",
+                     "cnt_places": 306,
+                     "cnt_auditoires" : 7,
+                     "adresse" : "rue du Compas, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpcur.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Pythagore",
+                     "sigle" : "PYTH",
+                     "cnt_places": 36,
+                     "cnt_auditoires" : 1,
+                     "adresse" : "rue du Compas, 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpyth.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Sainte Barbe",
+                     "sigle" : "BARB",
+                     "cnt_places": 1941,
+                     "cnt_auditoires" : 35,
+                     "adresse" : "Place Sainte Barbe, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolbarb.gif",
+                     "coord": {
+                         "lat" : "50.6684749",
+                         "lng": "4.621661"
+                     }
+                 },
+                 {
+                     "nom"  : "Sciences",
+                     "sigle" : "SCES",
+                     "cnt_places": 1334,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Place des Sciences, 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsces.gif",
+                     "coord": {
+                         "lat" : "50.6681746",
+                         "lng": "4.6196733"
+                     }
+                 },
+                 {
+                     "nom"  : "Van Helmont",
+                     "sigle" : "VHEL",
+                     "cnt_places": 236,
+                     "cnt_auditoires" : 6,
+                     "adresse" : "Place Louis Pasteur, 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolvhel.gif",
+                     "coord": {
+                         "lat" : "50.6693175",
+                         "lng": "4.6192258"
+                     }
+                 }
+            ],
+             "bibliotheques" : [
+                 {
+                     "nom"  : "Bibliothèque des sciences et technologies",
+                     "sigle" : "BST",
+                     "adresse" : "3, Place des Sciences - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/sciencesaccueil.jpg",
+                     "coord": {
+                         "lat" : "50.6681726",
+                         "lng": "4.6196554"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "2" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "3" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "4" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "5" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "12.00"
+                            }
+                        }
+                }
+            ],
+             "restaurants_universitaires" : [
+                 {
+                    "nom"  : "Le Galilée",
+                    "sigle" : "",
+                    "adresse" : "Place Galilée, 1 Louvain-La-Neuve",
+                    "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/facade-galilee.gif",
+                     "coord": {
+                         "lat" : "50.6679885",
+                         "lng": "4.6187452"
+                     },
+                    "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "2" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "3" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "4" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "5" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+
+                 }
+            ],
+            "parkings" : [
+                {
+                     "nom"  : "Place des Sciences",
+                     "sigle" : "",
+                     "adresse" : "50.668186, 4.619424",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "155",
+                     "coord": {
+                         "lat" : "50.668186",
+                         "lng": "4.619424"
+                     }
+                },
+                {
+                     "nom"  : "Sainte-Barbe",
+                     "sigle" : "",
+                     "adresse" : "50.667591, 4.621585",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "182",
+                     "coord": {
+                         "lat" : "50.667591",
+                         "lng": "4.621585"
+                     }
+                },
+                {
+                     "nom"  : "Croix du Sud",
+                     "sigle" : "",
+                     "adresse" : "50.666377, 4.621854",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "569",
+                     "coord": {
+                         "lat" : "50.666377",
+                         "lng": "4.621854"
+                     }
+                },
+                {
+                     "nom"  : "Cyclotron",
+                     "sigle" : "",
+                     "adresse" : "50.666231, 4.624793",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "197",
+                     "coord": {
+                         "lat" : "50.666231",
+                         "lng": "4.624793"
+                     }
+                },
+                {
+                     "nom"  : "Baudouin Ier",
+                     "sigle" : "",
+                     "adresse" : "50.664218, 4.622218",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "210",
+                     "coord": {
+                         "lat" : "50.664218",
+                         "lng": "4.622218"
+                     }
+                },
+                {
+                     "nom"  : "Rédimé",
+                     "sigle" : "",
+                     "adresse" : "50.668794, 4.624890",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "74",
+                     "coord": {
+                         "lat" : "50.668794",
+                         "lng": "4.624890"
+                     }
+                }
+            ]
+
+        },
+
+        {
+             "nom" : "Sciences humaines",
+             "auditoires" : [
+                 {
+                     "nom"  : "Agora",
+                     "sigle" : "AGOR",
+                     "cnt_places": 1289,
+                     "cnt_auditoires" : 9,
+                     "adresse" : "Place Agora, 19 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolagor.gif",
+                     "coord": {
+                         "lat" : "50.6691041",
+                         "lng": "4.6124464"
+                     }
+                 },
+                 {
+                     "nom"  : "Coubertin",
+                     "sigle" : "COUB",
+                     "cnt_places": 839,
+                     "cnt_auditoires" : 12,
+                     "adresse" : "Place Pierre de Coubertin, 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcoub.gif",
+                     "coord": {
+                         "lat" : "50.6705452",
+                         "lng": "4.606818"
+                     }
+                 },
+                 {
+                     "nom"  : "Descamps",
+                     "sigle" : "DESC",
+                     "cnt_places": 64,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Grand-Place, 45 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldesc.gif",
+                     "coord": {
+                         "lat" : "50.6692785",
+                         "lng": "4.6122516"
+                     }
+                 },
+                 {
+                     "nom"  : "Doyen",
+                     "sigle" : "DOYE",
+                     "cnt_places": 620,
+                     "cnt_auditoires" : 4,
+                     "adresse" : "Place des Doyens, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldoye.gif",
+                     "coord": {
+                         "lat" : "50.6680562",
+                         "lng": "4.6126268"
+                     }
+                 },
+                 {
+                     "nom"  : "Dupriez",
+                     "sigle" : "DUPR",
+                     "cnt_places": 2,
+                     "cnt_auditoires" : 50,
+                     "adresse" : "Place Montesquieu, 3 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldupr.gif",
+                     "coord": {
+                         "lat" : "50.6679106",
+                         "lng": "4.611555"
+                     }
+                 },
+                 {
+                     "nom"  : "Erasme",
+                     "sigle" : "ERAS",
+                     "cnt_places": 591,
+                     "cnt_auditoires" : 18,
+                     "adresse" : "Place Blaise Pascal, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooleras.gif",
+                     "coord": {
+                         "lat" : "50.6692205",
+                         "lng": "4.6115995"
+                     }
+                 },
+                 {
+                     "nom"  : "Leclercq",
+                     "sigle" : "LECL",
+                     "cnt_places": 722,
+                     "cnt_auditoires" : 19,
+                     "adresse" : "Place Montesquieu, 1 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollecl.gif",
+                     "coord": {
+                         "lat" : "50.6675738",
+                         "lng": "4.6119188"
+                     }
+                 },
+                 {
+                     "nom"  : "Montesqieu",
+                     "sigle" : "MONT",
+                     "cnt_places": 1423,
+                     "cnt_auditoires" : 6,
+                     "adresse" : "Rue Montesquieu, 32 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmont.gif",
+                     "coord": {
+                         "lat" : "50.6687754",
+                         "lng": "4.6117253"
+                     }
+                 },
+                 {
+                     "nom"  : "Socrate",
+                     "sigle" : "SOCR",
+                     "cnt_places": 1588,
+                     "cnt_auditoires" : 16,
+                     "adresse" : "Place du Cardinal Mercier, 10-12 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsocr.gif",
+                     "coord": {
+                         "lat" : "50.7095263",
+                         "lng": "4.5098737"
+                     }
+                 },
+                 {
+                     "nom"  : "Studio Agora",
+                     "sigle" : "STUD",
+                     "cnt_places": 573,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Place Agora, 19 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "coord": {
+                         "lat" : "50.6691951",
+                         "lng": "4.6126047"
+                     }
+                 },
+                 {
+                     "nom"  : "Thomas More",
+                     "sigle" : "MORE",
+                     "cnt_places": 830,
+                     "cnt_auditoires" : 18,
+                     "adresse" : "Place Montesquieu, 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmore.gif",
+                     "coord": {
+                         "lat" : "50.6677424",
+                         "lng": "4.6113916"
+                     }
+                 }
+            ],
+             "bibliotheques" : [
+                 {
+                     "nom"  : "Bibliothèque de droit",
+                     "sigle" : "BDRT",
+                     "adresse" : "Place Montesquieu 2 - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/Nouvelles_acquisitions_175px.jpg",
+                     "coord": {
+                         "lat" : "50.6677424",
+                         "lng": "4.6113916"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "10.00",
+                                "close" : "18.45"
+                            },
+                            "2" : {
+                                "open" : "9.00",
+                                "close" : "18.45"
+                            },
+                            "3" : {
+                                "open" : "9.00",
+                                "close" : "18.45"
+                            },
+                            "4" : {
+                                "open" : "9.00",
+                                "close" : "18.45"
+                            },
+                            "5" : {
+                                "open" : "9.00",
+                                "close" : "18.45"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        }
+                 },
+                 {
+                     "nom"  : "Bibliothèque des arts et des lettres",
+                     "sigle" : "BFLT",
+                     "adresse" : "31, Place Cardinal Mercier - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/logoBFLT1.jpg",
+                     "coord": {
+                         "lat" : "50.6700075",
+                         "lng": "4.6104069"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "2" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "3" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "4" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "5" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "17.00"
+                            }
+                        }
+                 },
+                 {
+                     "nom"  : "Bibliothèque de philosophie",
+                     "sigle" : "BISP",
+                     "adresse" : "14, Place du Cardinal Mercier - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/bisp/images/LogoBISP_LivreArbitre2.jpg",
+                     "coord": {
+                         "lat" : "50.6700753",
+                         "lng": "4.6105271"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "10.00",
+                                "close" : "17.45"
+                            },
+                            "2" : {
+                                "open" : "9.00",
+                                "close" : "17.45"
+                            },
+                            "3" : {
+                                "open" : "9.00",
+                                "close" : "17.45"
+                            },
+                            "4" : {
+                                "open" : "9.00",
+                                "close" : "17.45"
+                            },
+                            "5" : {
+                                "open" : "9.00",
+                                "close" : "17.45"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        }
+                 },
+                 {
+                     "nom"  : "Bibliothèque de psychologie et des sciences de l'éducation",
+                     "sigle" : "BPSP",
+                     "adresse" : "10, Place du Cardinal Mercier - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/bpsp/images/Photo_007bis.jpg",
+                     "coord": {
+                         "lat" : "50.6700753",
+                         "lng": "4.6105271"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "10.00",
+                                "close" : "18.00"
+                            },
+                            "2" : {
+                                "open" : "8.30",
+                                "close" : "18.00"
+                            },
+                            "3" : {
+                                "open" : "8.30",
+                                "close" : "18.00"
+                            },
+                            "4" : {
+                                "open" : "8.30",
+                                "close" : "18.00"
+                            },
+                            "5" : {
+                                "open" : "8.30",
+                                "close" : "16.00"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        }
+                 },
+                 {
+                     "nom"  : "Bibliothèque des sciences économiques, sociales, politiques et de communication",
+                     "sigle" : "BSPO",
+                     "adresse" : "Place Montesquieu 5  - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/bspo/images/00001_Copie_BSPO_logo_2014-4.JPG",
+                     "coord": {
+                         "lat" : "50.6679106",
+                         "lng": "4.611555"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "11.00",
+                                "close" : "17.00"
+                            },
+                            "2" : {
+                                "open" : "8.30",
+                                "close" : "17.00"
+                            },
+                            "3" : {
+                                "open" : "8.30",
+                                "close" : "17.00"
+                            },
+                            "4" : {
+                                "open" : "8.30",
+                                "close" : "17.00"
+                            },
+                            "5" : {
+                                "open" : "8.30",
+                                "close" : "17.00"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        }
+                 },
+                 {
+                     "nom"  : "Bibliothèque de théologie",
+                     "sigle" : "BTEC",
+                     "adresse" : "31, Place Cardinal Mercier - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/logoBTEC1.jpg",
+                     "coord": {
+                         "lat" : "50.6700075",
+                         "lng": "4.6104069"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "2" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "3" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "4" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "5" : {
+                                "open" : "8.15",
+                                "close" : "20.20"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "17.00"
+                            }
+                        }
+                 }
+
+            ],
+             "restaurants_universitaires" : [
+                 {
+                     "nom"  : "Le Sablon",
+                     "sigle" : "",
+                     "adresse" : "Rue du Sablon, 11 - Louvain-la-neuve",
+                     "vignette" : "http://www.autracteur.fr/wp-content/themes/tracteur/images/icon_resto.png",
+                     "coord": {
+                         "lat" : "50.6683386",
+                         "lng": "4.6126586"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12",
+                                "close" : "20.30",
+                                "break" : {
+                                    "start" : "14",
+                                    "end"   : "18.30"
+                                }
+                            },
+                            "2" : {
+                                "open" : "12",
+                                "close" : "20.30",
+                                "break" : {
+                                    "start" : "14",
+                                    "end"   : "18.30"
+                                }
+                            },
+                            "3" : {
+                                "open" : "12",
+                                "close" : "20.30",
+                                "break" : {
+                                    "start" : "14",
+                                    "end"   : "18.30"
+                                }
+                            },
+                            "4" : {
+                                "open" : "12",
+                                "close" : "20.30",
+                                "break" : {
+                                    "start" : "14",
+                                    "end"   : "18.30"
+                                }
+                            },
+                            "5" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "6" : {
+                                "open" : "12",
+                                "close" : "14"
+                            }
+                        },
+                    "menu" : true
+                 },
+                {
+                     "nom"  : "D'un pain à l'autre",
+                     "sigle" : "",
+                     "adresse" : "Grand rue, 20 - Louvain-la-neuve ",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/tartine-2.gif",
+                     "coord": {
+                         "lat" : "50.6690765",
+                         "lng": "4.6135048"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "2" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "3" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "4" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "5" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+                 }
+            ],
+            "parkings" : [
+                {
+                     "nom"  : "Magritte",
+                     "adresse" : "50.665804, 4.611554",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "45",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.665804",
+                         "lng": "4.611554"
+                     }
+                },
+                {
+                     "nom"  : "Pierre de Coubertin",
+                     "adresse" : "50.670994, 4.604714",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "66",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.670994",
+                         "lng": "4.604714"
+                     }
+                },
+                {
+                     "nom"  : "Lauzelle",
+                     "adresse" : "50.672684, 4.605331",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "180",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.672684",
+                         "lng": "4.605331"
+                     }
+                },
+                {
+                     "nom"  : "Leclercq",
+                     "adresse" : "50.667150, 4.612942",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone A2 : Parking accessible à compter de la souscription à un abonnement",
+                     "places": "406",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.667150",
+                         "lng": "4.612942"
+                     }
+                },
+                {
+                     "nom"  : "Sablon",
+                     "adresse" : "50.668232, 4.613864",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone A2 : Parking accessible à compter de la souscription à un abonnement",
+                     "places": "190",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.668232",
+                         "lng": "4.613864"
+                     }
+                },
+                {
+                     "nom"  : "Lac (ex-Musée)",
+                     "adresse" : "50.669204, 4.609755",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone A2 - Exception : accès gratuit et réservé aux membres du personnel UCL sans abonnement et sans avantage mobilité",
+                     "places": "200",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.669204",
+                         "lng": "4.609755"
+                     }
+                }
+            ]
+        },
+        {
+             "nom" : "Sciences de la santé (Woluwé)",
+             "auditoires" : [
+                 {
+                     "nom"  : "Centraux",
+                     "sigle" : "",
+                     "cnt_places": 1889,
+                     "cnt_auditoires" : 8,
+                     "adresse" : "Avenue Emmanuel Mounier, 51 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolcent.gif",
+                     "coord": {
+                         "lat" : "50.8509698",
+                         "lng": "4.4542779"
+                     }
+                 },
+                 {
+                     "nom"  : "Ecole médecine dentaire",
+                     "sigle" : "EMDS",
+                     "cnt_places": 200,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Avenue Hippocrate, 10 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/semiemds.gif",
+                     "coord": {
+                         "lat" : "50.8522457",
+                         "lng": "4.4519002"
+                     }
+                 },
+                 {
+                     "nom"  : "Pavillon des conférences",
+                     "sigle" : "",
+                     "cnt_places": 290,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Clos Chapelle-aux-Champs, 19 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolconf.gif",
+                     "coord": {
+                         "lat" : "50.8495171",
+                         "lng": "4.4491625"
+                     }
+                 },
+                 {
+                     "nom"  : "Roi Baudouin",
+                     "sigle" : "",
+                     "cnt_places": 862,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Avenue Emmanuel Mounier - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolbaud.gif",
+                     "coord": {
+                         "lat" : "50.8510608",
+                         "lng": "4.4526039"
+                     }
+                 },
+                 {
+                     "nom"  : "Vecquée",
+                     "sigle" : "",
+                     "cnt_places": 202,
+                     "cnt_auditoires" : 9,
+                     "adresse" : "Passage de la Vecquée, 17 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolvecq.gif",
+                     "coord": {
+                         "lat" : "50.8495217",
+                         "lng": "4.4519407"
+                     }
+                 }
+            ],
+             "bibliotheques" : [
+                 {
+                     "nom"  : "Bibliothèque des sciences de la santé",
+                     "sigle" : "BSS",
+                     "adresse" : "50, Avenue Hippocrate - 1200 Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/bmd.JPG",
+                     "coord": {
+                         "lat" : "50.8517128",
+                         "lng": "4.4546206"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "2" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "3" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "4" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "5" : {
+                                "open" : "9.00",
+                                "close" : "18.00"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "13.00"
+                            }
+                        }
+                 }
+            ],
+             "restaurants_universitaires" : [
+                 {
+                     "nom"  : "Martin V",
+                     "sigle" : "",
+                     "adresse" : "Jardin Martin V, Woluwé",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/tableau-noir-MV.gif",
+                     "coord": {
+                         "lat" : "50.850124",
+                         "lng": "4.455794"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "2" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "3" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "4" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "5" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+                 },
+                 {
+                     "nom"  : "D'un pain à l'autre (Wol.)",
+                     "sigle" : "",
+                     "adresse" : "Jardin Martin V Louvain-en-Woluwe ",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/tartine-2.gif",
+                     "coord": {
+                         "lat" : "50.850124",
+                         "lng": "4.455794"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "2" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "3" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "4" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "5" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        } ,
+                    "menu" : true
+                 }
+            ],
+            "parkings" : [
+                {
+                     "nom"  : "Esplanade",
+                     "sigle" : "",
+                     "adresse" : "50.853173, 4.449669",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.853173",
+                         "lng": "4.449669"
+                     }
+                },
+                {
+                     "nom"  : "Hippocrate",
+                     "sigle" : "",
+                     "adresse" : "50.852943, 4.454015",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.852943",
+                         "lng": "4.454015"
+                     }
+                },
+                {
+                     "nom"  : "Palestre",
+                     "sigle" : "",
+                     "adresse" : "50.852089, 4.459025",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.852089",
+                         "lng": "4.459025"
+                     }
+                },
+                {
+                     "nom"  : "Mounier",
+                     "sigle" : "",
+                     "adresse" : "50.849766, 4.458596",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public - 4 heures gratuites",
+                     "coord": {
+                         "lat" : "50.849766",
+                         "lng": "4.458596"
+                     }
+                },
+                {
+                     "nom"  : "Assomption",
+                     "sigle" : "",
+                     "adresse" : "50.848005, 4.450388",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.848005",
+                         "lng": "4.450388"
+                     }
+                }
+            ]
+        },
+        {
+             "nom" : "UCL Mons",
+             "auditoires" : [
+                 {
+                    "nom"  : "Bâtiment C",
+                    "sigle" : "",
+                    "cnt_places": 995,
+                    "cnt_auditoires" : 4,
+                    "adresse" : "chaussée de Binche 151 - 7000 Mons",
+                    "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ac-arec/images/Q335-p3fucam.png",
+                     "coord": {
+                         "lat" : "50.452763",
+                         "lng": "3.981192"
+                     }
+                 }
+            ],
+             "bibliotheques" : [
+                 {
+                     "nom"  : "Bibliothèque de l'UCL Mons",
+                     "sigle" : "BIMS",
+                     "adresse" : "Chaussée de Binche 151, - 7000 Mons",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/media/BPSP1.jpg",
+                     "coord": {
+                         "lat" : "50.452763",
+                         "lng": "3.981192"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "8.45",
+                                "close" : "20.00",
+                                "break" : {
+                                    "start" : "12.30",
+                                    "end"   : "13.30"
+                                }
+                            },
+                            "2" : {
+                                "open" : "8.45",
+                                "close" : "20.00",
+                                "break" : {
+                                    "start" : "12.30",
+                                    "end"   : "13.30"
+                                }
+                            },
+                            "3" : {
+                                "open" : "8.45",
+                                "close" : "17.00",
+                                "break" : {
+                                    "start" : "12.30",
+                                    "end"   : "13.30"
+                                }
+                            },
+                            "4" : {
+                                "open" : "8.45",
+                                "close" : "20.00",
+                                "break" : {
+                                    "start" : "12.30",
+                                    "end"   : "13.30"
+                                }
+                            },
+                            "5" : {
+                                "open" : "8.45",
+                                "close" : "17.00",
+                                "break" : {
+                                    "start" : "12.30",
+                                    "end"   : "13.30"
+                                }
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "13.00"
+                            }
+                        }
+                 }
+            ],
+             "restaurants_universitaires" : [
+                 {
+                     "nom"  : "La Bascule",
+                     "sigle" : "",
+                     "adresse" : "Chaussée de Binche, 151  - 7000 Mons",
+                     "vignette" : "http://www.autracteur.fr/wp-content/themes/tracteur/images/icon_resto.png",
+                     "coord": {
+                         "lat" : "50.452763",
+                         "lng": "3.981192"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "2" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "3" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "4" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "5" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+                 }
+            ],
+            "parkings" : [
+                {
+                     "nom"  : "Parking du site",
+                     "sigle" : "",
+                     "adresse" : "50.452809, 3.983769",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "places": 200,
+                     "coord": {
+                         "lat" : "50.452809",
+                         "lng": "3.983769"
+                     }
+                }
+            ]
+        }
+    ]
+}

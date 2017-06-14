@@ -1,0 +1,40 @@
+{
+    "locations": [
+
+        {
+            "title": "Sainte Barbe",
+            "type": "Auditoire",
+            "adress": "Place Sainte Barbe, 1",
+            "latitude": 50.668178,
+            "longitude": 4.621446
+        },
+        {
+            "title": "Croix du Sud",
+            "type": "Auditoire",
+            "adress": "Place Croix du SUD",
+            "latitude": 50.66701,
+            "longitude": 4.62063
+        },
+        {
+            "title": "Agora",
+            "type": "Auditoire",
+            "adress": "Place Agora, 19",
+            "latitude": 50.66894,
+            "longitude": 4.61155
+        },
+        {
+            "title": "Kap Vert",
+            "type": "Kap",
+            "adress": "Passage des dinandiers, 3/301-310",
+            "latitude": 50.666318,
+            "longitude": 4.61102
+        },
+        {
+            "title": "Kot Louvain-linux",
+            "type": "Kap",
+            "adress": "Rue Constantin Meunier, 12",
+            "latitude": 50.6648,
+            "longitude": 4.612123
+        }
+    ]
+}

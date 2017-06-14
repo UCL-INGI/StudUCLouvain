@@ -1,0 +1,65 @@
+<!--
+
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title align="center">{{title}}</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedNews()">
+    <ion-segment-button value="P1">
+      P1
+    </ion-segment-button>
+    <ion-segment-button value="P2">
+      P2
+    </ion-segment-button>
+    <ion-segment-button value="P3">
+      P3
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="feed-list">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div [hidden]="segment !== 'P1'">
+    <ion-list #newsList [hidden]="shownNews === 0" [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%">
+      <ion-item *virtualItem = "let item">
+        <button ion-item (click)="goToNewsDetail(item)" no-lines>
+          <h3>{{item.title}}</h3>
+          <p [innerHtml]="item.location"></p>
+        </button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-list-header *ngIf="(shownNews === 0) && !searching">
+    No Events Found
+  </ion-list-header>
+</ion-content>

@@ -1,0 +1,60 @@
+<!--
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Cancel</button>
+    </ion-buttons>
+
+    <ion-title>
+      Filter Events
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="applyFilters()" strong>Apply</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+  <ion-item>
+    <ion-label>Show events for the next {{dateRange}} month(s)</ion-label>
+    <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
+    </ion-range>
+  </ion-item>
+  <ion-list>
+    <ion-list-header>Categories</ion-list-header>
+
+    <ion-item *ngFor="let category of categories">
+      <ion-thumbnail item-left>
+        <img [src]="category.iconCategory">
+      </ion-thumbnail>
+      <ion-label>{{category.name}}</ion-label>
+      <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button icon-right (click)="resetFilters()">
+    Reset Filters
+    <ion-icon name="refresh-circle"></ion-icon>
+  </button>
+
+</ion-content>

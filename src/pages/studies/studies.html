@@ -1,0 +1,72 @@
+<!--
+
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title align="center">{{title}}</ion-title>
+    <button ion-button icon-only end  menuToggle="studiesMenu">
+      <ion-icon name="settings"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-menu id="studiesMenu" [content]="studiesContent" side="right">
+  <button ion-item (click)="launch('http://www.uclouvain.be/onglet_bureau.html')"> uclouvain.be </button>
+  <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> moodle ucl </button>
+</ion-menu>
+
+<ion-content padding #studiesContent>
+  <ion-list>
+     <ion-item-sliding *ngFor="let course of listCourses">
+       <ion-item (click)="openCoursePage(course)" >
+        <h2>{{course.name}} {{course.acronym}}</h2>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="removeCourse(course)" >
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="showPrompt()">
+      <ion-icon name="add"> </ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-item *ngFor="let person of people">
+      <ion-avatar item-left>
+        <img src="{{person.picture.thumbnail}}">
+      </ion-avatar>
+      <h2>{{person.name.first}} {{person.name.last}}</h2>
+      <p>{{person.email}}</p>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

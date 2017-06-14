@@ -1,0 +1,55 @@
+/*
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-map-location-selector',
+  templateUrl: 'map-location-selector.html'
+})
+export class MapLocationSelectorPage {
+  current: any;
+  locations : any;
+  checkBoxStates = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    this.locations = this.navParams.get("locations");
+    this.current = this.navParams.get("current");
+    for(let loc of this.locations) {
+      if(loc.title === this.current.title) {
+        this.checkBoxStates.push(true);
+      } else {
+        this.checkBoxStates.push(false);
+      }
+    }
+  }
+  changeCurrent(loc: any) {
+    this.current = loc;
+  }
+
+  applyFilters() {
+    this.dismiss();
+  }
+
+  dismiss(data?: any) {
+    this.viewCtrl.dismiss(this.current);
+  }
+
+}

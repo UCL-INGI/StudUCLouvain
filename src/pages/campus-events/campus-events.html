@@ -1,0 +1,126 @@
+<!--
+    Copyright 2017 Lamy Corentin, Lemaire Jerome
+
+    This file is part of UCLCampus.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title align="center">{{title}}</ion-title>
+    <!--<ion-buttons end>
+      <button ion-button (click)="openGuindaille()">
+        <ion-icon name="beer"></ion-icon>
+      </button>
+    </ion-buttons>-->
+    <ion-buttons end>
+      <button ion-button (click)="presentFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
+    <ion-segment-button value="all">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      Favorites
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+
+<ion-content class="feed-list">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <!--
+  <ion-list #eventsList [hidden]="shownEvents === 0" [virtualScroll]="displayedEvents" approxItemHeight="100px" style="height:100%">
+    <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
+
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="item.iconCategory">
+        </ion-thumbnail>
+        <button ion-item (click)="goToEventDetail(item)" no-lines>
+          <h3>{{item.title}}</h3>
+          <p [innerHtml]="item.trimmedDescription"></p>
+          <p [innerHtml]="item.location"></p>
+          <p>{{item.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{item.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
+        </button>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button outline (click)="createEvent(slidingItem, item)" class="large-icon">
+          <ion-icon name='calendar'></ion-icon>
+        </button>
+
+        <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
+          <ion-icon name="star-outline"></ion-icon>
+        </button>
+
+        <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <ion-icon name='close'></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>-->
+
+  <ion-list #eventsList [hidden]="shownEvents === 0">
+    <ion-item-sliding *ngFor = "let item of displayedEvents" #slidingItem [hidden]="item.hidden">
+
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="item.iconCategory">
+        </ion-thumbnail>
+        <button ion-item (click)="goToEventDetail(item)" no-lines>
+          <h3>{{item.title}}</h3>
+          <p [innerHtml]="item.trimmedDescription"></p>
+          <p [innerHtml]="item.location"></p>
+          <p>{{item.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{item.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
+        </button>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button outline (click)="createEvent(slidingItem, item)" class="large-icon">
+          <ion-icon name='calendar'></ion-icon>
+        </button>
+
+        <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
+          <ion-icon name="star-outline"></ion-icon>
+        </button>
+
+        <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <ion-icon name='close'></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list-header *ngIf="(shownEvents === 0) && !searching">
+    No Events Found
+  </ion-list-header>
+</ion-content>
