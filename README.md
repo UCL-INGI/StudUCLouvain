@@ -15,7 +15,7 @@ npm -v
 
 * Clone this repository
 
-* Install Ionic, cordova and node_modules
+* Install Ionic, cordova
     ```bash
     $ npm install -g ionic cordova
     ```
@@ -23,6 +23,11 @@ npm -v
     ```bash
     $ npm uninstall -g ionic cordova
     $ npm install -g ionic cordova
+    ```
+
+* Install node_modules
+    ```bash
+    $ npm install
     ```
 
 * Google Maps Plugin
