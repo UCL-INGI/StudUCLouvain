@@ -46,11 +46,11 @@ export class CursusListService {
       // then on the response, it'll map the JSON data to a parsed JS object.
       // Next, we process the data and resolve the promise with the new data.
       console.log("coucou")
-      this.http.get('http://horairev6.uclouvain.be/ade/webapi?function=connect&login=etudiant&password=student')
+      this.http.get('http://horairev6.uclouvain.be/jsp/webapi?function=connect&login=etudiant&password=student')
       .map(res => {
         console.log(res);
-        let posts = res.json();
-        xml2js.parseString(posts, ((result) => {
+        //let posts = res.json();
+        xml2js.parseString(res, ((result) => {
         console.log(result);
         return result;
         }));

@@ -28,14 +28,14 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { CampusEventsPage } from '../pages/campus-events/campus-events';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
-import { CoursePage } from '../pages/course/course';
-import { DetailsPage } from '../pages/details/details';
+//import { CoursePage } from '../pages/course/course';
+//import { DetailsPage } from '../pages/details/details';
 import { LibraryPage } from '../pages/library/library';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
-import { LoginPage } from '../pages/login/login';
+//import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 
@@ -61,16 +61,15 @@ export class MyApp {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
-    console.log("root : ", this.rootPage);
     this.campusPages =[
       { title: 'News', component: NewsPage, icon: 'paper', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Events', component: CampusEventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Sport', component: SportPage, icon : 'football', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
-      { title: 'Restaurant', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+      { title: 'Sports', component: SportPage, icon : 'football', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
+      { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
     ];
     this.studiePages =[
-      { title: 'Studie', component: StudiesPage, icon: 'school', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Library', component: LibraryPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
+      { title: 'Studies', component: StudiesPage, icon: 'school', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
+      { title: 'Libraries', component: LibraryPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
     ];
     this.toolPages =[
       { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
@@ -105,43 +104,24 @@ export class MyApp {
 	  let app: string;
     let storeUrl:string;
   	if (this.device.platform === 'iOS') {
-      console.log('IOS');
   		app = iosSchemaName;
       storeUrl=httpUrl;
   	} else if (this.device.platform === 'Android') {
-      console.log('android');
   		app = androidPackageName;
       storeUrl= 'market://details?id='+ app;
   	} else {
-      console.log('Other');
-  		const browser = this.iab.create(appUrl, '_system');
-  		return;
+  		const browser = this.iab.create(httpUrl, '_system');
+      browser.close();
   	}
-
   	this.appAvailability.check(app).then(
   		() => { // success callback
-        console.log('before InAppBrowser success check');
   			const browser = this.iab.create(appUrl, '_system');
-        console.log(browser);
-
+        browser.close();
   		},
   		() => { // error callback
   			this.market.open(app);
   		}
   	);
   }
-
-  openInstagram(username: string) {
-  	this.launchExternalApp('instagram://', 'com.instagram.android', 'instagram://', 'https://www.instagram.com/');
-  }
-
-  openFacebook(username: string) {
-  	this.launchExternalApp('fb://', 'com.facebook.katana', 'fb://profile/', 'https://www.facebook.com/');
-  }
-
-  openGuindaille(username:string){
-    this.launchExternalApp('','com.us.guindaille', 'fb504565829719289://', 'https://app.commuty.net/sign-in');
-  }
-
 
 }
