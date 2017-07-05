@@ -42,6 +42,7 @@ import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { CoursePage } from '../pages/course/course';
 import { DetailsPage } from '../pages/campus-events-details/details';
 import { LibraryPage } from '../pages/library/library';
+import { LibraryDetailsPage } from '../pages/library-details/library-details';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage } from '../pages/map-location-selector/map-location-selector';
@@ -64,6 +65,7 @@ import { POIService } from '../providers/poi-service';
 import { UserData } from '../providers/user-data';
 import { RssService } from '../providers/rss-service';
 import { NewsService } from '../providers/news-service';
+import { LibrariesService } from '../providers/libraries-service';
 
 
 
@@ -84,7 +86,8 @@ import { NewsService } from '../providers/news-service';
     RestaurantPage,
     SportPage,
     StudiesPage,
-    HelpDeskPage
+    HelpDeskPage,
+    LibraryDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ import { NewsService } from '../providers/news-service';
     RestaurantPage,
     SportPage,
     StudiesPage,
-    HelpDeskPage
+    HelpDeskPage,
+    LibraryDetailsPage
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},
@@ -132,7 +136,8 @@ import { NewsService } from '../providers/news-service';
     Network,
     Calendar,
     NewsService,
-    RssService
+    RssService,
+    LibrariesService
   ]
 })
 export class AppModule {}

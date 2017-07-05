@@ -23,6 +23,7 @@ import { MapService } from '../../providers/map-service';
 import { MapLocationSelectorPage } from '../map-location-selector/map-location-selector';
 import { NavController, Platform, ActionSheetController, ModalController, MenuController } from 'ionic-angular';
 import { GoogleMap } from '@ionic-native/google-maps';
+import { MapLocation } from '../../app/entity/mapLocation';
 
 @Component({
   selector: 'page-map',
@@ -32,7 +33,7 @@ export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
-  showedLocations: any = [];
+  showedLocations: MapLocation[] = [];
   zones: any;
   filters : any;
   excludedFilters : any = [];
@@ -62,13 +63,14 @@ export class MapPage {
       ]).then((result) => {
         this.zones = result[1];
         this.filters = this.zones;
-        this.userLocation = {title: "My Position",
-                          adress: this.mapService.getUserLocation().lat+", "+this.mapService.getUserLocation().lng,
-                          lat: this.mapService.getUserLocation().lat,
-                          lng: this.mapService.getUserLocation().lng};
+        this.userLocation = new MapLocation( "My Position",
+                                    "My address",
+                                    this.mapService.getUserLocation().lat,
+                                    this.mapService.getUserLocation().lng,
+                                    "MYPOS");
         this.selectedLocation = this.userLocation;
         this.showedLocations.push(this.selectedLocation);
-        this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.adress, this.selectedLocation.title);
+        this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
       });
 
     });
@@ -93,18 +95,11 @@ export class MapPage {
   }
 
   addShowedLocations(rawLocation){
-    let newLocation = {
-      title: rawLocation.nom,
-      adress: rawLocation.adresse,
-      lat: rawLocation.coord.lat,
-      lng: rawLocation.coord.lng
-    }
-
-    this.showedLocations.push(newLocation);
+    this.showedLocations.push(rawLocation);
   }
 
   removeShowedLocations(rawLocation){
-    let locToRemove = this.showedLocations.find(item => item.title === rawLocation.nom);
+    let locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
     this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
   }
 
@@ -122,7 +117,7 @@ export class MapPage {
         if(this.selectedLocation !== data){
           this.selectedLocation = data;
           this.mapService.moveCameraTo(this.selectedLocation);
-          this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.adress, this.selectedLocation.title);
+          this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
         }
       }
     });

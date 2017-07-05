@@ -17,17 +17,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Map</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="presentFilter()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -43,7 +39,7 @@
     <ion-item (click)="presentSelector()">
       <ion-icon name="create" item-left large></ion-icon>
       <h2>{{selectedLocation.title}}</h2>
-      <p>{{selectedLocation.adress}}</p>
+      <p>{{selectedLocation.address}}</p>
     </ion-item>
     <ion-item>
       <button ion-button icon-left clear item-right (click)="toggleMarker(selectedLocation.title)">
@@ -74,8 +70,8 @@
 
     <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.showDetails">
       <div item-content (click)="toggleLocation(auditore, zone.auditoires.listChecked, i)">
-        <h3>{{auditoire.nom}}</h3>
-        <p>{{auditoire.adresse}}</p>
+        <h3>{{auditoire.title}}</h3>
+        <p>{{auditoire.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
     </ion-item>
@@ -86,8 +82,8 @@
 
     <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.showDetails">
       <div item-content (click)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)">
-        <h3>{{bibli.nom}}</h3>
-        <p>{{bibli.adresse}}</p>
+        <h3>{{bibli.title}}</h3>
+        <p>{{bibli.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary"></ion-toggle>
     </ion-item>
@@ -98,8 +94,8 @@
 
     <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.showDetails">
       <div item-content (click)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)">
-        <h3>{{restau.nom}}</h3>
-        <p>{{restau.adresse}}</p>
+        <h3>{{restau.title}}</h3>
+        <p>{{restau.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary"></ion-toggle>
     </ion-item>
@@ -110,7 +106,7 @@
 
     <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.showDetails">
       <div item-content (click)="toggleLocation(parking, zone.parkings.listChecked, i)">
-        <h3>{{parking.nom}}</h3>
+        <h3>{{parking.title}}</h3>
       </div>
       <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary" (click)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
     </ion-item>

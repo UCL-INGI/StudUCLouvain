@@ -19,6 +19,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { MapLocation } from '../app/entity/mapLocation';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -45,16 +46,16 @@ export class POIService {
           let newZone = {
             name: zone.nom,
             auditoires: {
-              list: zone.auditoires,
+              list: this.createMapLocations(zone.auditoires),
               listChecked: Array(auditoiresLength).fill(false)},
             bibliotheques: {
-              list: zone.bibliotheques,
+              list: this.createMapLocations(zone.bibliotheques),
               listChecked: Array(bibliothequesLength).fill(false)},
             restaurants_universitaires: {
-              list: zone.restaurants_universitaires,
+              list: this.createMapLocations(zone.restaurants_universitaires),
               listChecked: Array(restauULength).fill(false)},
             parkings: {
-              list: zone.parkings,
+              list: this.createMapLocations(zone.parkings),
               listChecked: Array(parkingsLength).fill(false)},
             icon: 'arrow-dropdown',
             showDetails: false
@@ -67,6 +68,23 @@ export class POIService {
       });
 
     });
+  }
+
+  private createMapLocations(list: any): Array<MapLocation> {
+
+    let locationsList: MapLocation[] = [];
+
+    for (let elem of list) {
+      let newLocation = new MapLocation(elem.nom,
+                                    elem.adresse,
+                                    elem.coord.lat,
+                                    elem.coord.lng,
+                                    elem.sigle);
+
+      locationsList.push(newLocation);
+    }
+
+    return locationsList;
   }
 
   private applyHaversine(locations, userLocation:any){

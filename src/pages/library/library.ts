@@ -19,70 +19,37 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-//import {DatabaseService} from '../../providers/database-service';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { LibrariesService } from '../../providers/libraries-service';
+import { LibraryDetailsPage } from '../library-details/library-details';
 
+/*
+  Generated class for the Library page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
 @Component({
   selector: 'page-library',
   templateUrl: 'library.html'
 })
 export class LibraryPage {
-  private options = { name: "test.db", location: 'default', createFromLocation: 1 };
-  public title: any;
-  public bibliotheques;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private sqlite: SQLite) {
+
+  title: any;
+  libraries: any = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public libService : LibrariesService) {
     this.title = this.navParams.get('title');
-    this.platform.ready().then(() => {
-        console.log("platform ready");
-        this.refresh();
-    }, (error) => {
-        console.log("ERROR: ", error);
-    });
   }
 
   ionViewDidLoad() {
-    console.log('Hello LibraryPage Page');
+    this.libService.loadLibraries().then(
+      res => {
+        this.libraries = res;
+      }
+    );
   }
 
-  public refresh() {
-
-    this.platform.ready().then(() => {
-      this.sqlite.create(this.options)
-      .then((db : SQLiteObject) => {
-        console.log("open database");
-        db.executeSql("SELECT * FROM library", []).then((data) => {
-              console.log("refresh");
-              console.log(data);
-              console.log("REFRESHED: " + JSON.stringify(data));
-              this.bibliotheques = [];
-              if(data.rows.length > 0) {
-                  for(var i = 0; i < data.rows.length; i++) {
-                      this.bibliotheques.push({sigle: data.rows.item(i).SIGLE});
-                  }
-              }
-              console.log(this.bibliotheques);
-          }, (error) => {
-              console.log("ERROR: " + JSON.stringify(error));
-          });
-      }, (error) => {
-        console.log("ERROR: ", error);
-      }
-    )
-    });
-  /*  this.database.database.executeSql("SELECT * FROM library", []).then((data) => {
-        console.log("refresh");
-        console.log(data);
-        console.log("REFRESHED: " + JSON.stringify(data));
-        this.bibliotheques = [];
-        if(data.rows.length > 0) {
-            for(var i = 0; i < data.rows.length; i++) {
-                this.bibliotheques.push({sigle: data.rows.item(i).SIGLE});
-            }
-        }
-        console.log(this.bibliotheques);
-    }, (error) => {
-        console.log("ERROR: " + JSON.stringify(error));
-    });*/
-}
-
+  goToLibDetails(id: any) {
+    this.navCtrl.push(LibraryDetailsPage, { 'id': id });
+  }
 }

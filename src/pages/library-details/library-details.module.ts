@@ -1,5 +1,4 @@
-<!--
-
+/*
     Copyright 2017 Lamy Corentin, Lemaire Jerome
 
     This file is part of UCLCampus.
@@ -16,25 +15,21 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
--->
-<ion-header>
-  <ion-navbar >
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title align="center">{{title}}</ion-title>
-  </ion-navbar>
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { LibraryDetailsPage } from './library-details';
 
-</ion-header>
-
-
-<ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let lib of libraries">
-      <button ion-item (click)="goToLibDetails(lib.id)" no-lines>
-        {{lib.name}}
-      </button>
-    </ion-item>
-  </ion-list>
-</ion-content>
+@NgModule({
+  declarations: [
+    LibraryDetailsPage,
+  ],
+  imports: [
+    IonicPageModule.forChild(LibraryDetailsPage),
+  ],
+  exports: [
+    LibraryDetailsPage
+  ]
+})
+export class LibraryDetailsPageModule {}
