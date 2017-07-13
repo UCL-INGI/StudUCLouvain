@@ -33,7 +33,7 @@ import { LibraryDetailsPage } from '../library-details/library-details';
   templateUrl: 'library.html'
 })
 export class LibraryPage {
-
+  //TODO : change name to LibrariesPage
   title: any;
   libraries: any = [];
 
