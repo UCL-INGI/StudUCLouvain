@@ -93,7 +93,6 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     if(page.iosSchemaName != null && page.androidPackageName != null){
-      console.log('coucou');
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }
     this.nav.setRoot(page.component, {title: page.title});
