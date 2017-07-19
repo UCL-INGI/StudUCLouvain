@@ -1,6 +1,8 @@
 # UCLCampus
 UCLcampus is an application designed to accompany UCL students in their daily life on campus. Contributions are welcome for any good feature.
 
+[![Join the chat at https://gitter.im/UCLCampus/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UCLCampus/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Prerequisites
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
