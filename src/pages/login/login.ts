@@ -30,7 +30,11 @@ export class LoginPage {
   loading: Loading;
   credentials = {email: '', password: ''};
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    this.auth.loginUCL().then(res => {
+      console.log("Login response : " + res);
+    });
+  }
 
   public login() {
     this.showLoading()

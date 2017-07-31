@@ -21,6 +21,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { LibrariesService } from '../../providers/libraries-service';
 import { LibraryDetailsPage } from '../library-details/library-details';
+import { LibraryItem } from '../../app/entity/libraryItem';
 
 /*
   Generated class for the Library page.
@@ -35,7 +36,7 @@ import { LibraryDetailsPage } from '../library-details/library-details';
 export class LibraryPage {
   //TODO : change name to LibrariesPage
   title: any;
-  libraries: any = [];
+  libraries: Array<LibraryItem> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public libService : LibrariesService) {
     this.title = this.navParams.get('title');
@@ -44,12 +45,13 @@ export class LibraryPage {
   ionViewDidLoad() {
     this.libService.loadLibraries().then(
       res => {
-        this.libraries = res;
+        let result:any = res;
+        this.libraries = result.libraries;
       }
     );
   }
 
-  goToLibDetails(id: any) {
-    this.navCtrl.push(LibraryDetailsPage, { 'id': id });
+  goToLibDetails(lib: LibraryItem) {
+    this.navCtrl.push(LibraryDetailsPage, { 'lib': lib });
   }
 }

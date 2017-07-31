@@ -20,6 +20,7 @@
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LibrariesService } from '../../providers/libraries-service';
+import { LibraryItem } from '../../app/entity/libraryItem';
 
 /**
  * Generated class for the LibraryDetailsPage page.
@@ -41,15 +42,16 @@ import { LibrariesService } from '../../providers/libraries-service';
   ]
 })
 export class LibraryDetailsPage {
-  libDetails: any = [];
+  libDetails: LibraryItem;
   shownGroup = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public libService: LibrariesService) {
-    let libId = navParams.get('id');
+    this.libDetails = navParams.get('lib');
 
-    this.libService.loadLibDetails(libId).then(
+    this.libService.loadLibDetails(this.libDetails).then(
       res => {
-        this.libDetails = res;
+        let result:any = res;
+        this.libDetails = result.libDetails;
       }
     );
   }

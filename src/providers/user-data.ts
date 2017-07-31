@@ -25,6 +25,8 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserData {
+
+  //TODO : Renommer en UserService ?
   _favorites: string[] = [];
 
   constructor(

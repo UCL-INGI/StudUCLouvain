@@ -63,8 +63,8 @@
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_hours')">
-      <p *ngFor="let time_slot of libDetails.openingHours">
-        {{time_slot.day}} - {{time_slot.startHour}} : {{time_slot.endHour}}
+      <p *ngFor="let timeSlot of libDetails.openingHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
@@ -73,8 +73,8 @@
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_examination_hours')">
-      <p *ngFor="let time_slot of libDetails.openingExaminationHours">
-        {{time_slot.day}} - {{time_slot.startHour}} : {{time_slot.endHour}}
+      <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
@@ -83,8 +83,8 @@
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_summer_hours')">
-      <p *ngFor="let time_slot of libDetails.openingSummerHours">
-        {{time_slot.day}} - {{time_slot.startHour}} : {{time_slot.endHour}}
+      <p *ngFor="let timeSlot of libDetails.openingSummerHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
@@ -93,8 +93,8 @@
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('closed_dates')">
-      <p *ngFor="let time_slot of libDetails.closedDates">
-        {{time_slot.from}} - {{time_slot.to}} : {{time_slot.description}}
+      <p *ngFor="let cd of libDetails.closedDates">
+        {{cd.from}} - {{cd.to}} : {{cd.description}}
       </p>
     </ion-item>
   </ion-card>

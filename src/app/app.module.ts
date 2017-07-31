@@ -33,6 +33,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
+import { SecureStorage } from '@ionic-native/secure-storage';
 
 
 
@@ -137,7 +138,8 @@ import { LibrariesService } from '../providers/libraries-service';
     Calendar,
     NewsService,
     RssService,
-    LibrariesService
+    LibrariesService,
+    SecureStorage
   ]
 })
 export class AppModule {}

@@ -17,25 +17,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { EventsService } from '../../providers/events-service';
-import { EventItem } from '../../app/entity/eventItem';
+export class TimeSlot {
+  day: string;
+  startHour: string;
+  endHour : string;
 
-@Component({
-  selector: 'page-details',
-  templateUrl: 'details.html'
-})
-export class DetailsPage {
-  feedItem: EventItem;
-
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
-    this.feedItem = navParams.get('feed');
+  constructor(day: string, startHour: string, endHour: string) {
+    this.day = day;
+    this.startHour = startHour;
+    this.endHour = endHour;
   }
-
-  public openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
-    window.open(url, '_blank');
-  }
-
 }

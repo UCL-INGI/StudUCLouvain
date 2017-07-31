@@ -32,7 +32,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let lib of libraries">
-      <button ion-item (click)="goToLibDetails(lib.id)" no-lines>
+      <button ion-item (click)="goToLibDetails(lib)" no-lines>
         {{lib.name}}
       </button>
     </ion-item>

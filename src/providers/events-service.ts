@@ -20,7 +20,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Storage } from '@ionic/storage';
 import { UserData } from './user-data';
 import { RssService } from './rss-service';
 import { EventItem } from '../app/entity/eventItem';
@@ -32,9 +31,10 @@ export class EventsService {
   shownEvents = 0;
   url = "http://louvainfo.be/evenements/feed/calendar/";
 
-  constructor(private http: Http, public storage: Storage, public user:UserData, public rssService : RssService) {}
+  constructor(private http: Http, public user:UserData, public rssService : RssService) {}
 
   public getEvents(segment:string) {
+    
     return new Promise( (resolve, reject) => {
       this.rssService.load(this.url).subscribe(
         data => {
@@ -46,14 +46,15 @@ export class EventsService {
   }
 
   private extractEvents(data: any) {
-    var length = 20;
+    let maxDescLength = 20;
 
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      var trimmedDescription = item.description.length > length ? item.description.substring(0, 80) + "..." : item.description;
+      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
       let favorite = false;
       let hidden = false;
       let iconCategory = "assets/events-icon/other.png";
+
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
@@ -69,10 +70,10 @@ export class EventsService {
 
       let startDate = this.createDateForEvent(item.date_begin);
       let endDate = this.createDateForEvent(item.date_end);
-      let newFeedItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
+      let newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
                       hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
 
-      this.events.push(newFeedItem);
+      this.events.push(newEventItem);
     }
   }
 

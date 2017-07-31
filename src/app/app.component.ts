@@ -29,13 +29,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CampusEventsPage } from '../pages/campus-events/campus-events';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
 //import { CoursePage } from '../pages/course/course';
-//import { DetailsPage } from '../pages/details/details';
 import { LibraryPage } from '../pages/library/library';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
-//import { LoginPage } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 
@@ -75,7 +74,8 @@ export class MyApp {
       { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
       { title: 'Maps', component: MapPage, icon: 'map', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
       { title: 'Covoiturage', component: CarpoolingPage, icon : 'car', iosSchemaName: 'net.commuty.mobile', androidPackageName: 'net.commuty.mobile', appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
-      { title: 'Help Desk', component: HelpDeskPage, icon: 'information-circle', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null }
+      { title: 'Help Desk', component: HelpDeskPage, icon: 'information-circle', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
+      { title: 'Login Test', component: LoginPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null }
     ];
 
   }

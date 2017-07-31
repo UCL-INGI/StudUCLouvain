@@ -31,8 +31,6 @@ export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
 
-  username = '';
-  email = '';
   news: any = [];
   segment = 'P1';
   shownNews = 0;

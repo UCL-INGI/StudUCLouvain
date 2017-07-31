@@ -17,12 +17,33 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-details {
-  .details {
-    background: #d1ffdc;
+export class NewsItem {
+  description: string;
+  link: string;
+  title: string;
+  image: string;
+  trimmedDescription: string;
+  hidden : boolean;
+  guid : string;
+  pubDate : Date;
 
-    .details-content {
-      background: #ffffff;
-    }
+  constructor(
+    description: string,
+    link: string,
+    title: string,
+    image:string,
+    trimmedDescription: string,
+    hidden: boolean,
+    guid: string,
+    pubDate : Date
+  ) {
+    this.description = description;
+    this.link = link;
+    this.title = title;
+    this.image = image;
+    this.trimmedDescription = trimmedDescription;
+    this.hidden = hidden;
+    this.guid = guid;
+    this.pubDate = pubDate;
   }
 }

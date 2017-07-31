@@ -203,7 +203,7 @@ export class CampusEventsPage {
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     let alert = this.alertCtrl.create({
       title: title,
-      message: 'Would you like to remove this session from your favorites?',
+      message: 'Would you like to remove this event from your favorites?',
       buttons: [
         {
           text: 'Cancel',

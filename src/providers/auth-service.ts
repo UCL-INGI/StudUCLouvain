@@ -20,12 +20,95 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
+import { Platform } from 'ionic-angular';
 import 'rxjs/add/operator/map';
-import { User } from '../app/entity/user'
+import { User } from '../app/entity/user';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 
 @Injectable()
 export class AuthService {
   currentUser: User;
+  username: String = "";
+  password: String = "";
+  readyToLogIn: Boolean = false;
+  storage: SecureStorageObject;
+
+  constructor(public platform: Platform, private iab : InAppBrowser, private secureStorage: SecureStorage) {
+    platform.ready().then(() => {
+      this.secureStorage.create('uclcampus').then((storage: SecureStorageObject) => {
+        this.storage = storage;
+        console.log('Storage is ready!');
+
+        this.storage.get('loginData')
+         .then(
+           data => {
+             console.log('data was '+ data);
+             let {u,p} = JSON.parse(data);
+             this.username = u;
+             this.password = p;
+           },
+           error => {
+             // do nothing - it just means it doesn't exist
+             console.log(error);
+           }
+        );
+      },
+        error => console.log(error)
+      );
+    });
+  }
+
+  loginUCL(): Promise<any> {
+    let entrypoint_uri = "https://uclouvain.be/Shibboleth.sso/Login";
+    let redirect_uri = "https://idp.uclouvain.be/idp/profile/SAML2/Redirect/SSO";
+    let endpoint_uri = "https://uclouvain.be/Shibboleth.sso/SAML2/POST";
+
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        let browserRef = this.iab.create(entrypoint_uri, "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+
+        browserRef.on("loadstart").subscribe((event) => {
+          console.log(event.type + " - " + event.url);
+
+          if ((event.url).indexOf(endpoint_uri) === 0) {
+
+            console.log("logged in");
+
+            browserRef.executeScript({code: "localStorage.getItem('username');"}).then(username => this.username = username);
+            browserRef.executeScript({code: "localStorage.getItem('password');"}).then(
+              password => {
+                this.password = password;
+                this.storage.set('loginData', JSON.stringify({u:this.username, p:this.password})).then(
+                    data => this.readyToLogIn = true,
+                    error => console.log(error)
+                );
+            });
+            browserRef.executeScript({code: "localStorage.clear()"});
+
+            browserRef.close();
+          }
+        });
+
+        browserRef.on("loadstop").subscribe((event) => {
+          if ((event.url).indexOf(redirect_uri) === 0) {
+            if(this.readyToLogIn) {
+              console.log("Ready To Log In with : " + this.username + " - " + this.password);
+              browserRef.executeScript({code: "document.getElementById('username').value='" + this.username + "';"});
+              browserRef.executeScript({code: "document.getElementById('password').value='" + this.password + "';"});
+              //browserRef.executeScript({code: "document.getElementsByName('_eventId_proceed')[0].click();"});
+            } else {
+              browserRef.executeScript({code: "document.getElementsByName('_eventId_proceed')[0].onclick = function() { var username = document.getElementById('username').value;localStorage.setItem('username', username);var password = document.getElementById('password').value;localStorage.setItem('password', password);};"});
+            }
+          }
+        });
+
+      } else {
+        console.error("loadstart events are not being fired in browser.");
+        reject(new Error("loadstart events are not being fired in browser."));
+      }
+    });
+  }
 
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
@@ -52,4 +135,6 @@ export class AuthService {
       observer.complete();
     });
   }
+
+
 }
