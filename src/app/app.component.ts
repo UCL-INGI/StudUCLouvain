@@ -32,7 +32,6 @@ import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { LibraryPage } from '../pages/library/library';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
@@ -63,7 +62,6 @@ export class MyApp {
     this.campusPages =[
       { title: 'News', component: NewsPage, icon: 'paper', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Events', component: CampusEventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Sports', component: SportPage, icon : 'football', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
     ];
     this.studiePages =[

@@ -20,7 +20,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import xml2js from 'xml2js';
+import X2JS from 'x2js';
 //import xml2json from 'xml2json';
 
 @Injectable()
@@ -30,8 +30,11 @@ export class CursusListService {
   data:any;
     constructor(public http: Http) {
       console.log('Hello PeopleService Provider');
-      //this.url= 'http://horairev6.uclouvain.be/direct/index.jsp?login=etudiant&password=student';
-
+      let xml =  "MY XML STRING";
+      console.log(xml);
+      let parser : any = new X2JS();
+      let json = parser.xml2js(xml);
+      console.log(json);
     }
 
     load() {
@@ -46,14 +49,17 @@ export class CursusListService {
       // then on the response, it'll map the JSON data to a parsed JS object.
       // Next, we process the data and resolve the promise with the new data.
       console.log("coucou")
-      this.http.get('http://horairev6.uclouvain.be/jsp/webapi?function=connect&login=etudiant&password=student')
+      this.http.get('http://horaire.uclouvain.be/jsp/webapi?function=connect&login=etudiant&password=student')
       .map(res => {
+        console.log("res : " + res);
         console.log(res);
         //let posts = res.json();
-        xml2js.parseString(res, ((result) => {
-        console.log(result);
-        return result;
-        }));
+        let test = JSON.stringify(res)
+        console.log(test)
+        let parser : any = new X2JS();
+        let json = parser.xml2js(res);
+        console.log("json : " + json);
+        console.log(json);
         }).subscribe(
         (data) => console.log(data),
         (err) => console.log(err)

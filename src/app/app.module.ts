@@ -49,7 +49,6 @@ import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage } from '../pages/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 
@@ -85,7 +84,6 @@ import { LibrariesService } from '../providers/libraries-service';
     NewsPage,
     MapPage,
     RestaurantPage,
-    SportPage,
     StudiesPage,
     HelpDeskPage,
     LibraryDetailsPage
@@ -110,7 +108,6 @@ import { LibrariesService } from '../providers/libraries-service';
     MapPage,
     NewsPage,
     RestaurantPage,
-    SportPage,
     StudiesPage,
     HelpDeskPage,
     LibraryDetailsPage
