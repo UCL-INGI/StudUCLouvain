@@ -17,16 +17,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {Activity} from './activity'
 
-export class Course {
-  public acronym : string;
-  public name : string;
-  public activities : Activity[];
 
-  constructor(name : string, acronym : string, activities : Activity[]){
-    this.acronym=acronym;
+export class AdeProject{
+  id : string;
+  name : string;
+
+  constructor(id : string, name : string){
+    this.id=id;
     this.name=name;
-    this.activities=activities;
   }
 }

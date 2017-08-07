@@ -34,7 +34,7 @@ export class EventsService {
   constructor(private http: Http, public user:UserData, public rssService : RssService) {}
 
   public getEvents(segment:string) {
-    
+
     return new Promise( (resolve, reject) => {
       this.rssService.load(this.url).subscribe(
         data => {

@@ -51,13 +51,13 @@ import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
-
+import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 
 
 import { AuthService } from '../providers/auth-service';
 import { ConnectivityService } from '../providers/connectivity-service';
 import { CourseService } from '../providers/course-service';
-import { CursusListService } from '../providers/cursus-list-service';
+import { StudiesService } from '../providers/studies-service';
 import { DatabaseService } from '../providers/database-service';
 import { EventsService } from '../providers/events-service';
 import { MapService } from '../providers/map-service'
@@ -66,6 +66,8 @@ import { UserData } from '../providers/user-data';
 import { RssService } from '../providers/rss-service';
 import { NewsService } from '../providers/news-service';
 import { LibrariesService } from '../providers/libraries-service';
+import { AdeService } from '../providers/ade-service';
+
 
 
 
@@ -83,6 +85,7 @@ import { LibrariesService } from '../providers/libraries-service';
     LoginPage,
     NewsPage,
     MapPage,
+    ModalProjectPage,
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
@@ -106,6 +109,7 @@ import { LibrariesService } from '../providers/libraries-service';
     LibraryPage,
     LoginPage,
     MapPage,
+    ModalProjectPage,
     NewsPage,
     RestaurantPage,
     StudiesPage,
@@ -118,7 +122,7 @@ import { LibrariesService } from '../providers/libraries-service';
     AuthService,
     ConnectivityService,
     CourseService,
-    CursusListService,
+    StudiesService,
     DatabaseService,
     EventsService,
     InAppBrowser,
@@ -136,7 +140,8 @@ import { LibrariesService } from '../providers/libraries-service';
     NewsService,
     RssService,
     LibrariesService,
-    SecureStorage
+    SecureStorage,
+    AdeService
   ]
 })
 export class AppModule {}
