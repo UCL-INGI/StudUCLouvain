@@ -19,8 +19,8 @@
 
 import { Component } from '@angular/core';
 import { NavController,NavParams  } from 'ionic-angular';
-import { CourseService } from '../../providers/course-service';
-import { Course } from '../../app/entity/course'
+import { CourseService } from '../../../providers/studies-services/course-service';
+import { Course } from '../../../app/entity/course'
 
 @Component({
   selector: 'page-course',

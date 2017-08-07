@@ -18,8 +18,10 @@
 */
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { StudiesService} from '../../../providers/studies-service';
+import { IonicPage, NavController, NavParams, ViewController }
+        from 'ionic-angular';
+import { StudiesService}
+        from '../../../providers/studies-services/studies-service';
 import { AdeProject } from '../../../app/entity/adeProject';
 
 /**

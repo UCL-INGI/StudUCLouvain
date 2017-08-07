@@ -38,15 +38,17 @@ import { SecureStorage } from '@ionic-native/secure-storage';
 
 
 import { CampusEventsPage } from '../pages/campus-events/campus-events';
-import { CampusEventsFilterPage } from '../pages/campus-events-filter/campus-events-filter';
+import { CampusEventsFilterPage }
+          from '../pages/campus-events-filter/campus-events-filter';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
-import { CoursePage } from '../pages/course/course';
+import { CoursePage } from '../pages/studies/course/course';
 import { DetailsPage } from '../pages/campus-events-details/details';
 import { LibraryPage } from '../pages/library/library';
 import { LibraryDetailsPage } from '../pages/library-details/library-details';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
-import { MapLocationSelectorPage } from '../pages/map-location-selector/map-location-selector';
+import { MapLocationSelectorPage }
+          from '../pages/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
@@ -56,8 +58,8 @@ import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 
 import { AuthService } from '../providers/auth-service';
 import { ConnectivityService } from '../providers/connectivity-service';
-import { CourseService } from '../providers/course-service';
-import { StudiesService } from '../providers/studies-service';
+import { CourseService } from '../providers/studies-services/course-service';
+import { StudiesService } from '../providers/studies-services/studies-service';
 import { DatabaseService } from '../providers/database-service';
 import { EventsService } from '../providers/events-service';
 import { MapService } from '../providers/map-service'
@@ -66,7 +68,7 @@ import { UserData } from '../providers/user-data';
 import { RssService } from '../providers/rss-service';
 import { NewsService } from '../providers/news-service';
 import { LibrariesService } from '../providers/libraries-service';
-import { AdeService } from '../providers/ade-service';
+import { AdeService } from '../providers/studies-services/ade-service';
 
 
 

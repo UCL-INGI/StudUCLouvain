@@ -19,14 +19,15 @@
 
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
+import { AlertController, MenuController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { StudiesService} from '../../providers/studies-service';
+import { StudiesService} from '../../providers/studies-services/studies-service';
 import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
 
-import { CoursePage } from '../course/course';
+import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
 
 @Component({
@@ -129,7 +130,13 @@ export class StudiesPage {
   }
 
   getCourses(){
-    this.storage.get('listCourses').then((data) => {if(data==null) {this.listCourses=[]} else { this.listCourses=data}});
+    this.storage.get('listCourses').then((data) =>
+    {
+      if(data==null){
+        this.listCourses=[]
+      } else {
+        this.listCourses=data}
+    });
   }
 
   saveCourse(name: string, tag: string){
@@ -150,7 +157,8 @@ export class StudiesPage {
 
   openCoursePage(course: Course){
     console.log(course);
-    this.navCtrl.push(CoursePage, {course : course, projectId : this.projectId, sessionId : this.sessionId});
+    this.navCtrl.push(CoursePage,
+      {course : course, projectId : this.projectId, sessionId : this.sessionId});
   }
 
   ionViewDidLoad() {
