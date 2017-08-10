@@ -35,6 +35,7 @@
 <ion-menu id="studiesMenu" [content]="studiesContent" side="right">
   <button ion-item (click)="launch('http://www.uclouvain.be/onglet_bureau.html')"> uclouvain.be </button>
   <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> moodle ucl </button>
+  <button ion-item (click)="openModalProject()"> Changer projet ADE </button>
 </ion-menu>
 
 <ion-content padding #studiesContent>
@@ -58,15 +59,5 @@
       <ion-icon name="add"> </ion-icon>
     </button>
   </ion-fab>
-
-  <ion-list>
-    <ion-item *ngFor="let person of people">
-      <ion-avatar item-left>
-        <img src="{{person.picture.thumbnail}}">
-      </ion-avatar>
-      <h2>{{person.name.first}} {{person.name.last}}</h2>
-      <p>{{person.email}}</p>
-    </ion-item>
-  </ion-list>
 
 </ion-content>

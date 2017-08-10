@@ -110,7 +110,6 @@ export class EventsPage {
         res => {
           result = res;
           this.events = result.events;
-          console.log("events length : " + this.events.length);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
@@ -131,7 +130,6 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-      console.log("displayed events length : " + this.displayedEvents.length);
       this.displayedEvents = this.events.filter((item) => {
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));

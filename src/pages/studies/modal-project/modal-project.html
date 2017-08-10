@@ -19,16 +19,19 @@
 
 -->
 <ion-header>
-  <ion-navbar >
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title align="center">{{title}}</ion-title>
-  </ion-navbar>
+
+
 
 </ion-header>
 
 
 <ion-content padding>
+  select ADE project :
+  <ion-list>
+    <button ion-item *ngFor= "let project of projects" (click)="closeModal(project.id)">
+      <button ion-button full  > {{project.name}} </button>
+    </button>
+  </ion-list>
 
+  <!-- <button ion-button block (click)="closeModal()">Close Modal</button> -->
 </ion-content>

@@ -17,6 +17,23 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-sport {
 
+
+export class Activity{
+  type : string;
+  teachers : string;
+  students : string;
+  start : Date;
+  end : Date;
+  auditorium : string;
+
+  constructor(type : string, teachers : string, students : string,
+    start : Date, end : Date, auditorium : string){
+    this.type=type;
+    this.teachers=teachers;
+    this.students=students;
+    this. start=start;
+    this.end=end;
+    this.auditorium=auditorium;
+  }
 }

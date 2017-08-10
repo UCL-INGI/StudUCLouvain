@@ -17,21 +17,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 
-@Component({
-  selector: 'page-sport',
-  templateUrl: 'sport.html'
-})
-export class SportPage {
-  public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.title = this.navParams.get('title');
+
+export class AdeProject{
+  id : string;
+  name : string;
+
+  constructor(id : string, name : string){
+    this.id=id;
+    this.name=name;
   }
-
-  ionViewDidLoad() {
-    console.log('Hello SportPage Page');
-  }
-
 }

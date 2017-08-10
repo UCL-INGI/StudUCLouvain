@@ -40,26 +40,26 @@ import { SecureStorage } from '@ionic-native/secure-storage';
 import { EventsPage } from '../pages/events/events';
 import { EventsFilterPage } from '../pages/events-filter/events-filter';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
-import { CoursePage } from '../pages/course/course';
+import { CoursePage } from '../pages/studies/course/course';
 import { EventsDetailsPage } from '../pages/events-details/events-details';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library-details/library-details';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
-import { MapLocationSelectorPage } from '../pages/map-location-selector/map-location-selector';
+import { MapLocationSelectorPage }
+          from '../pages/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
 import { NewsDetailsPage } from '../pages/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
-
+import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 
 
 import { AuthService } from '../providers/auth-service';
 import { ConnectivityService } from '../providers/connectivity-service';
-import { CourseService } from '../providers/course-service';
-import { CursusListService } from '../providers/cursus-list-service';
+import { CourseService } from '../providers/studies-services/course-service';
+import { StudiesService } from '../providers/studies-services/studies-service';
 import { DatabaseService } from '../providers/database-service';
 import { EventsService } from '../providers/events-service';
 import { MapService } from '../providers/map-service'
@@ -68,6 +68,8 @@ import { UserData } from '../providers/user-data';
 import { RssService } from '../providers/rss-service';
 import { NewsService } from '../providers/news-service';
 import { LibrariesService } from '../providers/libraries-service';
+import { AdeService } from '../providers/studies-services/ade-service';
+
 
 
 
@@ -86,8 +88,8 @@ import { LibrariesService } from '../providers/libraries-service';
     NewsPage,
     NewsDetailsPage,
     MapPage,
+    ModalProjectPage,
     RestaurantPage,
-    SportPage,
     StudiesPage,
     HelpDeskPage,
     LibraryDetailsPage
@@ -110,10 +112,10 @@ import { LibrariesService } from '../providers/libraries-service';
     LibrariesPage,
     LoginPage,
     MapPage,
+    ModalProjectPage,
     NewsPage,
     NewsDetailsPage,
     RestaurantPage,
-    SportPage,
     StudiesPage,
     HelpDeskPage,
     LibraryDetailsPage
@@ -124,7 +126,7 @@ import { LibrariesService } from '../providers/libraries-service';
     AuthService,
     ConnectivityService,
     CourseService,
-    CursusListService,
+    StudiesService,
     DatabaseService,
     EventsService,
     InAppBrowser,
@@ -142,7 +144,8 @@ import { LibrariesService } from '../providers/libraries-service';
     NewsService,
     RssService,
     LibrariesService,
-    SecureStorage
+    SecureStorage,
+    AdeService
   ]
 })
 export class AppModule {}

@@ -32,7 +32,6 @@ import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
@@ -63,7 +62,6 @@ export class MyApp {
     this.campusPages =[
       { title: 'News', component: NewsPage, icon: 'paper', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Events', component: EventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Sports', component: SportPage, icon : 'football', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
     ];
     this.studiePages =[
@@ -71,7 +69,7 @@ export class MyApp {
       { title: 'Libraries', component: LibrariesPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
     ];
     this.toolPages =[
-      { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
+    //  { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
       { title: 'Maps', component: MapPage, icon: 'map', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
       { title: 'Covoiturage', component: CarpoolingPage, icon : 'car', iosSchemaName: 'net.commuty.mobile', androidPackageName: 'net.commuty.mobile', appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
       { title: 'Help Desk', component: HelpDeskPage, icon: 'information-circle', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },

@@ -17,16 +17,19 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {Activity} from './activity'
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { ModalProjectPage } from './modal-project';
 
-export class Course {
-  public acronym : string;
-  public name : string;
-  public activities : Activity[];
-
-  constructor(name : string, acronym : string, activities : Activity[]){
-    this.acronym=acronym;
-    this.name=name;
-    this.activities=activities;
-  }
-}
+@NgModule({
+  declarations: [
+    ModalProjectPage,
+  ],
+  imports: [
+    IonicPageModule.forChild(ModalProjectPage),
+  ],
+  exports: [
+    ModalProjectPage
+  ]
+})
+export class ModalProjectPageModule {}

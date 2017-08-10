@@ -17,16 +17,6 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {Activity} from './activity'
+page-modal-project {
 
-export class Course {
-  public acronym : string;
-  public name : string;
-  public activities : Activity[];
-
-  constructor(name : string, acronym : string, activities : Activity[]){
-    this.acronym=acronym;
-    this.name=name;
-    this.activities=activities;
-  }
 }

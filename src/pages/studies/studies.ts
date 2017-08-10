@@ -19,14 +19,16 @@
 
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, NavController, NavParams, Platform } from 'ionic-angular';
+import { AlertController, MenuController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { CursusListService} from '../../providers/cursus-list-service';
+import { StudiesService} from '../../providers/studies-services/studies-service';
 import { Course } from '../../app/entity/course';
+import { AdeProject } from '../../app/entity/adeProject';
 
-import { CoursePage } from '../course/course';
-
+import { CoursePage } from '../studies/course/course';
+import { ModalProjectPage } from './modal-project/modal-project';
 
 @Component({
   selector: 'page-studies',
@@ -39,29 +41,59 @@ export class StudiesPage {
   public listCourses: Course[];
   public course : Course;
   public title: any;
+  public sessionId: string;
+  public projectId : string = null;
 
   constructor(
-    public peopleService: CursusListService,
+    public studiesService: StudiesService,
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
     public storage:Storage,
     public menu: MenuController,
     public platform: Platform,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    public modalCtrl: ModalController
   ) {
     this.title = this.navParams.get('title');
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
-    this.loadPeople();
   }
 
-  loadPeople(){
-    this.peopleService.load()
-    .then(data => {
-      this.people = data;
+  openModalProject(){
+    let obj = {sessionId : this.sessionId};
+
+    let myModal = this.modalCtrl.create(ModalProjectPage, obj);
+    myModal.onDidDismiss(data => {
+      console.log("openModalProject data : " + data)
+      this.projectId = data;
+      console.log("openModalProject projectId : " + data)
+    });
+    myModal.present();
+  }
+
+  initializeSession(){
+    this.studiesService.openSession().then(
+      data => {
+        console.log("data in studies.ts");
+        console.log(data);
+        this.sessionId = data.toString();
+        console.log(this.sessionId);
+        if (this.projectId === null) {
+          this.openModalProject();
+        } else {
+          this.studiesService.setProject(this.sessionId,this.projectId).then(
+            data => {
+              console.log("data in setProject");
+              console.log(data);
+            }
+          );
+        }
     });
   }
+
+
+
 
   showPrompt() {
     let prompt = this.alertCtrl.create({
@@ -98,11 +130,18 @@ export class StudiesPage {
   }
 
   getCourses(){
-    this.storage.get('listCourses').then((data) => {if(data==null) {this.listCourses=[]} else { this.listCourses=data}});
+    this.storage.get('listCourses').then((data) =>
+    {
+      if(data==null){
+        this.listCourses=[]
+      } else {
+        this.listCourses=data}
+    });
   }
 
   saveCourse(name: string, tag: string){
-    let course = {"acronym": tag, "name": name };
+    let course = new Course(name,tag, null);
+
     console.log(course);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
@@ -118,11 +157,13 @@ export class StudiesPage {
 
   openCoursePage(course: Course){
     console.log(course);
-    this.navCtrl.push(CoursePage, {course : course});
+    this.navCtrl.push(CoursePage,
+      {course : course, projectId : this.projectId, sessionId : this.sessionId});
   }
 
   ionViewDidLoad() {
     console.log('Hello StudiesPage Page');
+    this.initializeSession();
   }
 
   launch(url) {
