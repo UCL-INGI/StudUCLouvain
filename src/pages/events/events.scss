@@ -17,6 +17,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-library {
-
+page-events {
+  .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+  .large-icon {
+    font-size: 40px;
+  }
 }

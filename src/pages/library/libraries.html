@@ -1,4 +1,5 @@
 <!--
+
     Copyright 2017 Lamy Corentin, Lemaire Jerome
 
     This file is part of UCLCampus.
@@ -15,43 +16,34 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
--->
 
+-->
 <ion-header>
-  <ion-navbar secondary>
-    <button ion-button menuToggle>
+  <ion-navbar >
+    <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{feedItem.title}}</ion-title>
+    <ion-title align="center">{{title}}</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content>
-  <ion-card>
 
-    <img src="{{feedItem.image}}"/>
-
-    <ion-card-content>
-      <ion-card-title>
-        {{feedItem.title}}
-      </ion-card-title>
-      <p [innerHTML]="feedItem.description"></p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-      <ion-col text-right>
-        <button ion-button clear small icon-left>
-          <ion-icon name='star'></ion-icon>
-          Favorite
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(feedItem.link)">
-          <ion-icon name='share-alt'></ion-icon>
-          View in browser
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let lib of libraries">
+      <button ion-item (click)="goToLibDetails(lib)" no-lines>
+        {{lib.name}}
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

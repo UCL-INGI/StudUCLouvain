@@ -25,25 +25,27 @@ import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { Http, Response } from '@angular/http';
 import { FormControl } from '@angular/forms';
-import { DetailsPage } from '../campus-events-details/details';
-import { CampusEventsFilterPage } from '../campus-events-filter/campus-events-filter';
+import { EventsDetailsPage } from '../events-details/events-details';
+import { EventsFilterPage } from '../events-filter/events-filter';
 import { UserData } from '../../providers/user-data';
 import { EventsService } from '../../providers/events-service';
 import { EventItem } from '../../app/entity/eventItem';
+import { ConnectivityService } from '../../providers/connectivity-service';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
-  selector: 'campus-events',
-  templateUrl: 'campus-events.html'
+  selector: 'page-events',
+  templateUrl: 'events.html'
 })
-export class CampusEventsPage {
+export class EventsPage {
+  //TODO : Change details to use EventItem and change EventsDetailsPage to EventDetailsPage
   // the list is a child of the schedule page
   // @ViewChild('scheduleList') gets a reference to the list
   // with the variable #scheduleList, `read: List` tells it to return
   // the List and not a reference to the element
   @ViewChild('eventsList', { read: List }) eventsList: List;
 
-  events: any = [];
+  events: Array<EventItem> = [];
   searching: any = false;
   segment = 'all';
   shownEvents = 0;
@@ -52,7 +54,7 @@ export class CampusEventsPage {
   searchControl: FormControl;
   filters : any;
   excludedFilters : any = [];
-  displayedEvents : any = [];
+  displayedEvents : Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
 
@@ -68,14 +70,15 @@ export class CampusEventsPage {
     private device: Device,
     private calendar: Calendar,
     private appAvailability: AppAvailability,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    public connService : ConnectivityService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
 
   ionViewDidLoad() {
-    this.app.setTitle('Events');
+    this.app.setTitle(this.title);
     this.updateDateLimit();
     this.loadEvents();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
@@ -88,8 +91,8 @@ export class CampusEventsPage {
     this.searching = true;
   }
 
-  public goToEventDetail(feed: any) {
-    this.nav.push(DetailsPage, { 'feed': feed });
+  public goToEventDetail(event: EventItem) {
+    this.nav.push(EventsDetailsPage, { 'event': event });
   }
 
   public doRefresh(refresher) {
@@ -101,15 +104,26 @@ export class CampusEventsPage {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
     let result: any;
-    this.eventsService.getEvents(this.segment).then(
-      res => {
-        result = res;
-        this.events = result.events;
-        this.shownEvents = result.shownEvents;
-        this.filters = result.categories;
-        this.searching = false;
-        this.updateDisplayedEvents();
-    });
+
+    if(this.connService.isOnline()) {
+      this.eventsService.getEvents(this.segment).then(
+        res => {
+          result = res;
+          this.events = result.events;
+          console.log("events length : " + this.events.length);
+          this.shownEvents = result.shownEvents;
+          this.filters = result.categories;
+          this.searching = false;
+          this.updateDisplayedEvents();
+      })
+      .catch(error => {
+          console.log("error loading events : " + error);
+      });
+
+    } else {
+      this.searching = false;
+      this.connService.presentConnectionAlert();
+    }
   }
 
   public updateDisplayedEvents() {
@@ -117,6 +131,7 @@ export class CampusEventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
+      console.log("displayed events length : " + this.displayedEvents.length);
       this.displayedEvents = this.events.filter((item) => {
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
@@ -141,7 +156,7 @@ export class CampusEventsPage {
 
 
   presentFilter() {
-    let modal = this.modalCtrl.create(CampusEventsFilterPage,
+    let modal = this.modalCtrl.create(EventsFilterPage,
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
 

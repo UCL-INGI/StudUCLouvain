@@ -20,6 +20,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class RssService {
@@ -32,8 +33,13 @@ export class RssService {
 
   load(url: string) {
     let encodedURL = this.rssServiceBaseUrl + encodeURIComponent(url) + this.rssServiceBaseOptions;
+
+
     return this.http.get(encodedURL)
-            .map(res => res.json())
-            .map(data => data.query.results.rss.channel['item']);
+            .map(res => {
+              let data:any = res.json();
+              console.log("test : " + data['query']);
+              return data['query']['results']['rss']['channel']['item'];
+            });
   }
 }

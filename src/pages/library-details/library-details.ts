@@ -21,6 +21,7 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LibrariesService } from '../../providers/libraries-service';
 import { LibraryItem } from '../../app/entity/libraryItem';
+import { ConnectivityService } from '../../providers/connectivity-service';
 
 /**
  * Generated class for the LibraryDetailsPage page.
@@ -44,16 +45,23 @@ import { LibraryItem } from '../../app/entity/libraryItem';
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
+  searching: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public libService: LibrariesService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public libService: LibrariesService, public connService: ConnectivityService) {
     this.libDetails = navParams.get('lib');
-
-    this.libService.loadLibDetails(this.libDetails).then(
-      res => {
-        let result:any = res;
-        this.libDetails = result.libDetails;
-      }
-    );
+    this.searching = true;
+    if(this.connService.isOnline()) {
+      this.libService.loadLibDetails(this.libDetails).then(
+        res => {
+          let result:any = res;
+          this.libDetails = result.libDetails;
+          this.searching = false;
+        }
+      );
+    } else {
+      this.searching = false;
+      this.connService.presentConnectionAlert();
+    }
   }
 
   toggleGroup(group) {

@@ -25,9 +25,9 @@ import { NewsItem } from '../app/entity/newsItem';
 
 @Injectable()
 export class NewsService {
-  url1 = "https://uclouvain.be/actualites/p1";
-  url2 = "https://uclouvain.be/actualites/p2";
-  url3 = "https://uclouvain.be/actualites/p3";
+  url1 = "https://uclouvain.be/actualites/p1/rss";
+  url2 = "https://uclouvain.be/actualites/p2/rss";
+  url3 = "https://uclouvain.be/actualites/p3/rss";
 
   news = [];
   shownNews = 0;
@@ -38,6 +38,7 @@ export class NewsService {
 
   public getNews(segment:string) {
     let baseURL;
+    this.news = [];
     switch(segment) {
        case "P2": {
           baseURL = this.url2;
@@ -52,27 +53,35 @@ export class NewsService {
           break;
        }
     }
+
     return new Promise( (resolve, reject) => {
       this.rssService.load(baseURL).subscribe(
         data => {
           this.extractNews(data);
           resolve({news : this.news, shownNews: this.shownNews});
+        },
+        err => {
+          reject(err);
         }
       );
     });
   }
 
-  extractNews(data : any){
+  private extractNews(data : any){
     let maxDescLength = 20;
 
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
+      let trimmedDescription = "...";
+      if(item.description !== undefined) {
+        trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
+      }
       let hidden = false;
 
       this.shownNews++;
       let pubDate = this.createDateForNews(item.pubDate);
-      let newNewsItem = new NewsItem(item.description, item.link, item.title, item.enclosure.url, trimmedDescription, hidden, item.guid, pubDate);
+      let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", item.enclosure.url, trimmedDescription, hidden, item.guid, pubDate);
+      this.news.push(newNewsItem);
     }
   }
 

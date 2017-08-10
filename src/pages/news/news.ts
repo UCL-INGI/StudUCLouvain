@@ -18,10 +18,12 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, List, NavController, NavParams } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
+import { App, List, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { FormControl } from '@angular/forms';
 import { NewsService } from '../../providers/news-service';
-import { EventsService } from '../../providers/events-service';
+import { NewsItem } from '../../app/entity/newsItem';
+import { NewsDetailsPage } from '../news-details/news-details';
+import { ConnectivityService } from '../../providers/connectivity-service';
 
 @Component({
   selector: 'page-news',
@@ -31,24 +33,39 @@ export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
 
-  news: any = [];
-  segment = 'P1';
+  news: Array<NewsItem> = [];
+  segment = "P1";
   shownNews = 0;
-  displayedNews : any = [];
+  displayedNews : Array<NewsItem> = [];
+  searching: any = false;
+  searchControl: FormControl;
+  searchTerm: string = '';
 
   public title:string ="News" ;
 
   constructor(
-    public events: EventsService,
+    public platform : Platform,
     public navCtrl: NavController,
     public navParams:NavParams,
     public app:App,
-    public newsService : NewsService) {
+    public newsService : NewsService,
+    public connService : ConnectivityService,
+    public alertCtrl : AlertController
+  ) {
+      this.title = this.navParams.get('title');
+      this.app.setTitle(this.title);
+      this.searchControl = new FormControl();
+      this.platform.ready().then(() => {
+        this.loadEvents();
+        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+          this.searching = false;
+          this.updateDisplayedNews();
+        });
+      });
   }
 
   ionViewDidLoad() {
-    this.app.setTitle(this.title);
-    this.loadEvents();
+
   }
 
   public doRefresh(refresher) {
@@ -57,10 +74,40 @@ export class NewsPage {
   }
 
   public loadEvents() {
-
+    this.searching = true;
+    this.news = [];
+    if(this.connService.isOnline()) {
+      this.newsService.getNews(this.segment)
+      .then(
+        res => {
+          let result:any = res;
+          this.news = result.news;
+          this.shownNews = result.shownNews;
+          this.searching = false;
+          this.updateDisplayedNews();
+      })
+      .catch(error => {
+          console.log("error loading news : " + error);
+          this.searching = false;
+          this.updateDisplayedNews();
+      });
+    } else {
+      this.searching = false;
+      this.connService.presentConnectionAlert();
+    }
   }
 
   public updateDisplayedNews() {
+    this.searching = true;
+    this.displayedNews = this.news;
+    this.displayedNews = this.news.filter((item) => {
+      return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
+    });
+    this.shownNews = this.displayedNews.length;
+    this.searching = false;
+  }
 
+  public goToNewsDetail(news: NewsItem) {
+    this.navCtrl.push( NewsDetailsPage, { 'news': news });
   }
 }

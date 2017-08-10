@@ -26,7 +26,7 @@ import { EventItem } from '../app/entity/eventItem';
 
 @Injectable()
 export class EventsService {
-  events = [];
+  events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
   url = "http://louvainfo.be/evenements/feed/calendar/";
@@ -34,12 +34,16 @@ export class EventsService {
   constructor(private http: Http, public user:UserData, public rssService : RssService) {}
 
   public getEvents(segment:string) {
-    
+    this.events = [];
     return new Promise( (resolve, reject) => {
+
       this.rssService.load(this.url).subscribe(
         data => {
           this.extractEvents(data);
           resolve({events : this.events, categories: this.allCategories, shownEvents: this.shownEvents});
+        },
+        err => {
+          reject(err);
         }
       );
     });

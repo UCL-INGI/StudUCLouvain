@@ -1,0 +1,265 @@
+
+
+{
+ "query": {
+  "count": 1,
+  "created": "2017-07-31T13:05:14Z",
+  "lang": "en-US",
+  "diagnostics": {
+   "publiclyCallable": "true",
+   "url": {
+    "execution-start-time": "1",
+    "execution-stop-time": "796",
+    "execution-time": "795",
+    "content": "https://uclouvain.be/fr/actualites/p1/rss"
+   },
+   "user-time": "798",
+   "service-time": "795",
+   "build-version": "2.0.164"
+  },
+  "meta": {
+   "url": {
+    "id": "https://uclouvain.be/fr/actualites/p1/rss",
+    "status": "200",
+    "headers": {
+     "header": [
+      {
+       "name": "Server",
+       "value": "ATS"
+      },
+      {
+       "name": "Content-Type",
+       "value": "application/rss+xml"
+      },
+      {
+       "name": "X-Drupal-Cache",
+       "value": "HIT"
+      },
+      {
+       "name": "Etag",
+       "value": "\"1501506264-1\""
+      },
+      {
+       "name": "X-DRUPAL-HOSTNAME",
+       "value": "drupal2"
+      },
+      {
+       "name": "charset",
+       "value": "UTF-8"
+      },
+      {
+       "name": "Content-Language",
+       "value": "fr"
+      },
+      {
+       "name": "X-Frame-Options",
+       "value": "SAMEORIGIN"
+      },
+      {
+       "name": "Last-Modified",
+       "value": "Mon, 31 Jul 2017 13:04:24 GMT"
+      },
+      {
+       "name": "Expires",
+       "value": "Sun, 19 Nov 1978 05:00:00 GMT"
+      },
+      {
+       "name": "Vary",
+       "value": "Accept-Encoding"
+      },
+      {
+       "name": "Content-Encoding",
+       "value": "gzip"
+      },
+      {
+       "name": "Access-Control-Allow-Origin",
+       "value": "*"
+      },
+      {
+       "name": "X-Varnish",
+       "value": "100296758"
+      },
+      {
+       "name": "Via",
+       "value": "1.1 varnish-v4, https/1.1 ecq2.ycs.gq1.yahoo.com (ApacheTrafficServer [cMsSfW])"
+      },
+      {
+       "name": "Cache-Control",
+       "value": "no-cache, must-revalidate, post-check=0, pre-check=0"
+      },
+      {
+       "name": "X-Varnish-Cache",
+       "value": "MISS"
+      },
+      {
+       "name": "Accept-Ranges",
+       "value": "bytes"
+      },
+      {
+       "name": "Strict-Transport-Security",
+       "value": "max-age=15768000"
+      },
+      {
+       "name": "Date",
+       "value": "Mon, 31 Jul 2017 13:05:13 GMT"
+      },
+      {
+       "name": "Age",
+       "value": "0"
+      },
+      {
+       "name": "Transfer-Encoding",
+       "value": "chunked"
+      },
+      {
+       "name": "Connection",
+       "value": "keep-alive"
+      }
+     ]
+    }
+   }
+  },
+  "results": {
+   "rss": {
+    "version": "2.0",
+    "atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+     "link": [
+      {
+       "href": "https://uclouvain.be/fr/actualites/p1/rss",
+       "rel": "self",
+       "type": "application/rss+xml"
+      },
+      "https://uclouvain.be/fr/actualites/p1"
+     ],
+     "title": "Actualités du site p1",
+     "description": "List of news of p1 site",
+     "language": "fr-be",
+     "copyright": "Copyright (C) 2017 https://uclouvain.be",
+     "item": [
+      {
+       "title": "Inscrivez-vous avant vos vacances !",
+       "description": "Quel que soit votre choix d’études, votre inscription à l’UCL commence toujours par une procédure en ligne.\n\nN’attendez pas le 30 septembre, date de clôture des inscriptions pour effectuer cette démarche !\n\n \n\nVoici un aperçu de la procédure :\n\nEtape 1\n\nRendez-vous à l’adresse www.uclouvain.be/inscription. En fonction de votre diplôme et de votre nationalité, vous serez invité à créer un compte d’accès. C’est grâce à ce compte que vous pourrez compléter et modifier votre demande d’inscription en ligne.\n\nEtape 2\n\nRemplissez complétement votre d",
+       "link": "https://uclouvain.be/fr/etudier/actualites/inscrivez-vous-avant-vos-vacances.html",
+       "pubDate": "Thu, 27 Jul 2017 10:33:20 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/inscrivez-vous-avant-vos-vacances.html",
+       "enclosure": {
+        "length": "8335372",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/promotion/inscription.jpg?itok=OSmgBkjA"
+       }
+      },
+      {
+       "title": "87 étudiants participent cet été au programme...",
+       "description": "Cet été, pour la 5ème année consécutive, 87 étudiants de l’UCL (ingénieurs civils, bioingénieurs, vétérinaires, et architectes) partent en Afrique, en Amérique Latine et en Asie, pour tester sur le terrain des solutions techniques qu’ils ont conçues pendant l’année avec des étudiants locaux.\n\n « Appliquer une solution technique dans un environnement spécifique, c’est cela le premier challenge de l’ingénieur. Nous leur demandons de concevoir une solution Low Technology, pratique et adaptée aux contraintes sur le terrain (climat, difficulté d’approvisionneme",
+       "link": "https://uclouvain.be/fr/etudier/actualites/87-etudiants-participent-cet-ete-au-programme-ingenieuxsud.html",
+       "pubDate": "Tue, 25 Jul 2017 14:58:52 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/87-etudiants-participent-cet-ete-au-programme-ingenieuxsud.html",
+       "enclosure": {
+        "length": "1936751",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/Ing%C3%A9nieux%20sud%20groupe%2013%20Cambodge.JPG?itok=XnTNBzr3"
+       }
+      },
+      {
+       "title": "Un étudiant de l’UCL se spécialise en chirurgie...",
+       "description": "Après avoir décroché son diplôme de bachelier en médecine à l'Université de Namur, Jocelyn Nothomb a poursuivi ses études à l’UCL où il se spécialise dans le domaine de la chirurgie, et plus précisément dans le traitement de patients souffrant de traumatismes aigus vitaux. \n\nLes attentats du 22 mars 2016 à Bruxelles ont montré que la Belgique manque de connaissance et d'expérience dans cette discipline. C’est pourquoi il​ partira l’année prochaine en Colombie, pour suivre une formation complémentaire à Cali. « Très rapidement dans ma formation, j’ai été attir",
+       "link": "https://uclouvain.be/fr/etudier/actualites/un-etudiant-de-l-ucl-se-specialise-en-chirurgie-aigue-en-colombie.html",
+       "pubDate": "Thu, 13 Jul 2017 18:17:02 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/un-etudiant-de-l-ucl-se-specialise-en-chirurgie-aigue-en-colombie.html",
+       "enclosure": {
+        "length": "9822000",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/pubInt30205_1.jpg?itok=1HZGCfqn"
+       }
+      },
+      {
+       "title": "Quelle vie affective vivent les étudiant·e·s ?",
+       "description": "L’université a sondé les étudiant·e·s sur leur vie affective et sexuelle. Les résultats démontrent notamment une réelle prise de conscience des risques liés aux maladies sexuellement transmissibles.\n\nDepuis quelques années, l’Observatoire de la vie étudiante de l’UCL mène chaque année une enquête consacrée à un aspect de la santé étudiante, l’objectif étant de monitorer la santé des étudiants pour orienter les politiques de prévention de l’université. Menées sous forme de sondage, ces enquêtes sont conçues en concertation entre les équipes de terrain et d",
+       "link": "https://uclouvain.be/fr/etudier/actualites/quelle-vie-affective-vivent-les-etudiants.html",
+       "pubDate": "Mon, 10 Jul 2017 08:56:12 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/quelle-vie-affective-vivent-les-etudiants.html",
+       "enclosure": {
+        "length": "322093",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/photo%20vie%20affective.JPEG?itok=Dztr2-ZA"
+       }
+      },
+      {
+       "title": "Un contrat avant le diplôme ! ",
+       "description": "Pour la troisième année consécutive, l'Economics School of Louvain (UCL & UNamur) a mené une enquête auprès de ses diplômé·e·s de la promotion 2016. Le but était de connaitre le taux d’insertion professionnelle des diplômé·e·s ESL mais aussi de sonder leur satisfaction à l’égard de l’ESL. Le questionnaire (en français et en anglais) diffusé en ligne au mois de mars 2017 a recueilli 69% de réponses. \n\nDe cette enquête, il ressort 4 résultats majeurs : \n\n\n\tEn mars 2017, 87% de la promotion 2016 des économistes de l'UCL et de l'UNamur étaient en emploi et 6%",
+       "link": "https://uclouvain.be/fr/etudier/actualites/un-contrat-avant-le-diplome.html",
+       "pubDate": "Fri, 07 Jul 2017 08:51:52 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/un-contrat-avant-le-diplome.html",
+       "enclosure": {
+        "length": "1800544",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/Diplomation%20ESL_2.jpg?itok=eZSXJfu2"
+       }
+      },
+      {
+       "title": "Une semaine d’open-source",
+       "description": "A l’heure où bon nombre d’étudiants profitent d’un repos bien mérité, une trentaine d’irréductibles est encore sur notre campus de Louvain-la-Neuve pour participer à l’Open Week : une semaine consacrée au développement open-source et à la collaboration sur des projets de grande envergure.\n\n“L’open-source est un mouvement qui a une importance de plus en plus grande dans le monde informatique”, souligne Olivier Bonaventure, professeur à l’Ecole polytechnique de Louvain et organisateur de l’Open Week. “Bon nombre de systèmes informatiques importants sont dévelo",
+       "link": "https://uclouvain.be/fr/etudier/actualites/une-semaine-d-open-source.html",
+       "pubDate": "Thu, 06 Jul 2017 18:26:24 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/une-semaine-d-open-source.html",
+       "enclosure": {
+        "length": "638516",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/OpenWeek.jpg?itok=viRemdsj"
+       }
+      },
+      {
+       "title": "Trois nouveaux masters en science des données (Data...",
+       "description": "Dès la rentrée académique 2017, l’UCL proposera trois nouveaux masters en sciences des données (Data Sciences).\n\nVéritable révolution technique et sociétale, la science des données est une discipline fondamentale, susceptible d’intéresser un grand nombre d’étudiant·e·s, et que l’UCL se réjouit d’enseigner au travers de trois masters différents :\n\n\n\tun master en science des données orientation statistique\n\tun master en science des données orientation technologies de l’information\n\tun master ingénieur civil en science des données orientation technologies de l",
+       "link": "https://uclouvain.be/fr/etudier/actualites/trois-nouveaux-masters-en-science-des-donnees-data-sciences.html",
+       "pubDate": "Thu, 06 Jul 2017 09:20:56 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/trois-nouveaux-masters-en-science-des-donnees-data-sciences.html",
+       "enclosure": {
+        "length": "636892",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/sciences_donnees_slideshow.jpg?itok=AivYTg0Z"
+       }
+      },
+      {
+       "title": "Valoriser son expérience professionnelle",
+       "description": "Timothée a 29 ans et après avoir travaillé 5 ans en tant qu’infirmier, il a décidé de compléter sa formation initiale. Grâce à la prise en compte de cette expérience, Timothée a pu accéder au master en Sciences de la Santé de l’UCL et opérer un virage professionnel. C’est ce qu’on appelle la VAE, pour Valorisation des Acquis et de l’Expérience.\n\nFaire des liens avec sa pratique quotidienne, prendre du recul sur ce qu’on fait, sur ce qu’on aimerait faire, être accompagné par les professeurs dans son projet dans une relation d’adulte à adulte, se nourrir d",
+       "link": "https://uclouvain.be/fr/etudier/actualites/valoriser-son-experience-professionnelle.html",
+       "pubDate": "Wed, 05 Jul 2017 16:07:09 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/valoriser-son-experience-professionnelle.html",
+       "enclosure": {
+        "length": "251707",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p3/actus/TimotheeVAE2_slideshow.jpg?itok=D06zw9W7"
+       }
+      },
+      {
+       "title": "Le sport à l’UCL, un atout pour les étudiants !",
+       "description": "Vous arrivez à l'UCL et vous adorez le sport ? Vous venez de passer une année riche en découvertes et aventures sportives et vous souhaitez renouveler l'expérience l'an prochain ? Affiliez-vous à la carte Sport UCL dès votre (ré)inscription à l'UCL. Vous aurez accès à plus de 90 disciplines différentes pour seulement 50€. Une chance unique de pouvoir tester autant de disciplines. \n\nComment s’affilier ?\n\nL’affiliation au sport peut s’effectuer au moment de votre (ré)inscription à l’UCL. Que vous vous inscriviez par internet ou directement au Service des inscriptions, ",
+       "link": "https://uclouvain.be/fr/etudier/actualites/le-sport-a-l-ucl-un-atout-pour-les-etudiants.html",
+       "pubDate": "Mon, 03 Jul 2017 11:26:46 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/le-sport-a-l-ucl-un-atout-pour-les-etudiants.html",
+       "enclosure": {
+        "length": "1093487",
+        "type": "image/png",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/sport%20ucl.png?itok=3axRaONo"
+       }
+      },
+      {
+       "title": "S’orienter ou se réorienter dans le supérieur : le...",
+       "description": "Le Centre d’Information et d’Orientation (CIO) de l’UCL publie deux nouveaux cahiers pour aider les jeunes qui font face au doute sur leur orientation, et les encourager à se confronter à la réalité.\n\n\n\t\n\t\t\n\t\t\t\n\t\t\tExplorer les débouchés pour mieux s’orienter – Cahier du CIO n°3\n\t\t\t« La motivation, c’est quand les rêves enfilent leurs habits de travail », Benjamin Franklin.\n\t\t\t\n\t\t\n\t\n\n\nLe processus d’orientation invite le jeune à se questionner sur la place qu’il aura envie d’occuper dans la société. Et quel meilleur moyen pour faire son choix que",
+       "link": "https://uclouvain.be/fr/etudier/actualites/s-orienter-et-se-reorienter-dans-le-superieur.html",
+       "pubDate": "Wed, 28 Jun 2017 15:26:01 +0200",
+       "guid": "https://uclouvain.be/fr/etudier/actualites/s-orienter-et-se-reorienter-dans-le-superieur.html",
+       "enclosure": {
+        "length": "111099",
+        "type": "image/jpeg",
+        "url": "https://cdn.uclouvain.be/styles/rectangle_vertical/groups/cms-editors-p1/2015-04-24%20UCL%20Campus%20Open%20Days%20-%20LLN-622.JPEG?itok=91CBp1w_"
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

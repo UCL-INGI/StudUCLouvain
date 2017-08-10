@@ -17,12 +17,30 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-details {
-  .details {
-    background: #d1ffdc;
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { EventItem } from '../../app/entity/eventItem';
 
-    .details-content {
-      background: #ffffff;
-    }
+/*
+  Generated class for the Details page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'page-events-details',
+  templateUrl: 'events-details.html'
+})
+export class EventsDetailsPage {
+  event: EventItem;
+
+  constructor(public navCtrl: NavController, private navParams: NavParams) {
+    this.event = navParams.get('event');
   }
+
+  public openPage(url: string) {
+    //InAppBrowser.open(url, '_blank');
+    window.open(url, '_blank');
+  }
+
 }

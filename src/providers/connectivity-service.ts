@@ -19,7 +19,7 @@
 
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 
 declare var Connection;
 
@@ -28,7 +28,7 @@ export class ConnectivityService {
 
   onDevice: boolean;
 
-  constructor(public platform: Platform, private network: Network){
+  constructor(public platform: Platform, private network: Network, private alertCtrl: AlertController){
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -38,5 +38,14 @@ export class ConnectivityService {
     } else {
       return navigator.onLine;
     }
+  }
+
+  presentConnectionAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Connexion Internet',
+      subTitle: 'Connectez-vous à Internet pour charger les actualités...',
+      buttons: ['Fermer']
+    });
+    alert.present();
   }
 }

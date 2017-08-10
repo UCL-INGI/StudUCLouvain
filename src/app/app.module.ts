@@ -37,17 +37,18 @@ import { SecureStorage } from '@ionic-native/secure-storage';
 
 
 
-import { CampusEventsPage } from '../pages/campus-events/campus-events';
-import { CampusEventsFilterPage } from '../pages/campus-events-filter/campus-events-filter';
+import { EventsPage } from '../pages/events/events';
+import { EventsFilterPage } from '../pages/events-filter/events-filter';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { CoursePage } from '../pages/course/course';
-import { DetailsPage } from '../pages/campus-events-details/details';
-import { LibraryPage } from '../pages/library/library';
+import { EventsDetailsPage } from '../pages/events-details/events-details';
+import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library-details/library-details';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage } from '../pages/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
+import { NewsDetailsPage } from '../pages/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { SportPage } from '../pages/sport/sport';
 import { StudiesPage } from '../pages/studies/studies';
@@ -74,15 +75,16 @@ import { LibrariesService } from '../providers/libraries-service';
 @NgModule({
   declarations: [
     MyApp,
-    CampusEventsPage,
-    CampusEventsFilterPage,
+    EventsPage,
+    EventsFilterPage,
     MapLocationSelectorPage,
     CarpoolingPage,
     CoursePage,
-    DetailsPage,
-    LibraryPage,
+    EventsDetailsPage,
+    LibrariesPage,
     LoginPage,
     NewsPage,
+    NewsDetailsPage,
     MapPage,
     RestaurantPage,
     SportPage,
@@ -99,16 +101,17 @@ import { LibrariesService } from '../providers/libraries-service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    CampusEventsPage,
-    CampusEventsFilterPage,
+    EventsPage,
+    EventsFilterPage,
     MapLocationSelectorPage,
     CarpoolingPage,
     CoursePage,
-    DetailsPage,
-    LibraryPage,
+    EventsDetailsPage,
+    LibrariesPage,
     LoginPage,
     MapPage,
     NewsPage,
+    NewsDetailsPage,
     RestaurantPage,
     SportPage,
     StudiesPage,

@@ -24,10 +24,10 @@ import { EventsService } from '../../providers/events-service';
 
 
 @Component({
-  selector: 'page-campus-events-filter',
-  templateUrl: 'campus-events-filter.html'
+  selector: 'page-events-filter',
+  templateUrl: 'events-filter.html'
 })
-export class CampusEventsFilterPage {
+export class EventsFilterPage {
   categories: Array<{name: string, iconCategory: string, isChecked: boolean}> = [];
   dateRange: any;
   results: any = [];

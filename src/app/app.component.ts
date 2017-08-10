@@ -26,10 +26,10 @@ import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import { CampusEventsPage } from '../pages/campus-events/campus-events';
+import { EventsPage } from '../pages/events/events';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
 //import { CoursePage } from '../pages/course/course';
-import { LibraryPage } from '../pages/library/library';
+import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { SportPage } from '../pages/sport/sport';
@@ -62,13 +62,13 @@ export class MyApp {
     this.initializeApp();
     this.campusPages =[
       { title: 'News', component: NewsPage, icon: 'paper', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
-      { title: 'Events', component: CampusEventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
+      { title: 'Events', component: EventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
       { title: 'Sports', component: SportPage, icon : 'football', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
       { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
     ];
     this.studiePages =[
       { title: 'Studies', component: StudiesPage, icon: 'school', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Libraries', component: LibraryPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
+      { title: 'Libraries', component: LibrariesPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
     ];
     this.toolPages =[
       { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },

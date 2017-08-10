@@ -22,6 +22,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { LibrariesService } from '../../providers/libraries-service';
 import { LibraryDetailsPage } from '../library-details/library-details';
 import { LibraryItem } from '../../app/entity/libraryItem';
+import { ConnectivityService } from '../../providers/connectivity-service';
 
 /*
   Generated class for the Library page.
@@ -30,25 +31,39 @@ import { LibraryItem } from '../../app/entity/libraryItem';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-library',
-  templateUrl: 'library.html'
+  selector: 'page-libraries',
+  templateUrl: 'libraries.html'
 })
-export class LibraryPage {
+export class LibrariesPage {
   //TODO : change name to LibrariesPage
   title: any;
   libraries: Array<LibraryItem> = [];
+  searching: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public libService : LibrariesService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public platform: Platform,
+    public libService : LibrariesService,
+    public connService : ConnectivityService
+  ) {
     this.title = this.navParams.get('title');
   }
 
   ionViewDidLoad() {
-    this.libService.loadLibraries().then(
-      res => {
-        let result:any = res;
-        this.libraries = result.libraries;
-      }
-    );
+    this.searching = true;
+    if(this.connService.isOnline()) {
+      this.libService.loadLibraries().then(
+        res => {
+          let result:any = res;
+          this.libraries = result.libraries;
+          this.searching = false;
+        }
+      );
+    } else {
+      this.searching = false;
+      this.connService.presentConnectionAlert();
+    }
   }
 
   goToLibDetails(lib: LibraryItem) {
