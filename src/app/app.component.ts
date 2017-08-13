@@ -28,7 +28,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { EventsPage } from '../pages/events/events';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
-//import { CoursePage } from '../pages/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
@@ -45,9 +44,15 @@ import { HelpDeskPage } from '../pages/help-desk/help-desk';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage = NewsPage;
-  campusPages: Array<{title: string, component: any, icon: any, iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string}>;
-  studiePages: Array<{title: string, component: any, icon: any, iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string}>;
-  toolPages: Array<{title: string, component: any, icon: any, iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string}>;
+  campusPages: Array<{title: string, component: any, icon: any,
+    iosSchemaName: string, androidPackageName: string,
+    appUrl: string, httpUrl: string}>;
+  studiePages: Array<{title: string, component: any, icon: any,
+    iosSchemaName: string, androidPackageName: string,
+    appUrl: string, httpUrl: string}>;
+  toolPages: Array<{title: string, component: any, icon: any,
+    iosSchemaName: string, androidPackageName: string,
+    appUrl: string, httpUrl: string}>;
 
   constructor(public platform: Platform,
     public menu: MenuController,
@@ -60,20 +65,44 @@ export class MyApp {
   ) {
     this.initializeApp();
     this.campusPages =[
-      { title: 'News', component: NewsPage, icon: 'paper', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
-      { title: 'Events', component: EventsPage, icon: 'calendar', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant', iosSchemaName: 'com.apptree.resto4u', androidPackageName: 'com.apptree.resto4u', appUrl: 'apptreeresto4u://', httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+      { title: 'Actualités', component: NewsPage, icon: 'paper',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null },
+      { title: 'Evenements', component: EventsPage, icon: 'calendar',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
+
     ];
     this.studiePages =[
-      { title: 'Studies', component: StudiesPage, icon: 'school', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Libraries', component: LibrariesPage, icon: 'book', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  }
+      { title: 'Etudes', component: StudiesPage, icon: 'school',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
+      { title: 'Bibliothèques', component: LibrariesPage, icon: 'book',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
+      { title: 'Service d\'aide', component: HelpDeskPage,
+        icon: 'information-circle', iosSchemaName: null,
+        androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-    //  { title: 'Repertoire UCL', component: NewsPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Maps', component: MapPage, icon: 'map', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null  },
-      { title: 'Covoiturage', component: CarpoolingPage, icon : 'car', iosSchemaName: 'net.commuty.mobile', androidPackageName: 'net.commuty.mobile', appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
-      { title: 'Help Desk', component: HelpDeskPage, icon: 'information-circle', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null },
-      { title: 'Login Test', component: LoginPage, icon: 'contact', iosSchemaName: null, androidPackageName: null, appUrl: null, httpUrl: null }
+    //{ title: 'Repertoire UCL', component: NewsPage, icon: 'contact',
+    //     iosSchemaName: null, androidPackageName: null,
+    //     appUrl: null, httpUrl: null  },
+      { title: 'Carte', component: MapPage, icon: 'map',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
+      { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant',
+        iosSchemaName: 'com.apptree.resto4u',
+        androidPackageName: 'com.apptree.resto4u',
+        appUrl: 'apptreeresto4u://',
+        httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
+      { title: 'Covoiturage', component: CarpoolingPage, icon : 'car',
+        iosSchemaName: 'net.commuty.mobile',
+        androidPackageName: 'net.commuty.mobile',
+        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
+      //{ title: 'Login Test', component: LoginPage, icon: 'contact',
+        // iosSchemaName: null, androidPackageName: null,
+        // appUrl: null, httpUrl: null }
     ];
 
   }

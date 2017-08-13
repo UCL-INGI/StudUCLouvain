@@ -145,7 +145,8 @@ import { AdeService } from '../providers/studies-services/ade-service';
     RssService,
     LibrariesService,
     SecureStorage,
-    AdeService
+    AdeService,
+    CourseService
   ]
 })
 export class AppModule {}
