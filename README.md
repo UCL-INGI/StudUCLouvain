@@ -58,6 +58,19 @@ $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
 
+## Tests
+
+### Unit Tests : Karma
+To run the unit tests
+```bash
+$ npm test
+```
+### E2E Tests : Protractor
+To run the E2E tests
+```bash
+$ ionic serve
+$ npm run e2e
+```
 ## Features
 
 ### Existing Features
@@ -80,11 +93,10 @@ $ ionic cordova build ios
 
 ## Screenshots
 
-<img src="screenshots/news.png" alt="android-tablet" width="350"/>
-<img src="screenshots/menu.png" alt="android-tablet" width="350"/>
-<img src="screenshots/carte.png" alt="android-tablet" width="350"/>
-<img src="screenshots/etudes_1.png" alt="android-tablet" width="350"/>
-<img src="screenshots/etudes_2.png" alt="android-tablet" width="350"/>
+<img src="screenshots/news.png" alt="android-tablet" width="150"/>
+<img src="screenshots/menu.png" alt="android-tablet" width="150"/>
+<img src="screenshots/carte.png" alt="android-tablet" width="150"/>
+<img src="screenshots/etudes_1.png" alt="android-tablet" width="150"/> <img src="screenshots/etudes_2.png" alt="android-tablet" width="150"/>
 
 ## User Guide
 
