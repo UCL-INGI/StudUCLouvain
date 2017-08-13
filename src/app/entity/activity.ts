@@ -32,7 +32,7 @@ export class Activity{
     this.type=type;
     this.teachers=teachers;
     this.students=students;
-    this. start=start;
+    this.start=start;
     this.end=end;
     this.auditorium=auditorium;
   }

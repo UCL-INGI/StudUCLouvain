@@ -33,15 +33,11 @@ export class AdeService {
   AdeserviceConnection : string = "function=connect&login=etudiant&password=student";
   AdeServiceGetProjects : string = "&function=getProjects&detail=2";
   constructor(public http: Http) {
-    console.log('Hello Adeservice Provider');
-
   }
 
   convertXmlToJson(xml) : any{
     let parser : any = new X2JS();
     let json = parser.xml2js(xml);
-    console.log("json");
-    console.log(json);
     return json;
   }
 
@@ -61,13 +57,33 @@ export class AdeService {
      })
   }
 
-  httpSetProject(sessionId :string, projectId : string){
+  httpSetProject(sessionId : string, projectId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +"&function=setProject&projectId="+ projectId;
     return this.http.get(encodedURL).map( res => {
       return this.convertXmlToJson(res.text());
      })
+  }
+
+
+  httpGetCourseId(sessionId : string, acronym : string){
+    let encodedURL : string = this.AdeserviceBaseUrl
+                              +"sessionId="+sessionId
+                              +"&function=getResources&code="+ acronym;
+    return this.http.get(encodedURL).map( res => {
+      return this.convertXmlToJson(res.text());
+     })
+  }
+
+  httpGeActivity(sessionId : string , courseId : string){
+    let encodedURL : string = this.AdeserviceBaseUrl
+                              +"sessionId="+sessionId
+                              +"&function=getActivities&resources="+ courseId
+                              +"&detail=17";
+    return this.http.get(encodedURL).map( res => {
+      return this.convertXmlToJson(res.text());
+    })
   }
 
 

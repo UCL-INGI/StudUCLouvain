@@ -65,9 +65,7 @@ export class StudiesPage {
 
     let myModal = this.modalCtrl.create(ModalProjectPage, obj);
     myModal.onDidDismiss(data => {
-      console.log("openModalProject data : " + data)
       this.projectId = data;
-      console.log("openModalProject projectId : " + data)
     });
     myModal.present();
   }
@@ -75,10 +73,7 @@ export class StudiesPage {
   initializeSession(){
     this.studiesService.openSession().then(
       data => {
-        console.log("data in studies.ts");
-        console.log(data);
         this.sessionId = data.toString();
-        console.log(this.sessionId);
         if (this.projectId === null) {
           this.openModalProject();
         } else {
@@ -113,14 +108,11 @@ export class StudiesPage {
         {
           text: 'Cancel',
           handler: data => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: 'Save',
           handler: data => {
-            console.log('Saved clicked');
-            console.log(data)
             this.saveCourse(data.name, data.acronym);
           }
         }
@@ -141,8 +133,6 @@ export class StudiesPage {
 
   saveCourse(name: string, tag: string){
     let course = new Course(name,tag, null);
-
-    console.log(course);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
   }
@@ -156,20 +146,16 @@ export class StudiesPage {
   }
 
   openCoursePage(course: Course){
-    console.log(course);
     this.navCtrl.push(CoursePage,
-      {course : course, projectId : this.projectId, sessionId : this.sessionId});
+      {course : course, sessionId : this.sessionId});
   }
 
   ionViewDidLoad() {
-    console.log('Hello StudiesPage Page');
     this.initializeSession();
   }
 
   launch(url) {
     let browser = this.iab.create(url,'_system');
   }
-
-
 
 }

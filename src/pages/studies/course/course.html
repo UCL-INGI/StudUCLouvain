@@ -28,16 +28,22 @@
 
 
 <ion-content padding #courseContent>
-  <h1 text-center>Next Deadline : {{nextDeadline}}</h1>
   <ion-list>
-    <ion-item *ngFor="let timeSlot of weekSchedule">
-      <ion-thumbnail item-left>
-        <img src="assets/img/lecture_halls/saintebarbe.jpg" />
-      </ion-thumbnail>
-      <h1>{{timeSlot.hall}}</h1>
-      <h2>{{timeSlot.date}}</h2>
-      <h2>{{timeSlot.time}}</h2>
-      <button ion-button clear item-right (click)="openMapTo(timeSlot.location)">View on map</button>
-    </ion-item>
+     <ion-item-sliding *ngFor="let activity of course.activities">
+       <ion-item >
+        <h3> {{activity.type}}</h3>
+        <h3> Horaire : {{activity.start}} - {{activity.start}} </h3>
+        <h3> Auditoire : {{activity.auditorium}}</h3>
+        <h3> Etudiants : {{activity.students}}</h3>
+        <h3> Professeurs : {{activity.teachers}}</h3>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="removeCourse(course)" >
+          <ion-icon name="calendar"></ion-icon>
+          Calendar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

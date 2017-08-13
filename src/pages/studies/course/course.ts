@@ -18,51 +18,42 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController,NavParams  } from 'ionic-angular';
+import { NavController, NavParams  } from 'ionic-angular';
 import { CourseService } from '../../../providers/studies-services/course-service';
 import { Course } from '../../../app/entity/course'
+import { Activity } from '../../../app/entity/activity'
 
 @Component({
   selector: 'page-course',
   templateUrl: 'course.html'
 })
 export class CoursePage {
-  public course: Course;
-  public week: string;
-  public nextDeadline: string;
-  public weekSchedule: any[];
+  sessionId : string = this.navParams.get('sessionId');
+  course : Course = this.navParams.get("course");
 
-  constructor(public navCtrl: NavController, public courseService: CourseService, public params:NavParams) {
-    this.course = params.get("course");
-    this.getADEInfos();
+
+  constructor(public navCtrl: NavController,
+    public courseService: CourseService,
+    public navParams:NavParams) {
+    //this.getADEInfos();
   }
 
   ionViewDidLoad() {
-    console.log('Hello CoursePage Page');
+    this.getCourse(this.sessionId, this.course.acronym)
   }
 
-  getADEInfos(){
-    //TODO link to ade real infos
-    this.nextDeadline = "23/02/2017";
-    this.week = "Week 3";
-    this.weekSchedule = [
-      {
-        date: "15/02/2017",
-        time: "10h45-12h45",
-        hall: "Sainte-Barbe",
-        imgURL: "assets/img/lecture_halls/saintebarbe.jpg"
-      },
-      {
-        date: "16/02/2017",
-        time: "08h30-10h30",
-        hall: "Sainte-Barbe",
-        imgURL: "assets/img/lecture_halls/saintebarbe.jpg"
-      },
-    ];
-  }
-
-  openMapTo(locString : string) {
-    console.log(locString);
+  getCourse(sessionId : string, acronym : string){
+    this.courseService.getCourseId(sessionId, acronym).then(
+      data => {
+        let courseId = data;
+        this.courseService.getActivity(sessionId, courseId).then(
+          data => {
+            let activities = data;
+            this.course.activities = data;
+          }
+        )
+      }
+    )
   }
 
 }

@@ -20,7 +20,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import X2JS from 'x2js';
 import { AdeService } from './ade-service';
 import { AdeProject } from '../../app/entity/adeProject';
 

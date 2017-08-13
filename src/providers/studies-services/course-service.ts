@@ -19,51 +19,118 @@
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { AdeService } from './ade-service';
 import 'rxjs/add/operator/map';
+import { Activity } from '../../app/entity/activity';
 
 @Injectable()
 export class CourseService {
-  public server_url:"http://horairev6.uclouvain.be";
-  public info_path: "/jsp/custom/modules/plannings/info.jsp?displayConfName=web&order=slot";
-  public project_id: 6;
-  public user: "etudiant";
-  public password:"student";
-  public notify_id=1;
 
-  data:any;
-    constructor(public http: Http) {
-      console.log('Hello PeopleService Provider');
+    constructor(
+      public http: Http,
+      public ade : AdeService) {
     }
 
-    load(tag: string, weeks: string) {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
+    getCourseId(sessionId : string, acronym : string){
+      return new Promise <string>( (resolve, reject) => {
+        this.ade.httpGetCourseId(sessionId, acronym).subscribe(
+          data => {
+            resolve(this.extractCourseId(data));
+          }
+        )
+      })
     }
 
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular HTTP provider to request the data,
-      // then on the response, it'll map the JSON data to a parsed JS object.
-      // Next, we process the data and resolve the promise with the new data.
+    extractCourseId(data){
+      return data.resources.resource._id;
+    }
 
-      this.http.get(
-        this.server_url
-        +"/jsp/custom/modules/plannings/direct_planning.jsp?weeks="
-        + weeks + "&code=" + tag + "&login=" + "etudiant" + "&password="
-        + "student" + "&projectId=" + "6" + "&showTabDuration=true"
-        + "&showTabDate=true&showTab=true&showTabWeek=false&showTabDay=false"
-        + "&showTabStage=false&showTabResources=false"
-        + "&showTabCategory6=false&showTabCategory7=false"
-        + "&showTabCategory8=false")
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data.results;
-          resolve(this.data);
-        });
-    });
-  }
+    getActivity(sessionId : string, courseId : string){
+      return new Promise <Activity[]>( (resolve, reject) => {
+        this.ade.httpGeActivity(sessionId, courseId).subscribe(
+          data => {
+            resolve(this.extractActivity(data));
+          }
+        )
+      })
+    }
+
+    extractActivity(data){
+      let activities : Activity[] = [];
+      let activitiesList = data.activities.activity
+      for (let i =0; i< activitiesList.length ;i++){
+        let activityElem = activitiesList[i];
+        let newActivities : Activity[] = this.createNewActivities(activityElem);
+        activities = activities.concat(newActivities);
+      }
+      return activities;
+    }
+
+    createNewActivities(jsonActivity) : Activity[] {
+      let activities : Activity[] = [];
+      let type : string = jsonActivity._type;
+      let events = jsonActivity.events.event;
+      if(events !== undefined){
+        for(let i=0; i<events.length; i++){
+          let event = events[i];
+          let endHour = event._endHour;
+          let startHour = event._startHour;
+          let date = event._date
+          let participants = event.eventParticipants.eventParticipant
+          let teachers = this.getTeachers(participants)
+          let students = this.getStudents(participants)
+          let auditorium = this.getAuditorium(participants)
+          let start = this.createDate(date, startHour);
+          let end = this.createDate(date, endHour);
+          let activity = new Activity(type, teachers, students, start, end, auditorium);
+          activities.push(activity);
+        }
+      }
+      return activities;
+    }
+
+    createDate(date : string, hour : string) : Date{
+      let splitDate = date.split("/")
+      let splitHour = hour.split(":")
+      let newdate : Date = new Date(parseInt(splitDate[2]),
+                            parseInt(splitDate[1]),
+                            parseInt(splitDate[0]),
+                            parseInt(splitHour[1]),
+                            parseInt(splitHour[0])
+                            );
+      return newdate;
+    }
+
+    getTeachers(participants) : string {
+      let teachers : string = " ";
+      for(let i=0; i < participants.length; i++){
+        if(participants[i]._category === "instructor"){
+          teachers = teachers + participants[i]._name + "/";
+        }
+      }
+      return teachers;
+    }
+
+    getStudents(participants) : string {
+      let students : string = " ";
+      for(let i=0; i < participants.length; i++){
+        if(participants[i]._category === "trainee"){
+          students = students + participants[i]._name + "/";
+        }
+      }
+      return students;
+    }
+
+    getAuditorium(participants) : string {
+      let auditorium : string = " ";
+      for(let i=0; i < participants.length; i++){
+        if(participants[i]._category === "classroom"){
+          auditorium = auditorium + participants[i]._name + " ";
+        }
+      }
+      return auditorium;
+    }
+
+
 
 }
