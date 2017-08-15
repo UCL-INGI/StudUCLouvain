@@ -13,6 +13,16 @@ npm -v
 ```
 - For iOS, update XCode version to 8.0 or higher
 
+- Get Google Maps API keys :
+    * Go to Google Console : \url{https://console.developers.google.com/flows/enableapi?apiid=maps\_backend,geocoding\_backend,directions\_backend,distance\_matrix\_backend,elevation\_backend,places\_backend&reusekey=true}
+    * Select or create a project
+    * Click on continue to activate the API
+    * Once you are on page Credentials, select the Javascript API. Click on the blue button to create the key.
+    * Click on the library button on the left pane
+    * Select Google Maps Android and then enable the service, repeat this step for Google Maps iOS
+    * Click on credentials on the left pane, create two more api keys (one for Android, one for iOS
+    * Click on each new key to restrict it's access (Android restriction, iOS restriction, HTTP referent restriction)
+
 ## Getting Started
 
 * Clone this repository
