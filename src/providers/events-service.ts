@@ -49,7 +49,7 @@ export class EventsService {
               this.nbCalls = 0;
               reject(2); //2 = data.query.results == null  & callLimit reached, no events to display
             }
-            reject(1); //1 = data.query.results == null, retry rssService
+            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
           } else {
             this.nbCalls = 0;
             this.extractEvents(data['query']['results']['item']);
@@ -64,7 +64,10 @@ export class EventsService {
 
   private extractEvents(data: any) {
     let maxDescLength = 20;
-
+    if(data === undefined){
+      console.log("Error events data undefined!!!")
+      return;
+    }
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;

@@ -42,6 +42,7 @@ export class LibrariesService {
   }
 
   public loadLibraries(){
+    this.libraries = [];
     return new Promise(resolve => {
 
       this.http.get(this.url, this.options)
