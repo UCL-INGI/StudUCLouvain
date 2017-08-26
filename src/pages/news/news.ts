@@ -42,8 +42,7 @@ export class NewsPage {
   searching: any = false;
   searchControl: FormControl;
   searchTerm: string = '';
-
-  public title:string ="News" ;
+  title:string ="Actualités" ;
 
   constructor(
     public platform : Platform,
@@ -54,7 +53,9 @@ export class NewsPage {
     public connService : ConnectivityService,
     public alertCtrl : AlertController
   ) {
-      this.title = this.navParams.get('title');
+      if(this.navParams.get('title') !== undefined) {
+        this.title = this.navParams.get('title');
+      }
       this.app.setTitle(this.title);
       this.searchControl = new FormControl();
       this.platform.ready().then(() => {
@@ -89,9 +90,17 @@ export class NewsPage {
           this.updateDisplayedNews();
       })
       .catch(error => {
-          console.log("error loading news : " + error);
-          this.searching = false;
-          this.updateDisplayedNews();
+          if(error == 1) {
+            this.loadEvents();
+          } else {
+            if(error == 2) {
+              console.log("Loading news : YQL req timed out > limit, suppose no news to be displayed");
+            } else {
+              console.log("Error loading news : " + error);
+            }
+            this.searching = false;
+            this.updateDisplayedNews();
+          }
       });
     } else {
       this.searching = false;

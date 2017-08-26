@@ -37,7 +37,6 @@ import { ConnectivityService } from '../../providers/connectivity-service';
   templateUrl: 'libraries.html'
 })
 export class LibrariesPage {
-  //TODO : change name to LibrariesPage
   title: any;
   libraries: Array<LibraryItem> = [];
   searching: boolean = false;

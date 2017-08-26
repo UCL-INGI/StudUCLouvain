@@ -26,7 +26,7 @@ import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class RssService {
-  rssServiceBaseUrl: string = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feednormalizer%20where%20url%3D%27";
+  rssServiceBaseUrl: string = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%27";
   rssServiceBaseOptions: string = "%27&format=json";
 
   constructor(public http: Http) {
@@ -36,12 +36,9 @@ export class RssService {
   load(url: string) {
     let encodedURL = this.rssServiceBaseUrl + encodeURIComponent(url) + this.rssServiceBaseOptions;
 
-
-    return this.http.get(encodedURL)
-            .map(res => {
-              let data:any = res.json();
-              console.log("test : " + data['query']);
-              return data['query']['results']['rss']['channel']['item'];
-            });
+    return  this.http.get(encodedURL).map(res => res.json());
   }
+
+
+
 }

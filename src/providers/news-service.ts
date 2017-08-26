@@ -30,6 +30,8 @@ export class NewsService {
   url1 = "https://uclouvain.be/actualites/p1/rss";
   url2 = "https://uclouvain.be/actualites/p2/rss";
   url3 = "https://uclouvain.be/actualites/p3/rss";
+  nbCalls = 0;
+  callLimit = 30;
 
   news = [];
   shownNews = 0;
@@ -57,15 +59,25 @@ export class NewsService {
     }
 
     return new Promise( (resolve, reject) => {
+
       this.rssService.load(baseURL).subscribe(
         data => {
-          this.extractNews(data);
-          resolve({news : this.news, shownNews: this.shownNews});
+          this.nbCalls++;
+          if (data['query']['results'] == null) {
+            if(this.nbCalls >= this.callLimit) {
+              this.nbCalls = 0;
+              reject(2); //2 = data.query.results == null  & callLimit reached, no news to display
+            }
+            reject(1); //1 = data.query.results == null, retry rssService
+          } else {
+            this.nbCalls = 0;
+            this.extractNews(data['query']['results']['item']);
+            resolve({news : this.news, shownNews: this.shownNews});
+          }
         },
         err => {
           reject(err);
-        }
-      );
+        });;
     });
   }
 

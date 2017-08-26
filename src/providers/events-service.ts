@@ -31,6 +31,9 @@ export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
+  nbCalls = 0;
+  callLimit = 30;
+
   url = "http://louvainfo.be/evenements/feed/calendar/";
 
   constructor(private http: Http, public user:UserData, public rssService : RssService) {}
@@ -38,16 +41,24 @@ export class EventsService {
   public getEvents(segment:string) {
     this.events = [];
     return new Promise( (resolve, reject) => {
-
       this.rssService.load(this.url).subscribe(
         data => {
-          this.extractEvents(data);
-          resolve({events : this.events, categories: this.allCategories, shownEvents: this.shownEvents});
+          this.nbCalls++;
+          if (data['query']['results'] == null) {
+            if(this.nbCalls >= this.callLimit) {
+              this.nbCalls = 0;
+              reject(2); //2 = data.query.results == null  & callLimit reached, no events to display
+            }
+            reject(1); //1 = data.query.results == null, retry rssService
+          } else {
+            this.nbCalls = 0;
+            this.extractEvents(data['query']['results']['item']);
+            resolve({events : this.events, shownEvents: this.shownEvents});
+          }
         },
         err => {
           reject(err);
-        }
-      );
+        });;
     });
   }
 

@@ -118,7 +118,17 @@ export class EventsPage {
           this.updateDisplayedEvents();
       })
       .catch(error => {
-          console.log("error loading events : " + error);
+        if(error == 1) {
+          this.loadEvents();
+        } else {
+          if(error == 2) {
+            console.log("Loading events : YQL req timed out > limit, suppose no events to be displayed");
+          } else {
+            console.log("Error loading events : " + error);
+          }
+          this.searching = false;
+          this.updateDisplayedEvents();
+        }
       });
 
     } else {
