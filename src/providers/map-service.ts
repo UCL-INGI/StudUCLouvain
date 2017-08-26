@@ -45,7 +45,7 @@ export class MapService {
   mapLoaded: any;
   mapLoadedObserver: any;
   markers: any = [];
-  apiKey: string = "AIzaSyByq9QHjtIGcxjfbUqJTFWNveGCg2hRtR4";
+  apiKey: string = "myapikey";
   userLocation = {
     lat : 0,
     lng : 0

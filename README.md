@@ -13,6 +13,16 @@ npm -v
 ```
 - For iOS, update XCode version to 8.0 or higher
 
+- Get Google Maps API keys :
+    * Go to Google Console : https://console.developers.google.com/flows/enableapi?apiid=maps\_backend,geocoding\_backend,directions\_backend,distance\_matrix\_backend,elevation\_backend,places\_backend&reusekey=true
+    * Select or create a project
+    * Click on continue to activate the API
+    * Once you are on page Credentials, select the Javascript API. Click on the blue button to create the key.
+    * Click on the library button on the left pane
+    * Select Google Maps Android and then enable the service, repeat this step for Google Maps iOS
+    * Click on credentials on the left pane, create two more api keys (one for Android, one for iOS
+    * Click on each new key to restrict it's access (Android restriction, iOS restriction, HTTP referent restriction)
+
 ## Getting Started
 
 * Clone this repository
@@ -26,18 +36,27 @@ npm -v
     $ npm uninstall -g ionic cordova
     $ npm install -g ionic cordova
     ```
+    
+* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file UCLCampus/config.xml
+    
+    ```xml
+    <plugin name="cordova-plugin-googlemaps" spec="~1.4.0">
+      <variable name="API_KEY_FOR_ANDROID" value="myapikeyforandroid" />
+      <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
+    </plugin>
+    ```
 
+* Replace the value of "myapikey" by your Javascript key in the file UCLCampus/src/providers/map-service.ts (line 46)
+
+* Prepare the cordova build : 
+    ```bash
+    $ cordova prepare
+    ```
+    
 * Install node_modules
     ```bash
     $ npm install
     ```
-
-* Google Maps Plugin
-
-   ```bash
-   $ ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_IS_HERE" -- variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_IS_HERE"
-   $ npm install --save @ionic-native/google-maps
-   ```
 ## Run
 
 ### Browser
@@ -58,6 +77,19 @@ $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
 
+## Tests
+
+### Unit Tests : Karma
+To run the unit tests
+```bash
+$ npm test
+```
+### E2E Tests : Protractor
+To run the E2E tests
+```bash
+$ ionic serve
+$ npm run e2e
+```
 ## Features
 
 ### Existing Features
@@ -80,11 +112,10 @@ $ ionic cordova build ios
 
 ## Screenshots
 
-<img src="screenshots/news.png" alt="android-tablet" width="350"/>
-<img src="screenshots/menu.png" alt="android-tablet" width="350"/>
-<img src="screenshots/carte.png" alt="android-tablet" width="350"/>
-<img src="screenshots/etudes_1.png" alt="android-tablet" width="350"/>
-<img src="screenshots/etudes_2.png" alt="android-tablet" width="350"/>
+<img src="screenshots/news.png" alt="android-tablet" width="150"/>
+<img src="screenshots/menu.png" alt="android-tablet" width="150"/>
+<img src="screenshots/carte.png" alt="android-tablet" width="150"/>
+<img src="screenshots/etudes_1.png" alt="android-tablet" width="150"/> <img src="screenshots/etudes_2.png" alt="android-tablet" width="150"/>
 
 ## User Guide
 
