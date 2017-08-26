@@ -94,26 +94,26 @@ export class StudiesPage {
 
   showPrompt() {
     let prompt = this.alertCtrl.create({
-      title: 'Add Course',
-      message: "Enter the name and acronym of the course...",
+      title: 'Ajout d\'un cours',
+      message: "Entrez le nom et le sigle du cours à ajouter",
       inputs: [
         {
           name: 'name',
-          placeholder: 'Name'
+          placeholder: 'Nom du cours'
         },
         {
           name: 'acronym',
-          placeholder: 'Acronym'
+          placeholder: 'Sigle du cours'
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Annuler',
           handler: data => {
           }
         },
         {
-          text: 'Save',
+          text: 'Sauver',
           handler: data => {
             this.saveCourse(data.name, data.acronym);
           }

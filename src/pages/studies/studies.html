@@ -35,7 +35,7 @@
 </ion-header>
 
 <ion-menu id="studiesMenu" [content]="studiesContent" side="right">
-  <button ion-item (click)="launch('http://www.uclouvain.be/onglet_bureau.html')"> uclouvain.be </button>
+  <button ion-item (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </button>
   <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> moodle ucl </button>
   <button ion-item (click)="openModalProject()"> Changer projet ADE </button>
 </ion-menu>
@@ -50,7 +50,7 @@
       <ion-item-options side="right">
         <button ion-button (click)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
-          Delete
+          Supprimer
         </button>
       </ion-item-options>
     </ion-item-sliding>
