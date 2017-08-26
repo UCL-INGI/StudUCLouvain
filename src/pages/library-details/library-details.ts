@@ -82,4 +82,9 @@ export class LibraryDetailsPage {
   ionViewDidLoad() {
   }
 
+
+  public openPage(url: string) {
+    //InAppBrowser.open(url, '_blank');
+    window.open(url, '_blank');
+  }
 }
