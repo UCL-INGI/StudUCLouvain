@@ -25,7 +25,6 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
-import { Http, Response } from '@angular/http';
 import { FormControl } from '@angular/forms';
 import { EventsDetailsPage } from '../events-details/events-details';
 import { EventsFilterPage } from '../events-filter/events-filter';
@@ -54,7 +53,7 @@ export class EventsPage {
   title: any;
   searchTerm: string = '';
   searchControl: FormControl;
-  filters : any;
+  filters : any = [];
   excludedFilters : any = [];
   displayedEvents : Array<EventItem> = [];
   dateRange: any = 1;
@@ -166,6 +165,10 @@ export class EventsPage {
 
 
   presentFilter() {
+    if(this.filters === undefined){
+      this.filters = [];
+    }
+    
     let modal = this.modalCtrl.create(EventsFilterPage,
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
@@ -255,7 +258,7 @@ export class EventsPage {
     alert.present();
   }
 
-  launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
+  /*launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
     let app: string;
     let storeUrl:string;
 
@@ -282,6 +285,6 @@ export class EventsPage {
 
   openGuindaille(){
     this.launchExternalApp('','com.us.guindaille', 'fb504565829719289://', 'https://app.commuty.net/sign-in');
-  }
+  }*/
 
 }
