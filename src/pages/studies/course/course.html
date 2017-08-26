@@ -31,17 +31,18 @@
 
 <ion-content padding #courseContent>
   <ion-list>
-     <ion-item-sliding *ngFor="let activity of course.activities">
+     <ion-item-sliding *ngFor="let activity of course.activities" #slidingItem >
        <ion-item >
-        <h3> {{activity.type}}</h3>
-        <h3> Horaire : {{activity.start}} - {{activity.start}} </h3>
-        <h3> Auditoire : {{activity.auditorium}}</h3>
-        <h3> Etudiants : {{activity.students}}</h3>
-        <h3> Professeurs : {{activity.teachers}}</h3>
+        <h2 text-center> Activité : {{activity.type}} </h2>
+        <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
+          &mdash; {{activity.end | date: 'dd/MM/yyyy H:mm' }} </p>
+        <p> Auditoire : {{activity.auditorium}}</p>
+        <p> Etudiants : {{activity.students}}</p>
+        <p> Professeurs : {{activity.teachers}}</p>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button (click)="removeCourse(course)" >
+        <button ion-button (click)="addToCalendar(slidingItem, activity)" >
           <ion-icon name="calendar"></ion-icon>
           Calendar
         </button>

@@ -20,10 +20,13 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams  } from 'ionic-angular';
-import { CourseService } from '../../../providers/studies-services/course-service';
+import { NavController, NavParams, ItemSliding, ToastController  }
+  from 'ionic-angular';
+import { CourseService }
+  from '../../../providers/studies-services/course-service';
 import { Course } from '../../../app/entity/course'
 import { Activity } from '../../../app/entity/activity'
+import { Calendar } from '@ionic-native/calendar';
 
 @Component({
   selector: 'page-course',
@@ -36,8 +39,9 @@ export class CoursePage {
 
   constructor(public navCtrl: NavController,
     public courseService: CourseService,
+    private calendar: Calendar,
+    public toastCtrl: ToastController,
     public navParams:NavParams) {
-    //this.getADEInfos();
   }
 
   ionViewDidLoad() {
@@ -56,6 +60,21 @@ export class CoursePage {
         )
       }
     )
+  }
+
+  addToCalendar(slidingItem : ItemSliding, activity : Activity){
+    let options:any = {
+      firstReminderMinutes:30
+    };
+
+    this.calendar.createEventWithOptions(this.course.name +" : " + activity.type, activity.auditorium, null, activity.start, activity.end, options).then(() => {
+      let toast = this.toastCtrl.create({
+        message: 'Activité ajoutée',
+        duration: 3000
+      });
+      toast.present();
+      slidingItem.close();
+    });
   }
 
 }

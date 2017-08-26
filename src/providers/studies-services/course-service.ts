@@ -95,10 +95,10 @@ export class CourseService {
       let splitDate = date.split("/")
       let splitHour = hour.split(":")
       let newdate : Date = new Date(parseInt(splitDate[2]),
-                            parseInt(splitDate[1]),
+                            parseInt(splitDate[1])-1,
                             parseInt(splitDate[0]),
-                            parseInt(splitHour[1]),
-                            parseInt(splitHour[0])
+                            parseInt(splitHour[0]),
+                            parseInt(splitHour[1])
                             );
       return newdate;
     }
