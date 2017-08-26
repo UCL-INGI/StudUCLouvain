@@ -30,7 +30,6 @@ import { AdeProject } from '../../app/entity/adeProject';
 export class StudiesService {
   url:String;
   projects : AdeProject[];
-
   data:any;
     constructor(
       public http: Http,
@@ -38,7 +37,7 @@ export class StudiesService {
 
 
     openSession() {
-    return new Promise( (resolve, reject) => {
+    return new Promise<string>( (resolve, reject) => {
       console.log("StudiesService openSession")
       this.ade.httpOpenSession().subscribe(
         data => {

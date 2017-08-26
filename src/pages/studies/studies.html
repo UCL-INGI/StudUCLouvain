@@ -41,6 +41,9 @@
 </ion-menu>
 
 <ion-content padding #studiesContent>
+
+  <div text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </div>
+
   <ion-list>
      <ion-item-sliding *ngFor="let course of listCourses">
        <ion-item (click)="openCoursePage(course)" >

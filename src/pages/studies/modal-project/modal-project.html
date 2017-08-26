@@ -28,12 +28,12 @@
 
 
 <ion-content padding>
-  select ADE project :
+
+<div text-center> Sélectionnez un projet ADE : </div>
   <ion-list>
-    <button ion-item *ngFor= "let project of projects" (click)="closeModal(project.id)">
+    <button ion-item *ngFor= "let project of projects" (click)="closeModal(project)">
       <button ion-button full  > {{project.name}} </button>
     </button>
   </ion-list>
 
-  <!-- <button ion-button block (click)="closeModal()">Close Modal</button> -->
 </ion-content>

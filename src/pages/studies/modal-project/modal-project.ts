@@ -25,6 +25,7 @@ import { IonicPage, NavController, NavParams, ViewController }
 import { StudiesService}
         from '../../../providers/studies-services/studies-service';
 import { AdeProject } from '../../../app/entity/adeProject';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the ModalProjectPage page.
@@ -42,16 +43,17 @@ export class ModalProjectPage {
   public projects;
 
   constructor(public navCtrl: NavController,
+    public storage:Storage,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studiesService : StudiesService) {
   }
 
-  closeModal(projectId : string) {
-    console.log("closeModal projectId : " + projectId)
-    this.studiesService.setProject(this.sessionId, projectId).then(
+  closeModal(project : AdeProject) {
+    this.studiesService.setProject(this.sessionId, project.id).then(
       data => {
-        this.viewCtrl.dismiss(projectId);
+        this.storage.set('adeProject',project);
+        this.viewCtrl.dismiss(project);
       }
     )
   }
@@ -59,18 +61,11 @@ export class ModalProjectPage {
   getProjects(sessionId :string){
     this.studiesService.getProjects(sessionId).then(
       data => {
-        console.log("data in getProjects");
-        console.log(data);
         this.projects = data;
-        console.log("this.projects[1].id" + this.projects[1].id)
-        console.log("instanceof" + (this.projects[1] instanceof AdeProject));
-        console.log("project.name : " + this.projects[0].name)
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalProjectPage');
-    console.log("sessionId modal : "+ this.sessionId);
     this.getProjects(this.sessionId);
   }
 

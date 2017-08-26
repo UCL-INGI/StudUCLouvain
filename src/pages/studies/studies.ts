@@ -32,6 +32,8 @@ import { AdeProject } from '../../app/entity/adeProject';
 import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
 
+
+
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
@@ -44,7 +46,7 @@ export class StudiesPage {
   public course : Course;
   public title: any;
   public sessionId: string;
-  public projectId : string = null;
+  public project : AdeProject = null;
 
   constructor(
     public studiesService: StudiesService,
@@ -58,6 +60,7 @@ export class StudiesPage {
     public modalCtrl: ModalController
   ) {
     this.title = this.navParams.get('title');
+    this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
   }
@@ -67,7 +70,7 @@ export class StudiesPage {
 
     let myModal = this.modalCtrl.create(ModalProjectPage, obj);
     myModal.onDidDismiss(data => {
-      this.projectId = data;
+      this.project = data;
     });
     myModal.present();
   }
@@ -75,17 +78,22 @@ export class StudiesPage {
   initializeSession(){
     this.studiesService.openSession().then(
       data => {
-        this.sessionId = data.toString();
-        if (this.projectId === null) {
-          this.openModalProject();
-        } else {
-          this.studiesService.setProject(this.sessionId,this.projectId).then(
-            data => {
-              console.log("data in setProject");
-              console.log(data);
+        this.sessionId = data;
+        this.storage.get('adeProject').then(
+          (data) => {
+            this.project=data;
+            if (this.project === null) {
+              this.openModalProject();
+            } else {
+              this.studiesService.setProject(this.sessionId,this.project.id).then(
+                data => {
+                  console.log("data in setProject");
+                  console.log(data);
+                }
+              );
             }
-          );
-        }
+          }
+        )
     });
   }
 
@@ -153,7 +161,7 @@ export class StudiesPage {
   }
 
   ionViewDidLoad() {
-    this.initializeSession();
+
   }
 
   launch(url) {
