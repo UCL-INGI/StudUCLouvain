@@ -33,10 +33,10 @@
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
     <ion-segment-button value="all">
-      All
+      Tous
     </ion-segment-button>
     <ion-segment-button value="favorites">
-      Favorites
+      Favoris
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -118,6 +118,6 @@
   </ion-list>
 
   <ion-list-header *ngIf="(shownEvents === 0) && !searching">
-    No Events Found
+    Pas d'évènement trouvé
   </ion-list-header>
 </ion-content>

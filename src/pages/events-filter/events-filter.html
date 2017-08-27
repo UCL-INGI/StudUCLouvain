@@ -4,7 +4,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,22 +22,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">Cancel</button>
+      <button ion-button (click)="dismiss()">Annuler</button>
     </ion-buttons>
 
     <ion-title>
-      Filter Events
+      Filtre
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>Apply</button>
+      <button ion-button (click)="applyFilters()" strong>Appliquer</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="outer-content">
   <ion-item>
-    <ion-label>Show events for the next {{dateRange}} month(s)</ion-label>
+    <ion-label *ngIf="dateRange > 1">
+      Montrer les évènements pour les {{dateRange}} prochains mois
+    </ion-label>
+    <ion-label *ngIf="dateRange == 1">
+      Montrer les évènements pour le {{dateRange}} prochain mois
+    </ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
   </ion-item>
@@ -55,7 +60,7 @@
   </ion-list>
 
   <button ion-button icon-right (click)="resetFilters()">
-    Reset Filters
+    Restaurer le filtre
     <ion-icon name="refresh-circle"></ion-icon>
   </button>
 
