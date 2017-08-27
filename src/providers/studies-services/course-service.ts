@@ -57,7 +57,7 @@ export class CourseService {
       })
     }
 
-    extractActivity(data){
+    extractActivity(data) : Activity[]{
       let activities : Activity[] = [];
       let activitiesList = data.activities.activity
       for (let i =0; i< activitiesList.length ;i++){

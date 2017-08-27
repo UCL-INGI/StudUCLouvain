@@ -87,8 +87,7 @@ export class StudiesPage {
             } else {
               this.studiesService.setProject(this.sessionId,this.project.id).then(
                 data => {
-                  console.log("data in setProject");
-                  console.log(data);
+                  console.log("setProject");
                 }
               );
             }

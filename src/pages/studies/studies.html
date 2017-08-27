@@ -42,7 +42,7 @@
 
 <ion-content padding #studiesContent>
 
-  <div text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </div>
+  <h4 text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </h4>
 
   <ion-list>
      <ion-item-sliding *ngFor="let course of listCourses">

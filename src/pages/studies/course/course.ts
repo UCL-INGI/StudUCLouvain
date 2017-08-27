@@ -54,8 +54,11 @@ export class CoursePage {
         let courseId = data;
         this.courseService.getActivity(sessionId, courseId).then(
           data => {
-            let activities = data;
-            this.course.activities = data;
+            this.course.activities = data.sort(
+              (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
+            ).filter(
+                activitie => activitie.end.valueOf() > Date.now().valueOf()
+              ); // display only activities finished after now time
           }
         )
       }
@@ -64,16 +67,17 @@ export class CoursePage {
 
   addToCalendar(slidingItem : ItemSliding, activity : Activity){
     let options:any = {
-      firstReminderMinutes:30
     };
 
-    this.calendar.createEventWithOptions(this.course.name +" : " + activity.type, activity.auditorium, null, activity.start, activity.end, options).then(() => {
-      let toast = this.toastCtrl.create({
-        message: 'Activité ajoutée',
-        duration: 3000
-      });
-      toast.present();
-      slidingItem.close();
+    this.calendar.createEventWithOptions(this.course.name +" : " + activity.type,
+      activity.auditorium, null, activity.start,
+      activity.end, options).then(() => {
+        let toast = this.toastCtrl.create({
+          message: 'Activité ajoutée',
+          duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
     });
   }
 
