@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, Nav, Platform } from 'ionic-angular';
+import { MenuController, Nav, Platform, AlertController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -63,6 +63,7 @@ export class MyApp {
     private iab: InAppBrowser,
     private device: Device,
     private splashscreen: SplashScreen,
+    private alertCtrl : AlertController,
     private statusBar: StatusBar
   ) {
     this.initializeApp();
@@ -116,7 +117,38 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashscreen.hide();
     });
+
+    // Confirm exit
+    this.platform.registerBackButtonAction(() => {
+        if (this.nav.length() == 1) {
+          this.confirmExitApp();
+        } else {
+          this.nav.pop();
+        }
+
+    });
   }
+
+  confirmExitApp() {
+    let confirmAlert = this.alertCtrl.create({
+        title: "Fermeture",
+        message: "Désirez-vous quitter l'application ?",
+        buttons: [
+            {
+                text: 'Annuler',
+                handler: () => {
+                }
+            },
+            {
+                text: 'Quitter',
+                handler: () => {
+                    this.platform.exitApp();
+                }
+            }
+        ]
+    });
+    confirmAlert.present();
+}
 
   openRootPage(page) {
     // close the menu when clicking a link from the menu
