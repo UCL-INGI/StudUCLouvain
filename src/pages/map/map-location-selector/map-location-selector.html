@@ -21,15 +21,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">Cancel</button>
+      <button ion-button (click)="dismiss()">Annuler</button>
     </ion-buttons>
 
     <ion-title>
-      Select Location
+      Choix d'un point d'intérêt
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>Apply</button>
+      <button ion-button (click)="applyFilters()" strong>Appliquer</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -38,7 +38,7 @@
 <ion-content #mapSelector id=mapSelector padding>
   <ion-list radio-group>
     <ion-list-header>
-      Select the location you want to be displayed ...
+      Sélectionnez le lieu que vous voulez afficher
     </ion-list-header>
 
     <ion-item *ngFor="let loc of locations, let i=index">

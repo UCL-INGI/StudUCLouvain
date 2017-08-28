@@ -129,8 +129,8 @@ export class MapService {
 
       this.geolocation.getCurrentPosition().then((position) => {
 
-        this.userLocation =new MapLocation( "My Position",
-                                    "My address",
+        this.userLocation =new MapLocation( "Ma Position",
+                                    "Mon adresse",
                                     String(position.coords.latitude),
                                     String(position.coords.longitude),
                                     "MYPOS");
@@ -182,8 +182,8 @@ export class MapService {
         console.log("initDeviceMap - geolocation answered");
 
 
-        this.userLocation =new MapLocation( "My Position",
-                                    "My address",
+        this.userLocation =new MapLocation( "Ma Position",
+                                    "Mon adresse",
                                     String(position.coords.latitude),
                                     String(position.coords.longitude),
                                     "MYPOS");
