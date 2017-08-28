@@ -164,7 +164,7 @@ export class StudiesPage {
   }
 
   launch(url) {
-    let browser = this.iab.create(url,'_system');
+    this.iab.create(url,'_system');
   }
 
 }
