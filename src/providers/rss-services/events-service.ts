@@ -53,7 +53,7 @@ export class EventsService {
           } else {
             this.nbCalls = 0;
             this.extractEvents(data['query']['results']['item']);
-            resolve({events : this.events, shownEvents: this.shownEvents});
+            resolve({events : this.events, shownEvents: this.shownEvents, categories: this.allCategories});
           }
         },
         err => {
@@ -73,7 +73,7 @@ export class EventsService {
       let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
       let favorite = false;
       let hidden = false;
-      let iconCategory = "assets/events-icon/other.png";
+      let iconCategory = "assets/icon/events-icon/other.png";
 
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
