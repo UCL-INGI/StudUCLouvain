@@ -20,8 +20,9 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { EventItem } from '../../../app/entity/eventItem';
+import { UserService } from '../../../providers/utils-services/user-service';
 
 /*
   Generated class for the Details page.
@@ -36,13 +37,28 @@ import { EventItem } from '../../../app/entity/eventItem';
 export class EventsDetailsPage {
   event: EventItem;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public user: UserService,
+    public toastCtrl: ToastController,
+    private navParams: NavParams) {
     this.event = navParams.get('event');
   }
 
   public openPage(url: string) {
     //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
+  }
+
+  addFavorite(event : EventItem){
+    if(!this.user.hasFavorite(event.guid)){
+      this.user.addFavorite(event.guid);
+      let toast = this.toastCtrl.create({
+        message: 'Favoris ajouté',
+        duration: 3000
+      });
+      toast.present();
+    }
+
   }
 
 }

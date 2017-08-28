@@ -20,7 +20,8 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, AlertController, ItemSliding, List, NavController, ModalController, NavParams, ToastController } from 'ionic-angular';
+import { App, AlertController, ItemSliding, List, NavController,
+  ModalController, NavParams, ToastController } from 'ionic-angular';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
@@ -198,14 +199,15 @@ export class EventsPage {
       firstReminderMinutes:5
     };
 
-    this.calendar.createEventWithOptions(itemData.title, itemData.location, null, itemData.startDate, itemData.endDate, options).then(() => {
-      let toast = this.toastCtrl.create({
-        message: 'Event Created',
-        duration: 3000
+    this.calendar.createEventWithOptions(itemData.title, itemData.location,
+      null, itemData.startDate, itemData.endDate, options).then(() => {
+        let toast = this.toastCtrl.create({
+          message: 'Evènement créé',
+          duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
       });
-      toast.present();
-      slidingItem.close();
-    });
   }
 
   addFavorite(slidingItem: ItemSliding, itemData: any) {
@@ -213,13 +215,13 @@ export class EventsPage {
     if (this.user.hasFavorite(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
-      this.removeFavorite(slidingItem, itemData, 'Favorite already added');
+      this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
     } else {
       // remember this session as a user favorite
       this.user.addFavorite(itemData.guid);
 
       let toast = this.toastCtrl.create({
-        message: 'Favorite added',
+        message: 'Ajouté aux favoris',
         duration: 3000
       });
       toast.present();
@@ -231,10 +233,10 @@ export class EventsPage {
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     let alert = this.alertCtrl.create({
       title: title,
-      message: 'Would you like to remove this event from your favorites?',
+      message: 'Souhaitez vous retirer cet évènement des favoris ?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Annuler',
           handler: () => {
             // they clicked the cancel button, do not remove the session
             // close the sliding item and hide the option buttons
@@ -242,7 +244,7 @@ export class EventsPage {
           }
         },
         {
-          text: 'Remove',
+          text: 'Supprimer',
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavorite(itemData.guid);
