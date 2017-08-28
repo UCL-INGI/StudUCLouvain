@@ -21,10 +21,10 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { LibrariesService } from '../../providers/libraries-service';
-import { LibraryDetailsPage } from '../library-details/library-details';
+import { LibrariesService } from '../../providers/wso2-services/libraries-service';
+import { LibraryDetailsPage } from './library-details/library-details';
 import { LibraryItem } from '../../app/entity/libraryItem';
-import { ConnectivityService } from '../../providers/connectivity-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 /*
   Generated class for the Library page.

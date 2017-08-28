@@ -19,35 +19,30 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { EventItem } from '../../../app/entity/eventItem';
 
-import { Events } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+/*
+  Generated class for the Details page.
 
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'page-events-details',
+  templateUrl: 'events-details.html'
+})
+export class EventsDetailsPage {
+  event: EventItem;
 
-@Injectable()
-export class UserData {
+  constructor(public navCtrl: NavController, private navParams: NavParams) {
+    this.event = navParams.get('event');
+  }
 
-  //TODO : Renommer en UserService ?
-  _favorites: string[] = [];
+  public openPage(url: string) {
+    //InAppBrowser.open(url, '_blank');
+    window.open(url, '_blank');
+  }
 
-  constructor(
-    public events: Events,
-    public storage: Storage
-  ) {}
-
-  hasFavorite(itemGuid: string) {
-    return (this._favorites.indexOf(itemGuid) > -1);
-  };
-
-  addFavorite(itemGuid: string) {
-    this._favorites.push(itemGuid);
-  };
-
-  removeFavorite(itemGuid: string) {
-    let index = this._favorites.indexOf(itemGuid);
-    if (index > -1) {
-      this._favorites.splice(index, 1);
-    }
-  };
 }

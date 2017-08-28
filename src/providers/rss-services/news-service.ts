@@ -23,7 +23,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { RssService } from './rss-service';
-import { NewsItem } from '../app/entity/newsItem';
+import { NewsItem } from '../../app/entity/newsItem';
 
 @Injectable()
 export class NewsService {

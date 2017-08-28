@@ -21,7 +21,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { MapLocation } from '../app/entity/mapLocation';
+import { MapLocation } from '../../app/entity/mapLocation';
 import 'rxjs/add/operator/map';
 
 @Injectable()

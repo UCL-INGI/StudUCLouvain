@@ -22,9 +22,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { UserData } from './user-data';
+import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
-import { EventItem } from '../app/entity/eventItem';
+import { EventItem } from '../../app/entity/eventItem';
 
 @Injectable()
 export class EventsService {
@@ -36,7 +36,7 @@ export class EventsService {
 
   url = "http://louvainfo.be/evenements/feed/calendar/";
 
-  constructor(private http: Http, public user:UserData, public rssService : RssService) {}
+  constructor(private http: Http, public user:UserService, public rssService : RssService) {}
 
   public getEvents(segment:string) {
     this.events = [];
@@ -100,25 +100,25 @@ export class EventsService {
   public getIconCategory(category : string):string{
     switch(category.toLowerCase()) {
       case "sensibilisation" : {
-        return "assets/events-icon/sensibilisation.png";
+        return "assets/icon/events-icon/sensibilisation.png";
       }
       case "animation" : {
-        return "assets/events-icon/animation.png";
+        return "assets/icon/events-icon/animation.png";
       }
       case "culturel et artistique" : {
-        return "assets/events-icon/cultural.png";
+        return "assets/icon/events-icon/cultural.png";
       }
       case "guindaille" : {
-        return "assets/events-icon/party.png";
+        return "assets/icon/events-icon/party.png";
       }
       case "sportif" : {
-        return "assets/events-icon/sports.png";
+        return "assets/icon/events-icon/sports.png";
       }
       case "services et aides" : {
-        return "assets/events-icon/services.png";
+        return "assets/icon/events-icon/services.png";
       }
       default: {
-        return "assets/events-icon/other.png";
+        return "assets/icon/events-icon/other.png";
       }
     }
   }

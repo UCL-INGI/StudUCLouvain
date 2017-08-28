@@ -26,12 +26,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
-import { EventsDetailsPage } from '../events-details/events-details';
-import { EventsFilterPage } from '../events-filter/events-filter';
-import { UserData } from '../../providers/user-data';
-import { EventsService } from '../../providers/events-service';
+import { EventsDetailsPage } from './events-details/events-details';
+import { EventsFilterPage } from './events-filter/events-filter';
+import { UserService } from '../../providers/utils-services/user-service';
+import { EventsService } from '../../providers/rss-services/events-service';
 import { EventItem } from '../../app/entity/eventItem';
-import { ConnectivityService } from '../../providers/connectivity-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -66,7 +66,7 @@ export class EventsPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public user: UserData,
+    public user: UserService,
     public toastCtrl: ToastController,
     private device: Device,
     private calendar: Calendar,
@@ -168,7 +168,7 @@ export class EventsPage {
     if(this.filters === undefined){
       this.filters = [];
     }
-    
+
     let modal = this.modalCtrl.create(EventsFilterPage,
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();

@@ -22,7 +22,7 @@
 import { Component } from '@angular/core';
 
 import { NavParams, ViewController } from 'ionic-angular';
-import { EventsService } from '../../providers/events-service';
+import { EventsService } from '../../../providers/rss-services/events-service';
 
 
 @Component({

@@ -21,8 +21,8 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { LibraryItem } from '../app/entity/libraryItem';
-import { TimeSlot } from '../app/entity/timeSlot';
+import { LibraryItem } from '../../app/entity/libraryItem';
+import { TimeSlot } from '../../app/entity/timeSlot';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 

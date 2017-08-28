@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { ConnectivityService } from './connectivity-service';
+import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 import { GoogleMap,

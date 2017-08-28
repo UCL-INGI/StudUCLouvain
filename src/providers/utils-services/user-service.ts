@@ -19,30 +19,34 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { NewsItem } from '../../app/entity/newsItem';
+import { Injectable } from '@angular/core';
 
-/*
-  Generated class for the Details page.
+import { Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Component({
-  selector: 'page-news-details',
-  templateUrl: 'news-details.html'
-})
-export class NewsDetailsPage {
-  news: NewsItem;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
-    this.news = navParams.get('news');
-  }
+@Injectable()
+export class UserService {
 
-  public openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
-    window.open(url, '_blank');
-  }
+  favorites: string[] = [];
 
+  constructor(
+    public events: Events,
+    public storage: Storage
+  ) {}
+
+  hasFavorite(itemGuid: string) {
+    return (this.favorites.indexOf(itemGuid) > -1);
+  };
+
+  addFavorite(itemGuid: string) {
+    this.favorites.push(itemGuid);
+  };
+
+  removeFavorite(itemGuid: string) {
+    let index = this.favorites.indexOf(itemGuid);
+    if (index > -1) {
+      this.favorites.splice(index, 1);
+    }
+  };
 }

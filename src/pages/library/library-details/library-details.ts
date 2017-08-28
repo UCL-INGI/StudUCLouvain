@@ -21,9 +21,9 @@
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LibrariesService } from '../../providers/libraries-service';
-import { LibraryItem } from '../../app/entity/libraryItem';
-import { ConnectivityService } from '../../providers/connectivity-service';
+import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
+import { LibraryItem } from '../../../app/entity/libraryItem';
+import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
 
 /**
  * Generated class for the LibraryDetailsPage page.

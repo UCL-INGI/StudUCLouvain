@@ -21,7 +21,7 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { EventItem } from '../../app/entity/eventItem';
+import { NewsItem } from '../../../app/entity/newsItem';
 
 /*
   Generated class for the Details page.
@@ -30,14 +30,14 @@ import { EventItem } from '../../app/entity/eventItem';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-events-details',
-  templateUrl: 'events-details.html'
+  selector: 'page-news-details',
+  templateUrl: 'news-details.html'
 })
-export class EventsDetailsPage {
-  event: EventItem;
+export class NewsDetailsPage {
+  news: NewsItem;
 
   constructor(public navCtrl: NavController, private navParams: NavParams) {
-    this.event = navParams.get('event');
+    this.news = navParams.get('news');
   }
 
   public openPage(url: string) {

@@ -20,9 +20,9 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { POIService } from '../../providers/poi-service';
-import { MapService } from '../../providers/map-service';
-import { MapLocationSelectorPage } from '../map-location-selector/map-location-selector';
+import { POIService } from '../../providers/map-services/poi-service';
+import { MapService } from '../../providers/map-services/map-service';
+import { MapLocationSelectorPage } from './map-location-selector/map-location-selector';
 import { NavController, Platform, ActionSheetController, ModalController, MenuController } from 'ionic-angular';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { MapLocation } from '../../app/entity/mapLocation';

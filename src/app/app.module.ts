@@ -40,18 +40,18 @@ import { SecureStorage } from '@ionic-native/secure-storage';
 
 
 import { EventsPage } from '../pages/events/events';
-import { EventsFilterPage } from '../pages/events-filter/events-filter';
+import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
+import { EventsDetailsPage } from '../pages/events/events-details/events-details';
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { CoursePage } from '../pages/studies/course/course';
-import { EventsDetailsPage } from '../pages/events-details/events-details';
 import { LibrariesPage } from '../pages/library/libraries';
-import { LibraryDetailsPage } from '../pages/library-details/library-details';
+import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage }
-          from '../pages/map-location-selector/map-location-selector';
+          from '../pages/map/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
-import { NewsDetailsPage } from '../pages/news-details/news-details';
+import { NewsDetailsPage } from '../pages/news/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
@@ -59,17 +59,17 @@ import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 
 
 import { AuthService } from '../providers/auth-service';
-import { ConnectivityService } from '../providers/connectivity-service';
+import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
 import { DatabaseService } from '../providers/database-service';
-import { EventsService } from '../providers/events-service';
-import { MapService } from '../providers/map-service'
-import { POIService } from '../providers/poi-service';
-import { UserData } from '../providers/user-data';
-import { RssService } from '../providers/rss-service';
-import { NewsService } from '../providers/news-service';
-import { LibrariesService } from '../providers/libraries-service';
+import { EventsService } from '../providers/rss-services/events-service';
+import { MapService } from '../providers/map-services/map-service'
+import { POIService } from '../providers/map-services/poi-service';
+import { UserService } from '../providers/utils-services/user-service';
+import { RssService } from '../providers/rss-services/rss-service';
+import { NewsService } from '../providers/rss-services/news-service';
+import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { AdeService } from '../providers/studies-services/ade-service';
 
 
@@ -136,7 +136,7 @@ import { AdeService } from '../providers/studies-services/ade-service';
     Market,
     POIService,
     SQLite,
-    UserData,
+    UserService,
     Device,
     SplashScreen,
     StatusBar,

@@ -22,10 +22,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, List, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
-import { NewsService } from '../../providers/news-service';
+import { NewsService } from '../../providers/rss-services/news-service';
 import { NewsItem } from '../../app/entity/newsItem';
-import { NewsDetailsPage } from '../news-details/news-details';
-import { ConnectivityService } from '../../providers/connectivity-service';
+import { NewsDetailsPage } from './news-details/news-details';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 @Component({
   selector: 'page-news',
