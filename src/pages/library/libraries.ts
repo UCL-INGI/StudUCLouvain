@@ -38,7 +38,8 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 })
 export class LibrariesPage {
   title: any;
-  libraries: Array<LibraryItem> = [];
+  librariesItems: LibraryItem[];
+  libraries: LibraryItem[];
   searching: boolean = false;
 
   constructor(
@@ -51,13 +52,24 @@ export class LibrariesPage {
     this.title = this.navParams.get('title');
   }
 
+
+  public doRefresh(refresher) {
+    this.loadLibraries();
+    refresher.complete();
+  }
+
   ionViewDidLoad() {
+    this.loadLibraries();
+  }
+
+  loadLibraries() {
     this.searching = true;
     if(this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
           let result:any = res;
-          this.libraries = result.libraries;
+          this.libraries = result.libraries.map(obj => {return obj});
+          //this.libraries = result.libraries.map(lib => lib.name);
           this.searching = false;
         }
       );
@@ -67,7 +79,7 @@ export class LibrariesPage {
     }
   }
 
-  goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push(LibraryDetailsPage, { 'lib': lib });
+  goToLibDetails(lib: any) {
+    this.navCtrl.push(LibraryDetailsPage, { 'lib': lib});
   }
 }

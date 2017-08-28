@@ -30,13 +30,14 @@ import { GoogleMap,
    MarkerOptions,
    Marker,
    GoogleMapsMapTypeId} from '@ionic-native/google-maps';
+import { MapLocation } from '../../app/entity/mapLocation';
 
 declare var google;
 
 @Injectable()
 export class MapService {
 
-  //TODO : virer code redondant, créer entité "location : {title, adress, lat, lng}", check couplage + abstraction des données
+  //TODO : virer code redondant, check couplage + abstraction des données
 
   mapElement: any;
   pleaseConnect: any;
@@ -46,10 +47,7 @@ export class MapService {
   mapLoadedObserver: any;
   markers: any = [];
   apiKey: string = "myapikey";
-  userLocation = {
-    lat : 0,
-    lng : 0
-  };
+  userLocation: MapLocation;
   onDevice: boolean;
 
   constructor(public connectivityService: ConnectivityService, private geolocation : Geolocation, private platform: Platform) {
@@ -130,11 +128,15 @@ export class MapService {
     return new Promise((resolve) => {
 
       this.geolocation.getCurrentPosition().then((position) => {
+
+        this.userLocation =new MapLocation( "My Position",
+                                    "My address",
+                                    String(position.coords.latitude),
+                                    String(position.coords.longitude),
+                                    "MYPOS");
+
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        this.userLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+
         let mapOptions = {
           center: latLng,
           zoom: 15,
@@ -179,12 +181,14 @@ export class MapService {
       this.geolocation.getCurrentPosition().then((position) => {
         console.log("initDeviceMap - geolocation answered");
 
-        let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
 
-        this.userLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+        this.userLocation =new MapLocation( "My Position",
+                                    "My address",
+                                    String(position.coords.latitude),
+                                    String(position.coords.longitude),
+                                    "MYPOS");
+
+        let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
 
         let mapOptions = {
           center: latLng,
@@ -336,7 +340,14 @@ export class MapService {
 
   public moveCameraTo(location: any) {
     let latLng = new LatLng(parseFloat(location.lat), parseFloat(location.lng));
-    this.map.panTo(latLng);
+    this.map.animateCamera({
+      'target': latLng,
+      'zoom': 15,
+      'duration': 2000 // = 5 sec.
+    }, function() {
+      console.log("The animation is done");
+    });
+    //this.map.moveCamera(latLng);
   }
 
   private setCenteredMarkerOnBrowser(title:string) {
@@ -366,7 +377,7 @@ export class MapService {
 
   }
 
-  private enableMap(): void {
+  public enableMap(): void {
 
     if(this.pleaseConnect){
       this.pleaseConnect.style.display = "none";
@@ -414,7 +425,7 @@ export class MapService {
 
   }
 
-  public getUserLocation() : any {
+  public getUserLocation() : MapLocation {
     return this.userLocation;
   }
 }

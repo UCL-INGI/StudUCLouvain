@@ -50,7 +50,7 @@
         {{libDetails.phone}}
       </ion-col>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(libDetails.website)">
+        <button *ngIf="libDetails.website" ion-button clear small icon-left (click)="openPage(libDetails.website)">
           <ion-icon name='share-alt'></ion-icon>
           Website
         </button>
@@ -95,7 +95,7 @@
       Dates de fermeture
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('closed_dates')">
+    <ion-item [hidden]="!isGroupShown('closed_dates')" text-wrap>
       <p *ngFor="let cd of libDetails.closedDates">
         {{cd.from}} - {{cd.to}} : {{cd.description}}
       </p>

@@ -58,27 +58,20 @@ export class MapPage {
       this.title = this.navParams.get('title');
   }
 
-  ionViewDidLoad(){
-    this.platform.ready().then(() => {
-      let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-      let zones = this.poilocations.loadResources();
+  ngAfterViewInit(){
+    let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+    let zones = this.poilocations.loadResources();
 
-      Promise.all([
-        mapLoaded,
-        zones
-      ]).then((result) => {
-        this.zones = result[1];
-        this.filters = this.zones;
-        this.userLocation = new MapLocation( "My Position",
-                                    "My address",
-                                    this.mapService.getUserLocation().lat,
-                                    this.mapService.getUserLocation().lng,
-                                    "MYPOS");
-        this.selectedLocation = this.userLocation;
-        this.showedLocations.push(this.selectedLocation);
-        this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
-      });
-
+    Promise.all([
+      mapLoaded,
+      zones
+    ]).then((result) => {
+      this.zones = result[1];
+      this.filters = this.zones;
+      this.userLocation = this.mapService.getUserLocation();
+      this.selectedLocation = this.userLocation;
+      this.showedLocations.push(this.selectedLocation);
+      this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
     });
   }
 
@@ -116,6 +109,7 @@ export class MapPage {
   presentSelector() {
     let modal = this.modalCtrl.create(MapLocationSelectorPage,
                   { locations: this.showedLocations, current: this.selectedLocation });
+    this.mapElement.nativeElement.style.display = "none";
     modal.present();
 
     modal.onWillDismiss((data: any) => {
@@ -126,6 +120,7 @@ export class MapPage {
           this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
         }
       }
+      this.mapElement.nativeElement.style.display = "block";
     });
 
   }

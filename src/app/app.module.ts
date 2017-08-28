@@ -32,6 +32,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
@@ -62,7 +63,6 @@ import { AuthService } from '../providers/auth-service';
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
-import { DatabaseService } from '../providers/database-service';
 import { EventsService } from '../providers/rss-services/events-service';
 import { MapService } from '../providers/map-services/map-service'
 import { POIService } from '../providers/map-services/poi-service';
@@ -129,7 +129,6 @@ import { AdeService } from '../providers/studies-services/ade-service';
     ConnectivityService,
     CourseService,
     StudiesService,
-    DatabaseService,
     EventsService,
     InAppBrowser,
     MapService,
@@ -140,6 +139,7 @@ import { AdeService } from '../providers/studies-services/ade-service';
     Device,
     SplashScreen,
     StatusBar,
+    GoogleMaps,
     Geolocation,
     Network,
     Calendar,

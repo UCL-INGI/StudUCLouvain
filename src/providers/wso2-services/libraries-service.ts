@@ -22,6 +22,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { LibraryItem } from '../../app/entity/libraryItem';
+import { MapLocation } from '../../app/entity/mapLocation';
 import { TimeSlot } from '../../app/entity/timeSlot';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -61,6 +62,7 @@ export class LibrariesService {
 
       this.http.get(url_details, this.options)
         .map(res => res.json()).subscribe(data => {
+          console.log("lib : " + JSON.stringify(data));
           lib = this.extractLibraryDetails(lib, data.return.library);
           resolve({libDetails:lib});
         });
@@ -77,27 +79,63 @@ export class LibrariesService {
   }
 
   private extractLibraryDetails(lib : LibraryItem, data:any): LibraryItem {
-
-    lib.locationId = data.locationId;
-    lib.mapLocation = data.mapLocation;
-    lib.phone = data.phone;
-    lib.email = data.email;
-    lib.website = data.website;
-
-    for( let i=0; i < data.openingHours.length; i++) {
-      lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
+    if ( data.locationId == null ) {
+      lib.locationId = -1;
+    } else {
+      lib.locationId = data.locationId;
     }
 
-    for( let i=0; i < data.openingExaminationHours.length; i++) {
-      lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
+    if ( data.mapLocation == null ) {
+      lib.mapLocation = new MapLocation(lib.name,"","","","");
+    } else {
+      lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "","",""); //TODO update maplocation with lat lng code
     }
 
-    for( let i=0; i < data.openingSummerHours.length; i++) {
-      lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
+    if ( data.phone == null ) {
+      lib.phone = "";
+    } else {
+      lib.phone = data.phone;
+    }
+
+    if ( data.email == null ) {
+      lib.email = false;
+    } else {
+      lib.email = data.email;
+    }
+
+
+    if ( data.website == null ) {
+      lib.website = "";
+    } else {
+      lib.website = data.website;
+    }
+
+    if(data.openingHours) {
+      for( let i=0; i < data.openingHours.length; i++) {
+        lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
+      }
+    }
+
+    if(data.openingExaminationHours) {
+      for( let i=0; i < data.openingExaminationHours.length; i++) {
+        lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
+      }
+    }
+
+    if(data.openingSummerHours) {
+      for( let i=0; i < data.openingSummerHours.length; i++) {
+        lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
+      }
     }
 
     lib.openingHoursNote = data.openingHoursNote;
-    lib.closedDates = data.closedDates;
+
+    if(data.closedDates.constructor.name == Array) {
+      lib.closedDates = data.closedDates;
+    } else {
+      lib.closedDates = [data.closedDates];
+    }
+
 
     return lib;
   }
