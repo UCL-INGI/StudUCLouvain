@@ -22,8 +22,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { POIService } from '../../providers/map-services/poi-service';
 import { MapService } from '../../providers/map-services/map-service';
-import { MapLocationSelectorPage } from './map-location-selector/map-location-selector';
-import { NavController, Platform, ActionSheetController, ModalController, MenuController } from 'ionic-angular';
+import { MapLocationSelectorPage }
+  from './map-location-selector/map-location-selector';
+import { NavController, Platform, ActionSheetController, ModalController,
+   MenuController, NavParams } from 'ionic-angular';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { MapLocation } from '../../app/entity/mapLocation';
 
@@ -43,15 +45,17 @@ export class MapPage {
   userLocation:any = [];
   showLocationList = false;
   map: GoogleMap;
+  public title: any;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
     public mapService: MapService,
     public platform: Platform,
+    public navParams: NavParams,
     public poilocations: POIService,
     public menuCtrl: MenuController) {
-
+      this.title = this.navParams.get('title');
   }
 
   ionViewDidLoad(){
