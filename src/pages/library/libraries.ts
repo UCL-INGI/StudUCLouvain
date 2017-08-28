@@ -38,7 +38,6 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 })
 export class LibrariesPage {
   title: any;
-  librariesItems: LibraryItem[];
   libraries: LibraryItem[];
   searching: boolean = false;
 
@@ -68,8 +67,7 @@ export class LibrariesPage {
       this.libService.loadLibraries().then(
         res => {
           let result:any = res;
-          this.libraries = result.libraries.map(obj => {return obj});
-          //this.libraries = result.libraries.map(lib => lib.name);
+          this.libraries = result.libraries;
           this.searching = false;
         }
       );
@@ -79,7 +77,7 @@ export class LibrariesPage {
     }
   }
 
-  goToLibDetails(lib: any) {
+  goToLibDetails(lib: LibraryItem) {
     this.navCtrl.push(LibraryDetailsPage, { 'lib': lib});
   }
 }

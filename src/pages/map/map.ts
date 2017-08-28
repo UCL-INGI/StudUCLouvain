@@ -109,7 +109,6 @@ export class MapPage {
   presentSelector() {
     let modal = this.modalCtrl.create(MapLocationSelectorPage,
                   { locations: this.showedLocations, current: this.selectedLocation });
-    this.mapElement.nativeElement.style.display = "none";
     modal.present();
 
     modal.onWillDismiss((data: any) => {
@@ -120,9 +119,16 @@ export class MapPage {
           this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
         }
       }
-      this.mapElement.nativeElement.style.display = "block";
     });
 
+  }
+
+  public disableMap() {
+    this.mapElement.nativeElement.style.display = "none";
+  }
+
+  public enableMap() {
+    this.mapElement.nativeElement.style.display = "block";  
   }
 
   public toggleMarker(title: string) {

@@ -24,6 +24,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { LibraryItem } from '../../app/entity/libraryItem';
 import { MapLocation } from '../../app/entity/mapLocation';
 import { TimeSlot } from '../../app/entity/timeSlot';
+import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -31,28 +32,24 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class LibrariesService {
   libraries:Array<LibraryItem> = [];
-  url = 'https://esb-test.sipr.ucl.ac.be:8248/libraries/v1/list';
-  test_url = 'assets/data/temp_libraries.json';
-  test_url_details = 'assets/data/temp_library_33.json';
+  url = 'libraries/v1/list';
   options: any;
 
-  constructor(public http: Http) {
-    let headers = new Headers({ 'Accept': 'application/json' });
-    headers.append('Authorization', `Bearer b1f03f08-fcd7-3834-9e28-ba91d462ad24`);
-    this.options = new RequestOptions({ headers: headers });
+  constructor(public http: Http, private wso2Service: Wso2Service) {
+
   }
 
   public loadLibraries(){
     this.libraries = [];
+
     return new Promise(resolve => {
 
-      this.http.get(this.url, this.options)
-        .map(res => res.json()).subscribe(data => {
+      this.wso2Service.load(this.url).subscribe(
+        data => {
           this.extractLibraries(data.return.library);
           resolve({libraries:this.libraries});
         });
-
-      });
+    });
   }
 
   public loadLibDetails(lib:LibraryItem){
@@ -60,14 +57,12 @@ export class LibrariesService {
 
       let url_details = this.url + '/' + lib.id;
 
-      this.http.get(url_details, this.options)
-        .map(res => res.json()).subscribe(data => {
-          console.log("lib : " + JSON.stringify(data));
+      this.wso2Service.load(url_details).subscribe(
+        data => {
           lib = this.extractLibraryDetails(lib, data.return.library);
           resolve({libDetails:lib});
         });
-
-      });
+    });
   }
 
   private extractLibraries(data: any){
@@ -130,10 +125,10 @@ export class LibrariesService {
 
     lib.openingHoursNote = data.openingHoursNote;
 
-    if(data.closedDates.constructor.name == Array) {
-      lib.closedDates = data.closedDates;
-    } else {
+    if(data.closedDates.length === undefined) {
       lib.closedDates = [data.closedDates];
+    } else {
+      lib.closedDates = data.closedDates;
     }
 
 

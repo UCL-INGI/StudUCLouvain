@@ -38,8 +38,6 @@ import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 
-
-
 @Component({
   templateUrl: 'app.html'
 })

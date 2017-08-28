@@ -31,6 +31,7 @@ import { GoogleMap,
    Marker,
    GoogleMapsMapTypeId} from '@ionic-native/google-maps';
 import { MapLocation } from '../../app/entity/mapLocation';
+import { jsApiKey } from '../../app/variables-config';
 
 declare var google;
 
@@ -46,12 +47,13 @@ export class MapService {
   mapLoaded: any;
   mapLoadedObserver: any;
   markers: any = [];
-  apiKey: string = "myapikey";
+  apiKey: string;
   userLocation: MapLocation;
   onDevice: boolean;
 
   constructor(public connectivityService: ConnectivityService, private geolocation : Geolocation, private platform: Platform) {
     this.onDevice = this.platform.is('cordova');
+    this.apiKey = jsApiKey;
   }
 
   init(mapElement: any, pleaseConnect: any): Promise<any> {
@@ -344,10 +346,7 @@ export class MapService {
       'target': latLng,
       'zoom': 15,
       'duration': 2000 // = 5 sec.
-    }, function() {
-      console.log("The animation is done");
     });
-    //this.map.moveCamera(latLng);
   }
 
   private setCenteredMarkerOnBrowser(title:string) {

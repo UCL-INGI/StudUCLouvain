@@ -71,6 +71,7 @@ import { RssService } from '../providers/rss-services/rss-service';
 import { NewsService } from '../providers/rss-services/news-service';
 import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { AdeService } from '../providers/studies-services/ade-service';
+import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
 
 
@@ -148,7 +149,8 @@ import { AdeService } from '../providers/studies-services/ade-service';
     LibrariesService,
     SecureStorage,
     AdeService,
-    CourseService
+    CourseService,
+    Wso2Service
   ]
 })
 export class AppModule {}
