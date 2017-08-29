@@ -24,8 +24,7 @@ import { POIService } from '../../providers/map-services/poi-service';
 import { MapService } from '../../providers/map-services/map-service';
 import { MapLocationSelectorPage }
   from './map-location-selector/map-location-selector';
-import { NavController, Platform, ActionSheetController, ModalController,
-   MenuController, NavParams } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { MapLocation } from '../../app/entity/mapLocation';
 
@@ -44,7 +43,6 @@ export class MapPage {
   selectedLocation: any = [];
   userLocation:any = [];
   showLocationList = false;
-  map: GoogleMap;
   public title: any;
 
   constructor(public navCtrl: NavController,
@@ -53,8 +51,7 @@ export class MapPage {
     public mapService: MapService,
     public platform: Platform,
     public navParams: NavParams,
-    public poilocations: POIService,
-    public menuCtrl: MenuController) {
+    public poilocations: POIService) {
       this.title = this.navParams.get('title');
   }
 
@@ -71,7 +68,10 @@ export class MapPage {
       this.userLocation = this.mapService.getUserLocation();
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
-      this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
+
+      if(result[0]) {
+        this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
+      }
     });
   }
 
@@ -109,26 +109,28 @@ export class MapPage {
   presentSelector() {
     let modal = this.modalCtrl.create(MapLocationSelectorPage,
                   { locations: this.showedLocations, current: this.selectedLocation });
+    this.disableMap();
     modal.present();
-
+    
     modal.onWillDismiss((data: any) => {
       if (data) {
         if(this.selectedLocation !== data){
           this.selectedLocation = data;
-          this.mapService.moveCameraTo(this.selectedLocation);
+          this.mapService.setCenteredMarker(this.selectedLocation.title);
           this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
         }
       }
+      this.enableMap();
     });
 
   }
 
-  public disableMap() {
-    this.mapElement.nativeElement.style.display = "none";
+  private disableMap() {
+    this.mapService.disableMap();
   }
 
-  public enableMap() {
-    this.mapElement.nativeElement.style.display = "block";  
+  private enableMap() {
+    this.mapService.enableMap();
   }
 
   public toggleMarker(title: string) {

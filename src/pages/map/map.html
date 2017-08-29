@@ -37,7 +37,7 @@
     <div #map id="map"></div>
   </div>
   <ion-card>
-    <ion-item (click)="presentSelector()">
+    <ion-item (click)="presentSelector()" text-wrap>
       <ion-icon name="create" item-left large></ion-icon>
       <h2>{{selectedLocation.title}}</h2>
       <p>{{selectedLocation.address}}</p>
