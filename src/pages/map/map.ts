@@ -25,7 +25,6 @@ import { MapService } from '../../providers/map-services/map-service';
 import { MapLocationSelectorPage }
   from './map-location-selector/map-location-selector';
 import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
-import { GoogleMap } from '@ionic-native/google-maps';
 import { MapLocation } from '../../app/entity/mapLocation';
 
 @Component({
@@ -43,7 +42,8 @@ export class MapPage {
   selectedLocation: any = [];
   userLocation:any = [];
   showLocationList = false;
-  public title: any;
+  title: any;
+  searching: boolean = false;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -58,11 +58,13 @@ export class MapPage {
   ngAfterViewInit(){
     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
     let zones = this.poilocations.loadResources();
+    this.searching = true;
 
     Promise.all([
       mapLoaded,
       zones
     ]).then((result) => {
+      this.searching = false;
       this.zones = result[1];
       this.filters = this.zones;
       this.userLocation = this.mapService.getUserLocation();
@@ -70,7 +72,7 @@ export class MapPage {
       this.showedLocations.push(this.selectedLocation);
 
       if(result[0]) {
-        this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
+        this.mapService.addMarker(this.selectedLocation);
       }
     });
   }
@@ -103,6 +105,13 @@ export class MapPage {
   }
 
   presentFilter() {
+    /*if(this.showLocationList) {
+      this.enableMap();
+      this.mapElement.nativeElement.style.display = "block";
+    } else {
+      this.disableMap();
+      this.mapElement.nativeElement.style.display = "none";
+    }*/
     this.showLocationList = !this.showLocationList;
   }
 
@@ -111,13 +120,12 @@ export class MapPage {
                   { locations: this.showedLocations, current: this.selectedLocation });
     this.disableMap();
     modal.present();
-    
+
     modal.onWillDismiss((data: any) => {
       if (data) {
         if(this.selectedLocation !== data){
           this.selectedLocation = data;
-          this.mapService.setCenteredMarker(this.selectedLocation.title);
-          this.mapService.addMarker(this.selectedLocation.lat, this.selectedLocation.lng, this.selectedLocation.address, this.selectedLocation.title);
+          this.mapService.addMarker(this.selectedLocation);
         }
       }
       this.enableMap();
@@ -133,7 +141,11 @@ export class MapPage {
     this.mapService.enableMap();
   }
 
-  public toggleMarker(title: string) {
+  clearMarkers() {
+    this.mapService.clearMarkers();
+  }
+
+  toggleMarker(title: string) {
     this.mapService.toggleMarker(title);
   }
 

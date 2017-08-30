@@ -37,6 +37,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
 import { SecureStorage } from '@ionic-native/secure-storage';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 
 
@@ -150,7 +151,8 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     SecureStorage,
     AdeService,
     CourseService,
-    Wso2Service
+    Wso2Service,
+    NativeGeocoder
   ]
 })
 export class AppModule {}

@@ -56,20 +56,20 @@ export class MapService {
   constructor(public connectivityService: ConnectivityService,
               private geolocation : Geolocation,
               private platform: Platform,
-              public menuCtrl: MenuController) {
+              private menuCtrl: MenuController) {
     this.onDevice = this.platform.is('cordova');
     this.apiKey = jsApiKey;
     let leftMenu = menuCtrl.get('left');
 
     if(leftMenu) {
       leftMenu.ionOpen.subscribe(() => {
-        if(this.map) {
+        if(this.map && this.onDevice) {
           this.map.setClickable(false);
         }
       });
 
       leftMenu.ionClose.subscribe(() => {
-        if(this.map) {
+        if(this.map && this.onDevice) {
           this.map.setClickable(true);
         }
       });
@@ -195,9 +195,8 @@ export class MapService {
       this.geolocation.getCurrentPosition().then(
         (position) => {
           console.log("initDeviceMap - geolocation answered");
-
           this.userLocation = new MapLocation( "Ma Position",
-                                      "Mon adresse",
+                                      "",
                                       String(position.coords.latitude),
                                       String(position.coords.longitude),
                                       "MYPOS");
@@ -232,40 +231,22 @@ export class MapService {
 
   }
 
-  public moveCameraToMarker(location: MapLocation) {
-    let latLng = new LatLng(parseFloat(location.lat), parseFloat(location.lng));
-    this.map.animateCamera({
-      'target': latLng,
-      'zoom': 15,
-      'tilt' : 0,
-      'duration': 2000 // = 2 sec.
-    });
-  }
+  addMarker(location: MapLocation) {
+    let marker = this.getMarker(location.title);
 
-  public addMarker(lat: number, lng: number, content: string, title: string) {
-    let marker = this.getMarker(title);
-    console.log("marker is : " + marker);
     if(!marker) {
+      let contentString = "<p>"+ location.address +"</p>";
+
       if(this.onDevice) {
-        this.addDeviceMarker(lat, lng, content, title);
+        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
       } else {
-        this.addBrowserMarker(lat, lng, content, title);
+        this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
       }
     } else {
-      marker.showInfoWindow();
+      if(this.onDevice) {
+        marker.showInfoWindow();
+      }
     }
-  }
-
-  public testAddMarker(location: any) {
-    let latLng = new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.lng));
-
-    let marker = new google.maps.Marker({
-      position: latLng,
-      title: location.title,
-      animation: google.maps.Animation.DROP
-    });
-
-    marker.setMap(this.map);
   }
 
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
@@ -280,7 +261,7 @@ export class MapService {
     });
 
     this.markers.push(marker);
-    this.addBrowserInfoWindow(marker, content);
+    this.addBrowserInfoWindow(marker, title+"\n"+content);
   }
 
   private addBrowserInfoWindow(marker, content){
@@ -292,35 +273,39 @@ export class MapService {
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
+
+    infoWindow.open(this.map,marker);
   }
 
-  private addDeviceMarker(lat: number, lng: number, content: string, title: string) {
+  private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
 
     let latLng = new LatLng(lat, lng);
 
     let markerOptions: MarkerOptions = {
       position: latLng,
-      title: title
+      title: title,
+      snippet: address
     };
 
     this.map.addMarker(markerOptions).then(
       (marker: Marker) => {
         marker.showInfoWindow();
         this.markers.push(marker);
+        this.setCenteredMarkerOnDevice(title, lat, lng);
       });
   }
 
   private getMarker(title: string) : Marker{
     let res = null;
     this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
+      if(marker.getTitle() == title) {
         return marker;
       }
     });
     return res;
   }
 
-  public toggleMarker(title: string){
+  toggleMarker(title: string){
     if(this.onDevice) {
       this.toggleMarkerOnDevice(title);
     } else {
@@ -335,6 +320,7 @@ export class MapService {
           marker.setVisible(false);
         } else {
           marker.setVisible(true);
+          marker.showInfoWindow();
         }
       }
     });
@@ -352,42 +338,42 @@ export class MapService {
     });
   }
 
-  public setCenteredMarker(title: string) {
+  setCenteredMarker(location: MapLocation) {
     if(this.onDevice) {
-      this.setCenteredMarkerOnDevice(title);
+      this.setCenteredMarkerOnDevice(location.title, parseFloat(location.lat), parseFloat(location.lng));
     } else {
-      this.setCenteredMarkerOnBrowser(title);
+      this.setCenteredMarkerOnBrowser(location.title);
     }
   }
 
   private setCenteredMarkerOnBrowser(title:string) {
     this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
+      if(marker.getTitle() == title) {
         this.map.panTo(marker.getPosition());
       }
     });
   }
 
-  private setCenteredMarkerOnDevice(title:string) {
+  private setCenteredMarkerOnDevice(title:string, lat:number, lng:number) {
     this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
-        this.map.animateCamera({
-          'target': marker.get('position'),
-          'zoom': 15,
-          'tilt' : 0,
-          'duration': 2000 // = 2 sec.
-        });
+      if(marker.getTitle() == title) {
+        let latLng = new LatLng(lat, lng);
+        let camPos: CameraPosition = {
+          target: latLng,
+          zoom: 15
+        };
+        this.map.moveCamera(camPos);
       }
     });
   }
 
-  public disableMap() {
+  disableMap() {
     if(this.map && this.onDevice) {
       this.map.setClickable(false);
     }
   }
 
-  public enableMap() {
+  enableMap() {
     if(this.map && this.onDevice) {
       this.map.setClickable(true);
     }
@@ -396,12 +382,14 @@ export class MapService {
   private showPleaseConnect() {
     if(this.pleaseConnect){
       this.pleaseConnect.style.display = "block";
+      this.disableMap();
     }
   }
 
   private hidePleaseConnect() {
     if(this.pleaseConnect){
       this.pleaseConnect.style.display = "none";
+      this.enableMap();
     }
   }
 
@@ -436,7 +424,19 @@ export class MapService {
       }, false);
   }
 
-  public getUserLocation() : MapLocation {
+  getUserLocation() : MapLocation {
     return this.userLocation;
+  }
+
+  clearMarkers() {
+    if(this.onDevice){
+      this.map.clear();
+    } else {
+      this.markers.map(
+        marker => {
+          marker.setMap(null);
+        }
+      );
+    }
   }
 }

@@ -34,6 +34,7 @@ export class MapLocationSelectorPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.locations = this.navParams.get("locations");
     this.current = this.navParams.get("current");
+    
     for(let loc of this.locations) {
       if(loc.title === this.current.title) {
         this.checkBoxStates.push(true);

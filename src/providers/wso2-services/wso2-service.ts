@@ -17,7 +17,6 @@ export class Wso2Service {
 
   constructor(public http: Http) {
     let headers = new Headers({ 'Accept': 'application/json' });
-    console.log(wso2Header);
     headers.append('Authorization', wso2Header);
     this.options = new RequestOptions({ headers: headers });
   }

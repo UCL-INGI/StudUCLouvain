@@ -24,6 +24,11 @@ ion-app._gmaps_cdv_ .nav-decor{
 }
 
 page-map {
+  .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
 
   #please-connect {
     position: absolute;
@@ -46,7 +51,7 @@ page-map {
   #container {
     width: 100%;
     margin: auto;
-    height: 65%;
+    height: 60%;
     background-color: white;
   }
 
