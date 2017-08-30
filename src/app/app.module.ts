@@ -48,7 +48,6 @@ import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
-import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage }
           from '../pages/map/map-location-selector/map-location-selector';
@@ -60,7 +59,6 @@ import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 
 
-import { AuthService } from '../providers/auth-service';
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
@@ -88,7 +86,6 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
-    LoginPage,
     NewsPage,
     NewsDetailsPage,
     MapPage,
@@ -114,7 +111,6 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
-    LoginPage,
     MapPage,
     ModalProjectPage,
     NewsPage,
@@ -127,7 +123,6 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},
     AppAvailability,
-    AuthService,
     ConnectivityService,
     CourseService,
     StudiesService,

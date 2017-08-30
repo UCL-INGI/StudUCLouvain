@@ -34,7 +34,6 @@ import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
-import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 
