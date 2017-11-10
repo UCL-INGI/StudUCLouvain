@@ -26,6 +26,7 @@ import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { SportItem } from '../../app/entity/sportItem';
 import xml2js from 'xml2js';
+import X2JS from 'x2js';
 
 @Injectable()
 export class SportsService {
@@ -39,11 +40,15 @@ export class SportsService {
 
   constructor(private http: Http, public user:UserService, public rssService : RssService) {}
 
+convertXmlToJson(xml) : any{
+    let parser : any = new X2JS();
+    let json = parser.xml2js(xml);
+    return json;
+  }
   public getSports(segment:string) {
     this.sports = [];
     return new Promise( (resolve, reject) => {
-      this.http.get(this.url).map(data => {return data.text();}).subscribe( data => {
-        let result = this.parseXML(data);
+      this.http.get(this.url).map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
@@ -53,7 +58,7 @@ export class SportsService {
             reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
           } else {
             this.nbCalls = 0;
-            this.extractSports(result);
+            this.extractSports(result.xml.item);
             
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
@@ -63,40 +68,6 @@ export class SportsService {
         });
     });
   }
-  parseXML(data)
-   {
-         var k,
-             arr : Array<Object> = [],
-             parser = new xml2js.Parser(
-             {
-                trim: true,
-                explicitArray: true
-             });
-
-         parser.parseString(data, function (err, result) 
-         {
-            var obj = result.xml;
-            for(k in obj.item)
-            {
-               var item = obj.item[k];
-               arr.push({  
-                  sport           : item.sport[0],
-                  sexe        : item.sexe[0],
-                  lieu : item.lieu[0],
-                  salle        : item.salle[0],
-                  jour : item.jour[0],
-                  date : item.date[0],
-                  hdebut : item.hdebut[0],
-                  hfin : item.hfin[0],
-                  type : item.type[0],
-                  online : item.online[0],
-                  remarque : item.remarque[0],
-                  active : item.active[0]
-               });
-            }
-         });
-         return arr;
-   }
 
   private extractSports(data: any) {
     let maxDescLength = 20;
@@ -106,6 +77,7 @@ export class SportsService {
     }
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
+      //console.log(item);
       let favorite = false;
       let hidden = false;
 
@@ -133,8 +105,8 @@ export class SportsService {
   private createDateForSport(str : string, hour: string):Date{
     
       let timeSplit = hour.split(":");
-      let dateTimeSplit = str.split(" ");
-      let dateSplit = dateTimeSplit[0].split("/");
+      //let dateTimeSplit = str.split(" ");
+      let dateSplit = str.split("/");
       let year = parseInt(dateSplit[2]);
       let month = parseInt(dateSplit[1])-1;
       let day = parseInt(dateSplit[0]);
