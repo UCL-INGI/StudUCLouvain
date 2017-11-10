@@ -47,6 +47,9 @@ export class AdeService {
     let encodedURL : string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
+    },
+    err => {
+    
     })
   }
 

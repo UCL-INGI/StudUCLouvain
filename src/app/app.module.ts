@@ -25,7 +25,7 @@ import { HttpModule } from '@angular/http'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
-//import { Market } from '@ionic-native/market';
+import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SQLite } from '@ionic-native/sqlite';
@@ -57,7 +57,9 @@ import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
-
+import { SportsPage } from '../pages/sports/sports';
+import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
+//import { HomePage } from '../pages/home/home';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
@@ -71,6 +73,7 @@ import { NewsService } from '../providers/rss-services/news-service';
 import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { AdeService } from '../providers/studies-services/ade-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { SportsService } from '../providers/rss-services/sports-service';
 
 
 
@@ -93,7 +96,10 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
-    LibraryDetailsPage
+    LibraryDetailsPage,
+    SportsPage,
+    SportsFilterPage
+    //HomePage
   ],
   imports: [
     BrowserModule,
@@ -118,7 +124,10 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
-    LibraryDetailsPage
+    LibraryDetailsPage,
+    SportsPage,
+    SportsFilterPage
+    //HomePage
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},
@@ -129,7 +138,7 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     EventsService,
     InAppBrowser,
     MapService,
-  //  Market,
+    Market,
     POIService,
     SQLite,
     UserService,
@@ -147,7 +156,8 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
     AdeService,
     CourseService,
     Wso2Service,
-    NativeGeocoder
+    NativeGeocoder,
+    SportsService
   ]
 })
 export class AppModule {}

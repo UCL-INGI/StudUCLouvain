@@ -24,7 +24,7 @@ import { MenuController, Nav, Platform, AlertController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-//import { Market } from '@ionic-native/market';
+import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -36,6 +36,8 @@ import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
+import { SportsPage } from '../pages/sports/sports';
+//import { HomePage } from '../pages/home/home';
 
 @Component({
   templateUrl: 'app.html'
@@ -43,6 +45,9 @@ import { HelpDeskPage } from '../pages/help-desk/help-desk';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage = NewsPage;
+  /*homePage: Array<{title: string, component: any, icon: any,
+    iosSchemaName: string, androidPackageName: string,
+    appUrl: string, httpUrl: string}>;*/
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -55,7 +60,7 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public menu: MenuController,
-  //  public market: Market,
+    public market: Market,
     private appAvailability : AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
@@ -64,11 +69,19 @@ export class MyApp {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+   /* this.homePage =[
+      {title: 'Accueil', component: HomePage, icon: 'book',
+      iosSchemaName: null, androidPackageName: null,
+      appUrl: null, httpUrl: null},
+    ];*/
     this.campusPages =[
       { title: 'Actualités', component: NewsPage, icon: 'paper',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
       { title: 'Evenements', component: EventsPage, icon: 'calendar',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
+      { title: 'Sports', component: SportsPage, icon: 'football',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
@@ -176,7 +189,7 @@ export class MyApp {
         browser.close();
   		},
   		() => { // error callback
-  		//	this.market.open(app);
+  			this.market.open(app);
   		}
   	);
   }
