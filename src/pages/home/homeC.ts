@@ -29,15 +29,25 @@ import { UserService } from '../../providers/utils-services/user-service';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '../../app/app.component';
 
+import { NewsPage } from '../news/news';
+
 @Component({
   selector: 'page-homeC',
   templateUrl: 'homeC.html',
 })
 export class HomePage {
   @ViewChild('Nav') nav: Nav;
+  //rootPage = HomePage;
   title:string = "Accueil";
   shownGroup = null;
   where = "";
+  myApp : MyApp;
+
+
+  newsPage = { title: 'Actualités', component: NewsPage, icon: 'paper',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null };
+
 
   constructor(public navParams: NavParams,
               private iab: InAppBrowser,
@@ -59,11 +69,14 @@ export class HomePage {
     this.userS.addCampus(this.where);
   }
 
+  changePage(page) {
+    this.nav.push(page);
+  }
   openRootPage(page) {
     // close the menu when clicking a link from the menu
-    this.menu.close();
+    //this.menu.close();
     if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+      this.myApp.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }
     this.nav.setRoot(page.component, {title: page.title});
 
