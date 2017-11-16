@@ -23,7 +23,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavParams, App, Nav, MenuController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
-import { Market } from '@ionic-native/market';
+//import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 
 import { EventsPage } from '../events/events';
@@ -42,12 +42,12 @@ export class HomePage {
     appUrl: string, httpUrl: string};
 
   constructor(public navParams: NavParams,
-              private iab: InAppBrowser, 
+              private iab: InAppBrowser,
               public app: App,
               public menu: MenuController,
               private device: Device,
-              public market: Market,
-              private appAvailability : AppAvailability) 
+//              public market: Market,
+              private appAvailability : AppAvailability)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -103,7 +103,7 @@ export class HomePage {
         browser.close();
       },
       () => { // error callback
-        this.market.open(app);
+    //    this.market.open(app);
       }
     );
   }
