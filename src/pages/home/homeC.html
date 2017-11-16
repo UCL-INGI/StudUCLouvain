@@ -54,10 +54,31 @@
 </ion-content>
 
 <ion-content padding *ngIf="(userS.hasCampus() === true)">
+  <p align="center"> LOGO !? </p>
   <ion-content text-center>
-    <img alt="logo" src="../../assets/img/ucl.jpg" align="middle" />
+  <ion-list>
+    <ion-item>
+      <p align="center" style="font-size:22px;"><b>CAMPUS</b></p>
+      <ion-row>
+        <ion-col align-self-center><img alt="logo" src="../../assets/img/ucl.jpg" align="middle" (click)="openRootPage(newsPage)" /></ion-col>
+        <ion-col align-self-center>
+          <img alt="louvinfo" src="../../assets/img/louvainfo.png" align="middle" (click)="openRootPage(eventPage)" />
+          <br>
+          <img alt="sport" src="../../assets/img/sport.jpg" align="middle" (click)="openRootPage(sportPage)" />
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <p align="center" style="font-size:22px;"><b>ETUDES</b></p>
+      <ion-row>
+        <ion-col align-self-center><img alt="biblio" src="../../assets/img/biblio.jpg" align="middle" (click)="openRootPage(LibrariesPage)" /></ion-col>
+        <ion-col align-self-center><img alt="etudes" src="../../assets/img/etudes.jpg" align="middle" (click)="openRootPage(StudiesPage)" /></ion-col>
+        <ion-col align-self-center><img alt="aide" src="../../assets/img/aide.png" align="middle" (click)="openRootPage(HelpDeskPage)" /></ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 
-    <img alt="louvainfo" src="../../assets/img/louvainfo.png" align="middle" (click)="openRootPage(eventPage)" />
   </ion-content>
+
 
 </ion-content>

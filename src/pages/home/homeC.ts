@@ -27,6 +27,7 @@ import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { UserService } from '../../providers/utils-services/user-service';
 import { Storage } from '@ionic/storage';
+import { MyApp } from '../../app/app.component';
 
 @Component({
   selector: 'page-homeC',
@@ -34,7 +35,6 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   @ViewChild('Nav') nav: Nav;
-  rootPage = HomePage;
   title:string = "Accueil";
   shownGroup = null;
   where = "";
@@ -55,24 +55,8 @@ export class HomePage {
       this.app.setTitle(this.title);
   }
 
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
   update(){
     this.userS.addCampus(this.where);
-  }
-
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
-
-  public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
   }
 
   openRootPage(page) {
