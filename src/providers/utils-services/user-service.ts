@@ -41,6 +41,7 @@ export class UserService {
     public storage: Storage
   ) {
     this.getFavorites();
+    this.getCampus();
   }
 
   getFavorites(){
@@ -52,6 +53,7 @@ export class UserService {
         this.favorites=data}
     });
   }
+
   hasFavorite(itemGuid: string) {
     return (this.favorites.indexOf(itemGuid) > -1);
   };
@@ -71,9 +73,31 @@ export class UserService {
     this.storage.set('listEvents',this.favorites);
   };
 
+  getCampus(){
+    this.storage.get('campus').then((data) =>
+    {
+      if(data==null){
+        this.campus = "";
+      } else {
+        this.campus=data}
+    });
+  }
+
   hasCampus() {
     return(this.campus.length > 0);
   }
+
+  addCampus(campus: string) {
+    this.campus = campus;
+    this.storage.set('campus',this.campus);
+    
+  };
+
+  removeCampus(campus: string) {
+    
+    this.campus="";
+    this.storage.set('campus',this.campus);
+  };
 
   hasFavoriteS(sport: SportItem) {
     this.storage.get('listSports').then((data) =>
