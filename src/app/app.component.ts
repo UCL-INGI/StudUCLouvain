@@ -24,7 +24,7 @@ import { MenuController, Nav, Platform, AlertController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Market } from '@ionic-native/market';
+//import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -45,6 +45,7 @@ import { HomePage } from '../pages/home/homeC';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage = HomePage;
+  alertPresented: any;
   /*homePage: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;*/
@@ -60,7 +61,7 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public menu: MenuController,
-    public market: Market,
+    //public market: Market,
     private appAvailability : AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
@@ -68,6 +69,7 @@ export class MyApp {
     private alertCtrl : AlertController,
     private statusBar: StatusBar
   ) {
+    this.alertPresented = false;
     this.initializeApp();
    /* this.homePage =[
       {title: 'Accueil', component: HomePage, icon: 'book',
@@ -140,24 +142,29 @@ export class MyApp {
   }
 
   confirmExitApp() {
-    let confirmAlert = this.alertCtrl.create({
-        title: "Fermeture",
-        message: "Désirez-vous quitter l'application ?",
-        buttons: [
-            {
-                text: 'Annuler',
-                handler: () => {
-                }
-            },
-            {
-                text: 'Quitter',
-                handler: () => {
-                    this.platform.exitApp();
-                }
-            }
-        ]
-    });
-    confirmAlert.present();
+
+    if(!this.alertPresented){
+      this.alertPresented = true;
+      let confirmAlert = this.alertCtrl.create({
+          title: "Fermeture",
+          message: "Désirez-vous quitter l'application ?",
+          buttons: [
+              {
+                  text: 'Annuler',
+                  handler: () => {
+                    this.alertPresented = false;
+                  }
+              },
+              {
+                  text: 'Quitter',
+                  handler: () => {
+                      this.platform.exitApp();
+                  }
+              }
+          ]
+      });
+      confirmAlert.present();
+  }
 }
 
   openRootPage(page) {
@@ -189,7 +196,7 @@ export class MyApp {
         browser.close();
   		},
   		() => { // error callback
-  			this.market.open(app);
+  			//this.market.open(app);
   		}
   	);
   }
