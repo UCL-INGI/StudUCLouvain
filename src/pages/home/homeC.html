@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<ion-header *ngIf="(campus === true)">
+<ion-header *ngIf="(userS.hasCampus() === true)">
   <ion-navbar >
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -29,9 +29,9 @@
 </ion-header>
 
 
-<ion-content padding *ngIf="(campus === false)">
+<ion-content padding *ngIf="(userS.hasCampus() === false)">
   <p align="center" style="font-size:20px;"> De quel campus êtes-vous ?</p>
-  <ion-list radio-group [(ngModel)]="userS.campus">
+  <ion-list radio-group [(ngModel)]="where">
     <ion-item>
       <ion-label>Louvain-la-Neuve</ion-label>
       <ion-radio value="LLN" checked></ion-radio>
@@ -53,7 +53,7 @@
   <p> Salut {{userS.campus}}</p>
 </ion-content>
 
-<ion-content padding *ngIf="(campus === true)">
+<ion-content padding *ngIf="(userS.hasCampus() === true)">
   <ion-content text-center>
     <img alt="logo" src="../../assets/img/ucl.jpg" align="middle" />
 

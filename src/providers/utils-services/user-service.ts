@@ -31,16 +31,15 @@ import { SportItem } from '../../app/entity/sportItem';
 export class UserService {
 
   favorites: string[] = [];
-  events: EventItem[] = [];
   sports: SportItem[] = [];
   campus: string = "";
-  has: boolean = false;
 
   constructor(
     public eventss: Events,
     public storage: Storage
   ) {
     this.getFavorites();
+    //this.storage.set('campus',"");
     this.getCampus();
   }
 
@@ -48,9 +47,10 @@ export class UserService {
     this.storage.get('listEvents').then((data) =>
     {
       if(data==null){
-        this.favorites=[]
+        this.favorites=[];
       } else {
-        this.favorites=data}
+        this.favorites=data;
+        }
     });
   }
 
@@ -76,10 +76,11 @@ export class UserService {
   getCampus(){
     this.storage.get('campus').then((data) =>
     {
-      if(data==null){
+      if(data.length == 0){
         this.campus = "";
       } else {
-        this.campus=data}
+        this.campus=data; 
+        }
     });
   }
 

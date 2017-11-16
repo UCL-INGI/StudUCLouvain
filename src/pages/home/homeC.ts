@@ -37,7 +37,7 @@ export class HomePage {
   rootPage = HomePage;
   title:string = "Accueil";
   shownGroup = null;
-  campus = false;
+  where = "";
 
   constructor(public navParams: NavParams,
               private iab: InAppBrowser,
@@ -49,7 +49,6 @@ export class HomePage {
               public storage:Storage,
               public userS:UserService)
   {
-      this.campus = userS.hasCampus();
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
@@ -65,7 +64,7 @@ export class HomePage {
   }
 
   update(){
-    this.campus = this.userS.hasCampus();
+    this.userS.addCampus(this.where);
   }
 
   isGroupShown(group) {
