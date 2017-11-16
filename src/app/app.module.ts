@@ -59,7 +59,7 @@ import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/homeC';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
@@ -98,8 +98,8 @@ import { SportsService } from '../providers/rss-services/sports-service';
     HelpDeskPage,
     LibraryDetailsPage,
     SportsPage,
-    SportsFilterPage
-    //HomePage
+    SportsFilterPage,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -126,8 +126,8 @@ import { SportsService } from '../providers/rss-services/sports-service';
     HelpDeskPage,
     LibraryDetailsPage,
     SportsPage,
-    SportsFilterPage
-    //HomePage
+    SportsFilterPage,
+    HomePage
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},

@@ -151,7 +151,7 @@ export class SportsPage {
       let favSports = [];
 
       this.sports.filter((item) => {
-        if(item.favorite || this.user.hasFavorite(item.guid)) {
+        if(item.favorite || this.user.hasFavoriteS(item)) {
           if(item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
             favSports.push(item);
           }

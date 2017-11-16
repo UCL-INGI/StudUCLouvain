@@ -23,30 +23,76 @@ import { Injectable } from '@angular/core';
 
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { EventItem } from '../../app/entity/eventItem';
+import { SportItem } from '../../app/entity/sportItem';
 
 
 @Injectable()
 export class UserService {
 
   favorites: string[] = [];
+  events: EventItem[] = [];
+  sports: SportItem[] = [];
+  campus: string = "";
+  has: boolean = false;
 
   constructor(
-    public events: Events,
+    public eventss: Events,
     public storage: Storage
-  ) {}
+  ) {
+    this.getFavorites();
+  }
 
+  getFavorites(){
+    this.storage.get('listEvents').then((data) =>
+    {
+      if(data==null){
+        this.favorites=[]
+      } else {
+        this.favorites=data}
+    });
+  }
   hasFavorite(itemGuid: string) {
     return (this.favorites.indexOf(itemGuid) > -1);
   };
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
+    this.storage.set('listEvents',this.favorites);
+    
   };
 
   removeFavorite(itemGuid: string) {
+    
     let index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
+    this.storage.set('listEvents',this.favorites);
+  };
+
+  hasCampus() {
+    return(this.campus.length > 0);
+  }
+
+  hasFavoriteS(sport: SportItem) {
+    this.storage.get('listSports').then((data) =>
+    {
+      console.log("has",data);
+      return (data.indexOf(sport) > -1);
+    });
+  };
+
+  addFavoriteS(sport: SportItem) {
+    this.sports.push(sport);
+    this.storage.set('listSports',this.sports);
+  };
+
+  removeFavoriteS(sport : SportItem) {
+    let index = this.sports.indexOf(sport);
+    if (index > -1) {
+      this.sports.splice(index, 1);
+    }
+    this.storage.set('listSports',this.sports);
   };
 }

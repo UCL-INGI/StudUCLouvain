@@ -37,14 +37,14 @@ import { StudiesPage } from '../pages/studies/studies';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { SportsPage } from '../pages/sports/sports';
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/homeC';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage = NewsPage;
+  rootPage = HomePage;
   /*homePage: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;*/

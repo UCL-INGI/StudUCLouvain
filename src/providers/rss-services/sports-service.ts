@@ -25,7 +25,7 @@ import 'rxjs/add/operator/map';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { SportItem } from '../../app/entity/sportItem';
-import xml2js from 'xml2js';
+//import xml2js from 'xml2js';
 import X2JS from 'x2js';
 
 @Injectable()
@@ -37,7 +37,10 @@ export class SportsService {
   callLimit = 30;
 
   url = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/recordrss.php";
-
+  url1 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t1"; //LLN
+  url2 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t3"; //woluwe
+  url3 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t5"; //mons
+  url4 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t7"; //equipe universitaire
   constructor(private http: Http, public user:UserService, public rssService : RssService) {}
 
 convertXmlToJson(xml) : any{
@@ -48,6 +51,25 @@ convertXmlToJson(xml) : any{
   public getSports(segment:string) {
     this.sports = [];
     return new Promise( (resolve, reject) => {
+     /* this.rssService.load(this.url1).subscribe(
+        data => {
+          this.nbCalls++;
+          if (data['query']['results'] == null) {
+            if(this.nbCalls >= this.callLimit) {
+              this.nbCalls = 0;
+              reject(2); //2 = data.query.results == null  & callLimit reached, no events to display
+            }
+            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
+          } else {
+            this.nbCalls = 0;
+            this.extractSports(data['query']['results']['item']);
+            resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
+          }
+        },
+        err => {
+          reject(err);
+        });;
+    });*/
       this.http.get(this.url).map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
@@ -75,6 +97,7 @@ convertXmlToJson(xml) : any{
       console.log("Error sports data undefined!!!")
       return;
     }
+    console.log(data);
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       //console.log(item);

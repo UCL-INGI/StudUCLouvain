@@ -148,7 +148,6 @@ export class EventsPage {
       });
     } else if (this.segment === 'favorites') {
       let favEvents = [];
-
       this.events.filter((item) => {
         if(item.favorite || this.user.hasFavorite(item.guid)) {
           if(item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
@@ -211,14 +210,13 @@ export class EventsPage {
   }
 
   addFavorite(slidingItem: ItemSliding, itemData: any) {
-
     if (this.user.hasFavorite(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
       this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
     } else {
       // remember this session as a user favorite
-      this.user.addFavorite(itemData.guid);
+      this.user.addFavorite(itemData);
 
       let toast = this.toastCtrl.create({
         message: 'Ajouté aux favoris',
@@ -247,7 +245,7 @@ export class EventsPage {
           text: 'Supprimer',
           handler: () => {
             // they want to remove this session from their favorites
-            this.user.removeFavorite(itemData.guid);
+            this.user.removeFavorite(itemData);
             this.updateDisplayedEvents();
 
             // close the sliding item and hide the option buttons

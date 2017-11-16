@@ -50,8 +50,8 @@ export class SportsDetailsPage {
   }
 
   addFavorite(sport : SportItem){
-    if(!this.user.hasFavorite(sport.guid)){
-      this.user.addFavorite(sport.guid);
+    if(!this.user.hasFavoriteS(sport)){
+      this.user.addFavoriteS(sport);
       let toast = this.toastCtrl.create({
         message: 'Favoris ajouté',
         duration: 3000
