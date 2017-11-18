@@ -119,18 +119,16 @@ export class MyApp {
       { title: 'Covoiturage', component: CarpoolingPage, icon : 'car',
         iosSchemaName: 'net.commuty.mobile',
         androidPackageName: 'net.commuty.mobile',
-        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
+        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
+      { title: 'Cinéma', component: MoviesPage, icon:'film',
+        iosSchemaName: 'be.euroscoop.cinescope', 
+        androidPackageName: 'be.euroscoop.cinescope' ,
+        appUrl: '' , httpUrl: 'https://www.cinescope.be' }
       //{ title: 'Login Test', component: LoginPage, icon: 'contact',
         // iosSchemaName: null, androidPackageName: null,
         // appUrl: null, httpUrl: null }
     ];
-    //console.log("dudu", this.user.campus);
-    if( this.user.campus == "LLN"){
-    console.log("lln");
-      this.toolPages.push(  {title: 'Cinéma', component: MoviesPage, icon:'car',
-                             iosSchemaName: null, androidPackageName: 'be.euroscoop.cinescope' ,
-                             appUrl: null , httpUrl: 'https://www.cinescope.be' },)
-    }
+
 
   }
 

@@ -60,6 +60,7 @@ import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
 import { HomePage } from '../pages/home/homeC';
+import { MoviesPage } from '../pages/movies/movies';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
@@ -99,6 +100,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
+    MoviesPage,
     HomePage
   ],
   imports: [
@@ -127,6 +129,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
+    MoviesPage,
     HomePage
   ],
   providers: [
