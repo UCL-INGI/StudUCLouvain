@@ -59,6 +59,13 @@ export class EventsFilterPage {
     });
   }
 
+  uncheckAll() {
+    // uncheck all sports
+    this.categories.forEach(category => {
+      category.isChecked = false;
+    });
+  }
+
   applyFilters() {
     // Pass back a new array of categories name to exclude
     let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
