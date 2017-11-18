@@ -45,10 +45,10 @@
       <ion-radio value="Mons"></ion-radio>
     </ion-item>
   </ion-list>
-  <ion-row center>  
-    <ion-col text-center>  
+  <ion-row center>
+    <ion-col text-center>
       <button ion-button round (click)="update()">Valider</button>
-    </ion-col> 
+    </ion-col>
   </ion-row>
   <p> Salut {{userS.campus}}</p>
 </ion-content>
@@ -75,9 +75,14 @@
     <ion-item>
       <p align="center" style="font-size:22px;"><b>ETUDES</b></p>
       <ion-row>
-        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle"  /> <p align="center"><b>Bibliothèques</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" /> <p align="center"><b>Bibliothèques</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle" /><p align="center"><b>Etudes</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" /><p align="center"><b>HelpDesk</b></p></ion-col>
+        <!--
+        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (click)="changePage(libraryPage)/> <p align="center"><b>Bibliothèques</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (click)="changePage(studiesPage)/><p align="center"><b>Etudes</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" (click)="changePage(helpDeskPage)/><p align="center"><b>HelpDesk</b></p></ion-col>
+        -->
       </ion-row>
     </ion-item>
     <ion-item>
@@ -86,6 +91,11 @@
         <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle"  /><p align="center"><b>Carte</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" /><p align="center"><b>Restaurants U.</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" /><p align="center"><b>Covoiturage</b></p></ion-col>
+        <!--
+        <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle" (click)="changePage(cartePage)"/><p align="center"><b>Carte</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" (click)="changePage(restoPage)"/><p align="center"><b>Restaurants U.</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" (click)="changePage(carPage)"/><p align="center"><b>Covoiturage</b></p></ion-col>
+        -->
       </ion-row>
     </ion-item>
   </ion-list>

@@ -23,13 +23,20 @@ import { Component, ViewChild } from '@angular/core';
 import { NavParams, App, Nav, MenuController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
-//import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { UserService } from '../../providers/utils-services/user-service';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '../../app/app.component';
 
+import { EventsPage } from '../events/events';
+import { CarpoolingPage } from '../carpooling/carpooling';
+import { LibrariesPage } from '../library/libraries';
 import { NewsPage } from '../news/news';
+import { RestaurantPage } from '../restaurant/restaurant';
+import { StudiesPage } from '../studies/studies';
+import { MapPage } from '../map/map';
+import { HelpDeskPage } from '../help-desk/help-desk';
+import { SportsPage } from '../sports/sports';
 
 @Component({
   selector: 'page-homeC',
@@ -37,27 +44,55 @@ import { NewsPage } from '../news/news';
 })
 export class HomePage {
   @ViewChild('Nav') nav: Nav;
-  //rootPage = HomePage;
   title:string = "Accueil";
   shownGroup = null;
   where = "";
   myApp : MyApp;
 
 
-  newsPage = { title: 'Actualités', component: NewsPage, icon: 'paper',
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null };
+  libraryPage = { title: 'Bibliothèques', component: LibrariesPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null };
 
+  newsPage = { title: 'Actualités', component: NewsPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null };
+
+  eventPage = { title: 'Evenements', component: EventsPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
+  sportPage = { title: 'Sports', component: SportsPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
+  studiesPage = { title: 'Etudes', component: StudiesPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
+  helpDeskPage = { title: 'Service d\'aide', component: HelpDeskPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null };
+
+  mapPage = { title: 'Carte', component: MapPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
+  restoPage = { title: 'Restaurants', component: RestaurantPage,
+    iosSchemaName: 'com.apptree.resto4u',
+    androidPackageName: 'com.apptree.resto4u',
+    appUrl: 'apptreeresto4u://',
+    httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
+
+  carPage = { title: 'Covoiturage', component: CarpoolingPage,
+    iosSchemaName: 'net.commuty.mobile',
+    androidPackageName: 'net.commuty.mobile',
+    appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
 
   constructor(public navParams: NavParams,
-              private iab: InAppBrowser,
               public app: App,
-              public menu: MenuController,
-              private device: Device,
-  //            public market: Market,
-              private appAvailability : AppAvailability,
-              public storage:Storage,
-              public userS:UserService)
+              public userS:UserService,
+            )
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -70,39 +105,8 @@ export class HomePage {
   }
 
   changePage(page) {
-    this.nav.push(page);
-  }
-  openRootPage(page) {
-    // close the menu when clicking a link from the menu
-    //this.menu.close();
-    if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.myApp.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-    }
-    this.nav.setRoot(page.component, {title: page.title});
-
-  }
-
-    launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
-    let app: string;
-    let storeUrl:string;
-    if (this.device.platform === 'iOS') {
-      app = iosSchemaName;
-      storeUrl=httpUrl;
-    } else if (this.device.platform === 'Android') {
-      app = androidPackageName;
-      storeUrl= 'market://details?id='+ app;
-    } else {
-      const browser = this.iab.create(httpUrl, '_system');
-      browser.close();
-    }
-    this.appAvailability.check(app).then(
-      () => { // success callback
-        const browser = this.iab.create(appUrl, '_system');
-        browser.close();
-      },
-      () => { // error callback
-      //  this.market.open(app);
-      }
-    );
+    console.log(this.myApp.nav); //Comprendre comment utiliser app.component
+    console.log(page);
+    this.myApp.openRootPage(page);
   }
 }
