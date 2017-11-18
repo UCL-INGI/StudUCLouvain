@@ -22,6 +22,9 @@
 <ion-menu id="mainMenu"  [content]="content">
   <ion-content>
     <ion-list scroll=true>
+      <button ion-item (click)="openRootPage(homePage)">
+        <ion-icon name={{homePage.icon}}> </ion-icon> {{homePage.title}}
+      </button>
       <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
         <ion-icon name={{p.icon}}> </ion-icon> {{p.title}}
       </button>

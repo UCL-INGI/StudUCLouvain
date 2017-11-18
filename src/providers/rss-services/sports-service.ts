@@ -31,17 +31,25 @@ import X2JS from 'x2js';
 @Injectable()
 export class SportsService {
   sports: Array<SportItem> = [];
+  teams: Array<SportItem> = [];
   allCategories: any = [];
+  allCategoriesT: any = [];
   shownSports = 0;
+  shownTeams = 0;
   nbCalls = 0;
   callLimit = 30;
 
-  url = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/recordrss.php";
+  url = "";
   url1 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t1"; //LLN
   url2 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t3"; //woluwe
   url3 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t5"; //mons
   url4 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t7"; //equipe universitaire
-  constructor(private http: Http, public user:UserService, public rssService : RssService) {}
+  constructor(private http: Http, public user:UserService, public rssService : RssService) {
+    let campus = user.campus;
+    if(campus == "LLN") this.url = this.url1;
+    if(campus == "Woluwe") this.url = this.url2;
+    if(campus == "Mons") this.url = this.url3;
+  }
 
 convertXmlToJson(xml) : any{
     let parser : any = new X2JS();
@@ -51,25 +59,6 @@ convertXmlToJson(xml) : any{
   public getSports(segment:string) {
     this.sports = [];
     return new Promise( (resolve, reject) => {
-     /* this.rssService.load(this.url1).subscribe(
-        data => {
-          this.nbCalls++;
-          if (data['query']['results'] == null) {
-            if(this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no events to display
-            }
-            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
-          } else {
-            this.nbCalls = 0;
-            this.extractSports(data['query']['results']['item']);
-            resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
-          }
-        },
-        err => {
-          reject(err);
-        });;
-    });*/
       this.http.get(this.url).map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
@@ -80,7 +69,7 @@ convertXmlToJson(xml) : any{
             reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
           } else {
             this.nbCalls = 0;
-            this.extractSports(result.xml.item);
+            this.extractSports(result.rss.channel.item,true);
             
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
@@ -91,13 +80,37 @@ convertXmlToJson(xml) : any{
     });
   }
 
-  private extractSports(data: any) {
-    let maxDescLength = 20;
+  public getTeams(segment:string) {
+    this.teams = [];
+    return new Promise( (resolve, reject) => {
+      this.http.get(this.url4).map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
+          this.nbCalls++;
+          if (result == null) {
+            if(this.nbCalls >= this.callLimit) {
+              this.nbCalls = 0;
+              reject(2); //2 = data.query.results == null  & callLimit reached, no sports to display
+            }
+            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
+          } else {
+            this.nbCalls = 0;
+            this.extractSports(result.rss.channel.item,false);
+            
+            resolve({teams : this.teams, shownTeams: this.shownTeams, categoriesT: this.allCategoriesT});
+          }
+        },
+        err => {
+          reject(err);
+        });
+    });
+  }
+
+  private extractSports(data: any, isSport:boolean) {
+    //let maxDescLength = 20;
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;
     }
-    console.log(data);
+    //console.log(data);
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       //console.log(item);
@@ -108,20 +121,30 @@ convertXmlToJson(xml) : any{
         favorite = true;
       }
       if (item.sport) {
-        if (this.allCategories.indexOf(item.sport) < 0) {
-          this.allCategories.push(item.sport);
+        if(isSport){
+          if (this.allCategories.indexOf(item.sport) < 0) {
+            this.allCategories.push(item.sport);
+          }
+          this.allCategories.sort();
         }
-        this.allCategories.sort();
+        else{
+          if (this.allCategoriesT.indexOf(item.sport) < 0) {
+            this.allCategoriesT.push(item.sport);
+          }
+          this.allCategoriesT.sort();
+        }
       }
-
-      this.shownSports++;
+      if(isSport) this.shownSports++;
+      else this.shownTeams++;
 
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
       let newSportItem = new SportItem(item.sport, item.sexe, item.lieu, item.salle, item.jour, startDate,
                       hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.guid);
 
-      this.sports.push(newSportItem);
+
+      if(isSport) this.sports.push(newSportItem);
+      else this.teams.push(newSportItem);
     }
   }
 

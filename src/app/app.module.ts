@@ -25,7 +25,7 @@ import { HttpModule } from '@angular/http'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
-import { Market } from '@ionic-native/market';
+//import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SQLite } from '@ionic-native/sqlite';
@@ -47,7 +47,7 @@ import { EventsDetailsPage } from '../pages/events/events-details/events-details
 import { CarpoolingPage } from '../pages/carpooling/carpooling';
 import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
-import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
+//import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage }
           from '../pages/map/map-location-selector/map-location-selector';
@@ -96,7 +96,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
-    LibraryDetailsPage,
+    //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
     HomePage
@@ -124,7 +124,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
-    LibraryDetailsPage,
+    //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
     HomePage
@@ -138,7 +138,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     EventsService,
     InAppBrowser,
     MapService,
-    Market,
+    //Market,
     POIService,
     SQLite,
     UserService,

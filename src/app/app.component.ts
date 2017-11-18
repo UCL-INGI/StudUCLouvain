@@ -38,6 +38,9 @@ import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/homeC';
+import { MoviesPage } from '../pages/movies/movies';
+
+import { UserService } from '../providers/utils-services/user-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -46,9 +49,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage = HomePage;
   alertPresented: any;
-  /*homePage: Array<{title: string, component: any, icon: any,
-    iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string}>;*/
+  page: any;
+  homePage;
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -67,15 +69,18 @@ export class MyApp {
     private device: Device,
     private splashscreen: SplashScreen,
     private alertCtrl : AlertController,
+    private user: UserService,
     private statusBar: StatusBar
   ) {
+    this.user.getCampus();
+    console.log(this.user.campus);
     this.alertPresented = false;
     this.initializeApp();
-   /* this.homePage =[
-      {title: 'Accueil', component: HomePage, icon: 'book',
+    this.homePage =
+      {title: 'Accueil', component: HomePage, icon: 'home',
       iosSchemaName: null, androidPackageName: null,
-      appUrl: null, httpUrl: null},
-    ];*/
+      appUrl: null, httpUrl: null}
+    ;
     this.campusPages =[
       { title: 'Actualités', component: NewsPage, icon: 'paper',
         iosSchemaName: null, androidPackageName: null,
@@ -119,6 +124,13 @@ export class MyApp {
         // iosSchemaName: null, androidPackageName: null,
         // appUrl: null, httpUrl: null }
     ];
+    //console.log("dudu", this.user.campus);
+    if( this.user.campus == "LLN"){
+    console.log("lln");
+      this.toolPages.push(  {title: 'Cinéma', component: MoviesPage, icon:'car',
+                             iosSchemaName: null, androidPackageName: 'be.euroscoop.cinescope' ,
+                             appUrl: null , httpUrl: 'https://www.cinescope.be' },)
+    }
 
   }
 
@@ -142,34 +154,38 @@ export class MyApp {
   }
 
   confirmExitApp() {
-
-    if(!this.alertPresented){
-      this.alertPresented = true;
-      let confirmAlert = this.alertCtrl.create({
-          title: "Fermeture",
-          message: "Désirez-vous quitter l'application ?",
-          buttons: [
-              {
-                  text: 'Annuler',
-                  handler: () => {
-                    this.alertPresented = false;
-                  }
-              },
-              {
-                  text: 'Quitter',
-                  handler: () => {
-                      this.platform.exitApp();
-                  }
-              }
-          ]
-      });
-      confirmAlert.present();
+    if(this.page == this.homePage){
+      if(!this.alertPresented){
+        this.alertPresented = true;
+        let confirmAlert = this.alertCtrl.create({
+            title: "Fermeture",
+            message: "Désirez-vous quitter l'application ?",
+            buttons: [
+                {
+                    text: 'Annuler',
+                    handler: () => {
+                      this.alertPresented = false;
+                    }
+                },
+                {
+                    text: 'Quitter',
+                    handler: () => {
+                        this.platform.exitApp();
+                    }
+                }
+            ]
+        });
+        confirmAlert.present();
+    }
   }
+  else this.openRootPage(this.homePage);
 }
 
   openRootPage(page) {
+
     // close the menu when clicking a link from the menu
     this.menu.close();
+    this.page = page;
     if(page.iosSchemaName != null && page.androidPackageName != null){
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }

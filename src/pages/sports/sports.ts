@@ -48,13 +48,16 @@ export class SportsPage {
   @ViewChild('sportsList', { read: List }) sportsList: List;
 
   sports: Array<SportItem> = [];
+  teams: Array<SportItem> = [];
   searching: any = false;
   segment = 'all';
   shownSports = 0;
+  shownTeams = 0;
   title: any;
   searchTerm: string = '';
   searchControl: FormControl;
   filters : any = [];
+  filtersT : any = [];
   excludedFilters : any = [];
   displayedSports : Array<SportItem> = [];
   dateRange: any = 1;
@@ -132,6 +135,30 @@ export class SportsPage {
         }
       });
 
+      this.sportsService.getTeams(this.segment).then(
+        res => {
+          result = res;
+          this.teams = result.teams;
+          this.shownTeams = result.shownTeams;
+          this.filtersT = result.categoriesT;
+          this.searching = false;
+          this.updateDisplayedSports();
+      })
+      .catch(error => {
+        if(error == 1) {
+          //console.log("Error loading teams : " + error);
+          this.loadSports();
+        } else {
+          if(error == 2) {
+            console.log("Loading teams : YQL req timed out > limit, suppose no sports to be displayed");
+          } else {
+            console.log("Error loading teams : " + error);
+          }
+          this.searching = false;
+          this.updateDisplayedSports();
+        }
+      });
+
     } else {
       this.searching = false;
       this.connService.presentConnectionAlert();
@@ -160,6 +187,13 @@ export class SportsPage {
 
       this.displayedSports = favSports;
     }
+    else if (this.segment === 'team') {
+      this.displayedSports = this.teams.filter((item) => {
+        return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
+      });
+    }
+    this.shownTeams = this.displayedSports.length;
     this.shownSports = this.displayedSports.length;
     this.searching = false;
 
@@ -260,34 +294,5 @@ export class SportsPage {
     // now present the alert on top of all other content
     alert.present();
   }
-
-  /*launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
-    let app: string;
-    let storeUrl:string;
-
-    if (this.device.platform === 'iOS') {
-      app = iosSchemaName;
-      storeUrl=httpUrl;
-    } else if (this.device.platform === 'Android') {
-      app = androidPackageName;
-      storeUrl= 'market://details?id='+ app;
-    } else {
-      let browser = this.iab.create(httpUrl, '_system');
-      return;
-    }
-
-    this.appAvailability.check(app).then(
-      () => { // success callback
-        let browser = this.iab.create(appUrl, '_system');
-      },
-      () => { // error callback
-        let browser = this.iab.create(storeUrl, '_system');
-      }
-    );
-  }
-
-  openGuindaille(){
-    this.launchExternalApp('','com.us.guindaille', 'fb504565829719289://', 'https://app.commuty.net/sign-in');
-  }*/
 
 }
