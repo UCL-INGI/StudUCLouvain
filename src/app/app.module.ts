@@ -61,6 +61,7 @@ import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
 import { HomePage } from '../pages/home/homeC';
 import { MoviesPage } from '../pages/movies/movies';
+import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
@@ -97,6 +98,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
+    GuindaillePage,
     //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
@@ -126,6 +128,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
+    GuindaillePage,
     //LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,

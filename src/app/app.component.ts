@@ -39,7 +39,7 @@ import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/homeC';
 import { MoviesPage } from '../pages/movies/movies';
-
+import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
 
 @Component({
@@ -108,6 +108,9 @@ export class MyApp {
     //{ title: 'Repertoire UCL', component: NewsPage, icon: 'contact',
     //     iosSchemaName: null, androidPackageName: null,
     //     appUrl: null, httpUrl: null  },
+      { title: 'Guindaille2.0', component: GuindaillePage, icon: 'water',
+        iosSchemaName: null, androidPackageName: null,
+        appUrl: null, httpUrl: null  },
       { title: 'Carte', component: MapPage, icon: 'map',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
@@ -121,7 +124,7 @@ export class MyApp {
         androidPackageName: 'net.commuty.mobile',
         appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
       { title: 'Cinéma', component: MoviesPage, icon:'film',
-        iosSchemaName: 'be.euroscoop.cinescope', 
+        iosSchemaName: 'be.euroscoop.cinescope',
         androidPackageName: 'be.euroscoop.cinescope' ,
         appUrl: '' , httpUrl: 'https://www.cinescope.be' }
       //{ title: 'Login Test', component: LoginPage, icon: 'contact',
