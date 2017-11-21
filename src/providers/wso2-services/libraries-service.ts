@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import { LibraryItem } from '../../app/entity/libraryItem';
 import { MapLocation } from '../../app/entity/mapLocation';
 import { TimeSlot } from '../../app/entity/timeSlot';

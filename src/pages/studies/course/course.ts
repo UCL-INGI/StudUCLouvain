@@ -35,7 +35,7 @@ import { Calendar } from '@ionic-native/calendar';
 export class CoursePage {
   sessionId : string = this.navParams.get('sessionId');
   course : Course = this.navParams.get("course");
-
+  segment = 'Cours magistral';
 
   constructor(public navCtrl: NavController,
     public courseService: CourseService,

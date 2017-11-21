@@ -89,7 +89,7 @@ export class POIService {
     return locationsList;
   }
 
-  private applyHaversine(locations, userLocation:any){
+ /* private applyHaversine(locations, userLocation:any){
 
     locations.map((location) => {
 
@@ -106,9 +106,9 @@ export class POIService {
     });
 
     return locations;
-  }
+  }*/
 
-  private getDistanceBetweenPoints(start, end, units){
+ /* private getDistanceBetweenPoints(start, end, units){
 
     let earthRadius = {
       miles: 3958.8,
@@ -132,9 +132,9 @@ export class POIService {
 
     return d;
 
-  }
+  }*/
 
-  private toRad(x){
+  /*private toRad(x){
     return x * Math.PI / 180;
-  }
+  }*/
 }

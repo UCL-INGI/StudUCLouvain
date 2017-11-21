@@ -25,14 +25,21 @@
   <ion-navbar>
     <ion-title>{{course.name}} - {{course.acronym}}</ion-title>
   </ion-navbar>
-
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="Cours magistral">
+      Cours magistraux
+    </ion-segment-button>
+    <ion-segment-button value="TD">
+      T.P.
+    </ion-segment-button>
+  </ion-segment>  
 </ion-header>
 
 
 <ion-content padding #courseContent>
   <ion-list>
      <ion-item-sliding *ngFor="let activity of course.activities" #slidingItem >
-       <ion-item >
+       <ion-item *ngIf="activity.type === segment">
         <h2 text-center> Activité : {{activity.type}} </h2>
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'dd/MM/yyyy H:mm' }} </p>
