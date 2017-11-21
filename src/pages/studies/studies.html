@@ -32,6 +32,15 @@
     </button>
   </ion-navbar>
 
+    <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="cours">
+      Horaires
+    </ion-segment-button>
+    <ion-segment-button value="prog">
+      Programme de cours
+    </ion-segment-button>
+  </ion-segment>
+
 </ion-header>
 
 <ion-menu id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
@@ -39,12 +48,12 @@
   <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </button>
   <button ion-item (click)="openModalProject()"> Changer projet ADE </button>
 </ion-menu>
-
 <ion-content padding #studiesContent>
+<ion-content padding *ngIf="segment==='cours'">
 
   <h4 text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </h4>
 
-  <ion-list>
+  <ion-list >
      <ion-item-sliding *ngFor="let course of listCourses">
        <ion-item (click)="openCoursePage(course)" >
         <h2>{{course.name}} {{course.acronym}}</h2>
@@ -65,4 +74,8 @@
     </button>
   </ion-fab>
 
+</ion-content>
+<ion-content padding  *ngIf="segment==='prog'">
+<p align="center">Indisponible pour le moment</p>
+</ion-content>
 </ion-content>

@@ -42,6 +42,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 export class StudiesPage {
   public people: any;
   public data : any;
+  segment = 'cours';
   public listCourses: Course[];
   public course : Course;
   public title: any;
