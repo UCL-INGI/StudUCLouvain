@@ -94,10 +94,10 @@
 
       <ion-item>
         <ion-item no-lines>
-          <h3>{{item.sport}}</h3>
-          <p [innerHtml]="item.lieu"></p>
-          <p [innerHtml]="item.salle"></p>
+          <h3>{{item.sport}} {{item.sexe}} - Type : {{item.type}}</h3>
+          <p>{{item.lieu}} - Salle : {{item.salle}}</p>
           <p>{{item.jour}} {{item.date | date: 'dd/MM/yyyy' }} {{item.date | date : 'H:mm' }} &mdash; {{item.hfin | date : 'H:mm'}}</p>
+          <p style="color:red;" *ngIf="item.remarque.length > 2">Remarque : {{item.remarque}}</p>
         </ion-item>
       </ion-item>
 

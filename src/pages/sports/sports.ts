@@ -115,9 +115,9 @@ export class SportsPage {
         res => {
           result = res;
           this.sports = result.sports;
-          this.sports = this.sports.slice(0,30);
-          //this.shownSports = result.shownSports;
-          this.shownSports = 30;
+          //this.sports = this.sports.slice(0,30);
+          this.shownSports = result.shownSports;
+          //this.shownSports = 30;
           this.filters = result.categories;
           this.searching = false;
           this.updateDisplayedSports();
@@ -141,9 +141,9 @@ export class SportsPage {
         res => {
           result = res;
           this.teams = result.teams;
-          this.teams = this.teams.slice(0,30);
-          //this.shownTeams = result.shownTeams;
-          this.shownTeams = 30;
+          //this.teams = this.teams.slice(0,30);
+          this.shownTeams = result.shownTeams;
+          //this.shownTeams = 30;
           this.filtersT = result.categoriesT;
           this.searching = false;
           this.updateDisplayedSports();
