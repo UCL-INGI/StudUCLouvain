@@ -75,9 +75,9 @@
     <ion-item>
       <p align="center" style="font-size:22px;"><b>ETUDES</b></p>
       <ion-row>
-        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" /> <p align="center"><b>Bibliothèques</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle" /><p align="center"><b>Etudes</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" /><p align="center"><b>HelpDesk</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (click)="changePage(libraryPage)"/> <p align="center"><b>Bibliothèques</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (click)="changePage(studiesPage)"/><p align="center"><b>Etudes</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" (click)="changePage(helpDeskPage)"/><p align="center"><b>HelpDesk</b></p></ion-col>
         <!--
         <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (click)="changePage(libraryPage)/> <p align="center"><b>Bibliothèques</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (click)="changePage(studiesPage)/><p align="center"><b>Etudes</b></p></ion-col>
