@@ -44,7 +44,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { EventsPage } from '../pages/events/events';
 import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
 import { EventsDetailsPage } from '../pages/events/events-details/events-details';
-import { CarpoolingPage } from '../pages/carpooling/carpooling';
+import { MobilityPage } from '../pages/mobility/mobility';
 import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
@@ -86,7 +86,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     EventsPage,
     EventsFilterPage,
     MapLocationSelectorPage,
-    CarpoolingPage,
+    MobilityPage,
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
@@ -115,7 +115,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     EventsPage,
     EventsFilterPage,
     MapLocationSelectorPage,
-    CarpoolingPage,
+    MobilityPage,
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,

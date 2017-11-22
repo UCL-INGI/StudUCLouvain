@@ -29,7 +29,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { EventsPage } from '../pages/events/events';
-import { CarpoolingPage } from '../pages/carpooling/carpooling';
+import { MobilityPage } from '../pages/mobility/mobility';
 import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
@@ -118,7 +118,7 @@ export class MyApp {
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'Mobilité', component: CarpoolingPage, icon : 'car',
+      { title: 'Mobilité', component: MobilityPage, icon : 'car',
         iosSchemaName: 'net.commuty.mobile',
         androidPackageName: 'net.commuty.mobile',
         appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
