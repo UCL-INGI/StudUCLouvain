@@ -92,7 +92,10 @@ export class HomePage {
   constructor(public navParams: NavParams,
               public app: App,
               public userS:UserService,
-              public nav : NavController
+              public nav : NavController,
+              private iab: InAppBrowser,
+              private appAvailability: AppAvailability,
+              private device: Device
             )
   {
       if(this.navParams.get('title') !== undefined) {
@@ -111,5 +114,29 @@ export class HomePage {
     this.nav.push(page.component, {title: page.title});
     //console.log(this.MyApp);
     //this.myApp.openRootPage(page);
+  }
+
+  launchExternalApp(page) {
+    let app: string;
+    let storeUrl:string;
+    if (this.device.platform === 'iOS') {
+      app = page.iosSchemaName;
+      storeUrl=page.httpUrl;
+    } else if (this.device.platform === 'Android') {
+      app = page.androidPackageName;
+      storeUrl= 'market://details?id='+ app;
+    } else {
+      const browser = this.iab.create(page.httpUrl, '_system');
+      browser.close();
+    }
+    this.appAvailability.check(app).then(
+      () => { // success callback
+        const browser = this.iab.create(page.appUrl, '_system');
+        browser.close();
+      },
+      () => { // error callback
+        //this.market.open(app);
+      }
+    );
   }
 }
