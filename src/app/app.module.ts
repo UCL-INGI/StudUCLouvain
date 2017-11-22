@@ -44,10 +44,10 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { EventsPage } from '../pages/events/events';
 import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
 import { EventsDetailsPage } from '../pages/events/events-details/events-details';
-import { CarpoolingPage } from '../pages/carpooling/carpooling';
+import { MobilityPage } from '../pages/mobility/mobility';
 import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
-//import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
+import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
 import { MapPage } from '../pages/map/map';
 import { MapLocationSelectorPage }
           from '../pages/map/map-location-selector/map-location-selector';
@@ -60,7 +60,6 @@ import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
 import { HomePage } from '../pages/home/homeC';
-import { MoviesPage } from '../pages/movies/movies';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
@@ -87,7 +86,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     EventsPage,
     EventsFilterPage,
     MapLocationSelectorPage,
-    CarpoolingPage,
+    MobilityPage,
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
@@ -99,10 +98,9 @@ import { SportsService } from '../providers/rss-services/sports-service';
     StudiesPage,
     HelpDeskPage,
     GuindaillePage,
-    //LibraryDetailsPage,
+    LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    MoviesPage,
     HomePage
   ],
   imports: [
@@ -117,7 +115,7 @@ import { SportsService } from '../providers/rss-services/sports-service';
     EventsPage,
     EventsFilterPage,
     MapLocationSelectorPage,
-    CarpoolingPage,
+    MobilityPage,
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
@@ -129,10 +127,9 @@ import { SportsService } from '../providers/rss-services/sports-service';
     StudiesPage,
     HelpDeskPage,
     GuindaillePage,
-    //LibraryDetailsPage,
+    LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    MoviesPage,
     HomePage
   ],
   providers: [

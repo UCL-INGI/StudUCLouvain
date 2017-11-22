@@ -1,4 +1,4 @@
-<!--
+/*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
     Date : July 2017
@@ -17,18 +17,23 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
--->
-<ion-header>
-  <ion-navbar >
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title align="center">{{title}}</ion-title>
-  </ion-navbar>
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
-</ion-header>
+@Component({
+  selector: 'page-bus',
+  templateUrl: 'bus.html'
+})
+export class BusPage {
+  public title: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.title = this.navParams.get('title');
+  }
 
-<ion-content padding text-center>
-  <img alt="logo" src="assets/img/guindaille.png" align="middle"  />
-</ion-content>
+  ionViewDidLoad() {
+    console.log('Hello BusPage Page');
+  }
+
+}

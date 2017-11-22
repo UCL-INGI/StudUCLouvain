@@ -29,7 +29,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { EventsPage } from '../pages/events/events';
-import { CarpoolingPage } from '../pages/carpooling/carpooling';
+import { MobilityPage } from '../pages/mobility/mobility';
 import { LibrariesPage } from '../pages/library/libraries';
 import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
@@ -38,7 +38,6 @@ import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/homeC';
-import { MoviesPage } from '../pages/movies/movies';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
 
@@ -119,14 +118,10 @@ export class MyApp {
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'Covoiturage', component: CarpoolingPage, icon : 'car',
-        iosSchemaName: 'net.commuty.mobile',
-        androidPackageName: 'net.commuty.mobile',
-        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' },
-      { title: 'Cinéma', component: MoviesPage, icon:'film',
-        iosSchemaName: 'be.euroscoop.cinescope',
-        androidPackageName: 'be.euroscoop.cinescope' ,
-        appUrl: '' , httpUrl: 'https://www.cinescope.be' }
+      { title: 'Mobilité', component: MobilityPage, icon : 'car',
+        iosSchemaName: null,
+        androidPackageName: null,
+        appUrl: null, httpUrl: null }
       //{ title: 'Login Test', component: LoginPage, icon: 'contact',
         // iosSchemaName: null, androidPackageName: null,
         // appUrl: null, httpUrl: null }

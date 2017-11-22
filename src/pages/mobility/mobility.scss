@@ -19,21 +19,6 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
-@Component({
-  selector: 'page-movies',
-  templateUrl: 'movies.html'
-})
-export class MoviesPage {
-  public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.title = this.navParams.get('title');
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello MoviesPage Page');
-  }
+page-mobility {
 
 }

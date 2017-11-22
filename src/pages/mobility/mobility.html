@@ -1,5 +1,4 @@
 <!--
-
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
     Date : July 2017
@@ -18,7 +17,6 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
-
 -->
 
 <ion-header>
@@ -33,18 +31,13 @@
 
 
 <ion-content padding>
-
-<p>Euroscoop est réputé comme le complexe de cinéma le plus beau et le plus économique.</p>
-
-<p>Ce que vous trouverez dans cette application gratuite :</p>
-
-<p>- les films attendus et à l’affiche,
-<br>
-- la programmation des salles,<br>
-- les évènements et actions diverses : les concours, les “ladies night” et les fêtes d’enfants,<br>
-- les avantages des cartes de réduction,<br>
-- Infos générales : tarifs, heures d’ouverture, présentations diverses pour écoles et suggestions de cadeaux,<br>
-- description de l’itinéraire à la salle de vôtre choix,<br>
-- comment commander des billets</p>
-
+<ion-row>
+  <ion-col align-self-end text-center><img (click)="launchExternalApp(carpoolingPage)" alt="voiture" src="assets/img/commuty.png" align="middle" /><p align="center"><b>Covoiturage</b></p></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col align-self-end text-center><img (click)="launchExternalApp(busPage)" alt="bus" src="assets/img/nextride.png" align="middle" /><p align="center"><b>Bus</b></p></ion-col>
+</ion-row>
+<ion-row>
+  <ion-col align-self-end text-center><img (click)="launchExternalApp(trainPage)" alt="train" src="assets/img/sncb.png" align="middle" /><p align="center"><b>SNCB</b></p></ion-col>
+</ion-row>
 </ion-content>
