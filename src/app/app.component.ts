@@ -119,9 +119,9 @@ export class MyApp {
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
       { title: 'Mobilité', component: MobilityPage, icon : 'car',
-        iosSchemaName: 'net.commuty.mobile',
-        androidPackageName: 'net.commuty.mobile',
-        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
+        iosSchemaName: null,
+        androidPackageName: null,
+        appUrl: null, httpUrl: null }
       //{ title: 'Login Test', component: LoginPage, icon: 'contact',
         // iosSchemaName: null, androidPackageName: null,
         // appUrl: null, httpUrl: null }

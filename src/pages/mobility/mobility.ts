@@ -21,6 +21,11 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppAvailability } from '@ionic-native/app-availability';
+
+import { CarpoolingPage } from './carpooling/carpooling';
 
 @Component({
   selector: 'page-mobility',
@@ -28,12 +33,46 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MobilityPage {
   public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  carpoolingPage;
+  tecPage;
+  sncbPage;
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private iab: InAppBrowser,
+              private appAvailability: AppAvailability,
+              private device: Device) {
     this.title = this.navParams.get('title');
+    this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage, icon : 'car',
+        iosSchemaName: 'net.commuty.mobile',
+        androidPackageName: 'net.commuty.mobile',
+        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
   }
 
   ionViewDidLoad() {
     console.log('Hello MobilityPage Page');
   }
 
+  launchExternalApp(page:any) {
+    let app: string;
+    let storeUrl:string;
+    if (this.device.platform === 'iOS') {
+      app = page.iosSchemaName;
+      storeUrl=page.httpUrl;
+    } else if (this.device.platform === 'Android') {
+      app = page.androidPackageName;
+      storeUrl= 'market://details?id='+ app;
+    } else {
+      const browser = this.iab.create(page.httpUrl, '_system');
+      browser.close();
+    }
+    this.appAvailability.check(app).then(
+      () => { // success callback
+        const browser = this.iab.create(page.appUrl, '_system');
+        browser.close();
+      },
+      () => { // error callback
+        //this.market.open(app);
+      }
+    );
+  }
 }
