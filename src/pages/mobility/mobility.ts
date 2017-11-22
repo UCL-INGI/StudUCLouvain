@@ -26,6 +26,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 
 import { CarpoolingPage } from './carpooling/carpooling';
+import { BusPage } from './bus/bus';
+import { TrainPage } from './train/train';
 
 @Component({
   selector: 'page-mobility',
@@ -34,18 +36,26 @@ import { CarpoolingPage } from './carpooling/carpooling';
 export class MobilityPage {
   public title: any;
   carpoolingPage;
-  tecPage;
-  sncbPage;
+  busPage;
+  trainPage;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device) {
     this.title = this.navParams.get('title');
-    this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage, icon : 'car',
-        iosSchemaName: 'net.commuty.mobile',
-        androidPackageName: 'net.commuty.mobile',
-        appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' }
+    this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage,
+                            iosSchemaName: 'net.commuty.mobile',
+                            androidPackageName: 'net.commuty.mobile',
+                            appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
+    this.busPage = { title: 'NextRide', component: BusPage,
+                            iosSchemaName: 'be.thomashermine.prochainbus',
+                            androidPackageName: 'be.thomashermine.prochainbus',
+                            appUrl: 'commutynet://', httpUrl: 'https://nextride.be/timetables' };
+    this.trainPage = { title: 'SNCB', component: CarpoolingPage,
+                            iosSchemaName: 'de.hafas.android.sncbnmbs',
+                            androidPackageName: 'de.hafas.android.sncbnmbs',
+                            appUrl: 'commutynet://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
   ionViewDidLoad() {
