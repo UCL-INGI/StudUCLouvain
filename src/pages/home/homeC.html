@@ -61,13 +61,13 @@
       <p align="center" style="font-size:22px;"><b>CAMPUS</b></p>
       <ion-row>
         <ion-col align-self-center text-center>
-          <img alt="logo" src="assets/img/ucl.jpg" align="middle"  />
+          <img alt="logo" src="assets/img/ucl.jpg" align="middle"  (click)="changePage(newsPage)"/>
           <p align="center"><b>News</b></p>
         </ion-col>
         <ion-col align-self-center text-center>
-          <img alt="louvinfo" src="assets/img/louvainfo.png" align="middle"  />
+          <img alt="louvinfo" src="assets/img/louvainfo.png" align="middle"  (click)="changePage(eventPage)"/>
           <p align="center"><b>Evénements</b></p>
-          <img alt="sport" src="assets/img/sport.jpg" align="middle"  />
+          <img alt="sport" src="assets/img/sport.jpg" align="middle"  (click)="changePage(sportPage)"/>
           <p align="center"><b>Sports</b></p>
         </ion-col>
       </ion-row>
@@ -88,11 +88,14 @@
     <ion-item>
       <p align="center" style="font-size:22px;"><b>OUTILS</b></p>
       <ion-row>
+<!--
         <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle"  /><p align="center"><b>Carte</b></p></ion-col>
+  -->
+        <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle" (click)="changePage(cartePage)"/><p align="center"><b>Carte</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" /><p align="center"><b>Restaurants U.</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" /><p align="center"><b>Covoiturage</b></p></ion-col>
+
         <!--
-        <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle" (click)="changePage(cartePage)"/><p align="center"><b>Carte</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" (click)="changePage(restoPage)"/><p align="center"><b>Restaurants U.</b></p></ion-col>
         <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" (click)="changePage(carPage)"/><p align="center"><b>Covoiturage</b></p></ion-col>
         -->
