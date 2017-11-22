@@ -52,10 +52,10 @@ export class MobilityPage {
                             iosSchemaName: 'be.thomashermine.prochainbus',
                             androidPackageName: 'be.thomashermine.prochainbus',
                             appUrl: 'commutynet://', httpUrl: 'https://nextride.be/timetables' };
-    this.trainPage = { title: 'SNCB', component: CarpoolingPage,
+    this.trainPage = { title: 'SNCB', component: TrainPage,
                             iosSchemaName: 'de.hafas.android.sncbnmbs',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
-                            appUrl: 'commutynet://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
+                            appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
   ionViewDidLoad() {
