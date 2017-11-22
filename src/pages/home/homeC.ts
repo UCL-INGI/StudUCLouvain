@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, App, Nav, MenuController } from 'ionic-angular';
+import { NavParams, NavController, App, Nav, MenuController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -43,7 +43,7 @@ import { SportsPage } from '../sports/sports';
   templateUrl: 'homeC.html',
 })
 export class HomePage {
-  @ViewChild('Nav') nav: Nav;
+//  @ViewChild('Nav') nav: Nav;
   title:string = "Accueil";
   shownGroup = null;
   where = "";
@@ -92,6 +92,7 @@ export class HomePage {
   constructor(public navParams: NavParams,
               public app: App,
               public userS:UserService,
+              public nav : NavController
             )
   {
       if(this.navParams.get('title') !== undefined) {
@@ -105,8 +106,10 @@ export class HomePage {
   }
 
   changePage(page) {
-    console.log(this.myApp.nav); //Comprendre comment utiliser app.component
+    //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
     console.log(page);
-    this.myApp.openRootPage(page);
+    this.nav.push(page.component, {title: page.title});
+    //console.log(this.MyApp);
+    //this.myApp.openRootPage(page);
   }
 }
