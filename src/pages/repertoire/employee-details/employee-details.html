@@ -1,0 +1,104 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire and Corentin Lamy
+    Date : July 2017
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{empDetails.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Informations pratiques
+      </ion-card-title>
+      {{empDetails.name}}
+    </ion-card-content>
+
+    <ion-row text-wrap>
+      <ion-col text-right>
+      </ion-col>
+      <ion-col text-right>
+      </ion-col>
+    </ion-row>
+
+    <ion-row text-wrap>
+      <ion-col text-left text-wrap>
+        {{empDetails.phone}}
+      </ion-col>
+      <ion-col text-right>
+        <button *ngIf="empDetails.website" ion-button clear small icon-left (click)="openPage(libDetails.website)">
+          <ion-icon name='share-alt'></ion-icon>
+          Website
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row padding text-wrap>
+      {{empDetails.openingHoursNote}}
+    </ion-row>
+
+    <ion-item-divider  (click)="toggleGroup('opening_hours')">
+      Heures d'ouverture
+    </ion-item-divider>
+
+    <ion-item [hidden]="!isGroupShown('opening_hours')">
+      <p *ngFor="let timeSlot of empDetails.openingHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+      </p>
+    </ion-item>
+
+    <ion-item-divider  (click)="toggleGroup('opening_examination_hours')">
+      Heures d'ouverture en période d'examens
+    </ion-item-divider>
+
+    <ion-item [hidden]="!isGroupShown('opening_examination_hours')">
+      <p *ngFor="let timeSlot of empDetails.openingExaminationHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+      </p>
+    </ion-item>
+
+    <ion-item-divider  (click)="toggleGroup('opening_summer_hours')">
+      Heures d'ouverture lors des vacances d'été
+    </ion-item-divider>
+
+    <ion-item [hidden]="!isGroupShown('opening_summer_hours')">
+      <p *ngFor="let timeSlot of empDetails.openingSummerHours">
+        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+      </p>
+    </ion-item>
+
+    <ion-item-divider  (click)="toggleGroup('closed_dates')">
+      Dates de fermeture
+    </ion-item-divider>
+
+    <ion-item [hidden]="!isGroupShown('closed_dates')" text-wrap>
+      <p *ngFor="let cd of empDetails.closedDates">
+        {{cd.from}} - {{cd.to}} : {{cd.description}}
+      </p>
+    </ion-item>
+  </ion-card>
+</ion-content>

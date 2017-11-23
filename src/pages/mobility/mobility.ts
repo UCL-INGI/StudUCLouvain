@@ -51,7 +51,7 @@ export class MobilityPage {
     this.busPage = { title: 'NextRide', component: BusPage,
                             iosSchemaName: 'be.thomashermine.prochainbus',
                             androidPackageName: 'be.thomashermine.prochainbus',
-                            appUrl: 'commutynet://', httpUrl: 'https://nextride.be/timetables' };
+                            appUrl: 'nextride://timetables/', httpUrl: 'https://nextride.be/timetables' };
     this.trainPage = { title: 'SNCB', component: TrainPage,
                             iosSchemaName: 'de.hafas.android.sncbnmbs',
                             androidPackageName: 'de.hafas.android.sncbnmbs',

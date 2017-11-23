@@ -19,13 +19,12 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { NavParams, NavController, App, Nav, MenuController } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { NavParams, NavController, App } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { UserService } from '../../providers/utils-services/user-service';
-import { Storage } from '@ionic/storage';
 import { MyApp } from '../../app/app.component';
 
 import { EventsPage } from '../events/events';
@@ -84,10 +83,9 @@ export class HomePage {
     appUrl: 'apptreeresto4u://',
     httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
 
-  carPage = { title: 'Mobilité', component: MobilityPage,
-    iosSchemaName: 'net.commuty.mobile',
-    androidPackageName: 'net.commuty.mobile',
-    appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
+  mobilityPage = { title: 'Mobilité', component: MobilityPage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null };
 
   constructor(public navParams: NavParams,
               public app: App,
@@ -110,7 +108,9 @@ export class HomePage {
 
   changePage(page) {
     //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
-    console.log(page);
+    if(page.iosSchemaName != null && page.androidPackageName != null){
+      this.launchExternalApp(page);
+    }
     this.nav.push(page.component, {title: page.title});
     //console.log(this.MyApp);
     //this.myApp.openRootPage(page);

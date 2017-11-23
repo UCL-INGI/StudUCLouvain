@@ -55,6 +55,7 @@ import { NewsPage } from '../pages/news/news';
 import { NewsDetailsPage } from '../pages/news/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
+import { RepertoirePage } from '../pages/repertoire/repertoire';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
@@ -75,6 +76,7 @@ import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { AdeService } from '../providers/studies-services/ade-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { SportsService } from '../providers/rss-services/sports-service';
+import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 
 
 
@@ -101,7 +103,8 @@ import { SportsService } from '../providers/rss-services/sports-service';
     LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    HomePage
+    HomePage,
+    RepertoirePage
   ],
   imports: [
     BrowserModule,
@@ -130,7 +133,8 @@ import { SportsService } from '../providers/rss-services/sports-service';
     LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    HomePage
+    HomePage,
+    RepertoirePage
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},
@@ -160,7 +164,8 @@ import { SportsService } from '../providers/rss-services/sports-service';
     CourseService,
     Wso2Service,
     NativeGeocoder,
-    SportsService
+    SportsService,
+    RepertoireService
   ]
 })
 export class AppModule {}

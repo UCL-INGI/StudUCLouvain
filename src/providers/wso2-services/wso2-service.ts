@@ -23,7 +23,6 @@ export class Wso2Service {
 
   load(url: string) {
     let finalUrl = this.wso2ServiceBaseUrl + url;
-
     return  this.http.get(finalUrl, this.options).map(res => res.json());
   }
 

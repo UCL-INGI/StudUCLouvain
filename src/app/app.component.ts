@@ -37,6 +37,7 @@ import { StudiesPage } from '../pages/studies/studies';
 import { MapPage } from '../pages/map/map';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { SportsPage } from '../pages/sports/sports';
+import { RepertoirePage } from '../pages/repertoire/repertoire';
 import { HomePage } from '../pages/home/homeC';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
@@ -104,9 +105,9 @@ export class MyApp {
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-    //{ title: 'Repertoire UCL', component: NewsPage, icon: 'contact',
-    //     iosSchemaName: null, androidPackageName: null,
-    //     appUrl: null, httpUrl: null  },
+      { title: 'Repertoire UCL', component: RepertoirePage, icon: 'contact',
+         iosSchemaName: null, androidPackageName: null,
+         appUrl: null, httpUrl: null  },
       { title: 'Guindaille2.0', component: GuindaillePage, icon: 'water',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
