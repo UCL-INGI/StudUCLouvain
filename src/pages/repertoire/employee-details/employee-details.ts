@@ -47,6 +47,7 @@ import { ConnectivityService } from '../../../providers/utils-services/connectiv
 export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
   shownGroup = null;
+  address:any;
   searching: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public repService: RepertoireService, public connService: ConnectivityService) {
@@ -57,8 +58,7 @@ export class EmployeeDetailsPage {
         res => {
           let result:any = res;
           this.empDetails = result.empDetails;
-          this.empDetails.address = result.empDetails.address;
-          console.log(result.empDetails.address);
+          console.log(this.empDetails);
           this.searching = false;
         }
       );
@@ -66,11 +66,6 @@ export class EmployeeDetailsPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
-          console.log(this.empDetails);
-          console.log(this.empDetails.address);
-          console.log(this.empDetails.contracts);
-          console.log(this.empDetails.businessContacts);
-          console.log(this.empDetails.gender);
   }
 
   ionViewDidLoad() {

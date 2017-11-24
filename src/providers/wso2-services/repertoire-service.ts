@@ -97,11 +97,7 @@ export class RepertoireService {
   }
 
   private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
-    /*if(data.address == null){
-      emp.address = "";
-    }else{*/
-      emp.address = data.address;
-   // }
+    emp.address = data.address
     emp.contracts = data.contracts;
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;

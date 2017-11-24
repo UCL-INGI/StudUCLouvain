@@ -45,11 +45,14 @@
     </ion-row>
 
     <ion-row text-wrap padding>
-        <b>{{empDetails.firstname}} {{empDetails.lastname}}</b>
+        <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
+        
+
     </ion-row>
 
     <ion-row padding text-wrap>
       <ion-list>
+        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract"> <p>({{c.grade}})</p></ion-item>
         <ion-item *ngFor="let emp of empDetails.departments.department">
           <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
           <p *ngIf="emp.linkType == 'Appartenance'"><ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
@@ -58,8 +61,48 @@
     </ion-row>
 
     <ion-row padding>
-      Adresse postale : {{empDetails.address}}
+      
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            Contact
+          </ion-card-title>
+        </ion-card-content>
+        <ion-row>
+          <ion-col><b>Adresse postale</b></ion-col>
+          <ion-col>
+            {{empDetails.address?.acronym}}<br>
+            {{empDetails.address?.streetName}} {{empDetails.address?.streetNumber}}/{{empDetails.address?.mailBox}}<br>
+            {{empDetails.address?.postCode}} {{empDetails.address?.town}}<br>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><b>Courriel</b></ion-col>
+          <ion-col>
+            {{empDetails?.email}}
+          </ion-col>
+        </ion-row>
 
+
+        <ion-card *ngFor="let contact of empDetails.businessContacts?.businessContact">
+          <ion-card-content>
+            <ion-card-title>
+              {{contact.acronym}}
+            </ion-card-title>
+          </ion-card-content>
+
+          <ion-row> 
+            <ion-col> N° tél. </ion-col>
+            <ion-col> {{contact.phone}} </ion-col>
+          </ion-row>
+          <ion-row> 
+            <ion-col> Secrétariat </ion-col>
+            <ion-col> {{contact.secretary}} </ion-col>
+          </ion-row>
+        </ion-card>
+
+
+      </ion-card>
     </ion-row>
   </ion-card>
 </ion-content>
