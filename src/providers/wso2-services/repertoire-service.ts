@@ -22,8 +22,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { EmployeeItem } from '../../app/entity/employeeItem';
-import { MapLocation } from '../../app/entity/mapLocation';
-import { TimeSlot } from '../../app/entity/timeSlot';
 import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -32,7 +30,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class RepertoireService {
   employees:Array<EmployeeItem> = [];
-  url = 'employees/v1/*?';
+  url = 'employees/v1/';
   options: any;
 
   constructor(public http: Http, private wso2Service: Wso2Service) {
@@ -55,6 +53,7 @@ export class RepertoireService {
   public searchEmployees(options:Array<string>, values:Array<string>){
     this.employees = [];
     let newUrl = this.url ;
+    newUrl += "*?";
     for(var i=0; i<options.length; i++){
       newUrl += options[i] + "=" + values[i];
       if(i!= options.length-1){
@@ -65,8 +64,10 @@ export class RepertoireService {
 
       this.wso2Service.load(newUrl).subscribe(
         data => {
-          this.extractEmployees(data.persons.person);
-          resolve({employees:this.employees});
+          if(data.persons!=null){
+            this.extractEmployees(data.persons.person);
+            resolve({employees:this.employees});
+          }
         });
     });
   }
@@ -74,11 +75,12 @@ export class RepertoireService {
   public loadEmpDetails(emp:EmployeeItem){
     return new Promise(resolve => {
 
-      let url_details = this.url + '/' + emp.matric_fgs;
+      let url_details = this.url + emp.matric_fgs + "/detail";
 
       this.wso2Service.load(url_details).subscribe(
         data => {
-          emp = this.extractEmployeeDetails(emp, data.return.employee);
+          console.log(data);
+          emp = this.extractEmployeeDetails(emp, data.businessInformation);
           resolve({empDetails:emp});
         });
     });
@@ -95,64 +97,16 @@ export class RepertoireService {
   }
 
   private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
-    /*if ( data.locationId == null ) {
-      emp.locationId = -1;
-    } else {
-      emp.locationId = data.locationId;
-    }
-
-    if ( data.mapLocation == null ) {
-      emp.mapLocation = new MapLocation(lib.name,"","","","");
-    } else {
-      lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "","",""); //TODO update maplocation with lat lng code
-    }
-
-    if ( data.phone == null ) {
-      lib.phone = "";
-    } else {
-      lib.phone = data.phone;
-    }
-
-    if ( data.email == null ) {
-      lib.email = false;
-    } else {
-      lib.email = data.email;
-    }
-
-
-    if ( data.website == null ) {
-      lib.website = "";
-    } else {
-      lib.website = data.website;
-    }
-
-    if(data.openingHours) {
-      for( let i=0; i < data.openingHours.length; i++) {
-        lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
-      }
-    }
-
-    if(data.openingExaminationHours) {
-      for( let i=0; i < data.openingExaminationHours.length; i++) {
-        lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
-      }
-    }
-
-    if(data.openingSummerHours) {
-      for( let i=0; i < data.openingSummerHours.length; i++) {
-        lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
-      }
-    }
-
-    lib.openingHoursNote = data.openingHoursNote;
-
-    if(data.closedDates.length === undefined) {
-      lib.closedDates = [data.closedDates];
-    } else {
-      lib.closedDates = data.closedDates;
-    }*/
-
-
+    /*if(data.address == null){
+      emp.address = "";
+    }else{*/
+      emp.address = data.address;
+   // }
+    emp.contracts = data.contracts;
+    emp.businessContacts = data.businessContacts;
+    emp.gender = data.gender;
+    emp.photo_url = data.photo_url;
+    //let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }

@@ -86,8 +86,8 @@
     </ion-item-sliding>
   </ion-list>-->
 
-  <ion-list #eventsList [hidden]="shownEvents === 0">
-    <ion-item-sliding *ngFor = "let item of displayedEvents" #slidingItem [hidden]="item.hidden">
+  <ion-list #eventsList [virtualScroll]="displayedEvents" [approxItemHeight]=" '130px' " [hidden]="shownEvents === 0">
+    <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
 
       <ion-item>
         <ion-thumbnail item-left>

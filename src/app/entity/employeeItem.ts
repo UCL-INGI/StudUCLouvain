@@ -25,18 +25,33 @@ export class EmployeeItem {
   firstname: string;
   email: string;
   departments: any;
+  address: any;
+  businessContacts:Array<any>;
+  contracts:Array<any>;
+  gender:string;
+  photo_url:string;
 
   constructor(
     matric_fgs: number,
     lastname: string,
     firstname: string,
     email: string,
-    departments: any
+    departments: any,
+    address?: any,
+    businessContacts?: Array<any>,
+    contracts?:Array<any>,
+    gender?: string,
+    photo_url?: string
   ) {
     this.matric_fgs = matric_fgs;
     this.lastname = lastname;
     this.firstname = firstname;
     this.email = email;
     this.departments = departments;
+    this.address = address ;
+    this.businessContacts = businessContacts;
+    this.contracts = contracts;
+    this.gender = gender;
+    this.photo_url = photo_url;
   }
 }

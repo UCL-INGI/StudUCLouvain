@@ -25,6 +25,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title align="center">{{title}}</ion-title>
+    <ion-buttons end *ngIf="(userS.hasCampus() === true)">
+      <button ion-button icon-only end (click)="settings()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -47,7 +52,7 @@
   </ion-list>
   <ion-row center>
     <ion-col text-center>
-      <button ion-button round (click)="update()">Valider</button>
+      <button ion-button round (click)="updateCampus()">Valider</button>
     </ion-col>
   </ion-row>
 </ion-content>

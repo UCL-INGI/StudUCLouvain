@@ -27,7 +27,7 @@ import { EmployeeItem } from '../../app/entity/employeeItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 /*
-  Generated class for the Library page.
+  Generated class for the Repertoire page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.

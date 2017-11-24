@@ -41,6 +41,7 @@ export class UserService {
     this.getFavorites();
     //this.storage.set('campus',"");
     this.getCampus();
+    this.getSports();
   }
 
   getFavorites(){
@@ -50,6 +51,17 @@ export class UserService {
         this.favorites=[];
       } else {
         this.favorites=data;
+        }
+    });
+  }
+
+  getSports(){
+    this.storage.get('listSports').then((data) =>
+    {
+      if(data==null){
+        this.sports=[];
+      } else {
+        this.sports=data;
         }
     });
   }
@@ -101,11 +113,7 @@ export class UserService {
   };
 
   hasFavoriteS(sport: SportItem) {
-    this.storage.get('listSports').then((data) =>
-    {
-      console.log("has",data);
-      return (data.indexOf(sport) > -1);
-    });
+    return (this.sports.indexOf(sport) > -1);
   };
 
   addFavoriteS(sport: SportItem) {

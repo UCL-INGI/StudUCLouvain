@@ -56,6 +56,7 @@ import { NewsDetailsPage } from '../pages/news/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { RepertoirePage } from '../pages/repertoire/repertoire';
+import { EmployeeDetailsPage } from '../pages/repertoire/employee-details/employee-details';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
@@ -104,7 +105,8 @@ import { RepertoireService } from '../providers/wso2-services/repertoire-service
     SportsPage,
     SportsFilterPage,
     HomePage,
-    RepertoirePage
+    RepertoirePage,
+    EmployeeDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import { RepertoireService } from '../providers/wso2-services/repertoire-service
     SportsPage,
     SportsFilterPage,
     HomePage,
-    RepertoirePage
+    RepertoirePage,
+    EmployeeDetailsPage
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},

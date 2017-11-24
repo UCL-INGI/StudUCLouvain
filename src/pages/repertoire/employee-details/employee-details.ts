@@ -50,13 +50,15 @@ export class EmployeeDetailsPage {
   searching: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public repService: RepertoireService, public connService: ConnectivityService) {
-    this.empDetails = navParams.get('lib');
+    this.empDetails = navParams.get('emp')
     this.searching = true;
     if(this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
           let result:any = res;
           this.empDetails = result.empDetails;
+          this.empDetails.address = result.empDetails.address;
+          console.log(result.empDetails.address);
           this.searching = false;
         }
       );
@@ -64,20 +66,12 @@ export class EmployeeDetailsPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
+          console.log(this.empDetails);
+          console.log(this.empDetails.address);
+          console.log(this.empDetails.contracts);
+          console.log(this.empDetails.businessContacts);
+          console.log(this.empDetails.gender);
   }
-
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
-
 
   ionViewDidLoad() {
   }

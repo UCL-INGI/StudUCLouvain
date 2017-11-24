@@ -44,11 +44,9 @@ export class SportsService {
   url2 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t3"; //woluwe
   url3 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t5"; //mons
   url4 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t7"; //equipe universitaire
+
   constructor(private http: Http, public user:UserService, public rssService : RssService) {
-    let campus = user.campus;
-    if(campus == "LLN") this.url = this.url1;
-    if(campus == "Woluwe") this.url = this.url2;
-    if(campus == "Mons") this.url = this.url3;
+
   }
 
 convertXmlToJson(xml) : any{
@@ -56,7 +54,15 @@ convertXmlToJson(xml) : any{
     let json = parser.xml2js(xml);
     return json;
   }
+
+  update(){
+    let campus = this.user.campus;
+    if(campus == "LLN") this.url = this.url1;
+    if(campus == "Woluwe") this.url = this.url2;
+    if(campus == "Mons") this.url = this.url3;
+  }
   public getSports(segment:string) {
+    this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {
       this.http.get(this.url).map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
@@ -105,15 +111,12 @@ convertXmlToJson(xml) : any{
   }
 
   private extractSports(data: any, isSport:boolean) {
-    //let maxDescLength = 20;
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;
     }
-    //console.log(data);
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      //console.log(item);
       let favorite = false;
       let hidden = false;
 

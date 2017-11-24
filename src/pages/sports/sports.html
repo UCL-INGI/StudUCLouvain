@@ -57,44 +57,13 @@
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <!--
-  <ion-list #eventsList [hidden]="shownEvents === 0" [virtualScroll]="displayedEvents" approxItemHeight="100px" style="height:100%">
-    <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
 
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img [src]="item.iconCategory">
-        </ion-thumbnail>
-        <button ion-item (click)="goToEventDetail(item)" no-lines>
-          <h3>{{item.title}}</h3>
-          <p [innerHtml]="item.trimmedDescription"></p>
-          <p [innerHtml]="item.location"></p>
-          <p>{{item.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{item.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-        </button>
-      </ion-item>
-
-      <ion-item-options>
-        <button ion-button outline (click)="createEvent(slidingItem, item)" class="large-icon">
-          <ion-icon name='calendar'></ion-icon>
-        </button>
-
-        <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
-          <ion-icon name="star-outline"></ion-icon>
-        </button>
-
-        <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
-          <ion-icon name='close'></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>-->
-
-  <ion-list #sportsList [hidden]="shownSports === 0">
-    <ion-item-sliding *ngFor = "let item of displayedSports" #slidingItem [hidden]="item.hidden">
+  <ion-list #sportsList [virtualScroll]="displayedSports" [approxItemHeight]=" '130px' " [hidden]="shownSports === 0">
+    <ion-item-sliding *virtualItem="let item" #slidingItem [hidden]="item.hidden">
 
       <ion-item>
         <ion-item no-lines>
-          <h3>{{item.sport}} {{item.sexe}} - Type : {{item.type}}</h3>
+          <h3>{{item.sport}} {{item.sexe}}  {{item.type}}</h3>
           <p>{{item.lieu}} - Salle : {{item.salle}}</p>
           <p>{{item.jour}} {{item.date | date: 'dd/MM/yyyy' }} {{item.date | date : 'H:mm' }} &mdash; {{item.hfin | date : 'H:mm'}}</p>
           <p style="color:red;" *ngIf="item.remarque.length > 2">Remarque : {{item.remarque}}</p>
@@ -117,7 +86,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list-header *ngIf="(shownSports === 0) && !searching">
+  <ion-list-header *ngIf="shownSports === 0 && !searching">
     Pas de sport trouvé
   </ion-list-header>
 </ion-content>

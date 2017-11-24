@@ -20,7 +20,7 @@
 */
 
 import { Component} from '@angular/core';
-import { NavParams, NavController, App } from 'ionic-angular';
+import { NavParams, NavController, App, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -93,7 +93,8 @@ export class HomePage {
               public nav : NavController,
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
-              private device: Device
+              private device: Device,
+              private alertCtrl : AlertController
             )
   {
       if(this.navParams.get('title') !== undefined) {
@@ -102,7 +103,7 @@ export class HomePage {
       this.app.setTitle(this.title);
   }
 
-  update(){
+  updateCampus(){
     this.userS.addCampus(this.where);
   }
 
@@ -138,5 +139,41 @@ export class HomePage {
         //this.market.open(app);
       }
     );
+  }
+
+  settings(){
+    let check = this.userS.campus;
+    let settingsAlert = this.alertCtrl.create({
+            title: "Paramètres",
+            message: "Choisissez votre campus",
+            inputs : [
+                {
+                    type:'radio',
+                    label:'Louvain-la-Neuve',
+                    value:'LLN',
+                    checked:(check == 'LLN')
+                },
+                {
+                    type:'radio',
+                    label:'Woluwé',
+                    value:'Woluwe',
+                    checked:(check == 'Woluwe')
+                },
+                {
+                    type:'radio',
+                    label:'Mons',
+                    value:'Mons',
+                    checked:(check == 'Mons')
+                }],
+            buttons: [
+                {
+                    text: 'Sauver',
+                    handler: data => {
+                      this.userS.addCampus(data)
+                    }
+                }
+            ]
+        });
+        settingsAlert.present();
   }
 }

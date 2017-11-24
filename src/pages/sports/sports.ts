@@ -62,6 +62,7 @@ export class SportsPage {
   displayedSports : Array<SportItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
+  campus:string;
 
   constructor(
     public alertCtrl: AlertController,
@@ -90,6 +91,7 @@ export class SportsPage {
       this.searching = false;
       this.updateDisplayedSports();
     });
+    console.log(this.user.campus);
   }
 
   public onSearchInput(){
@@ -109,22 +111,19 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     let result: any;
-
+    this.campus = this.user.campus;
     if(this.connService.isOnline()) {
       this.sportsService.getSports(this.segment).then(
         res => {
           result = res;
           this.sports = result.sports;
-          //this.sports = this.sports.slice(0,30);
           this.shownSports = result.shownSports;
-          //this.shownSports = 30;
           this.filters = result.categories;
           this.searching = false;
           this.updateDisplayedSports();
       })
       .catch(error => {
         if(error == 1) {
-          //console.log("Error loading sports : " + error);
           this.loadSports();
         } else {
           if(error == 2) {
@@ -141,9 +140,7 @@ export class SportsPage {
         res => {
           result = res;
           this.teams = result.teams;
-          //this.teams = this.teams.slice(0,30);
           this.shownTeams = result.shownTeams;
-          //this.shownTeams = 30;
           this.filtersT = result.categoriesT;
           this.searching = false;
           this.updateDisplayedSports();
@@ -170,6 +167,8 @@ export class SportsPage {
   }
 
   public updateDisplayedSports() {
+
+
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
 
@@ -198,9 +197,7 @@ export class SportsPage {
       });
     }
     //this.shownTeams = this.displayedSports.length;
-    //this.shownSports = this.displayedSports.length;
-    this.shownTeams = 30;
-    this.shownSports = 30;
+    this.shownSports = this.displayedSports.length;
     this.searching = false;
 
   }
