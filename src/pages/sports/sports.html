@@ -47,10 +47,11 @@
 
 
 <ion-content class="feed-list">
-  <ion-refresher (ionRefresh)="doRefresh($sport)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh">
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
