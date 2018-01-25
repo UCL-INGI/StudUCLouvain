@@ -29,6 +29,70 @@
 
 </ion-header>
 
-<ion-content padding text-center>
-  <img alt="logo" src="assets/img/guindaille.png" align="middle"  />
+<ion-content padding>
+  <ion-item-divider  (click)="toggleGroup('picto')">
+    Pictogrammes
+  </ion-item-divider>
+
+  <ion-item [hidden]="!isGroupShown('picto')">
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col align-self-center text-center>
+            <img alt="alterner" src="assets/img/alterner.png" align="middle" width="250" height="250" (click)="showAlert(alterner)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="bruit" src="assets/img/Bruit-exterieur.png" align="middle" width="250" height="250" (click)="showAlert(bruit)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="eau" src="assets/img/eau-gratuite.png" align="middle" width="250" height="250" (click)="showAlert(eau)"/>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col align-self-center text-center>
+            <img alt="ou" src="assets/img/jen-suis-ou.png" align="middle" width="250" height="250" (click)="showAlert(ou)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="cans" src="assets/img/no-cans-no-glass.png" align="middle" width="250" height="250" (click)="showAlert(cans)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="preservatif" src="assets/img/preservatif-jy-pense.png" align="middle" width="250" height="250" (click)="showAlert(preservatif)"/>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col align-self-center text-center>
+            <img alt="racompagner" src="assets/img/racompagner.png" align="middle" width="250" height="250" (click)="showAlert(racompagner)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="uriner" src="assets/img/uriner-dans-le-pot.png" align="middle" width="250" height="250" (click)="showAlert(uriner)"/>
+          </ion-col>
+          <ion-col align-self-end text-center>
+            <img alt="urinerD" src="assets/img/uriner-dehors.png" align="middle" width="250" height="250" (click)="showAlert(dehors)"/>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col align-self-end text-center>
+            <img alt="violence" src="assets/img/Violence-arrete-toi-avant.png" align="middle" width="250" height="250" align="center" (click)="showAlert(violence)"/>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+
+  <ion-item-divider  (click)="toggleGroup('effecto')">
+    Effectomètre
+  </ion-item-divider>
+
+  <ion-item [hidden]="!isGroupShown('effecto')">
+    <div item-content>
+      <p>Effectomètre</p>
+    </div>
+  </ion-item>
+
 </ion-content>
