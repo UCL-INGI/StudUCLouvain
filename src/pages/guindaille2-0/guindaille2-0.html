@@ -90,9 +90,11 @@
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('effecto')">
-    <div item-content>
-      <p>Effectomètre</p>
-    </div>
+    <ion-slides pager>
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide.image" class="slide-image"/>
+      </ion-slide>
+    </ion-slides>
   </ion-item>
 
 </ion-content>

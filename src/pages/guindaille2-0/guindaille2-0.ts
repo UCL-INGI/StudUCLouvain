@@ -23,7 +23,8 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
-
+import { ViewChild } from '@angular/core';
+import { Slides } from 'ionic-angular';
 
 @Component({
   selector: 'page-guindaille2-0',
@@ -81,6 +82,26 @@ export class GuindaillePage {
   violence = { title: 'Violence, arrête toi avant!',
       subTitle: 'Les effets de l’alcool peuvent varier. Alcool joyeux, triste ou encore agressif, personne n’est à l’abri. Si tu sens que toi ou un(e) de tes potes montez dans les tours, c’est le moment de te/le/la calmer et d’alterner avec des softs.',
       buttons: ['OK'] };
+
+  slides = [
+      {
+        image: "assets/img/slide1.png",
+      },
+      {
+        image: "assets/img/slide2.png",
+      },
+      {
+        image: "assets/img/slide3.png",
+      },
+      {
+        image: "assets/img/slide4.png",
+      },
+      {
+        image: "assets/img/slide5.png",
+      },
+      {
+        image: "assets/img/slide6.png",
+      }];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {
     this.title = this.navParams.get('title');
