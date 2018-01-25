@@ -97,4 +97,12 @@
     </ion-slides>
   </ion-item>
 
+  <ion-item-divider  (click)="toggleGroup('secours')">
+    Informations secours
+  </ion-item-divider>
+
+  <ion-item [hidden]="!isGroupShown('secours')">
+
+  </ion-item>
+
 </ion-content>
