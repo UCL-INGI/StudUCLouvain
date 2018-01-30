@@ -58,6 +58,7 @@ import { StudiesPage } from '../pages/studies/studies';
 import { RepertoirePage } from '../pages/repertoire/repertoire';
 import { EmployeeDetailsPage } from '../pages/repertoire/employee-details/employee-details';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
+import { CreditPage } from '../pages/credit/credit';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
@@ -105,6 +106,7 @@ import { RepertoireService } from '../providers/wso2-services/repertoire-service
     SportsPage,
     SportsFilterPage,
     HomePage,
+    CreditPage,
     RepertoirePage,
     EmployeeDetailsPage
   ],
@@ -131,6 +133,7 @@ import { RepertoireService } from '../providers/wso2-services/repertoire-service
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
+    CreditPage,
     GuindaillePage,
     LibraryDetailsPage,
     SportsPage,
