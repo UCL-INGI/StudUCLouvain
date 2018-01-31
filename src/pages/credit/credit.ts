@@ -35,4 +35,8 @@ export class CreditPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser) {
     this.title = this.navParams.get('title');
   }
+
+  public openURL(url: string) {
+    this.iab.create(url, '_system','location=yes');
+  }
 }
