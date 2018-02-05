@@ -43,7 +43,3 @@ package.json
 config.xml
 config.xml
 src/app/variables-config.ts
-config.xml
-package-lock.json
-package.json
-src/app/variables-config.ts
