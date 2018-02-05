@@ -24,72 +24,74 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title align="center">{{title}}</ion-title>
+    <ion-title align="center">
+      <img alt="logo"   height="40" src="assets/img/guindaille/logo.jpg" > 
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <ion-item-divider  (click)="toggleGroup('picto')">
-    Pictogrammes
+
+<ion-content padding class="guindaille" >
+  <ion-item-divider  (click)="toggleGroup('picto')" class="gelem" no-lines>
+    <button  class="gtext">Pictogrammes</button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('picto')">
-    <ion-list>
-      <ion-item>
+  <ion-item [hidden]="!isGroupShown('picto')" class="gelem" no-lines>
+    <ion-list >
+      <ion-item class="gelem">
         <ion-row>
           <ion-col align-self-center text-center>
-            <img alt="alterner" src="assets/img/alterner.png" align="middle" width="250" height="250" (click)="showAlert(alterner)"/>
+            <img alt="alterner" src="assets/img/guindaille/alterner.png" align="middle"  height="auto" (click)="showAlert(alterner)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="bruit" src="assets/img/Bruit-exterieur.png" align="middle" width="250" height="250" (click)="showAlert(bruit)"/>
+            <img alt="bruit" src="assets/img/guindaille/Bruit-exterieur.png" align="middle"  height="auto" (click)="showAlert(bruit)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="eau" src="assets/img/eau-gratuite.png" align="middle" width="250" height="250" (click)="showAlert(eau)"/>
+            <img alt="eau" src="assets/img/guindaille/eau-gratuite.png" align="middle"  height="auto" (click)="showAlert(eau)"/>
           </ion-col>
         </ion-row>
-      </ion-item>
-      <ion-item>
+      
+      
         <ion-row>
           <ion-col align-self-center text-center>
-            <img alt="ou" src="assets/img/jen-suis-ou.png" align="middle" width="250" height="250" (click)="showAlert(ou)"/>
+            <img alt="ou" src="assets/img/guindaille/jen-suis-ou.png" align="middle"  height="auto" (click)="showAlert(ou)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="cans" src="assets/img/no-cans-no-glass.png" align="middle" width="250" height="250" (click)="showAlert(cans)"/>
+            <img alt="cans" src="assets/img/guindaille/no-cans-no-glass.png" align="middle"  height="auto" (click)="showAlert(cans)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="preservatif" src="assets/img/preservatif-jy-pense.png" align="middle" width="250" height="250" (click)="showAlert(preservatif)"/>
+            <img alt="preservatif" src="assets/img/guindaille/preservatif-jy-pense.png" align="middle"  height="auto" (click)="showAlert(preservatif)"/>
           </ion-col>
         </ion-row>
-      </ion-item>
-      <ion-item>
+   
         <ion-row>
           <ion-col align-self-center text-center>
-            <img alt="racompagner" src="assets/img/racompagner.png" align="middle" width="250" height="250" (click)="showAlert(racompagner)"/>
+            <img alt="racompagner" src="assets/img/guindaille/racompagner.png" align="middle"  height="auto" (click)="showAlert(racompagner)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="uriner" src="assets/img/uriner-dans-le-pot.png" align="middle" width="250" height="250" (click)="showAlert(uriner)"/>
+            <img alt="uriner" src="assets/img/guindaille/uriner-dans-le-pot.png" align="middle"  height="auto" (click)="showAlert(uriner)"/>
           </ion-col>
           <ion-col align-self-end text-center>
-            <img alt="urinerD" src="assets/img/uriner-dehors.png" align="middle" width="250" height="250" (click)="showAlert(dehors)"/>
+            <img alt="urinerD" src="assets/img/guindaille/uriner-dehors.png" align="middle"  height="auto" (click)="showAlert(dehors)"/>
           </ion-col>
         </ion-row>
-      </ion-item>
-      <ion-item>
+
+      
         <ion-row>
           <ion-col align-self-end text-center>
-            <img alt="violence" src="assets/img/Violence-arrete-toi-avant.png" align="middle" width="250" height="250" align="center" (click)="showAlert(violence)"/>
+            <img alt="violence" src="assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" height="auto" align="center" (click)="showAlert(violence)"/>
           </ion-col>
         </ion-row>
       </ion-item>
     </ion-list>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('effecto')">
-    Effectomètre
+  <ion-item-divider  (click)="toggleGroup('effecto')" class="gelem" no-lines>
+    <button class="gtext">Effectomètre</button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('effecto')">
+  <ion-item [hidden]="!isGroupShown('effecto')" class="gelem" no-lines>
     <ion-slides pager>
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image" class="slide-image"/>
@@ -97,11 +99,11 @@
     </ion-slides>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('secours')">
-    Informations secours
+  <ion-item-divider  (click)="toggleGroup('secours')" class="gelem" no-lines>
+    <button class="gtext">Informations secours</button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('secours')">
+  <ion-item [hidden]="!isGroupShown('secours')" class="gelem">
 
   </ion-item>
 
