@@ -43,3 +43,5 @@ package.json
 config.xml
 config.xml
 src/app/variables-config.ts
+config.xml
+src/app/variables-config.ts
