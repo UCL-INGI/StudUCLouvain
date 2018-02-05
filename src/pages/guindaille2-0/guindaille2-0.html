@@ -34,7 +34,7 @@
 
 <ion-content padding class="guindaille" >
   <ion-item-divider  (click)="toggleGroup('picto')" class="gelem" no-lines>
-    <button  class="gtext">Pictogrammes</button>
+    <button ion-button round class="gbutton" ><p class="gtext">Pictogrammes</p></button>
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('picto')" class="gelem" no-lines>
@@ -88,7 +88,7 @@
   </ion-item>
 
   <ion-item-divider  (click)="toggleGroup('effecto')" class="gelem" no-lines>
-    <button class="gtext">Effectomètre</button>
+    <button ion-button round class="gbutton" ><p class="gtext">Effectomètre</p></button>
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('effecto')" class="gelem" no-lines>
@@ -97,10 +97,11 @@
         <img [src]="slide.image" class="slide-image"/>
       </ion-slide>
     </ion-slides>
+    <p text-color="white">Glisser vers la droite pour continuer</p>
   </ion-item>
 
   <ion-item-divider  (click)="toggleGroup('secours')" class="gelem" no-lines>
-    <button class="gtext">Informations secours</button>
+    <button ion-button round class="gbutton" ><p class="gtext">Informations secours</p></button>
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('secours')" class="gelem">
