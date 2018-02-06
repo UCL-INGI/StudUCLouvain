@@ -46,6 +46,26 @@
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
   </ion-item>
+
+   <!-- <ion-row radio-group [(ngModel)]="filter">
+      <ion-col>
+        <ion-label text-align=center>Trier par :</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label>Sports</ion-label>
+          <ion-radio value="sport"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-label>Dates</ion-label>
+          <ion-radio value="date"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>-->
+
+
   <ion-toolbar>
   <ion-buttons left>
     <button ion-button icon-right end (click)="uncheckAll()">
