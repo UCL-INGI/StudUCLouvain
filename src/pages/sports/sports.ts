@@ -57,12 +57,16 @@ export class SportsPage {
   searchTerm: string = '';
   searchControl: FormControl;
   filters : any = [];
+  days: any = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   filtersT : any = [];
   excludedFilters : any = [];
   displayedSports : Array<SportItem> = [];
+  displayedSportsD :any = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
   campus:string;
+  shownGroup = null;
+  current = null;
 
   constructor(
     public alertCtrl: AlertController,
@@ -117,6 +121,7 @@ export class SportsPage {
         res => {
           result = res;
           this.sports = result.sports;
+
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
@@ -166,6 +171,39 @@ export class SportsPage {
     }
   }
 
+  public changeArray(array){
+    var groups = this.sports.reduce(function(obj,item){
+      obj[item.jour] = obj[item.jour] || [];
+      obj[item.jour].push(item);
+      return obj;
+    }, {});
+    var sportsD = Object.keys(groups).map(function(key){
+    return {jour: key, name: groups[key]};
+    });
+    return sportsD;
+  }
+
+  public needDay(day: String){
+      if(this.current != day){
+        this.current = day;
+        return true;
+      }
+      return false;
+  }
+
+    toggleGroup(group) {
+      if (this.isGroupShown(group)) {
+          this.shownGroup = null;
+      } else {
+          this.shownGroup = group;
+      }
+  }
+
+  isGroupShown(group) {
+      return this.shownGroup === group;
+  }
+
+
   public updateDisplayedSports() {
 
 
@@ -177,6 +215,7 @@ export class SportsPage {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
+      
     } else if (this.segment === 'favorites') {
       let favSports = [];
 
@@ -199,7 +238,8 @@ export class SportsPage {
     //this.shownTeams = this.displayedSports.length;
     this.shownSports = this.displayedSports.length;
     this.searching = false;
-
+    this.displayedSportsD = this.changeArray(this.displayedSports);
+    console.log(this.displayedSportsD);
   }
 
 

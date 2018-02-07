@@ -19,6 +19,38 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-help-desk {
+page-guindaille2-0 {
 
+    @font-face {
+      font-family: 'Guindaille';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Museo 100'), url(assets/fonts/Museoregular/Museo.ttf) format('woff2');
+    }
+
+    .guindaille {
+        font-family: 'Guindaille';
+
+        background-color: map-get($colors, guindaille);
+    }
+
+
+
+    .gtext {
+        font-family: 'Guindaille';
+        font-size: 24px;
+        color: white;
+        padding: 5px;
+    }
+
+    .gbutton {
+        background-color: map-get($colors, guindaille);
+        border: 1px solid white;
+        text-transform: none;
+    }
+
+    .gelem {
+        background-color: map-get($colors, guindaille);
+        text-align: center;
+    }
 }

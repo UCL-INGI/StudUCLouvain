@@ -85,22 +85,22 @@ export class GuindaillePage {
 
   slides = [
       {
-        image: "assets/img/1.png",
+        image: "assets/img/guindaille/1.png",
       },
       {
-        image: "assets/img/2.png",
+        image: "assets/img/guindaille/2.png",
       },
       {
-        image: "assets/img/3.png",
+        image: "assets/img/guindaille/3.png",
       },
       {
-        image: "assets/img/4.png",
+        image: "assets/img/guindaille/4.png",
       },
       {
-        image: "assets/img/5.png",
+        image: "assets/img/guindaille/5.png",
       },
       {
-        image: "assets/img/6.png",
+        image: "assets/img/guindaille/6.png",
       }];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {

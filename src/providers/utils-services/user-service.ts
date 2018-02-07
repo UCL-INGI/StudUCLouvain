@@ -88,7 +88,7 @@ export class UserService {
   getCampus(){
     this.storage.get('campus').then((data) =>
     {
-      if(data.length == 0){
+      if(data == null){
         this.campus = "";
       } else {
         this.campus=data; 
