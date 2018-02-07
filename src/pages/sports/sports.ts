@@ -215,7 +215,7 @@ export class SportsPage {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
-      this.displayedSportsD = this.changeArray(this.displayedSports);
+      
     } else if (this.segment === 'favorites') {
       let favSports = [];
 
@@ -234,13 +234,12 @@ export class SportsPage {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
-      this.displayedSportsD = this.changeArray(this.displayedSports);
     }
     //this.shownTeams = this.displayedSports.length;
     this.shownSports = this.displayedSports.length;
     this.searching = false;
+    this.displayedSportsD = this.changeArray(this.displayedSports);
     console.log(this.displayedSportsD);
-
   }
 
 

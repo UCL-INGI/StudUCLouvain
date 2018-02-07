@@ -58,11 +58,11 @@
     <ion-spinner></ion-spinner>
   </div>
 
-  <ion-list #sportsList [virtualScroll]="displayedSportsD" [approxItemHeight]=" '130px' "  [hidden]="shownSports === 0">
-      <ion-item *virtualItem="let item" >
+  <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0">
+    
 
-        <ion-item-divider (click)="toggleGroup(item.jour)">
-          {{item.jour}} {{item.name[0].date | date: 'dd/MM'}}
+        <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)">
+          {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
         </ion-item-divider>
 
         <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
@@ -91,7 +91,7 @@
           </ion-item-sliding>
 
         </ion-list>
-      </ion-item>
+    
     </ion-list>
   <ion-list-header *ngIf="shownSports === 0 && !searching">
     Pas de sport trouvé
