@@ -57,7 +57,6 @@ export class SportsPage {
   searchTerm: string = '';
   searchControl: FormControl;
   filters : any = [];
-  days: any = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   filtersT : any = [];
   excludedFilters : any = [];
   displayedSports : Array<SportItem> = [];
@@ -66,7 +65,6 @@ export class SportsPage {
   dateLimit: Date = new Date();
   campus:string;
   shownGroup = null;
-  current = null;
 
   constructor(
     public alertCtrl: AlertController,
