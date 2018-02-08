@@ -229,10 +229,7 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    console.log("NEW");
-    console.log(this.displayedSportsD);
-    console.log("OLD");
-    console.log(this.displayedSports);
+
 
   }
 
