@@ -121,7 +121,6 @@ export class SportsPage {
         res => {
           result = res;
           this.sports = result.sports;
-
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
@@ -172,7 +171,7 @@ export class SportsPage {
   }
 
   public changeArray(array){
-    var groups = this.sports.reduce(function(obj,item){
+    var groups = array.reduce(function(obj,item){
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
@@ -183,13 +182,6 @@ export class SportsPage {
     return sportsD;
   }
 
-  public needDay(day: String){
-      if(this.current != day){
-        this.current = day;
-        return true;
-      }
-      return false;
-  }
 
     toggleGroup(group) {
       if (this.isGroupShown(group)) {
@@ -239,7 +231,11 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
+    console.log("NEW");
     console.log(this.displayedSportsD);
+    console.log("OLD");
+    console.log(this.displayedSports);
+
   }
 
 
