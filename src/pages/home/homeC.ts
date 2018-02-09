@@ -26,6 +26,7 @@ import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { UserService } from '../../providers/utils-services/user-service';
 import { MyApp } from '../../app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 
 import { EventsPage } from '../events/events';
 import { MobilityPage } from '../mobility/mobility';
@@ -47,6 +48,12 @@ export class HomePage {
   shownGroup = null;
   where = "";
   myApp : MyApp;
+  setting:string ="";
+  message:string = "";
+  save:string = "";
+  message2:string = "";
+  en:string = "";
+  fr:string = "";
 
 
   libraryPage = { title: 'Bibliothèques', component: LibrariesPage,
@@ -94,12 +101,14 @@ export class HomePage {
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
-              private alertCtrl : AlertController
+              private alertCtrl : AlertController,
+              private translateService: TranslateService
             )
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
+
       this.app.setTitle(this.title);
   }
 
@@ -141,11 +150,22 @@ export class HomePage {
     );
   }
 
+ languageChanged(event:string) {
+        this.translateService.use(event);
+    }
+
   settings(){
     let check = this.userS.campus;
+    let check2 = this.translateService.currentLang;
+    this.translateService.get('HOME.SETTINGS').subscribe((res:string) => {this.setting=res;});
+    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {this.message=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res:string) => {this.save=res;});
+    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {this.message2=res;});
+    this.translateService.get('HOME.FR').subscribe((res:string) => {this.fr=res;});
+    this.translateService.get('HOME.EN').subscribe((res:string) => {this.en=res;});
     let settingsAlert = this.alertCtrl.create({
-            title: "Paramètres",
-            message: "Choisissez votre campus",
+            title: this.setting,
+            message: this.message,
             inputs : [
                 {
                     type:'radio',
@@ -167,13 +187,42 @@ export class HomePage {
                 }],
             buttons: [
                 {
-                    text: 'Sauver',
+                    text: this.save,
                     handler: data => {
-                      this.userS.addCampus(data)
+                      this.userS.addCampus(data);
+                      languageAlert.present();
                     }
                 }
             ]
         });
         settingsAlert.present();
+
+        let languageAlert = this.alertCtrl.create({
+          title: this.setting,
+          message : this.message2,
+          inputs : [
+            {
+              type:'radio',
+              label:this.fr,
+              value:'fr',
+              checked:(check2 == 'fr')
+            },
+            {
+              type:'radio',
+              label:this.en,
+              value:'en',
+              checked:(check2 == 'en')
+            }
+          ],
+          buttons: [
+          {
+            text:this.save,
+            handler:data => {
+               this.languageChanged(data);
+            }
+          }]
+        });
+
   }
+
 }

@@ -1,0 +1,30 @@
+{
+	"HOME" : {
+	    "TITLE" : "Accueil",  
+	    "BUTTONS" : {
+	        "btn_eng" : "English",
+	        "btn_cro" : "Croatian"
+	    },
+	    "CAMPUS" : "CAMPUS",
+	    "NEWS" : "News",
+	    "EVENTS" : "Evénements",
+	    "SPORTS" : "Sports",
+	    "STUDY" : "ETUDES",
+	    "LIBRARY" : "Bibliothèques",
+	    "ETUDES" : "Etudes",
+	    "HELP" : "HelpDesk",
+	    "TOOLS" : "OUTILS",
+	    "MAP" :  "Carte",
+	    "REST" : "Restaurants U.",
+	    "MOBILITY" : "Mobilité",
+	    "WHICH" : "De quel campus êtes-vous ?",
+	    "OK" : "Valider",
+	    "SETTINGS": "Paramètres",
+	    "MESSAGE" : "Choisissez votre campus",
+	    "SAVE" : "SAUVER",
+	    "MESSAGE2" : "Choississez votre langue",
+	    "FR": "Francais",
+	    "EN": "Anglais"
+	}
+
+}

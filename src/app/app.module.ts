@@ -21,7 +21,7 @@
 
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http'
+import { HttpModule, Http } from '@angular/http'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
@@ -38,6 +38,10 @@ import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
 import { SecureStorage } from '@ionic-native/secure-storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+//import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 
 
@@ -81,7 +85,9 @@ import { SportsService } from '../providers/rss-services/sports-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 
 
-
+export function HttpLoaderFactory(http: Http) {
+    return new TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -114,7 +120,14 @@ import { RepertoireService } from '../providers/wso2-services/repertoire-service
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [Http]
+        }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,0 +1,29 @@
+{
+    "HOME": {
+        "TITLE" : "Home",  
+        "BUTTONS" : {
+            "btn_eng" : "English",
+            "btn_cro" : "Croatian"
+        },
+        "CAMPUS" : "CAMPUS",
+        "NEWS" : "News",
+        "EVENTS" : "Events",
+        "SPORTS" : "Sports",
+        "STUDY" : "STUDIES",
+        "LIBRARY" : "Libraries",
+        "ETUDES" : "Studies",
+        "HELP" : "HelpDesk",
+        "TOOLS" : "TOOLS",
+        "MAP" :  "Map",
+        "REST" : "Restaurants U.",
+        "MOBILITY" : "Mobility",
+        "WHICH" : "What campus are you from ?",
+        "OK" : "Ok",
+        "SETTINGS": "Settings",
+        "MESSAGE" : "Choose your campus",
+        "SAVE" : "SAVE",
+        "MESSAGE2" : "Choose your language",
+        "FR": "French",
+        "EN": "English"
+    }
+}

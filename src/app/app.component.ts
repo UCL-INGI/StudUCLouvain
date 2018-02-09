@@ -27,6 +27,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 //import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TranslateService } from '@ngx-translate/core';
+
 
 import { EventsPage } from '../pages/events/events';
 import { MobilityPage } from '../pages/mobility/mobility';
@@ -71,7 +73,8 @@ export class MyApp {
     private splashscreen: SplashScreen,
     private alertCtrl : AlertController,
     private user: UserService,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private translateService: TranslateService
   ) {
     this.user.getCampus();
     console.log(this.user.campus);
@@ -132,7 +135,10 @@ export class MyApp {
         // iosSchemaName: null, androidPackageName: null,
         // appUrl: null, httpUrl: null }
     ];
-
+    platform.ready().then(() => {
+      translateService.setDefaultLang('fr');
+      translateService.use('en');
+    })
 
   }
 
@@ -218,5 +224,6 @@ export class MyApp {
   		}
   	);
   }
+
 
 }
