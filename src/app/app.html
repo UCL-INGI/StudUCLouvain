@@ -23,16 +23,16 @@
   <ion-content>
     <ion-list scroll=true>
       <button ion-item (click)="openRootPage(homePage)">
-        <ion-icon name={{homePage.icon}}> </ion-icon> {{homePage.title}}
+        <ion-icon name={{homePage.icon}}> </ion-icon> {{homePage.title | translate}}
       </button>
       <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
-        <ion-icon name={{p.icon}}> </ion-icon> {{p.title}}
+        <ion-icon name={{p.icon}}> </ion-icon> {{p.title | translate}}
       </button>
       <button ion-item *ngFor="let p of studiePages" (click)="openRootPage(p)">
-        <ion-icon name={{p.icon}}> </ion-icon> {{p.title}}
+        <ion-icon name={{p.icon}}> </ion-icon> {{p.title | translate}}
       </button>
       <button ion-item *ngFor="let p of toolPages" (click)="openRootPage(p)">
-        <ion-icon name={{p.icon}}> </ion-icon> {{p.title}}
+        <ion-icon name={{p.icon}}> </ion-icon> {{p.title | translate}}
       </button>
     </ion-list>
   </ion-content>

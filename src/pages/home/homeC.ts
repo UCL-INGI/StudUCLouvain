@@ -48,6 +48,7 @@ export class HomePage {
   shownGroup = null;
   where = "";
   myApp : MyApp;
+  
   setting:string ="";
   message:string = "";
   save:string = "";

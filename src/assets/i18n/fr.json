@@ -1,10 +1,22 @@
 {
+	"MENU" : {
+		"HOME" : "Accueil",
+		"NEWS" : "Actualités",
+		"EVENTS" : "Evénements",
+		"SPORTS" : "Sports",
+		"STUDIES" : "Etudes",
+		"LIBRARY" : "Bibliothèques",
+		"HELP" : "Service d'aide",
+		"REPERTORY" : "Répértoire UCL",
+		"PARTY" : "Guindaille2.0",
+		"MAP" : "Carte",
+		"RESTAURANT" : "Restaurants U.",
+		"MOBILITY" : "Mobilité",
+		"CREDITS" : "Crédits"
+	},
+
 	"HOME" : {
 	    "TITLE" : "Accueil",  
-	    "BUTTONS" : {
-	        "btn_eng" : "English",
-	        "btn_cro" : "Croatian"
-	    },
 	    "CAMPUS" : "CAMPUS",
 	    "NEWS" : "News",
 	    "EVENTS" : "Evénements",

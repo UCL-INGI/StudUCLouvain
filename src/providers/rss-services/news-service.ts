@@ -71,6 +71,7 @@ export class NewsService {
             reject(1); //1 = data.query.results == null, retry rssService
           } else {
             this.nbCalls = 0;
+            console.log(data);
             this.extractNews(data['query']['results']['item']);
             resolve({news : this.news, shownNews: this.shownNews});
           }
@@ -94,7 +95,9 @@ export class NewsService {
 
       this.shownNews++;
       let pubDate = this.createDateForNews(item.pubDate);
-      let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", item.enclosure.url, trimmedDescription, hidden, item.guid, pubDate);
+      let img = "";
+      if(item.enclosure != null) img = item.enclosure.url;
+      let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
     }
   }

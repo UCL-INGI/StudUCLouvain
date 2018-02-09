@@ -23,8 +23,6 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
-import { ViewChild } from '@angular/core';
-import { Slides } from 'ionic-angular';
 
 @Component({
   selector: 'page-guindaille2-0',

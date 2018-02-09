@@ -64,6 +64,8 @@ export class MyApp {
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
 
+  text = {home:"", news:"", events:"",sports:"",study:"",library:"", help:"", repert:"",guindaille:"",map:"",rest:"",mobi:"",credit:""};
+
   constructor(public platform: Platform,
     public menu: MenuController,
     //public market: Market,
@@ -81,53 +83,53 @@ export class MyApp {
     this.alertPresented = false;
     this.initializeApp();
     this.homePage =
-      {title: 'Accueil', component: HomePage, icon: 'home',
+      {title: 'MENU.HOME', component: HomePage, icon: 'home',
       iosSchemaName: null, androidPackageName: null,
       appUrl: null, httpUrl: null}
     ;
     this.campusPages =[
-      { title: 'Actualités', component: NewsPage, icon: 'paper',
+      { title: 'MENU.NEWS', component: NewsPage, icon: 'paper',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'Evenements', component: EventsPage, icon: 'calendar',
+      { title: 'MENU.EVENTS', component: EventsPage, icon: 'calendar',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'Sports', component: SportsPage, icon: 'football',
+      { title: 'MENU.SPORTS', component: SportsPage, icon: 'football',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
     ];
     this.studiePages =[
-      { title: 'Etudes', component: StudiesPage, icon: 'school',
+      { title: 'MENU.STUDIES', component: StudiesPage, icon: 'school',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'Bibliothèques', component: LibrariesPage, icon: 'book',
+      { title: 'MENU.LIBRARY', component: LibrariesPage, icon: 'book',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'Service d\'aide', component: HelpDeskPage,
+      { title: 'MENU.HELP', component: HelpDeskPage,
         icon: 'information-circle', iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'Repertoire UCL', component: RepertoirePage, icon: 'contact',
+      { title: 'MENU.REPERTORY', component: RepertoirePage, icon: 'contact',
          iosSchemaName: null, androidPackageName: null,
          appUrl: null, httpUrl: null  },
-      { title: 'Guindaille2.0', component: GuindaillePage, icon: 'water',
+      { title: 'MENU.PARTY', component: GuindaillePage, icon: 'water',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'Carte', component: MapPage, icon: 'map',
+      { title: 'MENU.MAP', component: MapPage, icon: 'map',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'Restaurants', component: RestaurantPage, icon : 'restaurant',
+      { title: 'MENU.RESTAURANT', component: RestaurantPage, icon : 'restaurant',
         iosSchemaName: 'com.apptree.resto4u',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'Mobilité', component: MobilityPage, icon : 'car',
+      { title: 'MENU.MOBILITY', component: MobilityPage, icon : 'car',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'Crédit', component: CreditPage, icon : 'bulb',
+      { title: 'MENU.CREDITS', component: CreditPage, icon : 'bulb',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }

@@ -65,7 +65,7 @@
       <p align="center" style="font-size:22px;"><b>{{'HOME.CAMPUS' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-center text-center>
-          <img alt="logo" src="assets/img/ucl.jpg" align="middle" height="auto" (click)="changePage(newsPage)"/><p align="center"><b>{{'HOME.NEWS' | translate}}</b></p>
+          <img alt="logo" src="assets/img/ucl.jpg" align="middle" height="auto" (click)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
         </ion-col>
         <ion-col align-self-end text-center >
           <img alt="louvinfo" src="assets/img/louvainfo.png" align="middle"  height="auto" (click)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
