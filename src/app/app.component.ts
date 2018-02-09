@@ -137,7 +137,7 @@ export class MyApp {
     ];
     platform.ready().then(() => {
       translateService.setDefaultLang('fr');
-      translateService.use('en');
+      translateService.use('fr');
     })
 
   }
