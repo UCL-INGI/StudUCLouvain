@@ -20,8 +20,10 @@
 */
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { UserService } from '../../providers/utils-services/user-service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -39,10 +41,90 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 export class ParamPage {
   title: any;
   shownGroup = null;
+  setting:string ="Campus";
+  setting2:string ="Langue";
+  message:string = "Dans quel campus êtes-vous?";
+  message2:string = "Quelle langue choisissez-vous?";
+  save:string = "OK";
+  en:string = "English";
+  fr:string = "Français";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController,
+              private iab: InAppBrowser,
+              public userS:UserService,
+              private alertCtrl : AlertController,
+              private translateService: TranslateService) {
     this.title = this.navParams.get('title');
   }
 
+  campus_choice(){
+    let check = this.userS.campus;
+    let settingsAlert = this.alertCtrl.create({
+      title: this.setting,
+      message: this.message,
+      inputs : [
+        {
+          type:'radio',
+          label:'Louvain-la-Neuve',
+          value:'LLN',
+          checked:(check == 'LLN')
+        },
+        {
+          type:'radio',
+          label:'Woluwé',
+          value:'Woluwe',
+          checked:(check == 'Woluwe')
+        },
+        {
+          type:'radio',
+          label:'Mons',
+          value:'Mons',
+          checked:(check == 'Mons')
+        }],
+      buttons: [
+      {
+        text: this.save,
+        handler: data => {
+          this.userS.addCampus(data);
+        }
+      }]
+    });
+    settingsAlert.present();
+  }
 
+  language_choice(){
+    let check2 = this.translateService.currentLang;
+    let languageAlert = this.alertCtrl.create({
+      title: this.setting2,
+      message : this.message2,
+      inputs : [
+        {
+          type:'radio',
+          label:this.fr,
+          value:'fr',
+          checked:(check2 == 'fr')
+        },
+        {
+          type:'radio',
+          label:this.en,
+          value:'en',
+          checked:(check2 == 'en')
+        }
+      ],
+      buttons: [
+      {
+        text:this.save,
+        handler:data => {
+           this.languageChanged(data);
+        }
+      }]
+    });
+    languageAlert.present();
+  }
+
+  languageChanged(event:string) {
+         this.translateService.use(event);
+     }
 }
