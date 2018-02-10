@@ -57,21 +57,19 @@
   </ion-row>
 </ion-content>
 
-<ion-content padding *ngIf="(userS.hasCampus() === true)">
-  <p align="center"> LOGO !? </p>
-  <ion-content text-center>
+<ion-content text-center padding *ngIf="(userS.hasCampus() === true)">
   <ion-list>
     <ion-item>
       <p align="center" style="font-size:22px;"><b>{{'HOME.CAMPUS' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-center text-center>
-          <img alt="logo" src="assets/img/ucl.jpg" align="middle" height="auto" (click)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
+          <img alt="logo" src="assets/img/news.png" align="middle" height="auto" (click)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
         </ion-col>
         <ion-col align-self-end text-center >
-          <img alt="louvinfo" src="assets/img/louvainfo.png" align="middle"  height="auto" (click)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
+          <img alt="louvinfo" src="assets/img/calend.png" align="middle"  height="auto" (click)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="sport" src="assets/img/sport.jpg" align="middle"  height="auto" (click)="changePage(sportPage)"/><p align="center"><b>{{'HOME.SPORTS' | translate}}</b></p>
+          <img alt="sport" src="assets/img/sportsM.jpg" align="middle"  height="auto" (click)="changePage(sportPage)"/><p align="center"><b>{{'HOME.SPORTS' | translate}}</b></p>
         </ion-col>
       </ion-row>
     </ion-item>
@@ -79,10 +77,10 @@
       <p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-end text-center>
-          <img alt="biblio" src="assets/img/biblio.jpg" align="middle" height="auto" (click)="changePage(libraryPage)"/> <p align="center"><b>{{'HOME.LIBRARY' | translate}}</b></p>
+          <img alt="biblio" src="assets/img/books.png" align="middle" height="auto" (click)="changePage(libraryPage)"/> <p align="center"><b>{{'HOME.LIBRARY' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="etudes" src="assets/img/etudes.jpg" align="middle" height="auto" (click)="changePage(studiesPage)"/><p align="center"><b>{{'HOME.ETUDES' | translate}}</b></p>
+          <img alt="etudes" src="assets/img/grad.png" align="middle" height="auto" (click)="changePage(studiesPage)"/><p align="center"><b>{{'HOME.ETUDES' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
           <img alt="aide" src="assets/img/aide.png" align="middle" height="auto" (click)="changePage(helpDeskPage)"/><p align="center"><b>{{'HOME.HELP' | translate}}</b></p>
@@ -101,7 +99,7 @@
         <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle"  /><p align="center"><b>Carte</b></p></ion-col>
   -->
         <ion-col align-self-end text-center>
-          <img alt="carte" src="assets/img/map.png" align="middle" height="auto" (click)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
+          <img alt="carte" src="assets/img/cartes.png" align="middle" height="auto" (click)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
           <img alt="resto" src="assets/img/resto4u.jpg" align="middle" height="auto" (click)="changePage(restoPage)"/><p align="center"><b>{{'HOME.REST' | translate}}</b></p>
@@ -117,10 +115,6 @@
       </ion-row>
     </ion-item>
   </ion-list>
-
-  </ion-content>
-
-
 </ion-content>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
