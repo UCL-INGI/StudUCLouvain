@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">Annuler</button>
+      <button ion-button (tap)="dismiss()">Annuler</button>
     </ion-buttons>
 
     <ion-title>
@@ -30,7 +30,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>Appliquer</button>
+      <button ion-button (tap)="applyFilters()" strong>Appliquer</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -39,13 +39,13 @@
 
   <ion-toolbar>
   <ion-buttons left>
-    <button ion-button icon-right end (click)="uncheckAll()">
+    <button ion-button icon-right end (tap)="uncheckAll()">
       Tout décocher
       <ion-icon name="done-all"></ion-icon>
     </button>
   </ion-buttons>
   <ion-buttons end>
-    <button ion-button icon-right (click)="resetFilters()">
+    <button ion-button icon-right (tap)="resetFilters()">
       Restaurer le filtre
       <ion-icon name="refresh-circle"></ion-icon>
     </button>
