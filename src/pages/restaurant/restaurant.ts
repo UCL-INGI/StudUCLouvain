@@ -21,6 +21,7 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-restaurant',
@@ -28,7 +29,8 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private translateService: TranslateService) {
     this.title = this.navParams.get('title');
   }
 

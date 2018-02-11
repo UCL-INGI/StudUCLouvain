@@ -57,41 +57,41 @@ export class HomePage {
   fr:string = "";
 
 
-  libraryPage = { title: 'Bibliothèques', component: LibrariesPage,
+  libraryPage = { title: 'MENU.LIBRARY', component: LibrariesPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  newsPage = { title: 'Actualités', component: NewsPage,
+  newsPage = { title: 'MENU.NEWS', component: NewsPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  eventPage = { title: 'Evenements', component: EventsPage,
+  eventPage = { title: 'MENU.EVENTS', component: EventsPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  sportPage = { title: 'Sports', component: SportsPage,
+  sportPage = { title: 'MENU.SPORTS', component: SportsPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  studiesPage = { title: 'Etudes', component: StudiesPage,
+  studiesPage = { title: 'MENU.STUDIES', component: StudiesPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  helpDeskPage = { title: 'Service d\'aide', component: HelpDeskPage,
+  helpDeskPage = { title: 'MENU.HELP', component: HelpDeskPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  mapPage = { title: 'Carte', component: MapPage,
+  mapPage = { title: 'MENU.MAP', component: MapPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  restoPage = { title: 'Restaurants', component: RestaurantPage,
+  restoPage = { title: 'MENU.RESTAURANT', component: RestaurantPage,
     iosSchemaName: 'com.apptree.resto4u',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',
     httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
 
-  mobilityPage = { title: 'Mobilité', component: MobilityPage,
+  mobilityPage = { title: 'MENU.MOBILITY', component: MobilityPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 

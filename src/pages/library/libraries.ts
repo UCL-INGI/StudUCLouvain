@@ -25,6 +25,7 @@ import { LibrariesService } from '../../providers/wso2-services/libraries-servic
 import { LibraryDetailsPage } from './library-details/library-details';
 import { LibraryItem } from '../../app/entity/libraryItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { TranslateService } from '@ngx-translate/core';
 
 /*
   Generated class for the Library page.
@@ -46,7 +47,8 @@ export class LibrariesPage {
     public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
-    public connService : ConnectivityService
+    public connService : ConnectivityService,
+              private translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
   }

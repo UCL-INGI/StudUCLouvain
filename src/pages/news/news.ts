@@ -26,6 +26,7 @@ import { NewsService } from '../../providers/rss-services/news-service';
 import { NewsItem } from '../../app/entity/newsItem';
 import { NewsDetailsPage } from './news-details/news-details';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-news',
@@ -51,7 +52,8 @@ export class NewsPage {
     public app:App,
     public newsService : NewsService,
     public connService : ConnectivityService,
-    public alertCtrl : AlertController
+    public alertCtrl : AlertController,
+              private translateService: TranslateService
   ) {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');

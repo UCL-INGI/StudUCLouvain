@@ -28,6 +28,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { CarpoolingPage } from './carpooling/carpooling';
 import { BusPage } from './bus/bus';
 import { TrainPage } from './train/train';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-mobility',
@@ -42,7 +43,8 @@ export class MobilityPage {
               public navParams: NavParams, 
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
-              private device: Device) {
+              private device: Device,
+              private translateService: TranslateService) {
     this.title = this.navParams.get('title');
     this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage,
                             iosSchemaName: 'net.commuty.mobile',

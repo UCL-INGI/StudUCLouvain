@@ -24,6 +24,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController, MenuController, ModalController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
 
 import { StudiesService} from '../../providers/studies-services/studies-service';
 import { Course } from '../../app/entity/course';
@@ -58,7 +59,8 @@ export class StudiesPage {
     public menu: MenuController,
     public platform: Platform,
     private iab: InAppBrowser,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+              private translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
     this.initializeSession();

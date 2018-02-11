@@ -26,6 +26,7 @@ import { MapLocationSelectorPage }
   from './map-location-selector/map-location-selector';
 import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
 import { MapLocation } from '../../app/entity/mapLocation';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-map',
@@ -51,7 +52,8 @@ export class MapPage {
     public mapService: MapService,
     public platform: Platform,
     public navParams: NavParams,
-    public poilocations: POIService) {
+    public poilocations: POIService,
+              private translateService: TranslateService) {
       this.title = this.navParams.get('title');
   }
 

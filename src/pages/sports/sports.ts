@@ -33,6 +33,7 @@ import { SportsService } from '../../providers/rss-services/sports-service';
 import { SportItem } from '../../app/entity/sportItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import 'rxjs/add/operator/debounceTime';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-sports',
@@ -78,7 +79,8 @@ export class SportsPage {
     private calendar: Calendar,
     private appAvailability: AppAvailability,
     private iab: InAppBrowser,
-    public connService : ConnectivityService
+    public connService : ConnectivityService,
+              private translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();

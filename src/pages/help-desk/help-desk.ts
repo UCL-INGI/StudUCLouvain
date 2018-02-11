@@ -22,6 +22,7 @@
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class HelpDeskPage {
   title: any;
   shownGroup = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser,
+              private translateService: TranslateService) {
     this.title = this.navParams.get('title');
   }
 

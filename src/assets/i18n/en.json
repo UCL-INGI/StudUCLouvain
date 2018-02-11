@@ -19,10 +19,6 @@
 
     "HOME": {
         "TITLE" : "Home",
-        "BUTTONS" : {
-            "btn_eng" : "English",
-            "btn_cro" : "Croatian"
-        },
         "CAMPUS" : "CAMPUS",
         "NEWS" : "News",
         "EVENTS" : "Events",

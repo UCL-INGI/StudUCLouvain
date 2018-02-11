@@ -25,6 +25,7 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
 import { EmployeeDetailsPage } from './employee-details/employee-details';
 import { EmployeeItem } from '../../app/entity/employeeItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { TranslateService } from '@ngx-translate/core';
 
 /*
   Generated class for the Repertoire page.
@@ -48,7 +49,8 @@ export class RepertoirePage {
     public navParams: NavParams,
     public platform: Platform,
     public repService : RepertoireService,
-    public connService : ConnectivityService
+    public connService : ConnectivityService,
+              private translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
   }
