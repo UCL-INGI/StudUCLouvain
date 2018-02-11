@@ -44,48 +44,10 @@
 
 
 <ion-content class="feed-list">
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles">
-    </ion-refresher-content>
-  </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <!--
-  <ion-list #eventsList [hidden]="shownEvents === 0" [virtualScroll]="displayedEvents" approxItemHeight="100px" style="height:100%">
-    <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
-
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img [src]="item.iconCategory">
-        </ion-thumbnail>
-        <button ion-item (tap)="goToEventDetail(item)" no-lines>
-          <h3>{{item.title}}</h3>
-          <p [innerHtml]="item.trimmedDescription"></p>
-          <p [innerHtml]="item.location"></p>
-          <p>{{item.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{item.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-        </button>
-      </ion-item>
-
-      <ion-item-options>
-        <button ion-button outline (tap)="createEvent(slidingItem, item)" class="large-icon">
-          <ion-icon name='calendar'></ion-icon>
-        </button>
-
-        <button ion-button outline (tap)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
-          <ion-icon name="star-outline"></ion-icon>
-        </button>
-
-        <button ion-button (tap)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
-          <ion-icon name='close'></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>-->
 
   <ion-list #eventsList [virtualScroll]="displayedEvents" [approxItemHeight]=" '130px' " [hidden]="shownEvents === 0">
     <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
@@ -118,7 +80,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list-header *ngIf="(shownEvents === 0) && !searching">
+  <ion-list-header *ngIf="(shownEvents === 0)">
     Pas d'évènement trouvé
   </ion-list-header>
 </ion-content>

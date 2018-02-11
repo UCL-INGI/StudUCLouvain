@@ -191,8 +191,6 @@ export class SportsPage {
 
 
   public updateDisplayedSports() {
-
-
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
 

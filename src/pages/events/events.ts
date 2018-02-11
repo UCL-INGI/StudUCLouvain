@@ -99,11 +99,6 @@ export class EventsPage {
     this.nav.push(EventsDetailsPage, { 'event': event });
   }
 
-  public doRefresh(refresher) {
-    this.loadEvents();
-    refresher.complete();
-  }
-
   public loadEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
