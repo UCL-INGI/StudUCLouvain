@@ -26,7 +26,7 @@
     </button>
     <ion-title align="center">{{title | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="presentFilter()">
+      <button ion-button (tap)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
@@ -59,7 +59,7 @@
   </div>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0">
-    <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)">
+    <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)">
       {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
     </ion-item-divider>
     <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
@@ -71,13 +71,13 @@
           <p style="color:red;" *ngIf="sport.remarque.length > 2">Remarque : {{sport.remarque}}</p>
         </ion-item>
         <ion-item-options>
-          <button ion-button outline (click)="createSport(slidingItem, item)" class="large-icon">
+          <button ion-button outline (tap)="createSport(slidingItem, item)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
           </button>
-          <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
+          <button ion-button outline (tap)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
           </button>
-          <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <button ion-button (tap)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
             <ion-icon name='close'></ion-icon>
           </button>
         </ion-item-options>

@@ -44,9 +44,9 @@
 </ion-header>
 
 <ion-menu id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
-  <button ion-item (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </button>
-  <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </button>
-  <button ion-item (click)="openModalProject()"> Changer projet ADE </button>
+  <button ion-item (tap)="launch('http://www.uclouvain.be/')"> uclouvain.be </button>
+  <button ion-item (tap)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </button>
+  <button ion-item (tap)="openModalProject()"> Changer projet ADE </button>
 </ion-menu>
 <ion-content padding #studiesContent>
 <ion-content padding *ngIf="segment==='cours'">
@@ -55,12 +55,12 @@
 
   <ion-list >
      <ion-item-sliding *ngFor="let course of listCourses">
-       <ion-item (click)="openCoursePage(course)" >
+       <ion-item (tap)="openCoursePage(course)" >
         <h2>{{course.name}} {{course.acronym}}</h2>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button (click)="removeCourse(course)" >
+        <button ion-button (tap)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
           Supprimer
         </button>
@@ -69,7 +69,7 @@
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab (click)="showPrompt()">
+    <button ion-fab (tap)="showPrompt()">
       <ion-icon name="add"> </ion-icon>
     </button>
   </ion-fab>

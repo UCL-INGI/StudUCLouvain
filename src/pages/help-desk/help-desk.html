@@ -30,7 +30,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item-divider  (click)="toggleGroup('service_desk')">
+  <ion-item-divider  (tap)="toggleGroup('service_desk')">
     Service Desk
   </ion-item-divider>
 
@@ -47,7 +47,7 @@
     </div>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('smartcard')">
+  <ion-item-divider  (tap)="toggleGroup('smartcard')">
     SmartCard
   </ion-item-divider>
 
@@ -62,18 +62,18 @@
         <img alt="smartcard-verso" height="129" src="../../assets/img/smartcard/smartcard-2.jpg" width="209" /></p>
       <p>Le délai "normal" pour recevoir la carte est de 15 <em>ouvrables</em> si vous avez renvoyé une photo correspondant aux spécifications requises avec le formulaire.
         <br />Si la carte n'est pas en votre possession après 15 jours ouvrables :
-        <br />- Si vous êtes membre du personnel, veuillez prendre contact avec le <button ion-button (click)="openURL('https://uclouvain.be/fr/repertoires/entites/sper')">Service du personnel</button>.
-        <br />- Si vous êtes étudiant, veuillez prendre contact avec le <button ion-button (click)="openURL('http://www.uclouvain.be/inscription')">Service des Inscriptions</button>.
+        <br />- Si vous êtes membre du personnel, veuillez prendre contact avec le <button ion-button (tap)="openURL('https://uclouvain.be/fr/repertoires/entites/sper')">Service du personnel</button>.
+        <br />- Si vous êtes étudiant, veuillez prendre contact avec le <button ion-button (tap)="openURL('http://www.uclouvain.be/inscription')">Service des Inscriptions</button>.
         <br />- Si vous êtes lecteur des bibliothèques, veuillez prendre contact avec la bibliothèque dans laquelle vous vous êtes inscrits.
       </p>
       <p>La première carte de l'UCL est <strong>automatiquement activée</strong>. Si vous aviez déjà une carte magnétique en cours de validité,
          la nouvelle carte sera automatiquement activée 7 jours après la date d'envoi. L'ancienne carte sera désactivée pour vous permettre d'utiliser la nouvelle.
-        Si vous souhaitez <strong>activer cette carte plus tôt </strong>, suivez les instructions sur la page : <button ion-button (click)="openURL('https://carte.uclouvain.be/carte/activation')">Activation d'une carte à puce</button>.
+        Si vous souhaitez <strong>activer cette carte plus tôt </strong>, suivez les instructions sur la page : <button ion-button (tap)="openURL('https://carte.uclouvain.be/carte/activation')">Activation d'une carte à puce</button>.
       </p>
     </div>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('wifi')">
+  <ion-item-divider  (tap)="toggleGroup('wifi')">
     Wifi
   </ion-item-divider>
 
@@ -86,7 +86,7 @@
       - visiteurs.UCLouvain ► pour les autres visiteurs ou congressistes UCL<br>
       - UCLouvain-prive ► pour un accès limité aux pages web UCL</p>
       <h4 style="text-align: justify;">Eduroam</h4>
-      <p style="text-align: justify;">L'UCL est partenaire du projet eduroam. Les visiteurs de toutes les universités partenaires bénéficient d'un accès au WiFi avec les logins et mot de passe de leur université d'origine. Plus d’infos sur <button ion-button (click)="openURL('https://uclouvain.be/fr/decouvrir/wifi-eduroam.html')">Eduroam à l'UCL</button></p>
+      <p style="text-align: justify;">L'UCL est partenaire du projet eduroam. Les visiteurs de toutes les universités partenaires bénéficient d'un accès au WiFi avec les logins et mot de passe de leur université d'origine. Plus d’infos sur <button ion-button (tap)="openURL('https://uclouvain.be/fr/decouvrir/wifi-eduroam.html')">Eduroam à l'UCL</button></p>
       <h4 style="text-align: justify;">Se connecter</h4>
       <p style="text-align: justify;">Il est indispensable de connaître son identifiant global et le mot de passe associé :<br>
       - pour les étudiants UCL : <em>réseau 'eduroam'</em> → login : votre_identifiant_global@wifi.uclouvain.be<br>
@@ -95,18 +95,18 @@
       - pour les congressistes : <em>réseau 'visiteurs.UCLouvain' </em>→ login : login temporaire reçu<br>
       - pour un accès limité aux pages web UCL : <em>réseau 'UCLouvain-prive'</em> → pas de login</p>
       <p style="text-align: justify;">Des guides de configuration rapides (pdf) reprennent les caractéristiques des configurations du WiFi pour les systèmes Windows et Mac.<br>
-      - SSID : visiteurs.UCLouvain (pour visiteurs, congressistes et conférenciers)<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/eaabb465-8762-4e61-81fb-bf9ff97a3117/guide_rapide_config_WiFi_visiteurs.pdf?guest=true')">Guide</button><br>
-      - SSID : eduroam (pour étudiants, membres du personnel et membres des institutions participant à Eduroam) <button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/e032a935-4cf5-41cd-91a8-228a8e611f89/guide_rapide_config_WiFi_etudiants.pdf?guest=true')">Guide</button><br>
+      - SSID : visiteurs.UCLouvain (pour visiteurs, congressistes et conférenciers)<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/eaabb465-8762-4e61-81fb-bf9ff97a3117/guide_rapide_config_WiFi_visiteurs.pdf?guest=true')">Guide</button><br>
+      - SSID : eduroam (pour étudiants, membres du personnel et membres des institutions participant à Eduroam) <button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/e032a935-4cf5-41cd-91a8-228a8e611f89/guide_rapide_config_WiFi_etudiants.pdf?guest=true')">Guide</button><br>
 
       Des guides plus complets d'aide à la configuration du WiFi sont disponibles ici pour les systèmes suivants :<br>
-      - Windows Vista (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/2993993e-34b3-4273-bb7d-0cacd530c057/WiFi-WindowsVista-archives.pdf?guest=true')">pdf</button>)<br>
-      - Windows 7 : Windows 7 (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/4a246eb1-fdc8-44d4-bd2b-e0fc6927676a/UCL-Windows7.pdf?guest=true')">pdf</button>) et une alternative (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/92b608b8-552d-421c-a24b-86928de16770/UCL-Windows7(alternative).pdf?guest=true')">pdf</button>)<br>
-      - Windows 8 (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/025d5fd4-a5da-4e55-8a2b-bf169fa055c3/UCL-Windows8.pdf?guest=true')">pdf</button>)<br>
-      - Installer un certificat numérique (Windows) (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/733b2daa-1c9e-4ef2-b53d-e2ebf902e3dc/UCL-Windows8.pdf?guest=true')">pdf</button>)<br>
-      - Mac OS X : Tiger &amp; Panther (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/176331e0-74e6-4f08-83ac-70c540f14569/UCL-TigerPanther.pdf?guest=true')">pdf</button>), Léopard (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/60dabfc7-52a0-44ab-8649-66ea48909fef/UCL-TigerPanther.pdf?guest=true')">pdf</button>) et une page en cas de difficultés d'approbation du certificat (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/5318f676-6f33-4358-9c80-3381bd6f4699/UCL-TigerPanther.pdf?guest=true')">pdf</button>)<br>
-      - Linux : wpa_supplicant (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/bac993da-6d7f-45d4-9e47-4558044e9313/UCL-Linux_wpa_supplicant.pdf?guest=true')">pdf</button>) et Ubuntu (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/824d873b-bd79-49a0-9919-1373fd831c23/UCL-Ubuntu.pdf?guest=true')">pdf</button>)<br>
-      - iPhone/iPad (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/efa8fa47-8ccd-4043-96bd-a8bb3903df32/UCL-iPodTouch.pdf?guest=true')">pdf</button>)<br>
-      - Androîd (<button ion-button (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/f855b037-b445-4f38-b344-a61dc0add440/UCL-Android.pdf?guest=true')">pdf</button>)</p>
+      - Windows Vista (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/2993993e-34b3-4273-bb7d-0cacd530c057/WiFi-WindowsVista-archives.pdf?guest=true')">pdf</button>)<br>
+      - Windows 7 : Windows 7 (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/4a246eb1-fdc8-44d4-bd2b-e0fc6927676a/UCL-Windows7.pdf?guest=true')">pdf</button>) et une alternative (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/92b608b8-552d-421c-a24b-86928de16770/UCL-Windows7(alternative).pdf?guest=true')">pdf</button>)<br>
+      - Windows 8 (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/025d5fd4-a5da-4e55-8a2b-bf169fa055c3/UCL-Windows8.pdf?guest=true')">pdf</button>)<br>
+      - Installer un certificat numérique (Windows) (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/733b2daa-1c9e-4ef2-b53d-e2ebf902e3dc/UCL-Windows8.pdf?guest=true')">pdf</button>)<br>
+      - Mac OS X : Tiger &amp; Panther (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/176331e0-74e6-4f08-83ac-70c540f14569/UCL-TigerPanther.pdf?guest=true')">pdf</button>), Léopard (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/60dabfc7-52a0-44ab-8649-66ea48909fef/UCL-TigerPanther.pdf?guest=true')">pdf</button>) et une page en cas de difficultés d'approbation du certificat (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/5318f676-6f33-4358-9c80-3381bd6f4699/UCL-TigerPanther.pdf?guest=true')">pdf</button>)<br>
+      - Linux : wpa_supplicant (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/bac993da-6d7f-45d4-9e47-4558044e9313/UCL-Linux_wpa_supplicant.pdf?guest=true')">pdf</button>) et Ubuntu (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/824d873b-bd79-49a0-9919-1373fd831c23/UCL-Ubuntu.pdf?guest=true')">pdf</button>)<br>
+      - iPhone/iPad (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/efa8fa47-8ccd-4043-96bd-a8bb3903df32/UCL-iPodTouch.pdf?guest=true')">pdf</button>)<br>
+      - Androîd (<button ion-button (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/f855b037-b445-4f38-b344-a61dc0add440/UCL-Android.pdf?guest=true')">pdf</button>)</p>
       <h4 style="text-align: justify;">Demande temporaire pour visiteurs et congressistes</h4>
       <p style="text-align: justify;">Un accès temporaire au WiFi pour un visiteur ou pour des congressistes, etc. peut être demandé par un membre du personnel UCL. Consulter les pages du WiFi dans l'intranet - <em>MyUCL </em>après identification.</p>
       <h4 style="text-align: justify;">Couverture du service</h4>
@@ -116,7 +116,7 @@
       Sur le&nbsp;<strong>campus UCL de Mons</strong>, le service WiFi couvre l’ensemble des locaux UCL en ce compris les logements étudiant UCL.<br>
       Sur le&nbsp;<strong>campus UCL de Charleroi</strong>, le service WiFi couvre l’ensemble des locaux de cours situés à la rue Trieu Kaisin.</p>
       <h4 style="text-align: justify;">Qui contacter en cas de problème/question ?</h4>
-      <p style="text-align: justify;"><button ion-button (click)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')">Le Service Desk (8282) </button></p>
+      <p style="text-align: justify;"><button ion-button (tap)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')">Le Service Desk (8282) </button></p>
     </div>
   </ion-item>
   <!--
