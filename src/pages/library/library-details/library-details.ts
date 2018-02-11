@@ -20,7 +20,7 @@
 */
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
 import { LibraryItem } from '../../../app/entity/libraryItem';
 import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
@@ -31,7 +31,7 @@ import { ConnectivityService } from '../../../providers/utils-services/connectiv
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-library-details',
   templateUrl: 'library-details.html',

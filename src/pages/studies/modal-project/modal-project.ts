@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController }
+import { NavController, NavParams, ViewController }
         from 'ionic-angular';
 import { StudiesService}
         from '../../../providers/studies-services/studies-service';
@@ -33,7 +33,7 @@ import { Storage } from '@ionic/storage';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html',

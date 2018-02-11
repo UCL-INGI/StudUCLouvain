@@ -27,7 +27,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
-import { SportsDetailsPage } from './sports-details/sports-details';
 import { SportsFilterPage } from './sports-filter/sports-filter';
 import { UserService } from '../../providers/utils-services/user-service';
 import { SportsService } from '../../providers/rss-services/sports-service';
@@ -100,9 +99,9 @@ export class SportsPage {
     this.searching = true;
   }
 
-  public goToSportDetail(sport: SportItem) {
+ /* public goToSportDetail(sport: SportItem) {
     this.nav.push(SportsDetailsPage, { 'sport': sport });
-  }
+  }*/
 
   public doRefresh(refresher) {
     this.loadSports();

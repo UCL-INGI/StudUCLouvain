@@ -49,6 +49,9 @@ import { EventsPage } from '../pages/events/events';
 import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
 import { EventsDetailsPage } from '../pages/events/events-details/events-details';
 import { MobilityPage } from '../pages/mobility/mobility';
+import { CarpoolingPage } from '../pages/mobility/carpooling/carpooling';
+import { BusPage } from '../pages/mobility/bus/bus';
+import { TrainPage } from '../pages/mobility/train/train';
 import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
@@ -97,6 +100,9 @@ export function HttpLoaderFactory(http: Http) {
     EventsFilterPage,
     MapLocationSelectorPage,
     MobilityPage,
+    TrainPage,
+    CarpoolingPage,
+    BusPage,
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
