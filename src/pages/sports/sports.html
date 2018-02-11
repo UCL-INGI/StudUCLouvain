@@ -59,40 +59,31 @@
   </div>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0">
-    
-
-        <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)">
-          {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
-        </ion-item-divider>
-
-        <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
-          <ion-item-sliding #slidingItem [hidden]="sport.hidden">
-
-            <ion-item>
-              <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>
-              <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
-              <p>{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
-              <p style="color:red;" *ngIf="sport.remarque.length > 2">Remarque : {{sport.remarque}}</p>
-            </ion-item>
-
-            <ion-item-options>
-              <button ion-button outline (click)="createSport(slidingItem, item)" class="large-icon">
-                <ion-icon name='calendar'></ion-icon>
-              </button>
-
-              <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
-                <ion-icon name="star-outline"></ion-icon>
-              </button>
-
-              <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
-                <ion-icon name='close'></ion-icon>
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
-
-        </ion-list>
-    
+    <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)">
+      {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
+    </ion-item-divider>
+    <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
+      <ion-item-sliding #slidingItem [hidden]="sport.hidden">
+        <ion-item>
+          <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>
+          <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
+          <p>{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
+          <p style="color:red;" *ngIf="sport.remarque.length > 2">Remarque : {{sport.remarque}}</p>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button outline (click)="createSport(slidingItem, item)" class="large-icon">
+            <ion-icon name='calendar'></ion-icon>
+          </button>
+          <button ion-button outline (click)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
+            <ion-icon name="star-outline"></ion-icon>
+          </button>
+          <button ion-button (click)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+            <ion-icon name='close'></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
+  </ion-list>
   <ion-list-header *ngIf="shownSports === 0 && !searching">
     Pas de sport trouvé
   </ion-list-header>
