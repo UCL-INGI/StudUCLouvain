@@ -33,7 +33,6 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding *ngIf="(userS.hasCampus() === false)">
   <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
   <ion-list radio-group [(ngModel)]="where">
@@ -57,7 +56,7 @@
   </ion-row>
 </ion-content>
 
-<ion-content text-center padding *ngIf="(userS.hasCampus() === true)">
+<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)">
   <ion-list>
     <ion-item>
       <p align="center" style="font-size:22px;"><b>{{'HOME.CAMPUS' | translate}}</b></p>
@@ -85,19 +84,11 @@
         <ion-col align-self-end text-center>
           <img alt="aide" src="assets/img/aide.png" align="middle" height="auto" (tap)="changePage(helpDeskPage)"/><p align="center"><b>{{'HOME.HELP' | translate}}</b></p>
         </ion-col>
-        <!--
-        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (tap)="changePage(libraryPage)/> <p align="center"><b>Bibliothèques</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (tap)="changePage(studiesPage)/><p align="center"><b>Etudes</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" (tap)="changePage(helpDeskPage)/><p align="center"><b>HelpDesk</b></p></ion-col>
-        -->
       </ion-row>
     </ion-item>
     <ion-item>
       <p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p>
       <ion-row>
-<!--
-        <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle"  /><p align="center"><b>Carte</b></p></ion-col>
-  -->
         <ion-col align-self-end text-center>
           <img alt="carte" src="assets/img/cartes.png" align="middle" height="auto" (tap)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
         </ion-col>
@@ -107,11 +98,6 @@
         <ion-col align-self-end text-center>
           <img alt="voiture" src="assets/img/mobility.png" align="middle" height="auto" (tap)="changePage(mobilityPage)"/><p align="center"><b>{{'HOME.MOBILITY' | translate}}</b></p>
         </ion-col>
-
-        <!--
-        <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" (tap)="changePage(restoPage)"/><p align="center"><b>Restaurants U.</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" (tap)="changePage(carPage)"/><p align="center"><b>Covoiturage</b></p></ion-col>
-        -->
       </ion-row>
     </ion-item>
   </ion-list>
