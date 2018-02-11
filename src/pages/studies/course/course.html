@@ -39,7 +39,7 @@
 <ion-content padding #courseContent>
   <ion-list>
      <ion-item-sliding *ngFor="let activity of course.activities" #slidingItem >
-       <ion-item *ngIf="activity.type === segment">
+       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD')">
         <h2 text-center> Activité : {{activity.type}} </h2>
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'H:mm' }} </p>
