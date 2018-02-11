@@ -45,9 +45,6 @@
 
 <ion-content class="feed-list">
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
-  <div *ngIf="searching" class="spinner-container">
-    <ion-spinner></ion-spinner>
-  </div>
 
   <ion-list #eventsList [virtualScroll]="displayedEvents" [approxItemHeight]=" '130px' " [hidden]="shownEvents === 0">
     <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">

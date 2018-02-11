@@ -49,9 +49,6 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
-  <div *ngIf="searching" class="spinner-container">
-    <ion-spinner></ion-spinner>
-  </div>
 
   <ion-list #newsList [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%" [hidden]="shownNews === 0">
     <ion-item *virtualItem = "let item">
@@ -62,7 +59,7 @@
       </button>
     </ion-item>
   </ion-list>
-  <ion-list-header *ngIf="shownNews === 0 && !searching">
+  <ion-list-header *ngIf="shownNews === 0">
     Pas d'actualité à afficher...
   </ion-list-header>
 </ion-content>
