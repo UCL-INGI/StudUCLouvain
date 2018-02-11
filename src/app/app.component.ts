@@ -65,8 +65,6 @@ export class MyApp {
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
 
-  text = {home:"", news:"", events:"",sports:"",study:"",library:"", help:"", repert:"",guindaille:"",map:"",rest:"",mobi:"",credit:""};
-
   constructor(public platform: Platform,
     public menu: MenuController,
     //public market: Market,
