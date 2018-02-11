@@ -12,11 +12,12 @@
 		"MAP" : "Carte",
 		"RESTAURANT" : "Restaurants U.",
 		"MOBILITY" : "Mobilité",
+		"PARAM" : "Paramètres",
 		"CREDITS" : "Crédits"
 	},
 
 	"HOME" : {
-	    "TITLE" : "Accueil",  
+	    "TITLE" : "Accueil",
 	    "CAMPUS" : "CAMPUS",
 	    "NEWS" : "News",
 	    "EVENTS" : "Evénements",

@@ -37,6 +37,7 @@ import { NewsPage } from '../pages/news/news';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { MapPage } from '../pages/map/map';
+import { ParamPage } from '../pages/param/param';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { CreditPage } from '../pages/credit/credit';
 import { SportsPage } from '../pages/sports/sports';
@@ -126,6 +127,10 @@ export class MyApp {
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
       { title: 'MENU.MOBILITY', component: MobilityPage, icon : 'car',
+        iosSchemaName: null,
+        androidPackageName: null,
+        appUrl: null, httpUrl: null },
+      { title: 'MENU.PARAM', component: ParamPage, icon : 'construct',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },

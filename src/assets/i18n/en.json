@@ -13,11 +13,12 @@
         "MAP" : "Map",
         "RESTAURANT" : "Restaurants U.",
         "MOBILITY" : "Mobility",
+        "PARAM" : "Settings",
         "CREDITS" : "Credits"
     },
 
     "HOME": {
-        "TITLE" : "Home",  
+        "TITLE" : "Home",
         "BUTTONS" : {
             "btn_eng" : "English",
             "btn_cro" : "Croatian"

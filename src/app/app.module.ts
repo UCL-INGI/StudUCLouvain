@@ -71,6 +71,7 @@ import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
 import { HomePage } from '../pages/home/homeC';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
+import { ParamPage } from '../pages/param/param';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
@@ -100,9 +101,13 @@ export function HttpLoaderFactory(http: Http) {
     EventsFilterPage,
     MapLocationSelectorPage,
     MobilityPage,
+<<<<<<< HEAD
     TrainPage,
     CarpoolingPage,
     BusPage,
+=======
+    ParamPage,
+>>>>>>> b74e231c01e6ac4b921936316e5d8975a01e786d
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
@@ -152,6 +157,7 @@ export function HttpLoaderFactory(http: Http) {
     RestaurantPage,
     StudiesPage,
     HelpDeskPage,
+    ParamPage,
     CreditPage,
     GuindaillePage,
     LibraryDetailsPage,
