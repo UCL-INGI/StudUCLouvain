@@ -101,13 +101,10 @@ export function HttpLoaderFactory(http: Http) {
     EventsFilterPage,
     MapLocationSelectorPage,
     MobilityPage,
-<<<<<<< HEAD
     TrainPage,
     CarpoolingPage,
     BusPage,
-=======
     ParamPage,
->>>>>>> b74e231c01e6ac4b921936316e5d8975a01e786d
     CoursePage,
     EventsDetailsPage,
     LibrariesPage,
