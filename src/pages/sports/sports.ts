@@ -105,11 +105,6 @@ export class SportsPage {
     this.nav.push(SportsDetailsPage, { 'sport': sport });
   }*/
 
-  public doRefresh(refresher) {
-    this.loadSports();
-    refresher.complete();
-  }
-
   public loadSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
@@ -206,7 +201,7 @@ export class SportsPage {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
-      
+
     } else if (this.segment === 'favorites') {
       let favSports = [];
 

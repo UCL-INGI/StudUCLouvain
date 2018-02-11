@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, Nav, Platform, AlertController } from 'ionic-angular';
+import { MenuController, Nav, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -75,7 +75,8 @@ export class MyApp {
     private alertCtrl : AlertController,
     private user: UserService,
     private statusBar: StatusBar,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    public loadingCtrl: LoadingController
   ) {
     this.user.getCampus();
     console.log(this.user.campus);
@@ -193,7 +194,17 @@ export class MyApp {
   }
   else this.openRootPage(this.homePage);
 }
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
 
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
   openRootPage(page) {
 
     // close the menu when clicking a link from the menu
@@ -203,7 +214,9 @@ export class MyApp {
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }
     this.nav.setRoot(page.component, {title: page.title});
-
+    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.SPORTS' || page.title=='MENU.LIBRARY'){
+      this.presentLoadingDefault();
+    }
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {

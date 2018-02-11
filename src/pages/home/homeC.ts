@@ -20,7 +20,7 @@
 */
 
 import { Component} from '@angular/core';
-import { NavParams, NavController, App, AlertController } from 'ionic-angular';
+import { NavParams, NavController, App, AlertController, LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -48,7 +48,7 @@ export class HomePage {
   shownGroup = null;
   where = "";
   myApp : MyApp;
-  
+
   setting:string ="";
   message:string = "";
   save:string = "";
@@ -103,7 +103,8 @@ export class HomePage {
               private appAvailability: AppAvailability,
               private device: Device,
               private alertCtrl : AlertController,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              public loadingCtrl: LoadingController
             )
   {
       if(this.navParams.get('title') !== undefined) {
@@ -117,12 +118,27 @@ export class HomePage {
     this.userS.addCampus(this.where);
   }
 
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
+
   changePage(page) {
     //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
     if(page.iosSchemaName != null && page.androidPackageName != null){
       this.launchExternalApp(page);
     }
     this.nav.push(page.component, {title: page.title});
+    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.SPORTS' || page.title=='MENU.LIBRARY'){
+      this.presentLoadingDefault();
+    }
     //console.log(this.MyApp);
     //this.myApp.openRootPage(page);
   }
