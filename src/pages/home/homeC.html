@@ -26,7 +26,7 @@
     </button>
     <ion-title align="center">{{'HOME.TITLE' | translate}}</ion-title>
     <ion-buttons end *ngIf="(userS.hasCampus() === true)">
-      <button ion-button icon-only end (click)="settings()">
+      <button ion-button icon-only end (tap)="settings()">
         <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
@@ -52,7 +52,7 @@
   </ion-list>
   <ion-row center>
     <ion-col text-center>
-      <button ion-button round (click)="updateCampus()">{{'HOME.OK' | translate}}</button>
+      <button ion-button round (tap)="updateCampus()">{{'HOME.OK' | translate}}</button>
     </ion-col>
   </ion-row>
 </ion-content>
@@ -63,13 +63,13 @@
       <p align="center" style="font-size:22px;"><b>{{'HOME.CAMPUS' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-center text-center>
-          <img alt="logo" src="assets/img/news.png" align="middle" height="auto" (click)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
+          <img alt="logo" src="assets/img/news.png" align="middle" height="auto" (tap)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
         </ion-col>
         <ion-col align-self-end text-center >
-          <img alt="louvinfo" src="assets/img/calend.png" align="middle"  height="auto" (click)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
+          <img alt="louvinfo" src="assets/img/calend.png" align="middle"  height="auto" (tap)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="sport" src="assets/img/sportsM.jpg" align="middle"  height="auto" (click)="changePage(sportPage)"/><p align="center"><b>{{'HOME.SPORTS' | translate}}</b></p>
+          <img alt="sport" src="assets/img/sportsM.jpg" align="middle"  height="auto" (tap)="changePage(sportPage)"/><p align="center"><b>{{'HOME.SPORTS' | translate}}</b></p>
         </ion-col>
       </ion-row>
     </ion-item>
@@ -77,18 +77,18 @@
       <p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-end text-center>
-          <img alt="biblio" src="assets/img/books.png" align="middle" height="auto" (click)="changePage(libraryPage)"/> <p align="center"><b>{{'HOME.LIBRARY' | translate}}</b></p>
+          <img alt="biblio" src="assets/img/books.png" align="middle" height="auto" (tap)="changePage(libraryPage)"/> <p align="center"><b>{{'HOME.LIBRARY' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="etudes" src="assets/img/grad.png" align="middle" height="auto" (click)="changePage(studiesPage)"/><p align="center"><b>{{'HOME.ETUDES' | translate}}</b></p>
+          <img alt="etudes" src="assets/img/grad.png" align="middle" height="auto" (tap)="changePage(studiesPage)"/><p align="center"><b>{{'HOME.ETUDES' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="aide" src="assets/img/aide.png" align="middle" height="auto" (click)="changePage(helpDeskPage)"/><p align="center"><b>{{'HOME.HELP' | translate}}</b></p>
+          <img alt="aide" src="assets/img/aide.png" align="middle" height="auto" (tap)="changePage(helpDeskPage)"/><p align="center"><b>{{'HOME.HELP' | translate}}</b></p>
         </ion-col>
         <!--
-        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (click)="changePage(libraryPage)/> <p align="center"><b>Bibliothèques</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (click)="changePage(studiesPage)/><p align="center"><b>Etudes</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" (click)="changePage(helpDeskPage)/><p align="center"><b>HelpDesk</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="biblio" src="assets/img/biblio.jpg" align="middle" (tap)="changePage(libraryPage)/> <p align="center"><b>Bibliothèques</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="etudes" src="assets/img/etudes.jpg" align="middle"  (tap)="changePage(studiesPage)/><p align="center"><b>Etudes</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="aide" src="assets/img/aide.png" align="middle" (tap)="changePage(helpDeskPage)/><p align="center"><b>HelpDesk</b></p></ion-col>
         -->
       </ion-row>
     </ion-item>
@@ -99,18 +99,18 @@
         <ion-col align-self-end text-center><img alt="carte" src="assets/img/map.png" align="middle"  /><p align="center"><b>Carte</b></p></ion-col>
   -->
         <ion-col align-self-end text-center>
-          <img alt="carte" src="assets/img/cartes.png" align="middle" height="auto" (click)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
+          <img alt="carte" src="assets/img/cartes.png" align="middle" height="auto" (tap)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="resto" src="assets/img/resto4u.jpg" align="middle" height="auto" (click)="changePage(restoPage)"/><p align="center"><b>{{'HOME.REST' | translate}}</b></p>
+          <img alt="resto" src="assets/img/resto4u.jpg" align="middle" height="auto" (tap)="changePage(restoPage)"/><p align="center"><b>{{'HOME.REST' | translate}}</b></p>
         </ion-col>
         <ion-col align-self-end text-center>
-          <img alt="voiture" src="assets/img/mobility.png" align="middle" height="auto" (click)="changePage(mobilityPage)"/><p align="center"><b>{{'HOME.MOBILITY' | translate}}</b></p>
+          <img alt="voiture" src="assets/img/mobility.png" align="middle" height="auto" (tap)="changePage(mobilityPage)"/><p align="center"><b>{{'HOME.MOBILITY' | translate}}</b></p>
         </ion-col>
 
         <!--
-        <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" (click)="changePage(restoPage)"/><p align="center"><b>Restaurants U.</b></p></ion-col>
-        <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" (click)="changePage(carPage)"/><p align="center"><b>Covoiturage</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="resto" src="assets/img/resto4u.jpg" align="middle" (tap)="changePage(restoPage)"/><p align="center"><b>Restaurants U.</b></p></ion-col>
+        <ion-col align-self-end text-center><img alt="voiture" src="assets/img/commuty.png" align="middle" (tap)="changePage(carPage)"/><p align="center"><b>Covoiturage</b></p></ion-col>
         -->
       </ion-row>
     </ion-item>

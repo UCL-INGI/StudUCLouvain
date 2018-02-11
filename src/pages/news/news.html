@@ -41,28 +41,28 @@
 </ion-header>
 
 <ion-content class="feed-list">
-
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh">
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-list #newsList [hidden]="shownNews === 0" [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%">
+
+  <ion-list #newsList [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%" [hidden]="shownNews === 0">
     <ion-item *virtualItem = "let item">
-      <button ion-item (click)="goToNewsDetail(item)" no-lines>
+      <button ion-item (tap)="goToNewsDetail(item)" no-lines>
         <h3>{{item.title}}</h3>
         <p [innerHtml]="item.trimmedDescription"></p>
         <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>
       </button>
     </ion-item>
   </ion-list>
-
-  <ion-list-header *ngIf="(shownNews === 0) && !searching">
+  <ion-list-header *ngIf="shownNews === 0 && !searching">
     Pas d'actualité à afficher...
   </ion-list-header>
 </ion-content>

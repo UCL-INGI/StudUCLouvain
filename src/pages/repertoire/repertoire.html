@@ -5,7 +5,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -56,13 +56,13 @@
   </ion-list>
   <ion-row center>
     <ion-col text-center>
-      <button ion-button round (click)="update()">Rechercher</button>
+      <button ion-button round (tap)="update()">Rechercher</button>
     </ion-col>
   </ion-row>
 
   <ion-list *ngIf="searching">
     <ion-item *ngFor="let emp of employees">
-    <button ion-item no-lines (click)="goToEmpDetails(emp)">
+    <button ion-item no-lines (tap)="goToEmpDetails(emp)">
       {{emp.lastname}} {{emp.firstname}}
     </button>
     </ion-item>
