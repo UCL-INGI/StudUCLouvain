@@ -20,8 +20,12 @@
 */
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
+import { EmployeeDetailsPage } from './employee-details/employee-details';
+import { EmployeeItem } from '../../app/entity/employeeItem';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -40,10 +44,57 @@ import { TranslateService } from '@ngx-translate/core';
 export class HelpDeskPage {
   title: any;
   shownGroup = null;
+  employees: EmployeeItem[];
+  searching: boolean = false;
+  lastname:string = "";
+  firstname:string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController,
+              private iab: InAppBrowser,
+              public platform: Platform,
+              public repService : RepertoireService,
+              public connService : ConnectivityService,
               private translateService: TranslateService) {
     this.title = this.navParams.get('title');
+  }
+
+  ionViewDidLoad() {
+
+  }
+
+  update(){
+    let options: Array<string>= [];
+    let values: Array<string> = [];
+    if(this.lastname.length>0){
+      values.push(this.lastname);
+      options.push("lastname");
+    }
+    if(this.firstname.length>0){
+      values.push(this.firstname);
+      options.push("firstname");
+    }
+    this.searchEmployees(options, values);
+  }
+
+  searchEmployees(options:Array<string>, values:Array<string>){
+    if(this.connService.isOnline()) {
+      this.repService.searchEmployees(options, values).then(
+        res => {
+          let result:any = res;
+          this.employees = result.employees;
+          this.searching = true;
+        }
+      );
+    } else {
+      this.searching = false;
+      this.connService.presentConnectionAlert();
+    }
+  }
+
+  goToEmpDetails(emp: EmployeeItem) {
+    this.navCtrl.push(EmployeeDetailsPage, { 'emp': emp});
   }
 
   toggleGroup(group) {
