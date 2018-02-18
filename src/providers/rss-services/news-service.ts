@@ -71,7 +71,6 @@ export class NewsService {
             reject(1); //1 = data.query.results == null, retry rssService
           } else {
             this.nbCalls = 0;
-            console.log(data);
             this.extractNews(data['query']['results']['item']);
             resolve({news : this.news, shownNews: this.shownNews});
           }
