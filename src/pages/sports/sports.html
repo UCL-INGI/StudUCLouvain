@@ -60,13 +60,13 @@
               <p style="color:red;" *ngIf="sport.remarque.length > 2">Remarque : {{sport.remarque}}</p>
             </ion-item>
             <ion-item-options>
-              <button ion-button outline (tap)="createSport(slidingItem, item)" class="large-icon">
+              <button ion-button outline (tap)="createSport(slidingItem, sport)" class="large-icon">
                 <ion-icon name='calendar'></ion-icon>
               </button>
-              <button ion-button outline (tap)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
+              <button ion-button outline (tap)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all'" class="large-icon">
                 <ion-icon name="star-outline"></ion-icon>
               </button>
-              <button ion-button (tap)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+              <button ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
                 <ion-icon name='close'></ion-icon>
               </button>
             </ion-item-options>

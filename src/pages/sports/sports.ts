@@ -204,7 +204,7 @@ export class SportsPage {
   }
 
 
-    toggleGroup(group) {
+  toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
       } else {
@@ -231,7 +231,7 @@ export class SportsPage {
       let favSports = [];
 
       this.sports.filter((item) => {
-        if(item.favorite || this.user.hasFavoriteS(item)) {
+        if(item.favorite || this.user.hasFavoriteS(item.guid)) {
           if(item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
             favSports.push(item);
           }
@@ -302,15 +302,14 @@ export class SportsPage {
       });
   }
 
-  addFavorite(slidingItem: ItemSliding, itemData: any) {
-
-    if (this.user.hasFavoriteS(itemData)) {
+  addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
+    if (this.user.hasFavoriteS(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
       this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
     } else {
       // remember this session as a user favorite
-      this.user.addFavoriteS(itemData);
+      this.user.addFavoriteS(itemData.guid);
 
       let toast = this.toastCtrl.create({
         message: 'Ajouté aux favoris',
@@ -322,7 +321,7 @@ export class SportsPage {
 
   }
 
-  removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
+  removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
     let alert = this.alertCtrl.create({
       title: title,
       message: 'Souhaitez vous retirer ce sport des favoris ?',
@@ -339,7 +338,7 @@ export class SportsPage {
           text: 'Supprimer',
           handler: () => {
             // they want to remove this session from their favorites
-            this.user.removeFavoriteS(itemData);
+            this.user.removeFavoriteS(itemData.guid);
             this.updateDisplayedSports();
 
             // close the sliding item and hide the option buttons

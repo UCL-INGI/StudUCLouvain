@@ -213,7 +213,7 @@ export class EventsPage {
       this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
     } else {
       // remember this session as a user favorite
-      this.user.addFavorite(itemData);
+      this.user.addFavorite(itemData.guid);
 
       let toast = this.toastCtrl.create({
         message: 'Ajouté aux favoris',
@@ -242,7 +242,7 @@ export class EventsPage {
           text: 'Supprimer',
           handler: () => {
             // they want to remove this session from their favorites
-            this.user.removeFavorite(itemData);
+            this.user.removeFavorite(itemData.guid);
             this.updateDisplayedEvents();
 
             // close the sliding item and hide the option buttons

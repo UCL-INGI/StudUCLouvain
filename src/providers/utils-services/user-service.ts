@@ -31,13 +31,15 @@ import { SportItem } from '../../app/entity/sportItem';
 export class UserService {
 
   favorites: string[] = [];
-  sports: SportItem[] = [];
+  sports: string[] = [];
   campus: string = "";
 
   constructor(
     public eventss: Events,
     public storage: Storage
   ) {
+    //USE THIS LINE TO CLEAR THE STORAGE
+    //storage.clear();
     this.getFavorites();
     //this.storage.set('campus',"");
     this.getCampus();
@@ -77,7 +79,6 @@ export class UserService {
   };
 
   removeFavorite(itemGuid: string) {
-    
     let index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
@@ -112,17 +113,17 @@ export class UserService {
     this.storage.set('campus',this.campus);
   };
 
-  hasFavoriteS(sport: SportItem) {
-    return (this.sports.indexOf(sport) > -1);
+  hasFavoriteS(itemGuid : string) {
+    return (this.sports.indexOf(itemGuid) > -1);
   };
 
-  addFavoriteS(sport: SportItem) {
-    this.sports.push(sport);
+  addFavoriteS(itemGuid : string) {
+    this.sports.push(itemGuid);
     this.storage.set('listSports',this.sports);
   };
 
-  removeFavoriteS(sport : SportItem) {
-    let index = this.sports.indexOf(sport);
+  removeFavoriteS(itemGuid: string) {
+    let index = this.sports.indexOf(itemGuid);
     if (index > -1) {
       this.sports.splice(index, 1);
     }

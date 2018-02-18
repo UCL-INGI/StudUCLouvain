@@ -143,7 +143,7 @@ convertXmlToJson(xml) : any{
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
       let newSportItem = new SportItem(item.sport, item.sexe, item.lieu, item.salle, item.jour, startDate,
-                      hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.guid);
+                      hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.sport.concat(item.date.toString()));
 
 
       if(isSport) this.sports.push(newSportItem);
