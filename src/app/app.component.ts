@@ -214,7 +214,7 @@ export class MyApp {
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }
     this.nav.setRoot(page.component, {title: page.title});
-    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.SPORTS' || page.title=='MENU.LIBRARY'){
+    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
       this.presentLoadingDefault();
     }
   }

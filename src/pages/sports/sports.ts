@@ -21,7 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { App, AlertController, ItemSliding, List, NavController,
-  ModalController, NavParams, ToastController } from 'ionic-angular';
+  ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
@@ -65,6 +65,7 @@ export class SportsPage {
   dateLimit: Date = new Date();
   campus:string;
   shownGroup = null;
+  loading;
 
   constructor(
     public alertCtrl: AlertController,
@@ -80,7 +81,8 @@ export class SportsPage {
     private appAvailability: AppAvailability,
     private iab: InAppBrowser,
     public connService : ConnectivityService,
-              private translateService: TranslateService
+    private translateService: TranslateService,
+    public loadingCtrl: LoadingController
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -94,8 +96,31 @@ export class SportsPage {
       this.searching = false;
       this.updateDisplayedSports();
     });
-    console.log(this.user.campus);
+    this.presentLoading();
   }
+
+
+  presentLoading() {
+    if(!this.loading){
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      this.loading.present();
+    }
+    //this.dismiss = true;
+
+   /* setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);*/
+  }
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
+}
+
 
   public onSearchInput(){
     this.searching = true;
@@ -223,7 +248,9 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-
+    //while(this.dismiss == false){}
+    this.dismissLoading();
+   // this.dismiss=false;
 
   }
 

@@ -136,7 +136,7 @@ export class HomePage {
       this.launchExternalApp(page);
     }
     this.nav.push(page.component, {title: page.title});
-    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.SPORTS' || page.title=='MENU.LIBRARY'){
+    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
       this.presentLoadingDefault();
     }
     //console.log(this.MyApp);
