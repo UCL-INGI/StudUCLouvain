@@ -62,8 +62,7 @@ import { NewsPage } from '../pages/news/news';
 import { NewsDetailsPage } from '../pages/news/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
-import { RepertoirePage } from '../pages/repertoire/repertoire';
-import { EmployeeDetailsPage } from '../pages/repertoire/employee-details/employee-details';
+import { EmployeeDetailsPage } from '../pages/help-desk/employee-details/employee-details';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { CreditPage } from '../pages/credit/credit';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
@@ -121,7 +120,6 @@ export function HttpLoaderFactory(http: Http) {
     SportsFilterPage,
     HomePage,
     CreditPage,
-    RepertoirePage,
     EmployeeDetailsPage
   ],
   imports: [
@@ -161,7 +159,6 @@ export function HttpLoaderFactory(http: Http) {
     SportsPage,
     SportsFilterPage,
     HomePage,
-    RepertoirePage,
     EmployeeDetailsPage
   ],
   providers: [

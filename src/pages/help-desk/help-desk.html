@@ -119,6 +119,38 @@
       <p style="text-align: justify;"><button ion-button (tap)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')">Le Service Desk (8282) </button></p>
     </div>
   </ion-item>
+
+  <ion-item-divider  (tap)="toggleGroup('rep')">
+    Répertoire
+  </ion-item-divider>
+
+  <ion-item [hidden]="!isGroupShown('rep')">
+    <div item-content>
+        <ion-list no-lines>
+          <ion-item no-lines [(ngModel)]="lastname">
+            <ion-label color="primary">Nom</ion-label>
+            <ion-input type="text" placeholder="nom"></ion-input>
+          </ion-item>
+          <ion-item no-lines [(ngModel)]="firstname">
+            <ion-label color="primary">Prénom</ion-label>
+            <ion-input type="text" placeholder="prénom"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-row center>
+          <ion-col text-center>
+            <button ion-button round (tap)="update()">Rechercher</button>
+          </ion-col>
+        </ion-row>
+
+        <ion-list *ngIf="searching">
+          <ion-item *ngFor="let emp of employees">
+          <button ion-item no-lines (tap)="goToEmpDetails(emp)">
+            {{emp.lastname}} {{emp.firstname}}
+          </button>
+          </ion-item>
+        </ion-list>
+    </div>
+  </ion-item>
   <!--
   <ion-list>
     <ion-item *ngFor="let info of information; let i=index" text-wrap (tap)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">

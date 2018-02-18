@@ -41,7 +41,6 @@ import { ParamPage } from '../pages/param/param';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { CreditPage } from '../pages/credit/credit';
 import { SportsPage } from '../pages/sports/sports';
-import { RepertoirePage } from '../pages/repertoire/repertoire';
 import { HomePage } from '../pages/home/homeC';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
@@ -111,9 +110,6 @@ export class MyApp {
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'MENU.REPERTORY', component: RepertoirePage, icon: 'contact',
-         iosSchemaName: null, androidPackageName: null,
-         appUrl: null, httpUrl: null  },
       { title: 'MENU.PARTY', component: GuindaillePage, icon: 'water',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
