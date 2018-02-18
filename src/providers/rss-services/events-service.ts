@@ -34,7 +34,7 @@ export class EventsService {
   nbCalls = 0;
   callLimit = 30;
 
-  url = "http://louvainfo.be/evenements/feed/calendar/";
+  url = "http://louvainfo.be/calendrier/feed/calendar/";
 
   constructor(private http: Http, public user:UserService, public rssService : RssService) {}
 

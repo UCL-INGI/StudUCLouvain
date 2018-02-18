@@ -66,6 +66,7 @@ export class SportsPage {
   campus:string;
   shownGroup = null;
   loading;
+  nosport:any = false;
 
   constructor(
     public alertCtrl: AlertController,
@@ -155,6 +156,7 @@ export class SportsPage {
             console.log("Error loading sports : " + error);
           }
           this.searching = false;
+          this.nosport=true;
           this.updateDisplayedSports();
         }
       });
@@ -302,13 +304,13 @@ export class SportsPage {
 
   addFavorite(slidingItem: ItemSliding, itemData: any) {
 
-    if (this.user.hasFavorite(itemData.guid)) {
+    if (this.user.hasFavoriteS(itemData)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
       this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
     } else {
       // remember this session as a user favorite
-      this.user.addFavorite(itemData.guid);
+      this.user.addFavoriteS(itemData);
 
       let toast = this.toastCtrl.create({
         message: 'Ajouté aux favoris',
@@ -337,7 +339,7 @@ export class SportsPage {
           text: 'Supprimer',
           handler: () => {
             // they want to remove this session from their favorites
-            this.user.removeFavorite(itemData.guid);
+            this.user.removeFavoriteS(itemData);
             this.updateDisplayedSports();
 
             // close the sliding item and hide the option buttons
