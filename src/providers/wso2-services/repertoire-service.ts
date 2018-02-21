@@ -60,6 +60,7 @@ export class RepertoireService {
         newUrl += "&";
       }
     }
+    newUrl += "&directory=E";
     return new Promise(resolve => {
 
       this.wso2Service.load(newUrl).subscribe(
@@ -79,7 +80,6 @@ export class RepertoireService {
 
       this.wso2Service.load(url_details).subscribe(
         data => {
-          console.log(data);
           emp = this.extractEmployeeDetails(emp, data.businessInformation);
           resolve({empDetails:emp});
         });
