@@ -47,18 +47,22 @@
 
 <ion-content class="feed-list">
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0">
-        <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)">
+        <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)" text-center>
           {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
         </ion-item-divider>
+
         <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
+
           <ion-item-sliding #slidingItem [hidden]="sport.hidden">
-            <ion-item >
+            <ion-item text-center>
               <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>
               <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
               <p>{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
               <p style="color:red;" *ngIf="sport.remarque.length > 2">Remarque : {{sport.remarque}}</p>
             </ion-item>
+
             <ion-item-options>
               <button ion-button outline (tap)="createSport(slidingItem, sport)" class="large-icon">
                 <ion-icon name='calendar'></ion-icon>
@@ -70,9 +74,13 @@
                 <ion-icon name='close'></ion-icon>
               </button>
             </ion-item-options>
+
           </ion-item-sliding>
+
         </ion-list>
+
     </ion-list>
+
   <ion-list-header *ngIf="nosport && !searching">
     Pas de sport trouvé
   </ion-list-header> 

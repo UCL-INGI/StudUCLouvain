@@ -24,7 +24,7 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 //import { EventItem } from '../../app/entity/eventItem';
-import { SportItem } from '../../app/entity/sportItem';
+//import { SportItem } from '../../app/entity/sportItem';
 
 
 @Injectable()

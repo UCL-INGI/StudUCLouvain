@@ -31,19 +31,29 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
+  <!--<ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
     <ion-segment-button value="all">
       Tous
     </ion-segment-button>
     <ion-segment-button value="favorites">
       Favoris
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment>--> 
 </ion-header>
 
 
+<ion-content>
+<calendar [eventSource]="source"
+        [calendarMode]="calendar2.mode"
+        [currentDate]="calendar2.currentDate"
+        [startingDayWeek]="1"
+        [locale]="calendar2.locale"
+        [scrollToHour]="8"
 
-<ion-content class="feed-list">
+        class="calendar2">
+      </calendar>
+</ion-content>
+<!--<ion-content class="feed-list">
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #eventsList [virtualScroll]="displayedEvents" [approxItemHeight]=" '130px' " [hidden]="shownEvents === 0">
@@ -80,4 +90,4 @@
   <ion-list-header *ngIf="(shownEvents === 0)">
     Pas d'évènement trouvé
   </ion-list-header>
-</ion-content>
+</ion-content>-->

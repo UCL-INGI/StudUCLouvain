@@ -61,7 +61,9 @@ convertXmlToJson(xml) : any{
     if(campus == "Woluwe") this.url = this.url2;
     if(campus == "Mons") this.url = this.url3;
   }
+
   public getSports(segment:string) {
+    console.log("start get");
     this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {
@@ -79,11 +81,14 @@ convertXmlToJson(xml) : any{
             
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
+          console.log("end get OK");
         },
         err => {
+              console.log("end get ERR");
           reject(err);
         });
     });
+
   }
 
   public getTeams(segment:string) {
@@ -111,6 +116,7 @@ convertXmlToJson(xml) : any{
   }
 
   private extractSports(data: any, isSport:boolean) {
+    console.log("start extract");
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;
@@ -149,6 +155,7 @@ convertXmlToJson(xml) : any{
       if(isSport) this.sports.push(newSportItem);
       else this.teams.push(newSportItem);
     }
+    console.log("end extract");
   }
 
   private createDateForSport(str : string, hour: string):Date{

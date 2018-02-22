@@ -35,6 +35,7 @@ import { EventItem } from '../../app/entity/eventItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import 'rxjs/add/operator/debounceTime';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-events',
@@ -60,6 +61,14 @@ export class EventsPage {
   displayedEvents : Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
+  source: Array<{title:string, startTime:Date, endTime:Date, allDay:boolean}>;
+
+  calendar2 = {
+    mode: 'week',
+    locale: 'fr',
+
+    currentDate: new Date()
+  };
 
   constructor(
     public alertCtrl: AlertController,
@@ -157,9 +166,20 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
+    this.toSource(this.displayedEvents);
 
   }
 
+  toSource(displayed:Array<EventItem>){
+    let newSource: Array<{title:string, startTime:Date, endTime:Date, allDay:boolean}>=[];
+    for (let event of displayed){
+     // let start = new Date(Date.UTC(event.startDate.getFullYear(),event.startDate.getMonth(),event.startDate.getDay()));
+      //let end =new Date(Date.UTC(event.endDate.getFullYear(),event.endDate.getMonth(),event.endDate.getDay()));
+      let item = {title:event.title,startTime:event.startDate, endTime:event.endDate, allDay:false};
+      newSource.push(item);
+    }
+    this.source = newSource;
+  }
 
   presentFilter() {
     if(this.filters === undefined){

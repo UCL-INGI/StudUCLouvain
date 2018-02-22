@@ -41,7 +41,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { HttpModule, Http } from '@angular/http'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { NgCalendarModule } from 'ionic2-calendar';
 
 
 
@@ -127,6 +127,7 @@ export function HttpLoaderFactory(http: Http) {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpModule,
+    NgCalendarModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
