@@ -79,7 +79,7 @@
         <ion-row>
           <ion-col><b>Courriel</b></ion-col>
           <ion-col>
-            {{empDetails?.email}}
+            <a href="mailto:{{empDetails?.email}}" target="_top">{{empDetails?.email}}</a>
           </ion-col>
         </ion-row>
 
@@ -93,11 +93,11 @@
 
           <ion-row> 
             <ion-col> N° tél. </ion-col>
-            <ion-col> {{contact.phone}} </ion-col>
+            <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
           </ion-row>
           <ion-row> 
             <ion-col> Secrétariat </ion-col>
-            <ion-col> {{contact.secretary}} </ion-col>
+            <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
           </ion-row>
         </ion-card>
 
