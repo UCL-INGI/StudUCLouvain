@@ -19,6 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+
 <ion-header *ngIf="(userS.hasCampus() === true)">
   <ion-navbar >
     <button ion-button icon-only menuToggle>
@@ -32,8 +33,9 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding *ngIf="(userS.hasCampus() === false)">
+<ion-content   padding class="bg">
+    </ion-content>
+<ion-content padding *ngIf="(userS.hasCampus() === false)" class="other" >
   <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
   <ion-list radio-group [(ngModel)]="where">
     <ion-item>
@@ -56,10 +58,10 @@
   </ion-row>
 </ion-content>
 
-<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)">
-  <ion-list>
-    <ion-item>
-      <p align="center" style="font-size:22px;"><b>{{'HOME.CAMPUS' | translate}}</b></p>
+<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)"  class="other">
+  <ion-list class="other"  padding>
+    <ion-item padding class="other">
+      <p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-center text-center>
           <img alt="logo" src="assets/img/news.png" align="middle" height="auto" (tap)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
@@ -72,7 +74,7 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
+    <ion-item class="other">
       <p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-end text-center>
@@ -86,7 +88,7 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
+    <ion-item class="other">
       <p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p>
       <ion-row>
         <ion-col align-self-end text-center>

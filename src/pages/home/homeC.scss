@@ -20,4 +20,22 @@
 */
 
 page-homeC {
+
+
+    .bg{
+        background: url('/assets/img/logoprincipal.png');
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-position: center; 
+        opacity: 0.3;
+    }
+
+    .other{
+        background-color: transparent;
+    }
+
+    b{
+        color: black;
+    }
+
 }
