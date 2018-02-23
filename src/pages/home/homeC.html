@@ -34,19 +34,19 @@
   </ion-navbar>
 </ion-header>
 <ion-content   padding class="bg">
-    </ion-content>
+</ion-content>
 <ion-content padding *ngIf="(userS.hasCampus() === false)" class="other" >
   <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
-  <ion-list radio-group [(ngModel)]="where">
-    <ion-item>
+  <ion-list radio-group [(ngModel)]="where" class="other">
+    <ion-item class="other">
       <ion-label>Louvain-la-Neuve</ion-label>
       <ion-radio value="LLN" checked></ion-radio>
     </ion-item>
-    <ion-item>
+    <ion-item class="other">
       <ion-label>Woluwé</ion-label>
       <ion-radio value="Woluwe"></ion-radio>
     </ion-item>
-    <ion-item>
+    <ion-item class="other">
       <ion-label>Mons</ion-label>
       <ion-radio value="Mons"></ion-radio>
     </ion-item>
