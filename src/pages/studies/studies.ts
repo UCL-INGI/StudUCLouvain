@@ -21,7 +21,7 @@
 
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, ModalController } from 'ionic-angular';
+import { AlertController, MenuController, ModalController, ItemSliding, ToastController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +32,8 @@ import { AdeProject } from '../../app/entity/adeProject';
 
 import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
-
+import { Activity } from '../../app/entity/activity';
+import { Calendar } from '@ionic-native/calendar';
 
 
 @Component({
@@ -57,6 +58,8 @@ export class StudiesPage {
     private alertCtrl: AlertController,
     public storage:Storage,
     public menu: MenuController,
+    private calendar: Calendar,
+    public toastCtrl: ToastController,
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
@@ -168,6 +171,21 @@ export class StudiesPage {
 
   launch(url) {
     this.iab.create(url,'_system');
+  }
+
+  addCourseToCalendar(slidingItem : ItemSliding, course : Course){
+    let options:any = {
+    };
+    for (let activity of course.activities) {
+      this.calendar.createEventWithOptions(course.name +" : " + activity.type,
+        activity.auditorium, null, activity.start,activity.end, options);
+    }
+    let toast = this.toastCtrl.create({
+      message: 'Activités ajoutées',
+      duration: 3000
+    });
+    toast.present();
+    slidingItem.close();
   }
 
 }

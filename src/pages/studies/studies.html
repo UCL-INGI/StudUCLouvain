@@ -54,15 +54,18 @@
   <h4 text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </h4>
 
   <ion-list >
-     <ion-item-sliding *ngFor="let course of listCourses">
-       <ion-item (tap)="openCoursePage(course)" >
+    <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
+      <ion-item (tap)="openCoursePage(course)" >
         <h2>{{course.name}} {{course.acronym}}</h2>
       </ion-item>
-
       <ion-item-options side="right">
+        <button ion-button (tap)="addCourseToCalendar(slidingItem, course)" >
+          <ion-icon name="calendar"></ion-icon>
+            Calendar
+        </button>
         <button ion-button (tap)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
-          Supprimer
+            Supprimer
         </button>
       </ion-item-options>
     </ion-item-sliding>

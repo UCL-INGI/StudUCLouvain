@@ -24,7 +24,7 @@ import { NavController, NavParams, ItemSliding, ToastController  }
   from 'ionic-angular';
 import { CourseService }
   from '../../../providers/studies-services/course-service';
-import { Course } from '../../../app/entity/course'
+import { Course } from '../../../app/entity/course';
 import { Activity } from '../../../app/entity/activity'
 import { Calendar } from '@ionic-native/calendar';
 
