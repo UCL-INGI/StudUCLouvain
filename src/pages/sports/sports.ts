@@ -290,14 +290,13 @@ export class SportsPage {
     this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
   }
 
-  public createSport(slidingItem: ItemSliding, itemData: any):void{
+  addToCalendar(slidingItem: ItemSliding, itemData: SportItem){
 
     let options:any = {
-      firstReminderMinutes:5
     };
 
-    this.calendar.createEventWithOptions(itemData.title, itemData.location,
-      null, itemData.startDate, itemData.endDate, options).then(() => {
+    this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
+      itemData.salle, itemData.date, itemData.hfin, options).then(() => {
         let toast = this.toastCtrl.create({
           message: 'Sport créé',
           duration: 3000
@@ -324,36 +323,6 @@ export class SportsPage {
       slidingItem.close();
     }
 
-  }
-
-  removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      message: 'Souhaitez vous retirer ce sport des favoris ?',
-      buttons: [
-        {
-          text: 'Annuler',
-          handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        },
-        {
-          text: 'Supprimer',
-          handler: () => {
-            // they want to remove this session from their favorites
-            this.user.removeFavoriteS(itemData.guid);
-            this.updateDisplayedSports();
-
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        }
-      ]
-    });
-    // now present the alert on top of all other content
-    alert.present();
   }
 
 }
