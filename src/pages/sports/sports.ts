@@ -296,7 +296,7 @@ export class SportsPage {
     };
 
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
-      itemData., itemData.date, itemData.hfin, options).then(() => {
+      itemData.salle, itemData.date, itemData.hfin, options).then(() => {
         let toast = this.toastCtrl.create({
           message: 'Sport créé',
           duration: 3000
