@@ -119,7 +119,7 @@ export class HomePage {
     this.userS.addCampus(this.where);
   }
 
-  presentLoadingDefault() {
+ /* presentLoadingDefault() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -129,7 +129,7 @@ export class HomePage {
     setTimeout(() => {
       loading.dismiss();
     }, 5000);
-  }
+  }*/
 
   changePage(page) {
     //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
@@ -137,9 +137,9 @@ export class HomePage {
       this.launchExternalApp(page);
     }
     this.nav.push(page.component, {title: page.title});
-    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
+   /* if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
       this.presentLoadingDefault();
-    }
+    }*/
     //console.log(this.MyApp);
     //this.myApp.openRootPage(page);
   }

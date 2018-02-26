@@ -21,7 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { App, AlertController, ItemSliding, List, NavController,
-  ModalController, NavParams, ToastController } from 'ionic-angular';
+  ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
@@ -35,7 +35,7 @@ import { EventItem } from '../../app/entity/eventItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import 'rxjs/add/operator/debounceTime';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 
 @Component({
   selector: 'page-events',
@@ -62,6 +62,7 @@ export class EventsPage {
   dateRange: any = 1;
   dateLimit: Date = new Date();
   source: Array<{title:string, startTime:Date, endTime:Date, allDay:boolean}>;
+  loading;
 
   calendar2 = {
     mode: 'week',
@@ -86,12 +87,34 @@ export class EventsPage {
     private appAvailability: AppAvailability,
     private iab: InAppBrowser,
     public connService : ConnectivityService,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private loadingCtrl: LoadingController
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
 
+
+  presentLoading() {
+    if(!this.loading){
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      this.loading.present();
+    }
+    //this.dismiss = true;
+
+   /* setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);*/
+  }
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
+}
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
@@ -100,6 +123,7 @@ export class EventsPage {
       this.searching = false;
       this.updateDisplayedEvents();
     });
+    this.presentLoading();
   }
 
   public onSearchInput(){
@@ -170,6 +194,7 @@ export class EventsPage {
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.toSource(this.displayedEvents);
+    this.dismissLoading();
 
   }
 

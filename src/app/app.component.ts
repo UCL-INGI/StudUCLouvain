@@ -192,7 +192,7 @@ export class MyApp {
   }
   else this.openRootPage(this.homePage);
 }
-  presentLoadingDefault() {
+  /*presentLoadingDefault() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -202,7 +202,7 @@ export class MyApp {
     setTimeout(() => {
       loading.dismiss();
     }, 5000);
-  }
+  }*/
   openRootPage(page) {
 
     // close the menu when clicking a link from the menu
@@ -212,9 +212,9 @@ export class MyApp {
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     }
     this.nav.setRoot(page.component, {title: page.title});
-    if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
+    /*if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
       this.presentLoadingDefault();
-    }
+    }*/
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {

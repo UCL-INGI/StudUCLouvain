@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, List, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { App, List, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import { NewsService } from '../../providers/rss-services/news-service';
 import { NewsItem } from '../../app/entity/newsItem';
@@ -45,6 +45,7 @@ export class NewsPage {
   searchTerm: string = '';
   title:string ="Actualités" ;
   nonews:any = false;
+  loading;
 
   constructor(
     public platform : Platform,
@@ -54,7 +55,8 @@ export class NewsPage {
     public newsService : NewsService,
     public connService : ConnectivityService,
     public alertCtrl : AlertController,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              public loadingCtrl: LoadingController
   ) {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -69,9 +71,28 @@ export class NewsPage {
         });
       });
   }
+    presentLoading() {
+    if(!this.loading){
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
 
+      this.loading.present();
+    }
+    //this.dismiss = true;
+
+   /* setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);*/
+  }
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
+}
   ionViewDidLoad() {
-
+    this.presentLoading();
   }
 
   public doRefresh(refresher) {
@@ -120,6 +141,7 @@ export class NewsPage {
     });
     this.shownNews = this.displayedNews.length;
     this.searching = false;
+    this.dismissLoading();
   }
 
   public goToNewsDetail(news: NewsItem) {
