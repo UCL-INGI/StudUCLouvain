@@ -70,6 +70,8 @@ export class EventsPage {
     currentDate: new Date()
   };
 
+  noevents:any =false;
+
   constructor(
     public alertCtrl: AlertController,
     public app:App,
@@ -133,6 +135,7 @@ export class EventsPage {
             console.log("Error loading events : " + error);
           }
           this.searching = false;
+          this.noevents = true;
           this.updateDisplayedEvents();
         }
       });

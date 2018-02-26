@@ -44,6 +44,7 @@ export class NewsPage {
   searchControl: FormControl;
   searchTerm: string = '';
   title:string ="Actualités" ;
+  nonews:any = false;
 
   constructor(
     public platform : Platform,
@@ -101,6 +102,7 @@ export class NewsPage {
               console.log("Error loading news : " + error);
             }
             this.searching = false;
+            this.nonews=true;
             this.updateDisplayedNews();
           }
       });
