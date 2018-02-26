@@ -28,6 +28,7 @@ import { UserService } from '../../providers/utils-services/user-service';
 import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 
+
 import { EventsPage } from '../events/events';
 import { MobilityPage } from '../mobility/mobility';
 import { LibrariesPage } from '../library/libraries';

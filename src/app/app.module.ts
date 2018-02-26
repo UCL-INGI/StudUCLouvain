@@ -122,6 +122,9 @@ export function HttpLoaderFactory(http: Http) {
     CreditPage,
     EmployeeDetailsPage
   ],
+  exports: [
+    TranslateModule
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),

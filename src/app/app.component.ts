@@ -48,6 +48,8 @@ import { UserService } from '../providers/utils-services/user-service';
 @Component({
   templateUrl: 'app.html'
 })
+
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage = HomePage;
