@@ -34,7 +34,7 @@ export class POIService {
   }
 
   public loadResources() {
-    return new Promise(resolve => {
+    if(this.zones.length == 0) return new Promise(resolve => {
 
       this.http.get('assets/data/resources.json').map(res => res.json()).subscribe(data => {
         let tmpZones = data.zones;
@@ -66,10 +66,14 @@ export class POIService {
           this.zones.push(newZone);
         }
 
+
         resolve(this.zones);
       });
 
     });
+      else return new Promise(resolve => {
+        resolve(this.zones);
+      });
   }
 
   private createMapLocations(list: any): Array<MapLocation> {
