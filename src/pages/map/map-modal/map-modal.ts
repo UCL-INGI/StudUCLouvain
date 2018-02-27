@@ -76,6 +76,14 @@ export class MapModalPage {
     });
   }
 
+
+  /*getProjects(sessionId :string){
+    this.studiesService.getProjects(sessionId).then(
+      data => {
+        this.projects = data;
+    });
+  }*/
+
   ionViewDidLoad() {
     //this.getProjects(this.sessionId);
   }

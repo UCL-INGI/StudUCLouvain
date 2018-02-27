@@ -19,34 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-ion-app._gmaps_cdv_ .nav-decor{
-  background-color: transparent !important;
-}
-
-
 page-map-modal {
   .spinner-container {
         width: 100%;
         text-align: center;
         padding: 10px;
     }
-  #please-connect {
-    position: absolute;
-    background-color: #000;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
 
-  #please-connect p {
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    position: relative;
-    font-size: 1.6em;
-    top: 30%;
-  }
 
   #container {
     width: 100%;

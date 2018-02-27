@@ -32,12 +32,12 @@
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <div #pleaseConnect id="please-connect">
+  <!--<div #pleaseConnect id="please-connect">
     <p> Connectez-vous à internet</p>
   </div>
   <div id="container">
     <div #map id="map"></div>
-  </div>
+  </div>-->
   <!--<ion-card>
     <ion-item (tap)="presentSelector()" text-wrap>
       <ion-icon name="create" item-left large></ion-icon>
@@ -88,7 +88,7 @@
     </ion-item-divider>
 
     <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-left (tap)="openModal(bibli)">
+      <div item-left (tap)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)">
         <h3>{{bibli.title}}</h3>
         <p>{{bibli.address}}</p>
       </div>
@@ -100,7 +100,7 @@
     </ion-item-divider>
 
     <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-left (tap)="openModal(restau)">
+      <div item-left (tap)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)">
         <h3>{{restau.title}}</h3>
         <p>{{restau.address}}</p>
       </div>
@@ -112,11 +112,10 @@
     </ion-item-divider>
 
     <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-left (tap)="openModal(parking)">
+      <div item-left (tap)="toggleLocation(parking, zone.parkings.listChecked, i)">
         <h3>{{parking.title}}</h3>
       </div>
       <!--<ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>-->
     </ion-item>
   </ion-card>
-
 </ion-content>
