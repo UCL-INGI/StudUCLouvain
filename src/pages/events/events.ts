@@ -75,6 +75,8 @@ export class EventsPage {
   noevents:any =false;
   displayedEventsD : any = [];
 
+  weekUCL = 5;
+
   constructor(
     public alertCtrl: AlertController,
     public app:App,
@@ -185,13 +187,13 @@ export class EventsPage {
   }
 
 
-   changeArray(array){
+   changeArray(array, weekUCL){
     var groups = array.reduce(function(obj,item){
       var date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
       var temp = new Date(date.getFullYear(),0,4);
-      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7);
+      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7) - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
@@ -225,7 +227,7 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents);
+    this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
     console.log(this.displayedEventsD);
     // this.toSource(this.displayedEvents);
     this.dismissLoading();
