@@ -28,8 +28,6 @@ import { NavController, Platform, ActionSheetController, ModalController, NavPar
 import { MapLocation } from '../../app/entity/mapLocation';
 import { TranslateService } from '@ngx-translate/core';
 
-import { MapModalPage } from './map-modal/map-modal';
-
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
@@ -55,27 +53,17 @@ export class MapPage {
     public platform: Platform,
     public navParams: NavParams,
     public poilocations: POIService,
-    private translateService: TranslateService) {
+              private translateService: TranslateService) {
       this.title = this.navParams.get('title');
   }
 
-
-  openModal(location){
-    let obj = {location : location};
-
-    let myModal = this.modalCtrl.create(MapModalPage, obj);
-    myModal.onDidDismiss(data => {
-     //this.project = data;
-    });
-    myModal.present();
-  }
-
   ngAfterViewInit(){
-    //let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+    let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
     let zones = this.poilocations.loadResources();
     this.searching = true;
 
     Promise.all([
+      mapLoaded,
       zones
     ]).then((result) => {
       this.searching = false;
@@ -85,11 +73,10 @@ export class MapPage {
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
 
-     /* if(result[0]) {
+      if(result[0]) {
         this.mapService.addMarker(this.selectedLocation);
-      }*/
+      }
     });
-    console.log(zones);
   }
 
   toggleDetails(data) {
