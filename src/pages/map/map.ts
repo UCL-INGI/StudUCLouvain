@@ -71,11 +71,13 @@ export class MapPage {
   }
 
   ngAfterViewInit(){
-    //let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+    let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
     let zones = this.poilocations.loadResources();
     this.searching = true;
-
+    console.log(this.zones);
+    console.log(zones);
     Promise.all([
+      mapLoaded,
       zones
     ]).then((result) => {
       this.searching = false;
@@ -85,11 +87,12 @@ export class MapPage {
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
 
-     /* if(result[0]) {
+      if(result[0]) {
         this.mapService.addMarker(this.selectedLocation);
-      }*/
+      }
     });
-    console.log(zones);
+    console.log(this.zones);
+     console.log(zones);
   }
 
   toggleDetails(data) {
