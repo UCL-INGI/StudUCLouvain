@@ -56,6 +56,7 @@ import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
 import { MapPage } from '../pages/map/map';
+import { MapModalPage } from '../pages/map/map-modal/map-modal';
 import { MapLocationSelectorPage }
           from '../pages/map/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
@@ -110,6 +111,7 @@ export function HttpLoaderFactory(http: Http) {
     NewsPage,
     NewsDetailsPage,
     MapPage,
+    MapModalPage,
     ModalProjectPage,
     RestaurantPage,
     StudiesPage,
@@ -150,6 +152,7 @@ export function HttpLoaderFactory(http: Http) {
     EventsDetailsPage,
     LibrariesPage,
     MapPage,
+    MapModalPage,
     ModalProjectPage,
     NewsPage,
     NewsDetailsPage,
