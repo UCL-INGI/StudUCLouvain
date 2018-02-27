@@ -131,6 +131,8 @@ export class HomePage {
     }, 5000);
   }*/
 
+
+
   changePage(page) {
     //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
     if(page.iosSchemaName != null && page.androidPackageName != null){

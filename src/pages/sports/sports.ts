@@ -132,7 +132,7 @@ export class SportsPage {
   }*/
 
   public loadSports() {
-    console.log("start load");
+
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     let result: any;
@@ -191,7 +191,7 @@ export class SportsPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
-    console.log("end Load");
+
   }
 
   public changeArray(array){
@@ -221,7 +221,6 @@ export class SportsPage {
 
 
   public updateDisplayedSports() {
-    console.log("start update");
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
 
@@ -257,7 +256,6 @@ export class SportsPage {
     //while(this.dismiss == false){}
     this.dismissLoading();
    // this.dismiss=false;
-   console.log("end update");
 
   }
 

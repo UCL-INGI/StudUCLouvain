@@ -63,6 +63,7 @@ export class EventsPage {
   dateLimit: Date = new Date();
   source: Array<{title:string, startTime:Date, endTime:Date, allDay:boolean}>;
   loading;
+  shownGroup = null;
 
   calendar2 = {
     mode: 'week',
@@ -72,6 +73,7 @@ export class EventsPage {
   };
 
   noevents:any =false;
+  displayedEventsD : any = [];
 
   constructor(
     public alertCtrl: AlertController,
@@ -134,6 +136,18 @@ export class EventsPage {
     this.nav.push(EventsDetailsPage, { 'event': event });
   }
 
+  toggleGroup(group) {
+      if (this.isGroupShown(group)) {
+          this.shownGroup = null;
+      } else {
+          this.shownGroup = group;
+      }
+  }
+
+  isGroupShown(group) {
+      return this.shownGroup === group;
+  }
+
   public loadEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
@@ -170,6 +184,24 @@ export class EventsPage {
     }
   }
 
+
+   changeArray(array){
+    var groups = array.reduce(function(obj,item){
+      var date = new Date(item.startDate.getTime());
+      date.setHours(0,0,0,0);
+      date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
+      var temp = new Date(date.getFullYear(),0,4);
+      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7);
+      obj[week] = obj[week] || [];
+      obj[week].push(item);
+      return obj;
+    }, {});
+    var eventsD = Object.keys(groups).map(function(key){
+    return {weeks: key, event: groups[key]};
+    });
+    return eventsD;
+  }
+
   public updateDisplayedEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
@@ -193,12 +225,15 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.toSource(this.displayedEvents);
+    this.displayedEventsD = this.changeArray(this.displayedEvents);
+    console.log(this.displayedEventsD);
+    // this.toSource(this.displayedEvents);
     this.dismissLoading();
+
 
   }
 
-  toSource(displayed:Array<EventItem>){
+ /* toSource(displayed:Array<EventItem>){
     let newSource: Array<{title:string, startTime:Date, endTime:Date, allDay:boolean}>=[];
     for (let event of displayed){
      // let start = new Date(Date.UTC(event.startDate.getFullYear(),event.startDate.getMonth(),event.startDate.getDay()));
@@ -207,7 +242,7 @@ export class EventsPage {
       newSource.push(item);
     }
     this.source = newSource;
-  }
+  }*/
 
   presentFilter() {
     if(this.filters === undefined){

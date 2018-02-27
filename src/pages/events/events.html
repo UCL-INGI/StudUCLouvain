@@ -56,35 +56,43 @@
 <ion-content class="feed-list">
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
-  <ion-list #eventsList [virtualScroll]="displayedEvents" [approxItemHeight]=" '130px' " [hidden]="shownEvents === 0">
-    <ion-item-sliding *virtualItem = "let item" #slidingItem [hidden]="item.hidden">
+  <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img [src]="item.iconCategory">
-        </ion-thumbnail>
-        <button ion-item (tap)="goToEventDetail(item)" no-lines>
-          <h3>{{item.title}}</h3>
-          <p [innerHtml]="item.trimmedDescription"></p>
-          <p [innerHtml]="item.location"></p>
-          <p>{{item.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{item.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-        </button>
-      </ion-item>
+    <ion-item-divider *ngIf="item.event.length > 0" (tap)="toggleGroup(item.weeks)" text-center>
+        Week {{item.weeks}} ({{item.event.length}})
+    </ion-item-divider>
 
-      <ion-item-options>
-        <button ion-button outline (tap)="createEvent(slidingItem, item)" class="large-icon">
-          <ion-icon name='calendar'></ion-icon>
-        </button>
+    <ion-list *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks)">
 
-        <button ion-button outline (tap)="addFavorite(slidingItem, item)" *ngIf="segment === 'all'" class="large-icon">
-          <ion-icon name="star-outline"></ion-icon>
-        </button>
+      <ion-item-sliding #slidingItem [hidden]="event.hidden">
 
-        <button ion-button (tap)="removeFavorite(slidingItem, item, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
-          <ion-icon name='close'></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img [src]="event.iconCategory">
+          </ion-thumbnail>
+          <button ion-item (tap)="goToEventDetail(event)" no-lines>
+            <h3>{{event.title}}</h3>
+            <p [innerHtml]="event.trimmedDescription"></p>
+            <p [innerHtml]="event.location"></p>
+            <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
+          </button>
+        </ion-item>
+
+        <ion-item-options>
+          <button ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
+            <ion-icon name='calendar'></ion-icon>
+          </button>
+
+          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
+            <ion-icon name="star-outline"></ion-icon>
+          </button>
+
+          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+            <ion-icon name='close'></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </ion-list>
 
   <ion-list-header *ngIf="(noevents && !searching)">
