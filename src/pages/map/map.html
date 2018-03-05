@@ -55,7 +55,7 @@
       </button>
     </ion-item>
   </ion-card>
-  <ion-item>
+  <!--<ion-item>
     <button ion-button block (tap)="presentFilter()" [hidden]="showLocationList" icon-right>
       Afficher les points d'intérêt
       <ion-icon name="arrow-dropdown"></ion-icon>
@@ -65,7 +65,8 @@
       <ion-icon name="arrow-dropup"></ion-icon>
     </button>
   </ion-item>
-  <ion-card *ngFor="let zone of zones" [hidden]="!showLocationList" overflow-scroll=false>
+  <ion-card *ngFor="let zone of zones" [hidden]="!showLocationList" overflow-scroll=false>-->
+  <ion-card *ngFor="let zone of zones" overflow-scroll=false>
     <ion-card-header (tap)="toggleDetails(zone)">
       {{zone.name}}
       <ion-icon color="primary" [name]="zone.icon"></ion-icon>
