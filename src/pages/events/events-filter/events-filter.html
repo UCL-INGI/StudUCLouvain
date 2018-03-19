@@ -46,20 +46,20 @@
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
   </ion-item>
-    <ion-toolbar>
-  <ion-buttons left>
-    <button ion-button icon-right end (click)="uncheckAll()">
-      Tout décocher
-      <ion-icon name="done-all"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-buttons end>
-    <button ion-button icon-right (click)="resetFilters()">
-      Restaurer le filtre
-      <ion-icon name="refresh-circle"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-toolbar> 
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-right end (click)="uncheckAll()">
+        Tout décocher
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="resetFilters()">
+        Restaurer le filtre
+        <ion-icon name="refresh-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-list>
     <ion-list-header>Categories</ion-list-header>
 

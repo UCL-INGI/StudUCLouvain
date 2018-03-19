@@ -20,7 +20,7 @@
 */
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
-import { NavController, NavParams, ModalController, Platform} from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform,LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
 import { EmployeeDetailsPage } from './employee-details/employee-details';
@@ -48,6 +48,7 @@ export class HelpDeskPage {
   searching: boolean = false;
   lastname:string = "";
   firstname:string = "";
+  loading;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -56,8 +57,31 @@ export class HelpDeskPage {
               public platform: Platform,
               public repService : RepertoireService,
               public connService : ConnectivityService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              public loadingCtrl: LoadingController) {
     this.title = this.navParams.get('title');
+  }
+
+  presentLoading() {
+    if(!this.loading){
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      this.loading.present();
+    }
+    //this.dismiss = true;
+
+   /* setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);*/
+  }
+
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
   }
 
   ionViewDidLoad() {
@@ -65,6 +89,8 @@ export class HelpDeskPage {
   }
 
   update(){
+    this.presentLoading();
+
     let options: Array<string>= [];
     let values: Array<string> = [];
     if(this.lastname.length>0){
@@ -91,6 +117,7 @@ export class HelpDeskPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
+    this.dismissLoading();
   }
 
   goToEmpDetails(emp: EmployeeItem) {
