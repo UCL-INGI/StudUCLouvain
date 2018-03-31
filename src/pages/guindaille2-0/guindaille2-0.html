@@ -94,7 +94,7 @@
   <ion-item [hidden]="!isGroupShown('effecto')" class="gelem" no-lines>
     <ion-slides pager>
       <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.image" class="slide-image"/>
+        <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)"/>
       </ion-slide>
     </ion-slides>
     <p text-color="white">Glisser vers la droite pour continuer</p>
@@ -105,7 +105,23 @@
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('secours')" class="gelem">
+    <!--<ion-row>
+      <ion-col> N° tél. urgences générales </ion-col>
+      <ion-col> <a href="tel:112">112</a> </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col> N° tél. gardiennage UCL </ion-col>
+      <ion-col> <a href="tel:+32 10 47 22 22">+32 10 47 22 22</a> </ion-col>
+    </ion-row>-->
 
+    <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;">
+      <p>
+        <strong>N° tél. urgences générales</strong>: <a href="tel:112">112</a>
+      </p>
+      <p>
+        <strong>N° tél. gardiennage UCL</strong>: <a href="tel:+32 10 47 22 22">+32 10 47 22 22</a>
+      </p>
+    </div>
   </ion-item>
 
 </ion-content>

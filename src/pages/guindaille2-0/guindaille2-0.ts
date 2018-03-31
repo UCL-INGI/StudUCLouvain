@@ -83,21 +83,39 @@ export class GuindaillePage {
 
   slides = [
       {
+        title: 'Que retenir?',
+        subTitle: 'Ne pas dépasser la phase 2: quand j\'ai le "fêtant", j\'alterne mes boissons alcoolisées avec des softs et je profite de l\'eau gratuite! Je passerai une excellente soirée jusqu\'au bout de la nuit, je me souviendrai de tout, je resterai performant (dans tous les sens du terme) et je n\'aurai pas mal au crâne le lendemain. C\'est tout bénef! N\'oubliez jamais d\'alterner alcool et soft, de même n\'oubliez jamais de vous protéger en cas de rapport sexuel.',
+        buttons: ['OK'],
         image: "assets/img/guindaille/1.png",
       },
       {
+        title: 'Au top!',
+        subTitle: 'Tout va bien. J\'ai bu environ deux drinks (2 unités standard d\'alcool). Je me sens normal(e) mais attention, au regard de la loi, je ne peux fort probablement plus conduire. Je suis au alentours de 0.5 gramme d\'alcool par litre de sang, qui est la limite légale autorisée pour conduire en Belgique. Si je veux reprendre le volant (ou le guidon), je dois attendre une bonne heure environ. En effet, le corp a besoin d\'environ 1h30 pour éliminer un seul drink!',
+        buttons: ['OK'],
         image: "assets/img/guindaille/2.png",
       },
       {
+        title: 'Au max!',
+        subTitle: 'J\'ai le "fêtant", je suis joyeux(se), désinhibé(e), et j\'ai la drague plus facile. Excellent! Un état recherché lorsque l\'on a décidé de boire de l\'alcool, aller au-delà n\'a plus d\'intérêt. Pour rester dans cet état là toute la soirée, je dois absolument alterner avec des boissons softs. Je maintiendrai alors mon état joyeux, je m\'hydraterai correctement (l\'alcool déshydrate fort!), je me souviendrai de tout et je ne regretterai rien. Je me limite aussi à un ou deux drinks alcoolisés par heure maximum, car je tourne déjà entre 1‰ et 2‰ d\'alcool dans le sang. Pour rappel, je ne peux évidemment plus conduire depuis longtemps déjà.',
+        buttons: ['OK'],
         image: "assets/img/guindaille/3.png",
       },
       {
+        title: 'Limite Lourd!',
+        subTitle: 'J\'ai oublié d\'alterner avec des softs lorsque je me sentais au top ou au max.. Mon taux d\'alcool continue de grimper, et me capacité à faire rire et plaisir à mon entourage y est inversement proportionnelle. Je suis persuadé d\'être drôle et séduisant(e), mais je suis le/la seul(e) à le penser. Je parle fort et je postilonne un peu sur mon voisin, ma voisine. Bref, je suis lourd(e)... Je commencer à avoir des troubles de l\'équilibre. Les lendemains seront difficiles! Je me situe entre 2‰ et 3‰ d\'alcool dans le sang.',
+        buttons: ['OK'],
         image: "assets/img/guindaille/4.png",
       },
       {
+        title: 'Soirée foirée, Lendemain foireux!',
+        subTitle: 'C\'est la phrase qui emm... tout le monde, c\'est l\'alcool triste, violent... Je ne gère plus du tout ma consommation. Je perds le contrôle et l\'équilibre (ainsi qu\'éventuellement mon portefeuille, mes clés, mon portable,...). Mon cerveau est en souffrance importante et les nausées apparaissent. Je ne fais plus rire personne. Bien au contraire, je deviens un(e) "bitu" à gérer. Le lendemain sera très pénible et je pourrais regretter des choses, des faits. Je tourne autour des 3‰ d\'alcool dans le sang, c\'est beaucoup trop!',
+        buttons: ['OK'],
         image: "assets/img/guindaille/5.png",
       },
       {
+        title: 'Danger Maximum!',
+        subTitle: 'C\'est le pré-coma ou le coma éthylique. Je m\'endors sous l\'effet de l\'alcool et, sans m\'en rendre compte, je prends des risques énormes (étouffement si je vomis, chutes et traumatisques, arrêt respiratoire pouvant mener au décès). De plus, si jamais je viens encore de boire un verre ou de faire l\'un ou l\'autre "à-fond", mon taux d\'alcool va encore monter. Le risque de coma profond devient alors très important. Je me situe entre 3‰ et 4‰ d\'alcool dans le sang, la majorité d\'entre nous entre en pré-coma ou coma profond à ce taux-là!',
+        buttons: ['OK'],
         image: "assets/img/guindaille/6.png",
       }];
 

@@ -120,7 +120,7 @@ export class SportsPage {
         this.loading.dismiss();
         this.loading = null;
     }
-}
+  } 
 
 
   public onSearchInput(){
