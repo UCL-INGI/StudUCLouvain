@@ -1,9 +1,8 @@
 {
    "author": "mdeman",
-   "zones" : [
+   "zones" : 
 
         {
-             "nom" : "Sciences de la santé (Woluwé)",
              "auditoires" : [
                  {
                      "nom"  : "Centraux",
@@ -253,5 +252,5 @@
                 }
             ]
         }
-    ]
+    
 }

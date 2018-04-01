@@ -44,16 +44,6 @@
       <h2>{{selectedLocation.title}}</h2>
       <p>{{selectedLocation.address}}</p>
     </ion-item>
-    <ion-item>
-      <button ion-button icon-left clear item-left (tap)="clearMarkers()">
-        <ion-icon name="pin-outline"></ion-icon>
-        Clear Markers
-      </button>
-      <button ion-button icon-left clear item-right (tap)="toggleMarker(selectedLocation.title)">
-        <ion-icon name="pin"></ion-icon>
-        Pin
-      </button>
-    </ion-item>
   </ion-card>
   <!--<ion-item>
     <button ion-button block (tap)="presentFilter()" [hidden]="showLocationList" icon-right>
@@ -67,53 +57,49 @@
   </ion-item>
   <ion-card *ngFor="let zone of zones" [hidden]="!showLocationList" overflow-scroll=false>-->
   <ion-card *ngFor="let zone of zones" overflow-scroll=false>
-    <ion-card-header (tap)="toggleDetails(zone)">
-      {{zone.name}}
-      <ion-icon color="primary" [name]="zone.icon"></ion-icon>
-    </ion-card-header>
 
-    <ion-item-divider [hidden]="!zone.showDetails">
+    <ion-item-divider (tap)="toggleDetails(zone.auditoires)">
       Auditoires
     </ion-item-divider>
 
-    <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-content (tap)="toggleLocation(auditore, zone.auditoires.listChecked, i)">
+    <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.auditoires.showDetails">
+      <div item-content>
         <h3>{{auditoire.title}}</h3>
         <p>{{auditoire.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider [hidden]="!zone.showDetails">
+    <ion-item-divider (tap)="toggleDetails(zone.bibliotheques)" >
       Bibliothèques
     </ion-item-divider>
 
-    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-content (tap)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)">
+    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
+      <div item-content >
         <h3>{{bibli.title}}</h3>
         <p>{{bibli.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider [hidden]="!zone.showDetails">
+    <ion-item-divider (tap)="toggleDetails(zone.restaurants_universitaires)">
       Restaurants Universitaires
     </ion-item-divider>
 
-    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-content (tap)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)">
+    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.restaurants_universitaires.showDetails">
+      <div item-content >
         <h3>{{restau.title}}</h3>
         <p>{{restau.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider [hidden]="!zone.showDetails">
+    <ion-item-divider (tap)="toggleDetails(zone.parkings)" >
       Parkings
     </ion-item-divider>
 
-    <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.showDetails">
-      <div item-content (tap)="toggleLocation(parking, zone.parkings.listChecked, i)">
+    <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.parkings.showDetails">
+      <div item-content>
         <h3>{{parking.title}}</h3>
       </div>
       <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>

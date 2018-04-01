@@ -1,9 +1,8 @@
 {
    "author": "mdeman",
-   "zones" : [
+   "zones" : 
 
         {
-             "nom" : "Sciences et technologies",
              "auditoires" : [
                  {
                      "nom"  : "Croix du Sud",
@@ -125,176 +124,7 @@
                          "lat" : "50.6693175",
                          "lng": "4.6192258"
                      }
-                 }
-            ],
-             "bibliotheques" : [
-                 {
-                     "nom"  : "Bibliothèque des sciences et technologies",
-                     "sigle" : "BST",
-                     "adresse" : "3, Place des Sciences - Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/sciencesaccueil.jpg",
-                     "coord": {
-                         "lat" : "50.6681726",
-                         "lng": "4.6196554"
-                     },
-                     "horaires_periode_cours" :
-                        {
-                            "0" : {
-                                "open" : "0",
-                                "close" : "0"
-                            },
-                            "1" : {
-                                "open" : "8.00",
-                                "close" : "18.00"
-                            },
-                            "2" : {
-                                "open" : "8.00",
-                                "close" : "18.00"
-                            },
-                            "3" : {
-                                "open" : "8.00",
-                                "close" : "18.00"
-                            },
-                            "4" : {
-                                "open" : "8.00",
-                                "close" : "18.00"
-                            },
-                            "5" : {
-                                "open" : "8.00",
-                                "close" : "18.00"
-                            },
-                            "6" : {
-                                "open" : "9.00",
-                                "close" : "12.00"
-                            }
-                        }
-                }
-            ],
-             "restaurants_universitaires" : [
-                 {
-                    "nom"  : "Le Galilée",
-                    "sigle" : "",
-                    "adresse" : "Place Galilée, 1 Louvain-La-Neuve",
-                    "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/facade-galilee.gif",
-                     "coord": {
-                         "lat" : "50.6679885",
-                         "lng": "4.6187452"
-                     },
-                    "horaires_periode_cours" :
-                        {
-                            "0" : {
-                                "open" : "0",
-                                "close" : "0"
-                            },
-                            "1" : {
-                                "open" : "12",
-                                "close" : "14"
-                            },
-                            "2" : {
-                                "open" : "12",
-                                "close" : "14"
-                            },
-                            "3" : {
-                                "open" : "12",
-                                "close" : "14"
-                            },
-                            "4" : {
-                                "open" : "12",
-                                "close" : "14"
-                            },
-                            "5" : {
-                                "open" : "12",
-                                "close" : "14"
-                            },
-                            "6" : {
-                                "open" : "0",
-                                "close" : "0"
-                            }
-                        },
-                    "menu" : true
-
-                 }
-            ],
-            "parkings" : [
-                {
-                     "nom"  : "Place des Sciences",
-                     "sigle" : "",
-                     "adresse" : "50.668186, 4.619424",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "155",
-                     "coord": {
-                         "lat" : "50.668186",
-                         "lng": "4.619424"
-                     }
-                },
-                {
-                     "nom"  : "Sainte-Barbe",
-                     "sigle" : "",
-                     "adresse" : "50.667591, 4.621585",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "182",
-                     "coord": {
-                         "lat" : "50.667591",
-                         "lng": "4.621585"
-                     }
-                },
-                {
-                     "nom"  : "Croix du Sud",
-                     "sigle" : "",
-                     "adresse" : "50.666377, 4.621854",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "569",
-                     "coord": {
-                         "lat" : "50.666377",
-                         "lng": "4.621854"
-                     }
-                },
-                {
-                     "nom"  : "Cyclotron",
-                     "sigle" : "",
-                     "adresse" : "50.666231, 4.624793",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "197",
-                     "coord": {
-                         "lat" : "50.666231",
-                         "lng": "4.624793"
-                     }
-                },
-                {
-                     "nom"  : "Baudouin Ier",
-                     "sigle" : "",
-                     "adresse" : "50.664218, 4.622218",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "210",
-                     "coord": {
-                         "lat" : "50.664218",
-                         "lng": "4.622218"
-                     }
-                },
-                {
-                     "nom"  : "Rédimé",
-                     "sigle" : "",
-                     "adresse" : "50.668794, 4.624890",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "74",
-                     "coord": {
-                         "lat" : "50.668794",
-                         "lng": "4.624890"
-                     }
-                }
-            ]
-
-        },
-
-        {
-             "nom" : "Sciences humaines",
-             "auditoires" : [
+                 },
                  {
                      "nom"  : "Agora",
                      "sigle" : "AGOR",
@@ -427,9 +257,51 @@
                          "lng": "4.6113916"
                      }
                  }
-            ],
+             ],
+            
              "bibliotheques" : [
                  {
+                     "nom"  : "Bibliothèque des sciences et technologies",
+                     "sigle" : "BST",
+                     "adresse" : "3, Place des Sciences - Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/sciencesaccueil.jpg",
+                     "coord": {
+                         "lat" : "50.6681726",
+                         "lng": "4.6196554"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "2" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "3" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "4" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "5" : {
+                                "open" : "8.00",
+                                "close" : "18.00"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "12.00"
+                            }
+                        }
+                },
+                {
                      "nom"  : "Bibliothèque de droit",
                      "sigle" : "BDRT",
                      "adresse" : "Place Montesquieu 2 - Louvain-la-Neuve",
@@ -675,9 +547,52 @@
                             }
                         }
                  }
-
             ],
+
              "restaurants_universitaires" : [
+                 {
+                    "nom"  : "Le Galilée",
+                    "sigle" : "",
+                    "adresse" : "Place Galilée, 1 Louvain-La-Neuve",
+                    "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/facade-galilee.gif",
+                     "coord": {
+                         "lat" : "50.6679885",
+                         "lng": "4.6187452"
+                     },
+                    "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "2" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "3" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "4" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "5" : {
+                                "open" : "12",
+                                "close" : "14"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+
+                 },
                  {
                      "nom"  : "Le Sablon",
                      "sigle" : "",
@@ -779,7 +694,80 @@
                     "menu" : true
                  }
             ],
+
             "parkings" : [
+                {
+                     "nom"  : "Place des Sciences",
+                     "sigle" : "",
+                     "adresse" : "50.668186, 4.619424",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "155",
+                     "coord": {
+                         "lat" : "50.668186",
+                         "lng": "4.619424"
+                     }
+                },
+                {
+                     "nom"  : "Sainte-Barbe",
+                     "sigle" : "",
+                     "adresse" : "50.667591, 4.621585",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "182",
+                     "coord": {
+                         "lat" : "50.667591",
+                         "lng": "4.621585"
+                     }
+                },
+                {
+                     "nom"  : "Croix du Sud",
+                     "sigle" : "",
+                     "adresse" : "50.666377, 4.621854",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "569",
+                     "coord": {
+                         "lat" : "50.666377",
+                         "lng": "4.621854"
+                     }
+                },
+                {
+                     "nom"  : "Cyclotron",
+                     "sigle" : "",
+                     "adresse" : "50.666231, 4.624793",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "197",
+                     "coord": {
+                         "lat" : "50.666231",
+                         "lng": "4.624793"
+                     }
+                },
+                {
+                     "nom"  : "Baudouin Ier",
+                     "sigle" : "",
+                     "adresse" : "50.664218, 4.622218",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "210",
+                     "coord": {
+                         "lat" : "50.664218",
+                         "lng": "4.622218"
+                     }
+                },
+                {
+                     "nom"  : "Rédimé",
+                     "sigle" : "",
+                     "adresse" : "50.668794, 4.624890",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "74",
+                     "coord": {
+                         "lat" : "50.668794",
+                         "lng": "4.624890"
+                     }
+                },
                 {
                      "nom"  : "Magritte",
                      "adresse" : "50.665804, 4.611554",
@@ -853,6 +841,7 @@
                      }
                 }
             ]
-        }
-    ]
+
+
+    }
 }

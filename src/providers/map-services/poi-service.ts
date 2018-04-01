@@ -60,33 +60,35 @@ export class POIService {
       this.http.get(this.url).map(res => res.json()).subscribe(data => {
         let tmpZones = data.zones;
 
-        for (let zone of tmpZones) {
-          let auditoiresLength = zone.auditoires.length;
-          let bibliothequesLength = zone.bibliotheques.length;
-          let restauULength = zone.restaurants_universitaires.length;
-          let parkingsLength = zone.parkings.length;
+        //for (let zone of tmpZones) {
+          let auditoiresLength = tmpZones.auditoires.length;
+          let bibliothequesLength = tmpZones.bibliotheques.length;
+          let restauULength = tmpZones.restaurants_universitaires.length;
+          let parkingsLength = tmpZones.parkings.length;
 
           let newZone = {
-            name: zone.nom,
             auditoires: {
-              list: this.createMapLocations(zone.auditoires),
-              listChecked: Array(auditoiresLength).fill(false)},
+              list: this.createMapLocations(tmpZones.auditoires),
+              listChecked: Array(auditoiresLength).fill(false),
+                        showDetails: false},
             bibliotheques: {
-              list: this.createMapLocations(zone.bibliotheques),
-              listChecked: Array(bibliothequesLength).fill(false)},
+              list: this.createMapLocations(tmpZones.bibliotheques),
+              listChecked: Array(bibliothequesLength).fill(false),
+                        showDetails: false},
             restaurants_universitaires: {
-              list: this.createMapLocations(zone.restaurants_universitaires),
-              listChecked: Array(restauULength).fill(false)},
+              list: this.createMapLocations(tmpZones.restaurants_universitaires),
+              listChecked: Array(restauULength).fill(false),
+                        showDetails: false},
             parkings: {
-              list: this.createMapLocations(zone.parkings),
-              listChecked: Array(parkingsLength).fill(false)},
+              list: this.createMapLocations(tmpZones.parkings),
+              listChecked: Array(parkingsLength).fill(false),
+                        showDetails: false},
             icon: 'arrow-dropdown',
-            showDetails: false
+
           };
 
           this.zones.push(newZone);
-        }
-
+        //}
 
         resolve(this.zones);
       });

@@ -1,9 +1,8 @@
 {
    "author": "mdeman",
-   "zones" : [
+   "zones" : 
 
         {
-             "nom" : "UCL Mons",
              "auditoires" : [
                  {
                     "nom"  : "Bâtiment C",
@@ -140,5 +139,4 @@
                 }
             ]
         }
-    ]
 }
