@@ -22,21 +22,42 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { MapLocation } from '../../app/entity/mapLocation';
+import { UserService } from '../utils-services/user-service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class POIService {
 
   zones: any = [];
+  url = '';
+  urlLLN ='assets/data/resourcesLLN.json';
+  urlMons = 'assets/data/resourcesMons.json';
+  urlWol = 'assets/data/resourcesWoluwe.json'; 
+  old = '';
+  constructor(public http: Http,
 
-  constructor(public http: Http) {
+    public user: UserService) {
+    this.old = this.user.campus;
+    this.update();
 
   }
 
+  update(){
+    let campus = this.user.campus;
+    if(campus == "LLN") this.url = this.urlLLN;
+    if(campus == "Woluwe") this.url = this.urlWol;
+    if(campus == "Mons") this.url = this.urlMons;
+    if(campus != this.old) {
+      this.zones = [];
+      this.old = campus;
+    }
+  }
+
   public loadResources() {
+    this.update();
     if(this.zones.length == 0) return new Promise(resolve => {
 
-      this.http.get('assets/data/resources.json').map(res => res.json()).subscribe(data => {
+      this.http.get(this.url).map(res => res.json()).subscribe(data => {
         let tmpZones = data.zones;
 
         for (let zone of tmpZones) {
@@ -142,3 +163,4 @@ export class POIService {
     return x * Math.PI / 180;
   }*/
 }
+  

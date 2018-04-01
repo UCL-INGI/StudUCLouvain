@@ -1,0 +1,257 @@
+{
+   "author": "mdeman",
+   "zones" : [
+
+        {
+             "nom" : "Sciences de la santé (Woluwé)",
+             "auditoires" : [
+                 {
+                     "nom"  : "Centraux",
+                     "sigle" : "",
+                     "cnt_places": 1889,
+                     "cnt_auditoires" : 8,
+                     "adresse" : "Avenue Emmanuel Mounier, 51 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolcent.gif",
+                     "coord": {
+                         "lat" : "50.8509698",
+                         "lng": "4.4542779"
+                     }
+                 },
+                 {
+                     "nom"  : "Ecole médecine dentaire",
+                     "sigle" : "EMDS",
+                     "cnt_places": 200,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Avenue Hippocrate, 10 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/semiemds.gif",
+                     "coord": {
+                         "lat" : "50.8522457",
+                         "lng": "4.4519002"
+                     }
+                 },
+                 {
+                     "nom"  : "Pavillon des conférences",
+                     "sigle" : "",
+                     "cnt_places": 290,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Clos Chapelle-aux-Champs, 19 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolconf.gif",
+                     "coord": {
+                         "lat" : "50.8495171",
+                         "lng": "4.4491625"
+                     }
+                 },
+                 {
+                     "nom"  : "Roi Baudouin",
+                     "sigle" : "",
+                     "cnt_places": 862,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Avenue Emmanuel Mounier - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolbaud.gif",
+                     "coord": {
+                         "lat" : "50.8510608",
+                         "lng": "4.4526039"
+                     }
+                 },
+                 {
+                     "nom"  : "Vecquée",
+                     "sigle" : "",
+                     "cnt_places": 202,
+                     "cnt_auditoires" : 9,
+                     "adresse" : "Passage de la Vecquée, 17 - Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolvecq.gif",
+                     "coord": {
+                         "lat" : "50.8495217",
+                         "lng": "4.4519407"
+                     }
+                 }
+            ],
+             "bibliotheques" : [
+                 {
+                     "nom"  : "Bibliothèque des sciences de la santé",
+                     "sigle" : "BSS",
+                     "adresse" : "50, Avenue Hippocrate - 1200 Bruxelles",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/bmd.JPG",
+                     "coord": {
+                         "lat" : "50.8517128",
+                         "lng": "4.4546206"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "2" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "3" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "4" : {
+                                "open" : "9.00",
+                                "close" : "19.00"
+                            },
+                            "5" : {
+                                "open" : "9.00",
+                                "close" : "18.00"
+                            },
+                            "6" : {
+                                "open" : "9.00",
+                                "close" : "13.00"
+                            }
+                        }
+                 }
+            ],
+             "restaurants_universitaires" : [
+                 {
+                     "nom"  : "Martin V",
+                     "sigle" : "",
+                     "adresse" : "Jardin Martin V, Woluwé",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/tableau-noir-MV.gif",
+                     "coord": {
+                         "lat" : "50.850124",
+                         "lng": "4.455794"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "2" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "3" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "4" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "5" : {
+                                "open" : "12.00",
+                                "close" : "14.00"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        },
+                    "menu" : true
+                 },
+                 {
+                     "nom"  : "D'un pain à l'autre (Wol.)",
+                     "sigle" : "",
+                     "adresse" : "Jardin Martin V Louvain-en-Woluwe ",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/sru/images/tartine-2.gif",
+                     "coord": {
+                         "lat" : "50.850124",
+                         "lng": "4.455794"
+                     },
+                     "horaires_periode_cours" :
+                        {
+                            "0" : {
+                                "open" : "0",
+                                "close" : "0"
+                            },
+                            "1" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "2" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "3" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "4" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "5" : {
+                                "open" : "11.00",
+                                "close" : "14.30"
+                            },
+                            "6" : {
+                                "open" : "0",
+                                "close" : "0"
+                            }
+                        } ,
+                    "menu" : true
+                 }
+            ],
+            "parkings" : [
+                {
+                     "nom"  : "Esplanade",
+                     "sigle" : "",
+                     "adresse" : "50.853173, 4.449669",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.853173",
+                         "lng": "4.449669"
+                     }
+                },
+                {
+                     "nom"  : "Hippocrate",
+                     "sigle" : "",
+                     "adresse" : "50.852943, 4.454015",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.852943",
+                         "lng": "4.454015"
+                     }
+                },
+                {
+                     "nom"  : "Palestre",
+                     "sigle" : "",
+                     "adresse" : "50.852089, 4.459025",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.852089",
+                         "lng": "4.459025"
+                     }
+                },
+                {
+                     "nom"  : "Mounier",
+                     "sigle" : "",
+                     "adresse" : "50.849766, 4.458596",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public - 4 heures gratuites",
+                     "coord": {
+                         "lat" : "50.849766",
+                         "lng": "4.458596"
+                     }
+                },
+                {
+                     "nom"  : "Assomption",
+                     "sigle" : "",
+                     "adresse" : "50.848005, 4.450388",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Parking public",
+                     "coord": {
+                         "lat" : "50.848005",
+                         "lng": "4.450388"
+                     }
+                }
+            ]
+        }
+    ]
+}

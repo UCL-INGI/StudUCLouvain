@@ -63,7 +63,7 @@ convertXmlToJson(xml) : any{
   }
 
   public getSports(segment:string) {
-    console.log("start get");
+    //console.log("start get");
     this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {
@@ -81,10 +81,10 @@ convertXmlToJson(xml) : any{
             
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
-          console.log("end get OK");
+         // console.log("end get OK");
         },
         err => {
-              console.log("end get ERR");
+              //console.log("end get ERR");
           reject(err);
         });
     });
@@ -116,7 +116,7 @@ convertXmlToJson(xml) : any{
   }
 
   private extractSports(data: any, isSport:boolean) {
-    console.log("start extract");
+    //console.log("start extract");
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;
