@@ -140,8 +140,9 @@ export class MapPage {
   onSelect(data:any){
     if(this.selectedLocation !== data){
       this.selectedLocation = data;
-      this.mapService.addMarker(this.selectedLocation);
+      
     }
+    this.mapService.addMarker(this.selectedLocation);
   }
 
   private disableMap() {
