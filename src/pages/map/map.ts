@@ -95,6 +95,7 @@ export class MapPage {
       this.onSelect(data);
     } else {
       this.removeShowedLocations(data);
+      this.mapService.removeMarker(data);
     }
   }
 

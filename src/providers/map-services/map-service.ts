@@ -232,6 +232,7 @@ export class MapService {
   }
 
   addMarker(location: MapLocation) {
+    //console.log(this.markers);
     let marker = this.getMarker(location.title);
 
     if(!marker) {
@@ -247,7 +248,26 @@ export class MapService {
         marker.showInfoWindow();
       }
     }
+    //console.log(this.markers);
+}
+
+    removeMarker(location: MapLocation) {
+      //console.log(location);
+      //console.log(this.markers);
+      for(var i=0;i<this.markers.length; i++){
+         if(this.markers[i].getTitle() === location.title) {
+          //console.log(this.markers[i]);
+          this.markers[i].setMap(null);
+          //this.markers[i]=null;
+          this.markers.splice(i,1);
+          //console.log(this.markers);
+        }
+      }
+
+            
+
   }
+
 
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
 
@@ -298,8 +318,9 @@ export class MapService {
   private getMarker(title: string) : Marker{
     let res = null;
     this.markers.map((marker) => {
-      if(marker.getTitle() == title) {
-        return marker;
+
+      if(marker.getTitle() === title) {
+        res=marker;
       }
     });
     return res;
