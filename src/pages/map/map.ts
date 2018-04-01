@@ -92,6 +92,7 @@ export class MapPage {
   toggleLocation(data, checkList, index) {
     if (checkList[index] === true) {
       this.addShowedLocations(data);
+      this.onSelect(data);
     } else {
       this.removeShowedLocations(data);
     }
@@ -133,6 +134,13 @@ export class MapPage {
       this.enableMap();
     });
 
+  }
+
+  onSelect(data:any){
+    if(this.selectedLocation !== data){
+      this.selectedLocation = data;
+      this.mapService.addMarker(this.selectedLocation);
+    }
   }
 
   private disableMap() {

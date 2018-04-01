@@ -38,13 +38,7 @@
   <div id="container">
     <div #map id="map"></div>
   </div>
-  <ion-card>
-    <ion-item (tap)="presentSelector()" text-wrap>
-      <ion-icon name="create" item-left large></ion-icon>
-      <h2>{{selectedLocation.title}}</h2>
-      <p>{{selectedLocation.address}}</p>
-    </ion-item>
-  </ion-card>
+
   <!--<ion-item>
     <button ion-button block (tap)="presentFilter()" [hidden]="showLocationList" icon-right>
       Afficher les points d'intérêt
