@@ -52,7 +52,7 @@
 
     <ion-row padding text-wrap>
       <ion-list>
-        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract"> <p>({{c.grade}})</p></ion-item>
+        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract"> <p *ngIf="c.grade!=null">({{c.grade}})</p></ion-item>
         <ion-item *ngFor="let emp of empDetails.departments.department">
           <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
           <p *ngIf="emp.linkType == 'Appartenance'"><ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
@@ -95,8 +95,8 @@
             <ion-col> N° tél. </ion-col>
             <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
           </ion-row>
-          <ion-row> 
-            <ion-col> Secrétariat </ion-col>
+          <ion-row *ngIf="contact.secretary!=null"> 
+            <ion-col > Secrétariat </ion-col>
             <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
           </ion-row>
         </ion-card>

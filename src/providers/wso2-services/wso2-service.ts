@@ -12,7 +12,8 @@ import { wso2Header } from '../../app/variables-config';
 @Injectable()
 export class Wso2Service {
 
-  wso2ServiceBaseUrl = 'https://esb-test.sipr.ucl.ac.be:8248/';
+  wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
+  //wso2ServiceBaseUrl = 'https://esb-test.sipr.ucl.ac.be:8248/';
   options: RequestOptions;
 
   constructor(public http: Http) {

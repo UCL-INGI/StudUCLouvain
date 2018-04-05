@@ -30,7 +30,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class RepertoireService {
   employees:Array<EmployeeItem> = [];
-  url = 'employees/v1/';
+  url = 'directories/v1/employees/';
   options: any;
 
   constructor(public http: Http, private wso2Service: Wso2Service) {
@@ -53,14 +53,14 @@ export class RepertoireService {
   public searchEmployees(options:Array<string>, values:Array<string>){
     this.employees = [];
     let newUrl = this.url ;
-    newUrl += "*?";
+    newUrl += "search?";
     for(var i=0; i<options.length; i++){
       newUrl += options[i] + "=" + values[i];
       if(i!= options.length-1){
         newUrl += "&";
       }
     }
-    newUrl += "&directory=E";
+    //newUrl += "&directory=E";
     return new Promise(resolve => {
 
       this.wso2Service.load(newUrl).subscribe(
