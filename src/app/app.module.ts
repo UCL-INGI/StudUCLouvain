@@ -84,6 +84,7 @@ import { NewsService } from '../providers/rss-services/news-service';
 import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { AdeService } from '../providers/studies-services/ade-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { StudentService } from '../providers/wso2-services/student-service';
 import { SportsService } from '../providers/rss-services/sports-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 
@@ -194,7 +195,8 @@ export function HttpLoaderFactory(http: Http) {
     Wso2Service,
     NativeGeocoder,
     SportsService,
-    RepertoireService
+    RepertoireService,
+    StudentService
   ]
 })
 export class AppModule {}

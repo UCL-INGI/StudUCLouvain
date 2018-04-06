@@ -27,6 +27,8 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { StudiesService} from '../../providers/studies-services/studies-service';
+import { StudentService} from '../../providers/wso2-services/student-service';
+import { Wso2Service} from '../../providers/wso2-services/wso2-service';
 import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
 
@@ -50,6 +52,12 @@ export class StudiesPage {
   public title: any;
   public sessionId: string;
   public project : AdeProject = null;
+  private username:string = "";
+  private password: string = "";
+  private error:string = "";
+  private status: string = "";
+  //private token:string = "";
+  activities: any;
 
   constructor(
     public studiesService: StudiesService,
@@ -63,12 +71,58 @@ export class StudiesPage {
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private wso2Service: Wso2Service,
+              private studentService: StudentService
   ) {
     this.title = this.navParams.get('title');
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
+  }
+
+
+  private login(){
+  	//console.log("username",this.username);
+  	//console.log("pass",this.password);
+  	this.error = "";
+  	return new Promise(resolve => {
+
+      this.wso2Service.login(this.username,this.password)
+      .catch(error => {
+      	console.log(error); 
+      	if(error.status == 400) this.error = "Bad login/password";
+      	else this.error = "There is a problem ?"
+      	return error;
+      })
+      .subscribe(
+        data => {
+          if(data!=null){
+            this.status=data.toString();
+            //console.log(this.status);
+            resolve(data);
+          }
+        })
+      ;
+    });
+  }
+
+  loadActivities(){
+  	console.log(this.status);
+
+  	this.login().then((res) => {
+	  	console.log(this.status);
+	  	if(this.status){
+	  		console.log("chelou");
+	  		this.studentService.searchActivities().then((res) => {
+	  			let result:any = res;
+	  			this.activities = result.activities.activity;
+	  			//console.log(this.activities.activity);
+	  		});
+
+	  	}
+  	});
+
   }
 
   openModalProject(){

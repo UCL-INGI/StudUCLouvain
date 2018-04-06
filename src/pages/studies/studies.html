@@ -78,7 +78,35 @@
   </ion-fab>
 
 </ion-content>
+
 <ion-content padding  *ngIf="segment==='prog'">
-<p align="center">Indisponible pour le moment</p>
+  <form #loginForm="ngForm" (ngSubmit)="loadActivities()" autocomplete="off" *ngIf="!status">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-input placeholder="Username" name="username" id="loginField" type="text" required [(ngModel)]="username" #userName></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div text-center *ngIf="error" class="alert alert-danger" style="color: red"><b>{{error}}</b></div>
+        <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <ion-list *ngIf="status">
+    <ion-item *ngFor="let activity of activities">
+      {{activity}}
+    </ion-item>
+  </ion-list>
+
 </ion-content>
+
 </ion-content>

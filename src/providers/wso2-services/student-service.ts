@@ -21,59 +21,44 @@
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { EmployeeItem } from '../../app/entity/employeeItem';
 import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
 
 @Injectable()
-export class RepertoireService {
-  employees:Array<EmployeeItem> = [];
-  url = 'directories/v1/employees/';
+export class StudentService {
+  activities: Array<String> = [];
+  url = 'my/v0/student/';
   options: any;
 
   constructor(public http: Http, private wso2Service: Wso2Service) {
   }
 
 
-  public searchEmployees(options:Array<string>, values:Array<string>){
-    this.employees = [];
+  public searchActivities(){
+    this.activities = [];
     let newUrl = this.url ;
-    newUrl += "search?";
-    for(var i=0; i<options.length; i++){
-      newUrl += options[i] + "=" + values[i];
-      if(i!= options.length-1){
-        newUrl += "&";
-      }
-    }
-    //newUrl += "&directory=E";
+    newUrl += "activities";
     return new Promise(resolve => {
 
-      this.wso2Service.load(newUrl).subscribe(
+      this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
-          if(data.persons!=null){
-            this.extractEmployees(data.persons.person);
-            resolve({employees:this.employees});
+          console.log(data);
+          if(data.activities!=null){
+            console.log(data);
+            resolve({activities : data.activities});
+            //return data.activities;
+            //this.extractEmployees(data.persons.person);
+            //resolve({employees:this.employees});
           }
         });
     });
   }
 
-  public loadEmpDetails(emp:EmployeeItem){
-    return new Promise(resolve => {
 
-      let url_details = this.url + emp.matric_fgs + "/detail";
 
-      this.wso2Service.load(url_details).subscribe(
-        data => {
-          emp = this.extractEmployeeDetails(emp, data.businessInformation);
-          resolve({empDetails:emp});
-        });
-    });
-  }
-
-  private extractEmployees(data: any){
+  /*private extractEmployees(data: any){
     if(data!=null){
       for (let i = 0; i < data.length; i++) {
         let item = data[i];
@@ -81,15 +66,7 @@ export class RepertoireService {
         this.employees.push(employee);
       }
     }
-  }
+  }*/
 
-  private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
-    emp.address = data.address
-    emp.contracts = data.contracts;
-    emp.businessContacts = data.businessContacts;
-    emp.gender = data.gender;
-    emp.photo_url = data.photo_url;
-    //let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
-    return emp;
-  }
+
 }
