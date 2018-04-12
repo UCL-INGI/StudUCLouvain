@@ -44,11 +44,11 @@
   </ion-segment>
 </ion-header>
 
-
-<ion-content class="feed-list">
+<!--class="feed-list" -->
+<ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
-  <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0">
+  <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0" >
         <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)" text-center>
           {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
         </ion-item-divider>

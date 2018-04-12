@@ -120,13 +120,14 @@
     </div>
   </ion-item>
 
-  <ion-item-divider  (tap)="toggleGroup('rep')">
+  <ion-item-divider  (tap)="toggleGroup('rep')" no-lines>
     Répertoire
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('rep')">
-    <div item-content>
-        <ion-list no-lines>
+ 
+    <ion-card [hidden]="!isGroupShown('rep')">
+      <ion-card-content>
+        <ion-list no-lines class="ilist">
           <ion-item no-lines [(ngModel)]="lastname">
             <ion-label color="primary">Nom</ion-label>
             <ion-input type="text" placeholder="nom"></ion-input>
@@ -149,8 +150,9 @@
           </button>
           </ion-item>
         </ion-list>
-    </div>
-  </ion-item>
+    </ion-card-content>
+  </ion-card>
+
   <!--
   <ion-list>
     <ion-item *ngFor="let info of information; let i=index" text-wrap (tap)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
