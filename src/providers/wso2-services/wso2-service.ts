@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { wso2Header } from '../../app/variables-config';
+//import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../app/variables-config';
 import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Rx';
