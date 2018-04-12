@@ -44,6 +44,7 @@ import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/homeC';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
+import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -77,12 +78,14 @@ export class MyApp {
     private user: UserService,
     private statusBar: StatusBar,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private wso2Service : Wso2Service
   ) {
     this.user.getCampus();
     console.log(this.user.campus);
     this.alertPresented = false;
     this.initializeApp();
+    this.wso2Service.getToken();
     this.homePage =
       {title: 'MENU.HOME', component: HomePage, icon: 'home',
       iosSchemaName: null, androidPackageName: null,
