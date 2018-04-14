@@ -41,7 +41,6 @@ export class LibrariesService {
 
   public loadLibraries(){
     this.libraries = [];
-
     return new Promise(resolve => {
 
       this.wso2Service.load(this.url).subscribe(

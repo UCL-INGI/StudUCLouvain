@@ -34,7 +34,7 @@ import { AdeProject } from '../../app/entity/adeProject';
 
 import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
-import { Activity } from '../../app/entity/activity';
+//import { Activity } from '../../app/entity/activity';
 import { Calendar } from '@ionic-native/calendar';
 
 
@@ -90,7 +90,7 @@ export class StudiesPage {
 
       this.wso2Service.login(this.username,this.password)
       .catch(error => {
-      	console.log(error); 
+      	console.log(error);
       	if(error.status == 400) this.error = "Bad login/password";
       	else this.error = "There is a problem ?"
       	return error;
@@ -108,12 +108,12 @@ export class StudiesPage {
   }
 
   loadActivities(){
-  	console.log(this.status);
+  	//console.log(this.status);
 
   	this.login().then((res) => {
-	  	console.log(this.status);
+	  	//console.log(this.status);
 	  	if(this.status){
-	  		console.log("chelou");
+	  		//console.log("chelou");
 	  		this.studentService.searchActivities().then((res) => {
 	  			let result:any = res;
 	  			this.activities = result.activities.activity;
