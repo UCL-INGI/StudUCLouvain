@@ -190,6 +190,33 @@ export class StudiesPage {
     prompt.present();
   }
 
+  showPromptAddCourse(sigle : string) {
+    let prompt = this.alertCtrl.create({
+      title: 'Ajout d\'un cours au projet ADE',
+      message: "Entrez le nom du cours",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Nom du cours'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Sauver',
+          handler: data => {
+            this.saveCourse(data.name, sigle);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
   getCourses(){
     this.storage.get('listCourses').then((data) =>
     {
