@@ -117,7 +117,7 @@ export class StudiesPage {
 	  		this.studentService.searchActivities().then((res) => {
 	  			let result:any = res;
 	  			this.activities = result.activities.activity;
-	  			//console.log(this.activities.activity);
+	  			console.log(this.activities.activity);
 	  		});
 
 	  	}

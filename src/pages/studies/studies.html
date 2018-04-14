@@ -102,9 +102,18 @@
     </ion-row>
   </form>
   <ion-list *ngIf="status">
-    <ion-item *ngFor="let activity of activities">
-      {{activity}}
-    </ion-item>
+    <ion-list *ngFor="let activity of activities">
+    <ion-item-sliding #slidingItem>
+      <ion-item>
+        {{activity}}
+      </ion-item>
+      <ion-item-options>
+        <button ion-button outline (tap)="saveCourse(activity, activity)" class="large-icon">
+          <ion-icon name='add-circle'></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    </ion-list>
   </ion-list>
 
 </ion-content>
