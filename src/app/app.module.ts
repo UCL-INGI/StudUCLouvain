@@ -24,7 +24,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
-//import { Market } from '@ionic-native/market';
+import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SQLite } from '@ionic-native/sqlite';
@@ -175,7 +175,7 @@ export function HttpLoaderFactory(http: Http) {
     EventsService,
     InAppBrowser,
     MapService,
-    //Market,
+    Market,
     POIService,
     SQLite,
     UserService,

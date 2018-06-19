@@ -24,7 +24,7 @@ import { MenuController, Nav, Platform, AlertController,LoadingController } from
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-//import { Market } from '@ionic-native/market';
+import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -69,7 +69,7 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public menu: MenuController,
-    //public market: Market,
+    public market: Market,
     private appAvailability : AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
@@ -239,7 +239,7 @@ export class MyApp {
         browser.close();
   		},
   		() => { // error callback
-  			//this.market.open(app);
+  			this.market.open(app);
   		}
   	);
   }

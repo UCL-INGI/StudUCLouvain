@@ -24,7 +24,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
-
+import { Market } from '@ionic-native/market';
 import { CarpoolingPage } from './carpooling/carpooling';
 import { BusPage } from './bus/bus';
 import { TrainPage } from './train/train';
@@ -39,8 +39,9 @@ export class MobilityPage {
   carpoolingPage;
   busPage;
   trainPage;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+              public market: Market,
+              public navParams: NavParams,
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
@@ -83,7 +84,7 @@ export class MobilityPage {
         browser.close();
       },
       () => { // error callback
-        //this.market.open(app);
+        this.market.open(app);
       }
     );
   }
