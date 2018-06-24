@@ -27,6 +27,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { UserService } from '../../providers/utils-services/user-service';
 import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Market } from '@ionic-native/market';
 
 
 import { EventsPage } from '../events/events';
@@ -105,6 +106,7 @@ export class HomePage {
               private device: Device,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
+              public market: Market,
               public loadingCtrl: LoadingController
             )
   {
@@ -165,7 +167,7 @@ export class HomePage {
         browser.close();
       },
       () => { // error callback
-        //this.market.open(app);
+        this.market.open(app);
       }
     );
   }
