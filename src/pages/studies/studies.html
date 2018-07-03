@@ -33,25 +33,25 @@
   </ion-navbar>
 
     <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="cours">
-      Horaires
-    </ion-segment-button>
     <ion-segment-button value="prog">
-      Programme de cours
+      {{'STUDY.PROGRAM' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="cours">
+      {{'STUDY.HORAIRE' | translate}}
     </ion-segment-button>
   </ion-segment>
 
 </ion-header>
 
-<ion-menu id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
+<ion-menu persistent=true id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
   <button ion-item (tap)="launch('http://www.uclouvain.be/')"> uclouvain.be </button>
   <button ion-item (tap)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </button>
-  <button ion-item (tap)="openModalProject()"> Changer projet ADE </button>
+  <button ion-item (tap)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </button>
 </ion-menu>
 <ion-content padding #studiesContent>
 <ion-content padding *ngIf="segment==='cours'">
 
-  <h4 text-center *ngIf="project!==null"> Vous êtes sur le projet ADE : {{project.name}}  </h4>
+  <h4 text-center *ngIf="project!==null"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
 
   <ion-list >
     <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
@@ -61,11 +61,11 @@
       <ion-item-options side="right">
         <button ion-button (tap)="addCourseToCalendar(slidingItem, course)" >
           <ion-icon name="calendar"></ion-icon>
-            Calendar
+            {{'STUDY.CALENDAR' | translate}}
         </button>
         <button ion-button (tap)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
-            Supprimer
+            {{'STUDY.DEL' | translate}}
         </button>
       </ion-item-options>
     </ion-item-sliding>
@@ -85,7 +85,7 @@
       <ion-col>
         <ion-list inset>
           <ion-item>
-            <ion-input placeholder="Username" name="username" id="loginField" type="text" required [(ngModel)]="username" #userName></ion-input>
+            <ion-input placeholder="Username" name="username" id="loginField" type="text" required [(ngModel)]="username" #userName autocapitalize="none"></ion-input>
           </ion-item>
           <ion-item>
             <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
@@ -119,3 +119,7 @@
 </ion-content>
 
 </ion-content>
+<ion-footer text-center *ngIf="segment=='cours'">
+  <li> Swipe sur la gauche pour supprimer un cours
+   ou l'ajouter à ton agenda.</li>
+</ion-footer>

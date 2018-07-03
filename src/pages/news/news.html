@@ -29,13 +29,13 @@
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="loadEvents()">
     <ion-segment-button value="P1">
-      Les études
+      {{'NEWS.STUDY' | translate}}
     </ion-segment-button>
     <ion-segment-button value="P2">
-      La recherche
+      {{'NEWS.SEARCH' | translate}}
     </ion-segment-button>
     <ion-segment-button value="P3">
-      Le service à la société
+      {{'NEWS.SERVICE' | translate}}
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -60,6 +60,6 @@
     </ion-item>
   </ion-list>
   <ion-list-header *ngIf="nonews && !searching">
-    Pas d'actualité à afficher...
+    {{'NEWS.NOTHING' | translate}}
   </ion-list-header>
 </ion-content>

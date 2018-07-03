@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, NavController, App, AlertController, LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
@@ -28,6 +28,7 @@ import { UserService } from '../../providers/utils-services/user-service';
 import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Market } from '@ionic-native/market';
+
 
 
 import { EventsPage } from '../events/events';
@@ -39,10 +40,12 @@ import { StudiesPage } from '../studies/studies';
 import { MapPage } from '../map/map';
 import { HelpDeskPage } from '../help-desk/help-desk';
 import { SportsPage } from '../sports/sports';
+import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
 
 @Component({
   selector: 'page-homeC',
   templateUrl: 'homeC.html',
+  
 })
 export class HomePage {
 //  @ViewChild('Nav') nav: Nav;
@@ -87,6 +90,10 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
+  guindaillePage = { title: 'MENU.PARTY', component: GuindaillePage,
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
   restoPage = { title: 'MENU.RESTAURANT', component: RestaurantPage,
     iosSchemaName: 'com.apptree.resto4u',
     androidPackageName: 'com.apptree.resto4u',
@@ -115,6 +122,7 @@ export class HomePage {
       }
 
       this.app.setTitle(this.title);
+
   }
 
   updateCampus(){

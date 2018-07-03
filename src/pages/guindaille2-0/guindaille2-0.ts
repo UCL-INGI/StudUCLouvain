@@ -23,6 +23,7 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-guindaille2-0',
@@ -40,6 +41,29 @@ import { AlertController } from 'ionic-angular';
 export class GuindaillePage {
   title: any;
   shownGroup = null;
+
+  /*alt:string;
+  this.translateService.get('PIC1').subscribe((res:string) => {this.alt=res;});
+
+  altTitle:string;
+  noise:string;
+  noiseTitle:string;
+  water:string;
+  waterTitle:string;
+  where:string;
+  whereTitle:string;
+  can:string;
+  canTitle:string;
+  condom:string;
+  condomTitle:string;
+  rac:string;
+  racTitle:string;
+  pee:string;
+  peeTitle:string;
+  out:string;
+  outTitle:string;
+  viol:string;
+  violTitle:string;*/
 
   alterner = { title: 'Alterner',
       subTitle: 'Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…',
@@ -119,7 +143,7 @@ export class GuindaillePage {
         image: "assets/img/guindaille/6.png",
       }];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private translateService: TranslateService, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {
     this.title = this.navParams.get('title');
   }
 

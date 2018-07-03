@@ -36,6 +36,7 @@ import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
 //import { Activity } from '../../app/entity/activity';
 import { Calendar } from '@ionic-native/calendar';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 
 @Component({
@@ -46,7 +47,7 @@ import { Calendar } from '@ionic-native/calendar';
 export class StudiesPage {
   public people: any;
   public data : any;
-  segment = 'cours';
+  segment = 'prog';
   public listCourses: Course[];
   public course : Course;
   public title: any;
@@ -71,11 +72,13 @@ export class StudiesPage {
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
+    public connService : ConnectivityService,
               private translateService: TranslateService,
               private wso2Service: Wso2Service,
               private studentService: StudentService
   ) {
     this.title = this.navParams.get('title');
+
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
@@ -91,8 +94,8 @@ export class StudiesPage {
       this.wso2Service.login(this.username,this.password)
       .catch(error => {
       	console.log(error);
-      	if(error.status == 400) this.error = "Bad login/password";
-      	else this.error = "There is a problem ?"
+      	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res:string) => {this.error=res;});
+      	else this.translateService.get('STUDY.ERROR').subscribe((res:string) => {this.error=res;});
       	return error;
       })
       .subscribe(
@@ -136,51 +139,68 @@ export class StudiesPage {
   }
 
   initializeSession(){
-    this.studiesService.openSession().then(
-      data => {
-        this.sessionId = data;
-        this.storage.get('adeProject').then(
-          (data) => {
-            this.project=data;
-            if (this.project === null) {
-              this.openModalProject();
-            } else {
-              this.studiesService.setProject(this.sessionId,this.project.id).then(
-                data => {
-                  console.log("setProject");
-                }
-              );
+    if(this.connService.isOnline()) {
+      this.studiesService.openSession().then(
+        data => {
+          this.sessionId = data;
+          this.storage.get('adeProject').then(
+            (data) => {
+              this.project=data;
+              if (this.project === null) {
+                this.openModalProject();
+              } else {
+                this.studiesService.setProject(this.sessionId,this.project.id).then(
+                  data => {
+                    console.log("setProject");
+                  }
+                );
+              }
             }
-          }
-        )
-    });
+          )
+      });
+    }  
+     else {
+      this.connService.presentConnectionAlert();
+    }
   }
 
 
 
 
   showPrompt() {
+    let addcourse:string;
+    let message:string;
+    let name:string;
+    let sigle: string;
+    let cancel:string;
+    let save:string;
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res:string) => {addcourse=res;});
+    this.translateService.get('STUDY.MESSAGE').subscribe((res:string) => {message=res;});
+    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
+    this.translateService.get('STUDY.SIGLE').subscribe((res:string) => {sigle=res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
     let prompt = this.alertCtrl.create({
-      title: 'Ajout d\'un cours',
-      message: "Entrez le nom et le sigle du cours à ajouter",
+      title: addcourse,
+      message: message,
       inputs: [
         {
           name: 'name',
-          placeholder: 'Nom du cours'
+          placeholder: name
         },
         {
           name: 'acronym',
-          placeholder: 'Sigle du cours'
+          placeholder: sigle
         }
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: data => {
           }
         },
         {
-          text: 'Sauver',
+          text: save,
           handler: data => {
             this.saveCourse(data.name, data.acronym);
           }
@@ -191,23 +211,33 @@ export class StudiesPage {
   }
 
   showPromptAddCourse(sigle : string) {
+    let addcourse:string;
+    let message:string;
+    let name:string;
+    let cancel:string;
+    let save:string;
+    this.translateService.get('STUDY.ADDCOURSE2').subscribe((res:string) => {addcourse=res;});
+    this.translateService.get('STUDY.MESSAGE2').subscribe((res:string) => {message=res;});
+    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
     let prompt = this.alertCtrl.create({
-      title: 'Ajout d\'un cours au projet ADE',
-      message: "Entrez le nom du cours",
+      title: addcourse,
+      message: message,
       inputs: [
         {
           name: 'name',
-          placeholder: 'Nom du cours'
+          placeholder: name
         }
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: data => {
           }
         },
         {
-          text: 'Sauver',
+          text: save,
           handler: data => {
             this.saveCourse(data.name, sigle);
           }
@@ -261,8 +291,11 @@ export class StudiesPage {
       this.calendar.createEventWithOptions(course.name +" : " + activity.type,
         activity.auditorium, null, activity.start,activity.end, options);
     }
+    let message:string;
+    this.translateService.get('STUDY.MESSAGE3').subscribe((res:string) => {message=res;});
+
     let toast = this.toastCtrl.create({
-      message: 'Activités ajoutées',
+      message: message,
       duration: 3000
     });
     toast.present();

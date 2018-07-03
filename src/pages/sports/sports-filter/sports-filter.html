@@ -22,15 +22,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (tap)="dismiss()">Annuler</button>
+      <button ion-button (tap)="dismiss()">{{'SPORTS.CANCEL' | translate}}</button>
     </ion-buttons>
 
     <ion-title>
-      Filtre
+      {{'SPORTS.FILTER' | translate}}
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (tap)="applyFilters()" strong>Appliquer</button>
+      <button ion-button (tap)="applyFilters()" strong>{{'SPORTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -40,19 +40,19 @@
   <ion-toolbar>
   <ion-buttons left>
     <button ion-button icon-right end (tap)="uncheckAll()">
-      Tout décocher
+      {{'SPORTS.UNTOGGLE' | translate}}
       <ion-icon name="done-all"></ion-icon>
     </button>
   </ion-buttons>
   <ion-buttons end>
     <button ion-button icon-right (tap)="resetFilters()">
-      Restaurer le filtre
+      {{'SPORTS.RESTORE' | translate}}
       <ion-icon name="refresh-circle"></ion-icon>
     </button>
   </ion-buttons>
 </ion-toolbar>
   <ion-list>
-    <ion-list-header>Sports</ion-list-header>
+    <ion-list-header>{{'SPORTS.SPORTS' | translate}}</ion-list-header>
 
     <ion-item *ngFor="let category of categories">
       <ion-label>{{category.name}}</ion-label>

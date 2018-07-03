@@ -100,6 +100,10 @@ export class SportsPage {
     this.presentLoading();
   }
 
+  public doRefresh(refresher) {
+    this.loadSports();
+    refresher.complete();
+  }
 
   presentLoading() {
     if(!this.loading){
@@ -308,13 +312,17 @@ export class SportsPage {
     if (this.user.hasFavoriteS(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
-      this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
+      let message:string;
+      this.translateService.get('SPORTS.MESSAGEFAV').subscribe((res:string) => {message=res;});
+      this.removeFavorite(slidingItem, itemData, message);
     } else {
       // remember this session as a user favorite
       this.user.addFavoriteS(itemData.guid);
-
+      let message:string;
+      this.translateService.get('SPORTS.FAVADD').subscribe((res:string) => {message=res;});
+      
       let toast = this.toastCtrl.create({
-        message: 'Ajouté aux favoris',
+        message: message,
         duration: 3000
       });
       toast.present();
@@ -324,12 +332,18 @@ export class SportsPage {
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
+    let message:string;
+    let delet:string;
+    let cancel:string;
+    this.translateService.get('SPORTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
+    this.translateService.get('SPORTS.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('SPORTS.DEL').subscribe((res:string) => {delet=res;});
     let alert = this.alertCtrl.create({
       title: title,
-      message: 'Souhaitez vous retirer ce sport des favoris ?',
+      message: message,
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: () => {
             // they clicked the cancel button, do not remove the session
             // close the sliding item and hide the option buttons
@@ -337,7 +351,7 @@ export class SportsPage {
           }
         },
         {
-          text: 'Supprimer',
+          text: delet,
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavoriteS(itemData.guid);

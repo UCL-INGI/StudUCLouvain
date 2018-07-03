@@ -47,7 +47,10 @@ export class MobilityPage {
               private device: Device,
               private translateService: TranslateService) {
     this.title = this.navParams.get('title');
-    this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage,
+    let titlecar:string;
+    this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
+
+    this.carpoolingPage = { title: titlecar, component: CarpoolingPage,
                             iosSchemaName: 'net.commuty.mobile',
                             androidPackageName: 'net.commuty.mobile',
                             appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };

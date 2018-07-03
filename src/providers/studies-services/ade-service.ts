@@ -81,7 +81,7 @@ export class AdeService {
      })
   }
 
-  httpGeActivity(sessionId : string , courseId : string){
+  httpGetActivity(sessionId : string , courseId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +"&function=getActivities&resources="+ courseId

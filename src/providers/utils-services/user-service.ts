@@ -33,6 +33,7 @@ export class UserService {
   favorites: string[] = [];
   sports: string[] = [];
   campus: string = "";
+  slots: Array<{course:string, TP:string, CM:string}> = [];
 
   constructor(
     public eventss: Events,
@@ -44,6 +45,7 @@ export class UserService {
     //this.storage.set('campus',"");
     this.getCampus();
     this.getSports();
+    this.getSlots();
   }
 
   getFavorites(){
@@ -68,9 +70,70 @@ export class UserService {
     });
   }
 
+
+  getCampus(){
+    this.storage.get('campus').then((data) =>
+    {
+      if(data == null){
+        this.campus = "";
+      } else {
+        this.campus=data; 
+        }
+    });
+  }
+
+  getSlots(){
+    this.storage.get('slots').then((data) =>
+    {
+      if(data==null){
+        this.slots = [];
+      }
+      else{
+        this.slots = data;
+      }
+    })
+  }
+
+  getSlotCM(acronym:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index>-1) return this.slots[index].CM;
+    else return "";
+  }
+
+  getSlotTP(acronym:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index>-1) return this.slots[index].TP;
+    else return "";
+  }
+
   hasFavorite(itemGuid: string) {
     return (this.favorites.indexOf(itemGuid) > -1);
   };
+
+  hasFavoriteS(itemGuid : string) {
+    return (this.sports.indexOf(itemGuid) > -1);
+  };
+
+  hasCampus() {
+    return(this.campus.length > 0);
+  }
+
+  hasSlotTP(acronym:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index > -1){
+      return this.slots[index].TP.length >0;
+    }
+    else return index > -1;
+    
+  }
+
+  hasSlotCM(acronym:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index > -1){
+      return this.slots[index].CM.length >0;
+    }
+    else return index > -1;
+  }
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
@@ -86,20 +149,19 @@ export class UserService {
     this.storage.set('listEvents',this.favorites);
   };
 
-  getCampus(){
-    this.storage.get('campus').then((data) =>
-    {
-      if(data == null){
-        this.campus = "";
-      } else {
-        this.campus=data; 
-        }
-    });
-  }
+  addFavoriteS(itemGuid : string) {
+    this.sports.push(itemGuid);
+    this.storage.set('listSports',this.sports);
+  };
 
-  hasCampus() {
-    return(this.campus.length > 0);
-  }
+  removeFavoriteS(itemGuid: string) {
+    let index = this.sports.indexOf(itemGuid);
+    if (index > -1) {
+      this.sports.splice(index, 1);
+    }
+    this.storage.set('listSports',this.sports);
+  };
+
 
   addCampus(campus: string) {
     this.campus = campus;
@@ -113,20 +175,44 @@ export class UserService {
     this.storage.set('campus',this.campus);
   };
 
-  hasFavoriteS(itemGuid : string) {
-    return (this.sports.indexOf(itemGuid) > -1);
-  };
-
-  addFavoriteS(itemGuid : string) {
-    this.sports.push(itemGuid);
-    this.storage.set('listSports',this.sports);
-  };
-
-  removeFavoriteS(itemGuid: string) {
-    let index = this.sports.indexOf(itemGuid);
-    if (index > -1) {
-      this.sports.splice(index, 1);
+  addSlotTP(acronym:string, slot:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index>-1){
+      this.slots[index].TP = slot;
     }
-    this.storage.set('listSports',this.sports);
-  };
+    else{
+      let item = {course:acronym,TP:slot,CM:""};
+      this.slots.push(item);
+    }
+    this.storage.set('slots',this.slots);
+  }
+
+  removeSlotTP(acronym:string){
+      var index = this.slots.findIndex(item => item.course === acronym);
+      if(index > -1){
+        this.slots[index].TP = "";
+      }
+      this.storage.set('slots',this.slots);
+  }
+
+  addSlotCM(acronym:string, slot:string){
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if(index>-1){
+      this.slots[index].CM = slot;
+    }
+    else{
+      let item = {course:acronym,TP:"",CM:slot};
+      this.slots.push(item);
+    }
+    this.storage.set('slots',this.slots);
+  }
+
+  removeSlotCM(acronym:string){
+      var index = this.slots.findIndex(item => item.course === acronym);
+      if(index > -1){
+        this.slots[index].CM = "";
+      }
+      this.storage.set('slots',this.slots);
+  }
+
 }

@@ -45,7 +45,7 @@ export class ConnectivityService {
   presentConnectionAlert() {
     let alert = this.alertCtrl.create({
       title: 'Connexion Internet',
-      subTitle: 'Connectez-vous à Internet pour charger les actualités...',
+      subTitle: 'Connectez-vous à Internet pour utiliser la fonction demandée...',
       buttons: ['Fermer']
     });
     alert.present();

@@ -33,7 +33,7 @@
     <ion-spinner></ion-spinner>
   </div>
   <div #pleaseConnect id="please-connect">
-    <p> Connectez-vous à internet</p>
+    <p> {{'MAP.NET' | translate}}</p>
   </div>
   <div id="container">
     <div #map id="map"></div>
@@ -53,7 +53,7 @@
   <ion-card *ngFor="let zone of zones" overflow-scroll=false>
 
     <ion-item-divider (tap)="toggleDetails(zone.auditoires)">
-      Auditoires
+      {{'MAP.AUDIT' | translate}}
     </ion-item-divider>
 
     <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.auditoires.showDetails">
@@ -65,7 +65,7 @@
     </ion-item>
 
     <ion-item-divider (tap)="toggleDetails(zone.bibliotheques)" >
-      Bibliothèques
+      {{'MAP.LIBRARY' | translate}}
     </ion-item-divider>
 
     <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
@@ -77,7 +77,7 @@
     </ion-item>
 
     <ion-item-divider (tap)="toggleDetails(zone.restaurants_universitaires)">
-      Restaurants Universitaires
+      {{'MAP.REST' | translate}}
     </ion-item-divider>
 
     <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.restaurants_universitaires.showDetails">
@@ -89,7 +89,7 @@
     </ion-item>
 
     <ion-item-divider (tap)="toggleDetails(zone.parkings)" >
-      Parkings
+      {{'MAP.PARK' | translate}}
     </ion-item-divider>
 
     <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.parkings.showDetails">

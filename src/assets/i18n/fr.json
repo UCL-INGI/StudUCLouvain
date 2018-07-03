@@ -37,6 +37,268 @@
 	    "MESSAGE2" : "Choississez votre langue",
 	    "FR": "Francais",
 	    "EN": "Anglais"
-	}
+	},
+
+	"LIBRARY" : {
+		"INFO" : "Informations pratiques",
+		"HOUR" : "Heures d'ouverture",
+		"EXAMHOUR" : "Heures d'ouverture en période d'examens",
+		"SUMMERHOUR" : "Heures d'ouverture lors des vacances d'été",
+		"CLOSED" : "Dates de fermeture"
+	},
+
+	"STUDY" : {
+		"PROGRAM" : "Programme de cours",
+		"HORAIRE" : "Horaires",
+		"CHANGEADE" : "Changer projet ADE",
+		"ADE" : "Vous êtes sur le projet ADE :",
+		"CALENDAR" : "Calendrier",
+		"DEL" : "Supprimer",
+		"BADLOG" : "Mauvais login/password",
+		"ERROR" : "Il y a un problème",
+		"ADDCOURSE" : "Ajout d'un cours",
+		"MESSAGE" : "Entrez le nom et le sigle du cours à ajouter",
+		"NAME" : "Nom du cours",
+		"SIGLE" : "Sigle du cours",
+		"CANCEL" : "Annuler",
+		"SAVE" : "Sauver",
+		"ADDCOURSE2" : "Ajout d'un cours au projet ADE",
+		"MESSAGE2" : "Entrez le nom du cours",
+		"MESSAGE3" : "Activités ajoutées"
+	},
+
+    "COURSE" : {
+        "CM" : "C.M.",
+        "TP" : "T.P. & T.D.",
+        "EXAMEN" : "Examens",
+        "ACTIVITY" : "Activité",
+        "AUDIT" : "Auditoire",
+        "STUDENT" : "Etudiants",
+        "TEACHER" : "Professeurs",
+        "CALENDAR" : "Calendrier",
+        "MESSAGE" : "Activité ajoutée"
+    },
+
+    "MODAL" : {
+        "PROJECT" : "Sélectionnez un projet ADE"
+    },
+
+    "HELP" : {
+        "DESK" : "Service Desk",
+        "TEXT1" : "Le Service Desk est un<em><strong> point de contact unique</strong></em> pour toutes les demandes de nature informatique à l’UCL.",
+        "TEXT2" : "Un <em>call center</em> orientera l'utilisateur vers le bon interlocuteur.",
+        "TEXT3" : "Il aide tout nouveau membre de l'UCL à résoudre les problèmes liés à son identité : carte d'accès,",
+        "TEXT4" : "identifiant global, mot de passe. Il reçoit aussi les demandes liées aux services",
+        "TEXT5" : "IT (courrier électronique, agenda, WiFi, portail, etc.)",
+        "TEXT6" : "Le Service Desk est accessible :",
+        "TEXT7" : "- par téléphone, de 8h30 à 17h30 tous les jours ouvrables sans interruption au n° d'appel : 010/47.8282",
+        "TEXT8" : "  - via l'adresse mail 8282@UCLouvain.be",
+        "CARD" : "SmartCard",
+        "TEXT9" : "La smartcard permet l'accès aux bibliothèques et l'emprunt de livres, l'accès aux salles didactiques, aux bâtiments protégés, aux parkings, etc.",
+        "TEXT10" : "Le <em><strong>recto</strong></em> met en avant les éléments liés à l'identité de la personne: prénom et nom, photo d'identité, n° de la carte et n° FGS.",
+        "TEXT11" : "Le <em><strong>verso </strong></em>équipé d'une piste magnétique, met en avant l'aspect 'multisite' de l'Université.",
+        "TEXT12" : "La carte dispose également une fonctionnalité 'sans-contact'.",
+        "TEXT13" : "Le délai 'normal' pour recevoir la carte est de 15 <em>ouvrables</em> si vous avez renvoyé une photo correspondant aux spécifications requises avec le formulaire.",
+        "TEXT14" : "Si la carte n'est pas en votre possession après 15 jours ouvrables :",
+        "TEXT15" : "- Si vous êtes membre du personnel, veuillez prendre contact avec le",
+        "TEXTBTN1" : "Service du personnel",
+        "TEXT16" : "- Si vous êtes étudiant, veuillez prendre contact avec le",
+        "TEXTBTN2" : "Service des Inscriptions",
+        "TEXT17" : "- Si vous êtes lecteur des bibliothèques, veuillez prendre contact avec la bibliothèque dans laquelle vous vous êtes inscrits.",
+        "TEXT18" : "La première carte de l'UCL est <strong>automatiquement activée</strong>. Si vous aviez déjà une carte magnétique en cours de validité,",
+        "TEXT19" : "la nouvelle carte sera automatiquement activée 7 jours après la date d'envoi. L'ancienne carte sera désactivée pour vous permettre d'utiliser la nouvelle.",
+        "TEXT20" : "Si vous souhaitez <strong>activer cette carte plus tôt </strong>, suivez les instructions sur la page : ",
+        "TEXTBTN3" : "Activation d'une carte à puce",
+        "WIFI" : "WiFi",
+        "TEXT21" : "L'UCL offre un accès homogène au réseau sans fil (WiFi) en utilisant des technologies avancées en matière de sécurité et d'identification.",
+        "TEXT22" : "4 réseaux disponibles",
+        "TEXT23" : "- UCLouvain&nbsp; ► pour le personnel UCL",
+        "TEXT24" : "- eduroam ► pour les étudiants et personnel UCL et pour les visiteurs 'membre eduroam'",
+        "TEXT25" : "- visiteurs.UCLouvain ► pour les autres visiteurs ou congressistes UCL",
+        "TEXT26" : "- UCLouvain-prive ► pour un accès limité aux pages web UCL",
+        "TEXT27" : "Eduroam",
+        "TEXT28" : "L'UCL est partenaire du projet eduroam. Les visiteurs de toutes les universités partenaires bénéficient d'un accès au WiFi avec les logins et mot de passe de leur université d'origine. Plus d’infos sur",
+        "TEXTBTN4" : "Eduroam à l'UCL",
+        "TEXT29" : "Se connecter",
+        "TEXT30" : "Il est indispensable de connaître son identifiant global et le mot de passe associé :",
+        "TEXT31" : "- pour les étudiants UCL : <em>réseau 'eduroam'</em> → login : votre_identifiant_global@wifi.uclouvain.be",
+        "TEXT32" : "- pour les visiteurs membres eduroam : <em>réseau 'eduroam' </em>→ identifiant de l'université d'origine",
+        "TEXT33" : "- pour un visiteur : <em>réseau 'visiteurs.UCLouvain' </em>→ login : login temporaire reçu",
+        "TEXT34" : "- pour les congressistes : <em>réseau 'visiteurs.UCLouvain' </em>→ login : login temporaire reçu",
+        "TEXT35" : "- pour un accès limité aux pages web UCL : <em>réseau 'UCLouvain-prive'</em> → pas de login",
+        "TEXT36" : "Des guides de configuration rapides (pdf) reprennent les caractéristiques des configurations du WiFi pour les systèmes Windows et Mac.",
+        "TEXT37" : "- SSID : visiteurs.UCLouvain (pour visiteurs, congressistes et conférenciers) ",
+        "TEXT38": "- SSID : eduroam (pour étudiants, membres du personnel et membres des institutions participant à Eduroam) ",
+        "GUIDE" : "Guide",
+        "TEXT39" : "Des guides plus complets d'aide à la configuration du WiFi sont disponibles ici pour les systèmes suivants :",
+        "TEXT40" : "et une alternative",
+        "TEXT41" : "Installer un certificat numérique",
+        "TEXT42" : "et une page en cas de difficultés d'approbation du certificat",
+        "TEXT43" : "et",
+        "TEXT44" : "Demande temporaire pour visiteurs et congressistes",
+        "TEXT45" : "Un accès temporaire au WiFi pour un visiteur ou pour des congressistes, etc. peut être demandé par un membre du personnel UCL. Consulter les pages du WiFi dans l'intranet - <em>MyUCL </em>après identification.",
+        "TEXT46" : "Couverture du service",
+        "TEXT47" : "Sur le&nbsp;<strong>campus UCL de Louvain-la-Neuve</strong>, le service WiFi couvre tous les auditoires, salles didactiques et bibliothèques, ainsi que les salles de réunions et autres locaux où les besoins de mobilité le justifient. Les modalités d'accès sont identiques quel que soit le bâtiment ou le secteur informatique où vous vous déplacez à Louvain-la-Neuve.",
+        "TEXT48" : "Sur le&nbsp;<strong>campus UCL de Woluwe</strong>, le service WiFi couvre l’ensemble des locaux UCL en ce compris les logements étudiant UCL.",
+        "TEXT49" : "Sur le&nbsp;<strong>campus UCL de Saint-Gilles et de Tournai</strong>, le service WiFi couvre l’ensemble des locaux académiques.",
+        "TEXT50" : "Sur le&nbsp;<strong>campus UCL de Mons</strong>, le service WiFi couvre l’ensemble des locaux UCL en ce compris les logements étudiant UCL.",
+        "TEXT51" : "Sur le&nbsp;<strong>campus UCL de Charleroi</strong>, le service WiFi couvre l’ensemble des locaux de cours situés à la rue Trieu Kaisin.",
+        "TEXT52" : "Qui contacter en cas de problème/question ?",
+        "TEXTBTN5" : "Le Service Desk (8282)",
+
+        "REPERTOIRE" : "Répertoire",
+        "NAME" : "Nom",
+        "FIRSTNAME" : "Prénom",
+        "SEARCH" : "Rechercher"
+    },
+
+    "EMPLOYEE" : {
+        "INFO" : "Informations pratiques",
+        "CONTACT" : "Contact",
+        "ADRESSE" : "Adresse postale",
+        "MAIL" : "Courriel",
+        "TEL" : "N° tél.",
+        "SECRETARIAT" : "Secrétariat"
+    },
+
+    "NEWS" : {
+        "STUDY" : "Les études",
+        "SEARCH" : "La recherche",
+        "SERVICE" : "Le service à la société",
+        "NOTHING" : "Pas d'actualité à afficher...",
+
+        "SITE" : "Voir sur le site"
+    },
+
+    "EVENTS" : {
+        "ALL" : "Tous",
+        "FAV" : "Favoris",
+        "WEEK" : "Semaine",
+        "NOTHING" : "Pas d'évènements trouvé",
+        "MESSAGE" : "Evènement créé",
+        "MESSAGEFAV" : "Favoris déja ajouté",
+        "MESSAGEFAV2" : "Ajouté aux favoris",
+        "MESSAGEFAV3" : "Souhaitez-vous retirer cet évènement des favoris ?",
+        "CANCEL" : "Annuler",
+        "DEL" : "Supprimer",
+
+        "SITE" : "Voir sur le site",
+
+        "FILTER" : "Filtre",
+        "APPLY" : "Appliquer",
+        "TIMEEVENTS" : "Affichage des évènements",
+        "TIMEEVENTS2" : "pour les",
+        "TIMEEVENTS3" : "prochains mois",
+        "TIMEEVENTS4" : "pour le mois prochain",
+        "UNTOGGLE" : "Tout décocher",
+        "RESTORE" : "Restaurer le filtre",
+        "CATEGORIES" : "Catégories"
+    },
+
+    "SPORTS" : {
+    	"ALL" : "Tous",
+    	"TEAM" : "Equipes Universitaires",
+    	"FAV" : "Favoris",
+    	"NOTE" : "Remarque",
+    	"NOTHING" : "Pas de sport trouvé",
+    	"MESSAGEFAV" : "Favoris déjà ajouté",
+    	"FAVADD" : "Ajouté aux favoris",
+    	"MESSAGEFAV2" : "Souhaitez-vous retirer ce sport des favoris ?",
+    	"CANCEL" : "Annuler",
+    	"DEL" : "Supprimer",
+
+    	"FILTER" : "Filtre",
+    	"APPLY" : "Appliquer",
+    	"UNTOGGLE" : "Tout décocher",
+    	"RESTORE" : "Restaurer le filtre",
+    	"SPORTS" : "Sports"
+    },
+
+    "MAP" : {
+    	"NET" : "Connectez-vous à internet",
+    	"AUDIT" : "Auditoires",
+    	"LIBRARY" : "Bibliothèques",
+    	"REST" : "Restaurants Universitaires",
+    	"PARK" : "Parkings"
+    },
+
+    "REST" : {
+    	"TXT1" : "Les Restaurants Universitaires, c'est un concept innovant de cuisine saine et équilibrée, afin d'apporter à l'étudiant tout ce",
+    	"TXT2" : "dont il a besoin pour s'épanouir. Les menus sont, dans ce but, élaborés avec la collaboration d'une diététicienne.",
+    	"TXT3" : "Dans nos quatre selfs services, vous trouverez, chaque jour, un plat du jour, un plat suggestion, des pâtes",
+    	"TXT4" : "(sur place ou à emporter), ainsi que la carte snack, le tout pour un prix plus que démocratique",
+    	"TXT5" : "Dans nos deux sandwicheries, nous vous proposons une sélection originale de sandwichs frais,",
+    	"TXT6" : "   6 choix de soupe maison, des desserts, des salades, ... Le tout artisanal ! Vous pouvez déguster",
+    	"TXT7" : "au choix, ou combiner avec l'un de nos deux menus.",
+    	"TXT8" : "Actif depuis de nombreuses années sur les deux sites UCL, notre service traiteur en connait les moindres recoins et les petites habitudes.",
+    	"TXT9" : "Nous avons développé diverses formules pour rencontrer vos attentes lors de réunions, colloques, séminaires et autres repas 'd'affaires'.",
+    	"TXT10" : "Notre savoir-faire et notre expérience sont à votre service pour une prise en charge totale et un déroulement optimal de vos activités."
+    },
+
+    "MOBI" : {
+    	"COVOIT" : "Covoiturage",
+    	"BUS" : "Bus",
+    	"SNCB" : "SNCB",
+
+    	"NR1" : "NextRide est le compagnon gratuit des transports en commun pour la STIB et le TEC sur iPhone, Android, Windows Phone & le web.",
+    	"NR2" : "L’incroyable communauté de NextRide partage en temps réel toute la vie des transports publics : véhicules complets, bloqués, déviations,… Vous saurez tout!",
+    	"NR3" : "Mais NextRide propose aussi des fonctionalités avancées (accès hors-connexion, recherche d’itinéraire,...) et vous propulse au coeur d’une compétition unique au monde entre les navetteurs de demain (bientôt sur Android).",
+    	"NR4" : "* 2ème meilleure app Belge selon Le Soir ! *",
+    	"NR5" : "FONCTIONNALITÉS",
+    	"NR6" : "• Perturbations communautaires",
+    	"NR7" : "NextRide vous informe, 24h/24, 7 jours sur 7, des perturbations sur le réseau.",
+    	"NR8" : "Grâce à notre incroyable communauté où tout le monde peut signaler un problème, soyez au courant d’un bus plein, d’une grève, ou des conseils laissés par les utilisateurs.",
+    	"NR9" : "NextRide dispose aussi d’un connexion directe avec les transporteurs, afin d’obtenir toutes les informations sur les déviations et les perturbations de longue durée.",
+    	"NR10" : "• Horaires Hors Connexion",
+    	"NR11" : "Ni WiFi, ni forfait Internet? Ce n’est pas grave : NextRide vous donne accès à vos horaires sans connexion internet.",
+    	"NR12" : "• Itinéraires",
+    	"NR13" : "Le planificateur d’itinéraires unique de NextRide vous aide à comparer visuellement les trajets - plus courts, plus simples ou avec le moins de marche à pied.",
+    	"NR14" : "• SmartColor",
+    	"NR15" : "NextRide observe en permanence votre position et celle de l’arrêt de bus. L’app se colore en rouge, orange ou vert en fonction des chances que vous avez de rejoindre l’arrêt de bus à temps.",
+    	"NR16" : "• Rappel",
+    	"NR17" : "Distrait ? NextRide vibre et vous rappelle d’aller prendre votre bus. Et si vous partez toujours à la même heure, programmez la récurrence du rappel. Les lundis matins seront un peu moins difficiles :)",
+    	"NR18" : "• Partout à Bruxelles et en Wallonie",
+    	"NR19" : "Grâce à un partenariat exclusif et inédit avec la STIB et le Groupe TEC,",
+    	"NR20" : "NextRide délivre les horaires officiels des lignes de métros, trams et bus partout en Wallonie et à Bruxelles."
+    },
+
+    "GUINDAILLE" : {
+    	"PICTO" : "Pictogrammes",
+    	"EFFECT" : "Effectomètre",
+    	"SLIDE" : "Glisser vers la droite pour continuer",
+    	"HELP" : "Informations secours",
+    	"HELP1" : "N° tél. urgences générales",
+    	"HELP2" : "N° tél. gardiennage UCL",
+    	"HELP3" : "Gardez votre calme et précisez: ",
+    	"HELP4" : "Qui?",
+    	"HELP5" : "Votre nom et numéro d'appel.",
+    	"HELP6" : "Quoi?",
+    	"HELP7" : "La nature et l'étendue de l'incident, le nombre de victimes et leur état",
+    	"HELP8" : "Où?",
+    	"HELP9" : "Le bâtiment, étage, n° du local, parking, etc.",
+
+    	"PIC1" : "Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…",
+    	"PIC2" : "Louvain-la-Neuve est une ville qui bouge, même la nuit. Tous les soirs, il y a des occasions de s’occuper et de faire la fête. Et les salles sont prévues pour, mais n’oublie pas le retour au calme une fois dehors.\nQuand tu décides de rentrer dormir, d’autres l’ont déjà fait avant toi alors… Chut, plus de bruits.",
+    	"PIC3" : "Même si tu ne t’en rends pas compte, l’alcool déshydrate ton organisme. L’eau est le meilleur moyen pour te réhydrater suffisamment entre deux verres d’alcool.\nN’attends pas de ressentir la sensation de soif pour boire un verre d’eau. Profites-en, elle est gratuite au bar, et à volonté !",
+    	"PIC4" : "Quand tu sors, il est important que tu puisses évaluer et gérer ta propre consommation en fonction des effets ressentis et non pas de la quantité. Les effets ressentis chez l’un ou chez l’autre ; ou d’une soirée à l’autre ne sont pas les mêmes ! Cela dépend de ta constitution, ton état de fatigue,… Reste donc attentif à ces effets pour passer une bonne soirée !",
+    	"PIC5" : "Les canettes et les contenants en verre sont interdits dans l’ensemble des surfaces d’animation.",
+    	"PIC6" : "”10 à 12% des étudiants déclarent avoir eu des relations sexuelles non-protégées ou regrettées, suite à leur consommation d’alcool. » (UCL, 2011)\nL’alcool ne diminue pas les risques de transmissions de MST, ni celui de tomber enceinte.\nN’oublie pas ton préservatif avant de sortir, et de l’utiliser au moment voulu…",
+    	"PIC7" : "On ne doit jamais laisser son (sa) pote seul(e) lorsqu’il (elle) a trop bu ! On évite qu’il (elle) prenne la bagnole, la moto, le vélo… Même à pied, les risques existent ! On le (la) raccompagne pour lui éviter de mauvaises rencontres ou l’endormissement dans un buisson, et l’inévitable hypothermie qui va avec…\nLes quelques a-fonds réalisés juste avant font encore monter le taux d’alcoolémie ! Ce n’est pas parce qu’il (elle) dort que le coma éthylique ne guette pas. Vérifie son état de conscience (la personne doit rester « réveillable ») et s’il (elle) ne réagit pas, appelle les secours, c’est une urgence médicale.\nMieux vaut appeler les secours une fois de trop qu’une fois trop peu…",
+    	"PIC8" : "Des toilettes et/ou des urinoirs existent dans les surfaces d’animation. Utilise-les donc à bon escient et vise juste !",
+    	"PIC9" : "Les murs et les recoins ne sont pas des toilettes à ciel ouvert. Respecte l’environnement extérieur et utilise plutôt les toilettes existantes.",
+    	"PIC10" : "Les effets de l’alcool peuvent varier. Alcool joyeux, triste ou encore agressif, personne n’est à l’abri. Si tu sens que toi ou un(e) de tes potes montez dans les tours, c’est le moment de te/le/la calmer et d’alterner avec des softs.",
+    	"TITLE1" : "Alterner",
+    	"TITLE2" : "Limiter le bruit à l’extérieur",
+    	"TITLE3" : "Eau gratuite",
+    	"TITLE4" : "J'en suis où?",
+    	"TITLE5" : "Pas de canettes ni de bouteilles en verre",
+    	"TITLE6" : "Préservatif",
+    	"TITLE7" : "Je raccompagne",
+    	"TITLE8" : "Uriner dans le pot",
+    	"TITLE9" : "Ne pas uriner dehors",
+    	"TITLE10" : "Violence, arrête toi avant!"
+    }
+
+
 
 }

@@ -33,7 +33,7 @@
   <ion-card>
     <ion-card-content>
       <ion-card-title>
-        Informations pratiques
+        {{'LIBRARY.INFO' | translate}}
       </ion-card-title>
       {{libDetails.name}}
     </ion-card-content>
@@ -62,7 +62,7 @@
     </ion-row>
 
     <ion-item-divider  (click)="toggleGroup('opening_hours')">
-      Heures d'ouverture
+      {{'LIBRARY.HOUR' | translate}}
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_hours')">
@@ -72,7 +72,7 @@
     </ion-item>
 
     <ion-item-divider  (click)="toggleGroup('opening_examination_hours')">
-      Heures d'ouverture en période d'examens
+      {{'LIBRARY.EXAMHOUR' | translate}}
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_examination_hours')">
@@ -82,7 +82,7 @@
     </ion-item>
 
     <ion-item-divider  (click)="toggleGroup('opening_summer_hours')">
-      Heures d'ouverture lors des vacances d'été
+      {{'LIBRARY.SUMMERHOUR' | translate}}
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('opening_summer_hours')">
@@ -92,7 +92,7 @@
     </ion-item>
 
     <ion-item-divider  (click)="toggleGroup('closed_dates')">
-      Dates de fermeture
+      {{'LIBRARY.CLOSED' | translate}}
     </ion-item-divider>
 
     <ion-item [hidden]="!isGroupShown('closed_dates')" text-wrap>

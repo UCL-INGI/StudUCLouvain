@@ -33,8 +33,8 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content   padding class="bg">
-</ion-content>
+
+
 <ion-content padding *ngIf="(userS.hasCampus() === false)" class="other" >
   <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
   <ion-list radio-group [(ngModel)]="where" class="other">
@@ -58,7 +58,7 @@
   </ion-row>
 </ion-content>
 
-<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)"  class="other">
+<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)"  class="has-header">
   <!--
   <ion-list class="other"  padding>
     <ion-item padding class="other">
@@ -103,11 +103,27 @@
         </ion-col>
       </ion-row>
     </ion-item>
-  </ion-list>
+  <
   -->
-  <ion-list class="other"  padding>
-    <ion-item padding class="other">
-      <p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p>
+  <ion-grid class="other">
+    <ion-row>
+      <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p></ion-col>
+    </ion-row>
+      <ion-row>
+        <ion-col align-self-end text-center>
+          <img alt="biblio" src="./assets/img/icon4.jpg" align="middle"  (tap)="changePage(libraryPage)"/> <p align="center"><b><font color="#002D62">{{'HOME.LIBRARY' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col align-self-end text-center>
+          <img alt="etudes" src="./assets/img/icon5.jpg" align="middle"  (tap)="changePage(studiesPage)"/><p align="center"><b><font color="#002D62">{{'HOME.ETUDES' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col align-self-end text-center>
+          <img alt="aide" src="./assets/img/icon6.jpg" align="middle"  (tap)="changePage(helpDeskPage)"/><p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
+        </ion-col>
+    </ion-row>
+      <ion-row>
+            <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
+    </ion-row>
+
       <ion-row>
         <ion-col align-self-center text-center>
           <img alt="logo" src="./assets/img/icon1.jpg" align="middle" height="auto" (tap)="changePage(newsPage)"/><p align="center"><b><font color="#002D62">{{'HOME.NEWS' | translate}}</font></b></p>
@@ -118,24 +134,10 @@
         <ion-col align-self-end text-center>
           <img alt="sport" src="./assets/img/icon3.jpg" align="middle"  height="auto" (tap)="changePage(sportPage)"/><p align="center"><b><font color="#002D62">{{'HOME.SPORTS' | translate}}</font></b></p>
         </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item class="other">
-      <p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p>
+    </ion-row>
       <ion-row>
-        <ion-col align-self-end text-center>
-          <img alt="biblio" src="./assets/img/icon4.jpg" align="middle" height="auto" (tap)="changePage(libraryPage)"/> <p align="center"><b><font color="#002D62">{{'HOME.LIBRARY' | translate}}</font></b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="etudes" src="./assets/img/icon5.jpg" align="middle" height="auto" (tap)="changePage(studiesPage)"/><p align="center"><b><font color="#002D62">{{'HOME.ETUDES' | translate}}</font></b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="aide" src="./assets/img/icon6.jpg" align="middle" height="auto" (tap)="changePage(helpDeskPage)"/><p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item class="other">
-      <p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p>
+        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p></ion-col>
+    </ion-row>
       <ion-row>
         <ion-col align-self-end text-center>
           <img alt="carte" src="./assets/img/icon7.jpg" align="middle" height="auto" (tap)="changePage(mapPage)"/><p align="center"><b><font color="#002D62">{{'HOME.MAP' | translate}}</font></b></p>
@@ -146,9 +148,16 @@
         <ion-col align-self-end text-center>
           <img alt="voiture" src="./assets/img/icon9.jpg" align="middle" height="auto" (tap)="changePage(mobilityPage)"/><p align="center"><b><font color="#002D62">{{'HOME.MOBILITY' | translate}}</font></b></p>
         </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
+    </ion-row >
+
+    <ion-row>
+      <ion-col align-self-end text-center>
+         <img alt="voiture" src="./assets/img/guindaille/logo.jpg" align="middle" height="auto" (tap)="changePage(guindaillePage)"/><p align="center"><b><font color="#002D62">{{'MENU.PARTY' | translate}}</font></b></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 </ion-content>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

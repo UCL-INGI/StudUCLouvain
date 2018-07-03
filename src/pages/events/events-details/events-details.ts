@@ -23,6 +23,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { EventItem } from '../../../app/entity/eventItem';
 import { UserService } from '../../../providers/utils-services/user-service';
+import { TranslateService } from '@ngx-translate/core';
 
 /*
   Generated class for the Details page.
@@ -39,6 +40,7 @@ export class EventsDetailsPage {
 
   constructor(public navCtrl: NavController,
     public user: UserService,
+    private translateService: TranslateService,
     public toastCtrl: ToastController,
     private navParams: NavParams) {
     this.event = navParams.get('event');
@@ -50,10 +52,13 @@ export class EventsDetailsPage {
   }
 
   addFavorite(event : EventItem){
+    let message:string;
+    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
+
     if(!this.user.hasFavorite(event.guid)){
       this.user.addFavorite(event.guid);
       let toast = this.toastCtrl.create({
-        message: 'Favoris ajouté',
+        message: message,
         duration: 3000
       });
       toast.present();

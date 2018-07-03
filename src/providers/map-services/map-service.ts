@@ -261,6 +261,10 @@ export class MapService {
           //this.markers[i]=null;
           this.markers.splice(i,1);
           //console.log(this.markers);
+          if(this.onDevice){
+            this.map.clear();
+            this.addMarker(this.userLocation);
+          }
         }
       }
 

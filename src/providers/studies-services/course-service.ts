@@ -49,7 +49,7 @@ export class CourseService {
 
     getActivity(sessionId : string, courseId : string){
       return new Promise <Activity[]>( (resolve, reject) => {
-        this.ade.httpGeActivity(sessionId, courseId).subscribe(
+        this.ade.httpGetActivity(sessionId, courseId).subscribe(
           data => {
             resolve(this.extractActivity(data));
           }
@@ -71,6 +71,7 @@ export class CourseService {
     createNewActivities(jsonActivity) : Activity[] {
       let activities : Activity[] = [];
       let type : string = jsonActivity._type;
+      let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if(events !== undefined){
         for(let i=0; i<events.length; i++){
@@ -84,9 +85,25 @@ export class CourseService {
           let auditorium = this.getAuditorium(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
-          let activity = new Activity(type, teachers, students, start, end, auditorium);
+          let name = event._name;
+          let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
           activities.push(activity);
         }
+      }
+      if(isExam){
+          let event = events;
+          let endHour = event._endHour;
+          let startHour = event._startHour;
+          let date = event._date
+          let participants = event.eventParticipants.eventParticipant
+          let teachers = this.getTeachers(participants)
+          let students = this.getStudents(participants)
+          let auditorium = this.getAuditorium(participants)
+          let start = this.createDate(date, startHour);
+          let end = this.createDate(date, endHour);
+          let name = event._name;
+          let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
+          activities.push(activity);
       }
       return activities;
     }

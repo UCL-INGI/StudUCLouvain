@@ -121,7 +121,7 @@
   </ion-item>
 
   <ion-item-divider  (tap)="toggleGroup('rep')" no-lines>
-    Répertoire
+    {{'HELP.REPERTOIRE' | translate}}
   </ion-item-divider>
 
  
@@ -129,17 +129,17 @@
       <ion-card-content>
         <ion-list no-lines class="ilist">
           <ion-item no-lines [(ngModel)]="lastname">
-            <ion-label color="primary">Nom</ion-label>
+            <ion-label color="primary">{{'HELP.NAME' | translate}}</ion-label>
             <ion-input type="text" placeholder="nom"></ion-input>
           </ion-item>
           <ion-item no-lines [(ngModel)]="firstname">
-            <ion-label color="primary">Prénom</ion-label>
+            <ion-label color="primary">{{'HELP.FIRSTNAME' | translate}}</ion-label>
             <ion-input type="text" placeholder="prénom"></ion-input>
           </ion-item>
         </ion-list>
         <ion-row center>
           <ion-col text-center>
-            <button ion-button round (tap)="update()">Rechercher</button>
+            <button ion-button round (tap)="update()">{{'HELP.SEARCH' | translate}}</button>
           </ion-col>
         </ion-row>
 
