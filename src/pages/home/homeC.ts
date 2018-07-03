@@ -140,7 +140,20 @@ export class HomePage {
       loading.dismiss();
     }, 5000);
   }*/
-
+  ionViewDidLoad(){
+     let disclaimerAlert = this.alertCtrl.create({
+            title: "Avertissement",
+            message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
+  }
 
 
   changePage(page) {

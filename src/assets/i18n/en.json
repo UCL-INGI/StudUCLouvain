@@ -10,7 +10,7 @@
         "HELP" : "Support",
         "PARTY" : "Guindaille2.0",
         "MAP" : "Map",
-        "RESTAURANT" : "Restaurants U.",
+        "RESTAURANT" : "U. Restaurants",
         "MOBILITY" : "Mobility",
         "PARAM" : "Settings",
         "CREDITS" : "Credits"
@@ -28,7 +28,7 @@
         "HELP" : "Support",
         "TOOLS" : "TOOLS",
         "MAP" :  "Map",
-        "REST" : "Restaurants U.",
+        "REST" : "U. Restaurants",
         "MOBILITY" : "Mobility",
         "WHICH" : "What campus are you from ?",
         "OK" : "Ok",
@@ -41,47 +41,47 @@
     },
 
     "LIBRARY" : {
-        "INFO" : "Informations pratiques",
-        "HOUR" : "Heures d'ouverture",
-        "EXAMHOUR" : "Heures d'ouverture en période d'examens",
-        "SUMMERHOUR" : "Heures d'ouverture lors des vacances d'été",
-        "CLOSED" : "Dates de fermeture"
+        "INFO" : "Useful information",
+        "HOUR" : "Opening hours",
+        "EXAMHOUR" : "Opening hours during the examination period",
+        "SUMMERHOUR" : "Opening hours during summer holidays",
+        "CLOSED" : "Closing dates"
     },
 
     "STUDY" : {
-        "PROGRAM" : "Programme de cours",
-        "HORAIRE" : "Horaires",
-        "CHANGEADE" : "Changer projet ADE",
-        "ADE" : "Vous êtes sur le projet ADE :",
-        "CALENDAR" : "Calendrier",
-        "DEL" : "Supprimer",
-        "BADLOG" : "Mauvais login/password",
-        "ERROR" : "Il y a un problème",
-        "ADDCOURSE" : "Ajout d'un cours",
-        "MESSAGE" : "Entrez le nom et le sigle du cours à ajouter",
-        "NAME" : "Nom du cours",
-        "SIGLE" : "Sigle du cours",
-        "CANCEL" : "Annuler",
-        "SAVE" : "Sauver",
-        "ADDCOURSE2" : "Ajout d'un cours au projet ADE",
-        "MESSAGE2" : "Entrez le nom du cours",
-        "MESSAGE3" : "Activités ajoutées"
+        "PROGRAM" : "Course program",
+        "HORAIRE" : "Schedules",
+        "CHANGEADE" : "Change ADE project",
+        "ADE" : "You are on the ADE project :",
+        "CALENDAR" : "Calendar",
+        "DEL" : "Delete",
+        "BADLOG" : "Bad login/password",
+        "ERROR" : "There is a problem",
+        "ADDCOURSE" : "Adding a course",
+        "MESSAGE" : "Enter the name and acronym of the course to be added",
+        "NAME" : "Course name",
+        "SIGLE" : "Course acronym",
+        "CANCEL" : "Cancel",
+        "SAVE" : "Save",
+        "ADDCOURSE2" : "Adding a course to the ADE project",
+        "MESSAGE2" : "Enter the course name",
+        "MESSAGE3" : "Activities added"
     },
 
     "COURSE" : {
-        "CM" : "C.M.",
+        "CM" : "Lecture",
         "TP" : "T.P. & T.D.",
-        "EXAMEN" : "Examens",
-        "ACTIVITY" : "Activité",
+        "EXAMEN" : "Exams",
+        "ACTIVITY" : "Activity",
         "AUDIT" : "Auditoire",
-        "STUDENT" : "Etudiants",
-        "TEACHER" : "Professeurs",
-        "CALENDAR" : "Calendrier",
-        "MESSAGE" : "Activité ajoutée"
+        "STUDENT" : "Students",
+        "TEACHER" : "Teachers",
+        "CALENDAR" : "Calendar",
+        "MESSAGE" : "Activity added"
     },
 
     "MODAL" : {
-        "PROJECT" : "Sélectionnez un projet ADE"
+        "PROJECT" : "Select an ADE project"
     },
 
     "HELP" : {
@@ -147,79 +147,79 @@
         "TEXT52" : "Qui contacter en cas de problème/question ?",
         "TEXTBTN5" : "Le Service Desk (8282)",
 
-        "REPERTOIRE" : "Répertoire",
-        "NAME" : "Nom",
-        "FIRSTNAME" : "Prénom",
-        "SEARCH" : "Rechercher"
+        "REPERTOIRE" : "Directory",
+        "NAME" : "Name",
+        "FIRSTNAME" : "First name",
+        "SEARCH" : "Search"
     },
 
     "EMPLOYEE" : {
-        "INFO" : "Informations pratiques",
+        "INFO" : "Useful information",
         "CONTACT" : "Contact",
-        "ADRESSE" : "Adresse postale",
-        "MAIL" : "Courriel",
-        "TEL" : "N° tél.",
-        "SECRETARIAT" : "Secrétariat"
+        "ADRESSE" : "Address",
+        "MAIL" : "Email",
+        "TEL" : "Tel.",
+        "SECRETARIAT" : "Secretariat"
     },
 
     "NEWS" : {
-        "STUDY" : "Les études",
-        "SEARCH" : "La recherche",
-        "SERVICE" : "Le service à la société",
-        "NOTHING" : "Pas d'actualité à afficher...",
+        "STUDY" : "The studies",
+        "SEARCH" : "The research",
+        "SERVICE" : "Service to society",
+        "NOTHING" : "No news to display ...",
 
-        "SITE" : "Voir sur le site"
+        "SITE" : "See on the website"
     },
 
     "EVENTS" : {
-        "ALL" : "Tous",
-        "FAV" : "Favoris",
-        "WEEK" : "Semaine",
-        "NOTHING" : "Pas d'évènements trouvé",
-        "MESSAGE" : "Evènement créé",
-        "MESSAGEFAV" : "Favoris déja ajouté",
-        "MESSAGEFAV2" : "Ajouté aux favoris",
-        "MESSAGEFAV3" : "Souhaitez-vous retirer cet évènement des favoris ?",
-        "CANCEL" : "Annuler",
-        "DEL" : "Supprimer",
+        "ALL" : "All",
+        "FAV" : "Favorites",
+        "WEEK" : "Week",
+        "NOTHING" : "No events found",
+        "MESSAGE" : "Event created",
+        "MESSAGEFAV" : "Favorite already added",
+        "MESSAGEFAV2" : "Added to favorites",
+        "MESSAGEFAV3" : "Would you like to remove this event from favorites?",
+        "CANCEL" : "Cancel",
+        "DEL" : "Delete",
 
-        "SITE" : "Voir sur le site",
+        "SITE" : "See on the website",
 
-        "FILTER" : "Filtre",
-        "APPLY" : "Appliquer",
-        "TIMEEVENTS" : "Affichage des évènements",
-        "TIMEEVENTS2" : "pour les",
-        "TIMEEVENTS3" : "prochains mois",
-        "TIMEEVENTS4" : "pour le mois prochain",
-        "UNTOGGLE" : "Tout décocher",
-        "RESTORE" : "Restaurer le filtre",
-        "CATEGORIES" : "Catégories"
+        "FILTER" : "Filter",
+        "APPLY" : "Apply",
+        "TIMEEVENTS" : "View events",
+        "TIMEEVENTS2" : "for the next",
+        "TIMEEVENTS3" : "months",
+        "TIMEEVENTS4" : "month",
+        "UNTOGGLE" : "Uncheck all",
+        "RESTORE" : "Restore the filter",
+        "CATEGORIES" : "Categories"
     },
 
     "SPORTS" : {
-        "ALL" : "Tous",
-        "TEAM" : "Equipes Universitaires",
-        "FAV" : "Favoris",
-        "NOTE" : "Remarque",
-        "NOTHING" : "Pas de sport trouvé",
-        "MESSAGEFAV" : "Favoris déjà ajouté",
-        "FAVADD" : "Ajouté aux favoris",
-        "MESSAGEFAV2" : "Souhaitez-vous retirer ce sport des favoris ?",
-        "CANCEL" : "Annuler",
-        "DEL" : "Supprimer",
+        "ALL" : "All",
+        "TEAM" : "University teams",
+        "FAV" : "Favorites",
+        "NOTE" : "Note",
+        "NOTHING" : "No sports found",
+        "MESSAGEFAV" : "Favorite already added",
+        "FAVADD" : "Added to favorites",
+        "MESSAGEFAV2" : "Would you like to remove this sport from favorites?",
+        "CANCEL" : "Cancel",
+        "DEL" : "Delete",
 
-        "FILTER" : "Filtre",
-        "APPLY" : "Appliquer",
-        "UNTOGGLE" : "Tout décocher",
-        "RESTORE" : "Restaurer le filtre",
+        "FILTER" : "Filter",
+        "APPLY" : "Apply",
+        "UNTOGGLE" : "Uncheck all",
+        "RESTORE" : "Restore the filter",
         "SPORTS" : "Sports"
     },
 
     "MAP" : {
-        "NET" : "Connectez-vous à internet",
+        "NET" : "Connect to the internet",
         "AUDIT" : "Auditoires",
-        "LIBRARY" : "Bibliothèques",
-        "REST" : "Restaurants Universitaires",
+        "LIBRARY" : "Libraries",
+        "REST" : "University restaurants",
         "PARK" : "Parkings"
     },
 
@@ -237,7 +237,7 @@
     },
 
     "MOBI" : {
-        "COVOIT" : "Covoiturage",
+        "COVOIT" : "Carpooling",
         "BUS" : "Bus",
         "SNCB" : "SNCB",
 
@@ -264,19 +264,19 @@
     },
 
     "GUINDAILLE" : {
-        "PICTO" : "Pictogrammes",
+        "PICTO" : "Pictograms",
         "EFFECT" : "Effectomètre",
-        "SLIDE" : "Glisser vers la droite pour continuer",
+        "SLIDE" : "Swipe to the right to continue",
         "HELP" : "Informations secours",
-        "HELP1" : "N° tél. urgences générales",
+        "HELP1" : "General emergency number",
         "HELP2" : "N° tél. gardiennage UCL",
-        "HELP3" : "Gardez votre calme et précisez: ",
-        "HELP4" : "Qui?",
-        "HELP5" : "Votre nom et numéro d'appel.",
-        "HELP6" : "Quoi?",
-        "HELP7" : "La nature et l'étendue de l'incident, le nombre de victimes et leur état",
-        "HELP8" : "Où?",
-        "HELP9" : "Le bâtiment, étage, n° du local, parking, etc.",
+        "HELP3" : "Keep calm and specify: ",
+        "HELP4" : "Who?",
+        "HELP5" : "Your name and number.",
+        "HELP6" : "What?",
+        "HELP7" : "The nature and extent of the incident, the number of victims and their condition",
+        "HELP8" : "Where?",
+        "HELP9" : "The building, floor, room number, parking, etc.",
 
         "PIC1" : "Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…",
         "PIC2" : "Louvain-la-Neuve est une ville qui bouge, même la nuit. Tous les soirs, il y a des occasions de s’occuper et de faire la fête. Et les salles sont prévues pour, mais n’oublie pas le retour au calme une fois dehors.\nQuand tu décides de rentrer dormir, d’autres l’ont déjà fait avant toi alors… Chut, plus de bruits.",
@@ -288,15 +288,15 @@
         "PIC8" : "Des toilettes et/ou des urinoirs existent dans les surfaces d’animation. Utilise-les donc à bon escient et vise juste !",
         "PIC9" : "Les murs et les recoins ne sont pas des toilettes à ciel ouvert. Respecte l’environnement extérieur et utilise plutôt les toilettes existantes.",
         "PIC10" : "Les effets de l’alcool peuvent varier. Alcool joyeux, triste ou encore agressif, personne n’est à l’abri. Si tu sens que toi ou un(e) de tes potes montez dans les tours, c’est le moment de te/le/la calmer et d’alterner avec des softs.",
-        "TITLE1" : "Alterner",
-        "TITLE2" : "Limiter le bruit à l’extérieur",
-        "TITLE3" : "Eau gratuite",
-        "TITLE4" : "J'en suis où?",
-        "TITLE5" : "Pas de canettes ni de bouteilles en verre",
-        "TITLE6" : "Préservatif",
-        "TITLE7" : "Je raccompagne",
+        "TITLE1" : "Alternate",
+        "TITLE2" : "Limit the noise outside",
+        "TITLE3" : "Free water",
+        "TITLE4" : "Where am I?",
+        "TITLE5" : "No cans or glass bottles",
+        "TITLE6" : "Condom",
+        "TITLE7" : "I'm driving",
         "TITLE8" : "Uriner dans le pot",
-        "TITLE9" : "Ne pas uriner dehors",
-        "TITLE10" : "Violence, arrête toi avant!"
+        "TITLE9" : "Do not urinate outside",
+        "TITLE10" : "Violence, stop before!"
     }
 }

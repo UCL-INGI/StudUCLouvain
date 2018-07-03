@@ -77,9 +77,9 @@ export class CoursePage {
           data => {
             this.course.activities = data.sort(
               (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
-            );//.filter(
-              //  activitie => activitie.end.valueOf() > Date.now().valueOf()
-              //); // display only activities finished after now time
+            ).filter(
+                activitie => activitie.end.valueOf() > Date.now().valueOf()
+              ); // display only activities finished after now time
               this.displayedActi=this.course.activities;
           }
         )
@@ -102,6 +102,22 @@ export class CoursePage {
         toast.present();
         slidingItem.close();
     });
+      this.alert();
+  }
+
+  alert(){
+         let disclaimerAlert = this.alertCtrl.create({
+            title: "Avertissement",
+            message: "En cas de changement ou problème, ce rappel ne sera pas modifié.<br> Tout changement éventuel sera visible au prochain lancement de l'application.",
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
   }
 
   updateDisplayedTP(){

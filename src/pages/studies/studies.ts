@@ -300,6 +300,22 @@ export class StudiesPage {
     });
     toast.present();
     slidingItem.close();
+    this.alert
+  }
+
+    alert(){
+         let disclaimerAlert = this.alertCtrl.create({
+            title: "Avertissement",
+            message: "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application.",
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
   }
 
 }
