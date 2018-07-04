@@ -164,6 +164,9 @@ export function HttpLoaderFactory(http: Http) {
     SportsPage,
     SportsFilterPage,
     HomePage,
+    CarpoolingPage,
+    BusPage,
+    TrainPage,
     EmployeeDetailsPage
   ],
   providers: [

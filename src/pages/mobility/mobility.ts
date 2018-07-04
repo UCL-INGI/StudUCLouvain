@@ -39,7 +39,7 @@ export class MobilityPage {
   carpoolingPage;
   busPage;
   trainPage;
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
               public market: Market,
               public navParams: NavParams,
               private iab: InAppBrowser,
@@ -90,5 +90,6 @@ export class MobilityPage {
         this.market.open(app);
       }
     );
+    this.nav.push(page.component, {title: page.title});
   }
 }

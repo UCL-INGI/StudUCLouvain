@@ -49,6 +49,8 @@ export class HelpDeskPage {
   lastname:string = "";
   firstname:string = "";
   loading;
+  segment:string="info";
+  shownHelp = null;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -134,6 +136,18 @@ export class HelpDeskPage {
 
   isGroupShown(group) {
       return this.shownGroup === group;
+  }
+
+  toggleHelp(help) {
+      if (this.isHelpShown(help)) {
+          this.shownHelp = null;
+      } else {
+          this.shownHelp = help;
+      }
+  }
+
+  isHelpShown(help) {
+      return this.shownHelp === help;
   }
 
   public openURL(url: string) {

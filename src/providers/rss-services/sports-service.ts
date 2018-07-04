@@ -37,7 +37,8 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
   nbCalls = 0;
-  callLimit = 30;
+  //callLimit = 30; a remettre quand OK
+  callLimit=10;
 
   url = "";
   url1 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t1"; //LLN
@@ -63,7 +64,7 @@ convertXmlToJson(xml) : any{
   }
 
   public getSports(segment:string) {
-    //console.log("start get");
+    console.log("getsports");
     this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {

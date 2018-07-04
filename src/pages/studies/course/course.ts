@@ -77,9 +77,9 @@ export class CoursePage {
           data => {
             this.course.activities = data.sort(
               (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
-            ).filter(
-                activitie => activitie.end.valueOf() > Date.now().valueOf()
-              ); // display only activities finished after now time
+            );//.filter(
+               // activitie => activitie.end.valueOf() > Date.now().valueOf()
+              //); // display only activities finished after now time
               this.displayedActi=this.course.activities;
           }
         )
