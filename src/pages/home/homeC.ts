@@ -141,6 +141,10 @@ export class HomePage {
     }, 5000);
   }*/
   ionViewDidLoad(){
+    let title:string;
+    let message:string;
+    this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
+    this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
             message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",

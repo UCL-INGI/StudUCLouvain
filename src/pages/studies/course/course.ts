@@ -106,9 +106,13 @@ export class CoursePage {
   }
 
   alert(){
+    let title:string;
+    let message:string;
+    this.translateService.get('COURSE.WARNING').subscribe((res:string) => {title=res;});
+    this.translateService.get('COURSE.MESSAGE3').subscribe((res:string) => {message=res;});
          let disclaimerAlert = this.alertCtrl.create({
-            title: "Avertissement",
-            message: "En cas de changement ou problème, ce rappel ne sera pas modifié.<br> Tout changement éventuel sera visible au prochain lancement de l'application.",
+            title: title,
+            message: message,
             buttons: [
                 {
                     text: "OK",
@@ -144,20 +148,27 @@ export class CoursePage {
   }
 
   showPrompt(segment: string){
-
+    let title:string;
+    let message:string;
+    let cancel:string;
+    let apply:string;
+    this.translateService.get('COURSE.TITLE').subscribe((res:string) => {title=res;});
+    this.translateService.get('COURSE.MESSAGE2').subscribe((res:string) => {message=res;});
+    this.translateService.get('COURSE.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('COURSE.APPLY').subscribe((res:string) => {apply=res;});
     var options = {
-      title: 'Séances',
-      message: 'Choisissez votre séance',
+      title: title,
+      message: message,
       inputs : [],
       buttons : [
       {
-          text: "Annuler",
+          text: cancel,
           handler: data => {
 
           }
       },
       {
-          text: "Appliquer",
+          text: apply,
           handler: data => {
             if(segment == "Cours magistral") {
               this.slotCM = data;

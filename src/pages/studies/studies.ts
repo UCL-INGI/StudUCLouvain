@@ -304,9 +304,13 @@ export class StudiesPage {
   }
 
     alert(){
+      let title:string;
+      let message:string;
+      this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
+      this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
          let disclaimerAlert = this.alertCtrl.create({
-            title: "Avertissement",
-            message: "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application.",
+            title: title,
+            message: message,
             buttons: [
                 {
                     text: "OK",

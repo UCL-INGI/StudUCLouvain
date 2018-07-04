@@ -71,11 +71,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-fab right bottom>
-    <button ion-fab (tap)="showPrompt()">
-      <ion-icon name="add"> </ion-icon>
-    </button>
-  </ion-fab>
+
 
 </ion-content>
 
@@ -120,6 +116,10 @@
 
 </ion-content>
 <ion-footer text-center *ngIf="segment=='cours'">
-  <ion-icon name='help-circle'></ion-icon><p> Swipe sur la gauche pour supprimer un cours
-   ou l'ajouter à ton agenda.</p>
+    <ion-fab bottom right>
+    <button ion-fab (tap)="showPrompt()">
+      <ion-icon name="add"> </ion-icon>
+    </button>
+  </ion-fab>
+  <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE' | translate}}</p>
 </ion-footer>

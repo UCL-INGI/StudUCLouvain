@@ -34,8 +34,8 @@
   </ion-navbar>
 </ion-header>
 
-
-<ion-content padding *ngIf="(userS.hasCampus() === false)" class="other" >
+<ion-content text-center align-self-center padding   >
+	<ng-container *ngIf="(userS.hasCampus() === false)">
   <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
   <ion-list radio-group [(ngModel)]="where" class="other">
     <ion-item class="other">
@@ -56,9 +56,11 @@
       <button ion-button round (tap)="updateCampus()">{{'HOME.OK' | translate}}</button>
     </ion-col>
   </ion-row>
-</ion-content>
+</ng-container>
 
-<ion-content text-center align-self-center padding *ngIf="(userS.hasCampus() === true)"  class="has-header">
+
+	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header">
+		<p></p>
   <!--
   <ion-list class="other"  padding>
     <ion-item padding class="other">
@@ -157,7 +159,7 @@
     </ion-row>
   </ion-grid>
 
-
+</ng-container>
 </ion-content>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

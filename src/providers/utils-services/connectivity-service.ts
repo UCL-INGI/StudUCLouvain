@@ -22,6 +22,7 @@
 import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform, AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection;
 
@@ -30,7 +31,7 @@ export class ConnectivityService {
 
   onDevice: boolean;
 
-  constructor(public platform: Platform, private network: Network, private alertCtrl: AlertController){
+  constructor(public platform: Platform, private network: Network, private translateService: TranslateService, private alertCtrl: AlertController){
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -43,10 +44,16 @@ export class ConnectivityService {
   }
 
   presentConnectionAlert() {
+    let title:string;
+    let message:string;
+    let close:string;
+    this.translateService.get('NET.TITLE').subscribe((res:string) => {title=res;});
+    this.translateService.get('NET.CONNECT').subscribe((res:string) => {message=res;});
+    this.translateService.get('NET.CLOSE').subscribe((res:string) => {close=res;});
     let alert = this.alertCtrl.create({
-      title: 'Connexion Internet',
-      subTitle: 'Connectez-vous à Internet pour utiliser la fonction demandée...',
-      buttons: ['Fermer']
+      title: title,
+      subTitle: message,
+      buttons: [close]
     });
     alert.present();
   }

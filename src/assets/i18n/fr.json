@@ -36,7 +36,9 @@
 	    "SAVE" : "SAUVER",
 	    "MESSAGE2" : "Choississez votre langue",
 	    "FR": "Francais",
-	    "EN": "Anglais"
+	    "EN": "Anglais",
+        "WARNING" : "Avertissement",
+        "MESSAGE3" : "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus."
 	},
 
 	"LIBRARY" : {
@@ -64,7 +66,10 @@
 		"SAVE" : "Sauver",
 		"ADDCOURSE2" : "Ajout d'un cours au projet ADE",
 		"MESSAGE2" : "Entrez le nom du cours",
-		"MESSAGE3" : "Activités ajoutées"
+		"MESSAGE3" : "Activités ajoutées",
+        "SWIPE" : "Swipe sur la gauche pour supprimer un cours ou l'ajouter à ton agenda.",
+        "WARNING" : "Avertissement",
+        "MESSAGE4" : "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application."
 	},
 
     "COURSE" : {
@@ -76,7 +81,13 @@
         "STUDENT" : "Etudiants",
         "TEACHER" : "Professeurs",
         "CALENDAR" : "Calendrier",
-        "MESSAGE" : "Activité ajoutée"
+        "MESSAGE" : "Activité ajoutée",
+        "TITLE" : "Séances",
+        "MESSAGE2" : "Choisissez votre séance",
+        "CANCEL" : "Annuler",
+        "APPLY" : "Appliquer",
+        "WARNING" : "Avertissement",
+        "MESSAGE3" : "En cas de changement ou problème, ce rappel ne sera pas modifié.<br> Tout changement éventuel sera visible au prochain lancement de l'application."
     },
 
     "MODAL" : {
@@ -181,6 +192,7 @@
         "MESSAGEFAV3" : "Souhaitez-vous retirer cet évènement des favoris ?",
         "CANCEL" : "Annuler",
         "DEL" : "Supprimer",
+        "SWIPE" : "Swipe sur la gauche pour ajouter un évènement aux favoris ou dans ton agenda.",
 
         "SITE" : "Voir sur le site",
 
@@ -206,6 +218,7 @@
     	"MESSAGEFAV2" : "Souhaitez-vous retirer ce sport des favoris ?",
     	"CANCEL" : "Annuler",
     	"DEL" : "Supprimer",
+        "SWIPE" : "Swipe sur la gauche pour ajouter un sport aux favoris ou dans ton agenda.",
 
     	"FILTER" : "Filtre",
     	"APPLY" : "Appliquer",
@@ -297,8 +310,21 @@
     	"TITLE8" : "Uriner dans le pot",
     	"TITLE9" : "Ne pas uriner dehors",
     	"TITLE10" : "Violence, arrête toi avant!"
+    },
+
+    "CREDIT" : {
+        "PROJET" : "Le projet UCLCampus est le résultat du travail de plusieurs étudiants dans le cadre de leur mémoire.",
+        "COORD" : "La coordination de ce projet a été réalisée par Mr. Yves Deville.",
+        "LAST" : "Il a été développé par Daubry Benjamin et Marchesini Bruno en 2017-2018.",
+        "MIDDLE" : "Jérôme Lemaire et Corentin Lamy en 2016-2017.",
+        "FIRST" : " en 2015-2016.",
+        "CONTRIB" : "Toute contribution pour l'ajout de nouvelles fonctionnalités est la bienvenue. Ce projet étant Open Source, si vous souhaitez participer à son développement, vous pouvez trouver le github public via ce lien :"
+    },
+
+    "NET" : {
+        "TITLE" : "Connexion Internet",
+        "CONNECT" : "Connectez-vous à Internet pour utiliser la fonction demandée...",
+        "CLOSE" : "Fermer"
     }
-
-
 
 }

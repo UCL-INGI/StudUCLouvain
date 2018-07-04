@@ -28,16 +28,27 @@
       <img alt="logo"   height="40" src="./assets/img/guindaille/logo.jpg" >
     </ion-title>
   </ion-navbar>
-
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="pict" style="color:white">
+      {{'GUINDAILLE.PICTO' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="effect" style="color:white">
+      {{'GUINDAILLE.EFFECT' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="help" style="color:white">
+      {{'GUINDAILLE.HELP' | translate}}
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 
-<ion-content padding class="guindaille" >
-  <ion-item-divider  (tap)="toggleGroup('picto')" class="gelem" no-lines>
+<ion-content class="guindaille" >
+  <ion-content *ngIf="segment==='pict'" class="gelem">
+  <ion-item-divider  class="gelem" no-lines>
     <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p></button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('picto')" class="gelem" no-lines>
+  <ion-item class="gelem" no-lines>
     <ion-list >
       <ion-item class="gelem">
         <ion-row>
@@ -86,25 +97,27 @@
       </ion-item>
     </ion-list>
   </ion-item>
-
-  <ion-item-divider  (tap)="toggleGroup('effecto')" class="gelem" no-lines>
+</ion-content>
+<ion-content *ngIf="segment==='effect'" class="gelem">
+  <ion-item-divider   class="gelem" no-lines>
     <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.EFFECT' | translate}}</p></button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('effecto')" class="gelem" no-lines>
+  <ion-item class="gelem" no-lines>
     <ion-slides pager>
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)"/>
       </ion-slide>
     </ion-slides>
-    <p text-color="white">{{'GUINDAILLE.SWIPE' | translate}}</p>
+    <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
   </ion-item>
-
-  <ion-item-divider  (tap)="toggleGroup('secours')" class="gelem" no-lines>
+</ion-content>
+<ion-content *ngIf="segment==='help'" class="gelem">
+  <ion-item-divider  class="gelem" no-lines>
     <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.HELP' | translate}}</p></button>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('secours')" class="gelem">
+  <ion-item  class="gelem">
     <!--<ion-row>
       <ion-col> N° tél. urgences générales </ion-col>
       <ion-col> <a href="tel:112">112</a> </ion-col>
@@ -129,5 +142,5 @@
       </p>
     </div>
   </ion-item>
-
+</ion-content>
 </ion-content>

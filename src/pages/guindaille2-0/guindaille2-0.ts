@@ -41,7 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class GuindaillePage {
   title: any;
   shownGroup = null;
-
+  segment:string = 'pict';
   /*alt:string;
   this.translateService.get('PIC1').subscribe((res:string) => {this.alt=res;});
 
