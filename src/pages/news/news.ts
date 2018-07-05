@@ -20,13 +20,15 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, List, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
+import { App, List, Content, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import { NewsService } from '../../providers/rss-services/news-service';
 import { NewsItem } from '../../app/entity/newsItem';
 import { NewsDetailsPage } from './news-details/news-details';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../providers/utils-services/user-service';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-news',
@@ -35,9 +37,20 @@ import { TranslateService } from '@ngx-translate/core';
 export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
+  @ViewChild('news') content: Content;
+  
+  resize()
+  {
+    if(this.content)
+    {
+      this.content.resize();
+      console.debug("content resize", this.content)
+    }
+  }
 
   news: Array<NewsItem> = [];
-  segment = "P1";
+  segment = "univ";
+  subsegment = "P1";
   shownNews = 0;
   displayedNews : Array<NewsItem> = [];
   searching: any = false;
@@ -46,17 +59,21 @@ export class NewsPage {
   title:string ="Actualités" ;
   nonews:any = false;
   loading;
+  fac:string="";
+
 
   constructor(
     public platform : Platform,
     public navCtrl: NavController,
     public navParams:NavParams,
     public app:App,
+    public userS:UserService,
     public newsService : NewsService,
     public connService : ConnectivityService,
+    private iab: InAppBrowser,
     public alertCtrl : AlertController,
-              private translateService: TranslateService,
-              public loadingCtrl: LoadingController
+    private translateService: TranslateService,
+    public loadingCtrl: LoadingController
   ) {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -70,6 +87,8 @@ export class NewsPage {
           this.updateDisplayedNews();
         });
       });
+      this.fac=this.userS.fac;
+      //this.segmentChanged();
   }
     presentLoading() {
     if(!this.loading){
@@ -85,26 +104,44 @@ export class NewsPage {
       this.loading.dismiss();
     }, 5000);*/
   }
+
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
         this.loading = null;
     }
-}
+  }
+
+  public openURL(url: string) {
+    this.iab.create(url, '_system','location=yes');
+  }
+
+  updateFac(){
+    this.userS.addFac(this.fac);
+  }
+
   ionViewDidLoad() {
     this.presentLoading();
   }
 
   public doRefresh(refresher) {
-    this.loadEvents();
+
+    if(this.segment ==='univ') this.loadEvents();
     refresher.complete();
+
+  }
+
+  segmentChanged(){
+    this.resize();
+    if(this.segment==='univ') this.updateDisplayedNews();
+
   }
 
   public loadEvents() {
     this.searching = true;
     this.news = [];
     if(this.connService.isOnline()) {
-      this.newsService.getNews(this.segment)
+      this.newsService.getNews(this.subsegment)
       .then(
         res => {
           let result:any = res;
@@ -131,6 +168,7 @@ export class NewsPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
+
   }
 
   public updateDisplayedNews() {

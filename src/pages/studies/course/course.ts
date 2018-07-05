@@ -42,6 +42,8 @@ export class CoursePage {
   slotTP:string = "no";
   slotCM:string = "no";
   displayedActi : Array<Activity> = [];
+  courseSorted : {cm:Array<Activity>, tp:Array<Activity>, ex:Array<Activity>};
+
 
   constructor(public navCtrl: NavController,
     public courseService: CourseService,
@@ -52,21 +54,18 @@ export class CoursePage {
     private translateService: TranslateService,
     public navParams:NavParams) {
 
+      this.courseSorted = {cm : [], tp : [], ex :[]};
       let acro = this.course.acronym;
       if(this.userS.hasSlotCM(acro)){
         this.slotCM = this.userS.getSlotCM(acro);
-        this.updateDisplayedCM();
       }
       if(this.userS.hasSlotTP(acro)){
         this.slotTP = this.userS.getSlotTP(acro);
-        this.updateDisplayedTP();
-      }
+      }   
   }
 
   ionViewDidLoad() {
     this.getCourse(this.sessionId, this.course.acronym);
-    //this.displayedActi = this.course.activities;
-
   }
 
   getCourse(sessionId : string, acronym : string){
@@ -80,8 +79,13 @@ export class CoursePage {
             );//.filter(
                // activitie => activitie.end.valueOf() > Date.now().valueOf()
               //); // display only activities finished after now time
-              this.displayedActi=this.course.activities;
+              //this.displayedActi=this.course.activities;
+              this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
+              this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
+              this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
+              this.updateDisplayed();
           }
+
         )
       }
     )
@@ -125,26 +129,31 @@ export class CoursePage {
   }
 
   updateDisplayedTP(){
-      let toFilter;
-      if(this.course.activities != null) toFilter = this.course.activities;
-      else toFilter = this.displayedActi;
+      let toFilter = this.courseSorted.tp;
       
-      if(this.slotTP != "no")this.displayedActi = toFilter.filter(acti => (acti.type ==="Cours magistral" || acti.isExam || acti.name === this.slotTP));
-      else this.displayedActi = this.course.activities;
+      let toPush;
+      if(this.slotTP != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
+      else toPush = this.courseSorted.tp;
+      this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   updateDisplayedCM(){
-      let toFilter;
-      if(this.course.activities != null) toFilter = this.course.activities;
-      else toFilter = this.displayedActi;
+      let toFilter = this.courseSorted.cm;
     
-      if(this.slotCM != "no") this.displayedActi = toFilter.filter(acti => (acti.type === "TD" || acti.type ==="TP" || acti.isExam || acti.name === this.slotCM));
-      else this.displayedActi = this.course.activities;
+      let toPush:Array<Activity>;
+      if(this.slotCM != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
+      else toPush = this.courseSorted.cm;
+      this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   updateDisplayed(){
-    if(this.slotCM!="no") this.updateDisplayedCM();
-    if(this.slotTP != "no") this.updateDisplayedTP();
+    console.log(this.displayedActi);
+    console.log(this.courseSorted);
+    this.displayedActi = [];
+    this.updateDisplayedCM();
+    this.updateDisplayedTP();
+    this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
+    console.log(this.displayedActi);
   }
 
   showPrompt(segment: string){
@@ -172,23 +181,25 @@ export class CoursePage {
           handler: data => {
             if(segment == "Cours magistral") {
               this.slotCM = data;
-              this.updateDisplayedCM();
               this.userS.addSlotCM(this.course.acronym,this.slotCM);
             }
             if(segment == "TD") {
               this.slotTP = data;
-              this.updateDisplayedTP();
               this.userS.addSlotTP(this.course.acronym,this.slotTP);
             }
-
+            this.updateDisplayed();
           }
       }]};
 
+     let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
+
+
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
-      options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + " " + array[i].start.getHours()+":"+array[i].start.getUTCMinutes() , type: 'radio' });
+       let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+      options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + " " + array[i].start.getHours()+":"+array[i].start.getUTCMinutes() , type: 'radio', checked: slotChosen });
     }
-    if(options.inputs.length > 1) options.inputs.push({name:'options', value:"no", label : "Aucun", type : 'radio'});
+    if(options.inputs.length > 1) options.inputs.push({name:'options', value:"no", label : "Aucune", type : 'radio', checked: aucun});
     let prompt = this.alertCtrl.create(options);
     if(options.inputs.length > 1)prompt.present();
   }
@@ -198,14 +209,17 @@ export class CoursePage {
      act = act.filter(
       acti => (acti.type == segment || (acti.type == "TP" && segment == "TD") || (segment == "Examen" && acti.isExam))
       );
-    //console.log(acttemp);
+
+//retrieve name of each slot
     let slots = act.map(item => item.name)
       .filter((value, index, self) => self.indexOf(value) === index); //keep only different
-      //console.log(act);
+
+//delete some session (like seance aide etude)
     if(segment == "TD") slots = slots.filter(acti => acti.indexOf("_") !== -1);
     if(segment == "Cours magistral") slots = slots.filter(acti => acti.indexOf("-") !== -1);
     let newAct: Activity[] = [];
 
+//retrieve one activity of each slot
     for(let i=0; i< slots.length; i++){
       let activity:Activity = act.find(acti => acti.name == slots[i]);
       newAct.push(activity);

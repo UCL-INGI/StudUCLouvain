@@ -43,8 +43,8 @@ import { SportsPage } from '../sports/sports';
 import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
 
 @Component({
-  selector: 'page-homeC',
-  templateUrl: 'homeC.html',
+  selector: 'page-home',
+  templateUrl: 'home.html',
   
 })
 export class HomePage {
@@ -129,48 +129,11 @@ export class HomePage {
     this.userS.addCampus(this.where);
   }
 
- /* presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-
-    loading.present();
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, 5000);
-  }*/
-  ionViewDidLoad(){
-    let title:string;
-    let message:string;
-    this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
-     let disclaimerAlert = this.alertCtrl.create({
-            title: "Avertissement",
-            message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        });
-        disclaimerAlert.present();
-  }
-
-
   changePage(page) {
-    //console.log(this.myApp.nav); //Comprendre comment utiliser app.component
     if(page.iosSchemaName != null && page.androidPackageName != null){
       this.launchExternalApp(page);
     }
     this.nav.push(page.component, {title: page.title});
-   /* if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
-      this.presentLoadingDefault();
-    }*/
-    //console.log(this.MyApp);
-    //this.myApp.openRootPage(page);
   }
 
   launchExternalApp(page) {
@@ -270,6 +233,34 @@ export class HomePage {
           }]
         });
 
+  }
+
+  emergency(){
+    let close :string;
+    this.translateService.get('HOME.CLOSE').subscribe((res:string) => {close=res;});
+    let urg:string;
+    this.translateService.get('HOME.URG').subscribe((res:string) => {urg=res;});
+    let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9 : string;
+    this.translateService.get('GUINDAILLE.HELP1').subscribe((res:string) => {msg1=res;});
+    this.translateService.get('GUINDAILLE.HELP2').subscribe((res:string) => {msg2=res;});
+    this.translateService.get('GUINDAILLE.HELP3').subscribe((res:string) => {msg3=res;});
+    this.translateService.get('GUINDAILLE.HELP4').subscribe((res:string) => {msg4=res;});
+    this.translateService.get('GUINDAILLE.HELP5').subscribe((res:string) => {msg5=res;});
+    this.translateService.get('GUINDAILLE.HELP6').subscribe((res:string) => {msg6=res;});
+    this.translateService.get('GUINDAILLE.HELP7').subscribe((res:string) => {msg7=res;});
+    this.translateService.get('GUINDAILLE.HELP8').subscribe((res:string) => {msg8=res;});
+    this.translateService.get('GUINDAILLE.HELP9').subscribe((res:string) => {msg9=res;});
+    let alert = this.alertCtrl.create({
+      title: urg,
+      message: "<p> <strong>" + msg1 + "</strong>: <a href=\"tel:112\">112</a> </p> <p><strong>" + msg2 + "</strong>: <a href=\"tel:+32 10 47 22 22\">+32 10 47 22 22</a> </p> <p> <br>" + msg3 + " <br><br> <strong>" + msg4 + "</strong> " + msg5 + "<br> <strong>" + msg6 + "</strong> " + msg7 + "<br> <strong>" + msg8 + "</strong> " + msg9 +"<br>",
+      buttons: [
+      {
+        text:close,
+        handler:data => {
+        }
+      }]
+    });
+    alert.present();
   }
 
 }

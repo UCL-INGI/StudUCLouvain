@@ -17,7 +17,7 @@
     },
 
     "HOME": {
-        "TITLE" : "Home",
+        "TITLE" : "UCLCampus",
         "CAMPUS" : "CAMPUS",
         "NEWS" : "News",
         "EVENTS" : "Events",
@@ -38,6 +38,8 @@
         "MESSAGE2" : "Choose your language",
         "FR": "French",
         "EN": "English",
+        "CLOSE" : "Close",
+        "URG" : "EMERGENCY",
         "WARNING" : "Warning",
         "MESSAGE3" : "This application aims to centralize a maximum of information available on the UCLouvain portal. <br> This does not dispense you to go there to learn more."
     },
@@ -96,6 +98,10 @@
     },
 
     "HELP" : {
+        "SEGMENT1" : "Informations",
+        "SEGMENT2" : "Help services",
+        "SEGMENT3" : "Tutorials",
+
         "DESK" : "Service Desk",
         "TEXT1" : "Le Service Desk est un<em><strong> point de contact unique</strong></em> pour toutes les demandes de nature informatique à l’UCL. Un <em>call center</em> orientera l'utilisateur vers le bon interlocuteur.",
         "TEXT2" : "Il aide tout nouveau membre de l'UCL à résoudre les problèmes liés à son identité : carte d'accès, identifiant global, mot de passe. Il reçoit aussi les demandes liées aux services IT (courrier électronique, agenda, WiFi, portail, etc.)",
@@ -209,7 +215,13 @@
         "SERVICE" : "Service to society",
         "NOTHING" : "No news to display ...",
 
-        "SITE" : "See on the website"
+        "SITE" : "See on the website",
+
+        "WEB" : "Voir les actualités sur le site web",
+
+        "FAC" : "Facultaires",
+        "UNIF" : "Universitaires",
+        "VALVE" : "Valves"
     },
 
     "EVENTS" : {
@@ -324,7 +336,7 @@
 
         "HELP" : "Emergency",
         "HELP1" : "General emergency number",
-        "HELP2" : "N° tél. gardiennage UCL",
+        "HELP2" : "No. tel. gardiennage UCL",
         "HELP3" : "Keep calm and specify: ",
         "HELP4" : "Who?",
         "HELP5" : "Your name and number.",

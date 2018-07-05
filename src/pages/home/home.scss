@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-homeC {
+page-home {
 
 
     /*.bg{
@@ -36,6 +36,27 @@ page-homeC {
 
     b{
         color: black;
+    }
+
+    .fab {
+    contain: layout;
+    }
+
+        button[ion-fab] {
+        overflow: visible;
+        position: relative;
+
+        ion-label {
+            position: absolute;
+            top: -37px;
+            right: -24px;
+
+            color: black;
+            //background-color: rgba(0,0,0,0.7);
+            line-height: 24px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
     }
 
 }

@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, Nav, Platform, AlertController,LoadingController } from 'ionic-angular';
+import { MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,7 +41,7 @@ import { ParamPage } from '../pages/param/param';
 import { HelpDeskPage } from '../pages/help-desk/help-desk';
 import { CreditPage } from '../pages/credit/credit';
 import { SportsPage } from '../pages/sports/sports';
-import { HomePage } from '../pages/home/homeC';
+import { HomePage } from '../pages/home/home';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
@@ -79,6 +79,7 @@ export class MyApp {
     private statusBar: StatusBar,
     private translateService: TranslateService,
     public loadingCtrl: LoadingController,
+    private ionicApp: IonicApp,
     private wso2Service : Wso2Service
   ) {
     this.user.getCampus();
@@ -138,9 +139,6 @@ export class MyApp {
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }
-      //{ title: 'Login Test', component: LoginPage, icon: 'contact',
-        // iosSchemaName: null, androidPackageName: null,
-        // appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
       translateService.setDefaultLang('fr');
@@ -156,9 +154,24 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashscreen.hide();
     });
+    this.disclaimer();
 
     // Confirm exit
     this.platform.registerBackButtonAction(() => {
+
+        let activePortal = this.ionicApp._loadingPortal.getActive() ||
+           this.ionicApp._modalPortal.getActive() ||
+           this.ionicApp._toastPortal.getActive() ||
+            this.ionicApp._overlayPortal.getActive();
+
+        if (activePortal) {
+            activePortal.dismiss();
+            return
+        }
+        else if (this.menu.isOpen()) { // Close menu if open
+            this.menu.close();
+            return
+        }
         if (this.nav.length() == 1) {
           this.confirmExitApp();
         } else {
@@ -169,7 +182,9 @@ export class MyApp {
   }
 
   confirmExitApp() {
-    if(this.page == this.homePage){
+    let activeVC = this.nav.getActive();
+    let page = activeVC.instance;
+    if(page instanceof HomePage){
       if(!this.alertPresented){
         this.alertPresented = true;
         let confirmAlert = this.alertCtrl.create({
@@ -206,6 +221,25 @@ export class MyApp {
       loading.dismiss();
     }, 5000);
   }*/
+
+  disclaimer(){
+        let title:string;
+    let message:string;
+    this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
+    this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
+     let disclaimerAlert = this.alertCtrl.create({
+            title: "Avertissement",
+            message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
+  }
   openRootPage(page) {
 
     // close the menu when clicking a link from the menu

@@ -34,6 +34,7 @@ export class UserService {
   sports: string[] = [];
   campus: string = "";
   slots: Array<{course:string, TP:string, CM:string}> = [];
+  fac: string = "";
 
   constructor(
     public eventss: Events,
@@ -46,6 +47,7 @@ export class UserService {
     this.getCampus();
     this.getSports();
     this.getSlots();
+    this.getFac();
   }
 
   getFavorites(){
@@ -78,6 +80,17 @@ export class UserService {
         this.campus = "";
       } else {
         this.campus=data; 
+        }
+    });
+  }
+
+  getFac(){
+    this.storage.get('fac').then((data) =>
+    {
+      if(data == null){
+        this.fac = "";
+      } else {
+        this.fac=data; 
         }
     });
   }
@@ -116,6 +129,10 @@ export class UserService {
 
   hasCampus() {
     return(this.campus.length > 0);
+  }
+
+  hasFac() {
+    return(this.fac.length > 0);
   }
 
   hasSlotTP(acronym:string){
@@ -173,6 +190,18 @@ export class UserService {
     
     this.campus="";
     this.storage.set('campus',this.campus);
+  };
+
+  addFac(fac: string) {
+    this.fac = fac;
+    this.storage.set('fac',this.fac);
+    
+  };
+
+  removeFac(fac: string) {
+    
+    this.fac="";
+    this.storage.set('fac',this.fac);
   };
 
   addSlotTP(acronym:string, slot:string){

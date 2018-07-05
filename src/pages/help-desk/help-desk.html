@@ -28,13 +28,13 @@
   </ion-navbar>
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="info">
-      Informations
+      {{'HELP.SEGMENT1' | translate}}
     </ion-segment-button>
     <ion-segment-button value="aide">
-      Services d'aide
+      {{'HELP.SEGMENT2' | translate}}
     </ion-segment-button>
     <ion-segment-button value="tuto">
-      Tutoriaux
+      {{'HELP.SEGMENT3' | translate}}
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -235,7 +235,7 @@
 
     <p><strong>{{'HELP.AIDE24' | translate}}</strong></p>
     <p>{{'HELP.SANTE8' | translate}}</p><br>
-    <p>{{'HELP.SANTE9' | translate}}</p><br>
+    <p>{{'HELP.SANTE9' | translate}}</p><
   </ion-item>
 
   <ion-item-divider  (tap)="toggleGroup('psyped')">

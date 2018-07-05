@@ -30,6 +30,7 @@
       <button ion-button icon-only end (tap)="settings()">
         <ion-icon name="settings"></ion-icon>
       </button>
+
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -162,4 +163,11 @@
 </ng-container>
 </ion-content>
 
+
+<ion-fab bottom right style="contain:layout">
+  <button ion-fab color="danger" (tap)="emergency()">
+    <ion-icon name="alert" ></ion-icon>
+    <ion-label>{{'HOME.URG' | translate}}</ion-label>
+  </button>
+</ion-fab>
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

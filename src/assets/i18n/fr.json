@@ -16,7 +16,7 @@
 	},
 
 	"HOME" : {
-	    "TITLE" : "Accueil",
+	    "TITLE" : "UCLCampus",
 	    "CAMPUS" : "CAMPUS",
 	    "NEWS" : "News",
 	    "EVENTS" : "Evénements",
@@ -37,6 +37,8 @@
 	    "MESSAGE2" : "Choississez votre langue",
 	    "FR": "Francais",
 	    "EN": "Anglais",
+        "CLOSE" : "Fermer",
+        "URG" : "URGENCES",
         "WARNING" : "Avertissement",
         "MESSAGE3" : "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus."
 	},
@@ -95,6 +97,10 @@
     },
 
     "HELP" : {
+        "SEGMENT1" : "Informations",
+        "SEGMENT2" : "Services d'aide",
+        "SEGMENT3" : "Tutoriaux",
+
         "DESK" : "Service Desk",
         "TEXT1" : "Le Service Desk est un<em><strong> point de contact unique</strong></em> pour toutes les demandes de nature informatique à l’UCL. Un <em>call center</em> orientera l'utilisateur vers le bon interlocuteur.",
         "TEXT2" : "Il aide tout nouveau membre de l'UCL à résoudre les problèmes liés à son identité : carte d'accès, identifiant global, mot de passe. Il reçoit aussi les demandes liées aux services IT (courrier électronique, agenda, WiFi, portail, etc.)",
@@ -208,7 +214,13 @@
         "SERVICE" : "Le service à la société",
         "NOTHING" : "Pas d'actualité à afficher...",
 
-        "SITE" : "Voir sur le site"
+        "SITE" : "Voir sur le site",
+
+        "WEB" : "Voir les actualités sur le site web",
+
+        "FAC" : "Facultaires",
+        "UNIF" : "Universitaires",
+        "VALVE" : "Valves"
     },
 
     "EVENTS" : {
