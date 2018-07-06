@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -43,27 +43,9 @@ export class GuindaillePage {
   shownGroup = null;
   segment:string = 'pict';
   /*alt:string;
-  this.translateService.get('PIC1').subscribe((res:string) => {this.alt=res;});
+  this.translateService.get('PIC1').subscribe((res:string) => {this.alt=res;});*/
 
-  altTitle:string;
-  noise:string;
-  noiseTitle:string;
-  water:string;
-  waterTitle:string;
-  where:string;
-  whereTitle:string;
-  can:string;
-  canTitle:string;
-  condom:string;
-  condomTitle:string;
-  rac:string;
-  racTitle:string;
-  pee:string;
-  peeTitle:string;
-  out:string;
-  outTitle:string;
-  viol:string;
-  violTitle:string;*/
+  // MUST USE TRADUCTION !!!!!!!!!!!
 
   alterner = { title: 'Alterner',
       subTitle: 'Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…',
@@ -143,7 +125,13 @@ export class GuindaillePage {
         image: "assets/img/guindaille/6.png",
       }];
 
-  constructor(public navCtrl: NavController, private translateService: TranslateService, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, 
+              private translateService: TranslateService, 
+              public navParams: NavParams, 
+              public modalCtrl: ModalController, 
+              private iab: InAppBrowser, 
+              public alertCtrl: AlertController) 
+  {
     this.title = this.navParams.get('title');
   }
 

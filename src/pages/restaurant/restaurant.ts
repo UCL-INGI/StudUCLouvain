@@ -34,8 +34,4 @@ export class RestaurantPage {
     this.title = this.navParams.get('title');
   }
 
-  ionViewDidLoad() {
-    console.log('Hello RestaurantPage Page');
-  }
-
 }

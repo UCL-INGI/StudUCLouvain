@@ -1,7 +1,7 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -30,88 +30,43 @@
       <button ion-button icon-only end (tap)="settings()">
         <ion-icon name="settings"></ion-icon>
       </button>
-
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
+<!----------------------- FIRST LAUNCH : CHOICE OF CAMPUS --------------------------------->
 <ion-content text-center align-self-center padding   >
 	<ng-container *ngIf="(userS.hasCampus() === false)">
-  <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
-  <ion-list radio-group [(ngModel)]="where" class="other">
-    <ion-item class="other">
-      <ion-label>Louvain-la-Neuve</ion-label>
-      <ion-radio value="LLN" checked></ion-radio>
-    </ion-item>
-    <ion-item class="other">
-      <ion-label>Woluwé</ion-label>
-      <ion-radio value="Woluwe"></ion-radio>
-    </ion-item>
-    <ion-item class="other">
-      <ion-label>Mons</ion-label>
-      <ion-radio value="Mons"></ion-radio>
-    </ion-item>
-  </ion-list>
-  <ion-row center>
-    <ion-col text-center>
-      <button ion-button round (tap)="updateCampus()">{{'HOME.OK' | translate}}</button>
-    </ion-col>
-  </ion-row>
-</ng-container>
+    <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
+    <ion-list radio-group [(ngModel)]="where" class="other">
+      <ion-item class="other">
+        <ion-label>Louvain-la-Neuve</ion-label>
+        <ion-radio value="LLN" checked></ion-radio>
+      </ion-item>
+      <ion-item class="other">
+        <ion-label>Woluwé</ion-label>
+        <ion-radio value="Woluwe"></ion-radio>
+      </ion-item>
+      <ion-item class="other">
+        <ion-label>Mons</ion-label>
+        <ion-radio value="Mons"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-row center>
+      <ion-col text-center>
+        <button ion-button round (tap)="updateCampus()">{{'HOME.OK' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </ng-container>
 
-
+  <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
 	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header">
 		<p></p>
-  <!--
-  <ion-list class="other"  padding>
-    <ion-item padding class="other">
-      <p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p>
+    <ion-grid class="other">
+      <!--------------------------------------- STUDY PART ------------------------------------------------>
       <ion-row>
-        <ion-col align-self-center text-center>
-          <img alt="logo" src="./assets/img/news.png" align="middle" height="auto" (tap)="changePage(newsPage)"/><p align="center"><b [translate]="'HOME.NEWS'"></b></p>
-        </ion-col>
-        <ion-col align-self-end text-center >
-          <img alt="louvinfo" src="./assets/img/calend.png" align="middle"  height="auto" (tap)="changePage(eventPage)"/><p align="center"><b>{{'HOME.EVENTS' | translate}}</b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="sport" src="./assets/img/sportsM.jpg" align="middle"  height="auto" (tap)="changePage(sportPage)"/><p align="center"><b>{{'HOME.SPORTS' | translate}}</b></p>
-        </ion-col>
+        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p></ion-col>
       </ion-row>
-    </ion-item>
-    <ion-item class="other">
-      <p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p>
-      <ion-row>
-        <ion-col align-self-end text-center>
-          <img alt="biblio" src="./assets/img/books.png" align="middle" height="auto" (tap)="changePage(libraryPage)"/> <p align="center"><b>{{'HOME.LIBRARY' | translate}}</b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="etudes" src="./assets/img/grad.png" align="middle" height="auto" (tap)="changePage(studiesPage)"/><p align="center"><b>{{'HOME.ETUDES' | translate}}</b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="aide" src="./assets/img/aide.png" align="middle" height="auto" (tap)="changePage(helpDeskPage)"/><p align="center"><b>{{'HOME.HELP' | translate}}</b></p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item class="other">
-      <p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p>
-      <ion-row>
-        <ion-col align-self-end text-center>
-          <img alt="carte" src="./assets/img/cartes.png" align="middle" height="auto" (tap)="changePage(mapPage)"/><p align="center"><b>{{'HOME.MAP' | translate}}</b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="resto" src="./assets/img/resto4u.jpg" align="middle" height="auto" (tap)="changePage(restoPage)"/><p align="center"><b>{{'HOME.REST' | translate}}</b></p>
-        </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="voiture" src="./assets/img/mobility.png" align="middle" height="auto" (tap)="changePage(mobilityPage)"/><p align="center"><b>{{'HOME.MOBILITY' | translate}}</b></p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  <
-  -->
-  <ion-grid class="other">
-    <ion-row>
-      <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p></ion-col>
-    </ion-row>
       <ion-row>
         <ion-col align-self-end text-center>
           <img alt="biblio" src="./assets/img/icon4.jpg" align="middle"  (tap)="changePage(libraryPage)"/> <p align="center"><b><font color="#002D62">{{'HOME.LIBRARY' | translate}}</font></b></p>
@@ -122,11 +77,11 @@
         <ion-col align-self-end text-center>
           <img alt="aide" src="./assets/img/icon6.jpg" align="middle"  (tap)="changePage(helpDeskPage)"/><p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
         </ion-col>
-    </ion-row>
+      </ion-row>
+      <!---------------------------------------------- CAMPUS PART ----------------------------------------------------->
       <ion-row>
-            <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
-    </ion-row>
-
+        <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
+      </ion-row>
       <ion-row>
         <ion-col align-self-center text-center>
           <img alt="logo" src="./assets/img/icon1.jpg" align="middle" height="auto" (tap)="changePage(newsPage)"/><p align="center"><b><font color="#002D62">{{'HOME.NEWS' | translate}}</font></b></p>
@@ -137,10 +92,11 @@
         <ion-col align-self-end text-center>
           <img alt="sport" src="./assets/img/icon3.jpg" align="middle"  height="auto" (tap)="changePage(sportPage)"/><p align="center"><b><font color="#002D62">{{'HOME.SPORTS' | translate}}</font></b></p>
         </ion-col>
-    </ion-row>
+      </ion-row>
+      <!-------------------------------------------------- TOOLS PART ---------------------------------------------------->
       <ion-row>
         <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p></ion-col>
-    </ion-row>
+      </ion-row>
       <ion-row>
         <ion-col align-self-end text-center>
           <img alt="carte" src="./assets/img/icon7.jpg" align="middle" height="auto" (tap)="changePage(mapPage)"/><p align="center"><b><font color="#002D62">{{'HOME.MAP' | translate}}</font></b></p>
@@ -151,23 +107,48 @@
         <ion-col align-self-end text-center>
           <img alt="voiture" src="./assets/img/icon9.jpg" align="middle" height="auto" (tap)="changePage(mobilityPage)"/><p align="center"><b><font color="#002D62">{{'HOME.MOBILITY' | translate}}</font></b></p>
         </ion-col>
-    </ion-row >
+      </ion-row >
+      <!---------------------------------------- GUINDAILLE2.0 PART -------------------------------------------------------->
+      <ion-row>
+        <ion-col align-self-end text-center>
+           <img alt="voiture" src="./assets/img/guindaille/logo.jpg" align="middle" height="auto" (tap)="changePage(guindaillePage)"/><p align="center"><b><font color="#002D62">{{'MENU.PARTY' | translate}}</font></b></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <ion-row>
-      <ion-col align-self-end text-center>
-         <img alt="voiture" src="./assets/img/guindaille/logo.jpg" align="middle" height="auto" (tap)="changePage(guindaillePage)"/><p align="center"><b><font color="#002D62">{{'MENU.PARTY' | translate}}</font></b></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-</ng-container>
+  </ng-container>
 </ion-content>
 
-
-<ion-fab bottom right style="contain:layout">
+<!------------------------------------ EMERGENCY BUTTON --------------------------------------------------------------------->
+<ion-fab bottom right>
   <button ion-fab color="danger" (tap)="emergency()">
     <ion-icon name="alert" ></ion-icon>
-    <ion-label>{{'HOME.URG' | translate}}</ion-label>
+    <ion-label><strong>{{'HOME.URG' | translate}}</strong></ion-label>
   </button>
 </ion-fab>
+
+<!------------------------------------ SOCIAL NETWORK BUTTON ------------------------------------------------------------------>
+<ion-fab bottom left #fab *ngIf="(userS.hasCampus() === true)">
+  <button ion-fab mini>
+    <ion-icon  name="arrow-dropup" ></ion-icon>
+  </button>
+  <ion-fab-list side="top">
+     <button ion-fab (tap)="openURL('https://www.linkedin.com/school/universite-catholique-de-louvain/',fab)">
+       <ion-icon  name="logo-linkedin" ></ion-icon>
+     </button>
+     <button ion-fab (tap)="openURL('https://twitter.com/UCLouvain_be',fab)">
+       <ion-icon  name="logo-twitter" ></ion-icon>
+     </button>
+     <button ion-fab (tap)="openURL('https://www.facebook.com/univc.louvain',fab)">
+       <ion-icon  name="logo-facebook" ></ion-icon>
+     </button>
+     <button ion-fab (tap)="openURL('https://www.youtube.com/user/universitedelouvain',fab)">
+       <ion-icon  name="logo-youtube" ></ion-icon>
+     </button>
+     <button ion-fab (tap)="openURL('https://www.instagram.com/uclouvain',fab)">
+       <ion-icon  name="logo-instagram" ></ion-icon>
+     </button>
+    </ion-fab-list>
+  </ion-fab>
+
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

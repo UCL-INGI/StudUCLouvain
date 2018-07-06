@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -22,13 +22,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, List, Content, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
-import { NewsService } from '../../providers/rss-services/news-service';
-import { NewsItem } from '../../app/entity/newsItem';
-import { NewsDetailsPage } from './news-details/news-details';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { TranslateService } from '@ngx-translate/core';
-import { UserService } from '../../providers/utils-services/user-service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TranslateService } from '@ngx-translate/core';
+
+import { NewsService } from '../../providers/rss-services/news-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
+
+import { NewsItem } from '../../app/entity/newsItem';
+
+import { NewsDetailsPage } from './news-details/news-details';
 
 @Component({
   selector: 'page-news',
@@ -39,6 +42,7 @@ export class NewsPage {
   @ViewChild('newsList', { read: List }) newsList: List;
   @ViewChild('news') content: Content;
   
+  // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize()
   {
     if(this.content)
@@ -73,8 +77,8 @@ export class NewsPage {
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController
-  ) {
+    public loadingCtrl: LoadingController) 
+  {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
@@ -88,9 +92,13 @@ export class NewsPage {
         });
       });
       this.fac=this.userS.fac;
-      //this.segmentChanged();
   }
-    presentLoading() {
+
+  ionViewDidLoad() {
+    this.presentLoading();
+  }
+
+  presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
@@ -98,11 +106,6 @@ export class NewsPage {
 
       this.loading.present();
     }
-    //this.dismiss = true;
-
-   /* setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);*/
   }
 
   dismissLoading(){
@@ -118,10 +121,6 @@ export class NewsPage {
 
   updateFac(){
     this.userS.addFac(this.fac);
-  }
-
-  ionViewDidLoad() {
-    this.presentLoading();
   }
 
   public doRefresh(refresher) {

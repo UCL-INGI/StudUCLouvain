@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -22,16 +22,18 @@
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform,LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
-import { EmployeeDetailsPage } from './employee-details/employee-details';
-import { EmployeeItem } from '../../app/entity/employeeItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { TranslateService } from '@ngx-translate/core';
 
+import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+
+import { EmployeeItem } from '../../app/entity/employeeItem';
+
+import { EmployeeDetailsPage } from './employee-details/employee-details';
 
 @Component({
-  selector: 'page-help-desk',
-  templateUrl: 'help-desk.html',
+  selector: 'page-support',
+  templateUrl: 'support.html',
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
@@ -41,7 +43,7 @@ import { TranslateService } from '@ngx-translate/core';
     ])
   ]
 })
-export class HelpDeskPage {
+export class SupportPage {
   title: any;
   shownGroup = null;
   employees: EmployeeItem[];
@@ -60,23 +62,20 @@ export class HelpDeskPage {
               public repService : RepertoireService,
               public connService : ConnectivityService,
               private translateService: TranslateService,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController) 
+  {
     this.title = this.navParams.get('title');
   }
 
   presentLoading() {
     if(!this.loading){
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
+        this.loading = this.loadingCtrl.create({
+          content: 'Please wait...'
+        });
 
       this.loading.present();
     }
-    //this.dismiss = true;
 
-   /* setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);*/
   }
 
   dismissLoading(){
@@ -84,10 +83,6 @@ export class HelpDeskPage {
         this.loading.dismiss();
         this.loading = null;
     }
-  }
-
-  ionViewDidLoad() {
-
   }
 
   update(){

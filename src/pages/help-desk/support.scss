@@ -1,4 +1,4 @@
-<!--
+/*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
     Date : July 2017
@@ -17,34 +17,14 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
--->
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons start>
-      <button ion-button (click)="dismiss()">Annuler</button>
-    </ion-buttons>
+*/
 
-    <ion-title>
-      Choix d'un point d'intérêt
-    </ion-title>
+page-support {
+  .spinner-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
 
-    <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>Appliquer</button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-
-<ion-content #mapSelector id=mapSelector padding>
-  <ion-list radio-group>
-    <ion-list-header>
-      Sélectionnez le lieu que vous voulez afficher
-    </ion-list-header>
-
-    <ion-item *ngFor="let loc of locations, let i=index">
-      <ion-label>{{loc.title}}</ion-label>
-      <ion-radio [checked]="checkBoxStates[i]" value="{{loc.title}}" (click)="changeCurrent(loc)"></ion-radio>
-    </ion-item>
-
-  </ion-list>
-</ion-content>
+  
+}

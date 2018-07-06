@@ -1,6 +1,6 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
+    Authors :  Daubry Benjamin & Marchesini Bruno
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
@@ -44,113 +44,104 @@
 
 <ion-content class="guindaille" >
   <ion-content *ngIf="segment==='pict'" class="gelem">
-  <ion-item-divider  class="gelem" no-lines>
-    <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p></button>
-  </ion-item-divider>
+    <ion-item-divider  class="gelem" no-lines>
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p></button>
+    </ion-item-divider>
 
-  <ion-item class="gelem" no-lines>
-    <ion-list >
-      <ion-item class="gelem">
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <img alt="alterner" src="./assets/img/guindaille/alterner.png" align="middle"  height="auto" (tap)="showAlert(alterner)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="bruit" src="./assets/img/guindaille/Bruit-exterieur.png" align="middle"  height="auto" (tap)="showAlert(bruit)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="eau" src="./assets/img/guindaille/eau-gratuite.png" align="middle"  height="auto" (tap)="showAlert(eau)"/>
-          </ion-col>
-        </ion-row>
-
-
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <img alt="ou" src="./assets/img/guindaille/jen-suis-ou.png" align="middle"  height="auto" (tap)="showAlert(ou)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="cans" src="./assets/img/guindaille/no-cans-no-glass.png" align="middle"  height="auto" (tap)="showAlert(cans)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="preservatif" src="./assets/img/guindaille/preservatif-jy-pense.png" align="middle"  height="auto" (tap)="showAlert(preservatif)"/>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <img alt="racompagner" src="./assets/img/guindaille/racompagner.png" align="middle"  height="auto" (tap)="showAlert(racompagner)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="uriner" src="./assets/img/guindaille/uriner-dans-le-pot.png" align="middle"  height="auto" (tap)="showAlert(uriner)"/>
-          </ion-col>
-          <ion-col align-self-end text-center>
-            <img alt="urinerD" src="./assets/img/guindaille/uriner-dehors.png" align="middle"  height="auto" (tap)="showAlert(dehors)"/>
-          </ion-col>
-        </ion-row>
+    <ion-item class="gelem" no-lines>
+      <ion-list >
+        <ion-item class="gelem">
+          <ion-row>
+            <ion-col align-self-center text-center>
+              <img alt="alterner" src="./assets/img/guindaille/alterner.png" align="middle"  height="auto" (tap)="showAlert(alterner)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="bruit" src="./assets/img/guindaille/Bruit-exterieur.png" align="middle"  height="auto" (tap)="showAlert(bruit)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="eau" src="./assets/img/guindaille/eau-gratuite.png" align="middle"  height="auto" (tap)="showAlert(eau)"/>
+            </ion-col>
+          </ion-row>
 
 
-        <ion-row>
-          <ion-col align-self-end text-center>
-            <img alt="violence" src="./assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" height="auto" align="center" (tap)="showAlert(violence)"/>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-list>
-  </ion-item>
-</ion-content>
-<ion-content *ngIf="segment==='effect'" class="gelem">
-  <ion-item-divider   class="gelem" no-lines>
-    <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.EFFECT' | translate}}</p></button>
-  </ion-item-divider>
+          <ion-row>
+            <ion-col align-self-center text-center>
+              <img alt="ou" src="./assets/img/guindaille/jen-suis-ou.png" align="middle"  height="auto" (tap)="showAlert(ou)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="cans" src="./assets/img/guindaille/no-cans-no-glass.png" align="middle"  height="auto" (tap)="showAlert(cans)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="preservatif" src="./assets/img/guindaille/preservatif-jy-pense.png" align="middle"  height="auto" (tap)="showAlert(preservatif)"/>
+            </ion-col>
+          </ion-row>
 
-  <ion-item class="gelem" no-lines>
-    <ion-slides pager>
-      <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)"/>
-      </ion-slide>
-    </ion-slides>
-    <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
-  </ion-item>
-</ion-content>
-<ion-content *ngIf="segment==='help'" class="gelem">
-  <ion-item-divider  class="gelem" no-lines>
-    <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.HELP' | translate}}</p></button>
-  </ion-item-divider>
+          <ion-row>
+            <ion-col align-self-center text-center>
+              <img alt="racompagner" src="./assets/img/guindaille/racompagner.png" align="middle"  height="auto" (tap)="showAlert(racompagner)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="uriner" src="./assets/img/guindaille/uriner-dans-le-pot.png" align="middle"  height="auto" (tap)="showAlert(uriner)"/>
+            </ion-col>
+            <ion-col align-self-end text-center>
+              <img alt="urinerD" src="./assets/img/guindaille/uriner-dehors.png" align="middle"  height="auto" (tap)="showAlert(dehors)"/>
+            </ion-col>
+          </ion-row>
 
-  <ion-item  class="gelem">
-    <!--<ion-row>
-      <ion-col> N° tél. urgences générales </ion-col>
-      <ion-col> <a href="tel:112">112</a> </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col> N° tél. gardiennage UCL </ion-col>
-      <ion-col> <a href="tel:+32 10 47 22 22">+32 10 47 22 22</a> </ion-col>
-    </ion-row>-->
 
-    <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" text-wrap>
-      <p>
-        <strong>{{'GUINDAILLE.HELP1' | translate}}</strong>: <a href="tel:112">112</a>
-      </p>
-      <p>
-        <strong>{{'GUINDAILLE.HELP2' | translate}}</strong>: <a href="tel:+32 10 47 22 22">+32 10 47 22 22</a>
-      </p>
-      <p>
-        <br>{{'GUINDAILLE.HELP3' | translate}} <br><br>
-        <strong>{{'GUINDAILLE.HELP4' | translate}}</strong> {{'GUINDAILLE.HELP5' | translate}}<br>
-        <strong>{{'GUINDAILLE.HELP6' | translate}}</strong> {{'GUINDAILLE.HELP7' | translate}}<br>
-        <strong>{{'GUINDAILLE.HELP8' | translate}}</strong> {{'GUINDAILLE.HELP9' | translate}}<br>
-        <br> {{'GUINDAILLE.HELP10' | translate}} <br>
-      </p> <br>
-      <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
-      <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
-      <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
-      <p style="text-align: left">
-        <li>{{'GUINDAILLE.HELP14' | translate}}</li>
-        <li>{{'GUINDAILLE.HELP15' | translate}}</li>
-        <li>{{'GUINDAILLE.HELP16' | translate}}</li>
-        <li>{{'GUINDAILLE.HELP17' | translate}}</li>
-      </p>
-    </div>
-  </ion-item>
-</ion-content>
+          <ion-row>
+            <ion-col align-self-end text-center>
+              <img alt="violence" src="./assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" height="auto" align="center" (tap)="showAlert(violence)"/>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-content>
+  <ion-content *ngIf="segment==='effect'" class="gelem">
+    <ion-item-divider   class="gelem" no-lines>
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.EFFECT' | translate}}</p></button>
+    </ion-item-divider>
+
+    <ion-item class="gelem" no-lines>
+      <ion-slides pager>
+        <ion-slide *ngFor="let slide of slides">
+          <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)"/>
+        </ion-slide>
+      </ion-slides>
+      <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
+    </ion-item>
+  </ion-content>
+  <ion-content *ngIf="segment==='help'" class="gelem">
+    <ion-item-divider  class="gelem" no-lines>
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.HELP' | translate}}</p></button>
+    </ion-item-divider>
+
+    <ion-item  class="gelem">
+      <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" text-wrap>
+        <p>
+          <strong>{{'GUINDAILLE.HELP1' | translate}}</strong>: <a href="tel:112">112</a>
+        </p>
+        <p>
+          <strong>{{'GUINDAILLE.HELP2' | translate}}</strong>: <a href="tel:+32 10 47 22 22">+32 10 47 22 22</a>
+        </p>
+        <p>
+          <br>{{'GUINDAILLE.HELP3' | translate}} <br><br>
+          <strong>{{'GUINDAILLE.HELP4' | translate}}</strong> {{'GUINDAILLE.HELP5' | translate}}<br>
+          <strong>{{'GUINDAILLE.HELP6' | translate}}</strong> {{'GUINDAILLE.HELP7' | translate}}<br>
+          <strong>{{'GUINDAILLE.HELP8' | translate}}</strong> {{'GUINDAILLE.HELP9' | translate}}<br>
+          <br> {{'GUINDAILLE.HELP10' | translate}} <br>
+        </p> <br>
+        <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
+        <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
+        <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
+        <p style="text-align: left">
+          <li>{{'GUINDAILLE.HELP14' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP15' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP16' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP17' | translate}}</li>
+        </p>
+      </div>
+    </ion-item>
+  </ion-content>
 </ion-content>

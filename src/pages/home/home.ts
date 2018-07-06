@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,16 +20,15 @@
 */
 
 import { Component } from '@angular/core';
-import { NavParams, NavController, App, AlertController, LoadingController} from 'ionic-angular';
+import { NavParams, NavController, App, AlertController, LoadingController, FabContainer} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
-import { UserService } from '../../providers/utils-services/user-service';
 import { MyApp } from '../../app/app.component';
-import { TranslateService } from '@ngx-translate/core';
 import { Market } from '@ionic-native/market';
+import { TranslateService } from '@ngx-translate/core';
 
-
+import { UserService } from '../../providers/utils-services/user-service';
 
 import { EventsPage } from '../events/events';
 import { MobilityPage } from '../mobility/mobility';
@@ -38,7 +37,7 @@ import { NewsPage } from '../news/news';
 import { RestaurantPage } from '../restaurant/restaurant';
 import { StudiesPage } from '../studies/studies';
 import { MapPage } from '../map/map';
-import { HelpDeskPage } from '../help-desk/help-desk';
+import { SupportPage } from '../help-desk/support';
 import { SportsPage } from '../sports/sports';
 import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
 
@@ -48,19 +47,11 @@ import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
   
 })
 export class HomePage {
-//  @ViewChild('Nav') nav: Nav;
+
   title:string = "Accueil";
   shownGroup = null;
   where = "";
   myApp : MyApp;
-
-  setting:string ="";
-  message:string = "";
-  save:string = "";
-  message2:string = "";
-  en:string = "";
-  fr:string = "";
-
 
   libraryPage = { title: 'MENU.LIBRARY', component: LibrariesPage,
     iosSchemaName: null, androidPackageName: null,
@@ -82,7 +73,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  helpDeskPage = { title: 'MENU.HELP', component: HelpDeskPage,
+  helpDeskPage = { title: 'MENU.HELP', component: SupportPage,
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
@@ -104,6 +95,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
+
   constructor(public navParams: NavParams,
               public app: App,
               public userS:UserService,
@@ -114,15 +106,13 @@ export class HomePage {
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public market: Market,
-              public loadingCtrl: LoadingController
-            )
+              public loadingCtrl: LoadingController)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
 
       this.app.setTitle(this.title);
-
   }
 
   updateCampus(){
@@ -160,22 +150,29 @@ export class HomePage {
     );
   }
 
- languageChanged(event:string) {
+  public openURL(url: string, fab: FabContainer) {
+    this.iab.create(url, '_system');
+    fab.close();
+  }
+
+  languageChanged(event:string) {
         this.translateService.use(event);
-    }
+  }
 
   settings(){
     let check = this.userS.campus;
     let check2 = this.translateService.currentLang;
-    this.translateService.get('HOME.SETTINGS').subscribe((res:string) => {this.setting=res;});
-    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {this.message=res;});
-    this.translateService.get('HOME.SAVE').subscribe((res:string) => {this.save=res;});
-    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {this.message2=res;});
-    this.translateService.get('HOME.FR').subscribe((res:string) => {this.fr=res;});
-    this.translateService.get('HOME.EN').subscribe((res:string) => {this.en=res;});
+    let settings, message, save, message2, fr, en:string;
+    this.translateService.get('HOME.SETTINGS').subscribe((res:string) => {settings=res;});
+    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {message=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
+    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {message2=res;});
+    this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
+    this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
+
     let settingsAlert = this.alertCtrl.create({
-            title: this.setting,
-            message: this.message,
+            title: settings,
+            message: message,
             inputs : [
                 {
                     type:'radio',
@@ -197,7 +194,7 @@ export class HomePage {
                 }],
             buttons: [
                 {
-                    text: this.save,
+                    text: save,
                     handler: data => {
                       this.userS.addCampus(data);
                       languageAlert.present();
@@ -208,25 +205,25 @@ export class HomePage {
         settingsAlert.present();
 
         let languageAlert = this.alertCtrl.create({
-          title: this.setting,
-          message : this.message2,
+          title: settings,
+          message : message2,
           inputs : [
             {
               type:'radio',
-              label:this.fr,
+              label:fr,
               value:'fr',
               checked:(check2 == 'fr')
             },
             {
               type:'radio',
-              label:this.en,
+              label:en,
               value:'en',
               checked:(check2 == 'en')
             }
           ],
           buttons: [
           {
-            text:this.save,
+            text:save,
             handler:data => {
                this.languageChanged(data);
             }

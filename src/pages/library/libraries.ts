@@ -21,18 +21,15 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { LibrariesService } from '../../providers/wso2-services/libraries-service';
-import { LibraryDetailsPage } from './library-details/library-details';
-import { LibraryItem } from '../../app/entity/libraryItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { TranslateService } from '@ngx-translate/core';
 
-/*
-  Generated class for the Library page.
+import { LibrariesService } from '../../providers/wso2-services/libraries-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { LibraryItem } from '../../app/entity/libraryItem';
+
+import { LibraryDetailsPage } from './library-details/library-details';
+
 @Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html'
@@ -48,19 +45,18 @@ export class LibrariesPage {
     public platform: Platform,
     public libService : LibrariesService,
     public connService : ConnectivityService,
-              private translateService: TranslateService
-  ) {
+    private translateService: TranslateService) 
+  {
     this.title = this.navParams.get('title');
-  }
-
-
-  public doRefresh(refresher) {
-    this.loadLibraries();
-    refresher.complete();
   }
 
   ionViewDidLoad() {
     this.loadLibraries();
+  }
+
+  public doRefresh(refresher) {
+    this.loadLibraries();
+    refresher.complete();
   }
 
   loadLibraries() {

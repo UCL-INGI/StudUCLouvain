@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,9 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-
 import { NavParams, ViewController } from 'ionic-angular';
-import { SportsService } from '../../../providers/rss-services/sports-service';
 
 
 @Component({
@@ -36,9 +34,8 @@ export class SportsFilterPage {
 
   constructor(
     public navParams: NavParams,
-    public viewCtrl: ViewController,
-    private sportService: SportsService
-  ) {
+    public viewCtrl: ViewController) 
+  {
     // passed in array of categories names that should be excluded (unchecked)
     let excludedFilters = this.navParams.get("excludedFilters");
     let filters = this.navParams.get("filters");

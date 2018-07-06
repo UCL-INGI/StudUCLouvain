@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,21 +20,21 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ToastController, AlertController  }
-  from 'ionic-angular';
-import { CourseService }
-  from '../../../providers/studies-services/course-service';
+import { NavController, NavParams, ItemSliding, ToastController, AlertController  } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { CourseService } from '../../../providers/studies-services/course-service';
+import { UserService } from '../../../providers/utils-services/user-service';
+
 import { Course } from '../../../app/entity/course';
 import { Activity } from '../../../app/entity/activity'
 import { Calendar } from '@ionic-native/calendar';
-import { UserService } from '../../../providers/utils-services/user-service';
-
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-course',
   templateUrl: 'course.html'
 })
+
 export class CoursePage {
   sessionId : string = this.navParams.get('sessionId');
   course : Course = this.navParams.get("course");
@@ -46,14 +46,14 @@ export class CoursePage {
 
 
   constructor(public navCtrl: NavController,
-    public courseService: CourseService,
-    private calendar: Calendar,
-    public toastCtrl: ToastController,
-    public userS:UserService,
-    private alertCtrl : AlertController,
-    private translateService: TranslateService,
-    public navParams:NavParams) {
-
+              public courseService: CourseService,
+              private calendar: Calendar,
+              public toastCtrl: ToastController,
+              public userS:UserService,
+              private alertCtrl : AlertController,
+              private translateService: TranslateService,
+              public navParams:NavParams) 
+  {
       this.courseSorted = {cm : [], tp : [], ex :[]};
       let acro = this.course.acronym;
       if(this.userS.hasSlotCM(acro)){
@@ -68,6 +68,7 @@ export class CoursePage {
     this.getCourse(this.sessionId, this.course.acronym);
   }
 
+///////////UNCOMMENT BELOW TO HIDE PREVIOUS COURSE
   getCourse(sessionId : string, acronym : string){
     this.courseService.getCourseId(sessionId, acronym).then(
       data => {
@@ -192,8 +193,6 @@ export class CoursePage {
       }]};
 
      let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
-
-
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
@@ -227,7 +226,6 @@ export class CoursePage {
 
     return newAct;
 
-  //console.log((actfin));
 
   }
 

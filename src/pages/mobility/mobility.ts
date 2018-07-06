@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -25,15 +25,18 @@ import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Market } from '@ionic-native/market';
+import { TranslateService } from '@ngx-translate/core';
+
 import { CarpoolingPage } from './carpooling/carpooling';
 import { BusPage } from './bus/bus';
 import { TrainPage } from './train/train';
-import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
 })
+
 export class MobilityPage {
   public title: any;
   carpoolingPage;
@@ -45,7 +48,8 @@ export class MobilityPage {
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
-              private translateService: TranslateService) {
+              private translateService: TranslateService) 
+  {
     this.title = this.navParams.get('title');
     let titlecar:string;
     this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
@@ -57,15 +61,11 @@ export class MobilityPage {
     this.busPage = { title: 'NextRide', component: BusPage,
                             iosSchemaName: 'be.thomashermine.prochainbus',
                             androidPackageName: 'be.thomashermine.prochainbus',
-                            appUrl: 'nextride://timetables/', httpUrl: 'https://nextride.be/timetables' };
+                            appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
     this.trainPage = { title: 'SNCB', component: TrainPage,
                             iosSchemaName: 'de.hafas.android.sncbnmbs',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
                             appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello MobilityPage Page');
   }
 
   launchExternalApp(page:any) {

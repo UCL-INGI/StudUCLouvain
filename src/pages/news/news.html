@@ -1,8 +1,8 @@
 <!--
 
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -49,7 +49,7 @@
       {{'NEWS.SERVICE' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" *ngIf="segment === 'univ'"></ion-searchbar>
 </ion-header>
 
 <ion-content class="feed-list" #news>
@@ -153,10 +153,12 @@
       </ion-col>
     </ion-row>
 
-    <button ion-button clear small icon-left (tap)="openURL('https://uclouvain.be/fr/node/10353')" *ngIf="fac==='LSM'">
+    <button center ion-button clear small icon-left (tap)="openURL('https://uclouvain.be/fr/node/10353')" *ngIf="fac==='LSM' && userS.hasFac() == true">
       <ion-icon name='share-alt'></ion-icon>
       {{'NEWS.WEB' | translate}}
     </button>
+    <p text-center *ngIf="userS.hasFac() == true && fac !== 'LSM'"><strong>Indisponible pour le moment</strong></p>
+
 
   </ng-container>
 
@@ -165,5 +167,10 @@
       <ion-icon name="swap" ></ion-icon>
     </button>
   </ion-fab>
+
+  <!-------------------------------- ACTUALITES VALVES ? ----------------------------------------------->
+  <ng-container *ngIf="segment==='valve'">
+    <p text-center><strong>Indisponible pour le moment</strong></p>
+  </ng-container>
 
 </ion-content>

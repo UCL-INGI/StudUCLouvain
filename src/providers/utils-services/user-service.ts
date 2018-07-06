@@ -35,6 +35,7 @@ export class UserService {
   campus: string = "";
   slots: Array<{course:string, TP:string, CM:string}> = [];
   fac: string = "";
+  disclaimer:boolean = false;
 
   constructor(
     public eventss: Events,
@@ -48,6 +49,7 @@ export class UserService {
     this.getSports();
     this.getSlots();
     this.getFac();
+    this.getDisclaimer();
   }
 
   getFavorites(){
@@ -80,6 +82,17 @@ export class UserService {
         this.campus = "";
       } else {
         this.campus=data; 
+        }
+    });
+  }
+
+  getDisclaimer(){
+    this.storage.get('disclaimer').then((data) =>
+    {
+      if(data==null){
+        this.disclaimer=false;
+      } else {
+        this.disclaimer=data;
         }
     });
   }
@@ -135,6 +148,10 @@ export class UserService {
     return(this.fac.length > 0);
   }
 
+  hasDisclaimer(){
+    return(this.disclaimer == true);
+  }
+
   hasSlotTP(acronym:string){
     var index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1){
@@ -150,6 +167,16 @@ export class UserService {
       return this.slots[index].CM.length >0;
     }
     else return index > -1;
+  }
+
+  addDisclaimer(discl:boolean){
+    this.disclaimer = discl;
+    this.storage.set('disclaimer',this.disclaimer);
+  }
+
+  removeDisclaimer(discl:boolean){
+    this.disclaimer = false;
+    this.storage.set('disclaimer', this.disclaimer);
   }
 
   addFavorite(itemGuid: string) {

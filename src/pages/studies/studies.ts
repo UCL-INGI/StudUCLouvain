@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -24,19 +24,21 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController, MenuController, ModalController, ItemSliding, ToastController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Calendar } from '@ionic-native/calendar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { StudiesService} from '../../providers/studies-services/studies-service';
 import { StudentService} from '../../providers/wso2-services/student-service';
 import { Wso2Service} from '../../providers/wso2-services/wso2-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+
 import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
 
 import { CoursePage } from '../studies/course/course';
 import { ModalProjectPage } from './modal-project/modal-project';
-//import { Activity } from '../../app/entity/activity';
-import { Calendar } from '@ionic-native/calendar';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+
+
 
 
 @Component({
@@ -44,6 +46,7 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
   templateUrl: 'studies.html',
 
 })
+
 export class StudiesPage {
   public people: any;
   public data : any;
@@ -57,7 +60,6 @@ export class StudiesPage {
   private password: string = "";
   private error:string = "";
   private status: string = "";
-  //private token:string = "";
   activities: any;
 
   constructor(
@@ -73,10 +75,10 @@ export class StudiesPage {
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService : ConnectivityService,
-              private translateService: TranslateService,
-              private wso2Service: Wso2Service,
-              private studentService: StudentService
-  ) {
+    private translateService: TranslateService,
+    private wso2Service: Wso2Service,
+    private studentService: StudentService)
+  {
     this.title = this.navParams.get('title');
 
     this.initializeSession();
@@ -84,13 +86,10 @@ export class StudiesPage {
     this.getCourses();
   }
 
-
+//authenticate a student
   private login(){
-  	//console.log("username",this.username);
-  	//console.log("pass",this.password);
   	this.error = "";
   	return new Promise(resolve => {
-
       this.wso2Service.login(this.username,this.password)
       .catch(error => {
       	console.log(error);
@@ -102,7 +101,6 @@ export class StudiesPage {
         data => {
           if(data!=null){
             this.status=data.toString();
-            //console.log(this.status);
             resolve(data);
           }
         })
@@ -110,24 +108,21 @@ export class StudiesPage {
     });
   }
 
+//get course program of student
   loadActivities(){
-  	//console.log(this.status);
-
   	this.login().then((res) => {
-	  	//console.log(this.status);
 	  	if(this.status){
-	  		//console.log("chelou");
 	  		this.studentService.searchActivities().then((res) => {
 	  			let result:any = res;
 	  			this.activities = result.activities.activity;
 	  			console.log(this.activities.activity);
 	  		});
-
 	  	}
   	});
 
   }
 
+//open modalprojectpage to choose an ade project
   openModalProject(){
     let obj = {sessionId : this.sessionId};
 
@@ -138,6 +133,7 @@ export class StudiesPage {
     myModal.present();
   }
 
+//set project and connect to ADE
   initializeSession(){
     if(this.connService.isOnline()) {
       this.studiesService.openSession().then(
@@ -164,9 +160,7 @@ export class StudiesPage {
     }
   }
 
-
-
-
+//add a course manually
   showPrompt() {
     let addcourse:string;
     let message:string;
@@ -210,6 +204,7 @@ export class StudiesPage {
     prompt.present();
   }
 
+//add a course from course program
   showPromptAddCourse(sigle : string) {
     let addcourse:string;
     let message:string;
@@ -247,6 +242,7 @@ export class StudiesPage {
     prompt.present();
   }
 
+//retrieve list of course added previously
   getCourses(){
     this.storage.get('listCourses').then((data) =>
     {
@@ -257,12 +253,14 @@ export class StudiesPage {
     });
   }
 
+//save course into storage
   saveCourse(name: string, tag: string){
     let course = new Course(name,tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
   }
 
+//remove course from storage
   removeCourse(course: Course){
     let index= this.listCourses.indexOf(course);
     if(index>= 0){
@@ -271,15 +269,13 @@ export class StudiesPage {
     this.storage.set('listCourses',this.listCourses);
   }
 
+//open CoursePage of a course
   openCoursePage(course: Course){
     this.navCtrl.push(CoursePage,
       {course : course, sessionId : this.sessionId});
   }
 
-  ionViewDidLoad() {
-
-  }
-
+//launch moodle or ucl portal
   launch(url) {
     this.iab.create(url,'_system');
   }
@@ -303,6 +299,7 @@ export class StudiesPage {
     this.alert
   }
 
+//alert to warning that changes are possible
     alert(){
       let title:string;
       let message:string;

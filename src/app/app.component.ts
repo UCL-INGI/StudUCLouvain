@@ -28,7 +28,7 @@ import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-
+import { Storage } from '@ionic/storage';
 
 import { EventsPage } from '../pages/events/events';
 import { MobilityPage } from '../pages/mobility/mobility';
@@ -38,7 +38,7 @@ import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { MapPage } from '../pages/map/map';
 import { ParamPage } from '../pages/param/param';
-import { HelpDeskPage } from '../pages/help-desk/help-desk';
+import { SupportPage } from '../pages/help-desk/support';
 import { CreditPage } from '../pages/credit/credit';
 import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/home';
@@ -57,6 +57,7 @@ export class MyApp {
   alertPresented: any;
   page: any;
   homePage;
+  checked=false;
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -80,10 +81,11 @@ export class MyApp {
     private translateService: TranslateService,
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
+    private storage: Storage,
     private wso2Service : Wso2Service
   ) {
     this.user.getCampus();
-    console.log(this.user.campus);
+    this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
     this.wso2Service.getToken();
@@ -111,7 +113,7 @@ export class MyApp {
       { title: 'MENU.LIBRARY', component: LibrariesPage, icon: 'book',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: HelpDeskPage,
+      { title: 'MENU.HELP', component: SupportPage,
         icon: 'information-circle', iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
@@ -143,7 +145,13 @@ export class MyApp {
     platform.ready().then(() => {
       translateService.setDefaultLang('fr');
       translateService.use('fr');
+
     })
+
+    this.storage.get('disclaimer').then((disclaimer) => {
+      if(!disclaimer) this.disclaimer();
+      console.log(disclaimer);
+    });
 
   }
 
@@ -154,7 +162,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashscreen.hide();
     });
-    this.disclaimer();
+
 
     // Confirm exit
     this.platform.registerBackButtonAction(() => {
@@ -210,17 +218,6 @@ export class MyApp {
   }
   else this.openRootPage(this.homePage);
 }
-  /*presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-
-    loading.present();
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, 5000);
-  }*/
 
   disclaimer(){
         let title:string;
@@ -230,10 +227,23 @@ export class MyApp {
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
             message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
+            inputs: [
+              {
+                type: 'checkbox',
+                label: 'Ne plus afficher',
+                handler:(e)=>{
+                   console.log(e.checked);
+                   this.checked = e.checked;
+                }
+              }
+            ],
             buttons: [
                 {
                     text: "OK",
                     handler: data => {
+                      if(this.checked){
+                        this.user.addDisclaimer(this.checked);
+                      }
                     }
                 }
             ]
@@ -241,17 +251,19 @@ export class MyApp {
         disclaimerAlert.present();
   }
   openRootPage(page) {
-
+    let activeVC = this.nav.getActive();
+    let test = activeVC.instance;
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
-    if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-    }
-    this.nav.setRoot(page.component, {title: page.title});
-    /*if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
-      this.presentLoadingDefault();
-    }*/
+
+    if(!((test instanceof HomePage) && page == this.homePage)){
+      if(page.iosSchemaName != null && page.androidPackageName != null){
+        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+      }
+      this.nav.setRoot(page.component, {title: page.title});
+    }  
+
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
@@ -277,6 +289,5 @@ export class MyApp {
   		}
   	);
   }
-
 
 }

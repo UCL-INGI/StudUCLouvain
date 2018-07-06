@@ -21,17 +21,12 @@
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
 import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
-import { LibraryItem } from '../../../app/entity/libraryItem';
 import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
 
-/**
- * Generated class for the LibraryDetailsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-//@IonicPage()
+import { LibraryItem } from '../../../app/entity/libraryItem';
+
 @Component({
   selector: 'page-library-details',
   templateUrl: 'library-details.html',
@@ -44,6 +39,7 @@ import { ConnectivityService } from '../../../providers/utils-services/connectiv
     ])
   ]
 })
+
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
@@ -78,12 +74,7 @@ export class LibraryDetailsPage {
       return this.shownGroup === group;
   }
 
-
-  ionViewDidLoad() {
-  }
-
   openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

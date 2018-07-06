@@ -26,14 +26,13 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-train',
   templateUrl: 'train.html'
 })
+
 export class TrainPage {
   public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) 
+  {
     this.title = this.navParams.get('title');
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello TrainPage Page');
   }
 
 }

@@ -21,9 +21,11 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { EventItem } from '../../../app/entity/eventItem';
-import { UserService } from '../../../providers/utils-services/user-service';
 import { TranslateService } from '@ngx-translate/core';
+
+import { UserService } from '../../../providers/utils-services/user-service';
+
+import { EventItem } from '../../../app/entity/eventItem';
 
 /*
   Generated class for the Details page.
@@ -47,7 +49,6 @@ export class EventsDetailsPage {
   }
 
   public openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 

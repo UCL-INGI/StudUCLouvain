@@ -37,13 +37,9 @@ import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
 import { SecureStorage } from '@ionic-native/secure-storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-//import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-//import { NgCalendarModule } from 'ionic2-calendar';
-
-
 
 import { EventsPage } from '../pages/events/events';
 import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
@@ -56,14 +52,12 @@ import { CoursePage } from '../pages/studies/course/course';
 import { LibrariesPage } from '../pages/library/libraries';
 import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
 import { MapPage } from '../pages/map/map';
-import { MapLocationSelectorPage }
-          from '../pages/map/map-location-selector/map-location-selector';
 import { NewsPage } from '../pages/news/news';
 import { NewsDetailsPage } from '../pages/news/news-details/news-details';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { StudiesPage } from '../pages/studies/studies';
 import { EmployeeDetailsPage } from '../pages/help-desk/employee-details/employee-details';
-import { HelpDeskPage } from '../pages/help-desk/help-desk';
+import { SupportPage } from '../pages/help-desk/support';
 import { CreditPage } from '../pages/credit/credit';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
@@ -99,7 +93,6 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     EventsPage,
     EventsFilterPage,
-    MapLocationSelectorPage,
     MobilityPage,
     TrainPage,
     CarpoolingPage,
@@ -114,7 +107,7 @@ export function HttpLoaderFactory(http: Http) {
     ModalProjectPage,
     RestaurantPage,
     StudiesPage,
-    HelpDeskPage,
+    SupportPage,
     GuindaillePage,
     LibraryDetailsPage,
     SportsPage,
@@ -145,7 +138,6 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     EventsPage,
     EventsFilterPage,
-    MapLocationSelectorPage,
     MobilityPage,
     CoursePage,
     EventsDetailsPage,
@@ -156,7 +148,7 @@ export function HttpLoaderFactory(http: Http) {
     NewsDetailsPage,
     RestaurantPage,
     StudiesPage,
-    HelpDeskPage,
+    SupportPage,
     ParamPage,
     CreditPage,
     GuindaillePage,

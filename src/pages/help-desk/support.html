@@ -1,7 +1,7 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -253,14 +253,11 @@
     <p>{{'HELP.AIDE28' | translate}}</p>
   </ion-item>
 </ng-container>
-  <!--
-  <ion-list>
-    <ion-item *ngFor="let info of information; let i=index" text-wrap (tap)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
-      <h2>
-        {{info.title}}
-        <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
-      </h2>
-      <div *ngIf="isGroupShown(i)" [innerHtml]="info.description"></div>
-    </ion-item>
-  </ion-list>-->
+
+
+<!----------------------------------------- TUTO ------------------------------------->
+  <ng-container *ngIf="segment==='tuto'">
+    <p text-center><strong>Indisponible pour le moment</strong></p>
+  </ng-container>
+
 </ion-content>

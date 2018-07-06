@@ -38,6 +38,8 @@
         "MESSAGE2" : "Choose your language",
         "FR": "French",
         "EN": "English",
+        "SETTING1" : "Campus",
+        "SETTING2" : "Langue",
         "CLOSE" : "Close",
         "URG" : "EMERGENCY",
         "WARNING" : "Warning",

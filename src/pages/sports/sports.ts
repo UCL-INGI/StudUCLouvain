@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,31 +20,30 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, AlertController, ItemSliding, List, NavController,
+import { App, AlertController, ItemSliding, List,
   ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
-import { SportsFilterPage } from './sports-filter/sports-filter';
+import { TranslateService } from '@ngx-translate/core';
+import 'rxjs/add/operator/debounceTime';
+
 import { UserService } from '../../providers/utils-services/user-service';
 import { SportsService } from '../../providers/rss-services/sports-service';
-import { SportItem } from '../../app/entity/sportItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import 'rxjs/add/operator/debounceTime';
-import { TranslateService } from '@ngx-translate/core';
+
+import { SportItem } from '../../app/entity/sportItem';
+
+import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({
   selector: 'page-sports',
   templateUrl: 'sports.html'
 })
+
 export class SportsPage {
-  //TODO : Change details to use EventItem and change EventsDetailsPage to EventDetailsPage
-  // the list is a child of the schedule page
-  // @ViewChild('scheduleList') gets a reference to the list
-  // with the variable #scheduleList, `read: List` tells it to return
-  // the List and not a reference to the element
   @ViewChild('sportsList', { read: List }) sportsList: List;
 
   sports: Array<SportItem> = [];
@@ -71,7 +70,6 @@ export class SportsPage {
   constructor(
     public alertCtrl: AlertController,
     public app:App,
-    private nav: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
@@ -83,8 +81,8 @@ export class SportsPage {
     private iab: InAppBrowser,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController
-  ) {
+    public loadingCtrl: LoadingController) 
+  {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
@@ -98,7 +96,6 @@ export class SportsPage {
       this.updateDisplayedSports();
     });
     this.presentLoading();
-    console.log("Hello sport page");
   }
 
   public doRefresh(refresher) {
@@ -114,12 +111,8 @@ export class SportsPage {
 
       this.loading.present();
     }
-    //this.dismiss = true;
-
-   /* setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);*/
   }
+
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
@@ -127,14 +120,9 @@ export class SportsPage {
     }
   } 
 
-
   public onSearchInput(){
     this.searching = true;
   }
-
- /* public goToSportDetail(sport: SportItem) {
-    this.nav.push(SportsDetailsPage, { 'sport': sport });
-  }*/
 
   public loadSports() {
     console.log("loadsports");
@@ -178,7 +166,6 @@ export class SportsPage {
       })
       .catch(error => {
         if(error == 1) {
-          //console.log("Error loading teams : " + error);
           this.loadSports();
         } else {
           if(error == 2) {
@@ -199,6 +186,7 @@ export class SportsPage {
 
   }
 
+//SORT SPORTS BY DAY
   public changeArray(array){
     var groups = array.reduce(function(obj,item){
       obj[item.jour] = obj[item.jour] || [];
@@ -210,7 +198,6 @@ export class SportsPage {
     });
     return sportsD;
   }
-
 
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
@@ -254,13 +241,11 @@ export class SportsPage {
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
-    //this.shownTeams = this.displayedSports.length;
+
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    //while(this.dismiss == false){}
     this.dismissLoading();
-   // this.dismiss=false;
 
   }
 
