@@ -35,7 +35,7 @@
 </ion-header>
 
 <!----------------------- FIRST LAUNCH : CHOICE OF CAMPUS --------------------------------->
-<ion-content text-center align-self-center padding   >
+<ion-content text-center align-self-center padding  #home >
 	<ng-container *ngIf="(userS.hasCampus() === false)">
     <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
     <ion-list radio-group [(ngModel)]="where" class="other">
@@ -60,9 +60,9 @@
   </ng-container>
 
   <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
-	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header">
-		<p></p>
-    <ion-grid class="other">
+	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header" padding >
+		
+    <ion-grid class="other" padding>
       <!--------------------------------------- STUDY PART ------------------------------------------------>
       <ion-row>
         <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p></ion-col>

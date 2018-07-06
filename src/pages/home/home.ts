@@ -19,8 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavParams, NavController, App, AlertController, LoadingController, FabContainer} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavParams, NavController, App, AlertController, LoadingController, FabContainer, Content} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -47,7 +47,15 @@ import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
   
 })
 export class HomePage {
-
+@ViewChild('home') content: Content;
+  resize()
+  {
+    if(this.content)
+    {
+      this.content.resize();
+      console.debug("content resize", this.content)
+    }
+  }
   title:string = "Accueil";
   shownGroup = null;
   where = "";
@@ -113,6 +121,7 @@ export class HomePage {
       }
 
       this.app.setTitle(this.title);
+      this.resize();
   }
 
   updateCampus(){
