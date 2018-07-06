@@ -27,6 +27,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { MyApp } from '../../app/app.component';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { UserService } from '../../providers/utils-services/user-service';
 
@@ -41,6 +42,7 @@ import { SupportPage } from '../help-desk/support';
 import { SportsPage } from '../sports/sports';
 import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -48,7 +50,7 @@ import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
 })
 export class HomePage {
 
-  title:string = "Accueil";
+  title:string = "UCLCampus";
   shownGroup = null;
   where = "";
   myApp : MyApp;

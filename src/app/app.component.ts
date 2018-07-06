@@ -53,7 +53,7 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage = HomePage;
+  rootPage = 'HomePage';
   alertPresented: any;
   page: any;
   homePage;

@@ -62,7 +62,6 @@ import { CreditPage } from '../pages/credit/credit';
 import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
 import { SportsPage } from '../pages/sports/sports';
 import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
-import { HomePage } from '../pages/home/home';
 import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { ParamPage } from '../pages/param/param';
 
@@ -112,7 +111,6 @@ export function HttpLoaderFactory(http: Http) {
     LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    HomePage,
     CreditPage,
     EmployeeDetailsPage
   ],
@@ -155,7 +153,6 @@ export function HttpLoaderFactory(http: Http) {
     LibraryDetailsPage,
     SportsPage,
     SportsFilterPage,
-    HomePage,
     CarpoolingPage,
     BusPage,
     TrainPage,
