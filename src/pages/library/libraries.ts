@@ -22,14 +22,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { LibrariesService } from '../../providers/wso2-services/libraries-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 import { LibraryItem } from '../../app/entity/libraryItem';
 
-import { LibraryDetailsPage } from './library-details/library-details';
-
+@IonicPage()
 @Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html'
@@ -76,6 +76,6 @@ export class LibrariesPage {
   }
 
   goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push(LibraryDetailsPage, { 'lib': lib});
+    this.navCtrl.push('LibraryDetailsPage', { 'lib': lib});
   }
 }

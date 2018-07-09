@@ -49,7 +49,7 @@
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
         <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
         <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
-        <p> Nom : {{activity.name}} </p>
+        <p> {{activity.name}} </p>
       </ion-item>
 
       <ion-item-options side="right">
@@ -66,6 +66,12 @@
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
     <button ion-fab (tap)="showPrompt(segment)">
       <ion-icon name="cut"> </ion-icon>
+    </button>
+  </ion-fab>
+    <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+    <button ion-fab (tap)="addCourseToCalendar()">
+      <ion-icon name="calendar"> </ion-icon>
     </button>
   </ion-fab>
 </ion-content>

@@ -22,17 +22,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { UserService } from '../../../providers/utils-services/user-service';
 
 import { EventItem } from '../../../app/entity/eventItem';
 
-/*
-  Generated class for the Details page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-events-details',
   templateUrl: 'events-details.html'

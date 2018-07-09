@@ -21,6 +21,7 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, ItemSliding, ToastController, AlertController  } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CourseService } from '../../../providers/studies-services/course-service';
@@ -30,6 +31,7 @@ import { Course } from '../../../app/entity/course';
 import { Activity } from '../../../app/entity/activity'
 import { Calendar } from '@ionic-native/calendar';
 
+@IonicPage()
 @Component({
   selector: 'page-course',
   templateUrl: 'course.html'
@@ -198,7 +200,7 @@ export class CoursePage {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + " " + array[i].start.getHours()+":"+array[i].start.getUTCMinutes() , type: 'radio', checked: slotChosen });
     }
-    if(options.inputs.length > 1) options.inputs.push({name:'options', value:"no", label : "Aucune", type : 'radio', checked: aucun});
+    if(options.inputs.length > 1) options.inputs.push({name:'options', value:"no", label : "Toutes", type : 'radio', checked: aucun});
     let prompt = this.alertCtrl.create(options);
     if(options.inputs.length > 1)prompt.present();
   }
@@ -225,8 +227,44 @@ export class CoursePage {
     }
 
     return newAct;
+  }
 
+  addCourseToCalendar(){
+    let options:any = {
+    };
+    for (let activity of this.displayedActi) {
+      this.calendar.createEventWithOptions(this.course.name +" : " + activity.type,
+        activity.auditorium, null, activity.start,activity.end, options);
+    }
+    let message:string;
+    this.translateService.get('STUDY.MESSAGE3').subscribe((res:string) => {message=res;});
 
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+    this.alertAll();
+  }
+
+  //alert to warning that changes are possible
+    alertAll(){
+      let title:string;
+      let message:string;
+      this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
+      this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
+         let disclaimerAlert = this.alertCtrl.create({
+            title: title,
+            message: message,
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
   }
 
 }

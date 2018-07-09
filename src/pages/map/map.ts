@@ -22,13 +22,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { POIService } from '../../providers/map-services/poi-service';
 import { MapService } from '../../providers/map-services/map-service';
 
 import { MapLocation } from '../../app/entity/mapLocation';
 
-
+@IonicPage()
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'

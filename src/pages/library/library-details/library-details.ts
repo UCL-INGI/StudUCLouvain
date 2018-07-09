@@ -21,12 +21,14 @@
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
 import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
 
 import { LibraryItem } from '../../../app/entity/libraryItem';
 
+@IonicPage()
 @Component({
   selector: 'page-library-details',
   templateUrl: 'library-details.html',

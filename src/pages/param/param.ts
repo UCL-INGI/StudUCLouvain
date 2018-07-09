@@ -23,9 +23,11 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { UserService } from '../../providers/utils-services/user-service';
 
+@IonicPage()
 @Component({
   selector: 'page-param',
   templateUrl: 'param.html',
@@ -130,6 +132,7 @@ export class ParamPage {
   }
 
   languageChanged(event:string) {
+    this.userS.storage.set('lan',event);
          this.translateService.use(event);
   }
 }

@@ -24,6 +24,7 @@ import { App, List, Content, NavController, NavParams, Platform, AlertController
 import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { NewsService } from '../../providers/rss-services/news-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
@@ -31,8 +32,7 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 import { NewsItem } from '../../app/entity/newsItem';
 
-import { NewsDetailsPage } from './news-details/news-details';
-
+@IonicPage()
 @Component({
   selector: 'page-news',
   templateUrl: 'news.html'
@@ -55,6 +55,7 @@ export class NewsPage {
   news: Array<NewsItem> = [];
   segment = "univ";
   subsegment = "P1";
+  facsegment="news";
   shownNews = 0;
   displayedNews : Array<NewsItem> = [];
   searching: any = false;
@@ -120,7 +121,14 @@ export class NewsPage {
   }
 
   updateFac(){
+
     this.userS.addFac(this.fac);
+    this.resize();
+  }
+
+  removeFac(fac:string){
+    this.userS.removeFac(fac);
+        this.resize();
   }
 
   public doRefresh(refresher) {
@@ -133,6 +141,10 @@ export class NewsPage {
   segmentChanged(){
     this.resize();
     if(this.segment==='univ') this.updateDisplayedNews();
+
+  }
+
+  facSegChange(){
 
   }
 
@@ -182,6 +194,6 @@ export class NewsPage {
   }
 
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push( NewsDetailsPage, { 'news': news });
+    this.navCtrl.push( 'NewsDetailsPage', { 'news': news });
   }
 }

@@ -23,14 +23,14 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
 import { NavController, NavParams, ModalController, Platform,LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
 import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 
 import { EmployeeItem } from '../../app/entity/employeeItem';
 
-import { EmployeeDetailsPage } from './employee-details/employee-details';
-
+@IonicPage()
 @Component({
   selector: 'page-support',
   templateUrl: 'support.html',
@@ -118,7 +118,7 @@ export class SupportPage {
   }
 
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push(EmployeeDetailsPage, { 'emp': emp});
+    this.navCtrl.push('EmployeeDetailsPage', { 'emp': emp});
   }
 
   toggleGroup(group) {

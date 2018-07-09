@@ -27,6 +27,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
+import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
 
@@ -36,9 +37,7 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 
 import { EventItem } from '../../app/entity/eventItem';
 
-import { EventsDetailsPage } from './events-details/events-details';
-import { EventsFilterPage } from './events-filter/events-filter';
-
+@IonicPage()
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html'
@@ -132,7 +131,7 @@ export class EventsPage {
   }
 
   public goToEventDetail(event: EventItem) {
-    this.nav.push(EventsDetailsPage, { 'event': event });
+    this.nav.push('EventsDetailsPage', { 'event': event });
   }
 
   toggleGroup(group) {
@@ -261,7 +260,7 @@ export class EventsPage {
       this.filters = [];
     }
 
-    let modal = this.modalCtrl.create(EventsFilterPage,
+    let modal = this.modalCtrl.create('EventsFilterPage',
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
 

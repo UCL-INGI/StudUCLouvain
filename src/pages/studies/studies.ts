@@ -21,10 +21,11 @@
 
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, ModalController, ItemSliding, ToastController } from 'ionic-angular';
+import { AlertController, MenuController, ModalController, ToastController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Calendar } from '@ionic-native/calendar';
+import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { StudiesService} from '../../providers/studies-services/studies-service';
@@ -35,12 +36,7 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
 
-import { CoursePage } from '../studies/course/course';
-import { ModalProjectPage } from './modal-project/modal-project';
-
-
-
-
+@IonicPage()
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
@@ -126,7 +122,7 @@ export class StudiesPage {
   openModalProject(){
     let obj = {sessionId : this.sessionId};
 
-    let myModal = this.modalCtrl.create(ModalProjectPage, obj);
+    let myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
     });
@@ -271,52 +267,13 @@ export class StudiesPage {
 
 //open CoursePage of a course
   openCoursePage(course: Course){
-    this.navCtrl.push(CoursePage,
+    this.navCtrl.push('CoursePage',
       {course : course, sessionId : this.sessionId});
   }
 
 //launch moodle or ucl portal
   launch(url) {
     this.iab.create(url,'_system');
-  }
-
-  addCourseToCalendar(slidingItem : ItemSliding, course : Course){
-    let options:any = {
-    };
-    for (let activity of course.activities) {
-      this.calendar.createEventWithOptions(course.name +" : " + activity.type,
-        activity.auditorium, null, activity.start,activity.end, options);
-    }
-    let message:string;
-    this.translateService.get('STUDY.MESSAGE3').subscribe((res:string) => {message=res;});
-
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    });
-    toast.present();
-    slidingItem.close();
-    this.alert
-  }
-
-//alert to warning that changes are possible
-    alert(){
-      let title:string;
-      let message:string;
-      this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
-      this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
-         let disclaimerAlert = this.alertCtrl.create({
-            title: title,
-            message: message,
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        });
-        disclaimerAlert.present();
   }
 
 }

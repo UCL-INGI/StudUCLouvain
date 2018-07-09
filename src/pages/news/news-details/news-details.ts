@@ -21,9 +21,11 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 import { NewsItem } from '../../../app/entity/newsItem';
 
+@IonicPage()
 @Component({
   selector: 'page-news-details',
   templateUrl: 'news-details.html'

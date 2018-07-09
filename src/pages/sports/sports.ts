@@ -27,6 +27,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
+import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
 
@@ -36,8 +37,7 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 
 import { SportItem } from '../../app/entity/sportItem';
 
-import { SportsFilterPage } from './sports-filter/sports-filter';
-
+@IonicPage()
 @Component({
   selector: 'page-sports',
   templateUrl: 'sports.html'
@@ -255,7 +255,7 @@ export class SportsPage {
       this.filters = [];
     }
 
-    let modal = this.modalCtrl.create(SportsFilterPage,
+    let modal = this.modalCtrl.create('SportsFilterPage',
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
 

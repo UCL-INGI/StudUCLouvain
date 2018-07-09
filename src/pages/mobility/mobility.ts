@@ -26,12 +26,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
-import { CarpoolingPage } from './carpooling/carpooling';
-import { BusPage } from './bus/bus';
-import { TrainPage } from './train/train';
-
-
+@IonicPage()
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
@@ -54,15 +51,15 @@ export class MobilityPage {
     let titlecar:string;
     this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
 
-    this.carpoolingPage = { title: titlecar, component: CarpoolingPage,
+    this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',
                             iosSchemaName: 'net.commuty.mobile',
                             androidPackageName: 'net.commuty.mobile',
                             appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
-    this.busPage = { title: 'NextRide', component: BusPage,
+    this.busPage = { title: 'NextRide', component: 'BusPage',
                             iosSchemaName: 'be.thomashermine.prochainbus',
                             androidPackageName: 'be.thomashermine.prochainbus',
                             appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
-    this.trainPage = { title: 'SNCB', component: TrainPage,
+    this.trainPage = { title: 'SNCB', component: 'TrainPage',
                             iosSchemaName: 'de.hafas.android.sncbnmbs',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
                             appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };

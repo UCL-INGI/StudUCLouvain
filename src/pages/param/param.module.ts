@@ -4,13 +4,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { HttpLoaderFactory } from '../../app/app.module'
 
-import { HomePage } from './home';
+import { ParamPage } from './param';
 
 
 @NgModule({
-  declarations: [HomePage],
+  declarations: [ParamPage],
   imports: [
-  	IonicPageModule.forChild(HomePage),
+  	IonicPageModule.forChild(ParamPage),
   	TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -18,7 +18,6 @@ import { HomePage } from './home';
                 deps: [Http]
             }
         })
-  ],
-  exports: [TranslateModule]
+  ]
 })
-export class HomePageModule { }
+export class ParamPageModule { }

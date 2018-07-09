@@ -21,10 +21,11 @@
 
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 import { EventsService } from '../../../providers/rss-services/events-service';
 
-
+@IonicPage()
 @Component({
   selector: 'page-events-filter',
   templateUrl: 'events-filter.html'

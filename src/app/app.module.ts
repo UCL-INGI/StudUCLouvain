@@ -41,30 +41,6 @@ import { HttpModule, Http } from '@angular/http'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { EventsPage } from '../pages/events/events';
-import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
-import { EventsDetailsPage } from '../pages/events/events-details/events-details';
-import { MobilityPage } from '../pages/mobility/mobility';
-import { CarpoolingPage } from '../pages/mobility/carpooling/carpooling';
-import { BusPage } from '../pages/mobility/bus/bus';
-import { TrainPage } from '../pages/mobility/train/train';
-import { CoursePage } from '../pages/studies/course/course';
-import { LibrariesPage } from '../pages/library/libraries';
-import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
-import { MapPage } from '../pages/map/map';
-import { NewsPage } from '../pages/news/news';
-import { NewsDetailsPage } from '../pages/news/news-details/news-details';
-import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { StudiesPage } from '../pages/studies/studies';
-import { EmployeeDetailsPage } from '../pages/help-desk/employee-details/employee-details';
-import { SupportPage } from '../pages/help-desk/support';
-import { CreditPage } from '../pages/credit/credit';
-import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
-import { SportsPage } from '../pages/sports/sports';
-import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
-import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
-import { ParamPage } from '../pages/param/param';
-
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
@@ -89,30 +65,7 @@ export function HttpLoaderFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    MyApp,
-    EventsPage,
-    EventsFilterPage,
-    MobilityPage,
-    TrainPage,
-    CarpoolingPage,
-    BusPage,
-    ParamPage,
-    CoursePage,
-    EventsDetailsPage,
-    LibrariesPage,
-    NewsPage,
-    NewsDetailsPage,
-    MapPage,
-    ModalProjectPage,
-    RestaurantPage,
-    StudiesPage,
-    SupportPage,
-    GuindaillePage,
-    LibraryDetailsPage,
-    SportsPage,
-    SportsFilterPage,
-    CreditPage,
-    EmployeeDetailsPage
+    MyApp
   ],
   exports: [
     TranslateModule
@@ -133,30 +86,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    EventsPage,
-    EventsFilterPage,
-    MobilityPage,
-    CoursePage,
-    EventsDetailsPage,
-    LibrariesPage,
-    MapPage,
-    ModalProjectPage,
-    NewsPage,
-    NewsDetailsPage,
-    RestaurantPage,
-    StudiesPage,
-    SupportPage,
-    ParamPage,
-    CreditPage,
-    GuindaillePage,
-    LibraryDetailsPage,
-    SportsPage,
-    SportsFilterPage,
-    CarpoolingPage,
-    BusPage,
-    TrainPage,
-    EmployeeDetailsPage
+    MyApp
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},

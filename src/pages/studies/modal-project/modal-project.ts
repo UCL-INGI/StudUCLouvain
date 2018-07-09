@@ -23,12 +23,13 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController }
         from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { IonicPage } from 'ionic-angular';
 
 import { StudiesService} from '../../../providers/studies-services/studies-service';
 
 import { AdeProject } from '../../../app/entity/adeProject';
 
-
+@IonicPage()
 @Component({
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html',

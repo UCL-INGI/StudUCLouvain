@@ -30,19 +30,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 
-import { EventsPage } from '../pages/events/events';
-import { MobilityPage } from '../pages/mobility/mobility';
-import { LibrariesPage } from '../pages/library/libraries';
-import { NewsPage } from '../pages/news/news';
-import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { StudiesPage } from '../pages/studies/studies';
-import { MapPage } from '../pages/map/map';
-import { ParamPage } from '../pages/param/param';
-import { SupportPage } from '../pages/help-desk/support';
-import { CreditPage } from '../pages/credit/credit';
-import { SportsPage } from '../pages/sports/sports';
 import { HomePage } from '../pages/home/home';
-import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
+
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
@@ -90,61 +79,67 @@ export class MyApp {
     this.initializeApp();
     this.wso2Service.getToken();
     this.homePage =
-      {title: 'MENU.HOME', component: HomePage, icon: 'home',
+      {title: 'MENU.HOME', component: 'HomePage', icon: 'home',
       iosSchemaName: null, androidPackageName: null,
       appUrl: null, httpUrl: null}
     ;
     this.campusPages =[
-      { title: 'MENU.NEWS', component: NewsPage, icon: 'paper',
+      { title: 'MENU.NEWS', component: 'NewsPage', icon: 'paper',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.EVENTS', component: EventsPage, icon: 'calendar',
+      { title: 'MENU.EVENTS', component: 'EventsPage', icon: 'calendar',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.SPORTS', component: SportsPage, icon: 'football',
+      { title: 'MENU.SPORTS', component: 'SportsPage', icon: 'football',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
     ];
     this.studiePages =[
-      { title: 'MENU.STUDIES', component: StudiesPage, icon: 'school',
+      { title: 'MENU.STUDIES', component: 'StudiesPage', icon: 'school',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: LibrariesPage, icon: 'book',
+      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: 'book',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: SupportPage,
+      { title: 'MENU.HELP', component: 'SupportPage',
         icon: 'information-circle', iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'MENU.PARTY', component: GuindaillePage, icon: 'water',
+      { title: 'MENU.PARTY', component: 'GuindaillePage', icon: 'water',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: MapPage, icon: 'map',
+      { title: 'MENU.MAP', component: 'MapPage', icon: 'map',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.RESTAURANT', component: RestaurantPage, icon : 'restaurant',
+      { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : 'restaurant',
         iosSchemaName: 'com.apptree.resto4u',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'MENU.MOBILITY', component: MobilityPage, icon : 'car',
+      { title: 'MENU.MOBILITY', component: 'MobilityPage', icon : 'car',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.PARAM', component: ParamPage, icon : 'construct',
+      { title: 'MENU.PARAM', component: 'ParamPage', icon : 'construct',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.CREDITS', component: CreditPage, icon : 'bulb',
+      { title: 'MENU.CREDITS', component: 'CreditPage', icon : 'bulb',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
       translateService.setDefaultLang('fr');
-      translateService.use('fr');
+      this.user.storage.get('lan').then((data) =>
+      {
+        if(data!=null) translateService.use(data);
+        else translateService.use('fr');
+       }
+        );
+
 
     })
 
@@ -261,7 +256,7 @@ export class MyApp {
       if(page.iosSchemaName != null && page.androidPackageName != null){
         this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
       }
-      this.nav.setRoot(page.component, {title: page.title});
+      this.nav.push(page.component, {title: page.title});
     }  
 
   }

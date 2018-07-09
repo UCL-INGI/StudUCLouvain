@@ -21,8 +21,9 @@
 
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
-
+@IonicPage()
 @Component({
   selector: 'page-sports-filter',
   templateUrl: 'sports-filter.html'

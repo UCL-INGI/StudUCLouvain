@@ -31,17 +31,6 @@ import { IonicPage } from 'ionic-angular';
 
 import { UserService } from '../../providers/utils-services/user-service';
 
-import { EventsPage } from '../events/events';
-import { MobilityPage } from '../mobility/mobility';
-import { LibrariesPage } from '../library/libraries';
-import { NewsPage } from '../news/news';
-import { RestaurantPage } from '../restaurant/restaurant';
-import { StudiesPage } from '../studies/studies';
-import { MapPage } from '../map/map';
-import { SupportPage } from '../help-desk/support';
-import { SportsPage } from '../sports/sports';
-import { GuindaillePage } from '../guindaille2-0/guindaille2-0';
-
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -55,45 +44,45 @@ export class HomePage {
   where = "";
   myApp : MyApp;
 
-  libraryPage = { title: 'MENU.LIBRARY', component: LibrariesPage,
+  libraryPage = { title: 'MENU.LIBRARY', component: 'LibrariesPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  newsPage = { title: 'MENU.NEWS', component: NewsPage,
+  newsPage = { title: 'MENU.NEWS', component: 'NewsPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  eventPage = { title: 'MENU.EVENTS', component: EventsPage,
+  eventPage = { title: 'MENU.EVENTS', component: 'EventsPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  sportPage = { title: 'MENU.SPORTS', component: SportsPage,
+  sportPage = { title: 'MENU.SPORTS', component: 'SportsPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  studiesPage = { title: 'MENU.STUDIES', component: StudiesPage,
+  studiesPage = { title: 'MENU.STUDIES', component: 'StudiesPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  helpDeskPage = { title: 'MENU.HELP', component: SupportPage,
+  helpDeskPage = { title: 'MENU.HELP', component: 'SupportPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  mapPage = { title: 'MENU.MAP', component: MapPage,
+  mapPage = { title: 'MENU.MAP', component: 'MapPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  guindaillePage = { title: 'MENU.PARTY', component: GuindaillePage,
+  guindaillePage = { title: 'MENU.PARTY', component: 'GuindaillePage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  restoPage = { title: 'MENU.RESTAURANT', component: RestaurantPage,
+  restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
     iosSchemaName: 'com.apptree.resto4u',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',
     httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
 
-  mobilityPage = { title: 'MENU.MOBILITY', component: MobilityPage,
+  mobilityPage = { title: 'MENU.MOBILITY', component: 'MobilityPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
@@ -158,6 +147,7 @@ export class HomePage {
   }
 
   languageChanged(event:string) {
+    this.userS.storage.set('lan',event);
         this.translateService.use(event);
   }
 
