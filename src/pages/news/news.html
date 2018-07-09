@@ -154,10 +154,11 @@
     </ion-list>
     <ion-row center>
       <ion-col text-center>
-        <button ion-button round (tap)="updateFac()" *ngIf="(userS.hasFac() == false)">Sauver</button>
+        <button ion-button round (tap)="updateFac()" *ngIf="!userS.hasFac()">Sauver</button>
       </ion-col>
     </ion-row>
 
+    <ion-row center *ngIf="userS.hasFac()"><ion-col text-center><h2><strong>Faculté : {{fac}}</strong></h2> </ion-col></ion-row>
     <button center ion-button clear small icon-left (tap)="openURL('https://uclouvain.be/fr/node/10353')" *ngIf="fac==='LSM' && userS.hasFac() && facsegment === 'news' ">
       <ion-icon name='share-alt'></ion-icon>
       {{'NEWS.WEB' | translate}}
@@ -174,7 +175,7 @@
   </ion-fab>
 
   <!-------------------------------- ACTUALITES VALVES ? ----------------------------------------------->
-  <ng-container *ngIf="segment==='fac' && facsegment === 'valve' ">
+  <ng-container *ngIf="segment==='fac' && facsegment === 'valve' && userS.hasFac()">
     <p text-center><strong>Indisponible pour le moment</strong></p>
   </ng-container>
 

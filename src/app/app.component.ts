@@ -143,10 +143,9 @@ export class MyApp {
 
     })
 
-    this.storage.get('disclaimer').then((disclaimer) => {
+    /*this.storage.get('disclaimer').then((disclaimer) => {
       if(!disclaimer) this.disclaimer();
-      console.log(disclaimer);
-    });
+    });*/
 
   }
 
