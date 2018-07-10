@@ -22,7 +22,6 @@
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform,LoadingController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
@@ -61,7 +60,6 @@ export class SupportPage {
               public platform: Platform,
               public repService : RepertoireService,
               public connService : ConnectivityService,
-              private translateService: TranslateService,
               public loadingCtrl: LoadingController) 
   {
     this.title = this.navParams.get('title');

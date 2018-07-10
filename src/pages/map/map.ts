@@ -21,7 +21,6 @@
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 import { POIService } from '../../providers/map-services/poi-service';
@@ -54,8 +53,7 @@ export class MapPage {
               public mapService: MapService,
               public platform: Platform,
               public navParams: NavParams,
-              public poilocations: POIService,
-              private translateService: TranslateService) 
+              public poilocations: POIService) 
   {
       this.title = this.navParams.get('title');
   }

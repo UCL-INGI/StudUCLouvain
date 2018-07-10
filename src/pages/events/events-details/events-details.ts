@@ -40,7 +40,7 @@ export class EventsDetailsPage {
     public user: UserService,
     private translateService: TranslateService,
     public toastCtrl: ToastController,
-    private navParams: NavParams) {
+    navParams: NavParams) {
     this.event = navParams.get('event');
   }
 

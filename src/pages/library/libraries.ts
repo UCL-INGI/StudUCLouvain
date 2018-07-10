@@ -21,7 +21,6 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 import { LibrariesService } from '../../providers/wso2-services/libraries-service';
@@ -44,8 +43,7 @@ export class LibrariesPage {
     public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
-    public connService : ConnectivityService,
-    private translateService: TranslateService) 
+    public connService : ConnectivityService) 
   {
     this.title = this.navParams.get('title');
   }

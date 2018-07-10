@@ -21,7 +21,6 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
@@ -31,8 +30,9 @@ import { IonicPage } from 'ionic-angular';
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private translateService: TranslateService) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) 
+  {
     this.title = this.navParams.get('title');
   }
 

@@ -39,3 +39,4 @@ package.json
 .vs/VSWorkspaceState.json
 config.xml
 src/app/variables-config.ts
+*.map

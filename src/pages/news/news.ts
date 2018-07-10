@@ -23,7 +23,6 @@ import { Component, ViewChild } from '@angular/core';
 import { App, List, Content, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 import { NewsService } from '../../providers/rss-services/news-service';
@@ -77,7 +76,6 @@ export class NewsPage {
     public connService : ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
-    private translateService: TranslateService,
     public loadingCtrl: LoadingController) 
   {
       if(this.navParams.get('title') !== undefined) {

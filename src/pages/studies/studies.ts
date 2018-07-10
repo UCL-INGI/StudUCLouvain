@@ -24,7 +24,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController, MenuController, ModalController, ToastController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Calendar } from '@ionic-native/calendar';
 import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -65,7 +64,6 @@ export class StudiesPage {
     private alertCtrl: AlertController,
     public storage:Storage,
     public menu: MenuController,
-    private calendar: Calendar,
     public toastCtrl: ToastController,
     public platform: Platform,
     private iab: InAppBrowser,

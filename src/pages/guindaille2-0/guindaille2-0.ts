@@ -21,9 +21,7 @@
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
@@ -127,11 +125,9 @@ export class GuindaillePage {
         image: "assets/img/guindaille/6.png",
       }];
 
-  constructor(public navCtrl: NavController, 
-              private translateService: TranslateService, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams, 
-              public modalCtrl: ModalController, 
-              private iab: InAppBrowser, 
+              public modalCtrl: ModalController,
               public alertCtrl: AlertController) 
   {
     this.title = this.navParams.get('title');

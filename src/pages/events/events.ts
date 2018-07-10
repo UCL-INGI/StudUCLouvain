@@ -22,9 +22,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { App, AlertController, ItemSliding, List, NavController,
   ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
 import { IonicPage } from 'ionic-angular';
@@ -81,10 +78,7 @@ export class EventsPage {
     private eventsService: EventsService,
     public user: UserService,
     public toastCtrl: ToastController,
-    private device: Device,
     private calendar: Calendar,
-    private appAvailability: AppAvailability,
-    private iab: InAppBrowser,
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private loadingCtrl: LoadingController

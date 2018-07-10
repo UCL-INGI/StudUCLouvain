@@ -34,7 +34,7 @@ import { NewsItem } from '../../../app/entity/newsItem';
 export class NewsDetailsPage {
   news: NewsItem;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, navParams: NavParams) {
     this.news = navParams.get('news');
   }
 

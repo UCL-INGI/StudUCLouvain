@@ -28,8 +28,6 @@ import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { Storage } from '@ionic/storage';
-
 import { HomePage } from '../pages/home/home';
 
 import { UserService } from '../providers/utils-services/user-service';
@@ -70,7 +68,6 @@ export class MyApp {
     private translateService: TranslateService,
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
-    private storage: Storage,
     private wso2Service : Wso2Service
   ) {
     this.user.getCampus();

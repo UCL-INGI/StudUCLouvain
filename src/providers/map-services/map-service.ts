@@ -56,7 +56,7 @@ export class MapService {
   constructor(public connectivityService: ConnectivityService,
               private geolocation : Geolocation,
               private platform: Platform,
-              private menuCtrl: MenuController) {
+              menuCtrl: MenuController) {
     this.onDevice = this.platform.is('cordova');
     this.apiKey = jsApiKey;
     let leftMenu = menuCtrl.get('left');
@@ -210,7 +210,7 @@ export class MapService {
           }
 
           // create CameraPosition
-          let camPos: CameraPosition = {
+          let camPos: CameraPosition<LatLng> = {
             target: latLng,
             zoom: 15
           };
@@ -383,7 +383,7 @@ export class MapService {
     this.markers.map((marker) => {
       if(marker.getTitle() == title) {
         let latLng = new LatLng(lat, lng);
-        let camPos: CameraPosition = {
+        let camPos: CameraPosition<LatLng> = {
           target: latLng,
           zoom: 15
         };

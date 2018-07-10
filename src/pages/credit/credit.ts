@@ -23,7 +23,6 @@ import { Component} from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicPage } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -38,8 +37,7 @@ export class CreditPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public modalCtrl: ModalController, 
-              private iab: InAppBrowser,
-              private translateService: TranslateService) 
+              private iab: InAppBrowser) 
   {
     this.title = this.navParams.get('title');
   }

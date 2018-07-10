@@ -21,7 +21,6 @@
 
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
@@ -49,7 +48,6 @@ export class ParamPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
-              private iab: InAppBrowser,
               public userS:UserService,
               private alertCtrl : AlertController,
               private translateService: TranslateService) {
