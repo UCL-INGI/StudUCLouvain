@@ -1,0 +1,78 @@
+{
+	"Secteur des sciences de la santé" : {
+		"MEDE" : {
+			"site" : "",
+			"name" : "Faculté de médecine et médecine dentaire"
+		},
+
+		"FASB" : {
+			"site" : "",
+			"name" : "Faculté de pharmacie et des sciences biomédicales"
+		},
+
+		"FSP" : {
+			"site" : "",
+			"name" : "Faculté de santé publique"
+		},
+
+		"FSM" : {
+			"site" : "",
+			"name" : "Faculté des Sciences de la Motricité"
+		}
+	},
+
+	"Secteur des sciences et technologies" : {
+		"EPL" : {
+			"site" : "",
+			"name" : "Ecole Polytechnique de Louvain"
+		},
+
+		"LOCI" : {
+			"site" : "",
+			"name" : "Faculté d'architecture, d'ingénierie architecturale, d'urbanisme"
+		},
+
+		"AGRO" : {
+			"site" : "",
+			"name" : "Faculté des bioingénieurs"
+		},
+
+		"SC" : {
+			"site" : "",
+			"name" : "Faculté des sciences"
+		}
+	},
+
+	"Secteur des sciences humaines" : {
+		"DRT" : {
+			"site" : "",
+			"name" : "Faculté de droit et de criminologie"
+		},
+
+		"FIAL" : {
+			"site" : "",
+			"name" : "Faculté de philosophie, arts et lettres"
+		},
+
+		"PSP" : {
+			"site" : "",
+			"name" : "Faculté de psychologie et des sciences de l'éducation"
+		},
+
+		"TECO" : {
+			"site" : "",
+			"name" : "Faculté de théologie"
+		},
+
+		"ESPO" : {
+			"site" : "",
+			"name" : "Faculté des sciences économiques, sociales, politiques et de communication"
+		},
+
+		"LSM" : {
+			"site" : "",
+			"name" : "Louvain School of Management"
+		}
+	}
+
+}

@@ -82,10 +82,8 @@ convertXmlToJson(xml) : any{
             
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
-         // console.log("end get OK");
         },
         err => {
-              //console.log("end get ERR");
           reject(err);
         });
     });
@@ -117,7 +115,6 @@ convertXmlToJson(xml) : any{
   }
 
   private extractSports(data: any, isSport:boolean) {
-    //console.log("start extract");
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;
@@ -156,13 +153,11 @@ convertXmlToJson(xml) : any{
       if(isSport) this.sports.push(newSportItem);
       else this.teams.push(newSportItem);
     }
-    console.log("end extract");
   }
 
   private createDateForSport(str : string, hour: string):Date{
     
       let timeSplit = hour.split(":");
-      //let dateTimeSplit = str.split(" ");
       let dateSplit = str.split("/");
       let year = parseInt(dateSplit[2]);
       let month = parseInt(dateSplit[1])-1;

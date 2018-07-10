@@ -65,7 +65,7 @@ export class NewsPage {
   nonews:any = false;
   loading;
   fac:string="";
-
+  //url = 'assets/data/fac.json';
 
   constructor(
     public platform : Platform,
@@ -104,7 +104,6 @@ export class NewsPage {
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
-
       this.loading.present();
     }
   }
