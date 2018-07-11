@@ -57,7 +57,7 @@ export class MapService {
               private geolocation : Geolocation,
               private platform: Platform,
               menuCtrl: MenuController) {
-    this.onDevice = this.platform.is('cordova');
+    this.onDevice = this.platform.is('android') || this.platform.is('ios');
     this.apiKey = jsApiKey;
     let leftMenu = menuCtrl.get('left');
 
@@ -257,6 +257,8 @@ export class MapService {
       for(var i=0;i<this.markers.length; i++){
          if(this.markers[i].getTitle() === location.title) {
           //console.log(this.markers[i]);
+          //let m: Marker = this.markers[i];
+         //m.remove();
           this.markers[i].setMap(null);
           //this.markers[i]=null;
           this.markers.splice(i,1);

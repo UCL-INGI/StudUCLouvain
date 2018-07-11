@@ -42,6 +42,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
+import { FacService } from '../providers/utils-services/fac-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
 import { EventsService } from '../providers/rss-services/events-service';
@@ -118,7 +119,8 @@ export function HttpLoaderFactory(http: Http) {
     NativeGeocoder,
     SportsService,
     RepertoireService,
-    StudentService
+    StudentService,
+    FacService
   ]
 })
 export class AppModule {}

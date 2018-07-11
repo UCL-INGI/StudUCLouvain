@@ -28,6 +28,7 @@ import { IonicPage } from 'ionic-angular';
 import { NewsService } from '../../providers/rss-services/news-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { FacService } from '../../providers/utils-services/fac-service';
 
 import { NewsItem } from '../../app/entity/newsItem';
 
@@ -64,6 +65,8 @@ export class NewsPage {
   nonews:any = false;
   loading;
   fac:string="";
+  listFac:any=[];
+  site:string="";
   //url = 'assets/data/fac.json';
 
   constructor(
@@ -76,7 +79,8 @@ export class NewsPage {
     public connService : ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
-    public loadingCtrl: LoadingController) 
+    public loadingCtrl: LoadingController,
+    public facService: FacService) 
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -90,11 +94,15 @@ export class NewsPage {
           this.updateDisplayedNews();
         });
       });
-      this.fac=this.userS.fac;
+
+      this.facService.loadResources().then((data) => {
+        this.listFac=data;
+      });
   }
 
   ionViewDidLoad() {
     this.presentLoading();
+
   }
 
   presentLoading() {
@@ -121,6 +129,18 @@ export class NewsPage {
 
     this.userS.addFac(this.fac);
     this.resize();
+    this.site = this.findSite();
+
+  }
+
+  findSite():string{
+    for(let sector of this.listFac){
+      for(let facs of sector.facs){
+        if(facs.acro === this.fac) {
+          return facs.site;
+        }
+      }
+    }
   }
 
   removeFac(fac:string){
@@ -138,6 +158,10 @@ export class NewsPage {
   segmentChanged(){
     this.resize();
     if(this.segment==='univ') this.updateDisplayedNews();
+    if(this.segment==='fac'){
+      this.fac=this.userS.fac;
+      this.site=this.findSite();
+    } 
 
   }
 
