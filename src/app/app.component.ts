@@ -65,13 +65,13 @@ export class MyApp {
     private alertCtrl : AlertController,
     private user: UserService,
     private statusBar: StatusBar,
-    private translateService: TranslateService,
+    public translateService: TranslateService,
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
     private wso2Service : Wso2Service
   ) {
     this.user.getCampus();
-    this.user.getDisclaimer();
+    //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
     this.wso2Service.getToken();
@@ -211,10 +211,10 @@ export class MyApp {
 }
 
   disclaimer(){
-        let title:string;
-    let message:string;
-    this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
+        //let title:string;
+    //let message:string;
+    //this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
+    //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
             message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
@@ -241,6 +241,7 @@ export class MyApp {
         });
         disclaimerAlert.present();
   }
+  
   openRootPage(page) {
     let activeVC = this.nav.getActive();
     let test = activeVC.instance;
@@ -259,13 +260,13 @@ export class MyApp {
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
-    let storeUrl:string;
+    //let storeUrl:string;
   	if (this.device.platform === 'iOS') {
   		app = iosSchemaName;
-      storeUrl=httpUrl;
+      //storeUrl=httpUrl;
   	} else if (this.device.platform === 'Android') {
   		app = androidPackageName;
-      storeUrl= 'market://details?id='+ app;
+      //storeUrl= 'market://details?id='+ app;
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();

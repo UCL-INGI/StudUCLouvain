@@ -19,7 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, trigger, state, style, animate, transition } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';

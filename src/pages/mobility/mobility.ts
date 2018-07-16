@@ -67,13 +67,13 @@ export class MobilityPage {
 
   launchExternalApp(page:any) {
     let app: string;
-    let storeUrl:string;
+    //let storeUrl:string;
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
-      storeUrl=page.httpUrl;
+      //storeUrl=page.httpUrl;
     } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
-      storeUrl= 'market://details?id='+ app;
+      //storeUrl= 'market://details?id='+ app;
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();

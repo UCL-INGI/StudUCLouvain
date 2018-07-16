@@ -39,7 +39,7 @@
 	<ng-container *ngIf="(userS.hasCampus() === false)">
     <p align="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
     <ion-list radio-group [(ngModel)]="where" class="other">
-      <ion-item class="other">
+      <ion-item class="other" id="LLN">
         <ion-label>Louvain-la-Neuve</ion-label>
         <ion-radio value="LLN" checked></ion-radio>
       </ion-item>
@@ -52,9 +52,9 @@
         <ion-radio value="Mons"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-row center>
-      <ion-col text-center>
-        <button ion-button round (tap)="updateCampus()">{{'HOME.OK' | translate}}</button>
+    <ion-row center >
+      <ion-col text-center >
+        <button ion-button round  (tap)="updateCampus()" id="okbutton">{{'HOME.OK' | translate}}</button>
       </ion-col>
     </ion-row>
   </ng-container>
@@ -71,8 +71,8 @@
         <ion-col align-self-end text-center>
           <img alt="biblio" src="./assets/img/icon4.jpg" align="middle"  (tap)="changePage(libraryPage)"/> <p align="center"><b><font color="#002D62">{{'HOME.LIBRARY' | translate}}</font></b></p>
         </ion-col>
-        <ion-col align-self-end text-center>
-          <img alt="etudes" src="./assets/img/icon5.jpg" align="middle"  (tap)="changePage(studiesPage)"/><p align="center"><b><font color="#002D62">{{'HOME.ETUDES' | translate}}</font></b></p>
+        <ion-col align-self-end text-center id="study">
+          <img alt="etudes" src="./assets/img/icon5.jpg" align="middle"   (tap)="changePage(studiesPage)"/><p align="center"><b><font color="#002D62" >{{'HOME.ETUDES' | translate}}</font></b></p>
         </ion-col>
         <ion-col align-self-end text-center>
           <img alt="aide" src="./assets/img/icon6.jpg" align="middle"  (tap)="changePage(helpDeskPage)"/><p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>

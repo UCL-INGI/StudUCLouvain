@@ -34,7 +34,7 @@
     <ion-segment-button value="prog">
       {{'STUDY.PROGRAM' | translate}}
     </ion-segment-button>
-    <ion-segment-button value="cours">
+    <ion-segment-button value="cours" name="cours">
       {{'STUDY.HORAIRE' | translate}}
     </ion-segment-button>
   </ion-segment>
@@ -50,7 +50,7 @@
 <ion-content padding #studiesContent>
 
   <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
-<ion-content padding *ngIf="segment==='cours'">
+<ion-content padding *ngIf="segment==='cours'" id="cours">
   <h4 text-center *ngIf="project!==null"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
   <ion-list >
     <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
@@ -79,8 +79,8 @@
     <ion-row>
       <ion-col>
         <ion-list inset>
-          <ion-item>
-            <ion-input placeholder="Username" name="username" id="loginField" type="text" required [(ngModel)]="username" #userName autocapitalize="none"></ion-input>
+          <ion-item class="inputField">
+            <ion-input id="userField" placeholder="Username" name="username"  type="text" required [(ngModel)]="username" #userName autocapitalize="none"></ion-input>
           </ion-item>
           <ion-item>
             <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
@@ -90,8 +90,8 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div text-center *ngIf="error" class="alert alert-danger" style="color: red"><b>{{error}}</b></div>
-        <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
+        <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b  >{{error}}</b></div>
+        <button id="login" ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
         </button>
       </ion-col>
     </ion-row>
@@ -120,7 +120,7 @@
 <!-------------------------------- BUTTON TO ADD COURSE ---------------------------------------------------->
 <ion-footer text-center *ngIf="segment=='cours'">
     <ion-fab bottom right>
-    <button ion-fab (tap)="showPrompt()">
+    <button id="prompt" ion-fab (tap)="showPrompt()">
       <ion-icon name="add"> </ion-icon>
     </button>
   </ion-fab>

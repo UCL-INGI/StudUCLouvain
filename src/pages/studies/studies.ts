@@ -53,7 +53,7 @@ export class StudiesPage {
   public project : AdeProject = null;
   private username:string = "";
   private password: string = "";
-  private error:string = "";
+  public error:string = "";
   private status: string = "";
   activities: any;
 
@@ -189,6 +189,7 @@ export class StudiesPage {
         },
         {
           text: save,
+          cssClass: 'save',
           handler: data => {
             this.saveCourse(data.name, data.acronym);
           }
@@ -212,6 +213,7 @@ export class StudiesPage {
     this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
     let prompt = this.alertCtrl.create({
       title: addcourse,
+      cssClass: "alert",
       message: message,
       inputs: [
         {

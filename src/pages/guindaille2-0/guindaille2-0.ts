@@ -19,7 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, trigger, state, style, animate, transition } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
@@ -131,18 +132,6 @@ export class GuindaillePage {
               public alertCtrl: AlertController) 
   {
     this.title = this.navParams.get('title');
-  }
-
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  isGroupShown(group) {
-      return this.shownGroup === group;
   }
 
   showAlert(page) {
