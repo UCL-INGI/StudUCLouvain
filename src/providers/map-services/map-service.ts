@@ -210,7 +210,7 @@ export class MapService {
           }
 
           // create CameraPosition
-          let camPos: CameraPosition<LatLng> = {
+          let camPos: CameraPosition = {
             target: latLng,
             zoom: 15
           };
@@ -228,7 +228,6 @@ export class MapService {
         });
 
     });
-
   }
 
   addMarker(location: MapLocation) {
@@ -385,7 +384,7 @@ export class MapService {
     this.markers.map((marker) => {
       if(marker.getTitle() == title) {
         let latLng = new LatLng(lat, lng);
-        let camPos: CameraPosition<LatLng> = {
+        let camPos: CameraPosition = {
           target: latLng,
           zoom: 15
         };
