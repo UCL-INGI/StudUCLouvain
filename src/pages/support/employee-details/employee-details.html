@@ -23,7 +23,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{empDetails.name}}</ion-title>
+    <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -31,12 +31,6 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-content>
-      <ion-card-title>
-        {{'EMPLOYEE.INFO' | translate}}
-      </ion-card-title>
-    </ion-card-content>
-
     <ion-row text-wrap>
       <ion-col text-right>
       </ion-col>
@@ -46,7 +40,7 @@
 
     <ion-row text-wrap padding>
         <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
-        
+
 
     </ion-row>
 
@@ -61,7 +55,7 @@
     </ion-row>
 
     <ion-row padding>
-      
+
       <ion-card>
         <ion-card-content>
           <ion-card-title>
@@ -91,11 +85,11 @@
             </ion-card-title>
           </ion-card-content>
 
-          <ion-row> 
+          <ion-row>
             <ion-col> {{'EMPLOYEE.TEL' | translate}} </ion-col>
             <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
           </ion-row>
-          <ion-row *ngIf="contact.secretary!=null"> 
+          <ion-row *ngIf="contact.secretary!=null">
             <ion-col > {{'EMPLOYEE.SECRETARIAT' | translate}} </ion-col>
             <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
           </ion-row>
