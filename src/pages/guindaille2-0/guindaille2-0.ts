@@ -46,7 +46,6 @@ export class GuindaillePage {
   segment:string = 'pict';
   alt:string;
 
-  alt:string;
   altsub:string;
   alterner = { title: '',
           subTitle: '',
