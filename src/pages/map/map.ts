@@ -46,7 +46,8 @@ export class MapPage {
   showLocationList = false;
   title: any;
   searching: boolean = false;
-
+  temp:any;
+  temp2:any;
 
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
@@ -85,7 +86,6 @@ export class MapPage {
       mapLoaded,
       zones
     ]).then((result) => {
-      this.alert("Promise ok ?");
       this.searching = false;
       this.zones = result[1];
       this.filters = this.zones;
@@ -97,7 +97,6 @@ export class MapPage {
         this.mapService.addMarker(this.selectedLocation);
       }
     }, (error) => {
-      this.alert("error promise");
     });
   }
 
