@@ -37,7 +37,8 @@ import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
 import { SecureStorage } from '@ionic-native/secure-storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { HttpModule, Http } from '@angular/http'
+import { HttpModule, Http } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
