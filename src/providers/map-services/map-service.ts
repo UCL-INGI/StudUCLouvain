@@ -136,6 +136,7 @@ export class MapService {
     });
   }
 
+
   private initBrowserMap(): Promise<any> {
 
     this.mapInitialised = true;

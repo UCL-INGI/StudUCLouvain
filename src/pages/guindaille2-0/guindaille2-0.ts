@@ -24,6 +24,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -43,15 +44,11 @@ export class GuindaillePage {
   title: any;
   shownGroup = null;
   segment:string = 'pict';
-  /*alt:string;
-  this.translateService.get('PIC1').subscribe((res:string) => {this.alt=res;});*/
+  alt:string;
 
-  // MUST USE TRADUCTION !!!!!!!!!!!
-
-  alterner = { title: 'Alterner',
-      subTitle: 'Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…',
-      buttons: ['OK'] };
-
+  alterner = { title: '',
+          subTitle: 'Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…',
+          buttons: ['OK'] };
   bruit = { title: 'Limiter le bruit à l’extérieur',
       subTitle: 'Louvain-la-Neuve est une ville qui bouge, même la nuit. Tous les soirs, il y a des occasions de s’occuper et de faire la fête. Et les salles sont prévues pour, mais n’oublie pas le retour au calme une fois dehors.\nQuand tu décides de rentrer dormir, d’autres l’ont déjà fait avant toi alors… Chut, plus de bruits.',
       buttons: ['OK'] };
@@ -129,9 +126,13 @@ export class GuindaillePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               public modalCtrl: ModalController,
-              public alertCtrl: AlertController) 
+              public alertCtrl: AlertController,
+              public translateService: TranslateService) 
   {
-    this.title = this.navParams.get('title');
+      this.title = this.navParams.get('title');
+      this.translateService.get('GUINDAILLE.TITLE1').subscribe((res:string) => {this.alt=res;});
+
+      this.alterner.title = this.alt;
   }
 
   showAlert(page) {

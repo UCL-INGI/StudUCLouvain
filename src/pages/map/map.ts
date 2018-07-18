@@ -20,7 +20,7 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController, ModalController, NavParams, AlertController } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
 
 import { POIService } from '../../providers/map-services/poi-service';
@@ -47,15 +47,33 @@ export class MapPage {
   title: any;
   searching: boolean = false;
 
+
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               public actionSheetCtrl: ActionSheetController,
               public mapService: MapService,
               public platform: Platform,
               public navParams: NavParams,
-              public poilocations: POIService) 
+              public poilocations: POIService,
+              public alertCtrl: AlertController) 
   {
       this.title = this.navParams.get('title');
+  }
+
+  alert(message:string) {
+    const actionSheet = this.alertCtrl.create({
+      title: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   ngAfterViewInit(){
@@ -67,6 +85,7 @@ export class MapPage {
       mapLoaded,
       zones
     ]).then((result) => {
+      this.alert("Promise ok ?");
       this.searching = false;
       this.zones = result[1];
       this.filters = this.zones;
@@ -77,6 +96,8 @@ export class MapPage {
       if(result[0]) {
         this.mapService.addMarker(this.selectedLocation);
       }
+    }, (error) => {
+      this.alert("error promise");
     });
   }
 
