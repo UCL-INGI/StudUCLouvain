@@ -22,7 +22,7 @@
 import { async, TestBed, inject } from '@angular/core/testing';
 import { Injectable } from '@angular/core';
 import { Http,HttpModule, ResponseOptions, BaseRequestOptions, Response } from '@angular/http';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { RssService } from './rss-service';
 import { NewsItem } from '../../app/entity/newsItem';
 import { IonicModule } from 'ionic-angular';

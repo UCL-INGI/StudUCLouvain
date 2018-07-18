@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { RssService } from './rss-service';
 import { NewsItem } from '../../app/entity/newsItem';
@@ -36,7 +36,7 @@ export class NewsService {
   news = [];
   shownNews = 0;
 
-  constructor(public http: Http, public rssService: RssService) {
+  constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
 

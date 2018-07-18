@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { EmployeeItem } from '../../app/entity/employeeItem';
 import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
@@ -33,7 +33,7 @@ export class RepertoireService {
   url = 'directories/v1/employees/';
   options: any;
 
-  constructor(public http: Http, private wso2Service: Wso2Service) {
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
 
@@ -52,8 +52,8 @@ export class RepertoireService {
 
       this.wso2Service.load(newUrl).subscribe(
         data => {
-          if(data.persons!=null){
-            this.extractEmployees(data.persons.person);
+          if(data['persons']!=null){
+            this.extractEmployees(data['persons'].person);
             resolve({employees:this.employees});
           }
         });
@@ -67,7 +67,7 @@ export class RepertoireService {
 
       this.wso2Service.load(url_details).subscribe(
         data => {
-          emp = this.extractEmployeeDetails(emp, data.businessInformation);
+          emp = this.extractEmployeeDetails(emp, data['businessInformation']);
           resolve({empDetails:emp});
         });
     });

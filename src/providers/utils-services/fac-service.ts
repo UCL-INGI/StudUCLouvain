@@ -20,14 +20,14 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class FacService {
   facultes : any = [];
   url = 'assets/data/fac.json'; 
-  constructor(public http: Http)
+  constructor(public http: HttpClient)
   {
 
   }
@@ -35,8 +35,8 @@ export class FacService {
   public loadResources() {
     if(this.facultes.length == 0) return new Promise(resolve => {
 
-      this.http.get(this.url).map(res => res.json()).subscribe(data => {
-          for(let sector of data.secteurs){
+      this.http.get(this.url).map(res => res).subscribe(data => {
+          for(let sector of data['secteurs']){
             this.facultes.push(sector);
           }
 

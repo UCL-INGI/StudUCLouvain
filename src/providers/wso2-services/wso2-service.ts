@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 //import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../app/variables-config';
@@ -17,22 +17,20 @@ export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
   //wso2ServiceBaseUrl = 'https://esb-test.sipr.ucl.ac.be:8248/';
-  options: RequestOptions;
+
   private token:string ="";
   private tokenStudent:string = "";
-  private optionsStudent : RequestOptions;
-  private optionsToken : RequestOptions;
+  headers: HttpHeaders;
 
-
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
 
     this.getToken()
     .subscribe(
         data => {
               //console.log(this.token);
-              let headers = new Headers({ 'Accept': 'application/json' });
-              headers.append('Authorization', this.token);
-              this.options = new RequestOptions({ headers: headers });
+              this.headers = new HttpHeaders({'Authorization' : this.token});
+              this.headers.append('Accept', 'application/json');
+              //this.options = new RequestOptions({ headers: headers });
         });
 
   }
@@ -40,27 +38,29 @@ export class Wso2Service {
 
 
   load(url: string) {
-
+//console.log(this.token);
     //console.log(this.token);
     let finalUrl = this.wso2ServiceBaseUrl + url;
-    return  this.http.get(finalUrl, this.options).map(res => res.json());
+    return  this.http.get(finalUrl, {headers: this.headers}).map(res => res);
   }
 
   getToken(){
-    let headers = new Headers({ 'Authorization': wso2HeaderStudent});
+    let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type','application/x-www-form-urlencoded');
 
-    let body = `grant_type=client_credentials`;
+    //let body = "grant_type=client_credentials";
+    let body = new HttpParams().set('grant_type', 'client_credentials');
 
-    this.optionsToken = new RequestOptions({headers: headers});
+    //this.optionsToken = new RequestOptions({headers: headers});
 
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
     //console.log(finalUrl);
     //console.log(this.optionsToken);
-    return this.http.post(finalUrl,body, this.optionsToken)
+    return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
         //console.log(res);
-        this.token = "Bearer " + res.json().access_token;
+        this.token = "Bearer " + res['access_token'];
+        //console.log(this.token);
         console.log("Token ok");
         return "OK";
       })
@@ -70,19 +70,18 @@ export class Wso2Service {
 
    login(user : string, pass : string){
 
-    let headers = new Headers({ 'Authorization': wso2HeaderStudent});
+    let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type','application/x-www-form-urlencoded');
 
-    let body = `grant_type=password&username=${user}&password=${pass}`;
-
-    this.optionsStudent = new RequestOptions({headers: headers});
+    //let body = `grant_type=password&username=${user}&password=${pass}`;
+    let body = new HttpParams().set('grant_type', 'password').set('username',user).set('password',pass);
+    //this.optionsStudent = new RequestOptions({headers: headers});
 
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
 
-    return this.http.post(finalUrl,body, this.optionsStudent)
+    return this.http.post(finalUrl,body, {headers: headers})
       .map(res => {
-        //console.log(res);
-        this.tokenStudent = "Bearer " + res.json().access_token;
+        this.tokenStudent = "Bearer " + res['access_token'];
         console.log("Login ok");
         return "OK";
       })
@@ -90,13 +89,13 @@ export class Wso2Service {
   }
 
   loadStudent(url:string) {
-    let headers = new Headers({ 'Accept': 'application/json' });
-    headers.append('Authorization', this.tokenStudent);
-    this.optionsStudent = new RequestOptions({ headers: headers });
+    let headers = new HttpHeaders({'Authorization': this.tokenStudent});
+    headers.append('Accept', 'application/json');
+    //this.optionsStudent = new RequestOptions({ headers: headers });
     let finalUrl = this.wso2ServiceBaseUrl + url;
     //console.log(finalUrl);
     //console.log(this.tokenStudent);
-    return  this.http.get(finalUrl, this.optionsStudent).map(res => res.json());
+    return  this.http.get(finalUrl, {headers: headers}).map(res => res);
   }
 
 }

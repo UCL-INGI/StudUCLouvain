@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MapLocation } from '../../app/entity/mapLocation';
 import { UserService } from '../utils-services/user-service';
 import 'rxjs/add/operator/map';
@@ -34,7 +34,7 @@ export class POIService {
   urlMons = 'assets/data/resourcesMons.json';
   urlWol = 'assets/data/resourcesWoluwe.json'; 
   old = '';
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
 
     public user: UserService) {
     this.old = this.user.campus;
@@ -57,8 +57,8 @@ export class POIService {
     this.update();
     if(this.zones.length == 0) return new Promise(resolve => {
 
-      this.http.get(this.url).map(res => res.json()).subscribe(data => {
-        let tmpZones = data.zones;
+      this.http.get(this.url).map(res => res).subscribe(data => {
+        let tmpZones = data['zones'];
 
         //for (let zone of tmpZones) {
           let auditoiresLength = tmpZones.auditoires.length;
