@@ -26,6 +26,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title align="center">{{'HOME.TITLE' | translate}}</ion-title>
+
     <ion-buttons end *ngIf="(userS.hasCampus() === true)">
       <button ion-button icon-only end (tap)="settings()">
         <ion-icon name="settings"></ion-icon>
@@ -61,7 +62,7 @@
 
   <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
 	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header" padding >
-		
+
     <ion-grid class="other" padding>
       <!--------------------------------------- STUDY PART ------------------------------------------------>
       <ion-row>
@@ -126,6 +127,17 @@
     <ion-label><strong>{{'HOME.URG' | translate}}</strong></ion-label>
   </button>
 </ion-fab>
+
+<!--------------------------------REPORTBUG
+<ion-fab bottom center>
+  <a href="mailto:bruno.marchesini@student.uclouvain.be">
+    <button ion-button icon-start >
+      <ion-icon name="mail"></ion-icon>
+      report
+    </button>
+  </a>
+</ion-fab>
+--------------------------------------->
 
 <!------------------------------------ SOCIAL NETWORK BUTTON ------------------------------------------------------------------>
 <ion-fab bottom left #fab *ngIf="(userS.hasCampus() === true)">
