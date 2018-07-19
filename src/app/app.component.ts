@@ -33,6 +33,8 @@ import { HomePage } from '../pages/home/home';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
+declare var TestFairy: any;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -129,6 +131,7 @@ export class MyApp {
         appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
+      TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then((data) =>
       {

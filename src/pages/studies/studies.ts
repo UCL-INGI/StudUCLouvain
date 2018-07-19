@@ -97,8 +97,7 @@ export class StudiesPage {
             this.status=data.toString();
             resolve(data);
           }
-        })
-      ;
+        });
     });
   }
 

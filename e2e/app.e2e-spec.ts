@@ -12,13 +12,15 @@ describe('App', () => {
       page.navigateTo('/');
     });
 
-    it('should have a title saying UCLCampus', () => {
+    it('should have a title saying UCLCampus', function (done) {
+      browser.driver.sleep(2000);
       var choice = element(by.id('LLN'));
       choice.click();
       var ok = element(by.id('okbutton'));
       ok.click();
       page.getTitle().then(title => {
         expect(title).toEqual('UCLCampus');
+        done();
       });
     });
   })
