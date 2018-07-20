@@ -147,8 +147,9 @@ export class StudiesPage {
             }
           )
       });
-    }  
+    }
      else {
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }

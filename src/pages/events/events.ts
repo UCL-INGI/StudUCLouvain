@@ -72,7 +72,7 @@ export class EventsPage {
   constructor(
     public alertCtrl: AlertController,
     public app:App,
-    private nav: NavController,
+    private navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
@@ -90,19 +90,25 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    this.loadEvents();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayedEvents();
-    });
-    this.presentLoading();
+    if(this.connService.isOnline()) {
+      this.loadEvents();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedEvents();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
   public doRefresh(refresher) {
     this.loadEvents();
     refresher.complete();
   }
-  
+
   presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
@@ -125,7 +131,7 @@ export class EventsPage {
   }
 
   public goToEventDetail(event: EventItem) {
-    this.nav.push('EventsDetailsPage', { 'event': event });
+    this.navCtrl.push('EventsDetailsPage', { 'event': event });
   }
 
   toggleGroup(group) {
@@ -172,6 +178,7 @@ export class EventsPage {
 
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }

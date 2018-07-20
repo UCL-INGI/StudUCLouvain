@@ -4,7 +4,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -19,16 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController} from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection;
 
 @Injectable()
 export class ConnectivityService {
-
   onDevice: boolean;
 
   constructor(public platform: Platform, private network: Network, private translateService: TranslateService, private alertCtrl: AlertController){
@@ -56,5 +55,6 @@ export class ConnectivityService {
       buttons: [close]
     });
     alert.present();
+
   }
 }

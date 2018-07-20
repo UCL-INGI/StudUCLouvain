@@ -43,7 +43,7 @@ export class LibrariesPage {
     public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
-    public connService : ConnectivityService) 
+    public connService : ConnectivityService)
   {
     this.title = this.navParams.get('title');
   }
@@ -69,6 +69,7 @@ export class LibrariesPage {
       );
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }

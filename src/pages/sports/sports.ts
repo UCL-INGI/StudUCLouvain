@@ -21,7 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { App, AlertController, ItemSliding, List,
-  ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+  ModalController, NavParams, ToastController, LoadingController, NavController} from 'ionic-angular';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
 import { IonicPage } from 'ionic-angular';
@@ -75,7 +75,8 @@ export class SportsPage {
     private calendar: Calendar,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController) 
+    public loadingCtrl: LoadingController,
+    public navCtrl: NavController)
   {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -112,7 +113,7 @@ export class SportsPage {
         this.loading.dismiss();
         this.loading = null;
     }
-  } 
+  }
 
   public onSearchInput(){
     this.searching = true;
@@ -174,9 +175,9 @@ export class SportsPage {
 
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
-
   }
 
 //SORT SPORTS BY DAY
@@ -299,7 +300,7 @@ export class SportsPage {
       this.user.addFavoriteS(itemData.guid);
       let message:string;
       this.translateService.get('SPORTS.FAVADD').subscribe((res:string) => {message=res;});
-      
+
       let toast = this.toastCtrl.create({
         message: message,
         duration: 3000

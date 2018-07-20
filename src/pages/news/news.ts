@@ -41,7 +41,7 @@ export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
   @ViewChild('news') content: Content;
-  
+
   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize()
   {
@@ -80,29 +80,31 @@ export class NewsPage {
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
     public loadingCtrl: LoadingController,
-    public facService: FacService) 
+    public facService: FacService)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
-      this.app.setTitle(this.title);
       this.searchControl = new FormControl();
-      this.platform.ready().then(() => {
-        this.loadEvents();
-        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-          this.searching = false;
-          this.updateDisplayedNews();
-        });
-      });
-
       this.facService.loadResources().then((data) => {
         this.listFac=data;
       });
   }
 
   ionViewDidLoad() {
-    this.presentLoading();
-
+    this.app.setTitle(this.title);
+    if(this.connService.isOnline()) {
+      this.loadEvents();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedNews();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
   presentLoading() {
@@ -161,7 +163,7 @@ export class NewsPage {
     if(this.segment==='fac'){
       this.fac=this.userS.fac;
       this.site=this.findSite();
-    } 
+    }
 
   }
 
@@ -198,6 +200,7 @@ export class NewsPage {
       });
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
 
