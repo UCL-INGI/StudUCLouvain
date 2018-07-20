@@ -58,7 +58,7 @@
                      "sigle" : "MCUR",
                      "cnt_places": 96,
                      "cnt_auditoires" : 4,
-                     "adresse" : "rue du Compas, 3 - 1348 Louvain-la-Neuve",
+                     "adresse" : "Rue du Compas, 3 - 1348 Louvain-la-Neuve",
                      "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmcur.gif",
                      "coord": {
                          "lat" : "50.6675361",
@@ -70,7 +70,7 @@
                      "sigle" : "PCUR",
                      "cnt_places": 306,
                      "cnt_auditoires" : 7,
-                     "adresse" : "rue du Compas, 1 - 1348 Louvain-la-Neuve",
+                     "adresse" : "Rue du Compas, 1 - 1348 Louvain-la-Neuve",
                      "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpcur.gif",
                      "coord": {
                          "lat" : "50.6675361",
@@ -82,7 +82,7 @@
                      "sigle" : "PYTH",
                      "cnt_places": 36,
                      "cnt_auditoires" : 1,
-                     "adresse" : "rue du Compas, 2 - 1348 Louvain-la-Neuve",
+                     "adresse" : "Rue du Compas, 2 - 1348 Louvain-la-Neuve",
                      "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpyth.gif",
                      "coord": {
                          "lat" : "50.6675361",
@@ -263,11 +263,11 @@
                  {
                      "nom"  : "Bibliothèque des sciences et technologies",
                      "sigle" : "BST",
-                     "adresse" : "Place des Sciences, 3 - 1348 Louvain-la-Neuve",
+                     "adresse" : "Place Louis Pasteur, 2 - 1348 Louvain-la-Neuve",
                      "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ucl/images/sciencesaccueil.jpg",
                      "coord": {
-                         "lat" : "50.6681726",
-                         "lng": "4.6196554"
+                         "lat" : "50.669394",
+                         "lng": "4.619242"
                      },
                      "horaires_periode_cours" :
                         {
@@ -506,6 +506,26 @@
                             }
                         }
                  },
+                {
+                    "nom"  : "Bibliothèque d'architecture, d'ingénierie architecturale, d'urbanisme",
+                    "sigle" : "BAiU",
+                    "adresse" : "Place du Levant, 1 - 1348 Louvain-la-Neuve",
+                    "vignette" : "https://cdn.uclouvain.be/groups/cms-editors-baiu-lln/baiuLLNlogo.png",
+                    "coord": {
+                        "lat" : "50.668434",
+                        "lng": "4.622722"
+                    }
+               },
+               {
+                   "nom"  : "Bibliothèque des sciences de la motricité",
+                   "sigle" : "BSM",
+                   "adresse" : "Place Pierre de Coubertin, 1 - 1348 Louvain-la-Neuve",
+                   "vignette" : "https://cdn.uclouvain.be/groups/cms-editors-baiu-lln/baiuLLNlogo.png",
+                   "coord": {
+                       "lat" : "50.670415",
+                       "lng": "4.606942"
+                   }
+              },
                  {
                      "nom"  : "Bibliothèque de théologie",
                      "sigle" : "BTEC",
