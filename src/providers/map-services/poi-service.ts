@@ -32,7 +32,7 @@ export class POIService {
   url = '';
   urlLLN ='assets/data/resourcesLLN.json';
   urlMons = 'assets/data/resourcesMons.json';
-  urlWol = 'assets/data/resourcesWoluwe.json'; 
+  urlWol = 'assets/data/resourcesWoluwe.json';
   old = '';
   constructor(public http: HttpClient,
 
@@ -63,6 +63,7 @@ export class POIService {
         //for (let zone of tmpZones) {
           let auditoiresLength = tmpZones.auditoires.length;
           let bibliothequesLength = tmpZones.bibliotheques.length;
+          let sportsLength = tmpZones.sports.length;
           let restauULength = tmpZones.restaurants_universitaires.length;
           let parkingsLength = tmpZones.parkings.length;
 
@@ -74,6 +75,10 @@ export class POIService {
             bibliotheques: {
               list: this.createMapLocations(tmpZones.bibliotheques),
               listChecked: Array(bibliothequesLength).fill(false),
+                        showDetails: false},
+            sports: {
+              list: this.createMapLocations(tmpZones.sports),
+              listChecked: Array(sportsLength).fill(false),
                         showDetails: false},
             restaurants_universitaires: {
               list: this.createMapLocations(tmpZones.restaurants_universitaires),
@@ -165,4 +170,3 @@ export class POIService {
     return x * Math.PI / 180;
   }*/
 }
-  

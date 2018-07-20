@@ -1,6 +1,6 @@
 {
    "author": "mdeman",
-   "zones" : 
+   "zones" :
 
         {
              "auditoires" : [
@@ -9,7 +9,7 @@
                     "sigle" : "",
                     "cnt_places": 995,
                     "cnt_auditoires" : 4,
-                    "adresse" : "chaussée de Binche 151 - 7000 Mons",
+                    "adresse" : "chaussée de Binche, 151 - 7000 Mons",
                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ac-arec/images/Q335-p3fucam.png",
                      "coord": {
                          "lat" : "50.452763",
@@ -21,7 +21,7 @@
                  {
                      "nom"  : "Bibliothèque de l'UCL Mons",
                      "sigle" : "BIMS",
-                     "adresse" : "Chaussée de Binche 151, - 7000 Mons",
+                     "adresse" : "Chaussée de Binche, 151 - 7000 Mons",
                      "vignette" : "http://www.uclouvain.be/cps/ucl/doc/media/BPSP1.jpg",
                      "coord": {
                          "lat" : "50.452763",
@@ -80,6 +80,20 @@
                         }
                  }
             ],
+
+            "sports" : [
+                {
+                     "nom"  : "UCLouvain FUCaM Mons",
+                     "adresse" : "Chaussée de Binche, 151 - 7000 Mons",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                       "lat" : "50.452763",
+                       "lng": "3.981192"
+                     }
+                }
+            ],
+
              "restaurants_universitaires" : [
                  {
                      "nom"  : "La Bascule",

@@ -277,7 +277,8 @@
         "AUDIT" : "Auditoires",
         "LIBRARY" : "Libraries",
         "REST" : "University restaurants",
-        "PARK" : "Parkings"
+        "PARK" : "Parkings",
+        "SPORT" : "Places of sports activities"
     },
 
     "REST" : {

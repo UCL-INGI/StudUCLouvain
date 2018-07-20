@@ -64,6 +64,18 @@
       <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
     </ion-item>
 
+    <ion-item-divider (tap)="toggleDetails(zone.sports)">
+      {{'MAP.SPORT' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let sport of zone.sports.list, let i=index" [hidden]="!zone.sports.showDetails">
+      <div item-content>
+        <h3>{{sport.title}}</h3>
+        <p>{{sport.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.sports.listChecked[i]" color="secondary" (ionChange)="toggleLocation(sport, zone.sports.listChecked, i)"></ion-toggle>
+    </ion-item>
+
     <ion-item-divider (tap)="toggleDetails(zone.restaurants_universitaires)">
       {{'MAP.REST' | translate}}
     </ion-item-divider>

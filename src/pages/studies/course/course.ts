@@ -54,7 +54,7 @@ export class CoursePage {
               public userS:UserService,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
-              public navParams:NavParams) 
+              public navParams:NavParams)
   {
       this.courseSorted = {cm : [], tp : [], ex :[]};
       let acro = this.course.acronym;
@@ -63,7 +63,7 @@ export class CoursePage {
       }
       if(this.userS.hasSlotTP(acro)){
         this.slotTP = this.userS.getSlotTP(acro);
-      }   
+      }
   }
 
   ionViewDidLoad() {
@@ -79,10 +79,10 @@ export class CoursePage {
           data => {
             this.course.activities = data.sort(
               (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
-            );//.filter(
-               // activitie => activitie.end.valueOf() > Date.now().valueOf()
-              //); // display only activities finished after now time
-              //this.displayedActi=this.course.activities;
+            ).filter(
+                activitie => activitie.end.valueOf() > Date.now().valueOf()
+              ); // display only activities finished after now time
+              this.displayedActi=this.course.activities;
               this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
               this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
               this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
@@ -133,7 +133,7 @@ export class CoursePage {
 
   updateDisplayedTP(){
       let toFilter = this.courseSorted.tp;
-      
+
       let toPush;
       if(this.slotTP != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
       else toPush = this.courseSorted.tp;
@@ -142,7 +142,7 @@ export class CoursePage {
 
   updateDisplayedCM(){
       let toFilter = this.courseSorted.cm;
-    
+
       let toPush:Array<Activity>;
       if(this.slotCM != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
       else toPush = this.courseSorted.cm;
