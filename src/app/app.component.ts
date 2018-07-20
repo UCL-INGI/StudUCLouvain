@@ -131,9 +131,7 @@ export class MyApp {
         appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
-      if ((<any>window).TestFairy) {
-        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
-      }
+      TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then((data) =>
       {
@@ -246,7 +244,7 @@ export class MyApp {
         });
         disclaimerAlert.present();
   }
-  
+
   openRootPage(page) {
     let activeVC = this.nav.getActive();
     let test = activeVC.instance;
@@ -259,7 +257,7 @@ export class MyApp {
         this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
       }
       this.nav.push(page.component, {title: page.title});
-    }  
+    }
 
   }
 
