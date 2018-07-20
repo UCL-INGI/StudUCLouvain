@@ -90,12 +90,18 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    this.loadEvents();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayedEvents();
-    });
-    this.presentLoading();
+    if(this.connService.isOnline()) {
+      this.loadEvents();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedEvents();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
   public doRefresh(refresher) {

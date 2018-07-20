@@ -85,24 +85,26 @@ export class NewsPage {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
-      this.app.setTitle(this.title);
       this.searchControl = new FormControl();
-      this.platform.ready().then(() => {
-        this.loadEvents();
-        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-          this.searching = false;
-          this.updateDisplayedNews();
-        });
-      });
-
       this.facService.loadResources().then((data) => {
         this.listFac=data;
       });
   }
 
   ionViewDidLoad() {
-    this.presentLoading();
-
+    this.app.setTitle(this.title);
+    if(this.connService.isOnline()) {
+      this.loadEvents();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedNews();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
   presentLoading() {
