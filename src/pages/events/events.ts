@@ -72,7 +72,7 @@ export class EventsPage {
   constructor(
     public alertCtrl: AlertController,
     public app:App,
-    private nav: NavController,
+    private navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
@@ -102,7 +102,7 @@ export class EventsPage {
     this.loadEvents();
     refresher.complete();
   }
-  
+
   presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
@@ -125,7 +125,7 @@ export class EventsPage {
   }
 
   public goToEventDetail(event: EventItem) {
-    this.nav.push('EventsDetailsPage', { 'event': event });
+    this.navCtrl.push('EventsDetailsPage', { 'event': event });
   }
 
   toggleGroup(group) {
@@ -172,6 +172,7 @@ export class EventsPage {
 
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }

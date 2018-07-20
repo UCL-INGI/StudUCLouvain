@@ -61,7 +61,7 @@ export class SupportPage {
               public platform: Platform,
               public repService : RepertoireService,
               public connService : ConnectivityService,
-              public loadingCtrl: LoadingController) 
+              public loadingCtrl: LoadingController)
   {
     this.title = this.navParams.get('title');
   }
@@ -111,6 +111,7 @@ export class SupportPage {
       );
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
     this.dismissLoading();

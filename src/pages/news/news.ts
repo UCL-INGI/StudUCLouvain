@@ -41,7 +41,7 @@ export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
   @ViewChild('news') content: Content;
-  
+
   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize()
   {
@@ -80,7 +80,7 @@ export class NewsPage {
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
     public loadingCtrl: LoadingController,
-    public facService: FacService) 
+    public facService: FacService)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -161,7 +161,7 @@ export class NewsPage {
     if(this.segment==='fac'){
       this.fac=this.userS.fac;
       this.site=this.findSite();
-    } 
+    }
 
   }
 
@@ -198,6 +198,7 @@ export class NewsPage {
       });
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
 
