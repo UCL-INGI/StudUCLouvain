@@ -6,25 +6,29 @@
 				{
 					"acro" : "MEDE",
 					"site" : "",
-					"name" : "Faculté de médecine et médecine dentaire"
+					"name" : "Faculté de médecine et médecine dentaire",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "FASB",
 					"site" : "",
-					"name" : "Faculté de pharmacie et des sciences biomédicales"
+					"name" : "Faculté de pharmacie et des sciences biomédicales",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "FSP",
 					"site" : "",
-					"name" : "Faculté de santé publique"
+					"name" : "Faculté de santé publique",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "FSM",
 					"site" : "",
-					"name" : "Faculté des Sciences de la Motricité"
+					"name" : "Faculté des Sciences de la Motricité",
+					"rss"  : ""
 				}
 			]
 		},
@@ -34,25 +38,29 @@
 				{
 					"acro" : "EPL",
 					"site" : "",
-					"name" : "Ecole Polytechnique de Louvain"
+					"name" : "Ecole Polytechnique de Louvain",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "LOCI",
 					"site" : "",
-					"name" : "Faculté d'architecture, d'ingénierie architecturale, d'urbanisme"
+					"name" : "Faculté d'architecture, d'ingénierie architecturale, d'urbanisme",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "AGRO",
 					"site" : "",
-					"name" : "Faculté des bioingénieurs"
+					"name" : "Faculté des bioingénieurs",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "SC",
 					"site" : "",
-					"name" : "Faculté des sciences"
+					"name" : "Faculté des sciences",
+					"rss"  : ""
 				}
 			]
 		},
@@ -62,37 +70,43 @@
 				{
 					"acro" : "DRT",
 					"site" : "",
-					"name" : "Faculté de droit et de criminologie"
+					"name" : "Faculté de droit et de criminologie",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "FIAL",
 					"site" : "",
-					"name" : "Faculté de philosophie, arts et lettres"
+					"name" : "Faculté de philosophie, arts et lettres",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "PSP",
 					"site" : "",
-					"name" : "Faculté de psychologie et des sciences de l'éducation"
+					"name" : "Faculté de psychologie et des sciences de l'éducation",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "TECO",
 					"site" : "",
-					"name" : "Faculté de théologie"
+					"name" : "Faculté de théologie",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "ESPO",
 					"site" : "",
-					"name" : "Faculté des sciences économiques, sociales, politiques et de communication"
+					"name" : "Faculté des sciences économiques, sociales, politiques et de communication",
+					"rss"  : ""
 				},
 
 				{
 					"acro" : "LSM",
 					"site" : "https://uclouvain.be/fr/node/10353",
-					"name" : "Louvain School of Management"
+					"name" : "Louvain School of Management",
+					"rss"  : ""
 				}
 			]
 		}
