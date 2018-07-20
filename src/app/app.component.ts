@@ -131,7 +131,9 @@ export class MyApp {
         appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
-      TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
+      if ((<any>window).TestFairy) {
+        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
+      }
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then((data) =>
       {
