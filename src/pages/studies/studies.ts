@@ -103,16 +103,21 @@ export class StudiesPage {
 
 //get course program of student
   loadActivities(){
-  	this.login().then((res) => {
-	  	if(this.status){
-	  		this.studentService.searchActivities().then((res) => {
-	  			let result:any = res;
-	  			this.activities = result.activities.activity;
-	  			console.log(this.activities.activity);
-	  		});
-	  	}
-  	});
-
+    if(this.connService.isOnline()) {
+      this.login().then((res) => {
+  	  	if(this.status){
+  	  		this.studentService.searchActivities().then((res) => {
+  	  			let result:any = res;
+  	  			this.activities = result.activities.activity;
+  	  			console.log(this.activities.activity);
+  	  		});
+  	  	}
+    	});
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
 //open modalprojectpage to choose an ade project
