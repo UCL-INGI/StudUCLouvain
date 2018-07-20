@@ -119,7 +119,6 @@ export class SportsPage {
   }
 
   public loadSports() {
-    console.log("loadsports");
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     let result: any;
