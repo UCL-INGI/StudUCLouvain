@@ -111,7 +111,6 @@ export class SupportPage {
       );
     } else {
       this.searching = false;
-      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
     this.dismissLoading();

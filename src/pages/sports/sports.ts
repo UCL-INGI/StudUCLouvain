@@ -85,12 +85,18 @@ export class SportsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    this.loadSports();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayedSports();
-    });
-    this.presentLoading();
+    if(this.connService.isOnline()) {
+      this.loadSports();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedSports();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
   public doRefresh(refresher) {
