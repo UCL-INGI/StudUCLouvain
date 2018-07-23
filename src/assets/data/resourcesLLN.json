@@ -256,6 +256,201 @@
                          "lat" : "50.6677424",
                          "lng": "4.6113916"
                      }
+                 },
+                 {
+                     "nom"  : "Institut des langues vivantes (ILV)",
+                     "sigle" : "ILV",
+                     "cnt_places": 573,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Traverse d'Esope - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "coord": {
+                         "lat" : "50.669002",
+                         "lng": "4.614822"
+                     }
+                 }
+             ],
+
+             "locaux" : [
+                 {
+                      "nom"  : "Pasteur",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.669566095484974",
+                          "lng": "4.619319280906893"
+                      }
+                 },
+                 {
+                      "nom"  : "CPME",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.669171277616684",
+                          "lng": "4.621072775050379"
+                      }
+                 },
+                 {
+                      "nom"  : "MECA - ELME",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66880068128997",
+                          "lng": "4.622804476245619"
+                      }
+                 },
+                 {
+                      "nom"  : "CAO - Euler",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.669223126871216",
+                          "lng": "4.623832768126704"
+                      }
+                 },
+                 {
+                      "nom"  : "Faraday - Marconi",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.669011904556655",
+                          "lng": "4.62393569789765"
+                      }
+                 },
+                 {
+                      "nom"  : "Candix - DAO - IAO - GCE",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668042054686346",
+                          "lng": "4.622524855955817"
+                      }
+                 },
+                 {
+                      "nom"  : "Curie - Ferraris",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66778046379144",
+                          "lng": "4.620777061506487"
+                      }
+                 },
+                 {
+                      "nom"  : "Darwin",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66659064245608",
+                          "lng": "4.619523128792025"
+                      }
+                 },
+                 {
+                      "nom"  : "Fisher",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.666172635913114",
+                          "lng": "4.620075328572966"
+                      }
+                 },
+                 {
+                      "nom"  : "Ulysse - Cérès - Atlas",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66601559029711",
+                          "lng": "4.6208156182610765"
+                      }
+                 },
+                 {
+                      "nom"  : "Pointcaré",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66590742190323",
+                          "lng": "4.62324771128533"
+                      }
+                 },
+                 {
+                      "nom"  : "Coubertin 13",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.67068026319428",
+                          "lng": "4.606954328021516"
+                      }
+                 },
+                 {
+                      "nom"  : "SOCR 031-032-033-034 a054-a068",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.670233181631566",
+                          "lng": "4.611046037873734"
+                      }
+                 },
+                 {
+                      "nom"  : "Erasme 65",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.6696059003224",
+                          "lng": "4.610441199740876"
+                      }
+                 },
+                 {
+                      "nom"  : "Descamps 01-02",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66940870446693",
+                          "lng": "4.611189536056031"
+                      }
+                 },
+                 {
+                      "nom"  : "More 65-66-67-68",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.6680147101376",
+                          "lng": "4.611134550771226"
+                      }
+                 },
+                 {
+                      "nom"  : "Leclercq 074-076-077-078-170",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66782685773762",
+                          "lng": "4.61175816436718"
+                      }
+                 },
+                 {
+                      "nom"  : "Dupriez D147",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668292662312695",
+                          "lng": "4.611968717774857"
+                      }
+                 },
+                 {
+                      "nom"  : "Doyen 1-2-3-4-5-6-7-8",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668588462818285",
+                          "lng": "4.612993321618546"
+                      }
+                 },
+                 {
+                      "nom"  : "CV09 statistiques",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668639462717366",
+                          "lng": "4.615322820147981"
+                      }
                  }
              ],
 

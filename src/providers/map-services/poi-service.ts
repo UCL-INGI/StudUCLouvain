@@ -62,6 +62,7 @@ export class POIService {
 
         //for (let zone of tmpZones) {
           let auditoiresLength = tmpZones.auditoires.length;
+          let locauxLength = tmpZones.locaux.length;
           let bibliothequesLength = tmpZones.bibliotheques.length;
           let sportsLength = tmpZones.sports.length;
           let restauULength = tmpZones.restaurants_universitaires.length;
@@ -72,6 +73,10 @@ export class POIService {
             auditoires: {
               list: this.createMapLocations(tmpZones.auditoires),
               listChecked: Array(auditoiresLength).fill(false),
+                        showDetails: false},
+            locaux: {
+              list: this.createMapLocations(tmpZones.locaux),
+              listChecked: Array(locauxLength).fill(false),
                         showDetails: false},
             bibliotheques: {
               list: this.createMapLocations(tmpZones.bibliotheques),

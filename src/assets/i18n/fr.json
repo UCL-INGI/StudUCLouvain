@@ -275,6 +275,7 @@
     "MAP" : {
     	"NET" : "Connectez-vous à internet",
     	"AUDIT" : "Auditoires",
+			"LOC": "Locaux informatique/de travail",
     	"LIBRARY" : "Bibliothèques",
     	"REST" : "Restaurants Universitaires",
     	"PARK" : "Parkings",

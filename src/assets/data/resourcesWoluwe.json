@@ -65,6 +65,46 @@
                      }
                  }
             ],
+
+            "locaux" : [
+              {
+                   "nom"  : "MOEX bleue - orange",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                       "lat" : "50.85141259439776",
+                       "lng": "4.454026647854107"
+                   }
+              },
+              {
+                   "nom"  : "TP BIO",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                       "lat" : "50.85112620250733",
+                       "lng": "4.454537943947571"
+                   }
+              },
+              {
+                   "nom"  : "FARM 1-2",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                       "lat" : "50.85123860042166",
+                       "lng": "4.455601439821976"
+                   }
+              },
+              {
+                   "nom"  : "Ambroise Paré - Avicenne - Hippocrate - Laennec + salles d'étude",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                       "lat" : "50.851680569253666",
+                       "lng": "4.454606340277451"
+                   }
+              }
+            ],
+
              "bibliotheques" : [
                  {
                      "nom"  : "Bibliothèque des sciences de la santé",

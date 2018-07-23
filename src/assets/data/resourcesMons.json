@@ -9,13 +9,24 @@
                     "sigle" : "",
                     "cnt_places": 995,
                     "cnt_auditoires" : 4,
-                    "adresse" : "chaussée de Binche, 151 - 7000 Mons",
+                    "adresse" : "Chaussée de Binche, 151 - 7000 Mons",
                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/ac-arec/images/Q335-p3fucam.png",
                      "coord": {
                          "lat" : "50.452763",
                          "lng": "3.981192"
                      }
                  }
+            ],
+            "locaux" : [
+              {
+                 "nom"  : "Locaux",
+                 "sigle" : "",
+                 "vignette" : "",
+                  "coord": {
+                      "lat" : "50.452763",
+                      "lng": "3.981192"
+                  }
+              }
             ],
              "bibliotheques" : [
                  {

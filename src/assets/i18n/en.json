@@ -276,6 +276,7 @@
     "MAP" : {
         "NET" : "Connect to the internet",
         "AUDIT" : "Auditoires",
+        "LOC": "Computer/work areas",
         "LIBRARY" : "Libraries",
         "REST" : "University restaurants",
         "PARK" : "Parkings",
