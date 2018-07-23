@@ -248,6 +248,60 @@
                     "menu" : true
                  }
             ],
+
+            "services" : [
+                {
+                     "nom"  : "Service d'aide aux étudiants",
+                     "adresse" : "La Maire, Promenade de l’Alma, 31 - 1200 Woluwe-Saint-Lambert",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                       "lat" : "50.849775",
+                       "lng": "4.4521357"
+                     }
+                },
+                {
+                     "nom"  : "Service des logements UCL",
+                     "adresse" : "Promenade de l'Alma, 31 bte B1.41.01 - 1200 Woluwe-Saint-Lambert",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.849775",
+                         "lng": "4.4521357"
+                     }
+                },
+                {
+                     "nom"  : "Service des inscriptions",
+                     "adresse" : "Promenade de l'Alma, 51 bte B1.43.01 - 1200 Woluwe-Saint-Lambert",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.8501812",
+                         "lng": "4.4532136"
+                     }
+                },
+                {
+                     "nom"  : "Centre d'information et d'orientation",
+                     "adresse" : "Promenade de l'Alma, 51 - 1200 Woluwe-Saint-Lambert",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                       "lat" : "50.8501812",
+                       "lng": "4.4532136"
+                     }
+                },
+                {
+                     "nom"  : "Univers santé ASBL",
+                     "adresse" : "Rue Martin V, 28 - 1200 Woluwe-Saint-Lambert",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.8503541",
+                         "lng": "4.4535721"
+                     }
+                }
+            ],
+
             "parkings" : [
                 {
                      "nom"  : "Esplanade",

@@ -88,6 +88,18 @@
       <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
     </ion-item>
 
+    <ion-item-divider (tap)="toggleDetails(zone.services)" >
+      {{'MAP.SERV' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let service of zone.services.list, let i=index" [hidden]="!zone.services.showDetails">
+      <div item-content>
+        <h3>{{service.title}}</h3>
+        <p>{{service.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.services.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(service, zone.services.listChecked, i)"></ion-toggle>
+    </ion-item>
+
     <ion-item-divider (tap)="toggleDetails(zone.parkings)" >
       {{'MAP.PARK' | translate}}
     </ion-item-divider>

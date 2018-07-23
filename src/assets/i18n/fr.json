@@ -278,6 +278,7 @@
     	"LIBRARY" : "Bibliothèques",
     	"REST" : "Restaurants Universitaires",
     	"PARK" : "Parkings",
+			"SERV" : "Services",
 			"SPORT" : "Lieux des activités sportives"
     },
 

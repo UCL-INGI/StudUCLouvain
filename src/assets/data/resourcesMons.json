@@ -138,6 +138,49 @@
                     "menu" : true
                  }
             ],
+            "services" : [
+              {
+                   "nom"  : "Service d'aide aux étudiants",
+                   "adresse" : "Chaussée de Binche, 151 - 7000 Mons",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                     "lat" : "50.452811",
+                     "lng": "3.980996"
+                   }
+              },
+              {
+                   "nom"  : "Service administratif en support aux étudiants",
+                   "sigle" : "",
+                   "adresse" : "Bâtiment i, Chaussée de Binche, 151 - 7000 Mons",
+                   "vignette" : "",
+                   "coord": {
+                       "lat" : "50.452811",
+                       "lng": "3.980996"
+                   }
+              },
+              {
+                   "nom"  : "Service des inscriptions",
+                   "adresse" : "Bâtiment i, Chaussée de Binche, 151, bte M1.01.01 - 7000 Mons",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                     "lat" : "50.452811",
+                     "lng": "3.980996"
+                   }
+              },
+              {
+                   "nom"  : "Centre d'information et d'orientation",
+                   "adresse" : "Bâtiment i, Chaussée de Binche, 151 - 7000 Mons",
+                   "sigle" : "",
+                   "vignette" : "",
+                   "coord": {
+                     "lat" : "50.452811",
+                     "lng": "3.980996"
+                   }
+              }
+            ],
+
             "parkings" : [
                 {
                      "nom"  : "Parking du site",

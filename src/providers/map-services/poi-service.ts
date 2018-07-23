@@ -65,6 +65,7 @@ export class POIService {
           let bibliothequesLength = tmpZones.bibliotheques.length;
           let sportsLength = tmpZones.sports.length;
           let restauULength = tmpZones.restaurants_universitaires.length;
+          let servicesLength = tmpZones.services.length;
           let parkingsLength = tmpZones.parkings.length;
 
           let newZone = {
@@ -83,6 +84,10 @@ export class POIService {
             restaurants_universitaires: {
               list: this.createMapLocations(tmpZones.restaurants_universitaires),
               listChecked: Array(restauULength).fill(false),
+                        showDetails: false},
+            services: {
+              list: this.createMapLocations(tmpZones.services),
+              listChecked: Array(servicesLength).fill(false),
                         showDetails: false},
             parkings: {
               list: this.createMapLocations(tmpZones.parkings),

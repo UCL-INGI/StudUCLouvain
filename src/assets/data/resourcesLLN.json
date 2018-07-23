@@ -778,6 +778,89 @@
                  }
             ],
 
+            "services" : [
+                {
+                     "nom"  : "Service d'aide aux étudiants",
+                     "adresse" : "Rue des Wallons 10 bte L1.01.01 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.669238",
+                         "lng": "4.616119"
+                     }
+                },
+                {
+                     "nom"  : "Service des inscriptions",
+                     "adresse" : "Halles universitaires, Place de l'Université, 1 bte L0.01.10 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.6696471",
+                         "lng": "4.6152367"
+                     }
+                },
+                {
+                     "nom"  : "Service des logements UCL",
+                     "adresse" : "Rue de la Gare, 6 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.671413",
+                         "lng": "4.615484"
+                     }
+                },
+                {
+                     "nom"  : "Permanence logements UCL - Hocaille",
+                     "adresse" : "Rue des sports, 15 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.670039",
+                         "lng": "4.603047"
+                     }
+                },
+                {
+                     "nom"  : "Permanence logements UCL - Bruyères",
+                     "adresse" : "Place René Magritte, 2/5 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.666129",
+                         "lng": "4.611228"
+                     }
+                },
+                {
+                     "nom"  : "Permanence logements UCL - Biéreau",
+                     "adresse" : "Rue des Wallons, 16 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.668770",
+                         "lng": "4.616660"
+                     }
+                },
+                {
+                     "nom"  : "Centre d'information et d'orientation",
+                     "adresse" : "Rue Paulin Ladeuze, 3 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.668770",
+                         "lng": "4.616660"
+                     }
+                },
+                {
+                     "nom"  : "Univers santé ASBL",
+                     "adresse" : "Place Galilée, 6 Bte L6.04.01 - 1348 Louvain-la-Neuve",
+                     "sigle" : "",
+                     "vignette" : "",
+                     "coord": {
+                         "lat" : "50.6679024",
+                         "lng": "4.6186562"
+                     }
+                }
+            ],
+
             "parkings" : [
                 {
                      "nom"  : "Place des Sciences",
