@@ -291,6 +291,15 @@
                       }
                  },
                  {
+                      "nom"  : "Réaumur (Siemens, Intel)",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668552",
+                          "lng": "4.621687"
+                      }
+                 },
+                 {
                       "nom"  : "MECA - ELME",
                       "sigle" : "",
                       "vignette" : "",
