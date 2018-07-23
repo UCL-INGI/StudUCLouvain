@@ -1103,6 +1103,18 @@
                      }
                 },
                 {
+                     "nom"  : "P14",
+                     "sigle" : "",
+                     "adresse" : "50.66938115243462, 4.62318754850582",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "569",
+                     "coord": {
+                         "lat" : "50.66938115243462",
+                         "lng": "4.62318754850582"
+                     }
+                },
+                {
                      "nom"  : "Cyclotron",
                      "sigle" : "",
                      "adresse" : "50.666231, 4.624793",
