@@ -45,6 +45,9 @@ export class CoursePage {
   slotCM:string = "no";
   displayedActi : Array<Activity> = [];
   courseSorted : {cm:Array<Activity>, tp:Array<Activity>, ex:Array<Activity>};
+  noTP:boolean;
+  noCM:boolean;
+  noEx:boolean;
 
 
   constructor(public navCtrl: NavController,
@@ -133,7 +136,8 @@ export class CoursePage {
 
   updateDisplayedTP(){
       let toFilter = this.courseSorted.tp;
-
+      if(toFilter.length==0) this.noTP = true;
+      else this.noTP = false;
       let toPush;
       if(this.slotTP != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
       else toPush = this.courseSorted.tp;
@@ -142,7 +146,8 @@ export class CoursePage {
 
   updateDisplayedCM(){
       let toFilter = this.courseSorted.cm;
-
+		if(toFilter.length==0) this.noCM = true;
+		else this.noCM = false;
       let toPush:Array<Activity>;
       if(this.slotCM != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
       else toPush = this.courseSorted.cm;
@@ -156,6 +161,8 @@ export class CoursePage {
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
+    if(this.courseSorted.ex.length == 0) this.noEx = true;
+    else this.noEx = false;
     console.log(this.displayedActi);
   }
 

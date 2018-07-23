@@ -91,7 +91,8 @@
         "CANCEL" : "Annuler",
         "APPLY" : "Appliquer",
         "WARNING" : "Avertissement",
-        "MESSAGE3" : "En cas de changement ou problème, ce rappel ne sera pas modifié.<br> Tout changement éventuel sera visible au prochain lancement de l'application."
+        "MESSAGE3" : "En cas de changement ou problème, ce rappel ne sera pas modifié.<br> Tout changement éventuel sera visible au prochain lancement de l'application.",
+        "NO" : "Pas de cours"
     },
 
     "MODAL" : {
