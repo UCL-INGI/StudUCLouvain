@@ -59,11 +59,6 @@ export class LibrariesPage {
     refresher.complete();
   }
 
-
-  ionViewDidLoad() {
-   
-  }
-
   loadLibraries() {
     this.searching = true;
     if(this.connService.isOnline()) {

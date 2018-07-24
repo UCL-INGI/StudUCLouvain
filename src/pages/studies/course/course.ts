@@ -155,15 +155,14 @@ export class CoursePage {
   }
 
   updateDisplayed(){
-    console.log(this.displayedActi);
-    console.log(this.courseSorted);
+
     this.displayedActi = [];
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
     if(this.courseSorted.ex.length == 0) this.noEx = true;
     else this.noEx = false;
-    console.log(this.displayedActi);
+
   }
 
   showPrompt(segment: string){

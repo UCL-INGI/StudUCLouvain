@@ -36,7 +36,7 @@ export class LibrariesService {
   options: any;
 
 
-  constructor(public http: Http, private wso2Service: Wso2Service) {
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
 	console.log('Hello LibrariesService');
 
   }

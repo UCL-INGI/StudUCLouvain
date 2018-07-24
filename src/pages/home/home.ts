@@ -92,7 +92,6 @@ export class HomePage {
               public userS:UserService,
               public nav : NavController,
               private iab: InAppBrowser,
-		public market: Market,
               private appAvailability: AppAvailability,
               private device: Device,
               private alertCtrl : AlertController,
