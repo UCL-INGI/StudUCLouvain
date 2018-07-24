@@ -155,6 +155,7 @@ export class HomePage {
     );
   }
 
+  /*Open the URL for the social media of the UCL*/
   public openURL(url: string, fab: FabContainer) {
     this.iab.create(url, '_system');
     fab.close();
