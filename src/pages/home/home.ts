@@ -72,15 +72,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-<<<<<<< HEAD:src/pages/home/homeC.ts
-  restoPage = { title: 'MENU.RESTAURANT', component: RestaurantPage,
-=======
   guindaillePage = { title: 'MENU.PARTY', component: 'GuindaillePage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
   restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3:src/pages/home/home.ts
     iosSchemaName: 'id1156050719',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',
@@ -128,18 +124,6 @@ export class HomePage {
 
   launchExternalApp(page) {
     let app: string;
-<<<<<<< HEAD:src/pages/home/homeC.ts
-    let storeUrl:string;
-let check:string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      storeUrl=page.httpUrl;
-check=page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      storeUrl= 'market://details?id='+ app;
-	check=app;
-=======
     //let storeUrl:string;
     let check:string;
     if (this.device.platform === 'iOS') {
@@ -150,7 +134,6 @@ check=page.appUrl;
       app = page.androidPackageName;
       //storeUrl= 'market://details?id='+ app;
       check=app;
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3:src/pages/home/home.ts
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();

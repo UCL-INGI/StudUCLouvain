@@ -35,13 +35,10 @@ export class LibrariesService {
   url = 'libraries/v1/list';
   options: any;
 
-<<<<<<< HEAD
-  constructor(public http: Http, private wso2Service: Wso2Service) {
-console.log('Hello LibrariesService');
-=======
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
 
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
+  constructor(public http: Http, private wso2Service: Wso2Service) {
+	console.log('Hello LibrariesService');
+
   }
 
   public loadLibraries(){

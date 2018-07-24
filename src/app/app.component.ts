@@ -113,11 +113,7 @@ console.log("Startin App");
       { title: 'MENU.MAP', component: 'MapPage', icon: 'map',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-<<<<<<< HEAD
-      { title: 'MENU.RESTAURANT', component: RestaurantPage, icon : 'restaurant',
-=======
       { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : 'restaurant',
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
         iosSchemaName: 'id1156050719',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
@@ -270,20 +266,8 @@ console.log("Startin App");
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
-<<<<<<< HEAD
-    let storeUrl:string;
-	let check:string;
-  	if (this.device.platform === 'iOS') {
-  		app = iosSchemaName;
-      storeUrl=httpUrl;
-	check=appUrl;
-  	} else if (this.device.platform === 'Android') {
-  		app = androidPackageName;
-      storeUrl= 'market://details?id='+ app;
-	check=app;
-=======
-    //let storeUrl:string;
-    let check:string;
+    	//let storeUrl:string;
+    	let check:string;
   	if (this.device.platform === 'iOS') {
   		app = iosSchemaName;
       //storeUrl=httpUrl;
@@ -292,7 +276,7 @@ console.log("Startin App");
   		app = androidPackageName;
       //storeUrl= 'market://details?id='+ app;
       	check=app;
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
+
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();

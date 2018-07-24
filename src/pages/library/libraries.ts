@@ -46,11 +46,8 @@ export class LibrariesPage {
     public connService : ConnectivityService)
   {
     this.title = this.navParams.get('title');
-<<<<<<< HEAD
-this.loadLibraries();
-=======
     this.loadLibraries();
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
+
   }
 
   ionViewDidLoad() {
@@ -62,13 +59,11 @@ this.loadLibraries();
     refresher.complete();
   }
 
-<<<<<<< HEAD
+
   ionViewDidLoad() {
    
   }
 
-=======
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
   loadLibraries() {
     this.searching = true;
     if(this.connService.isOnline()) {

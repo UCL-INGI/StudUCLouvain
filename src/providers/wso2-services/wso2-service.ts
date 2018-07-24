@@ -59,14 +59,10 @@ export class Wso2Service {
     return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
         //console.log(res);
-<<<<<<< HEAD
-        this.token = "Bearer " + res.json().access_token;
-        console.log('Token ok');
-=======
         this.token = "Bearer " + res['access_token'];
         //console.log(this.token);
         console.log("Token ok");
->>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
+
         return "OK";
       })
       .catch((error:any) => { 
