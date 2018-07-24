@@ -35,7 +35,7 @@ import { UserService } from '../../providers/utils-services/user-service';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  
+
 })
 export class HomePage {
 
@@ -43,6 +43,8 @@ export class HomePage {
   shownGroup = null;
   where = "";
   myApp : MyApp;
+
+  /*Create an object Page for each feature of our application display in the home page*/
 
   libraryPage = { title: 'MENU.LIBRARY', component: 'LibrariesPage',
     iosSchemaName: null, androidPackageName: null,
@@ -107,13 +109,17 @@ export class HomePage {
       document.title = this.title;
   }
 
+  /*Set the title*/
   ionViewDidEnter() {
     this.app.setTitle(this.title);
   }
+
+  /*Update the public variable campus for the user*/
   updateCampus(){
     this.userS.addCampus(this.where);
   }
 
+  /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
     if(page.iosSchemaName != null && page.androidPackageName != null){
       this.launchExternalApp(page);
@@ -121,6 +127,7 @@ export class HomePage {
     this.nav.push(page.component, {title: page.title});
   }
 
+  /*launch external application*/
   launchExternalApp(page) {
     let app: string;
     //let storeUrl:string;
@@ -153,11 +160,13 @@ export class HomePage {
     fab.close();
   }
 
+  /*If the user change the language of the app, tranlate the text and change the public variable*/
   languageChanged(event:string) {
     this.userS.storage.set('lan',event);
-        this.translateService.use(event);
+    this.translateService.use(event);
   }
 
+  /*Create an alert to allow the user to change the parameters of the application (language and campus)*/
   settings(){
     let check = this.userS.campus;
     let check2 = this.translateService.currentLang;
@@ -231,6 +240,7 @@ export class HomePage {
 
   }
 
+  /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency(){
     let close :string;
     this.translateService.get('HOME.CLOSE').subscribe((res:string) => {close=res;});
