@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -22,19 +22,23 @@
 import { Component} from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
-
+@IonicPage()
 @Component({
   selector: 'page-credit',
   templateUrl: 'credit.html',
 })
+
 export class CreditPage {
   title: any;
   shownGroup = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser,
-              private translateService: TranslateService) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public modalCtrl: ModalController, 
+              private iab: InAppBrowser) 
+  {
     this.title = this.navParams.get('title');
   }
 

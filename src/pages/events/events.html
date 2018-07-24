@@ -1,7 +1,7 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -33,33 +33,28 @@
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
     <ion-segment-button value="all">
-      Tous
+      {{'EVENTS.ALL' | translate}}
     </ion-segment-button>
     <ion-segment-button value="favorites">
-      Favoris
+      {{'EVENTS.FAV' | translate}}
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
-
-<!--<ion-content>
-<calendar [eventSource]="source"
-        [calendarMode]="calendar2.mode"
-        [currentDate]="calendar2.currentDate"
-        [startingDayWeek]="1"
-        [locale]="calendar2.locale"
-        [scrollToHour]="8"
-        (onEventSelected)="onEventSelected($event)"
-        class="calendar2">
-      </calendar>
-</ion-content>-->
 <ion-content class="feed-list">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
     <ion-item-divider *ngIf="item.event.length > 0" (tap)="toggleGroup(item.weeks)" text-center>
-        Week {{item.weeks}} ({{item.event.length}})
+        <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
     </ion-item-divider>
 
     <ion-list *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks)">
@@ -96,6 +91,10 @@
   </ion-list>
 
   <ion-list-header *ngIf="(noevents && !searching)">
-    Pas d'évènement trouvé
+    {{'EVENTS.NOTHING' | translate}}
   </ion-list-header>
 </ion-content>
+
+<ion-footer text-center *ngIf="segment=='all'">
+  <ion-icon name='help-circle'></ion-icon><p>{{'EVENTS.SWIPE' | translate}}</p>
+</ion-footer>

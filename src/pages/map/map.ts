@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,14 +20,15 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NavController, Platform, ActionSheetController, ModalController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+
 import { POIService } from '../../providers/map-services/poi-service';
 import { MapService } from '../../providers/map-services/map-service';
-import { MapLocationSelectorPage }
-  from './map-location-selector/map-location-selector';
-import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
-import { MapLocation } from '../../app/entity/mapLocation';
-import { TranslateService } from '@ngx-translate/core';
 
+import { MapLocation } from '../../app/entity/mapLocation';
+
+@IonicPage()
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
@@ -45,16 +46,35 @@ export class MapPage {
   showLocationList = false;
   title: any;
   searching: boolean = false;
+  temp:any;
+  temp2:any;
 
   constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController,
-    public mapService: MapService,
-    public platform: Platform,
-    public navParams: NavParams,
-    public poilocations: POIService,
-              private translateService: TranslateService) {
+              public modalCtrl: ModalController,
+              public actionSheetCtrl: ActionSheetController,
+              public mapService: MapService,
+              public platform: Platform,
+              public navParams: NavParams,
+              public poilocations: POIService,
+              public alertCtrl: AlertController) 
+  {
       this.title = this.navParams.get('title');
+  }
+
+  alert(message:string) {
+    const actionSheet = this.alertCtrl.create({
+      title: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   ngAfterViewInit(){
@@ -76,6 +96,7 @@ export class MapPage {
       if(result[0]) {
         this.mapService.addMarker(this.selectedLocation);
       }
+    }, (error) => {
     });
   }
 
@@ -108,57 +129,12 @@ export class MapPage {
     this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
   }
 
-  presentFilter() {
-    /*if(this.showLocationList) {
-      this.enableMap();
-      this.mapElement.nativeElement.style.display = "block";
-    } else {
-      this.disableMap();
-      this.mapElement.nativeElement.style.display = "none";
-    }*/
-    this.showLocationList = !this.showLocationList;
-  }
-
-  presentSelector() {
-    let modal = this.modalCtrl.create(MapLocationSelectorPage,
-                  { locations: this.showedLocations, current: this.selectedLocation });
-    this.disableMap();
-    modal.present();
-
-    modal.onWillDismiss((data: any) => {
-      if (data) {
-        if(this.selectedLocation !== data){
-          this.selectedLocation = data;
-          this.mapService.addMarker(this.selectedLocation);
-        }
-      }
-      this.enableMap();
-    });
-
-  }
-
   onSelect(data:any){
     if(this.selectedLocation !== data){
       this.selectedLocation = data;
       
     }
     this.mapService.addMarker(this.selectedLocation);
-  }
-
-  private disableMap() {
-    this.mapService.disableMap();
-  }
-
-  private enableMap() {
-    this.mapService.enableMap();
-  }
-
-  clearMarkers() {
-    this.mapService.clearMarkers();
-  }
-
-  toggleMarker(title: string) {
-    this.mapService.toggleMarker(title);
   }
 
 }

@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { LibraryItem } from '../../app/entity/libraryItem';
 import { MapLocation } from '../../app/entity/mapLocation';
 import { TimeSlot } from '../../app/entity/timeSlot';
@@ -35,8 +35,13 @@ export class LibrariesService {
   url = 'libraries/v1/list';
   options: any;
 
+<<<<<<< HEAD
   constructor(public http: Http, private wso2Service: Wso2Service) {
 console.log('Hello LibrariesService');
+=======
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
+
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
   }
 
   public loadLibraries(){
@@ -45,7 +50,7 @@ console.log('Hello LibrariesService');
 
       this.wso2Service.load(this.url).subscribe(
         data => {
-          this.extractLibraries(data.return.library);
+          this.extractLibraries(data['return'].library);
           resolve({libraries:this.libraries});
         });
     });
@@ -58,7 +63,7 @@ console.log('Hello LibrariesService');
 
       this.wso2Service.load(url_details).subscribe(
         data => {
-          lib = this.extractLibraryDetails(lib, data.return.library);
+          lib = this.extractLibraryDetails(lib, data['return'].library);
           resolve({libDetails:lib});
         });
     });

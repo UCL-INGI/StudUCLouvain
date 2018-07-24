@@ -21,27 +21,24 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+
 import { NewsItem } from '../../../app/entity/newsItem';
 
-/*
-  Generated class for the Details page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-news-details',
   templateUrl: 'news-details.html'
 })
+
 export class NewsDetailsPage {
   news: NewsItem;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, navParams: NavParams) {
     this.news = navParams.get('news');
   }
 
   public openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 

@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 
@@ -29,14 +29,14 @@ export class RssService {
   rssServiceBaseUrl: string = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%27";
   rssServiceBaseOptions: string = "%27&format=json";
 
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
 
   }
 
   load(url: string) {
     let encodedURL = this.rssServiceBaseUrl + encodeURIComponent(url) + this.rssServiceBaseOptions;
 
-    return  this.http.get(encodedURL).map(res => res.json());
+    return  this.http.get(encodedURL).map(res => res);
   }
 
 

@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AdeService } from './ade-service';
 import 'rxjs/add/operator/map';
 import { Activity } from '../../app/entity/activity';
@@ -29,7 +29,7 @@ import { Activity } from '../../app/entity/activity';
 export class CourseService {
 
     constructor(
-      public http: Http,
+      public http: HttpClient,
       public ade : AdeService) {
     }
 
@@ -49,7 +49,7 @@ export class CourseService {
 
     getActivity(sessionId : string, courseId : string){
       return new Promise <Activity[]>( (resolve, reject) => {
-        this.ade.httpGeActivity(sessionId, courseId).subscribe(
+        this.ade.httpGetActivity(sessionId, courseId).subscribe(
           data => {
             resolve(this.extractActivity(data));
           }
@@ -60,6 +60,7 @@ export class CourseService {
     extractActivity(data) : Activity[]{
       let activities : Activity[] = [];
       let activitiesList = data.activities.activity
+      console.log(data);
       for (let i =0; i< activitiesList.length ;i++){
         let activityElem = activitiesList[i];
         let newActivities : Activity[] = this.createNewActivities(activityElem);
@@ -71,6 +72,7 @@ export class CourseService {
     createNewActivities(jsonActivity) : Activity[] {
       let activities : Activity[] = [];
       let type : string = jsonActivity._type;
+      let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if(events !== undefined){
         for(let i=0; i<events.length; i++){
@@ -84,9 +86,26 @@ export class CourseService {
           let auditorium = this.getAuditorium(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
-          let activity = new Activity(type, teachers, students, start, end, auditorium);
+          let name = event._name;
+          let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
           activities.push(activity);
         }
+      }
+      if(isExam && events !== undefined){
+        console.log(events);
+          let event = events;
+          let endHour = event._endHour;
+          let startHour = event._startHour;
+          let date = event._date
+          let participants = event.eventParticipants.eventParticipant
+          let teachers = this.getTeachers(participants)
+          let students = this.getStudents(participants)
+          let auditorium = this.getAuditorium(participants)
+          let start = this.createDate(date, startHour);
+          let end = this.createDate(date, endHour);
+          let name = event._name;
+          let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
+          activities.push(activity);
       }
       return activities;
     }

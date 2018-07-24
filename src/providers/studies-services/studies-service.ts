@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { AdeService } from './ade-service';
 import { AdeProject } from '../../app/entity/adeProject';
@@ -32,7 +32,7 @@ export class StudiesService {
   projects : AdeProject[];
   data:any;
     constructor(
-      public http: Http,
+      public http: HttpClient,
       public ade : AdeService) {}
 
 

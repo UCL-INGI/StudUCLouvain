@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, Nav, Platform, AlertController,LoadingController } from 'ionic-angular';
+import { MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,23 +28,12 @@ import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { HomePage } from '../pages/home/home';
 
-
-import { EventsPage } from '../pages/events/events';
-import { MobilityPage } from '../pages/mobility/mobility';
-import { LibrariesPage } from '../pages/library/libraries';
-import { NewsPage } from '../pages/news/news';
-import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { StudiesPage } from '../pages/studies/studies';
-import { MapPage } from '../pages/map/map';
-import { ParamPage } from '../pages/param/param';
-import { HelpDeskPage } from '../pages/help-desk/help-desk';
-import { CreditPage } from '../pages/credit/credit';
-import { SportsPage } from '../pages/sports/sports';
-import { HomePage } from '../pages/home/homeC';
-import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+
+declare var TestFairy: any;
 
 @Component({
   templateUrl: 'app.html'
@@ -53,10 +42,11 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage = HomePage;
+  rootPage = 'HomePage';
   alertPresented: any;
   page: any;
   homePage;
+  checked=false;
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -77,76 +67,92 @@ export class MyApp {
     private alertCtrl : AlertController,
     private user: UserService,
     private statusBar: StatusBar,
-    private translateService: TranslateService,
+    public translateService: TranslateService,
     public loadingCtrl: LoadingController,
+    private ionicApp: IonicApp,
     private wso2Service : Wso2Service
   ) {
 console.log("Startin App");
     this.user.getCampus();
-    console.log(this.user.campus);
+    //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
     this.wso2Service.getToken();
     this.homePage =
-      {title: 'MENU.HOME', component: HomePage, icon: 'home',
+      {title: 'MENU.HOME', component: 'HomePage', icon: 'home',
       iosSchemaName: null, androidPackageName: null,
       appUrl: null, httpUrl: null}
     ;
     this.campusPages =[
-      { title: 'MENU.NEWS', component: NewsPage, icon: 'paper',
+      { title: 'MENU.NEWS', component: 'NewsPage', icon: 'paper',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.EVENTS', component: EventsPage, icon: 'calendar',
+      { title: 'MENU.EVENTS', component: 'EventsPage', icon: 'calendar',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.SPORTS', component: SportsPage, icon: 'football',
+      { title: 'MENU.SPORTS', component: 'SportsPage', icon: 'football',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
     ];
     this.studiePages =[
-      { title: 'MENU.STUDIES', component: StudiesPage, icon: 'school',
+      { title: 'MENU.STUDIES', component: 'StudiesPage', icon: 'school',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: LibrariesPage, icon: 'book',
+      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: 'book',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: HelpDeskPage,
+      { title: 'MENU.HELP', component: 'SupportPage',
         icon: 'information-circle', iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'MENU.PARTY', component: GuindaillePage, icon: 'water',
+      { title: 'MENU.PARTY', component: 'GuindaillePage', icon: 'water',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: MapPage, icon: 'map',
+      { title: 'MENU.MAP', component: 'MapPage', icon: 'map',
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
+<<<<<<< HEAD
       { title: 'MENU.RESTAURANT', component: RestaurantPage, icon : 'restaurant',
+=======
+      { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : 'restaurant',
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
         iosSchemaName: 'id1156050719',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'MENU.MOBILITY', component: MobilityPage, icon : 'car',
+      { title: 'MENU.MOBILITY', component: 'MobilityPage', icon : 'car',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.PARAM', component: ParamPage, icon : 'construct',
+      { title: 'MENU.PARAM', component: 'ParamPage', icon : 'construct',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.CREDITS', component: CreditPage, icon : 'bulb',
+      { title: 'MENU.CREDITS', component: 'CreditPage', icon : 'bulb',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }
-      //{ title: 'Login Test', component: LoginPage, icon: 'contact',
-        // iosSchemaName: null, androidPackageName: null,
-        // appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
+      if ((<any>window).TestFairy) {
+        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
+      }
       translateService.setDefaultLang('fr');
-      translateService.use('fr');
+      this.user.storage.get('lan').then((data) =>
+      {
+        if(data!=null) translateService.use(data);
+        else translateService.use('fr');
+       }
+        );
+
+
     })
+
+    /*this.storage.get('disclaimer').then((disclaimer) => {
+      if(!disclaimer) this.disclaimer();
+    });*/
 
   }
 
@@ -158,8 +164,23 @@ console.log("Startin App");
       this.splashscreen.hide();
     });
 
+
     // Confirm exit
     this.platform.registerBackButtonAction(() => {
+
+        let activePortal = this.ionicApp._loadingPortal.getActive() ||
+           this.ionicApp._modalPortal.getActive() ||
+           this.ionicApp._toastPortal.getActive() ||
+            this.ionicApp._overlayPortal.getActive();
+
+        if (activePortal) {
+            activePortal.dismiss();
+            return
+        }
+        else if (this.menu.isOpen()) { // Close menu if open
+            this.menu.close();
+            return
+        }
         if (this.nav.length() == 1) {
           this.confirmExitApp();
         } else {
@@ -170,7 +191,9 @@ console.log("Startin App");
   }
 
   confirmExitApp() {
-    if(this.page == this.homePage){
+    let activeVC = this.nav.getActive();
+    let page = activeVC.instance;
+    if(page instanceof HomePage){
       if(!this.alertPresented){
         this.alertPresented = true;
         let confirmAlert = this.alertCtrl.create({
@@ -196,33 +219,58 @@ console.log("Startin App");
   }
   else this.openRootPage(this.homePage);
 }
-  /*presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
 
-    loading.present();
+  disclaimer(){
+        //let title:string;
+    //let message:string;
+    //this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
+    //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
+     let disclaimerAlert = this.alertCtrl.create({
+            title: "Avertissement",
+            message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
+            inputs: [
+              {
+                type: 'checkbox',
+                label: 'Ne plus afficher',
+                handler:(e)=>{
+                   console.log(e.checked);
+                   this.checked = e.checked;
+                }
+              }
+            ],
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                      if(this.checked){
+                        this.user.addDisclaimer(this.checked);
+                      }
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
+  }
 
-    setTimeout(() => {
-      loading.dismiss();
-    }, 5000);
-  }*/
   openRootPage(page) {
-
+    let activeVC = this.nav.getActive();
+    let test = activeVC.instance;
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
-    if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+
+    if(!((test instanceof HomePage) && page == this.homePage)){
+      if(page.iosSchemaName != null && page.androidPackageName != null){
+        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+      }
+      this.nav.push(page.component, {title: page.title});
     }
-    this.nav.setRoot(page.component, {title: page.title});
-    /*if(page.title=='MENU.NEWS' || page.title=='MENU.EVENTS' || page.title=='MENU.LIBRARY'){
-      this.presentLoadingDefault();
-    }*/
+
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
+<<<<<<< HEAD
     let storeUrl:string;
 	let check:string;
   	if (this.device.platform === 'iOS') {
@@ -233,6 +281,18 @@ console.log("Startin App");
   		app = androidPackageName;
       storeUrl= 'market://details?id='+ app;
 	check=app;
+=======
+    //let storeUrl:string;
+    let check:string;
+  	if (this.device.platform === 'iOS') {
+  		app = iosSchemaName;
+      //storeUrl=httpUrl;
+      	check=appUrl;
+  	} else if (this.device.platform === 'Android') {
+  		app = androidPackageName;
+      //storeUrl= 'market://details?id='+ app;
+      	check=app;
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();
@@ -247,6 +307,5 @@ console.log("Startin App");
   		}
   	);
   }
-
 
 }

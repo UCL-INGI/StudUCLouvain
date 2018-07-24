@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -32,7 +32,7 @@ export class StudentService {
   url = 'my/v0/student/';
   options: any;
 
-  constructor(public http: Http, private wso2Service: Wso2Service) {
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
 
@@ -45,9 +45,9 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           console.log(data);
-          if(data.activities!=null){
+          if(data['activities']!=null){
             console.log(data);
-            resolve({activities : data.activities});
+            resolve({activities : data['activities']});
             //return data.activities;
             //this.extractEmployees(data.persons.person);
             //resolve({employees:this.employees});

@@ -22,15 +22,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">Annuler</button>
+      <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
 
     <ion-title>
-      Filtre
+      {{'EVENTS.FILTER' | translate}}
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>Appliquer</button>
+      <button ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -38,10 +38,10 @@
 <ion-content class="outer-content">
   <ion-item>
     <ion-label *ngIf="dateRange > 1" center >
-       Affichage des évènements <br/> pour les {{dateRange}} prochains mois
+       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}} {{'EVENTS.TIMEEVENTS3' | translate}}
     </ion-label>
     <ion-label *ngIf="dateRange == 1" center >
-       Affichage des évènements <br/> pour le mois prochain
+       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
@@ -49,19 +49,19 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button icon-right end (click)="uncheckAll()">
-        Tout décocher
+        {{'EVENTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-right (click)="resetFilters()">
-        Restaurer le filtre
+        {{'EVENTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
   <ion-list>
-    <ion-list-header>Categories</ion-list-header>
+    <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
 
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>

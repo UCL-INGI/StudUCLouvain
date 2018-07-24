@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -21,32 +21,31 @@
 
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, ModalController, ItemSliding, ToastController } from 'ionic-angular';
+import { AlertController, MenuController, ModalController, ToastController } from 'ionic-angular';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { StudiesService} from '../../providers/studies-services/studies-service';
 import { StudentService} from '../../providers/wso2-services/student-service';
 import { Wso2Service} from '../../providers/wso2-services/wso2-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+
 import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
 
-import { CoursePage } from '../studies/course/course';
-import { ModalProjectPage } from './modal-project/modal-project';
-//import { Activity } from '../../app/entity/activity';
-import { Calendar } from '@ionic-native/calendar';
-
-
+@IonicPage()
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
 
 })
+
 export class StudiesPage {
   public people: any;
   public data : any;
-  segment = 'cours';
+  segment = 'prog';
   public listCourses: Course[];
   public course : Course;
   public title: any;
@@ -54,9 +53,8 @@ export class StudiesPage {
   public project : AdeProject = null;
   private username:string = "";
   private password: string = "";
-  private error:string = "";
+  public error:string = "";
   private status: string = "";
-  //private token:string = "";
   activities: any;
 
   constructor(
@@ -66,121 +64,137 @@ export class StudiesPage {
     private alertCtrl: AlertController,
     public storage:Storage,
     public menu: MenuController,
-    private calendar: Calendar,
     public toastCtrl: ToastController,
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
-              private translateService: TranslateService,
-              private wso2Service: Wso2Service,
-              private studentService: StudentService
-  ) {
+    public connService : ConnectivityService,
+    private translateService: TranslateService,
+    private wso2Service: Wso2Service,
+    private studentService: StudentService)
+  {
     this.title = this.navParams.get('title');
+
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
   }
 
-
+//authenticate a student
   private login(){
-  	//console.log("username",this.username);
-  	//console.log("pass",this.password);
   	this.error = "";
   	return new Promise(resolve => {
-
       this.wso2Service.login(this.username,this.password)
       .catch(error => {
       	console.log(error);
-      	if(error.status == 400) this.error = "Bad login/password";
-      	else this.error = "There is a problem ?"
+      	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res:string) => {this.error=res;});
+      	else this.translateService.get('STUDY.ERROR').subscribe((res:string) => {this.error=res;});
       	return error;
       })
       .subscribe(
         data => {
           if(data!=null){
             this.status=data.toString();
-            //console.log(this.status);
             resolve(data);
           }
-        })
-      ;
+        });
     });
   }
 
+//get course program of student
   loadActivities(){
-  	//console.log(this.status);
-
-  	this.login().then((res) => {
-	  	//console.log(this.status);
-	  	if(this.status){
-	  		//console.log("chelou");
-	  		this.studentService.searchActivities().then((res) => {
-	  			let result:any = res;
-	  			this.activities = result.activities.activity;
-	  			console.log(this.activities.activity);
-	  		});
-
-	  	}
-  	});
-
+    if(this.connService.isOnline()) {
+      this.login().then((res) => {
+  	  	if(this.status){
+  	  		this.studentService.searchActivities().then((res) => {
+  	  			let result:any = res;
+  	  			this.activities = result.activities.activity;
+  	  			console.log(this.activities.activity);
+  	  		});
+  	  	}
+    	});
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
+//open modalprojectpage to choose an ade project
   openModalProject(){
     let obj = {sessionId : this.sessionId};
 
-    let myModal = this.modalCtrl.create(ModalProjectPage, obj);
+    let myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
     });
     myModal.present();
   }
 
+//set project and connect to ADE
   initializeSession(){
-    this.studiesService.openSession().then(
-      data => {
-        this.sessionId = data;
-        this.storage.get('adeProject').then(
-          (data) => {
-            this.project=data;
-            if (this.project === null) {
-              this.openModalProject();
-            } else {
-              this.studiesService.setProject(this.sessionId,this.project.id).then(
-                data => {
-                  console.log("setProject");
-                }
-              );
+    if(this.connService.isOnline()) {
+      this.studiesService.openSession().then(
+        data => {
+          this.sessionId = data;
+          this.storage.get('adeProject').then(
+            (data) => {
+              this.project=data;
+              if (this.project === null) {
+                this.openModalProject();
+              } else {
+                this.studiesService.setProject(this.sessionId,this.project.id).then(
+                  data => {
+                    console.log("setProject");
+                  }
+                );
+              }
             }
-          }
-        )
-    });
+          )
+      });
+    }
+     else {
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
-
-
-
+//add a course manually
   showPrompt() {
+    let addcourse:string;
+    let message:string;
+    let name:string;
+    let sigle: string;
+    let cancel:string;
+    let save:string;
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res:string) => {addcourse=res;});
+    this.translateService.get('STUDY.MESSAGE').subscribe((res:string) => {message=res;});
+    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
+    this.translateService.get('STUDY.SIGLE').subscribe((res:string) => {sigle=res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
     let prompt = this.alertCtrl.create({
-      title: 'Ajout d\'un cours',
-      message: "Entrez le nom et le sigle du cours à ajouter",
+      title: addcourse,
+      message: message,
       inputs: [
         {
           name: 'name',
-          placeholder: 'Nom du cours'
+          placeholder: name
         },
         {
           name: 'acronym',
-          placeholder: 'Sigle du cours'
+          placeholder: sigle
         }
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: data => {
           }
         },
         {
-          text: 'Sauver',
+          text: save,
+          cssClass: 'save',
           handler: data => {
             this.saveCourse(data.name, data.acronym);
           }
@@ -190,24 +204,36 @@ export class StudiesPage {
     prompt.present();
   }
 
+//add a course from course program
   showPromptAddCourse(sigle : string) {
+    let addcourse:string;
+    let message:string;
+    let name:string;
+    let cancel:string;
+    let save:string;
+    this.translateService.get('STUDY.ADDCOURSE2').subscribe((res:string) => {addcourse=res;});
+    this.translateService.get('STUDY.MESSAGE2').subscribe((res:string) => {message=res;});
+    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
     let prompt = this.alertCtrl.create({
-      title: 'Ajout d\'un cours au projet ADE',
-      message: "Entrez le nom du cours",
+      title: addcourse,
+      cssClass: "alert",
+      message: message,
       inputs: [
         {
           name: 'name',
-          placeholder: 'Nom du cours'
+          placeholder: name
         }
       ],
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: data => {
           }
         },
         {
-          text: 'Sauver',
+          text: save,
           handler: data => {
             this.saveCourse(data.name, sigle);
           }
@@ -217,6 +243,7 @@ export class StudiesPage {
     prompt.present();
   }
 
+//retrieve list of course added previously
   getCourses(){
     this.storage.get('listCourses').then((data) =>
     {
@@ -227,12 +254,14 @@ export class StudiesPage {
     });
   }
 
+//save course into storage
   saveCourse(name: string, tag: string){
     let course = new Course(name,tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
   }
 
+//remove course from storage
   removeCourse(course: Course){
     let index= this.listCourses.indexOf(course);
     if(index>= 0){
@@ -241,32 +270,15 @@ export class StudiesPage {
     this.storage.set('listCourses',this.listCourses);
   }
 
+//open CoursePage of a course
   openCoursePage(course: Course){
-    this.navCtrl.push(CoursePage,
+    this.navCtrl.push('CoursePage',
       {course : course, sessionId : this.sessionId});
   }
 
-  ionViewDidLoad() {
-
-  }
-
+//launch moodle or ucl portal
   launch(url) {
     this.iab.create(url,'_system');
-  }
-
-  addCourseToCalendar(slidingItem : ItemSliding, course : Course){
-    let options:any = {
-    };
-    for (let activity of course.activities) {
-      this.calendar.createEventWithOptions(course.name +" : " + activity.type,
-        activity.auditorium, null, activity.start,activity.end, options);
-    }
-    let toast = this.toastCtrl.create({
-      message: 'Activités ajoutées',
-      duration: 3000
-    });
-    toast.present();
-    slidingItem.close();
   }
 
 }

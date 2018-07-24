@@ -20,7 +20,6 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
@@ -36,7 +35,7 @@ export class EventsService {
 
   url = "http://louvainfo.be/calendrier/feed/calendar/";
 
-  constructor(private http: Http, public user:UserService, public rssService : RssService) {}
+  constructor(public user:UserService, public rssService : RssService) {}
 
   public getEvents(segment:string) {
     this.events = [];

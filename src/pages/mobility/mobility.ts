@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -25,28 +25,30 @@ import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Market } from '@ionic-native/market';
-import { CarpoolingPage } from './carpooling/carpooling';
-import { BusPage } from './bus/bus';
-import { TrainPage } from './train/train';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
 })
+
 export class MobilityPage {
   public title: any;
   carpoolingPage;
   busPage;
   trainPage;
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
               public market: Market,
               public navParams: NavParams,
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
-              private translateService: TranslateService) {
+              private translateService: TranslateService) 
+  {
     this.title = this.navParams.get('title');
+<<<<<<< HEAD
     this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage,
                             iosSchemaName: 'id1143545052',
                             androidPackageName: 'net.commuty.mobile',
@@ -56,17 +58,28 @@ export class MobilityPage {
                             androidPackageName: 'be.thomashermine.prochainbus',
                             appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
     this.trainPage = { title: 'SNCB', component: TrainPage,
+=======
+    let titlecar:string;
+    this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
+
+    this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',
+                            iosSchemaName: 'id1143545052',
+                            androidPackageName: 'net.commuty.mobile',
+                            appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
+    this.busPage = { title: 'NextRide', component: 'BusPage',
+                            iosSchemaName: 'id568042532',
+                            androidPackageName: 'be.thomashermine.prochainbus',
+                            appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
+    this.trainPage = { title: 'SNCB', component: 'TrainPage',
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
                             iosSchemaName: 'id403212064',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
                             appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
-  ionViewDidLoad() {
-    console.log('Hello MobilityPage Page');
-  }
-
   launchExternalApp(page:any) {
     let app: string;
+<<<<<<< HEAD
     let storeUrl:string;
 	let check:string;
     if (this.device.platform === 'iOS') {
@@ -77,6 +90,18 @@ export class MobilityPage {
       app = page.androidPackageName;
       storeUrl= 'market://details?id='+ app;
 	check=app;
+=======
+    //let storeUrl:string;
+    let check:string;
+    if (this.device.platform === 'iOS') {
+      app = page.iosSchemaName;
+      //storeUrl=page.httpUrl;
+      check=page.appUrl;
+    } else if (this.device.platform === 'Android') {
+      app = page.androidPackageName;
+      //storeUrl= 'market://details?id='+ app;
+      check=app;
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
@@ -90,5 +115,6 @@ export class MobilityPage {
         this.market.open(app);
       }
     );
+    this.nav.push(page.component, {title: page.title});
   }
 }

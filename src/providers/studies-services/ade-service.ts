@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import X2JS from 'x2js';
 /*
@@ -81,7 +81,7 @@ export class AdeService {
      })
   }
 
-  httpGeActivity(sessionId : string , courseId : string){
+  httpGetActivity(sessionId : string , courseId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +"&function=getActivities&resources="+ courseId

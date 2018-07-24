@@ -1,8 +1,8 @@
 <!--
 
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -25,35 +25,56 @@
   <ion-navbar>
     <ion-title>{{course.name}} - {{course.acronym}}</ion-title>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment">
+  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
     <ion-segment-button value="Cours magistral">
-      Cours magistraux
+      {{'COURSE.CM' | translate}}
     </ion-segment-button>
     <ion-segment-button value="TD">
-      T.P.
+      {{'COURSE.TP' | translate}}
     </ion-segment-button>
+    <ion-segment-button value="Examen">
+      {{'COURSE.EXAMEN' | translate}}
+      </ion-segment-button> 
   </ion-segment>  
 </ion-header>
 
 
 <ion-content padding #courseContent>
   <ion-list>
-     <ion-item-sliding *ngFor="let activity of course.activities" #slidingItem >
-       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD')">
-        <h2 text-center> Activité : {{activity.type}} </h2>
+     <ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem >
+       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
+        <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'H:mm' }} </p>
-        <p> Auditoire : {{activity.auditorium}}</p>
-        <p> Etudiants : {{activity.students}}</p>
-        <p> Professeurs : {{activity.teachers}}</p>
+        <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
+        <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
+        <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
+        <p> {{activity.name}} </p>
       </ion-item>
 
       <ion-item-options side="right">
         <button ion-button (click)="addToCalendar(slidingItem, activity)" >
           <ion-icon name="calendar"></ion-icon>
-          Calendar
+          {{'COURSE.CALENDAR' | translate}}
         </button>
       </ion-item-options>
     </ion-item-sliding>
+
   </ion-list>
+  <ion-list-header *ngIf="(segment === 'TD' && noTP) || (segment === 'Cours magistral' && noCM) || (segment === 'Examen' && noEx)">
+    {{'COURSE.NO' | translate}}
+  </ion-list-header>
+
+  <ion-fab right bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+    <button ion-fab (tap)="showPrompt(segment)">
+      <ion-icon name="cut"> </ion-icon>
+    </button>
+  </ion-fab>
+    <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+    <button ion-fab (tap)="addCourseToCalendar()">
+      <ion-icon name="calendar"> </ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

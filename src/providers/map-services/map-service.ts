@@ -56,8 +56,8 @@ export class MapService {
   constructor(public connectivityService: ConnectivityService,
               private geolocation : Geolocation,
               private platform: Platform,
-              private menuCtrl: MenuController) {
-    this.onDevice = this.platform.is('cordova');
+              menuCtrl: MenuController) {
+    this.onDevice = this.platform.is('android') || this.platform.is('ios');
     this.apiKey = jsApiKey;
     let leftMenu = menuCtrl.get('left');
 
@@ -135,6 +135,7 @@ export class MapService {
       this.addConnectivityListeners();
     });
   }
+
 
   private initBrowserMap(): Promise<any> {
 
@@ -228,7 +229,6 @@ export class MapService {
         });
 
     });
-
   }
 
   addMarker(location: MapLocation) {
@@ -257,10 +257,16 @@ export class MapService {
       for(var i=0;i<this.markers.length; i++){
          if(this.markers[i].getTitle() === location.title) {
           //console.log(this.markers[i]);
+          //let m: Marker = this.markers[i];
+         //m.remove();
           this.markers[i].setMap(null);
           //this.markers[i]=null;
           this.markers.splice(i,1);
           //console.log(this.markers);
+          if(this.onDevice){
+            this.map.clear();
+            this.addMarker(this.userLocation);
+          }
         }
       }
 

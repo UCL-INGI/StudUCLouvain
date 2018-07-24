@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -19,13 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, trigger, state, style, animate, transition } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { UserService } from '../../providers/utils-services/user-service';
 import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
 
+import { UserService } from '../../providers/utils-services/user-service';
 
+@IonicPage()
 @Component({
   selector: 'page-param',
   templateUrl: 'param.html',
@@ -41,18 +43,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class ParamPage {
   title: any;
   shownGroup = null;
-  setting:string ="Campus";
   setting2:string ="Langue";
-  message:string = "Dans quel campus êtes-vous?";
-  message2:string = "Quelle langue choisissez-vous?";
-  save:string = "OK";
-  en:string = "English";
-  fr:string = "Français";
+
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController,
-              private iab: InAppBrowser,
               public userS:UserService,
               private alertCtrl : AlertController,
               private translateService: TranslateService) {
@@ -61,9 +57,13 @@ export class ParamPage {
 
   campus_choice(){
     let check = this.userS.campus;
+    let setting, message, save;
+    this.translateService.get('HOME.SETTING1').subscribe((res:string) => {setting=res;});
+    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {message=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
     let settingsAlert = this.alertCtrl.create({
-      title: this.setting,
-      message: this.message,
+      title: setting,
+      message: message,
       inputs : [
         {
           type:'radio',
@@ -85,7 +85,7 @@ export class ParamPage {
         }],
       buttons: [
       {
-        text: this.save,
+        text: save,
         handler: data => {
           this.userS.addCampus(data);
         }
@@ -96,26 +96,32 @@ export class ParamPage {
 
   language_choice(){
     let check2 = this.translateService.currentLang;
+    let message2, en, fr, setting2, save:string;
+    this.translateService.get('HOME.SETTING2').subscribe((res:string) => {setting2=res;});
+    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {message2=res;});
+    this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
+    this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
     let languageAlert = this.alertCtrl.create({
-      title: this.setting2,
-      message : this.message2,
+      title: setting2,
+      message : message2,
       inputs : [
         {
           type:'radio',
-          label:this.fr,
+          label:fr,
           value:'fr',
           checked:(check2 == 'fr')
         },
         {
           type:'radio',
-          label:this.en,
+          label:en,
           value:'en',
           checked:(check2 == 'en')
         }
       ],
       buttons: [
       {
-        text:this.save,
+        text:save,
         handler:data => {
            this.languageChanged(data);
         }
@@ -125,6 +131,7 @@ export class ParamPage {
   }
 
   languageChanged(event:string) {
+    this.userS.storage.set('lan',event);
          this.translateService.use(event);
-     }
+  }
 }

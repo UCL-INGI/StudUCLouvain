@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -19,11 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, trigger, state, style, animate, transition } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AlertController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
+@IonicPage()
 @Component({
   selector: 'page-guindaille2-0',
   templateUrl: 'guindaille2-0.html',
@@ -40,99 +43,206 @@ import { AlertController } from 'ionic-angular';
 export class GuindaillePage {
   title: any;
   shownGroup = null;
+  segment:string = 'pict';
+  alt:string;
 
-  alterner = { title: 'Alterner',
-      subTitle: 'Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…',
+  altsub:string;
+  alterner = { title: '',
+          subTitle: '',
+          buttons: ['OK'] };
+
+  brt:string;
+  brtsub:string;
+  bruit = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  bruit = { title: 'Limiter le bruit à l’extérieur',
-      subTitle: 'Louvain-la-Neuve est une ville qui bouge, même la nuit. Tous les soirs, il y a des occasions de s’occuper et de faire la fête. Et les salles sont prévues pour, mais n’oublie pas le retour au calme une fois dehors.\nQuand tu décides de rentrer dormir, d’autres l’ont déjà fait avant toi alors… Chut, plus de bruits.',
+  wat:string;
+  watsub:string;
+  eau = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  eau = { title: 'Eau gratuite',
-      subTitle: 'Même si tu ne t’en rends pas compte, l’alcool déshydrate ton organisme. L’eau est le meilleur moyen pour te réhydrater suffisamment entre deux verres d’alcool.\nN’attends pas de ressentir la sensation de soif pour boire un verre d’eau. Profites-en, elle est gratuite au bar, et à volonté !',
+  where:string;
+  wheresub:string;
+  ou = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  ou = { title: 'J\'en suis où?',
-      subTitle: 'Quand tu sors, il est important que tu puisses évaluer et gérer ta propre consommation en fonction des effets ressentis et non pas de la quantité. Les effets ressentis chez l’un ou chez l’autre ; ou d’une soirée à l’autre ne sont pas les mêmes ! Cela dépend de ta constitution, ton état de fatigue,… Reste donc attentif à ces effets pour passer une bonne soirée !',
+  can:string;
+  cansub:string;
+  cans = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  cans = { title: 'Pas de canettes ni de bouteilles en verre',
-      subTitle: 'Les canettes et les contenants en verre sont interdits dans l’ensemble des surfaces d’animation.',
+  pres:string;
+  pressub:string;
+  preservatif = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  preservatif = { title: 'Préservatif',
-      subTitle: '”10 à 12% des étudiants déclarent avoir eu des relations sexuelles non-protégées ou regrettées, suite à leur consommation d’alcool. » (UCL, 2011)\nL’alcool ne diminue pas les risques de transmissions de MST, ni celui de tomber enceinte.\nN’oublie pas ton préservatif avant de sortir, et de l’utiliser au moment voulu…',
+  rac:string;
+  racsub:string;
+  racompagner = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  racompagner = { title: 'Je raccompagne',
-      subTitle: 'On ne doit jamais laisser son (sa) pote seul(e) lorsqu’il (elle) a trop bu ! On évite qu’il (elle) prenne la bagnole, la moto, le vélo… Même à pied, les risques existent ! On le (la) raccompagne pour lui éviter de mauvaises rencontres ou l’endormissement dans un buisson, et l’inévitable hypothermie qui va avec…\nLes quelques a-fonds réalisés juste avant font encore monter le taux d’alcoolémie ! Ce n’est pas parce qu’il (elle) dort que le coma éthylique ne guette pas. Vérifie son état de conscience (la personne doit rester « réveillable ») et s’il (elle) ne réagit pas, appelle les secours, c’est une urgence médicale.\nMieux vaut appeler les secours une fois de trop qu’une fois trop peu…',
+  ur:string;
+  ursub:string;
+  uriner = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  uriner = { title: 'Uriner dans le pot',
-      subTitle: 'Des toilettes et/ou des urinoirs existent dans les surfaces d’animation. Utilise-les donc à bon escient et vise juste !',
+  de:string;
+  desub:string;
+  dehors = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  dehors = { title: 'Ne pas uriner dehors',
-      subTitle: 'Les murs et les recoins ne sont pas des toilettes à ciel ouvert. Respecte l’environnement extérieur et utilise plutôt les toilettes existantes.',
+  vio:string;
+  viosub:string;
+  violence = { title: '',
+      subTitle: '',
       buttons: ['OK'] };
 
-  violence = { title: 'Violence, arrête toi avant!',
-      subTitle: 'Les effets de l’alcool peuvent varier. Alcool joyeux, triste ou encore agressif, personne n’est à l’abri. Si tu sens que toi ou un(e) de tes potes montez dans les tours, c’est le moment de te/le/la calmer et d’alterner avec des softs.',
-      buttons: ['OK'] };
+  ttl1:string;
+  efct1:string;
+  ttl2:string;
+  efct2:string;
+  ttl3:string;
+  efct3:string;
+  ttl4:string;
+  efct4:string;
+  ttl5:string;
+  efct5:string;
+  ttl6:string;
+  efct6:string;
 
   slides = [
       {
-        title: 'Que retenir?',
-        subTitle: 'Ne pas dépasser la phase 2: quand j\'ai le "fêtant", j\'alterne mes boissons alcoolisées avec des softs et je profite de l\'eau gratuite! Je passerai une excellente soirée jusqu\'au bout de la nuit, je me souviendrai de tout, je resterai performant (dans tous les sens du terme) et je n\'aurai pas mal au crâne le lendemain. C\'est tout bénef! N\'oubliez jamais d\'alterner alcool et soft, de même n\'oubliez jamais de vous protéger en cas de rapport sexuel.',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/1.png",
       },
       {
-        title: 'Au top!',
-        subTitle: 'Tout va bien. J\'ai bu environ deux drinks (2 unités standard d\'alcool). Je me sens normal(e) mais attention, au regard de la loi, je ne peux fort probablement plus conduire. Je suis au alentours de 0.5 gramme d\'alcool par litre de sang, qui est la limite légale autorisée pour conduire en Belgique. Si je veux reprendre le volant (ou le guidon), je dois attendre une bonne heure environ. En effet, le corp a besoin d\'environ 1h30 pour éliminer un seul drink!',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/2.png",
       },
       {
-        title: 'Au max!',
-        subTitle: 'J\'ai le "fêtant", je suis joyeux(se), désinhibé(e), et j\'ai la drague plus facile. Excellent! Un état recherché lorsque l\'on a décidé de boire de l\'alcool, aller au-delà n\'a plus d\'intérêt. Pour rester dans cet état là toute la soirée, je dois absolument alterner avec des boissons softs. Je maintiendrai alors mon état joyeux, je m\'hydraterai correctement (l\'alcool déshydrate fort!), je me souviendrai de tout et je ne regretterai rien. Je me limite aussi à un ou deux drinks alcoolisés par heure maximum, car je tourne déjà entre 1‰ et 2‰ d\'alcool dans le sang. Pour rappel, je ne peux évidemment plus conduire depuis longtemps déjà.',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/3.png",
       },
       {
-        title: 'Limite Lourd!',
-        subTitle: 'J\'ai oublié d\'alterner avec des softs lorsque je me sentais au top ou au max.. Mon taux d\'alcool continue de grimper, et me capacité à faire rire et plaisir à mon entourage y est inversement proportionnelle. Je suis persuadé d\'être drôle et séduisant(e), mais je suis le/la seul(e) à le penser. Je parle fort et je postilonne un peu sur mon voisin, ma voisine. Bref, je suis lourd(e)... Je commencer à avoir des troubles de l\'équilibre. Les lendemains seront difficiles! Je me situe entre 2‰ et 3‰ d\'alcool dans le sang.',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/4.png",
       },
       {
-        title: 'Soirée foirée, Lendemain foireux!',
-        subTitle: 'C\'est la phrase qui emm... tout le monde, c\'est l\'alcool triste, violent... Je ne gère plus du tout ma consommation. Je perds le contrôle et l\'équilibre (ainsi qu\'éventuellement mon portefeuille, mes clés, mon portable,...). Mon cerveau est en souffrance importante et les nausées apparaissent. Je ne fais plus rire personne. Bien au contraire, je deviens un(e) "bitu" à gérer. Le lendemain sera très pénible et je pourrais regretter des choses, des faits. Je tourne autour des 3‰ d\'alcool dans le sang, c\'est beaucoup trop!',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/5.png",
       },
       {
-        title: 'Danger Maximum!',
-        subTitle: 'C\'est le pré-coma ou le coma éthylique. Je m\'endors sous l\'effet de l\'alcool et, sans m\'en rendre compte, je prends des risques énormes (étouffement si je vomis, chutes et traumatisques, arrêt respiratoire pouvant mener au décès). De plus, si jamais je viens encore de boire un verre ou de faire l\'un ou l\'autre "à-fond", mon taux d\'alcool va encore monter. Le risque de coma profond devient alors très important. Je me situe entre 3‰ et 4‰ d\'alcool dans le sang, la majorité d\'entre nous entre en pré-coma ou coma profond à ce taux-là!',
+        title: '',
+        subTitle: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/6.png",
       }];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private iab: InAppBrowser, public alertCtrl: AlertController) {
-    this.title = this.navParams.get('title');
-  }
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController,
+              public alertCtrl: AlertController,
+              public translateService: TranslateService)
+  {
+      this.title = this.navParams.get('title');
 
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
+      this.translateService.get('GUINDAILLE.TITLE1').subscribe((res:string) => {this.alt=res;});
+      this.translateService.get('GUINDAILLE.PIC1').subscribe((res:string) => {this.altsub=res;});
+      this.alterner.title = this.alt;
+      this.alterner.subTitle = this.altsub;
 
-  isGroupShown(group) {
-      return this.shownGroup === group;
+      this.translateService.get('GUINDAILLE.TITLE2').subscribe((res:string) => {this.brt=res;});
+      this.translateService.get('GUINDAILLE.PIC2').subscribe((res:string) => {this.brtsub=res;});
+      this.bruit.title = this.brt;
+      this.bruit.subTitle = this.brtsub;
+
+      this.translateService.get('GUINDAILLE.TITLE3').subscribe((res:string) => {this.wat=res;});
+      this.translateService.get('GUINDAILLE.PIC3').subscribe((res:string) => {this.watsub=res;});
+      this.eau.title = this.wat;
+      this.eau.subTitle = this.watsub;
+
+      this.translateService.get('GUINDAILLE.TITLE4').subscribe((res:string) => {this.where=res;});
+      this.translateService.get('GUINDAILLE.PIC4').subscribe((res:string) => {this.wheresub=res;});
+      this.ou.title = this.where;
+      this.ou.subTitle = this.wheresub;
+
+      this.translateService.get('GUINDAILLE.TITLE5').subscribe((res:string) => {this.can=res;});
+      this.translateService.get('GUINDAILLE.PIC5').subscribe((res:string) => {this.cansub=res;});
+      this.cans.title = this.can;
+      this.cans.subTitle = this.cansub;
+
+      this.translateService.get('GUINDAILLE.TITLE6').subscribe((res:string) => {this.pres=res;});
+      this.translateService.get('GUINDAILLE.PIC6').subscribe((res:string) => {this.pressub=res;});
+      this.preservatif.title = this.pres;
+      this.preservatif.subTitle = this.pressub;
+
+      this.translateService.get('GUINDAILLE.TITLE7').subscribe((res:string) => {this.rac=res;});
+      this.translateService.get('GUINDAILLE.PIC7').subscribe((res:string) => {this.racsub=res;});
+      this.racompagner.title = this.rac;
+      this.racompagner.subTitle = this.racsub;
+
+      this.translateService.get('GUINDAILLE.TITLE8').subscribe((res:string) => {this.ur=res;});
+      this.translateService.get('GUINDAILLE.PIC8').subscribe((res:string) => {this.ursub=res;});
+      this.uriner.title = this.ur;
+      this.uriner.subTitle = this.ursub;
+
+      this.translateService.get('GUINDAILLE.TITLE9').subscribe((res:string) => {this.de=res;});
+      this.translateService.get('GUINDAILLE.PIC9').subscribe((res:string) => {this.desub=res;});
+      this.dehors.title = this.de;
+      this.dehors.subTitle = this.desub;
+
+      this.translateService.get('GUINDAILLE.TITLE10').subscribe((res:string) => {this.vio=res;});
+      this.translateService.get('GUINDAILLE.PIC10').subscribe((res:string) => {this.viosub=res;});
+      this.violence.title = this.vio;
+      this.violence.subTitle = this.viosub;
+
+      this.translateService.get('GUINDAILLE.TITLEF1').subscribe((res:string) => {this.ttl1=res;});
+      this.translateService.get('GUINDAILLE.EFFECT1').subscribe((res:string) => {this.efct1=res;});
+      this.slides[0].title = this.ttl1;
+      this.slides[0].subTitle = this.efct1;
+
+      this.translateService.get('GUINDAILLE.TITLEF2').subscribe((res:string) => {this.ttl2=res;});
+      this.translateService.get('GUINDAILLE.EFFECT2').subscribe((res:string) => {this.efct2=res;});
+      this.slides[1].title = this.ttl2;
+      this.slides[1].subTitle = this.efct2;
+
+      this.translateService.get('GUINDAILLE.TITLEF3').subscribe((res:string) => {this.ttl3=res;});
+      this.translateService.get('GUINDAILLE.EFFECT3').subscribe((res:string) => {this.efct3=res;});
+      this.slides[2].title = this.ttl3;
+      this.slides[2].subTitle = this.efct3;
+
+      this.translateService.get('GUINDAILLE.TITLEF4').subscribe((res:string) => {this.ttl4=res;});
+      this.translateService.get('GUINDAILLE.EFFECT4').subscribe((res:string) => {this.efct4=res;});
+      this.slides[3].title = this.ttl4;
+      this.slides[3].subTitle = this.efct4;
+
+      this.translateService.get('GUINDAILLE.TITLEF5').subscribe((res:string) => {this.ttl5=res;});
+      this.translateService.get('GUINDAILLE.EFFECT5').subscribe((res:string) => {this.efct5=res;});
+      this.slides[4].title = this.ttl5;
+      this.slides[4].subTitle = this.efct5;
+
+      this.translateService.get('GUINDAILLE.TITLEF6').subscribe((res:string) => {this.ttl6=res;});
+      this.translateService.get('GUINDAILLE.EFFECT6').subscribe((res:string) => {this.efct6=res;});
+      this.slides[5].title = this.ttl6;
+      this.slides[5].subTitle = this.efct6;
   }
 
   showAlert(page) {

@@ -37,42 +37,13 @@ import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
 import { SecureStorage } from '@ionic-native/secure-storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-//import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { HttpModule, Http } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-//import { NgCalendarModule } from 'ionic2-calendar';
-
-
-
-import { EventsPage } from '../pages/events/events';
-import { EventsFilterPage } from '../pages/events/events-filter/events-filter';
-import { EventsDetailsPage } from '../pages/events/events-details/events-details';
-import { MobilityPage } from '../pages/mobility/mobility';
-import { CarpoolingPage } from '../pages/mobility/carpooling/carpooling';
-import { BusPage } from '../pages/mobility/bus/bus';
-import { TrainPage } from '../pages/mobility/train/train';
-import { CoursePage } from '../pages/studies/course/course';
-import { LibrariesPage } from '../pages/library/libraries';
-import { LibraryDetailsPage } from '../pages/library/library-details/library-details';
-import { MapPage } from '../pages/map/map';
-import { MapLocationSelectorPage }
-          from '../pages/map/map-location-selector/map-location-selector';
-import { NewsPage } from '../pages/news/news';
-import { NewsDetailsPage } from '../pages/news/news-details/news-details';
-import { RestaurantPage } from '../pages/restaurant/restaurant';
-import { StudiesPage } from '../pages/studies/studies';
-import { EmployeeDetailsPage } from '../pages/help-desk/employee-details/employee-details';
-import { HelpDeskPage } from '../pages/help-desk/help-desk';
-import { CreditPage } from '../pages/credit/credit';
-import { ModalProjectPage } from '../pages/studies/modal-project/modal-project';
-import { SportsPage } from '../pages/sports/sports';
-import { SportsFilterPage } from '../pages/sports/sports-filter/sports-filter';
-import { HomePage } from '../pages/home/homeC';
-import { GuindaillePage } from '../pages/guindaille2-0/guindaille2-0';
-import { ParamPage } from '../pages/param/param';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
+import { FacService } from '../providers/utils-services/fac-service';
 import { CourseService } from '../providers/studies-services/course-service';
 import { StudiesService } from '../providers/studies-services/studies-service';
 import { EventsService } from '../providers/rss-services/events-service';
@@ -89,39 +60,14 @@ import { SportsService } from '../providers/rss-services/sports-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 
 
-export function HttpLoaderFactory(http: Http) {
+export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
 }
 
 
 @NgModule({
   declarations: [
-    MyApp,
-    EventsPage,
-    EventsFilterPage,
-    MapLocationSelectorPage,
-    MobilityPage,
-    TrainPage,
-    CarpoolingPage,
-    BusPage,
-    ParamPage,
-    CoursePage,
-    EventsDetailsPage,
-    LibrariesPage,
-    NewsPage,
-    NewsDetailsPage,
-    MapPage,
-    ModalProjectPage,
-    RestaurantPage,
-    StudiesPage,
-    HelpDeskPage,
-    GuindaillePage,
-    LibraryDetailsPage,
-    SportsPage,
-    SportsFilterPage,
-    HomePage,
-    CreditPage,
-    EmployeeDetailsPage
+    MyApp
   ],
   exports: [
     TranslateModule
@@ -131,40 +77,19 @@ export function HttpLoaderFactory(http: Http) {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpModule,
+    HttpClientModule,
     //NgCalendarModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
-            deps: [Http]
+            deps: [HttpClient]
         }
     })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    EventsPage,
-    EventsFilterPage,
-    MapLocationSelectorPage,
-    MobilityPage,
-    CoursePage,
-    EventsDetailsPage,
-    LibrariesPage,
-    MapPage,
-    ModalProjectPage,
-    NewsPage,
-    NewsDetailsPage,
-    RestaurantPage,
-    StudiesPage,
-    HelpDeskPage,
-    ParamPage,
-    CreditPage,
-    GuindaillePage,
-    LibraryDetailsPage,
-    SportsPage,
-    SportsFilterPage,
-    HomePage,
-    EmployeeDetailsPage
+    MyApp
   ],
   providers: [
     { provide : ErrorHandler, useClass : IonicErrorHandler},
@@ -196,7 +121,8 @@ export function HttpLoaderFactory(http: Http) {
     NativeGeocoder,
     SportsService,
     RepertoireService,
-    StudentService
+    StudentService,
+    FacService
   ]
 })
 export class AppModule {}

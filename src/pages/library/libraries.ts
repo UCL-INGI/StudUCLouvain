@@ -21,18 +21,14 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
+
 import { LibrariesService } from '../../providers/wso2-services/libraries-service';
-import { LibraryDetailsPage } from './library-details/library-details';
-import { LibraryItem } from '../../app/entity/libraryItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { TranslateService } from '@ngx-translate/core';
 
-/*
-  Generated class for the Library page.
+import { LibraryItem } from '../../app/entity/libraryItem';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html'
@@ -47,23 +43,32 @@ export class LibrariesPage {
     public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
-    public connService : ConnectivityService,
-              private translateService: TranslateService
-  ) {
+    public connService : ConnectivityService)
+  {
     this.title = this.navParams.get('title');
+<<<<<<< HEAD
 this.loadLibraries();
+=======
+    this.loadLibraries();
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
   }
 
+  ionViewDidLoad() {
+    //this.loadLibraries();
+  }
 
   public doRefresh(refresher) {
     this.loadLibraries();
     refresher.complete();
   }
 
+<<<<<<< HEAD
   ionViewDidLoad() {
    
   }
 
+=======
+>>>>>>> d12e424a324261ab8d3acf29546d890fce4e39b3
   loadLibraries() {
     this.searching = true;
     if(this.connService.isOnline()) {
@@ -76,11 +81,12 @@ this.loadLibraries();
       );
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
   goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push(LibraryDetailsPage, { 'lib': lib});
+    this.navCtrl.push('LibraryDetailsPage', { 'lib': lib});
   }
 }

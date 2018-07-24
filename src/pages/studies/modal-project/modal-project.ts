@@ -22,18 +22,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController }
         from 'ionic-angular';
-import { StudiesService}
-        from '../../../providers/studies-services/studies-service';
-import { AdeProject } from '../../../app/entity/adeProject';
 import { Storage } from '@ionic/storage';
+import { IonicPage } from 'ionic-angular';
 
-/**
- * Generated class for the ModalProjectPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-//@IonicPage()
+import { StudiesService} from '../../../providers/studies-services/studies-service';
+
+import { AdeProject } from '../../../app/entity/adeProject';
+
+@IonicPage()
 @Component({
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html',
@@ -46,7 +42,8 @@ export class ModalProjectPage {
     public storage:Storage,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public studiesService : StudiesService) {
+    public studiesService : StudiesService) 
+  {
   }
 
   closeModal(project : AdeProject) {

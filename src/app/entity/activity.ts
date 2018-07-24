@@ -28,14 +28,18 @@ export class Activity{
   start : Date;
   end : Date;
   auditorium : string;
+  isExam:boolean;
+  name:string;
 
   constructor(type : string, teachers : string, students : string,
-    start : Date, end : Date, auditorium : string){
+    start : Date, end : Date, auditorium : string, isExam: boolean, name:string){
     this.type=type;
     this.teachers=teachers;
     this.students=students;
     this.start=start;
     this.end=end;
     this.auditorium=auditorium;
+    this.isExam = isExam;
+    this.name=name;
   }
 }

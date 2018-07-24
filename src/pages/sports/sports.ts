@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,31 +20,27 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, AlertController, ItemSliding, List, NavController,
-  ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
+import { App, AlertController, ItemSliding, List,
+  ModalController, NavParams, ToastController, LoadingController, NavController} from 'ionic-angular';
 import { Calendar } from '@ionic-native/calendar';
 import { FormControl } from '@angular/forms';
-import { SportsFilterPage } from './sports-filter/sports-filter';
+import { IonicPage } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import 'rxjs/add/operator/debounceTime';
+
 import { UserService } from '../../providers/utils-services/user-service';
 import { SportsService } from '../../providers/rss-services/sports-service';
-import { SportItem } from '../../app/entity/sportItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import 'rxjs/add/operator/debounceTime';
-import { TranslateService } from '@ngx-translate/core';
 
+import { SportItem } from '../../app/entity/sportItem';
+
+@IonicPage()
 @Component({
   selector: 'page-sports',
   templateUrl: 'sports.html'
 })
+
 export class SportsPage {
-  //TODO : Change details to use EventItem and change EventsDetailsPage to EventDetailsPage
-  // the list is a child of the schedule page
-  // @ViewChild('scheduleList') gets a reference to the list
-  // with the variable #scheduleList, `read: List` tells it to return
-  // the List and not a reference to the element
   @ViewChild('sportsList', { read: List }) sportsList: List;
 
   sports: Array<SportItem> = [];
@@ -71,20 +67,17 @@ export class SportsPage {
   constructor(
     public alertCtrl: AlertController,
     public app:App,
-    private nav: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
     public user: UserService,
     public toastCtrl: ToastController,
-    private device: Device,
     private calendar: Calendar,
-    private appAvailability: AppAvailability,
-    private iab: InAppBrowser,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController
-  ) {
+    public loadingCtrl: LoadingController,
+    public navCtrl: NavController)
+  {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
@@ -92,14 +85,24 @@ export class SportsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    this.loadSports();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayedSports();
-    });
-    this.presentLoading();
+    if(this.connService.isOnline()) {
+      this.loadSports();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedSports();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 
+  public doRefresh(refresher) {
+    this.loadSports();
+    refresher.complete();
+  }
 
   presentLoading() {
     if(!this.loading){
@@ -109,30 +112,20 @@ export class SportsPage {
 
       this.loading.present();
     }
-    //this.dismiss = true;
-
-   /* setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);*/
   }
+
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
         this.loading = null;
     }
-  } 
-
+  }
 
   public onSearchInput(){
     this.searching = true;
   }
 
- /* public goToSportDetail(sport: SportItem) {
-    this.nav.push(SportsDetailsPage, { 'sport': sport });
-  }*/
-
   public loadSports() {
-
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     let result: any;
@@ -173,7 +166,6 @@ export class SportsPage {
       })
       .catch(error => {
         if(error == 1) {
-          //console.log("Error loading teams : " + error);
           this.loadSports();
         } else {
           if(error == 2) {
@@ -189,11 +181,12 @@ export class SportsPage {
 
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
-
   }
 
+//SORT SPORTS BY DAY
   public changeArray(array){
     var groups = array.reduce(function(obj,item){
       obj[item.jour] = obj[item.jour] || [];
@@ -205,7 +198,6 @@ export class SportsPage {
     });
     return sportsD;
   }
-
 
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
@@ -249,13 +241,11 @@ export class SportsPage {
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
-    //this.shownTeams = this.displayedSports.length;
+
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    //while(this.dismiss == false){}
     this.dismissLoading();
-   // this.dismiss=false;
 
   }
 
@@ -265,7 +255,7 @@ export class SportsPage {
       this.filters = [];
     }
 
-    let modal = this.modalCtrl.create(SportsFilterPage,
+    let modal = this.modalCtrl.create('SportsFilterPage',
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
 
@@ -308,13 +298,17 @@ export class SportsPage {
     if (this.user.hasFavoriteS(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
-      this.removeFavorite(slidingItem, itemData, 'Favoris déjà ajouté');
+      let message:string;
+      this.translateService.get('SPORTS.MESSAGEFAV').subscribe((res:string) => {message=res;});
+      this.removeFavorite(slidingItem, itemData, message);
     } else {
       // remember this session as a user favorite
       this.user.addFavoriteS(itemData.guid);
+      let message:string;
+      this.translateService.get('SPORTS.FAVADD').subscribe((res:string) => {message=res;});
 
       let toast = this.toastCtrl.create({
-        message: 'Ajouté aux favoris',
+        message: message,
         duration: 3000
       });
       toast.present();
@@ -324,12 +318,18 @@ export class SportsPage {
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
+    let message:string;
+    let delet:string;
+    let cancel:string;
+    this.translateService.get('SPORTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
+    this.translateService.get('SPORTS.CANCEL').subscribe((res:string) => {cancel=res;});
+    this.translateService.get('SPORTS.DEL').subscribe((res:string) => {delet=res;});
     let alert = this.alertCtrl.create({
       title: title,
-      message: 'Souhaitez vous retirer ce sport des favoris ?',
+      message: message,
       buttons: [
         {
-          text: 'Annuler',
+          text: cancel,
           handler: () => {
             // they clicked the cancel button, do not remove the session
             // close the sliding item and hide the option buttons
@@ -337,7 +337,7 @@ export class SportsPage {
           }
         },
         {
-          text: 'Supprimer',
+          text: delet,
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavoriteS(itemData.guid);

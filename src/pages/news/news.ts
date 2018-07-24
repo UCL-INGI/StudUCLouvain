@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,14 +20,19 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { App, List, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
+import { App, List, Content, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
-import { NewsService } from '../../providers/rss-services/news-service';
-import { NewsItem } from '../../app/entity/newsItem';
-import { NewsDetailsPage } from './news-details/news-details';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { TranslateService } from '@ngx-translate/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { IonicPage } from 'ionic-angular';
 
+import { NewsService } from '../../providers/rss-services/news-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { FacService } from '../../providers/utils-services/fac-service';
+
+import { NewsItem } from '../../app/entity/newsItem';
+
+@IonicPage()
 @Component({
   selector: 'page-news',
   templateUrl: 'news.html'
@@ -35,9 +40,22 @@ import { TranslateService } from '@ngx-translate/core';
 export class NewsPage {
 
   @ViewChild('newsList', { read: List }) newsList: List;
+  @ViewChild('news') content: Content;
+
+  // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
+  resize()
+  {
+    if(this.content)
+    {
+      this.content.resize();
+      console.debug("content resize", this.content)
+    }
+  }
 
   news: Array<NewsItem> = [];
-  segment = "P1";
+  segment = "univ";
+  subsegment = "P1";
+  facsegment="news";
   shownNews = 0;
   displayedNews : Array<NewsItem> = [];
   searching: any = false;
@@ -46,65 +64,130 @@ export class NewsPage {
   title:string ="Actualités" ;
   nonews:any = false;
   loading;
+  fac:string="";
+  listFac:any=[];
+  site:string="";
+  rss:string="";
+  //url = 'assets/data/fac.json';
 
   constructor(
     public platform : Platform,
     public navCtrl: NavController,
     public navParams:NavParams,
     public app:App,
+    public userS:UserService,
     public newsService : NewsService,
     public connService : ConnectivityService,
+    private iab: InAppBrowser,
     public alertCtrl : AlertController,
-              private translateService: TranslateService,
-              public loadingCtrl: LoadingController
-  ) {
+    public loadingCtrl: LoadingController,
+    public facService: FacService)
+  {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
       }
-      this.app.setTitle(this.title);
       this.searchControl = new FormControl();
-      this.platform.ready().then(() => {
-        this.loadEvents();
-        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-          this.searching = false;
-          this.updateDisplayedNews();
-        });
+      this.facService.loadResources().then((data) => {
+        this.listFac=data;
       });
   }
-    presentLoading() {
+
+  ionViewDidLoad() {
+    this.app.setTitle(this.title);
+    if(this.connService.isOnline()) {
+      this.loadEvents();
+      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searching = false;
+        this.updateDisplayedNews();
+      });
+      this.presentLoading();
+    }
+    else{
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
+  }
+
+  presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
-
       this.loading.present();
     }
-    //this.dismiss = true;
-
-   /* setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);*/
   }
+
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
         this.loading = null;
     }
-}
-  ionViewDidLoad() {
-    this.presentLoading();
+  }
+
+  public openURL(url: string) {
+    this.iab.create(url, '_system','location=yes');
+  }
+
+  updateFac(){
+
+    this.userS.addFac(this.fac);
+    this.resize();
+    let links = this.findSite();
+    this.site = links.site;
+    this.rss = links.rss;
+    this.loadEvents();
+
+  }
+
+  findSite(){
+    for(let sector of this.listFac){
+      for(let facs of sector.facs){
+        if(facs.acro === this.fac) {
+          return {'site':facs.site, 'rss': facs.rss};
+        }
+      }
+    }
+  }
+
+  removeFac(fac:string){
+    this.userS.removeFac(fac);
+        this.resize();
   }
 
   public doRefresh(refresher) {
-    this.loadEvents();
+
+    if(this.segment ==='univ') this.loadEvents();
     refresher.complete();
+
+  }
+
+  segmentChanged(){
+    this.resize();
+    //if(this.segment==='univ') this.updateDisplayedNews();
+    if(this.segment==='fac'){
+      this.fac=this.userS.fac;
+
+      if(this.facsegment === 'news' && this.userS.hasFac()){
+        let links = this.findSite();
+        this.site= links.site;
+        this.rss = links.rss;
+      }
+    }
+    this.loadEvents();
+
+  }
+
+  facSegChange(){
+
   }
 
   public loadEvents() {
     this.searching = true;
     this.news = [];
     if(this.connService.isOnline()) {
-      this.newsService.getNews(this.segment)
+      let actu = this.subsegment;
+      if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
+      this.newsService.getNews(actu)
       .then(
         res => {
           let result:any = res;
@@ -129,8 +212,10 @@ export class NewsPage {
       });
     } else {
       this.searching = false;
+      this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
+
   }
 
   public updateDisplayedNews() {
@@ -145,6 +230,6 @@ export class NewsPage {
   }
 
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push( NewsDetailsPage, { 'news': news });
+    this.navCtrl.push( 'NewsDetailsPage', { 'news': news });
   }
 }

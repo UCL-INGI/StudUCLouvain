@@ -4,7 +4,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -19,18 +19,18 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController} from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection;
 
 @Injectable()
 export class ConnectivityService {
-
   onDevice: boolean;
 
-  constructor(public platform: Platform, private network: Network, private alertCtrl: AlertController){
+  constructor(public platform: Platform, private network: Network, private translateService: TranslateService, private alertCtrl: AlertController){
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -43,11 +43,18 @@ export class ConnectivityService {
   }
 
   presentConnectionAlert() {
+    let title:string;
+    let message:string;
+    let close:string;
+    this.translateService.get('NET.TITLE').subscribe((res:string) => {title=res;});
+    this.translateService.get('NET.CONNECT').subscribe((res:string) => {message=res;});
+    this.translateService.get('NET.CLOSE').subscribe((res:string) => {close=res;});
     let alert = this.alertCtrl.create({
-      title: 'Connexion Internet',
-      subTitle: 'Connectez-vous à Internet pour charger les actualités...',
-      buttons: ['Fermer']
+      title: title,
+      subTitle: message,
+      buttons: [close]
     });
     alert.present();
+
   }
 }

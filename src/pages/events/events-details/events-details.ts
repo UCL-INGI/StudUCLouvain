@@ -21,15 +21,14 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { EventItem } from '../../../app/entity/eventItem';
+import { TranslateService } from '@ngx-translate/core';
+import { IonicPage } from 'ionic-angular';
+
 import { UserService } from '../../../providers/utils-services/user-service';
 
-/*
-  Generated class for the Details page.
+import { EventItem } from '../../../app/entity/eventItem';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-events-details',
   templateUrl: 'events-details.html'
@@ -39,21 +38,24 @@ export class EventsDetailsPage {
 
   constructor(public navCtrl: NavController,
     public user: UserService,
+    private translateService: TranslateService,
     public toastCtrl: ToastController,
-    private navParams: NavParams) {
+    navParams: NavParams) {
     this.event = navParams.get('event');
   }
 
   public openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 
   addFavorite(event : EventItem){
+    let message:string;
+    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
+
     if(!this.user.hasFavorite(event.guid)){
       this.user.addFavorite(event.guid);
       let toast = this.toastCtrl.create({
-        message: 'Favoris ajouté',
+        message: message,
         duration: 3000
       });
       toast.present();
