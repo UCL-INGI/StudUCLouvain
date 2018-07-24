@@ -67,6 +67,7 @@ export class NewsPage {
   fac:string="";
   listFac:any=[];
   site:string="";
+  rss:string="";
   //url = 'assets/data/fac.json';
 
   constructor(
@@ -131,15 +132,18 @@ export class NewsPage {
 
     this.userS.addFac(this.fac);
     this.resize();
-    this.site = this.findSite();
+    let links = this.findSite();
+    this.site = links.site;
+    this.rss = links.rss;
+    this.loadEvents();
 
   }
 
-  findSite():string{
+  findSite(){
     for(let sector of this.listFac){
       for(let facs of sector.facs){
         if(facs.acro === this.fac) {
-          return facs.site;
+          return {'site':facs.site, 'rss': facs.rss};
         }
       }
     }
@@ -159,11 +163,17 @@ export class NewsPage {
 
   segmentChanged(){
     this.resize();
-    if(this.segment==='univ') this.updateDisplayedNews();
+    //if(this.segment==='univ') this.updateDisplayedNews();
     if(this.segment==='fac'){
       this.fac=this.userS.fac;
-      this.site=this.findSite();
+
+      if(this.facsegment === 'news' && this.userS.hasFac()){
+        let links = this.findSite();
+        this.site= links.site;
+        this.rss = links.rss;
+      }
     }
+    this.loadEvents();
 
   }
 
@@ -175,7 +185,9 @@ export class NewsPage {
     this.searching = true;
     this.news = [];
     if(this.connService.isOnline()) {
-      this.newsService.getNews(this.subsegment)
+      let actu = this.subsegment;
+      if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
+      this.newsService.getNews(actu)
       .then(
         res => {
           let result:any = res;

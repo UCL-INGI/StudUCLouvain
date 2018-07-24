@@ -46,7 +46,7 @@
 
     <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.auditoires.showDetails">
       <div item-content>
-        <h3>{{auditoire.title}}</h3>
+        <h3>{{auditoire.title}} {{auditoire.sigle}}</h3>
         <p>{{auditoire.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
@@ -69,7 +69,7 @@
 
     <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
       <div item-content >
-        <h3>{{bibli.title}}</h3>
+        <h3>{{bibli.title}} {{bibli.sigle}}</h3>
         <p>{{bibli.address}}</p>
       </div>
       <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>

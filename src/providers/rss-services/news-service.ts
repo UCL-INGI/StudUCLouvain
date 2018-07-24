@@ -52,12 +52,15 @@ export class NewsService {
           baseURL = this.url3;
           break;
        }
+       case "P1": {
+         baseURL = this.url1;
+         break;
+       }
        default: {
-          baseURL = this.url1;
+          baseURL = segment;
           break;
        }
     }
-
     return new Promise( (resolve, reject) => {
 
       this.rssService.load(baseURL).subscribe(
