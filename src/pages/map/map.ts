@@ -20,7 +20,7 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
 
 import { POIService } from '../../providers/map-services/poi-service';
@@ -55,26 +55,9 @@ export class MapPage {
               public mapService: MapService,
               public platform: Platform,
               public navParams: NavParams,
-              public poilocations: POIService,
-              public alertCtrl: AlertController) 
+              public poilocations: POIService)
   {
       this.title = this.navParams.get('title');
-  }
-
-  alert(message:string) {
-    const actionSheet = this.alertCtrl.create({
-      title: message,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
   }
 
   ngAfterViewInit(){
@@ -132,7 +115,7 @@ export class MapPage {
   onSelect(data:any){
     if(this.selectedLocation !== data){
       this.selectedLocation = data;
-      
+
     }
     this.mapService.addMarker(this.selectedLocation);
   }
