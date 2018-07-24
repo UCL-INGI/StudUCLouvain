@@ -185,22 +185,22 @@
         "AIDE23" : "Avis conseils expertise",
         "AIDE24" : "Actions communautaires et travail en réseau",
 
-        "PSYPED" : "Aide psychologique, pédagogique et d'orientation",
-        "AIDE25" : "Une équipe de psychologues à la disposition des étudiants",
-        "AIDE26" : "Au sein du Service d’aide, des psychologues reçoivent les étudiants à leur demande lors  de consultations confidentielles et  dans un cadre indépendant des facultés.",
-        "AIDE27" : "Les étudiants peuvent être écoutés et  accompagnés dans les difficultés qui les empêchent de mener à bien leur projet d’étude.",
-        "AIDE28" : "Besoin d’écoute, besoin de faire le point sur les études, les projets, les difficultés de vie, la situation familiale, affective. Besoin de réorienter son projet d’étude, son projet de vie. Besoin d’une aide face aux difficultés d’études et d’apprentissage.",
+				"PSYPED" : "Aide psychologique, pédagogique et d'orientation",
+				"AIDE25" : "Une équipe de psychologues à la disposition des étudiants",
+				"AIDE26" : "Au sein du Service d’aide, des psychologues reçoivent les étudiants à leur demande lors  de consultations confidentielles et  dans un cadre indépendant des facultés.",
+				"AIDE27" : "Les étudiants peuvent être écoutés et  accompagnés dans les difficultés qui les empêchent de mener à bien leur projet d’étude.",
+				"AIDE28" : "Besoin d’écoute, besoin de faire le point sur les études, les projets, les difficultés de vie, la situation familiale, affective. Besoin de réorienter son projet d’étude, son projet de vie. Besoin d’une aide face aux difficultés d’études et d’apprentissage.",
 
-        "SANTE1" : "L’équipe est à l’écoute de l’étudiant lors de  consultations individuelles concernant une inquiétude, une difficulté, un Actions de prévention et de santé publique",
-        "SANTE2" : "L’équipe a en charge la surveillance de santé des étudiants stagiaires, l’organisation des campagnes de prévention de la tuberculose dans le cadre de bilans de santé pour les étudiants internationaux, les campagnes de vaccinations. Elle assure le suivi des événements infectieux : rougeole, oreillons, méningite, etc.",
-        "SANTE3" : "L'équipe organise également des actions de prévention notamment en co-organisant des campagnes de dépistage des IST, ou des soirées d’informations sur l’accès aux soins de santé.",
-        "SANTE4" : "L’équipe remet  des avis médicaux  par exemple à demande d’un assistant social, d’un psychologue de l’équipe, d’un académique, d’un jury d’examen par rapport à l’incapacité d’un étudiant à suivre les cours, le stage, le TP, etc. ",
-        "SANTE5" : "Le médecin participe à la commission d’attribution des statuts pour étudiants à profils spécifiques spécifiquement pour les étudiants malades.",
-        "SANTE6" : "Des avis sont demandés à l’équipe pour des décisions d’aides financières médico-sociales. ",
-        "SANTE7" : "L’équipe a une fonction de conseil à la demande des étudiants ou de la commission des baptêmes étudiants.",
-        "SANTE8" : "L’équipe  travaille en référence à la charte sur la qualité de vie en milieu étudiants . Elle anime ou participe à différents groupes dans cette optique : Groupe de Réflexion Santé, Bouger Manger, Pack en bloque, ateliers santé en faculté, ateliers du blocus, Tout SEXplique, etc. Elle fait émerger les préoccupations de santé entendues dans les consultations individuelles pour les relayer auprès d’autres acteurs de l’université concernés par la vie étudiante et leur santé.",
-        "SANTE9" : "Elle travaille en étroite collaboration avec Univers santé ASBL dans toutes les actions de promotion de la santé en milieu étudiant."
-    },
+				"SANTE1" : "L’équipe est à l’écoute de l’étudiant lors de  consultations individuelles concernant une inquiétude, une difficulté, un Actions de prévention et de santé publique",
+				"SANTE2" : "L’équipe a en charge la surveillance de santé des étudiants stagiaires, l’organisation des campagnes de prévention de la tuberculose dans le cadre de bilans de santé pour les étudiants internationaux, les campagnes de vaccinations. Elle assure le suivi des événements infectieux : rougeole, oreillons, méningite, etc.",
+				"SANTE3" : "L'équipe organise également des actions de prévention notamment en co-organisant des campagnes de dépistage des IST, ou des soirées d’informations sur l’accès aux soins de santé.",
+				"SANTE4" : "L’équipe remet  des avis médicaux  par exemple à demande d’un assistant social, d’un psychologue de l’équipe, d’un académique, d’un jury d’examen par rapport à l’incapacité d’un étudiant à suivre les cours, le stage, le TP, etc. ",
+				"SANTE5" : "Le médecin participe à la commission d’attribution des statuts pour étudiants à profils spécifiques spécifiquement pour les étudiants malades.",
+				"SANTE6" : "Des avis sont demandés à l’équipe pour des décisions d’aides financières médico-sociales. ",
+				"SANTE7" : "L’équipe a une fonction de conseil à la demande des étudiants ou de la commission des baptêmes étudiants.",
+				"SANTE8" : "L’équipe  travaille en référence à la charte sur la qualité de vie en milieu étudiants . Elle anime ou participe à différents groupes dans cette optique : Groupe de Réflexion Santé, Bouger Manger, Pack en bloque, ateliers santé en faculté, ateliers du blocus, Tout SEXplique, etc. Elle fait émerger les préoccupations de santé entendues dans les consultations individuelles pour les relayer auprès d’autres acteurs de l’université concernés par la vie étudiante et leur santé.",
+				"SANTE9" : "Elle travaille en étroite collaboration avec Univers santé ASBL dans toutes les actions de promotion de la santé en milieu étudiant."
+		 },
 
     "EMPLOYEE" : {
         "INFO" : "Informations pratiques",
@@ -305,7 +305,7 @@
     	"NR2" : "L’incroyable communauté de NextRide partage en temps réel toute la vie des transports publics : véhicules complets, bloqués, déviations,… Vous saurez tout!",
     	"NR3" : "Mais NextRide propose aussi des fonctionalités avancées (accès hors-connexion, recherche d’itinéraire,...) et vous propulse au coeur d’une compétition unique au monde entre les navetteurs de demain (bientôt sur Android).",
     	"NR4" : "* 2ème meilleure app Belge selon Le Soir ! *",
-    	"NR5" : "FONCTIONNALITÉS",
+    	"NR5" : "FonctionnalitéS",
     	"NR6" : "• Perturbations communautaires",
     	"NR7" : "NextRide vous informe, 24h/24, 7 jours sur 7, des perturbations sur le réseau.",
     	"NR8" : "Grâce à notre incroyable communauté où tout le monde peut signaler un problème, soyez au courant d’un bus plein, d’une grève, ou des conseils laissés par les utilisateurs.",
@@ -322,16 +322,16 @@
     	"NR19" : "Grâce à un partenariat exclusif et inédit avec la STIB et le Groupe TEC,",
     	"NR20" : "NextRide délivre les horaires officiels des lignes de métros, trams et bus partout en Wallonie et à Bruxelles.",
 
-        "BUS1" : "est une plateforme de qualité pour trouver un covoitureur près de chez vous ou sur le chemin de l'université. Une base de données pour la communauté universitaire a été mise en place !",
-        "BUS2" : "Pour trouver un <strong>covoitureur </strong>à partir de et vers les sites de l'UCL, rendez-vous sur :",
-        "BUS3" : "&nbsp;et inscrivez-vous <strong>avec votre adresse mail UCL</strong>.",
-        "BUS4" : "En temps réel ou en le planifiant - Etudiants et membres du personnel - Pour tous les sites UCL.",
-        "BUS5" : "Une fois inscrit sur la plate-forme de covoiturage sur internet vous pouvez utiliser l'application pour rechercher un chauffeur ou un passager, que ce soit pour une navette quotidienne ou des déplacements occasionnels en Belgique ou à l'étranger.",
-        "BUS6" : "Le système combine plusieurs avantages:",
-        "BUS7" : "<strong>Souplesse</strong> : Commuty permet de trouver et de contacter à l’avance ou en temps réel des covoitureurs.",
-        "BUS8" : "<strong>Sécurité</strong> : Commuty est une application privée. Elle n’est accessible qu’aux membres de l’UCL avec leur adresse mail de l’Université.",
-        "BUS9" : "<strong>Masse critique</strong> : Commuty connecte des covoitureurs au sein de l’UCL, étudiants et personnel confondus. Si vous le souhaitez, vous pouvez également entrer en contact avec des membres d’organisations voisines pour élargir les possibilités de covoiturage.",
-        "BUS10" : "<strong>Confidentialité</strong> : Vos données personnelles ne sont en aucun cas divulguées. Les seules données visibles par d’autres utilisateurs sont les codes postaux des adresses que vous entrerez et votre nom."
+      "BUS1" : "est une plateforme de qualité pour trouver un covoitureur près de chez vous ou sur le chemin de l'université. Une base de données pour la communauté universitaire a été mise en place !",
+      "BUS2" : "Pour trouver un <strong>covoitureur </strong>à partir de et vers les sites de l'UCL, rendez-vous sur :",
+      "BUS3" : "&nbsp;et inscrivez-vous <strong>avec votre adresse mail UCL</strong>.",
+      "BUS4" : "En temps réel ou en le planifiant - Etudiants et membres du personnel - Pour tous les sites UCL.",
+      "BUS5" : "Une fois inscrit sur la plate-forme de covoiturage sur internet vous pouvez utiliser l'application pour rechercher un chauffeur ou un passager, que ce soit pour une navette quotidienne ou des déplacements occasionnels en Belgique ou à l'étranger.",
+      "BUS6" : "Le système combine plusieurs avantages:",
+      "BUS7" : "<strong>Souplesse</strong> : Commuty permet de trouver et de contacter à l’avance ou en temps réel des covoitureurs.",
+      "BUS8" : "<strong>Sécurité</strong> : Commuty est une application privée. Elle n’est accessible qu’aux membres de l’UCL avec leur adresse mail de l’Université.",
+      "BUS9" : "<strong>Masse critique</strong> : Commuty connecte des covoitureurs au sein de l’UCL, étudiants et personnel confondus. Si vous le souhaitez, vous pouvez également entrer en contact avec des membres d’organisations voisines pour élargir les possibilités de covoiturage.",
+      "BUS10" : "<strong>Confidentialité</strong> : Vos données personnelles ne sont en aucun cas divulguées. Les seules données visibles par d’autres utilisateurs sont les codes postaux des adresses que vous entrerez et votre nom."
     },
 
     "GUINDAILLE" : {
@@ -394,7 +394,7 @@
     },
 
     "CREDIT" : {
-        "PROJET" : "Le projet UCLCampus est le résultat du travail de plusieurs étudiants dans le cadre de leur mémoire.",
+        "PROJET" : "Le projet Stud@UCLouvain est le résultat du travail de plusieurs étudiants dans le cadre de leur mémoire.",
         "COORD" : "La coordination de ce projet a été réalisée par Mr. Yves Deville.",
         "LAST" : "Il a été développé par Daubry Benjamin et Marchesini Bruno en 2017-2018.",
         "MIDDLE" : "Jérôme Lemaire et Corentin Lamy en 2016-2017.",
