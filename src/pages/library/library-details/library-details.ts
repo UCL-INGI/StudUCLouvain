@@ -65,6 +65,7 @@ export class LibraryDetailsPage {
     }
   }
 
+  /*Open or close the schedule*/
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
@@ -73,10 +74,12 @@ export class LibraryDetailsPage {
       }
   }
 
+  /*The selectionned schedule is displayed?*/
   isGroupShown(group) {
       return this.shownGroup === group;
   }
 
+  /*Open the page of the library for more details*/
   openPage(url: string) {
     window.open(url, '_blank');
   }

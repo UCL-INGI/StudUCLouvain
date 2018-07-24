@@ -54,13 +54,16 @@ export class LibrariesPage {
     //this.loadLibraries();
   }
 
+  /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
     this.loadLibraries();
     refresher.complete();
   }
 
+  /*Load libraries*/
   loadLibraries() {
     this.searching = true;
+    //Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
     if(this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
@@ -76,6 +79,7 @@ export class LibrariesPage {
     }
   }
 
+  /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
     this.navCtrl.push('LibraryDetailsPage', { 'lib': lib});
   }
