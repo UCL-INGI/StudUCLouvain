@@ -77,7 +77,7 @@ export class HomePage {
     appUrl: null, httpUrl: null  };
 
   restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
-    iosSchemaName: 'com.apptree.resto4u',
+    iosSchemaName: 'id1156050719',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',
     httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
@@ -124,17 +124,20 @@ export class HomePage {
   launchExternalApp(page) {
     let app: string;
     //let storeUrl:string;
+    let check:string;
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
       //storeUrl=page.httpUrl;
+      check=page.appUrl;
     } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
       //storeUrl= 'market://details?id='+ app;
+      check=app;
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
-    this.appAvailability.check(app).then(
+    this.appAvailability.check(check).then(
       () => { // success callback
         const browser = this.iab.create(page.appUrl, '_system');
         browser.close();

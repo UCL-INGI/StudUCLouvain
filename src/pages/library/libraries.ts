@@ -46,10 +46,11 @@ export class LibrariesPage {
     public connService : ConnectivityService)
   {
     this.title = this.navParams.get('title');
+    this.loadLibraries();
   }
 
   ionViewDidLoad() {
-    this.loadLibraries();
+    //this.loadLibraries();
   }
 
   public doRefresh(refresher) {
