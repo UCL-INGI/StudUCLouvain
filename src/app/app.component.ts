@@ -149,6 +149,7 @@ console.log("Startin App");
     /*this.storage.get('disclaimer').then((disclaimer) => {
       if(!disclaimer) this.disclaimer();
     });*/
+    this.disclaimer();
 
   }
 
@@ -223,24 +224,24 @@ console.log("Startin App");
     //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
-            message: "Cette application a pour but de centraliser un maximum d'informations disponibles sur le portail UCLouvain.<br>Cela ne vous dispense pas de vous y rendre afin d'en savoir plus.",
-            inputs: [
+            message: "Ceci est une version bêta de l'application. Celle-ci est toujours en cours de développement",
+            /*inputs: [
               {
                 type: 'checkbox',
                 label: 'Ne plus afficher',
                 handler:(e)=>{
-                   console.log(e.checked);
-                   this.checked = e.checked;
+                   //console.log(e.checked);
+                   //this.checked = e.checked;
                 }
               }
-            ],
+            ],*/
             buttons: [
                 {
                     text: "OK",
                     handler: data => {
-                      if(this.checked){
+                      /*if(this.checked){
                         this.user.addDisclaimer(this.checked);
-                      }
+                      }*/
                     }
                 }
             ]
