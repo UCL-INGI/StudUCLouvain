@@ -51,6 +51,7 @@ export class LibrariesPage {
               private translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
+this.loadLibraries();
   }
 
 
@@ -60,7 +61,7 @@ export class LibrariesPage {
   }
 
   ionViewDidLoad() {
-    this.loadLibraries();
+   
   }
 
   loadLibraries() {

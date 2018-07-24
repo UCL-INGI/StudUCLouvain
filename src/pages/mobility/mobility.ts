@@ -48,15 +48,15 @@ export class MobilityPage {
               private translateService: TranslateService) {
     this.title = this.navParams.get('title');
     this.carpoolingPage = { title: 'Covoiturage', component: CarpoolingPage,
-                            iosSchemaName: 'net.commuty.mobile',
+                            iosSchemaName: 'id1143545052',
                             androidPackageName: 'net.commuty.mobile',
                             appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
     this.busPage = { title: 'NextRide', component: BusPage,
-                            iosSchemaName: 'be.thomashermine.prochainbus',
+                            iosSchemaName: 'id568042532',
                             androidPackageName: 'be.thomashermine.prochainbus',
-                            appUrl: 'nextride://timetables/', httpUrl: 'https://nextride.be/timetables' };
+                            appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
     this.trainPage = { title: 'SNCB', component: TrainPage,
-                            iosSchemaName: 'de.hafas.android.sncbnmbs',
+                            iosSchemaName: 'id403212064',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
                             appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
@@ -68,17 +68,20 @@ export class MobilityPage {
   launchExternalApp(page:any) {
     let app: string;
     let storeUrl:string;
+	let check:string;
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
       storeUrl=page.httpUrl;
+	check=page.appUrl;
     } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
       storeUrl= 'market://details?id='+ app;
+	check=app;
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
-    this.appAvailability.check(app).then(
+    this.appAvailability.check(check).then(
       () => { // success callback
         const browser = this.iab.create(page.appUrl, '_system');
         browser.close();

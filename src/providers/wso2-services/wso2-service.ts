@@ -61,10 +61,12 @@ export class Wso2Service {
       .map(res => {
         //console.log(res);
         this.token = "Bearer " + res.json().access_token;
-        console.log("Token ok");
+        console.log('Token ok');
         return "OK";
       })
-      .catch((error:any) => { return Observable.throw(error)});
+      .catch((error:any) => { 
+console.log('Token error');
+return Observable.throw(error)});
   }
 
 
