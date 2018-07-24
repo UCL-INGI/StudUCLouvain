@@ -59,8 +59,11 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
 
+  </ion-list>
+  <ion-list-header *ngIf="(segment === 'TD' && noTP) || (segment === 'Cours magistral' && noCM) || (segment === 'Examen' && noEx)">
+    {{'COURSE.NO' | translate}}
+  </ion-list-header>
 
   <ion-fab right bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->

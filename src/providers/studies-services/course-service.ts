@@ -60,6 +60,7 @@ export class CourseService {
     extractActivity(data) : Activity[]{
       let activities : Activity[] = [];
       let activitiesList = data.activities.activity
+      console.log(data);
       for (let i =0; i< activitiesList.length ;i++){
         let activityElem = activitiesList[i];
         let newActivities : Activity[] = this.createNewActivities(activityElem);
@@ -90,7 +91,8 @@ export class CourseService {
           activities.push(activity);
         }
       }
-      if(isExam){
+      if(isExam && events !== undefined){
+        console.log(events);
           let event = events;
           let endHour = event._endHour;
           let startHour = event._startHour;

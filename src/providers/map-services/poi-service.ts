@@ -32,7 +32,7 @@ export class POIService {
   url = '';
   urlLLN ='assets/data/resourcesLLN.json';
   urlMons = 'assets/data/resourcesMons.json';
-  urlWol = 'assets/data/resourcesWoluwe.json'; 
+  urlWol = 'assets/data/resourcesWoluwe.json';
   old = '';
   constructor(public http: HttpClient,
 
@@ -62,8 +62,11 @@ export class POIService {
 
         //for (let zone of tmpZones) {
           let auditoiresLength = tmpZones.auditoires.length;
+          let locauxLength = tmpZones.locaux.length;
           let bibliothequesLength = tmpZones.bibliotheques.length;
+          let sportsLength = tmpZones.sports.length;
           let restauULength = tmpZones.restaurants_universitaires.length;
+          let servicesLength = tmpZones.services.length;
           let parkingsLength = tmpZones.parkings.length;
 
           let newZone = {
@@ -71,13 +74,25 @@ export class POIService {
               list: this.createMapLocations(tmpZones.auditoires),
               listChecked: Array(auditoiresLength).fill(false),
                         showDetails: false},
+            locaux: {
+              list: this.createMapLocations(tmpZones.locaux),
+              listChecked: Array(locauxLength).fill(false),
+                        showDetails: false},
             bibliotheques: {
               list: this.createMapLocations(tmpZones.bibliotheques),
               listChecked: Array(bibliothequesLength).fill(false),
                         showDetails: false},
+            sports: {
+              list: this.createMapLocations(tmpZones.sports),
+              listChecked: Array(sportsLength).fill(false),
+                        showDetails: false},
             restaurants_universitaires: {
               list: this.createMapLocations(tmpZones.restaurants_universitaires),
               listChecked: Array(restauULength).fill(false),
+                        showDetails: false},
+            services: {
+              list: this.createMapLocations(tmpZones.services),
+              listChecked: Array(servicesLength).fill(false),
                         showDetails: false},
             parkings: {
               list: this.createMapLocations(tmpZones.parkings),
@@ -165,4 +180,3 @@ export class POIService {
     return x * Math.PI / 180;
   }*/
 }
-  
