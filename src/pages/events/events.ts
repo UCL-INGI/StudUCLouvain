@@ -40,11 +40,6 @@ import { EventItem } from '../../app/entity/eventItem';
   templateUrl: 'events.html'
 })
 export class EventsPage {
-  //TODO : Change details to use EventItem and change EventsDetailsPage to EventDetailsPage
-  // the list is a child of the schedule page
-  // @ViewChild('scheduleList') gets a reference to the list
-  // with the variable #scheduleList, `read: List` tells it to return
-  // the List and not a reference to the element
   @ViewChild('eventsList', { read: List }) eventsList: List;
 
   events: Array<EventItem> = [];
@@ -87,9 +82,11 @@ export class EventsPage {
     this.searchControl = new FormControl();
   }
 
+  /*Like the constructor, ionViewDidLoad fires all his body*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
+    //If available connexion => load events to display and display them
     if(this.connService.isOnline()) {
       this.loadEvents();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
@@ -98,17 +95,20 @@ export class EventsPage {
       });
       this.presentLoading();
     }
+    //If not => go back to precedent page and pop an alert
     else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
+  /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
     this.loadEvents();
     refresher.complete();
   }
 
+  /*Display an loading window*/
   presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
@@ -119,6 +119,7 @@ export class EventsPage {
     }
   }
 
+  /*Close the loading window*/
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
@@ -130,10 +131,12 @@ export class EventsPage {
     this.searching = true;
   }
 
+  /*Open the details page for an event*/
   public goToEventDetail(event: EventItem) {
     this.navCtrl.push('EventsDetailsPage', { 'event': event });
   }
 
+  /*To display or close a group of events (1 group = events for one week)*/
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
@@ -142,15 +145,18 @@ export class EventsPage {
       }
   }
 
+  /*Check if the display group is the group in arg*/
   isGroupShown(group) {
       return this.shownGroup === group;
   }
 
+  /*Load the list of events to display*/
   public loadEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
     let result: any;
 
+    //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if(this.connService.isOnline()) {
       this.eventsService.getEvents(this.segment).then(
         res => {
@@ -175,7 +181,6 @@ export class EventsPage {
           this.updateDisplayedEvents();
         }
       });
-
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -183,7 +188,7 @@ export class EventsPage {
     }
   }
 
-   //Make an array with events sorted by week
+   /*Make an array with events sorted by week*/
    changeArray(array, weekUCL){
     var groups = array.reduce(function(obj,item){
       var date = new Date(item.startDate.getTime());
@@ -201,7 +206,7 @@ export class EventsPage {
     return eventsD;
   }
 
-  // Returns the ISO week of the date.
+  /*Returns the ISO week of the date*/
   getWeek(d:Date) {
     var date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
@@ -213,7 +218,7 @@ export class EventsPage {
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
-  //Return first day of the week and last day of the week (to display range)
+  /*Return first day of the week and last day of the week (to display range)*/
   getRangeWeek(week,year){
     var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date(''+year+'');
@@ -226,6 +231,7 @@ export class EventsPage {
     return {from:rangeIsFrom, to:rangeIsTo};
   }
 
+  /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayedEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
@@ -252,10 +258,9 @@ export class EventsPage {
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
     console.log(this.displayedEventsD);
     this.dismissLoading();
-
-
   }
 
+  /*Display the modal with the filters and update data with them*/
   presentFilter() {
     if(this.filters === undefined){
       this.filters = [];
@@ -264,7 +269,6 @@ export class EventsPage {
     let modal = this.modalCtrl.create('EventsFilterPage',
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
-
     modal.onWillDismiss((data: any[]) => {
       if (data) {
         let tmpRange = data.pop();
@@ -276,18 +280,18 @@ export class EventsPage {
         this.updateDisplayedEvents();
       }
     });
-
   }
 
+  /*Update the date limit, take account if a change is done by filter with the dateRange value*/
   private updateDateLimit(){
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
   }
 
+  /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: ItemSliding, itemData: any):void{
-
     let options:any = {
-      firstReminderMinutes:5
+      firstReminderMinutes:15
     };
     let message:string;
     this.translateService.get('EVENTS.MESSAGE').subscribe((res:string) => {message=res;});
@@ -303,6 +307,7 @@ export class EventsPage {
       });
   }
 
+  /*Add an event to the favorites*/
   addFavorite(slidingItem: ItemSliding, itemData: any) {
     if (this.user.hasFavorite(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
@@ -325,6 +330,7 @@ export class EventsPage {
 
   }
 
+  /*Remove an event from the favorites*/
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     let message:string;
     let cancel:string;

@@ -40,7 +40,7 @@ export class EventsFilterPage {
     public viewCtrl: ViewController,
     private eventService: EventsService
   ) {
-    // passed in array of categories names that should be excluded (unchecked)
+    //passed in array of categories names that should be excluded (unchecked)
     let excludedFilters = this.navParams.get("excludedFilters");
     let filters = this.navParams.get("filters");
     this.dateRange = this.navParams.get("dateRange");
@@ -53,26 +53,27 @@ export class EventsFilterPage {
     }
   }
 
+  /*Reset All of the Toggles to be checked*/
   resetFilters() {
-    // reset all of the toggles to be checked
     this.categories.forEach(category => {
       category.isChecked = true;
     });
   }
 
+  /*Uncheck All Sports*/
   uncheckAll() {
-    // uncheck all sports
     this.categories.forEach(category => {
       category.isChecked = false;
     });
   }
 
+  /*Pass Back a New Array of Categories Name to Exclude*/
   applyFilters() {
-    // Pass back a new array of categories name to exclude
     let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
     this.dismiss(excludedFilters);
   }
 
+  /*Cancel Filter*/
   dismiss(data?: any) {
     if(typeof data == "undefined" ) {
       data = [];

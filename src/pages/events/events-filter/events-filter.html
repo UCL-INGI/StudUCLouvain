@@ -18,23 +18,22 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
+<!--EN-TETE-->
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
-
     <ion-title>
       {{'EVENTS.FILTER' | translate}}
     </ion-title>
-
     <ion-buttons end>
       <button ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!--BODY-->
 <ion-content class="outer-content">
   <ion-item>
     <ion-label *ngIf="dateRange > 1" center >
@@ -62,7 +61,6 @@
   </ion-toolbar>
   <ion-list>
     <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
-
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
         <img [src]="category.iconCategory">
@@ -70,8 +68,5 @@
       <ion-label>{{category.name}}</ion-label>
       <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
     </ion-item>
-
   </ion-list>
-
-
 </ion-content>

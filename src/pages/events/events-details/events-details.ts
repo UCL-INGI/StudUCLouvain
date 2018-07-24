@@ -44,11 +44,13 @@ export class EventsDetailsPage {
     this.event = navParams.get('event');
   }
 
+  /*OPEN THE EXTERNAL PAGE OF THE EVENT*/
   public openPage(url: string) {
     window.open(url, '_blank');
   }
 
-  addFavorite(event : EventItem){
+  /*ADD EVENT TO FAVORITE*/
+  public addFavorite(event : EventItem){
     let message:string;
     this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
 

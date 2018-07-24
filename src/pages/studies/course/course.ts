@@ -99,6 +99,7 @@ export class CoursePage {
 
   addToCalendar(slidingItem : ItemSliding, activity : Activity){
     let options:any = {
+      firstReminderMinutes:15
     };
     let message:string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
