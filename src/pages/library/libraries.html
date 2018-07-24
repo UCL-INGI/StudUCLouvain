@@ -20,6 +20,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+<!--EN-TETE-->
 <ion-header>
   <ion-navbar >
     <button ion-button icon-only menuToggle>
@@ -27,10 +28,9 @@
     </button>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
+<!--BODY-->
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content

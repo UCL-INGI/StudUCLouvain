@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
+<!--EN-TETE-->
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -44,6 +44,7 @@
   </ion-segment>
 </ion-header>
 
+<!--BODY-->
 <!--class="feed-list" -->
 <ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
   <ion-refresher (ionRefresh)="doRefresh($event)">

@@ -19,6 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+<!--EN-TETE-->
 <ion-header>
   <ion-navbar >
     <button ion-button icon-only menuToggle>
@@ -39,8 +40,8 @@
   </ion-segment>
 </ion-header>
 
+<!--BODY-->
 <ion-content  padding class="has-header">
-
   <!----------------INFORMATIONS ---------------------->
   <ng-container *ngIf="segment==='info'">
     <ion-item-divider  (tap)="toggleGroup('service_desk')">

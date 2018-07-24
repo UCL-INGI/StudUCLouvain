@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
+<!--EN-TETE-->
 <ion-header>
   <ion-navbar >
     <button ion-button icon-only menuToggle>
@@ -26,10 +26,9 @@
     </button>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
+<!--BODY-->
 <ion-content padding>
 <ion-row>
   <ion-col align-self-end text-center><img (tap)="launchExternalApp(carpoolingPage)" alt="voiture" src="./assets/img/commuty.png" align="middle" /><p align="center"><b>{{'MOBI.COVOIT' | translate}}</b></p></ion-col>

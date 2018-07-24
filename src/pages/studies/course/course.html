@@ -20,8 +20,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
+<!--EN-TETE-->
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{course.name}} - {{course.acronym}}</ion-title>
   </ion-navbar>
@@ -34,11 +34,11 @@
     </ion-segment-button>
     <ion-segment-button value="Examen">
       {{'COURSE.EXAMEN' | translate}}
-      </ion-segment-button> 
-  </ion-segment>  
+      </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
-
+<!--BODY-->
 <ion-content padding #courseContent>
   <ion-list>
      <ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem >
