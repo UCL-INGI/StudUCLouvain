@@ -81,6 +81,7 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     private wso2Service : Wso2Service
   ) {
+console.log("Startin App");
     this.user.getCampus();
     console.log(this.user.campus);
     this.alertPresented = false;
@@ -122,7 +123,7 @@ export class MyApp {
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.RESTAURANT', component: RestaurantPage, icon : 'restaurant',
-        iosSchemaName: 'com.apptree.resto4u',
+        iosSchemaName: 'id1156050719',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
@@ -223,17 +224,20 @@ export class MyApp {
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
     let storeUrl:string;
+	let check:string;
   	if (this.device.platform === 'iOS') {
   		app = iosSchemaName;
       storeUrl=httpUrl;
+	check=appUrl;
   	} else if (this.device.platform === 'Android') {
   		app = androidPackageName;
       storeUrl= 'market://details?id='+ app;
+	check=app;
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();
   	}
-  	this.appAvailability.check(app).then(
+  	this.appAvailability.check(check).then(
   		() => { // success callback
   			const browser = this.iab.create(appUrl, '_system');
         browser.close();
