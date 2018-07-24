@@ -7,28 +7,28 @@
 					"acro" : "MEDE",
 					"site" : "",
 					"name" : "Faculté de médecine et médecine dentaire",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/mede/rss"
 				},
 
 				{
 					"acro" : "FASB",
 					"site" : "",
 					"name" : "Faculté de pharmacie et des sciences biomédicales",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/fasb/rss"
 				},
 
 				{
 					"acro" : "FSP",
 					"site" : "",
 					"name" : "Faculté de santé publique",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/fsp/rss"
 				},
 
 				{
 					"acro" : "FSM",
 					"site" : "",
 					"name" : "Faculté des Sciences de la Motricité",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/fsm/rss"
 				}
 			]
 		},
@@ -39,28 +39,28 @@
 					"acro" : "EPL",
 					"site" : "",
 					"name" : "Ecole Polytechnique de Louvain",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/epl/rss"
 				},
 
 				{
 					"acro" : "LOCI",
 					"site" : "",
 					"name" : "Faculté d'architecture, d'ingénierie architecturale, d'urbanisme",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/loci/rss"
 				},
 
 				{
 					"acro" : "AGRO",
 					"site" : "",
 					"name" : "Faculté des bioingénieurs",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/agro/rss"
 				},
 
 				{
 					"acro" : "SC",
 					"site" : "",
 					"name" : "Faculté des sciences",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/sc/rss"
 				}
 			]
 		},
@@ -71,42 +71,42 @@
 					"acro" : "DRT",
 					"site" : "",
 					"name" : "Faculté de droit et de criminologie",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/drt/rss"
 				},
 
 				{
 					"acro" : "FIAL",
 					"site" : "",
 					"name" : "Faculté de philosophie, arts et lettres",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/fial/rss"
 				},
 
 				{
 					"acro" : "PSP",
 					"site" : "",
 					"name" : "Faculté de psychologie et des sciences de l'éducation",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/psp/rss"
 				},
 
 				{
 					"acro" : "TECO",
 					"site" : "",
 					"name" : "Faculté de théologie",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/teco/rss"
 				},
 
 				{
 					"acro" : "ESPO",
 					"site" : "",
 					"name" : "Faculté des sciences économiques, sociales, politiques et de communication",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/espo/rss"
 				},
 
 				{
 					"acro" : "LSM",
 					"site" : "https://uclouvain.be/fr/node/10353",
 					"name" : "Louvain School of Management",
-					"rss"  : ""
+					"rss"  : "https://uclouvain.be/fr/actualites/lsm/rss"
 				}
 			]
 		}

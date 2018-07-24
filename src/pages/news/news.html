@@ -65,22 +65,7 @@
       refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
-  
-<!------------------------------NEWS UNIVERSITAIRES -------------------------------->
-  <ng-container >
-    <ion-list #newsList [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%" [hidden]="segment !== 'univ' || shownNews === 0" >
-      <ion-item *virtualItem = "let item">
-        <button ion-item (tap)="goToNewsDetail(item)" no-lines>
-          <h3>{{item.title}}</h3>
-          <p [innerHtml]="item.trimmedDescription"></p>
-          <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>
-        </button>
-      </ion-item>
-    </ion-list>
-    <ion-list-header *ngIf="nonews && !searching">
-      {{'NEWS.NOTHING' | translate}}
-    </ion-list-header>
-  </ng-container>
+
 
 <!------------------------------NEWS FACULTAIRES -------------------------------->
 <!------------------------------CHOIX FAC -------------------------------->
@@ -99,29 +84,40 @@
         <button ion-button round (tap)="updateFac()" *ngIf="!userS.hasFac()">Sauver</button>
       </ion-col>
     </ion-row>
-
+<!--------------------------- ACTUALITES FAC ----------------------------------------->
     <ion-item *ngIf="userS.hasFac()">
       <ion-row center>
         <ion-col text-center>
           <h2><strong>Faculté : {{userS.fac}}</strong></h2> 
         </ion-col>
       </ion-row>
-      <ion-item *ngIf="facsegment=== 'news'" no-lines>
-        <button center ion-button clear small icon-left (tap)="openURL(site)" *ngIf="site.length > 0">
+        <button center ion-button clear small icon-left (tap)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'">
           <ion-icon name='share-alt'></ion-icon>
           {{'NEWS.WEB' | translate}}
         </button>
-        <p text-center *ngIf="site.length == 0"><strong>Indisponible pour le moment</strong></p>
-      </ion-item>
+        <p text-center *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'"><strong>Indisponible pour le moment</strong></p>
 
 <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
       <ion-item *ngIf="facsegment==='valve'" no-lines>
         <p text-center><strong>Indisponible pour le moment</strong></p>
       </ion-item>
     </ion-item>
-    
+  </ng-container>
 
-
+<!------------------------------NEWS UNIVERSITAIRES -------------------------------->
+  <ng-container >
+    <ion-list #newsList [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%" [hidden]="facsegment==='valve' || shownNews === 0 || !userS.hasFac()" >
+      <ion-item *virtualItem = "let item">
+        <button ion-item (tap)="goToNewsDetail(item)" no-lines>
+          <h3>{{item.title}}</h3>
+          <p [innerHtml]="item.trimmedDescription"></p>
+          <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list-header *ngIf="nonews && !searching">
+      {{'NEWS.NOTHING' | translate}}
+    </ion-list-header>
   </ng-container>
 
 <!----------------- BUTTON TO CHANGE FAC ------------------------->
