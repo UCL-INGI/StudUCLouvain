@@ -42,6 +42,7 @@ export class POIService {
 
   }
 
+  /*Put the good campus for the user to display the good map with the good locations*/
   update(){
     let campus = this.user.campus;
     if(campus == "LLN") this.url = this.urlLLN;
@@ -53,14 +54,12 @@ export class POIService {
     }
   }
 
+  /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
     if(this.zones.length == 0) return new Promise(resolve => {
-
       this.http.get(this.url).map(res => res).subscribe(data => {
-        let tmpZones = data['zones'];
-
-        //for (let zone of tmpZones) {
+          let tmpZones = data['zones'];
           let auditoiresLength = tmpZones.auditoires.length;
           let locauxLength = tmpZones.locaux.length;
           let bibliothequesLength = tmpZones.bibliotheques.length;
@@ -69,6 +68,7 @@ export class POIService {
           let servicesLength = tmpZones.services.length;
           let parkingsLength = tmpZones.parkings.length;
 
+          //Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
           let newZone = {
             auditoires: {
               list: this.createMapLocations(tmpZones.auditoires),
@@ -99,35 +99,27 @@ export class POIService {
               listChecked: Array(parkingsLength).fill(false),
                         showDetails: false},
             icon: 'arrow-dropdown',
-
           };
-
           this.zones.push(newZone);
-        //}
-
         resolve(this.zones);
       });
-
     });
       else return new Promise(resolve => {
         resolve(this.zones);
       });
   }
 
+  /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
   private createMapLocations(list: any): Array<MapLocation> {
-
     let locationsList: MapLocation[] = [];
-
     for (let elem of list) {
       let newLocation = new MapLocation(elem.nom,
                                     elem.adresse,
                                     elem.coord.lat,
                                     elem.coord.lng,
                                     elem.sigle);
-
       locationsList.push(newLocation);
     }
-
     return locationsList;
   }
 
