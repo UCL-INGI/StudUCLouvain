@@ -42,8 +42,6 @@ declare var google;
 @Injectable()
 export class MapService {
 
-  //TODO : virer code redondant, check couplage + abstraction des données
-
   mapElement: any;
   pleaseConnect: any;
   map: any;
@@ -57,17 +55,18 @@ export class MapService {
               private geolocation : Geolocation,
               private platform: Platform,
               menuCtrl: MenuController) {
+    //Check the platform used
     this.onDevice = this.platform.is('android') || this.platform.is('ios');
-    this.apiKey = jsApiKey;
-    let leftMenu = menuCtrl.get('left');
 
+    this.apiKey = jsApiKey;
+
+    let leftMenu = menuCtrl.get('left');
     if(leftMenu) {
       leftMenu.ionOpen.subscribe(() => {
         if(this.map && this.onDevice) {
           this.map.setClickable(false);
         }
       });
-
       leftMenu.ionClose.subscribe(() => {
         if(this.map && this.onDevice) {
           this.map.setClickable(true);
@@ -76,8 +75,8 @@ export class MapService {
     }
   }
 
+  /*Initializes the map for the device or the browser*/
   init(mapElement: any, pleaseConnect: any): Promise<any> {
-
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
 
@@ -88,14 +87,11 @@ export class MapService {
     }
   }
 
+  /*Load the map for the browser and check the connectivity, if no connexion display a message to ask to connect*/
   private loadBrowserGoogleMaps(): Promise<any> {
-
     return new Promise((resolve, reject) => {
-
       if(typeof google == "undefined" || typeof google.maps == "undefined"){
-
         this.showPleaseConnect();
-
         if(this.connectivityService.isOnline()){
           window['mapInit'] = () => {
             this.initBrowserMap().then(
@@ -104,12 +100,10 @@ export class MapService {
               }, error => {
                 reject(error);
               });
-
             this.hidePleaseConnect();
           }
           let script = document.createElement("script");
           script.id = "googleMaps";
-
           if(this.apiKey){
             script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
           } else {
@@ -136,11 +130,9 @@ export class MapService {
     });
   }
 
-
+  /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
   private initBrowserMap(): Promise<any> {
-
     this.mapInitialised = true;
-
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition().then(
         (position) => {
@@ -149,15 +141,12 @@ export class MapService {
                                       String(position.coords.latitude),
                                       String(position.coords.longitude),
                                       "MYPOS");
-
           let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
           let mapOptions = {
             center: latLng,
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           }
-
           this.map = new google.maps.Map(this.mapElement, mapOptions);
           resolve(true);
         }, (error) => {
@@ -166,9 +155,9 @@ export class MapService {
         });
 
     });
-
   }
 
+  /*Load the map for the device and check the connectivity, if no connexion display a message to ask to connect*/
   private loadDeviceGoogleMaps() : Promise<any>{
     return new Promise((resolve, reject) => {
       if(this.connectivityService.isOnline()){
@@ -188,11 +177,10 @@ export class MapService {
     });
   }
 
+  /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
   private initDeviceMap() : Promise<any> {
     console.log("initDeviceMap - ask geolocation");
-
     return new Promise((resolve, reject) => {
-
       this.geolocation.getCurrentPosition().then(
         (position) => {
           console.log("initDeviceMap - geolocation answered");
@@ -201,23 +189,18 @@ export class MapService {
                                       String(position.coords.latitude),
                                       String(position.coords.longitude),
                                       "MYPOS");
-
           let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
-
           let mapOptions = {
             center: latLng,
             zoom: 15,
             mapTypeId: GoogleMapsMapTypeId.ROADMAP
           }
-
           // create CameraPosition
           let camPos: CameraPosition = {
             target: latLng,
             zoom: 15
           };
-
           this.map = new GoogleMap(this.mapElement, mapOptions);
-
           this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
             console.log('Map is ready!');
             this.map.moveCamera(camPos);
@@ -227,17 +210,15 @@ export class MapService {
           console.log("Map error initDeviceMap : " + error);
           reject(false);
         });
-
     });
   }
 
+  /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
     //console.log(this.markers);
     let marker = this.getMarker(location.title);
-
     if(!marker) {
       let contentString = "<p>"+ location.address +"</p>";
-
       if(this.onDevice) {
         this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
       } else {
@@ -249,9 +230,10 @@ export class MapService {
       }
     }
     //console.log(this.markers);
-}
+  }
 
-    removeMarker(location: MapLocation) {
+  /*Remove a marker for a location unselected*/
+  removeMarker(location: MapLocation) {
       //console.log(location);
       //console.log(this.markers);
       for(var i=0;i<this.markers.length; i++){
@@ -269,12 +251,10 @@ export class MapService {
           }
         }
       }
-
-            
-
-  }
+   }
 
 
+  
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
 
     let latLng = new google.maps.LatLng(lat, lng);
