@@ -55,6 +55,7 @@ export class ParamPage {
     this.title = this.navParams.get('title');
   }
 
+  /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
   campus_choice(){
     let check = this.userS.campus;
     let setting, message, save;
@@ -94,6 +95,7 @@ export class ParamPage {
     settingsAlert.present();
   }
 
+  /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
   language_choice(){
     let check2 = this.translateService.currentLang;
     let message2, en, fr, setting2, save:string;
@@ -130,8 +132,9 @@ export class ParamPage {
     languageAlert.present();
   }
 
+  /*When the language change, translate the page with the applied language*/
   languageChanged(event:string) {
     this.userS.storage.set('lan',event);
-         this.translateService.use(event);
+    this.translateService.use(event);
   }
 }
