@@ -45,12 +45,13 @@ export class MobilityPage {
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
-              private translateService: TranslateService) 
+              private translateService: TranslateService)
   {
     this.title = this.navParams.get('title');
     let titlecar:string;
     this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
 
+    //Information to launch external app
     this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',
                             iosSchemaName: 'id1143545052',
                             androidPackageName: 'net.commuty.mobile',
@@ -65,10 +66,13 @@ export class MobilityPage {
                             appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
+  /*Launch external app*/
   launchExternalApp(page:any) {
     let app: string;
     //let storeUrl:string;
     let check:string;
+
+    //Check the platform of the user
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
       //storeUrl=page.httpUrl;
@@ -77,11 +81,12 @@ export class MobilityPage {
       app = page.androidPackageName;
       //storeUrl= 'market://details?id='+ app;
       check=app;
-
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
+
+    //Check if the app is installed, if yes launch app else return the user to the market
     this.appAvailability.check(check).then(
       () => { // success callback
         const browser = this.iab.create(page.appUrl, '_system');
