@@ -80,7 +80,7 @@ export class StudiesPage {
     this.getCourses();
   }
 
-//authenticate a student
+ /*Authenticate a student*/
   private login(){
   	this.error = "";
   	return new Promise(resolve => {
@@ -101,7 +101,7 @@ export class StudiesPage {
     });
   }
 
-//get course program of student
+  /*Get course program of student*/
   loadActivities(){
     if(this.connService.isOnline()) {
       this.login().then((res) => {
@@ -120,7 +120,7 @@ export class StudiesPage {
     }
   }
 
-//open modalprojectpage to choose an ade project
+  /*Open modalprojectpage to choose an ade project*/
   openModalProject(){
     let obj = {sessionId : this.sessionId};
 
@@ -131,7 +131,7 @@ export class StudiesPage {
     myModal.present();
   }
 
-//set project and connect to ADE
+  /*Set project and connect to ADE*/
   initializeSession(){
     if(this.connService.isOnline()) {
       this.studiesService.openSession().then(
@@ -159,7 +159,7 @@ export class StudiesPage {
     }
   }
 
-//add a course manually
+  /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
   showPrompt() {
     let addcourse:string;
     let message:string;
@@ -204,7 +204,7 @@ export class StudiesPage {
     prompt.present();
   }
 
-//add a course from course program
+  /*Add a course from course program, a prompt is shown for this and the user can add a name*/
   showPromptAddCourse(sigle : string) {
     let addcourse:string;
     let message:string;
@@ -243,7 +243,7 @@ export class StudiesPage {
     prompt.present();
   }
 
-//retrieve list of course added previously
+  /*Retrieve list of course added previously in the storage*/
   getCourses(){
     this.storage.get('listCourses').then((data) =>
     {
@@ -254,14 +254,14 @@ export class StudiesPage {
     });
   }
 
-//save course into storage
+  /*Save course into storage*/
   saveCourse(name: string, tag: string){
     let course = new Course(name,tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
   }
 
-//remove course from storage
+  /*Remove course from storage*/
   removeCourse(course: Course){
     let index= this.listCourses.indexOf(course);
     if(index>= 0){
@@ -270,13 +270,13 @@ export class StudiesPage {
     this.storage.set('listCourses',this.listCourses);
   }
 
-//open CoursePage of a course
+  /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course){
     this.navCtrl.push('CoursePage',
       {course : course, sessionId : this.sessionId});
   }
 
-//launch moodle or ucl portal
+  /*Launch moodle or ucl portal*/
   launch(url) {
     this.iab.create(url,'_system');
   }
