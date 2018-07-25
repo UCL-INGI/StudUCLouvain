@@ -165,7 +165,7 @@ export class EventsPage {
           this.events=data;
           this.shownEvents = data.shownEvents;
           this.searching=false;
-          this.updateDisplayedEvents(key);
+          this.updateDisplayedEvents();
         })
         .catch(() => {
           console.log("Oh no! My data is expired or doesn't exist!");
