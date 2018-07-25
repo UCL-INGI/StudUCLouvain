@@ -36,7 +36,7 @@
       {{'NEWS.FAC' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-segment [(ngModel)]="subsegment" (ionChange)="loadNews()" *ngIf="segment==='univ'">
+  <ion-segment [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
     <ion-segment-button value="P1">
       {{'NEWS.STUDY' | translate}}
     </ion-segment-button>

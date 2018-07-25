@@ -24,6 +24,7 @@ import { App, List, Content, NavController, NavParams, Platform, AlertController
 import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicPage } from 'ionic-angular';
+import { CacheService } from 'ionic-cache';
 
 import { NewsService } from '../../providers/rss-services/news-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
@@ -69,6 +70,7 @@ export class NewsPage {
   site:string="";
   rss:string="";
   //url = 'assets/data/fac.json';
+  key='news-cache';
 
   constructor(
     public platform : Platform,
@@ -81,7 +83,8 @@ export class NewsPage {
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
     public loadingCtrl: LoadingController,
-    public facService: FacService)
+    public facService: FacService,
+    private cache: CacheService)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -97,7 +100,7 @@ export class NewsPage {
     this.app.setTitle(this.title);
     //Check the connexion, if it's ok, load the news
     if(this.connService.isOnline()) {
-      this.loadNews();
+      this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedNews();
@@ -163,18 +166,18 @@ export class NewsPage {
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    if(this.segment ==='univ') this.loadNews();
+    if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())) this.loadNews();
     refresher.complete();
   }
 
   facTabChanged(){
 
   }
-  
+
   /*Tab change*/
   tabChanged(){
     this.resize();
-    //if(this.segment==='univ') this.updateDisplayedNews();
+    if(this.segment==='univ') this.cachedOrNot();
     if(this.segment==='fac'){
       this.fac=this.userS.fac;
       if(this.facsegment === 'news' && this.userS.hasFac()){
@@ -182,12 +185,44 @@ export class NewsPage {
         this.site= links.site;
         this.rss = links.rss;
       }
+      this.loadNews();
     }
-    this.loadNews();
+  }
+
+  async cachedOrNot(){
+    //this.cache.removeItem('cache-P3');
+    let key;
+    let part = this.subsegment;
+    if(this.segment === 'univ'){
+      if(part === 'P1') key = 'cache-P1';
+      else if(part === 'P2') key = 'cache-P2';
+      else key = 'cache-P3';
+      console.log(key);
+      await this.cache.getItem(key)
+      .then((data) => {
+        console.log("cached news");
+        console.log(data);
+        this.news=data;
+        this.shownNews = data.shownNews;
+        this.searching=false;
+        this.updateDisplayedNews();
+      })
+      .catch(() => {
+        console.log("Oh no! My promise is expired or doesn't exist!");
+        console.log();
+        this.loadNews(key);
+      });
+    }
+    else{
+      this.loadNews();
+    }
+
+
+
   }
 
   /*Load news to display*/
-  public loadNews() {
+  public loadNews(key?) {
     this.searching = true;
     this.news = [];
     //Check connexion before load news
@@ -198,6 +233,8 @@ export class NewsPage {
       .then(
         res => {
           let result:any = res;
+          //return result.news;
+          if(key)this.cache.saveItem(key, result.news);
           this.news = result.news;
           this.shownNews = result.shownNews;
           this.searching = false;
@@ -217,11 +254,16 @@ export class NewsPage {
             this.updateDisplayedNews();
           }
       });
+
+
+
     //If no connexion pop an alert and go back to previous page
     } else {
+      //return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
+
     }
   }
 

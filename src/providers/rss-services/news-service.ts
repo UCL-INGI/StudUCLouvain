@@ -25,6 +25,7 @@ import 'rxjs/add/operator/map';
 import { RssService } from './rss-service';
 import { NewsItem } from '../../app/entity/newsItem';
 
+
 @Injectable()
 export class NewsService {
   url1 = "https://uclouvain.be/actualites/p1/rss";

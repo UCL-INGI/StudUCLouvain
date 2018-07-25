@@ -72,7 +72,7 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
     private wso2Service : Wso2Service,
-    private cache: CacheService,
+    public cache: CacheService
   ) {
 console.log("Startin App");
     this.user.getCampus();
