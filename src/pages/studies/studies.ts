@@ -280,5 +280,4 @@ export class StudiesPage {
   launch(url) {
     this.iab.create(url,'_system');
   }
-
 }
