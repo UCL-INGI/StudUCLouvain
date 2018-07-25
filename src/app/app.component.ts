@@ -224,7 +224,7 @@ console.log("Startin App");
     //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
-            message: "Ceci est une version bêta de l'application. Celle-ci est toujours en cours de développement",
+            message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test</p>",
             /*inputs: [
               {
                 type: 'checkbox',

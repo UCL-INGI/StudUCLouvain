@@ -396,12 +396,10 @@
     },
 
     "CREDIT" : {
-      "PROJECT": "The Stud@UCLouvain project is the result of the work of several students as part of their thesis.",
-        "COORD": "This project was coordinated by Mr. Yves Deville.",
-        "LAST": "It was developed by Daubry Benjamin and Marchesini Bruno in 2017-2018.",
-        "MIDDLE": "Jérôme Lemaire and Corentin Lamy in 2016-2017.",
-        "FIRST": "Lacasse Baptiste and Moyaux Arnold in 2015-2016.",
-        "CONTRIB": "Any contribution for the addition of new features is welcome. This project being Open Source, if you want to participate in its development, you can find the public github via this link:"
+        "PROJECT": "Stud@UCLouvain is an Open Source application developed by students for students.  This application was developed by computer science students at UCLouvain as part of various master thesis, under the coordination of Professor Yves Deville.",
+        "DEV": "Developers: Daubry Benjamin and Marchesini Bruno (2017-2018); Jérôme Lemaire and Corentin Lamy (2016-2017); Lacasse Baptiste and Moyaux Arnold (2015-2016).",
+        "LICENCE": "This project is under GPL 3.0 license and is available under github ",
+        "CONTRIB": "If you wish to participate in the development of this project or propose ideas for extensions, please contact "
     },
 
     "NET" : {

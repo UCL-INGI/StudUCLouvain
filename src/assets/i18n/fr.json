@@ -394,12 +394,10 @@
     },
 
     "CREDIT" : {
-        "PROJET" : "Le projet Stud@UCLouvain est le résultat du travail de plusieurs étudiants dans le cadre de leur mémoire.",
-        "COORD" : "La coordination de ce projet a été réalisée par Mr. Yves Deville.",
-        "LAST" : "Il a été développé par Daubry Benjamin et Marchesini Bruno en 2017-2018.",
-        "MIDDLE" : "Jérôme Lemaire et Corentin Lamy en 2016-2017.",
-        "FIRST" : "Lacasse Baptiste et Moyaux Arnold en 2015-2016.",
-        "CONTRIB" : "Toute contribution pour l'ajout de nouvelles fonctionnalités est la bienvenue. Ce projet étant Open Source, si vous souhaitez participer à son développement, vous pouvez trouver le github public via ce lien :"
+        "PROJET" : "L'application Stud@UCLouvain est une application Open Source développée par des étudiants pour les étudiants.  Cette application a été réalisée par des étudiants en informatique de l'UCLouvain dans le cadre de différents travaux de fin d'études, sous la coordination du Professeur Yves Deville.",
+        "DEV" : "Développeurs: Daubry Benjamin et Marchesini Bruno (2017-2018); Jérôme Lemaire et Corentin Lamy (2016-2017); Lacasse Baptiste et Moyaux Arnold (2015-2016).",
+        "LICENCE" : "Ce projet est sous licence GPL 3.0 et est disponible sous github ",
+        "CONTRIB" : "Si vous souhaitez participer au développement de ce projet ou proposer des idées d'extensions, merci de contacter "
     },
 
     "NET" : {
