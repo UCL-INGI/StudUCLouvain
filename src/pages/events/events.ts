@@ -27,6 +27,7 @@ import { FormControl } from '@angular/forms';
 import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
+import { CacheService } from 'ionic-cache';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { EventsService } from '../../providers/rss-services/events-service';
@@ -76,7 +77,8 @@ export class EventsPage {
     private calendar: Calendar,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private cache: CacheService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -87,23 +89,24 @@ export class EventsPage {
     this.app.setTitle(this.title);
     this.updateDateLimit();
     //If available connexion => load events to display and display them
-    if(this.connService.isOnline()) {
-      this.loadEvents();
+    //if(this.connService.isOnline()) {
+      this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedEvents();
       });
-      this.presentLoading();
-    }
+      //this.presentLoading();
+    //}
     //If not => go back to precedent page and pop an alert
-    else{
+    /*else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
-    }
+    }*/
   }
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
+    this.presentLoading();
     this.loadEvents();
     refresher.complete();
   }
@@ -150,8 +153,30 @@ export class EventsPage {
       return this.shownGroup === group;
   }
 
+
+    async cachedOrNot(){
+      //this.cache.removeItem('cache-P3');
+      this.presentLoading();
+        let key = 'event-cache';
+        await this.cache.getItem(key)
+        .then((data) => {
+          console.log("cached events");
+          console.log(data);
+          this.events=data;
+          this.shownEvents = data.shownEvents;
+          this.searching=false;
+          this.updateDisplayedEvents(key);
+        })
+        .catch(() => {
+          console.log("Oh no! My data is expired or doesn't exist!");
+          this.loadEvents(key);
+        });
+
+    }
+
+
   /*Load the list of events to display*/
-  public loadEvents() {
+  public loadEvents(key?) {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
     let result: any;
@@ -162,6 +187,7 @@ export class EventsPage {
         res => {
           result = res;
           this.events = result.events;
+          if(key)this.cache.saveItem(key, this.events);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
