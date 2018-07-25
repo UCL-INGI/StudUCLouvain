@@ -60,6 +60,7 @@ export class MapPage {
       this.title = this.navParams.get('title');
   }
 
+  /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
   ngAfterViewInit(){
     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
     let zones = this.poilocations.loadResources();
@@ -75,7 +76,6 @@ export class MapPage {
       this.userLocation = this.mapService.getUserLocation();
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
-
       if(result[0]) {
         this.mapService.addMarker(this.selectedLocation);
       }
@@ -83,6 +83,7 @@ export class MapPage {
     });
   }
 
+  /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
   toggleDetails(data) {
     if (data.showDetails) {
         data.showDetails = false;
@@ -93,6 +94,7 @@ export class MapPage {
     }
   }
 
+  /*select or unselect a specific location*/
   toggleLocation(data, checkList, index) {
     if (checkList[index] === true) {
       this.addShowedLocations(data);
@@ -103,21 +105,22 @@ export class MapPage {
     }
   }
 
+  /*push a location to display*/
   addShowedLocations(rawLocation){
     this.showedLocations.push(rawLocation);
   }
 
+  /*remove a location displayed*/
   removeShowedLocations(rawLocation){
     let locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
     this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
   }
 
+  /*when select an location*/
   onSelect(data:any){
     if(this.selectedLocation !== data){
       this.selectedLocation = data;
-
     }
     this.mapService.addMarker(this.selectedLocation);
   }
-
 }
