@@ -70,7 +70,6 @@ export class NewsPage {
   site:string="";
   rss:string="";
   //url = 'assets/data/fac.json';
-  key='news-cache';
 
   constructor(
     public platform : Platform,
@@ -144,7 +143,6 @@ export class NewsPage {
     let links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
-    this.presentLoading();
     this.loadNews();
   }
 
@@ -169,7 +167,6 @@ export class NewsPage {
   public doRefresh(refresher) {
     console.log("refresh ?");
     if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
-      this.presentLoading();  
       this.loadNews();
     }
     refresher.complete();
@@ -189,7 +186,7 @@ export class NewsPage {
         let links = this.findSite();
         this.site= links.site;
         this.rss = links.rss;
-        this.presentLoading();
+        
         this.loadNews();
       }
 
@@ -198,7 +195,7 @@ export class NewsPage {
 
   async cachedOrNot(){
     //this.cache.removeItem('cache-P3');
-    this.presentLoading();
+    
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ'){
@@ -209,6 +206,7 @@ export class NewsPage {
       console.log(key);
       await this.cache.getItem(key)
       .then((data) => {
+        this.presentLoading();
         console.log("cached news");
         console.log(data);
         this.news=data;
@@ -224,9 +222,6 @@ export class NewsPage {
     else{
       this.loadNews();
     }
-
-
-
   }
 
   /*Load news to display*/
@@ -235,6 +230,7 @@ export class NewsPage {
     this.news = [];
     //Check connexion before load news
     if(this.connService.isOnline()) {
+      this.presentLoading();
       let actu = this.subsegment;
       if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
       this.newsService.getNews(actu)

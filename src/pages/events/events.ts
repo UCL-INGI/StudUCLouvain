@@ -106,7 +106,7 @@ export class EventsPage {
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    this.presentLoading();
+    
     this.loadEvents();
     refresher.complete();
   }
@@ -155,17 +155,20 @@ export class EventsPage {
 
 
     async cachedOrNot(){
-      //this.cache.removeItem('cache-P3');
-      this.presentLoading();
-        let key = 'event-cache';
+      //this.cache.removeItem('cache-event');
+      
+        let key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
+          this.presentLoading();
           console.log("cached events");
           console.log(data);
           this.events=data;
           this.shownEvents = data.shownEvents;
+          this.filters = data.categories;
           this.searching=false;
           this.updateDisplayedEvents();
+          console.log("end then");
         })
         .catch(() => {
           console.log("Oh no! My data is expired or doesn't exist!");
@@ -183,10 +186,12 @@ export class EventsPage {
 
     //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if(this.connService.isOnline()) {
+      this.presentLoading();
       this.eventsService.getEvents(this.segment).then(
         res => {
-          result = res;
+          let result:any = res;
           this.events = result.events;
+          //console.log(this.events);
           if(key)this.cache.saveItem(key, this.events);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
@@ -259,11 +264,14 @@ export class EventsPage {
 
   /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayedEvents() {
+    console.log("start displayed event");
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
+      console.log("start segment all");
       this.displayedEvents = this.events.filter((item) => {
+        console.log("start filter");  
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
@@ -279,6 +287,7 @@ export class EventsPage {
 
       this.displayedEvents = favEvents;
     }
+    console.log("end segment if");
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);

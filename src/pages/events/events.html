@@ -32,7 +32,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedEvents()">
+  <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
     <ion-segment-button value="all">
       {{'EVENTS.ALL' | translate}}
     </ion-segment-button>
