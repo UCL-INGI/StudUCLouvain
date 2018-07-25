@@ -185,22 +185,27 @@
         "AIDE23" : "Avis conseils expertise",
         "AIDE24" : "Actions communautaires et travail en réseau",
 
-				"PSYPED" : "Aide psychologique, pédagogique et d'orientation",
-				"AIDE25" : "Une équipe de psychologues à la disposition des étudiants",
-				"AIDE26" : "Au sein du Service d’aide, des psychologues reçoivent les étudiants à leur demande lors  de consultations confidentielles et  dans un cadre indépendant des facultés.",
-				"AIDE27" : "Les étudiants peuvent être écoutés et  accompagnés dans les difficultés qui les empêchent de mener à bien leur projet d’étude.",
-				"AIDE28" : "Besoin d’écoute, besoin de faire le point sur les études, les projets, les difficultés de vie, la situation familiale, affective. Besoin de réorienter son projet d’étude, son projet de vie. Besoin d’une aide face aux difficultés d’études et d’apprentissage.",
+		"PSYPED" : "Aide psychologique, pédagogique et d'orientation",
+		"AIDE25" : "Une équipe de psychologues à la disposition des étudiants",
+		"AIDE26" : "Au sein du Service d’aide, des psychologues reçoivent les étudiants à leur demande lors  de consultations confidentielles et  dans un cadre indépendant des facultés.",
+		"AIDE27" : "Les étudiants peuvent être écoutés et  accompagnés dans les difficultés qui les empêchent de mener à bien leur projet d’étude.",
+		"AIDE28" : "Besoin d’écoute, besoin de faire le point sur les études, les projets, les difficultés de vie, la situation familiale, affective. Besoin de réorienter son projet d’étude, son projet de vie. Besoin d’une aide face aux difficultés d’études et d’apprentissage.",
 
-				"SANTE1" : "L’équipe est à l’écoute de l’étudiant lors de  consultations individuelles concernant une inquiétude, une difficulté, un Actions de prévention et de santé publique",
-				"SANTE2" : "L’équipe a en charge la surveillance de santé des étudiants stagiaires, l’organisation des campagnes de prévention de la tuberculose dans le cadre de bilans de santé pour les étudiants internationaux, les campagnes de vaccinations. Elle assure le suivi des événements infectieux : rougeole, oreillons, méningite, etc.",
-				"SANTE3" : "L'équipe organise également des actions de prévention notamment en co-organisant des campagnes de dépistage des IST, ou des soirées d’informations sur l’accès aux soins de santé.",
-				"SANTE4" : "L’équipe remet  des avis médicaux  par exemple à demande d’un assistant social, d’un psychologue de l’équipe, d’un académique, d’un jury d’examen par rapport à l’incapacité d’un étudiant à suivre les cours, le stage, le TP, etc. ",
-				"SANTE5" : "Le médecin participe à la commission d’attribution des statuts pour étudiants à profils spécifiques spécifiquement pour les étudiants malades.",
-				"SANTE6" : "Des avis sont demandés à l’équipe pour des décisions d’aides financières médico-sociales. ",
-				"SANTE7" : "L’équipe a une fonction de conseil à la demande des étudiants ou de la commission des baptêmes étudiants.",
-				"SANTE8" : "L’équipe  travaille en référence à la charte sur la qualité de vie en milieu étudiants . Elle anime ou participe à différents groupes dans cette optique : Groupe de Réflexion Santé, Bouger Manger, Pack en bloque, ateliers santé en faculté, ateliers du blocus, Tout SEXplique, etc. Elle fait émerger les préoccupations de santé entendues dans les consultations individuelles pour les relayer auprès d’autres acteurs de l’université concernés par la vie étudiante et leur santé.",
-				"SANTE9" : "Elle travaille en étroite collaboration avec Univers santé ASBL dans toutes les actions de promotion de la santé en milieu étudiant."
-		 },
+		"SANTE1" : "L’équipe est à l’écoute de l’étudiant lors de  consultations individuelles concernant une inquiétude, une difficulté, un Actions de prévention et de santé publique",
+		"SANTE2" : "L’équipe a en charge la surveillance de santé des étudiants stagiaires, l’organisation des campagnes de prévention de la tuberculose dans le cadre de bilans de santé pour les étudiants internationaux, les campagnes de vaccinations. Elle assure le suivi des événements infectieux : rougeole, oreillons, méningite, etc.",
+		"SANTE3" : "L'équipe organise également des actions de prévention notamment en co-organisant des campagnes de dépistage des IST, ou des soirées d’informations sur l’accès aux soins de santé.",
+		"SANTE4" : "L’équipe remet  des avis médicaux  par exemple à demande d’un assistant social, d’un psychologue de l’équipe, d’un académique, d’un jury d’examen par rapport à l’incapacité d’un étudiant à suivre les cours, le stage, le TP, etc. ",
+		"SANTE5" : "Le médecin participe à la commission d’attribution des statuts pour étudiants à profils spécifiques spécifiquement pour les étudiants malades.",
+		"SANTE6" : "Des avis sont demandés à l’équipe pour des décisions d’aides financières médico-sociales. ",
+		"SANTE7" : "L’équipe a une fonction de conseil à la demande des étudiants ou de la commission des baptêmes étudiants.",
+		"SANTE8" : "L’équipe  travaille en référence à la charte sur la qualité de vie en milieu étudiants . Elle anime ou participe à différents groupes dans cette optique : Groupe de Réflexion Santé, Bouger Manger, Pack en bloque, ateliers santé en faculté, ateliers du blocus, Tout SEXplique, etc. Elle fait émerger les préoccupations de santé entendues dans les consultations individuelles pour les relayer auprès d’autres acteurs de l’université concernés par la vie étudiante et leur santé.",
+		"SANTE9" : "Elle travaille en étroite collaboration avec Univers santé ASBL dans toutes les actions de promotion de la santé en milieu étudiant.",
+
+        "TUTO1" : "Connaître son horaire-type",
+        "TUTO2" : "Connaître son horaire personnalisé",
+        "TUTO3" : "Bureau virtuel",
+        "TUTOTITLE" : "Horaires"
+	},
 
     "EMPLOYEE" : {
         "INFO" : "Informations pratiques",

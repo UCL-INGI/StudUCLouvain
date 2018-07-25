@@ -187,20 +187,26 @@
         "AIDE24": "Community actions and networking",
 
         "PSYPED": "Psychological, educational and guidance assistance",
-				"AIDE25": "A team of psychologists at the students' disposal",
-				"AIDE26": "Within the Service d'aide, psychologists receive students at their request during confidential consultations and in a framework independent of the faculties",
-				"AIDE27": "Students can be listened to and accompanied in the difficulties that prevent them from carrying out their study project",
-				"AIDE28": "Need to listen, need to take stock of studies, projects, life difficulties, family situation, emotional. Need to reorient his study project, his life project. Need help with learning and study difficulties.",
+		"AIDE25": "A team of psychologists at the students' disposal",
+		"AIDE26": "Within the Service d'aide, psychologists receive students at their request during confidential consultations and in a framework independent of the faculties",
+		"AIDE27": "Students can be listened to and accompanied in the difficulties that prevent them from carrying out their study project",
+		"AIDE28": "Need to listen, need to take stock of studies, projects, life difficulties, family situation, emotional. Need to reorient his study project, his life project. Need help with learning and study difficulties.",
 
-				"SANTE1": "The team listens to the student during individual consultations concerning a concern, a difficulty, a Prevention and Public Health Action",
-				"SANTE2": "The team is in charge of supervising the health of trainee students, organising tuberculosis prevention campaigns as part of health check-ups for international students and vaccination campaigns. It monitors infectious events: measles, mumps, meningitis, etc.",
-				"SANTE3": "The team also organizes prevention actions, notably by co-organizing STI screening campaigns or information evenings on access to health care",
-				"SANTE4": "The team provides medical advice, for example, at the request of a social worker, a team psychologist, an academic, an examination board in relation to a student's inability to attend classes, the internship, the work placement, etc. ",
-				"SANTE5": "The doctor participates in the committee for the attribution of statutes for students with specific profiles specifically for sick students",
-				"SANTE6": "Advice is requested from the team for decisions on medico-social financial aid. ",
-				"SANTE7": "The team has an advisory function at the request of students or the student baptism commission.",
-				"SANTE8": "The team works in reference to the charter on the quality of life in student environments. She leads or participates in various groups in this perspective: Health Reflection Group, Eat Out, Pack en Bloque, health workshops in faculty, blockade workshops, Tout SEXplique, etc. It brings out the health concerns heard in the individual consultations to relay them to other university stakeholders concerned with student life and their health",
-				"SANTE9": "It works closely with Univers santé ASBL in all health promotion actions in the student environment."
+		"SANTE1": "The team listens to the student during individual consultations concerning a concern, a difficulty, a Prevention and Public Health Action",
+		"SANTE2": "The team is in charge of supervising the health of trainee students, organising tuberculosis prevention campaigns as part of health check-ups for international students and vaccination campaigns. It monitors infectious events: measles, mumps, meningitis, etc.",
+		"SANTE3": "The team also organizes prevention actions, notably by co-organizing STI screening campaigns or information evenings on access to health care",
+		"SANTE4": "The team provides medical advice, for example, at the request of a social worker, a team psychologist, an academic, an examination board in relation to a student's inability to attend classes, the internship, the work placement, etc. ",
+		"SANTE5": "The doctor participates in the committee for the attribution of statutes for students with specific profiles specifically for sick students",
+		"SANTE6": "Advice is requested from the team for decisions on medico-social financial aid. ",
+		"SANTE7": "The team has an advisory function at the request of students or the student baptism commission.",
+		"SANTE8": "The team works in reference to the charter on the quality of life in student environments. She leads or participates in various groups in this perspective: Health Reflection Group, Eat Out, Pack en Bloque, health workshops in faculty, blockade workshops, Tout SEXplique, etc. It brings out the health concerns heard in the individual consultations to relay them to other university stakeholders concerned with student life and their health",
+		"SANTE9": "It works closely with Univers santé ASBL in all health promotion actions in the student environment.",
+
+        "TUTO1" : "Know your typical schedule",
+        "TUTO2" : "Know your personalized schedule",
+        "TUTO3" : "Virtual Office",
+        "TUTOTITLE" : "Schedules"
+
     },
 
     "EMPLOYEE" : {

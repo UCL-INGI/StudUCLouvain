@@ -224,24 +224,13 @@ console.log("Startin App");
     //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
             title: "Avertissement",
-            message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test</p>",
-            /*inputs: [
-              {
-                type: 'checkbox',
-                label: 'Ne plus afficher',
-                handler:(e)=>{
-                   //console.log(e.checked);
-                   //this.checked = e.checked;
-                }
-              }
-            ],*/
+            message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test.</p>",
+
             buttons: [
                 {
                     text: "OK",
                     handler: data => {
-                      /*if(this.checked){
-                        this.user.addDisclaimer(this.checked);
-                      }*/
+
                     }
                 }
             ]
