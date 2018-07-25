@@ -284,9 +284,10 @@ export class NewsPage {
       return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
     });
     this.shownNews = this.displayedNews.length;
+    this.nonews = this.shownNews ==0;
     this.searching = false;
     this.dismissLoading();
-    console.log(this.displayedNews)
+    console.log(this.displayedNews);
   }
 
   /*When click on a news, go to the page with more details*/
