@@ -253,46 +253,36 @@ export class MapService {
       }
    }
 
-
-  
+  /*Add Marker in the map for the browser*/
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
-
     let latLng = new google.maps.LatLng(lat, lng);
-
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng,
       title: title
     });
-
     this.markers.push(marker);
     this.addBrowserInfoWindow(marker, title+"\n"+content);
   }
-
   private addBrowserInfoWindow(marker, content){
-
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
-
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
-
     infoWindow.open(this.map,marker);
   }
 
+  /*Add Marker in the map for the device*/
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
-
     let latLng = new LatLng(lat, lng);
-
     let markerOptions: MarkerOptions = {
       position: latLng,
       title: title,
       snippet: address
     };
-
     this.map.addMarker(markerOptions).then(
       (marker: Marker) => {
         marker.showInfoWindow();
@@ -301,48 +291,15 @@ export class MapService {
       });
   }
 
+  /*Get a marker for the selected location*/
   private getMarker(title: string) : Marker{
     let res = null;
     this.markers.map((marker) => {
-
       if(marker.getTitle() === title) {
         res=marker;
       }
     });
     return res;
-  }
-
-  toggleMarker(title: string){
-    if(this.onDevice) {
-      this.toggleMarkerOnDevice(title);
-    } else {
-      this.toggleMarkerOnBrowser(title);
-    }
-  }
-
-  private toggleMarkerOnDevice(title:string) {
-    this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
-        if(marker.isVisible()){
-          marker.setVisible(false);
-        } else {
-          marker.setVisible(true);
-          marker.showInfoWindow();
-        }
-      }
-    });
-  }
-
-  private toggleMarkerOnBrowser(title:string) {
-    this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
-        if(marker.getVisible()){
-          marker.setVisible(false);
-        } else {
-          marker.setVisible(true);
-        }
-      }
-    });
   }
 
   setCenteredMarker(location: MapLocation) {
@@ -374,18 +331,21 @@ export class MapService {
     });
   }
 
+  /*Disable Map*/
   disableMap() {
     if(this.map && this.onDevice) {
       this.map.setClickable(false);
     }
   }
 
+  /*Enable Map*/
   enableMap() {
     if(this.map && this.onDevice) {
       this.map.setClickable(true);
     }
   }
 
+  /*If no connexion disable the map and display message*/
   private showPleaseConnect() {
     if(this.pleaseConnect){
       this.pleaseConnect.style.display = "block";
@@ -393,6 +353,7 @@ export class MapService {
     }
   }
 
+  /*Enable map and undisplay message*/
   private hidePleaseConnect() {
     if(this.pleaseConnect){
       this.pleaseConnect.style.display = "none";
@@ -400,8 +361,8 @@ export class MapService {
     }
   }
 
+  /*Connectivity listener to check if the connexion persists*/
   private addConnectivityListeners() {
-
     document.addEventListener('online',
       () => {setTimeout(
         () => {
@@ -424,16 +385,17 @@ export class MapService {
           }
         }, 2000);
       }, false);
-
     document.addEventListener('offline',
       () => {
         this.showPleaseConnect();
       }, false);
   }
 
+  /*Return the location of the user*/
   getUserLocation() : MapLocation {
     return this.userLocation;
   }
+
 
   clearMarkers() {
     if(this.onDevice){
