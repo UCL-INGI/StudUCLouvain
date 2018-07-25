@@ -42,10 +42,11 @@ export class ModalProjectPage {
     public storage:Storage,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public studiesService : StudiesService) 
+    public studiesService : StudiesService)
   {
   }
 
+  /*Set the project and close de view of the modal*/
   closeModal(project : AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(
       data => {
@@ -55,13 +56,14 @@ export class ModalProjectPage {
     )
   }
 
+  /*Get the available projects*/
   getProjects(sessionId :string){
     this.studiesService.getProjects(sessionId).then(
       data => {
         this.projects = data;
     });
   }
-
+  
   ionViewDidLoad() {
     this.getProjects(this.sessionId);
   }

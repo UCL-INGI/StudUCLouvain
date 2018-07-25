@@ -69,11 +69,12 @@ export class CoursePage {
       }
   }
 
+  /*Display the available sessions for a course*/
   ionViewDidLoad() {
     this.getCourse(this.sessionId, this.course.acronym);
   }
 
-///////////UNCOMMENT BELOW TO HIDE PREVIOUS COURSE
+  /*Get sessions of the course to display for the selectionned project and display them*/
   getCourse(sessionId : string, acronym : string){
     this.courseService.getCourseId(sessionId, acronym).then(
       data => {
@@ -97,6 +98,7 @@ export class CoursePage {
     )
   }
 
+  /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem : ItemSliding, activity : Activity){
     let options:any = {
       firstReminderMinutes:15
@@ -116,6 +118,7 @@ export class CoursePage {
       this.alert();
   }
 
+  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
   alert(){
     let title:string;
     let message:string;
@@ -135,6 +138,7 @@ export class CoursePage {
         disclaimerAlert.present();
   }
 
+  /*Filter TP if a slot is selectionned*/
   updateDisplayedTP(){
       let toFilter = this.courseSorted.tp;
       if(toFilter.length==0) this.noTP = true;
@@ -145,27 +149,28 @@ export class CoursePage {
       this.displayedActi = this.displayedActi.concat(toPush);
   }
 
+  /*Filter CM if a slot is selectionned*/
   updateDisplayedCM(){
       let toFilter = this.courseSorted.cm;
-		if(toFilter.length==0) this.noCM = true;
-		else this.noCM = false;
+  		if(toFilter.length==0) this.noCM = true;
+  		else this.noCM = false;
       let toPush:Array<Activity>;
       if(this.slotCM != "no") toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
       else toPush = this.courseSorted.cm;
       this.displayedActi = this.displayedActi.concat(toPush);
   }
 
+  /*Update the display if a filter is applicated*/
   updateDisplayed(){
-
     this.displayedActi = [];
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
     if(this.courseSorted.ex.length == 0) this.noEx = true;
     else this.noEx = false;
-
   }
 
+  /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
   showPrompt(segment: string){
     let title:string;
     let message:string;
@@ -200,8 +205,7 @@ export class CoursePage {
             this.updateDisplayed();
           }
       }]};
-
-     let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
+    let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
@@ -212,32 +216,31 @@ export class CoursePage {
     if(options.inputs.length > 1)prompt.present();
   }
 
+  /*Return the different slots available for a course TP or CM */
   getSlots(segment:string){
     let act: Activity[] = this.course.activities;
      act = act.filter(
       acti => (acti.type == segment || (acti.type == "TP" && segment == "TD") || (segment == "Examen" && acti.isExam))
       );
-
-//retrieve name of each slot
+    //retrieve name of each slot
     let slots = act.map(item => item.name)
       .filter((value, index, self) => self.indexOf(value) === index); //keep only different
-
-//delete some session (like seance aide etude)
+    //delete some session (like seance aide etude)
     if(segment == "TD") slots = slots.filter(acti => acti.indexOf("_") !== -1);
     if(segment == "Cours magistral") slots = slots.filter(acti => acti.indexOf("-") !== -1);
     let newAct: Activity[] = [];
-
-//retrieve one activity of each slot
+    //retrieve one activity of each slot
     for(let i=0; i< slots.length; i++){
       let activity:Activity = act.find(acti => acti.name == slots[i]);
       newAct.push(activity);
     }
-
     return newAct;
   }
 
+  /*Add a course to the calendar*/
   addCourseToCalendar(){
     let options:any = {
+      firstReminderMinutes:15
     };
     for (let activity of this.displayedActi) {
       this.calendar.createEventWithOptions(this.course.name +" : " + activity.type,
@@ -254,24 +257,23 @@ export class CoursePage {
     this.alertAll();
   }
 
-  //alert to warning that changes are possible
-    alertAll(){
-      let title:string;
-      let message:string;
-      this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
-      this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
-         let disclaimerAlert = this.alertCtrl.create({
-            title: title,
-            message: message,
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        });
-        disclaimerAlert.present();
-  }
-
+  /*Alert to warning that changes are possible*/
+  alertAll(){
+    let title:string;
+    let message:string;
+    this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
+    this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
+       let disclaimerAlert = this.alertCtrl.create({
+          title: title,
+          message: message,
+          buttons: [
+              {
+                  text: "OK",
+                  handler: data => {
+                  }
+              }
+          ]
+      });
+      disclaimerAlert.present();
+   }
 }
