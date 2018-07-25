@@ -32,6 +32,7 @@ import { HomePage } from '../pages/home/home';
 
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { CacheService } from "ionic-cache";
 
 declare var TestFairy: any;
 
@@ -70,7 +71,8 @@ export class MyApp {
     public translateService: TranslateService,
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
-    private wso2Service : Wso2Service
+    private wso2Service : Wso2Service,
+    private cache: CacheService,
   ) {
 console.log("Startin App");
     this.user.getCampus();
@@ -142,7 +144,8 @@ console.log("Startin App");
         else translateService.use('fr');
        }
         );
-
+      cache.setDefaultTTL(60 * 60 * 2);
+      cache.setOfflineInvalidate(false);
 
     })
 
