@@ -99,19 +99,19 @@ export class NewsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     //Check the connexion, if it's ok, load the news
-    if(this.connService.isOnline()) {
+    //if(this.connService.isOnline()) {
       this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedNews();
       });
-      this.presentLoading();
-    }
+      //this.presentLoading();
+    //}
     //If no connexion, go back to the previous page and pop an alert
-    else{
+    /*else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
-    }
+    }*/
   }
 
   /*Display an loading pop up*/
@@ -144,6 +144,7 @@ export class NewsPage {
     let links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
+    this.presentLoading();
     this.loadNews();
   }
 
@@ -185,6 +186,7 @@ export class NewsPage {
         this.site= links.site;
         this.rss = links.rss;
       }
+      this.presentLoading();
       this.loadNews();
     }
   }
@@ -194,6 +196,7 @@ export class NewsPage {
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ'){
+      this.presentLoading();
       if(part === 'P1') key = 'cache-P1';
       else if(part === 'P2') key = 'cache-P2';
       else key = 'cache-P3';
@@ -209,7 +212,6 @@ export class NewsPage {
       })
       .catch(() => {
         console.log("Oh no! My promise is expired or doesn't exist!");
-        console.log();
         this.loadNews(key);
       });
     }
