@@ -167,6 +167,10 @@ export class NewsPage {
     refresher.complete();
   }
 
+  facTabChanged(){
+
+  }
+  
   /*Tab change*/
   tabChanged(){
     this.resize();
