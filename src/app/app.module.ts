@@ -76,7 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CacheModule.forRoot(),
+    CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
     IonicStorageModule.forRoot(),
     HttpModule,
     HttpClientModule,
