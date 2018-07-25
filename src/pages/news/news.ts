@@ -167,7 +167,11 @@ export class NewsPage {
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())) this.loadNews();
+    console.log("refresh ?");
+    if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
+      this.presentLoading();  
+      this.loadNews();
+    }
     refresher.complete();
   }
 
@@ -194,10 +198,11 @@ export class NewsPage {
 
   async cachedOrNot(){
     //this.cache.removeItem('cache-P3');
+    this.presentLoading();
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ'){
-      //this.presentLoading();
+
       if(part === 'P1') key = 'cache-P1';
       else if(part === 'P2') key = 'cache-P2';
       else key = 'cache-P3';
@@ -212,7 +217,7 @@ export class NewsPage {
         this.updateDisplayedNews();
       })
       .catch(() => {
-        console.log("Oh no! My promise is expired or doesn't exist!");
+        console.log("Oh no! My data is expired or doesn't exist!");
         this.loadNews(key);
       });
     }
@@ -237,8 +242,9 @@ export class NewsPage {
         res => {
           let result:any = res;
           //return result.news;
-          if(key)this.cache.saveItem(key, result.news);
+          
           this.news = result.news;
+          if(key)this.cache.saveItem(key, this.news);
           this.shownNews = result.shownNews;
           this.searching = false;
           this.updateDisplayedNews();
@@ -280,6 +286,7 @@ export class NewsPage {
     this.shownNews = this.displayedNews.length;
     this.searching = false;
     this.dismissLoading();
+    console.log(this.displayedNews)
   }
 
   /*When click on a news, go to the page with more details*/
