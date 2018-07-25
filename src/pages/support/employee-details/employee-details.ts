@@ -52,6 +52,7 @@ export class EmployeeDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public repService: RepertoireService, public connService: ConnectivityService) {
     this.empDetails = navParams.get('emp')
     this.searching = true;
+    //Check if the connexion is Ok before search details pour an employee
     if(this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
@@ -61,7 +62,9 @@ export class EmployeeDetailsPage {
           this.searching = false;
         }
       );
-    } else {
+    }
+    //if not return to previous page and pop up an alert
+    else {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
@@ -70,6 +73,7 @@ export class EmployeeDetailsPage {
   ionViewDidLoad() {
   }
 
+  /*Open page with some aditionnal information*/
   openPage(url: string) {
     //InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');

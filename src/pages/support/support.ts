@@ -66,6 +66,7 @@ export class SupportPage {
     this.title = this.navParams.get('title');
   }
 
+  /*Display loading pop up*/
   presentLoading() {
     if(!this.loading){
         this.loading = this.loadingCtrl.create({
@@ -77,6 +78,7 @@ export class SupportPage {
 
   }
 
+  /*Dismiss loading pop up*/
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
@@ -84,9 +86,9 @@ export class SupportPage {
     }
   }
 
+  /*Take the name and lastname in the good field to do the search and display the result*/
   update(){
     this.presentLoading();
-
     let options: Array<string>= [];
     let values: Array<string> = [];
     if(this.lastname.length>0){
@@ -100,6 +102,7 @@ export class SupportPage {
     this.searchEmployees(options, values);
   }
 
+  /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
   searchEmployees(options:Array<string>, values:Array<string>){
     if(this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(
@@ -116,10 +119,12 @@ export class SupportPage {
     this.dismissLoading();
   }
 
+  /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
     this.navCtrl.push('EmployeeDetailsPage', { 'emp': emp});
   }
 
+  /*Show or close the informations for the section selectionned*/
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
@@ -132,18 +137,7 @@ export class SupportPage {
       return this.shownGroup === group;
   }
 
-  toggleHelp(help) {
-      if (this.isHelpShown(help)) {
-          this.shownHelp = null;
-      } else {
-          this.shownHelp = help;
-      }
-  }
-
-  isHelpShown(help) {
-      return this.shownHelp === help;
-  }
-
+  /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
     this.iab.create(url, '_system','location=yes');
   }
