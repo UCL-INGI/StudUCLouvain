@@ -185,9 +185,10 @@ export class NewsPage {
         let links = this.findSite();
         this.site= links.site;
         this.rss = links.rss;
+        this.presentLoading();
+        this.loadNews();
       }
-      this.presentLoading();
-      this.loadNews();
+
     }
   }
 
@@ -196,7 +197,7 @@ export class NewsPage {
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ'){
-      this.presentLoading();
+      //this.presentLoading();
       if(part === 'P1') key = 'cache-P1';
       else if(part === 'P2') key = 'cache-P2';
       else key = 'cache-P3';
