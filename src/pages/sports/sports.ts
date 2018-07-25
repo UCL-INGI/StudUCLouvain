@@ -82,9 +82,11 @@ export class SportsPage {
     this.searchControl = new FormControl();
   }
 
+  /*update the date with in real time value, load sport and display them*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
+    //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
       this.loadSports();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
@@ -93,17 +95,20 @@ export class SportsPage {
       });
       this.presentLoading();
     }
+    //If not go back to previous page and pop an alert
     else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
+  /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports();
     refresher.complete();
   }
 
+  /*display an loading pop up*/
   presentLoading() {
     if(!this.loading){
       this.loading = this.loadingCtrl.create({
@@ -114,6 +119,7 @@ export class SportsPage {
     }
   }
 
+  /*Cancel loading pop up*/
   dismissLoading(){
     if(this.loading){
         this.loading.dismiss();
@@ -125,12 +131,15 @@ export class SportsPage {
     this.searching = true;
   }
 
+  /*Load sports to display*/
   public loadSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     let result: any;
     this.campus = this.user.campus;
+    //Check the connexion, if it's ok, load them else return to previous page and display an alert
     if(this.connService.isOnline()) {
+      //get sports for all students
       this.sportsService.getSports(this.segment).then(
         res => {
           result = res;
@@ -154,7 +163,7 @@ export class SportsPage {
           this.updateDisplayedSports();
         }
       });
-
+      //get sports for university teams
       this.sportsService.getTeams(this.segment).then(
         res => {
           result = res;
@@ -178,7 +187,6 @@ export class SportsPage {
           this.updateDisplayedSports();
         }
       });
-
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -186,7 +194,7 @@ export class SportsPage {
     }
   }
 
-//SORT SPORTS BY DAY
+  /*Sort sports BY DAY*/
   public changeArray(array){
     var groups = array.reduce(function(obj,item){
       obj[item.jour] = obj[item.jour] || [];
@@ -199,6 +207,7 @@ export class SportsPage {
     return sportsD;
   }
 
+  /*Display or close the group of sports for one day*/
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
@@ -207,24 +216,26 @@ export class SportsPage {
       }
   }
 
+  /*Check if the list is shown or not*/
   isGroupShown(group) {
       return this.shownGroup === group;
   }
 
-
+  /*Display the good list of sports according to the tab*/
   public updateDisplayedSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
 
+    //List of sports for all students
     if (this.segment === 'all') {
       this.displayedSports = this.sports.filter((item) => {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
-
-    } else if (this.segment === 'favorites') {
+    }
+    //list of sports put in favorite
+    else if (this.segment === 'favorites') {
       let favSports = [];
-
       this.sports.filter((item) => {
         if(item.favorite || this.user.hasFavoriteS(item.guid)) {
           if(item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
@@ -235,6 +246,7 @@ export class SportsPage {
 
       this.displayedSports = favSports;
     }
+    //List of sports for university teams
     else if (this.segment === 'team') {
       this.displayedSports = this.teams.filter((item) => {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
@@ -246,19 +258,20 @@ export class SportsPage {
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
     this.dismissLoading();
-
   }
 
-
+  /*Display a modal to select as filter only the sports that the user want to see*/
   presentFilter() {
     if(this.filters === undefined){
       this.filters = [];
     }
 
+    //Create a modal in which the filter will be by the SportsFilterPage
     let modal = this.modalCtrl.create('SportsFilterPage',
                   { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
     modal.present();
 
+    //Applied changing of date range when dismiss the modal
     modal.onWillDismiss((data: any[]) => {
       if (data) {
         let tmpRange = data.pop();
@@ -270,17 +283,18 @@ export class SportsPage {
         this.updateDisplayedSports();
       }
     });
-
   }
 
+  /*Update the dateLimit when that is changed by the filter*/
   private updateDateLimit(){
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
   }
 
+  /*Add a sport to calendar of the smartphone*/
   addToCalendar(slidingItem: ItemSliding, itemData: SportItem){
-
     let options:any = {
+      firstReminderMinutes:30
     };
 
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
@@ -294,6 +308,7 @@ export class SportsPage {
       });
   }
 
+  /*Add a sport to favorite, each slot for the day selected*/
   addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
     if (this.user.hasFavoriteS(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
@@ -314,9 +329,9 @@ export class SportsPage {
       toast.present();
       slidingItem.close();
     }
-
   }
 
+  /*Remove a sport of the favorites*/
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
     let message:string;
     let delet:string;
@@ -352,5 +367,4 @@ export class SportsPage {
     // now present the alert on top of all other content
     alert.present();
   }
-
 }
