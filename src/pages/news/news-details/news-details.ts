@@ -37,9 +37,9 @@ export class NewsDetailsPage {
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.news = navParams.get('news');
   }
-
+  
+  /*Open the url for a news to see more details*/
   public openPage(url: string) {
     window.open(url, '_blank');
   }
-
 }
