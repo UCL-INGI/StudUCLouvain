@@ -88,7 +88,9 @@ export class StudiesPage {
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,2017).then(
       (data) =>{
+        console.log(data);
         let res:any = data;
+        console.log(res);
         let exist:boolean;
         let nameFR:string='';
         let nameEN:string ='';
@@ -166,6 +168,7 @@ export class StudiesPage {
     let myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
+      console.log(this.project);
     });
     myModal.present();
   }
@@ -232,8 +235,8 @@ export class StudiesPage {
           cssClass: 'save',
           handler: data => {
             let check; 
-            this.checkExist(data.acronym).then(data => {
-              check = data;
+            this.checkExist(data.acronym).then(data2 => {
+              check = data2;
               if(check.exist){
                 this.saveCourse(check.nameFR, data.acronym);
               }
