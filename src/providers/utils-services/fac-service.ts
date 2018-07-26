@@ -26,21 +26,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class FacService {
   facultes : any = [];
-  url = 'assets/data/fac.json'; 
+  url = 'assets/data/fac.json';
   constructor(public http: HttpClient)
   {
 
   }
 
+  /*Load fac from Json file in assets*/
   public loadResources() {
     if(this.facultes.length == 0) return new Promise(resolve => {
-
       this.http.get(this.url).map(res => res).subscribe(data => {
           for(let sector of data['secteurs']){
             this.facultes.push(sector);
           }
-
-
         resolve(this.facultes);
       });
 
