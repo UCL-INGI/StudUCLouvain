@@ -36,7 +36,7 @@ export class RepertoireService {
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
-
+  /*Search employees that match with the options & values*/
   public searchEmployees(options:Array<string>, values:Array<string>){
     this.employees = [];
     let newUrl = this.url ;
@@ -49,7 +49,6 @@ export class RepertoireService {
     }
     //newUrl += "&directory=E";
     return new Promise(resolve => {
-
       this.wso2Service.load(newUrl).subscribe(
         data => {
           if(data['persons']!=null){
@@ -60,6 +59,7 @@ export class RepertoireService {
     });
   }
 
+  /*Load the details for a selected employee*/
   public loadEmpDetails(emp:EmployeeItem){
     return new Promise(resolve => {
 
@@ -73,6 +73,7 @@ export class RepertoireService {
     });
   }
 
+  /*Extract the employees*/
   private extractEmployees(data: any){
     if(data!=null){
       for (let i = 0; i < data.length; i++) {
@@ -83,6 +84,7 @@ export class RepertoireService {
     }
   }
 
+  /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
     emp.address = data.address
     emp.contracts = data.contracts;
