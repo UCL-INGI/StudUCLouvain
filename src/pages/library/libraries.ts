@@ -62,6 +62,7 @@ export class LibrariesPage {
       this.cache.removeItem('cache-libraries');
       this.loadLibraries('cache-libraries');
       refresher.complete();
+    }
     else{
       this.connService.presentConnectionAlert();
       refresher.complete();
