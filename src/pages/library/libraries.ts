@@ -58,9 +58,14 @@ export class LibrariesPage {
 
   /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
-    this.cache.removeItem('cache-libraries');
-    this.loadLibraries('cache-libraries');
-    refresher.complete();
+    if(this.connService.isOnline()) {
+      this.cache.removeItem('cache-libraries');
+      this.loadLibraries('cache-libraries');
+      refresher.complete();
+    else{
+      this.connService.presentConnectionAlert();
+      refresher.complete();
+    }
   }
 
   /*Load libraries*/
