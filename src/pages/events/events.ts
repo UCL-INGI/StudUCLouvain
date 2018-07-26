@@ -88,20 +88,13 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    //If available connexion => load events to display and display them
-    //if(this.connService.isOnline()) {
+
       this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedEvents();
       });
-      //this.presentLoading();
-    //}
-    //If not => go back to precedent page and pop an alert
-    /*else{
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }*/
+
   }
 
   /*Reload events when refresh by swipe to the bottom*/
@@ -153,10 +146,9 @@ export class EventsPage {
       return this.shownGroup === group;
   }
 
-
+    /*Check if data are cached or not */
     async cachedOrNot(){
       //this.cache.removeItem('cache-event');
-
         let key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
@@ -176,7 +168,6 @@ export class EventsPage {
           console.log("Oh no! My data is expired or doesn't exist!");
           this.loadEvents(key);
         });
-
     }
 
 

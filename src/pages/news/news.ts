@@ -202,9 +202,9 @@ export class NewsPage {
     }
   }
 
+/*Check if data are cached or not */
   async cachedOrNot(){
     //this.cache.removeItem('cache-P1');
-    
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ'){
