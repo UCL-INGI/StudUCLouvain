@@ -81,12 +81,14 @@ export class StudiesPage {
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
 
+
   }
 
   checkExist(sigle:string) : Promise<any>{
     let response:any;
+    let year = parseInt(this.project.name.split("-")[0]);
     return new Promise(resolve => {
-      this.studentService.checkCourse(sigle,2017).then(
+      this.studentService.checkCourse(sigle,year).then(
       (data) =>{
         console.log(data);
         let res:any = data;
@@ -109,7 +111,7 @@ export class StudiesPage {
 
   toastBadCourse() {
     let toast = this.toastCtrl.create({
-      message: 'Ce sigle n\'existe pas',
+      message: 'Ce sigle n\'existe pas ou n\'est pas encore disponible cette année',
       duration: 2000,
       position: 'middle'
     });
@@ -168,7 +170,7 @@ export class StudiesPage {
     let myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
-      console.log(this.project);
+
     });
     myModal.present();
   }
