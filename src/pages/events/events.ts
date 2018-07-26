@@ -106,8 +106,8 @@ export class EventsPage {
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-
-    this.loadEvents();
+    this.cache.removeItem('cache-event');
+    this.loadEvents('cache-event');
     refresher.complete();
   }
 
@@ -162,13 +162,15 @@ export class EventsPage {
         .then((data) => {
           this.presentLoading();
           console.log("cached events");
-          console.log(data);
-          this.events=data.events;
+          this.events=<Array<EventItem>>data.events;
+          this.events.forEach(function(element) {
+            element.startDate = new Date(element.startDate);
+            element.endDate = new Date(element.endDate);
+          });
           this.shownEvents = data.shownEvents;
           this.filters = data.categories;
           this.searching=false;
           this.updateDisplayedEvents();
-          console.log("end then");
         })
         .catch(() => {
           console.log("Oh no! My data is expired or doesn't exist!");
@@ -190,10 +192,8 @@ export class EventsPage {
         res => {
           let result:any = res;
           this.events = result.events;
-          console.log(this.events);
           if(key)this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
-          console.log(this.shownEvents);
           this.filters = result.categories;
           this.searching = false;
           this.updateDisplayedEvents();
@@ -264,18 +264,16 @@ export class EventsPage {
 
   /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayedEvents() {
-    console.log("start displayed event");
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-      console.log("start segment all");
+     // try{
       this.displayedEvents = this.events.filter((item) => {
-        console.log("start filter");
         //console.log(item);
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      });
+      })//}catch(error) {console.log(error)}
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
@@ -288,11 +286,9 @@ export class EventsPage {
 
       this.displayedEvents = favEvents;
     }
-    console.log("end segment if");
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
-    console.log(this.displayedEventsD);
     this.dismissLoading();
   }
 

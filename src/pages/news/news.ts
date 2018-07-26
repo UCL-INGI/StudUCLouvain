@@ -167,7 +167,16 @@ export class NewsPage {
   public doRefresh(refresher) {
     console.log("refresh ?");
     if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
-      this.loadNews();
+      if(this.segment==='univ'){
+        let part = this.subsegment;
+        let key;
+        if(part === 'P1') key = 'cache-P1';
+        else if(part === 'P2') key = 'cache-P2';
+        else key = 'cache-P3';
+        this.cache.removeItem(key);
+        this.loadNews(key);
+      }
+      else this.loadNews();
     }
     refresher.complete();
   }
