@@ -285,12 +285,27 @@ export class StudiesPage {
         {
           text: save,
           handler: data => {
-            this.saveCourse(data.name, sigle);
+            this.getNameToAddCourse(data)
           }
         }
       ]
     });
     prompt.present();
+  }
+
+  getNameToAddCourse(sigle:string){
+    let check; 
+    this.checkExist(sigle).then(data => {
+      check = data;
+      this.saveCourse(check.nameFR, sigle);
+      let toast = this.toastCtrl.create({
+        message: 'Cours ajouté',
+        duration: 1000,
+        position: 'bottom'
+      });
+
+      toast.present();
+    })
   }
 
   /*Retrieve list of course added previously in the storage*/
