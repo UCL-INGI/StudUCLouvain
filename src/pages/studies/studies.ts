@@ -56,6 +56,7 @@ export class StudiesPage {
   public error:string = "";
   private status: string = "";
   activities: any;
+  response:any;
 
   constructor(
     public studiesService: StudiesService,
@@ -78,6 +79,43 @@ export class StudiesPage {
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
+    this.checkExist('LINGI1123').then(data => console.log(data));
+    this.checkExist('LINGI1578').then(data => console.log(data));
+  }
+
+  checkExist(sigle:string) : Promise<any>{
+    let response:any;
+    return new Promise(resolve => {
+      this.studentService.checkCourse(sigle,2017).then(
+      (data) =>{
+        let exist:boolean;
+        let nameFR:string='';
+        let nameEN:string ='';
+        if(data === 400) exist=false;
+        else{
+          let names = data.ficheActivite.intituleCompletMap.entry;
+          nameFR = names[1].value;
+          nameEN = names[0].value;
+          exist=true;
+        }
+        response={'exist':exist,'nameFR':nameFR, 'nameEN':nameEN};
+        resolve(response);
+      })
+      })    
+  }
+
+  toastBadCourse() {
+    let toast = this.toastCtrl.create({
+      message: 'Ce sigle n\'existe pas',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
  /*Authenticate a student*/
@@ -178,10 +216,6 @@ export class StudiesPage {
       message: message,
       inputs: [
         {
-          name: 'name',
-          placeholder: name
-        },
-        {
           name: 'acronym',
           placeholder: sigle
         }
@@ -196,13 +230,25 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            this.saveCourse(data.name, data.acronym);
+            let check; 
+            this.checkExist(data.acronym).then(data => {
+              check = data;
+              if(check.exist){
+                this.saveCourse(check.nameFR, data.acronym);
+              }
+              else{
+                this.toastBadCourse();
+                this.showPrompt();
+              }
+            })
           }
         }
       ]
     });
     prompt.present();
   }
+
+
 
   /*Add a course from course program, a prompt is shown for this and the user can add a name*/
   showPromptAddCourse(sigle : string) {

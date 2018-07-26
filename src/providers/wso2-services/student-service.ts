@@ -31,6 +31,7 @@ export class StudentService {
   activities: Array<String> = [];
   url = 'my/v0/student/';
   options: any;
+  courseUrl = 'learning/v1/';
 
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
@@ -47,25 +48,23 @@ export class StudentService {
           if(data['activities']!=null){
             console.log(data);
             resolve({activities : data['activities']});
-            //return data.activities;
-            //this.extractEmployees(data.persons.person);
-            //resolve({employees:this.employees});
           }
         });
     });
   }
 
-
-
-  /*private extractEmployees(data: any){
-    if(data!=null){
-      for (let i = 0; i < data.length; i++) {
-        let item = data[i];
-        let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
-        this.employees.push(employee);
-      }
-    }
-  }*/
+  public checkCourse(sigle:string, year){
+    let newUrl = this.courseUrl + year + '/learningUnits/' + sigle + '/fullInformation';
+    return new Promise(resolve => {
+      this.wso2Service.load(newUrl).subscribe(
+        (data) => {
+          resolve(data);
+        },
+        (err) => {
+          resolve(err.status);
+        });
+    })
+  }
 
 
 }
