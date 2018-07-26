@@ -94,7 +94,7 @@ export class StudiesPage {
         let nameEN:string ='';
         if(data === 400) exist=false;
         else{
-          let names = res.ficheActivite.intituleCompletMap.entry;
+          let names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
           exist=true;
