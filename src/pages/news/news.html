@@ -49,7 +49,7 @@
   </ion-segment>
   <ion-segment [(ngModel)]="facsegment" (ionChange)="facTabChange()" *ngIf="segment==='fac' && userS.hasFac()">
     <ion-segment-button value="news">
-      {{'HOME.NEWS' |translate}} <!--<strong *ngIf="userS.hasFac()">({{userS.fac}})</strong>-->
+      {{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong>
     </ion-segment-button>
     <ion-segment-button value="valve">
       {{'NEWS.VALVE' | translate}}
@@ -107,8 +107,8 @@
   </ng-container>
 
 <!------------------------------NEWS UNIVERSITAIRES & FACULTAIRES-------------------------------->
-  <ng-container >
-    <ion-list #newsList  [hidden]="facsegment==='valve' || shownNews === 0 || !userS.hasFac()" >
+  <ng-container *ngIf="segment==='univ' || (segment === 'fac' && facsegment === 'news' && userS.hasFac())">
+    <ion-list #newsList  [hidden]="shownNews === 0" >
       <ion-item *ngFor = "let item of displayedNews">
         <button ion-item (tap)="goToNewsDetail(item)" no-lines>
           <h3>{{item.title}}</h3>

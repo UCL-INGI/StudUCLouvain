@@ -194,7 +194,7 @@ export class NewsPage {
   }
 
   async cachedOrNot(){
-    //this.cache.removeItem('cache-P3');
+    //this.cache.removeItem('cache-P1');
     
     let key;
     let part = this.subsegment;
