@@ -36,23 +36,25 @@ export class AdeService {
   AdeServiceGetProjects : string = "&function=getProjects&detail=2";
   constructor(public http: Http) {
   }
-
+   /*Convert Xml to JSON*/
   convertXmlToJson(xml) : any{
     let parser : any = new X2JS();
     let json = parser.xml2js(xml);
     return json;
   }
 
+  /*Open a session*/
   httpOpenSession() {
     let encodedURL : string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
     },
     err => {
-    
+
     })
   }
 
+  /*Get the projects from ADE*/
   httpGetProjects(sessionId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
@@ -62,6 +64,7 @@ export class AdeService {
      })
   }
 
+  /*Set the project selected by the user*/
   httpSetProject(sessionId : string, projectId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
@@ -71,7 +74,7 @@ export class AdeService {
      })
   }
 
-
+  /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId : string, acronym : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
@@ -81,6 +84,7 @@ export class AdeService {
      })
   }
 
+  /*For a course selected get the activities*/
   httpGetActivity(sessionId : string , courseId : string){
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId

@@ -31,12 +31,12 @@ export class StudiesService {
   url:String;
   projects : AdeProject[];
   data:any;
-    constructor(
-      public http: HttpClient,
-      public ade : AdeService) {}
+  constructor(
+    public http: HttpClient,
+    public ade : AdeService) {}
 
-
-    openSession() {
+  /*Open session for the user*/
+  openSession() {
     return new Promise<string>( (resolve, reject) => {
       console.log("StudiesService openSession")
       this.ade.httpOpenSession().subscribe(
@@ -49,19 +49,21 @@ export class StudiesService {
     });
   }
 
+  /*Get the projects ADE*/
   getProjects(sessionId : string) {
-  return new Promise( (resolve, reject) => {
-    console.log("Studiesservice getProjects")
-    this.ade.httpGetProjects(sessionId).subscribe(
-      data => {
-        console.log("project");
-        console.log(data.projects);
-        resolve(this.extractAdeProjects(data));
-        }
-      );
-    });
+    return new Promise( (resolve, reject) => {
+      console.log("Studiesservice getProjects")
+      this.ade.httpGetProjects(sessionId).subscribe(
+        data => {
+          console.log("project");
+          console.log(data.projects);
+          resolve(this.extractAdeProjects(data));
+          }
+        );
+      });
   }
 
+  /*Extract the projects ADE*/
   extractAdeProjects(data) : AdeProject[]{
     let projects : AdeProject[] = [];
     console.log(data.projects)
@@ -93,7 +95,7 @@ export class StudiesService {
     return projects;
   }
 
-
+  /*Set the project selected by the user*/
   setProject(sessionId : string, projectId : string){
     return new Promise( (resolve, reject) => {
       console.log("studiesService setProject:" + sessionId + " projectId : " +  projectId);
