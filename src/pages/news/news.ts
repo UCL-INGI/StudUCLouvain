@@ -165,20 +165,24 @@ export class NewsPage {
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    console.log("refresh ?");
-    if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
-      if(this.segment==='univ'){
-        let part = this.subsegment;
-        let key;
-        if(part === 'P1') key = 'cache-P1';
-        else if(part === 'P2') key = 'cache-P2';
-        else key = 'cache-P3';
-        this.cache.removeItem(key);
-        this.loadNews(key);
+    if(this.connService.isOnline()) {
+      if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
+        if(this.segment==='univ'){
+          let part = this.subsegment;
+          let key;
+          if(part === 'P1') key = 'cache-P1';
+          else if(part === 'P2') key = 'cache-P2';
+          else key = 'cache-P3';
+          this.cache.removeItem(key);
+          this.loadNews(key);
+        }
+        else this.loadNews();
       }
-      else this.loadNews();
+      refresher.complete();
+    } else {
+      this.connService.presentConnectionAlert();
+      refresher.complete();
     }
-    refresher.complete();
   }
 
   facTabChange(){
@@ -195,7 +199,7 @@ export class NewsPage {
         let links = this.findSite();
         this.site= links.site;
         this.rss = links.rss;
-        
+
         this.loadNews();
       }
 

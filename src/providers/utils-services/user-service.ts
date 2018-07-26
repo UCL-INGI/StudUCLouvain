@@ -81,7 +81,7 @@ export class UserService {
       if(data == null){
         this.campus = "";
       } else {
-        this.campus=data; 
+        this.campus=data;
         }
     });
   }
@@ -103,7 +103,7 @@ export class UserService {
       if(data == null){
         this.fac = "";
       } else {
-        this.fac=data; 
+        this.fac=data;
         }
     });
   }
@@ -158,7 +158,7 @@ export class UserService {
       return this.slots[index].TP.length >0;
     }
     else return index > -1;
-    
+
   }
 
   hasSlotCM(acronym:string){
@@ -182,7 +182,7 @@ export class UserService {
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
     this.storage.set('listEvents',this.favorites);
-    
+
   };
 
   removeFavorite(itemGuid: string) {
@@ -210,11 +210,11 @@ export class UserService {
   addCampus(campus: string) {
     this.campus = campus;
     this.storage.set('campus',this.campus);
-    
+
   };
 
   removeCampus(campus: string) {
-    
+
     this.campus="";
     this.storage.set('campus',this.campus);
   };
@@ -222,11 +222,11 @@ export class UserService {
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac',this.fac);
-    
+
   };
 
   removeFac(fac: string) {
-    
+
     this.fac="";
     this.storage.set('fac',this.fac);
   };

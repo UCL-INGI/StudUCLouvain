@@ -88,7 +88,6 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-
       this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
@@ -99,9 +98,14 @@ export class EventsPage {
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    this.cache.removeItem('cache-event');
-    this.loadEvents('cache-event');
-    refresher.complete();
+    if(this.connService.isOnline()) {
+      this.cache.removeItem('cache-event');
+      this.loadEvents('cache-event');
+      refresher.complete();
+    } else {
+      this.connService.presentConnectionAlert();
+      refresher.complete();
+    }
   }
 
   /*Display an loading window*/
