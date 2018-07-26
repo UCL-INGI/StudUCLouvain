@@ -108,8 +108,8 @@
 
 <!------------------------------NEWS UNIVERSITAIRES & FACULTAIRES-------------------------------->
   <ng-container >
-    <ion-list #newsList [virtualScroll]="displayedNews" approxItemHeight="100px" style="100%" [hidden]="facsegment==='valve' || shownNews === 0 || !userS.hasFac()" >
-      <ion-item *virtualItem = "let item">
+    <ion-list #newsList  [hidden]="facsegment==='valve' || shownNews === 0 || !userS.hasFac()" >
+      <ion-item *ngFor = "let item of displayedNews">
         <button ion-item (tap)="goToNewsDetail(item)" no-lines>
           <h3>{{item.title}}</h3>
           <p [innerHtml]="item.trimmedDescription"></p>
