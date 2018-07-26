@@ -114,13 +114,6 @@ $ npm run e2e
 * Studentbook and Staffbook
 * Display Sports schedule
 
-## Screenshots
-
-<img src="screenshots/news.png" alt="android-tablet" width="150"/>
-<img src="screenshots/menu.png" alt="android-tablet" width="150"/>
-<img src="screenshots/carte.png" alt="android-tablet" width="150"/>
-<img src="screenshots/etudes_1.png" alt="android-tablet" width="150"/> <img src="screenshots/etudes_2.png" alt="android-tablet" width="150"/>
-
 ## User Guide
 
 
