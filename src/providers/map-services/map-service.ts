@@ -196,7 +196,7 @@ export class MapService {
             mapTypeId: GoogleMapsMapTypeId.ROADMAP
           }
           // create CameraPosition
-          let camPos: CameraPosition = {
+          let camPos: CameraPosition<LatLng> = {
             target: latLng,
             zoom: 15
           };
@@ -322,7 +322,7 @@ export class MapService {
     this.markers.map((marker) => {
       if(marker.getTitle() == title) {
         let latLng = new LatLng(lat, lng);
-        let camPos: CameraPosition = {
+        let camPos: CameraPosition<LatLng> = {
           target: latLng,
           zoom: 15
         };
