@@ -50,12 +50,14 @@ export class SportsService {
 
   }
 
-convertXmlToJson(xml) : any{
+  /*Parse the xml to json*/
+  convertXmlToJson(xml) : any{
     let parser : any = new X2JS();
     let json = parser.xml2js(xml);
     return json;
   }
 
+  /*Get the good URL in function of the user's campus*/
   update(){
     let campus = this.user.campus;
     if(campus == "LLN") this.url = this.url1;
@@ -63,6 +65,7 @@ convertXmlToJson(xml) : any{
     if(campus == "Mons") this.url = this.url3;
   }
 
+  /*Get sports for the URL specific to the campus of the user*/
   public getSports(segment:string) {
     this.update();
     this.sports = [];
@@ -79,7 +82,7 @@ convertXmlToJson(xml) : any{
           } else {
             this.nbCalls = 0;
             this.extractSports(result.rss.channel.item,true);
-            
+
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
         },
@@ -87,9 +90,9 @@ convertXmlToJson(xml) : any{
           reject(err);
         });
     });
-
   }
 
+  /*Get sports for the university teams*/
   public getTeams(segment:string) {
     this.teams = [];
     return new Promise( (resolve, reject) => {
@@ -104,7 +107,7 @@ convertXmlToJson(xml) : any{
           } else {
             this.nbCalls = 0;
             this.extractSports(result.rss.channel.item,false);
-            
+
             resolve({teams : this.teams, shownTeams: this.shownTeams, categoriesT: this.allCategoriesT});
           }
         },
@@ -114,6 +117,7 @@ convertXmlToJson(xml) : any{
     });
   }
 
+  /*Extract sports with all the details*/
   private extractSports(data: any, isSport:boolean) {
     if(data === undefined){
       console.log("Error sports data undefined!!!")
@@ -155,8 +159,8 @@ convertXmlToJson(xml) : any{
     }
   }
 
+  /*Return a date in good form by splitting for the sport*/
   private createDateForSport(str : string, hour: string):Date{
-    
       let timeSplit = hour.split(":");
       let dateSplit = str.split("/");
       let year = parseInt(dateSplit[2]);
@@ -167,8 +171,8 @@ convertXmlToJson(xml) : any{
       return new Date(year, month, day, hours, minutes);
   }
 
+  /*Return the items of filter*/
   public filterItems(myList, searchTerm){
-
     return myList.filter((item) => {
       return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });

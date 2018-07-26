@@ -37,6 +37,7 @@ export class EventsService {
 
   constructor(public user:UserService, public rssService : RssService) {}
 
+  /*Get the events*/
   public getEvents(segment:string) {
     this.events = [];
     return new Promise( (resolve, reject) => {
@@ -61,6 +62,7 @@ export class EventsService {
     });
   }
 
+  /*Extraction of events*/
   private extractEvents(data: any) {
     this.shownEvents=0;
     let maxDescLength = 20;
@@ -74,7 +76,6 @@ export class EventsService {
       let favorite = false;
       let hidden = false;
       let iconCategory = "assets/icon/events-icon/other.png";
-
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
@@ -82,21 +83,18 @@ export class EventsService {
         if (this.allCategories.indexOf(item.category) < 0) {
           this.allCategories.push(item.category);
         }
-
         iconCategory = this.getIconCategory(item.category);
       }
-
       this.shownEvents++;
-
       let startDate = this.createDateForEvent(item.date_begin);
       let endDate = this.createDateForEvent(item.date_end);
       let newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
                       hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
-
       this.events.push(newEventItem);
     }
   }
 
+  /*Get the good icon for a catagory*/
   public getIconCategory(category : string):string{
     switch(category.toLowerCase()) {
       case "sensibilisation" : {
@@ -123,6 +121,7 @@ export class EventsService {
     }
   }
 
+  /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str : string):Date{
     //new Date(Year : number, (month-1) : number, day : number)
     let dateTimeSplit = str.split(" ");
@@ -136,15 +135,13 @@ export class EventsService {
     let minutes = parseInt(timeSplit[1]);
 
     return new Date(year, month, day, hours, minutes);
-
   }
 
+  /*Return the items of filter*/
   public filterItems(myList, searchTerm){
-
     return myList.filter((item) => {
       return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
-
   }
 
 }

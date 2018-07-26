@@ -33,12 +33,9 @@ export class RssService {
 
   }
 
+  /*Load data from the RSS flux*/
   load(url: string) {
     let encodedURL = this.rssServiceBaseUrl + encodeURIComponent(url) + this.rssServiceBaseOptions;
-
     return  this.http.get(encodedURL).map(res => res);
   }
-
-
-
 }

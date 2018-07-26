@@ -41,6 +41,7 @@ export class NewsService {
     console.log('Hello NewsService Provider');
   }
 
+  /*Get the appropriate news in function of the tab in which the user is*/
   public getNews(segment:string) {
     let baseURL;
     this.news = [];
@@ -63,7 +64,6 @@ export class NewsService {
        }
     }
     return new Promise( (resolve, reject) => {
-
       this.rssService.load(baseURL).subscribe(
         data => {
           this.nbCalls++;
@@ -85,6 +85,7 @@ export class NewsService {
     });
   }
 
+  /*Extract news*/
   private extractNews(data : any){
     this.shownNews=0;
     let maxDescLength = 20;
@@ -106,6 +107,7 @@ export class NewsService {
     }
   }
 
+  /*Return a date in good form by splitting for the new*/
   private createDateForNews(str : string): Date{
     //str : "Fri, 07 Jul 2017 08:51:52 +0200"
     //new Date(Year : number, (month-1) : number, day : number)
@@ -121,9 +123,9 @@ export class NewsService {
     return new Date(year, month, day, hours, minutes);
   }
 
+  /*Get the right month number*/
   private getMonthNumber(str: string) {
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
     return months.indexOf(str);
   }
 }
