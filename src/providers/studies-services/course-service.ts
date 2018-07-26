@@ -33,6 +33,7 @@ export class CourseService {
       public ade : AdeService) {
     }
 
+    /*Get the course ID for the acronym of the course*/
     getCourseId(sessionId : string, acronym : string){
       return new Promise <string>( (resolve, reject) => {
         this.ade.httpGetCourseId(sessionId, acronym).subscribe(
@@ -43,10 +44,12 @@ export class CourseService {
       })
     }
 
+    /*Extract the course ID*/
     extractCourseId(data){
       return data.resources.resource._id;
     }
 
+    /*Get activity for a course ID obtained by getting this from a course selected by the user*/
     getActivity(sessionId : string, courseId : string){
       return new Promise <Activity[]>( (resolve, reject) => {
         this.ade.httpGetActivity(sessionId, courseId).subscribe(
@@ -57,6 +60,7 @@ export class CourseService {
       })
     }
 
+    /*Extract the activity*/
     extractActivity(data) : Activity[]{
       let activities : Activity[] = [];
       let activitiesList = data.activities.activity
@@ -69,6 +73,7 @@ export class CourseService {
       return activities;
     }
 
+    /*For each activity collect the right variables to be able to display them*/
     createNewActivities(jsonActivity) : Activity[] {
       let activities : Activity[] = [];
       let type : string = jsonActivity._type;
@@ -110,6 +115,7 @@ export class CourseService {
       return activities;
     }
 
+    /*Create a date*/
     createDate(date : string, hour : string) : Date{
       let splitDate = date.split("/")
       let splitHour = hour.split(":")
@@ -122,6 +128,7 @@ export class CourseService {
       return newdate;
     }
 
+    /*Get teacher from the participants*/
     getTeachers(participants) : string {
       let teachers : string = " ";
       for(let i=0; i < participants.length; i++){
@@ -132,6 +139,7 @@ export class CourseService {
       return teachers;
     }
 
+    /*Get students accepted at a course in the participants*/
     getStudents(participants) : string {
       let students : string = " ";
       for(let i=0; i < participants.length; i++){
@@ -142,6 +150,7 @@ export class CourseService {
       return students;
     }
 
+    /*Get Auditorium in which the course is presented*/
     getAuditorium(participants) : string {
       let auditorium : string = " ";
       for(let i=0; i < participants.length; i++){
