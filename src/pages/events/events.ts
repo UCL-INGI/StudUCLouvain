@@ -106,7 +106,7 @@ export class EventsPage {
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    
+
     this.loadEvents();
     refresher.complete();
   }
@@ -156,7 +156,7 @@ export class EventsPage {
 
     async cachedOrNot(){
       //this.cache.removeItem('cache-event');
-      
+
         let key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
@@ -182,7 +182,6 @@ export class EventsPage {
   public loadEvents(key?) {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
-    let result: any;
 
     //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if(this.connService.isOnline()) {
@@ -272,7 +271,7 @@ export class EventsPage {
     if (this.segment === 'all') {
       console.log("start segment all");
       this.displayedEvents = this.events.filter((item) => {
-        console.log("start filter");  
+        console.log("start filter");
         //console.log(item);
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
