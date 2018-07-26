@@ -209,7 +209,7 @@ export class NewsPage {
         this.presentLoading();
         console.log("cached news");
         console.log(data);
-        this.news=data;
+        this.news=data.news;
         this.shownNews = data.shownNews;
         this.searching=false;
         this.updateDisplayedNews();
@@ -238,9 +238,9 @@ export class NewsPage {
         res => {
           let result:any = res;
           //return result.news;
-          
+
           this.news = result.news;
-          if(key)this.cache.saveItem(key, this.news);
+          if(key)this.cache.saveItem(key, result);
           this.shownNews = result.shownNews;
           this.searching = false;
           this.updateDisplayedNews();

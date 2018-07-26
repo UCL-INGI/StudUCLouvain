@@ -163,7 +163,7 @@ export class EventsPage {
           this.presentLoading();
           console.log("cached events");
           console.log(data);
-          this.events=data;
+          this.events=data.events;
           this.shownEvents = data.shownEvents;
           this.filters = data.categories;
           this.searching=false;
@@ -191,9 +191,10 @@ export class EventsPage {
         res => {
           let result:any = res;
           this.events = result.events;
-          //console.log(this.events);
-          if(key)this.cache.saveItem(key, this.events);
+          console.log(this.events);
+          if(key)this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
+          console.log(this.shownEvents);
           this.filters = result.categories;
           this.searching = false;
           this.updateDisplayedEvents();
@@ -272,6 +273,7 @@ export class EventsPage {
       console.log("start segment all");
       this.displayedEvents = this.events.filter((item) => {
         console.log("start filter");  
+        //console.log(item);
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });

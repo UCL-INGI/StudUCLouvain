@@ -62,6 +62,7 @@ export class EventsService {
   }
 
   private extractEvents(data: any) {
+    this.shownEvents=0;
     let maxDescLength = 20;
     if(data === undefined){
       console.log("Error events data undefined!!!")

@@ -86,6 +86,7 @@ export class NewsService {
   }
 
   private extractNews(data : any){
+    this.shownNews=0;
     let maxDescLength = 20;
 
     for (let i = 0; i < data.length; i++) {
