@@ -74,7 +74,6 @@ export class UserService {
     });
   }
 
-
   getCampus(){
     this.storage.get('campus').then((data) =>
     {
@@ -210,11 +209,9 @@ export class UserService {
   addCampus(campus: string) {
     this.campus = campus;
     this.storage.set('campus',this.campus);
-
   };
 
   removeCampus(campus: string) {
-
     this.campus="";
     this.storage.set('campus',this.campus);
   };
@@ -222,11 +219,9 @@ export class UserService {
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac',this.fac);
-
   };
 
   removeFac(fac: string) {
-
     this.fac="";
     this.storage.set('fac',this.fac);
   };

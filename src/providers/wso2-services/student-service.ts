@@ -35,13 +35,12 @@ export class StudentService {
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
-
+  /*Search activities (courses)*/
   public searchActivities(){
     this.activities = [];
     let newUrl = this.url ;
     newUrl += "activities";
     return new Promise(resolve => {
-
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           console.log(data);

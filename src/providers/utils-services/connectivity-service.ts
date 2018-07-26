@@ -34,6 +34,7 @@ export class ConnectivityService {
     this.onDevice = this.platform.is('cordova');
   }
 
+  /*Check if there is a connexion*/
   isOnline(): boolean {
     if(this.onDevice && this.network.type){
       return this.network.type !== Connection.NONE;
@@ -41,7 +42,7 @@ export class ConnectivityService {
       return navigator.onLine;
     }
   }
-
+  /*pop up an alert to say to the user to connect him to the internet*/
   presentConnectionAlert() {
     let title:string;
     let message:string;
@@ -55,6 +56,5 @@ export class ConnectivityService {
       buttons: [close]
     });
     alert.present();
-
   }
 }

@@ -23,7 +23,6 @@ export class Wso2Service {
   headers: HttpHeaders;
 
   constructor(public http: HttpClient) {
-
     this.getToken()
     .subscribe(
         data => {
@@ -32,18 +31,17 @@ export class Wso2Service {
               this.headers.append('Accept', 'application/json');
               //this.options = new RequestOptions({ headers: headers });
         });
-
   }
 
-
-
+  /*Load wso2 service*/
   load(url: string) {
-//console.log(this.token);
+    //console.log(this.token);
     //console.log(this.token);
     let finalUrl = this.wso2ServiceBaseUrl + url;
     return  this.http.get(finalUrl, {headers: this.headers}).map(res => res);
   }
 
+  /*Retrieves the token*/
   getToken(){
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type','application/x-www-form-urlencoded');
@@ -65,14 +63,13 @@ export class Wso2Service {
 
         return "OK";
       })
-      .catch((error:any) => { 
-console.log('Token error');
-return Observable.throw(error)});
+      .catch((error:any) => {
+    console.log('Token error');
+    return Observable.throw(error)});
   }
 
-
-   login(user : string, pass : string){
-
+  /*Log in the user*/
+  login(user : string, pass : string){
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type','application/x-www-form-urlencoded');
 
@@ -91,6 +88,7 @@ return Observable.throw(error)});
       .catch((error:any) => { return Observable.throw(error)});
   }
 
+  /*Load the student*/
   loadStudent(url:string) {
     let headers = new HttpHeaders({'Authorization': this.tokenStudent});
     headers.append('Accept', 'application/json');
