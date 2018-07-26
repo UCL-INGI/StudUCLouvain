@@ -58,7 +58,9 @@ export class StudentService {
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
-          resolve(data);
+          let res:any;
+          res=data;
+          resolve(res.ficheActivite);
         },
         (err) => {
           resolve(err.status);

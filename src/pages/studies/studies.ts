@@ -57,6 +57,7 @@ export class StudiesPage {
   private status: string = "";
   activities: any;
   response:any;
+  language;
 
   constructor(
     public studiesService: StudiesService,
@@ -79,8 +80,7 @@ export class StudiesPage {
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
-    this.checkExist('LINGI1123').then(data => console.log(data));
-    this.checkExist('LINGI1578').then(data => console.log(data));
+
   }
 
   checkExist(sigle:string) : Promise<any>{
@@ -88,12 +88,13 @@ export class StudiesPage {
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,2017).then(
       (data) =>{
+        let res:any = data;
         let exist:boolean;
         let nameFR:string='';
         let nameEN:string ='';
         if(data === 400) exist=false;
         else{
-          let names = data.ficheActivite.intituleCompletMap.entry;
+          let names = res.ficheActivite.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
           exist=true;
