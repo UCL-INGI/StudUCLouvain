@@ -22,6 +22,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
+import { CacheService } from 'ionic-cache';
 
 import { LibrariesService } from '../../providers/wso2-services/libraries-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
@@ -43,10 +44,11 @@ export class LibrariesPage {
     public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
-    public connService : ConnectivityService)
+    public connService : ConnectivityService,
+    private cache:CacheService)
   {
     this.title = this.navParams.get('title');
-    this.loadLibraries();
+    this.cachedOrNot();
 
   }
 
@@ -56,12 +58,13 @@ export class LibrariesPage {
 
   /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
-    this.loadLibraries();
+    this.cache.removeItem('cache-libraries');
+    this.loadLibraries('cache-libraries');
     refresher.complete();
   }
 
   /*Load libraries*/
-  loadLibraries() {
+  loadLibraries(key?) {
     this.searching = true;
     //Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
     if(this.connService.isOnline()) {
@@ -69,6 +72,7 @@ export class LibrariesPage {
         res => {
           let result:any = res;
           this.libraries = result.libraries;
+          if(key)this.cache.saveItem(key, this.libraries);
           this.searching = false;
         }
       );
@@ -83,4 +87,20 @@ export class LibrariesPage {
   goToLibDetails(lib: LibraryItem) {
     this.navCtrl.push('LibraryDetailsPage', { 'lib': lib});
   }
+
+  async cachedOrNot(){
+      //this.cache.removeItem('cache-event');
+      let key = 'cache-libraries';
+      await this.cache.getItem(key)
+        .then((data) => {
+          //this.presentLoading();
+          console.log("cached libraries");
+          this.libraries=data;
+          this.searching=false;
+        })
+        .catch(() => {
+          console.log("Oh no! My data is expired or doesn't exist!");
+          this.loadLibraries(key);
+        });
+    }
 }

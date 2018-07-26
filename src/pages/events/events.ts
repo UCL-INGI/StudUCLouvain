@@ -158,7 +158,7 @@ export class EventsPage {
         .then((data) => {
           this.presentLoading();
           console.log("cached events");
-          this.events=<Array<EventItem>>data.events;
+          this.events=data.events;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
             element.endDate = new Date(element.endDate);
