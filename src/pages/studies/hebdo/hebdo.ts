@@ -41,7 +41,6 @@ export class HebdoPage {
   schedule : Array<any> = this.navParams.get('schedule');
   shownGroup = null;
 
-
   constructor(public navCtrl: NavController,
               private calendar: Calendar,
               public toastCtrl: ToastController,
@@ -50,7 +49,15 @@ export class HebdoPage {
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public navParams:NavParams)
-  {  
+  {
+    function compare(a,b) {
+      if (parseInt(a.date.substr(0,2)) < parseInt(b.date.substr(0,2)))
+        return -1;
+      if (parseInt(a.date.substr(0,2)) > parseInt(b.date.substr(0,2)))
+        return 1;
+      return 0;
+    }
+    this.schedule = this.schedule.sort(compare)
     console.log(this.schedule);
   }
 
@@ -73,5 +80,5 @@ export class HebdoPage {
       return this.shownGroup === group;
   }
 
- 
+
 }
