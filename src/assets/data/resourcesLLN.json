@@ -4,6 +4,30 @@
 
         {
              "auditoires" : [
+               {
+                   "nom"  : "Agora",
+                   "sigle" : "AGOR",
+                   "cnt_places": 1289,
+                   "cnt_auditoires" : 9,
+                   "adresse" : "Place Agora, 19 - 1348 Louvain-la-Neuve",
+                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolagor.gif",
+                   "coord": {
+                       "lat" : "50.6691041",
+                       "lng": "4.6124464"
+                   }
+               },
+               {
+                   "nom"  : "Coubertin",
+                   "sigle" : "COUB",
+                   "cnt_places": 839,
+                   "cnt_auditoires" : 12,
+                   "adresse" : "Place Pierre de Coubertin, 2 - 1348 Louvain-la-Neuve",
+                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcoub.gif",
+                   "coord": {
+                       "lat" : "50.6705452",
+                       "lng": "4.606818"
+                   }
+               },
                  {
                      "nom"  : "Croix du Sud",
                      "sigle" : "SUD",
@@ -27,126 +51,6 @@
                      "coord": {
                          "lat" : "50.6660998",
                          "lng": "4.6239607"
-                     }
-                 },
-                 {
-                     "nom"  : "Lavoisier",
-                     "sigle" : "LAVO",
-                     "cnt_places": 148,
-                     "cnt_auditoires" : 3,
-                     "adresse" : "Place Louis Pasteur, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollavo.gif",
-                     "coord": {
-                         "lat" : "50.6694534",
-                         "lng": "4.619427"
-                     }
-                 },
-                 {
-                     "nom"  : "Mercator",
-                     "sigle" : "MERC",
-                     "cnt_places": 530,
-                     "cnt_auditoires" : 15,
-                     "adresse" : "Place Louis Pasteur, 3 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmerc.gif",
-                     "coord": {
-                         "lat" : "50.6694534",
-                         "lng": "4.619427"
-                     }
-                 },
-                 {
-                     "nom"  : "Marie Curie",
-                     "sigle" : "MCUR",
-                     "cnt_places": 96,
-                     "cnt_auditoires" : 4,
-                     "adresse" : "Rue du Compas, 3 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmcur.gif",
-                     "coord": {
-                         "lat" : "50.6675361",
-                         "lng": "4.6200231"
-                     }
-                 },
-                 {
-                     "nom"  : "Pierre Curie",
-                     "sigle" : "PCUR",
-                     "cnt_places": 306,
-                     "cnt_auditoires" : 7,
-                     "adresse" : "Rue du Compas, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpcur.gif",
-                     "coord": {
-                         "lat" : "50.6675361",
-                         "lng": "4.6200231"
-                     }
-                 },
-                 {
-                     "nom"  : "Pythagore",
-                     "sigle" : "PYTH",
-                     "cnt_places": 36,
-                     "cnt_auditoires" : 1,
-                     "adresse" : "Rue du Compas, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpyth.gif",
-                     "coord": {
-                         "lat" : "50.6675361",
-                         "lng": "4.6200231"
-                     }
-                 },
-                 {
-                     "nom"  : "Sainte Barbe",
-                     "sigle" : "BARB",
-                     "cnt_places": 1941,
-                     "cnt_auditoires" : 35,
-                     "adresse" : "Place Sainte Barbe, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolbarb.gif",
-                     "coord": {
-                         "lat" : "50.6684749",
-                         "lng": "4.621661"
-                     }
-                 },
-                 {
-                     "nom"  : "Sciences",
-                     "sigle" : "SCES",
-                     "cnt_places": 1334,
-                     "cnt_auditoires" : 5,
-                     "adresse" : "Place des Sciences, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsces.gif",
-                     "coord": {
-                         "lat" : "50.6681746",
-                         "lng": "4.6196733"
-                     }
-                 },
-                 {
-                     "nom"  : "Van Helmont",
-                     "sigle" : "VHEL",
-                     "cnt_places": 236,
-                     "cnt_auditoires" : 6,
-                     "adresse" : "Place Louis Pasteur, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolvhel.gif",
-                     "coord": {
-                         "lat" : "50.6693175",
-                         "lng": "4.6192258"
-                     }
-                 },
-                 {
-                     "nom"  : "Agora",
-                     "sigle" : "AGOR",
-                     "cnt_places": 1289,
-                     "cnt_auditoires" : 9,
-                     "adresse" : "Place Agora, 19 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolagor.gif",
-                     "coord": {
-                         "lat" : "50.6691041",
-                         "lng": "4.6124464"
-                     }
-                 },
-                 {
-                     "nom"  : "Coubertin",
-                     "sigle" : "COUB",
-                     "cnt_places": 839,
-                     "cnt_auditoires" : 12,
-                     "adresse" : "Place Pierre de Coubertin, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcoub.gif",
-                     "coord": {
-                         "lat" : "50.6705452",
-                         "lng": "4.606818"
                      }
                  },
                  {
@@ -198,6 +102,30 @@
                      }
                  },
                  {
+                     "nom"  : "Institut des langues vivantes (ILV)",
+                     "sigle" : "ILV",
+                     "cnt_places": 573,
+                     "cnt_auditoires" : 2,
+                     "adresse" : "Traverse d'Esope - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "coord": {
+                         "lat" : "50.669002",
+                         "lng": "4.614822"
+                     }
+                 },
+                 {
+                     "nom"  : "Lavoisier",
+                     "sigle" : "LAVO",
+                     "cnt_places": 148,
+                     "cnt_auditoires" : 3,
+                     "adresse" : "Place Louis Pasteur, 1 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollavo.gif",
+                     "coord": {
+                         "lat" : "50.6694534",
+                         "lng": "4.619427"
+                     }
+                 },
+                 {
                      "nom"  : "Leclercq",
                      "sigle" : "LECL",
                      "cnt_places": 722,
@@ -210,6 +138,30 @@
                      }
                  },
                  {
+                     "nom"  : "Marie Curie",
+                     "sigle" : "MCUR",
+                     "cnt_places": 96,
+                     "cnt_auditoires" : 4,
+                     "adresse" : "Rue du Compas, 3 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmcur.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Mercator",
+                     "sigle" : "MERC",
+                     "cnt_places": 530,
+                     "cnt_auditoires" : 15,
+                     "adresse" : "Place Louis Pasteur, 3 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmerc.gif",
+                     "coord": {
+                         "lat" : "50.6694534",
+                         "lng": "4.619427"
+                     }
+                 },
+                 {
                      "nom"  : "Montesqieu",
                      "sigle" : "MONT",
                      "cnt_places": 1423,
@@ -219,6 +171,54 @@
                      "coord": {
                          "lat" : "50.6687754",
                          "lng": "4.6117253"
+                     }
+                 },
+                 {
+                     "nom"  : "Pierre Curie",
+                     "sigle" : "PCUR",
+                     "cnt_places": 306,
+                     "cnt_auditoires" : 7,
+                     "adresse" : "Rue du Compas, 1 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpcur.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Pythagore",
+                     "sigle" : "PYTH",
+                     "cnt_places": 36,
+                     "cnt_auditoires" : 1,
+                     "adresse" : "Rue du Compas, 2 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpyth.gif",
+                     "coord": {
+                         "lat" : "50.6675361",
+                         "lng": "4.6200231"
+                     }
+                 },
+                 {
+                     "nom"  : "Sainte Barbe",
+                     "sigle" : "BARB",
+                     "cnt_places": 1941,
+                     "cnt_auditoires" : 35,
+                     "adresse" : "Place Sainte Barbe, 1 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolbarb.gif",
+                     "coord": {
+                         "lat" : "50.6684749",
+                         "lng": "4.621661"
+                     }
+                 },
+                 {
+                     "nom"  : "Sciences",
+                     "sigle" : "SCES",
+                     "cnt_places": 1334,
+                     "cnt_auditoires" : 5,
+                     "adresse" : "Place des Sciences, 2 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsces.gif",
+                     "coord": {
+                         "lat" : "50.6681746",
+                         "lng": "4.6196733"
                      }
                  },
                  {
@@ -258,15 +258,15 @@
                      }
                  },
                  {
-                     "nom"  : "Institut des langues vivantes (ILV)",
-                     "sigle" : "ILV",
-                     "cnt_places": 573,
-                     "cnt_auditoires" : 2,
-                     "adresse" : "Traverse d'Esope - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "nom"  : "Van Helmont",
+                     "sigle" : "VHEL",
+                     "cnt_places": 236,
+                     "cnt_auditoires" : 6,
+                     "adresse" : "Place Louis Pasteur, 2 - 1348 Louvain-la-Neuve",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolvhel.gif",
                      "coord": {
-                         "lat" : "50.669002",
-                         "lng": "4.614822"
+                         "lat" : "50.6693175",
+                         "lng": "4.6192258"
                      }
                  }
              ],
