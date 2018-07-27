@@ -133,14 +133,14 @@
 
                 <ion-item *ngIf="information?.programmeprerequis.length >1">
                         <ion-row *ngFor="let item of information?.programmeprerequis">
-                            <ion-col><strong>{{item.intituleProgrammeCompletFr}}</strong></ion-col>
+                            <ion-col><strong style="white-space: pre-line;">{{item.intituleProgrammeCompletFr}}</strong></ion-col>
                             <ion-col>{{item.sigleProgramme}}</ion-col>
                             <ion-col>{{item.credit}} crédits</ion-col>
                         </ion-row>
                 </ion-item>
                 <ion-item *ngIf="!information?.programmeprerequis.length">
                     <ion-row >
-                        <ion-col><strong>{{information?.programmeprerequis.intituleProgrammeCompletFr}}</strong></ion-col>
+                        <ion-col><strong style="white-space: pre-line;">{{information?.programmeprerequis.intituleProgrammeCompletFr}}</strong></ion-col>
                         <ion-col>{{information?.programmeprerequis.sigleProgramme}}</ion-col>
                         <ion-col>{{information?.programmeprerequis.credit}} crédits</ion-col>
                     </ion-row>
