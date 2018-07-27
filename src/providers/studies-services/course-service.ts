@@ -97,7 +97,6 @@ export class CourseService {
         }
       }
       if(isExam && events !== undefined){
-        console.log(events);
           let event = events;
           let endHour = event._endHour;
           let startHour = event._startHour;

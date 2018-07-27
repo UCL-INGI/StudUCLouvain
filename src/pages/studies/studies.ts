@@ -339,8 +339,9 @@ export class StudiesPage {
 
   /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course){
+    let year = parseInt(this.project.name.split("-")[0]);
     this.navCtrl.push('CoursePage',
-      {course : course, sessionId : this.sessionId});
+      {course : course, sessionId : this.sessionId, year: year});
   }
 
   /*Launch moodle or ucl portal*/

@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ToastController, AlertController  } from 'ionic-angular';
+import { NavController, NavParams, ItemSliding, ToastController, AlertController, ModalController  } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -40,6 +40,7 @@ import { Calendar } from '@ionic-native/calendar';
 export class CoursePage {
   sessionId : string = this.navParams.get('sessionId');
   course : Course = this.navParams.get("course");
+  year = this.navParams.get("year");
   segment = 'Cours magistral';
   slotTP:string = "no";
   slotCM:string = "no";
@@ -55,6 +56,7 @@ export class CoursePage {
               private calendar: Calendar,
               public toastCtrl: ToastController,
               public userS:UserService,
+              public modalCtrl: ModalController,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public navParams:NavParams)
@@ -275,5 +277,15 @@ export class CoursePage {
           ]
       });
       disclaimerAlert.present();
+   }
+
+   openModalInfo(){
+
+    let myModal = this.modalCtrl.create('ModalInfoPage', {course: this.course, year: this.year},{ cssClass: "modal-fullscreen" });
+    myModal.onDidDismiss(data => {
+      
+
+    });
+    myModal.present();
    }
 }

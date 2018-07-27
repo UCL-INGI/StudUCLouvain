@@ -31,7 +31,7 @@ export class StudentService {
   activities: Array<String> = [];
   url = 'my/v0/student/';
   options: any;
-  courseUrl = 'learning/v1/';
+  courseUrl = 'learning/v1/learningUnits/';
 
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
@@ -54,7 +54,7 @@ export class StudentService {
   }
 
   public checkCourse(sigle:string, year){
-    let newUrl = this.courseUrl + year + '/learningUnits/' + sigle + '/fullInformation';
+    let newUrl = this.courseUrl  + year + '/' +  sigle + '/fullInformation';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
