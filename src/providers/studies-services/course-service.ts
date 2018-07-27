@@ -46,7 +46,8 @@ export class CourseService {
 
     /*Extract the course ID*/
     extractCourseId(data){
-      return data.resources.resource._id;
+
+      if(data.resources.resource !== undefined) return data.resources.resource._id;
     }
 
     /*Get activity for a course ID obtained by getting this from a course selected by the user*/
@@ -63,12 +64,14 @@ export class CourseService {
     /*Extract the activity*/
     extractActivity(data) : Activity[]{
       let activities : Activity[] = [];
-      let activitiesList = data.activities.activity
-      console.log(data);
-      for (let i =0; i< activitiesList.length ;i++){
-        let activityElem = activitiesList[i];
-        let newActivities : Activity[] = this.createNewActivities(activityElem);
-        activities = activities.concat(newActivities);
+      if(data.activities !== undefined){
+        let activitiesList = data.activities.activity
+        console.log(data);
+        for (let i =0; i< activitiesList.length ;i++){
+          let activityElem = activitiesList[i];
+          let newActivities : Activity[] = this.createNewActivities(activityElem);
+          activities = activities.concat(newActivities);
+        }
       }
       return activities;
     }

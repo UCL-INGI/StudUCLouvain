@@ -85,7 +85,7 @@ export class ModalInfoPage {
             response={'cahierCharges':cahier, 'offre' : offres,
                         'campus':campus, 'entite': entite,
                         'prof': teacher, 'localisation': loca,
-                        'credit' : credit, 'programme&prerequis' : progpre,
+                        'credit' : credit, 'programmeprerequis' : progpre,
                         'quadri' : quadri, 'resume': resume, 'volume' : vol, 'langue':langue
                       };
                       console.log(response);
