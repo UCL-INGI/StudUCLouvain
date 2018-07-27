@@ -259,7 +259,7 @@ export class HomePage {
     this.translateService.get('GUINDAILLE.HELP9').subscribe((res:string) => {msg9=res;});
     let alert = this.alertCtrl.create({
       title: urg,
-      message: "<p> <strong>" + msg1 + "</strong>: <a href=\"tel:112\">112</a> </p> <p><strong>" + msg2 + "</strong>: <a href=\"tel:+32 10 47 22 22\">+32 10 47 22 22</a> </p> <p> <br>" + msg3 + " <br><br> <strong>" + msg4 + "</strong> " + msg5 + "<br> <strong>" + msg6 + "</strong> " + msg7 + "<br> <strong>" + msg8 + "</strong> " + msg9 +"<br>",
+      message: "<p> <strong>" + msg1 + "</strong>: <a href=\"tel:112\">112</a> </p> <p><strong>" + msg2 + "</strong>: <a href=\"tel:010 47 22 22\">010 47 22 22</a> </p> <p> <br>" + msg3 + " <br><br> <strong>" + msg4 + "</strong> " + msg5 + "<br> <strong>" + msg6 + "</strong> " + msg7 + "<br> <strong>" + msg8 + "</strong> " + msg9 +"<br>",
       buttons: [
       {
         text:close,
