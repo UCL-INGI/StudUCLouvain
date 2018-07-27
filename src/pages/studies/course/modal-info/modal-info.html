@@ -34,7 +34,7 @@
     <ion-card>
         <ion-card-header>
             <ion-row>
-                <h1><strong>{{course.name}}-{{course.acronym}}</strong></h1>
+                <h1 class="break"><strong>{{course.name}} <br>{{course.acronym}}</strong></h1>
             </ion-row>
             <ion-row>
                 {{information?.localisation.localisation}}
@@ -55,7 +55,7 @@
                     <ion-row *ngIf="information?.prof.length >1">
                         <ion-col *ngFor="let item of information?.prof">{{item.nom}} {{item.prenom}}</ion-col>
                     </ion-row>
-                    <ion-row *ngIf="information?.prof">
+                    <ion-row *ngIf="!information?.prof.length">
                         <ion-col>{{information?.prof.nom}} {{information?.prof.prenom}}</ion-col>
                     </ion-row>
                 </ion-item>
@@ -128,36 +128,24 @@
                 </ion-row>
             </ion-card>
             
-            <ion-card>
-                <ion-card-header>
-                    <h2><strong>Programmes / formations proposant cette unité d'enseignement (UE)</strong></h2>
-                </ion-card-header>
-                <ion-card-content *ngIf="information?.programmeprerequis.length >1">
-                        <ion-row>
-                            <ion-col>Intitulé du programme</ion-col>
-                            <ion-col>Sigle</ion-col>
-                            <ion-col>Crédits</ion-col>
-                        </ion-row>  
+
+                    <h2 class="break"><strong>Programmes le proposant </strong></h2>
+
+                <ion-item *ngIf="information?.programmeprerequis.length >1">
                         <ion-row *ngFor="let item of information?.programmeprerequis">
                             <ion-col><strong>{{item.intituleProgrammeCompletFr}}</strong></ion-col>
                             <ion-col>{{item.sigleProgramme}}</ion-col>
-                            <ion-col>{{item.credit}}</ion-col>
+                            <ion-col>{{item.credit}} crédits</ion-col>
                         </ion-row>
-                </ion-card-content>
-                <ion-card-content *ngIf="!information?.programmeprerequis.length">
-                    
-                    <ion-row>
-                        <ion-col>Intitulé du programme</ion-col>
-                        <ion-col>Sigle</ion-col>
-                        <ion-col>Crédits</ion-col>
-                    </ion-row>  
+                </ion-item>
+                <ion-item *ngIf="!information?.programmeprerequis.length">
                     <ion-row >
                         <ion-col><strong>{{information?.programmeprerequis.intituleProgrammeCompletFr}}</strong></ion-col>
                         <ion-col>{{information?.programmeprerequis.sigleProgramme}}</ion-col>
-                        <ion-col>{{information?.programmeprerequis.credit}}</ion-col>
+                        <ion-col>{{information?.programmeprerequis.credit}} crédits</ion-col>
                     </ion-row>
-                </ion-card-content>
-            </ion-card>
+                </ion-item>
+
 
         </ion-card-content>
     </ion-card>
