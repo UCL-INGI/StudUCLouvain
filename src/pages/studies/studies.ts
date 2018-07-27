@@ -146,9 +146,11 @@ export class StudiesPage {
 
   /*Get course program of student*/
   loadActivities(){
+
     if(this.connService.isOnline()) {
       this.login().then((res) => {
   	  	if(this.status){
+          this.studentService.weekSchedule();
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result:any = res;
   	  			this.activities = result.activities.activity;
@@ -207,13 +209,11 @@ export class StudiesPage {
   showPrompt() {
     let addcourse:string;
     let message:string;
-    let name:string;
     let sigle: string;
     let cancel:string;
     let save:string;
     this.translateService.get('STUDY.ADDCOURSE').subscribe((res:string) => {addcourse=res;});
     this.translateService.get('STUDY.MESSAGE').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
     this.translateService.get('STUDY.SIGLE').subscribe((res:string) => {sigle=res;});
     this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
     this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
@@ -342,6 +342,13 @@ export class StudiesPage {
     let year = parseInt(this.project.name.split("-")[0]);
     this.navCtrl.push('CoursePage',
       {course : course, sessionId : this.sessionId, year: year});
+  }
+
+  openWeekPage(){
+    this.studentService.weekSchedule().then((res) => {
+      let result:any = res;
+      this.navCtrl.push('HebdoPage', {schedule:result});
+    });
   }
 
   /*Launch moodle or ucl portal*/

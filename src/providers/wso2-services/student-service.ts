@@ -68,5 +68,60 @@ export class StudentService {
     })
   }
 
+  public weekSchedule(){
+    let newUrl = this.url +"courseSchedules?date=";
+    //var C =  7 - new Date().getDay();
+    var C = 7 - new Date("10/16/2017").getDay();
+    if(C==7) C=C-1;
+    console.log(C);
+    let schedule:Array<any> = [];
+    return new Promise(resolve => {
+      for(var _i = 0; _i < C; _i++){
+          let date = this.getDate(_i);
+          let url= newUrl+date;
+          this.wso2Service.loadStudent(url).subscribe(
+            data => {
+              let res:any;
+              res = data;
+              if(res.items != null){
+                let items = res.items.item;
+                let dayDate = date.substr(5);
+                dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
+                let daySchedule = {'date':dayDate, 'schedule': items};
+                console.log(daySchedule);
+                schedule.push(daySchedule);
+              }
+            });
+      }
+        console.log(schedule);
+        resolve(schedule);
+    })
+
+    /*var today = new Date();
+    console.log(today)
+    today.setDate(today.getDate() +1)
+    console.log( today)*/
+    
+
+  }
+
+  getDate(i:number):string{
+    //var today = new Date();
+    var today = new Date("10/16/2017");
+    today.setDate(today.getDate() + i);
+    var d = today.getDate();
+    var dd = d.toString();
+    var m = today.getMonth()+1;
+    var mm = m.toString();
+    if(m < 10) {
+        mm="0"+mm;
+    }
+    if(d<10){
+      dd="0"+dd;
+    }
+    var yyyy= today.getFullYear();
+    return yyyy+"-"+mm+"-"+dd;
+  }
+
 
 }

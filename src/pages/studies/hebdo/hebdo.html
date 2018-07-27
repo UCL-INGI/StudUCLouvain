@@ -1,0 +1,68 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar>
+    <ion-title align="center"></ion-title>
+  </ion-navbar>
+ 
+</ion-header>
+
+<!--BODY-->
+<ion-content padding #weekContent>
+<ion-list *ngFor="let day of schedule"  > 
+  <ion-item-divider text-center [hidden]="day.schedule.length == 0" (tap)="toggleGroup(day.date)">
+    {{day.date}} ({{day.schedule.length}} séances)
+  </ion-item-divider>
+  <ion-list *ngFor="let course of day.schedule" [hidden]="!isGroupShown(day.date)">
+    <ion-item-sliding>
+      <ion-item>
+        <h2 text-center> {{course.cours}} </h2>
+        <p> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
+          &mdash; {{course.eventendtime | date: 'H:mm' }} </p>
+        <p *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}</p>
+        <p *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} : {{course.enseignants}}</p>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+     <!---<ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem >
+       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
+        <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
+        <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
+          &mdash; {{activity.end | date: 'H:mm' }} </p>
+        <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
+        <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
+        <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
+        <p> {{activity.name}} </p>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="" >
+          <ion-icon name="calendar"></ion-icon>
+          {{'COURSE.CALENDAR' | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>-->
+
+  </ion-list>
+</ion-content>

@@ -71,6 +71,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
 </ion-content>
 
 <!------------------------------------ PROGRAMME DE COURS --------------------------------------------------------->
@@ -101,6 +102,7 @@
 
   <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
   <ion-list *ngIf="status">
+    <button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>
@@ -113,9 +115,11 @@
       </ion-item-options>
     </ion-item-sliding>
     </ion-list>
+
   </ion-list>
 
 </ion-content>
+
 
 </ion-content>
 
