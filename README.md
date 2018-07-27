@@ -48,15 +48,11 @@ npm -v
 
 * Replace the value of "myapikey" by your Javascript key in the file UCLCampus/src/providers/map-service.ts (line 46)
 
-* Prepare the cordova build : 
-    ```bash
-    $ cordova prepare
-    ```
-    
 * Install node_modules
     ```bash
     $ npm install
     ```
+    
 ## Run
 
 ### Browser
@@ -67,12 +63,20 @@ $ ionic serve
 ### Android
 
 ```bash
+* Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
+    ```bash
+    $ cordova prepare
+    ```
 $ ionic cordova platform add android
 $ ionic cordova run android
 ```
 
 ### iOS
 ```bash
+* Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
+    ```bash
+    $ cordova prepare
+    ```
 $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
@@ -109,13 +113,6 @@ $ npm run e2e
 * Authentication with OAuth 2.0
 * Studentbook and Staffbook
 * Display Sports schedule
-
-## Screenshots
-
-<img src="screenshots/news.png" alt="android-tablet" width="150"/>
-<img src="screenshots/menu.png" alt="android-tablet" width="150"/>
-<img src="screenshots/carte.png" alt="android-tablet" width="150"/>
-<img src="screenshots/etudes_1.png" alt="android-tablet" width="150"/> <img src="screenshots/etudes_2.png" alt="android-tablet" width="150"/>
 
 ## User Guide
 

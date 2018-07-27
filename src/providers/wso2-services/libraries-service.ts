@@ -89,7 +89,7 @@ export class LibrariesService {
     if ( data.phone == null ) {
       lib.phone = "";
     } else {
-      lib.phone = data.phone;
+      lib.phone = data.phone.substr(3);
     }
 
     if ( data.email == null ) {
