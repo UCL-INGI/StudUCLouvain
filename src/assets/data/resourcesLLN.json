@@ -273,39 +273,12 @@
 
              "locaux" : [
                  {
-                      "nom"  : "Pasteur",
+                      "nom"  : "Candix - DAO - IAO - GCE",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.669566095484974",
-                          "lng": "4.619319280906893"
-                      }
-                 },
-                 {
-                      "nom"  : "CPME",
-                      "sigle" : "",
-                      "vignette" : "",
-                      "coord": {
-                          "lat" : "50.669171277616684",
-                          "lng": "4.621072775050379"
-                      }
-                 },
-                 {
-                      "nom"  : "Réaumur (Siemens, Intel)",
-                      "sigle" : "",
-                      "vignette" : "",
-                      "coord": {
-                          "lat" : "50.668552",
-                          "lng": "4.621687"
-                      }
-                 },
-                 {
-                      "nom"  : "MECA - ELME",
-                      "sigle" : "",
-                      "vignette" : "",
-                      "coord": {
-                          "lat" : "50.66880068128997",
-                          "lng": "4.622804476245619"
+                          "lat" : "50.668042054686346",
+                          "lng": "4.622524855955817"
                       }
                  },
                  {
@@ -318,21 +291,21 @@
                       }
                  },
                  {
-                      "nom"  : "Faraday - Marconi",
+                      "nom"  : "Coubertin 13",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.669011904556655",
-                          "lng": "4.62393569789765"
+                          "lat" : "50.67068026319428",
+                          "lng": "4.606954328021516"
                       }
                  },
                  {
-                      "nom"  : "Candix - DAO - IAO - GCE",
+                      "nom"  : "CPME",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.668042054686346",
-                          "lng": "4.622524855955817"
+                          "lat" : "50.669171277616684",
+                          "lng": "4.621072775050379"
                       }
                  },
                  {
@@ -345,6 +318,15 @@
                       }
                  },
                  {
+                      "nom"  : "CV09 statistiques",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.668639462717366",
+                          "lng": "4.615322820147981"
+                      }
+                 },
+                 {
                       "nom"  : "Darwin",
                       "sigle" : "",
                       "vignette" : "",
@@ -354,48 +336,30 @@
                       }
                  },
                  {
-                      "nom"  : "Fisher",
+                      "nom"  : "Descamps 01-02",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.666172635913114",
-                          "lng": "4.620075328572966"
+                          "lat" : "50.66940870446693",
+                          "lng": "4.611189536056031"
                       }
                  },
                  {
-                      "nom"  : "Ulysse - Cérès - Atlas",
+                      "nom"  : "Doyen 1-2-3-4-5-6-7-8",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.66601559029711",
-                          "lng": "4.6208156182610765"
+                          "lat" : "50.668588462818285",
+                          "lng": "4.612993321618546"
                       }
                  },
                  {
-                      "nom"  : "Pointcaré",
+                      "nom"  : "Dupriez D147",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.66590742190323",
-                          "lng": "4.62324771128533"
-                      }
-                 },
-                 {
-                      "nom"  : "Coubertin 13",
-                      "sigle" : "",
-                      "vignette" : "",
-                      "coord": {
-                          "lat" : "50.67068026319428",
-                          "lng": "4.606954328021516"
-                      }
-                 },
-                 {
-                      "nom"  : "SOCR 031-032-033-034 a054-a068",
-                      "sigle" : "",
-                      "vignette" : "",
-                      "coord": {
-                          "lat" : "50.670233181631566",
-                          "lng": "4.611046037873734"
+                          "lat" : "50.668292662312695",
+                          "lng": "4.611968717774857"
                       }
                  },
                  {
@@ -408,12 +372,30 @@
                       }
                  },
                  {
-                      "nom"  : "Descamps 01-02",
+                      "nom"  : "Faraday - Marconi",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.66940870446693",
-                          "lng": "4.611189536056031"
+                          "lat" : "50.669011904556655",
+                          "lng": "4.62393569789765"
+                      }
+                 },
+                 {
+                      "nom"  : "Fisher",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.666172635913114",
+                          "lng": "4.620075328572966"
+                      }
+                 },
+                 {
+                      "nom"  : "MECA - ELME",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66880068128997",
+                          "lng": "4.622804476245619"
                       }
                  },
                  {
@@ -435,30 +417,48 @@
                       }
                  },
                  {
-                      "nom"  : "Dupriez D147",
+                      "nom"  : "Pasteur",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.668292662312695",
-                          "lng": "4.611968717774857"
+                          "lat" : "50.669566095484974",
+                          "lng": "4.619319280906893"
                       }
                  },
                  {
-                      "nom"  : "Doyen 1-2-3-4-5-6-7-8",
+                      "nom"  : "Pointcaré",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.668588462818285",
-                          "lng": "4.612993321618546"
+                          "lat" : "50.66590742190323",
+                          "lng": "4.62324771128533"
                       }
                  },
                  {
-                      "nom"  : "CV09 statistiques",
+                      "nom"  : "Réaumur (Siemens, Intel)",
                       "sigle" : "",
                       "vignette" : "",
                       "coord": {
-                          "lat" : "50.668639462717366",
-                          "lng": "4.615322820147981"
+                          "lat" : "50.668552",
+                          "lng": "4.621687"
+                      }
+                 },
+                 {
+                      "nom"  : "SOCR 031-032-033-034 a054-a068",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.670233181631566",
+                          "lng": "4.611046037873734"
+                      }
+                 },
+                 {
+                      "nom"  : "Ulysse - Cérès - Atlas",
+                      "sigle" : "",
+                      "vignette" : "",
+                      "coord": {
+                          "lat" : "50.66601559029711",
+                          "lng": "4.6208156182610765"
                       }
                  }
              ],
@@ -1067,27 +1067,15 @@
 
             "parkings" : [
                 {
-                     "nom"  : "Place des Sciences",
+                     "nom"  : "Baudouin Ier",
                      "sigle" : "",
-                     "adresse" : "50.668186, 4.619424",
+                     "adresse" : "50.664218, 4.622218",
                      "vignette" : "./inAppIcon/parking.png",
                      "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "155",
+                     "places": "210",
                      "coord": {
-                         "lat" : "50.668186",
-                         "lng": "4.619424"
-                     }
-                },
-                {
-                     "nom"  : "Sainte-Barbe",
-                     "sigle" : "",
-                     "adresse" : "50.667591, 4.621585",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "182",
-                     "coord": {
-                         "lat" : "50.667591",
-                         "lng": "4.621585"
+                         "lat" : "50.664218",
+                         "lng": "4.622218"
                      }
                 },
                 {
@@ -1103,18 +1091,6 @@
                      }
                 },
                 {
-                     "nom"  : "P14",
-                     "sigle" : "",
-                     "adresse" : "50.66938115243462, 4.62318754850582",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "569",
-                     "coord": {
-                         "lat" : "50.66938115243462",
-                         "lng": "4.62318754850582"
-                     }
-                },
-                {
                      "nom"  : "Cyclotron",
                      "sigle" : "",
                      "adresse" : "50.666231, 4.624793",
@@ -1124,30 +1100,6 @@
                      "coord": {
                          "lat" : "50.666231",
                          "lng": "4.624793"
-                     }
-                },
-                {
-                     "nom"  : "Baudouin Ier",
-                     "sigle" : "",
-                     "adresse" : "50.664218, 4.622218",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "210",
-                     "coord": {
-                         "lat" : "50.664218",
-                         "lng": "4.622218"
-                     }
-                },
-                {
-                     "nom"  : "Rédimé",
-                     "sigle" : "",
-                     "adresse" : "50.668794, 4.624890",
-                     "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "74",
-                     "coord": {
-                         "lat" : "50.668794",
-                         "lng": "4.624890"
                      }
                 },
                 {
@@ -1163,15 +1115,15 @@
                      }
                 },
                 {
-                     "nom"  : "Pierre de Coubertin",
-                     "adresse" : "50.670994, 4.604714",
+                     "nom"  : "Lac (ex-Musée)",
+                     "adresse" : "50.669204, 4.609755",
                      "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
-                     "places": "66",
+                     "type" : "Zone A2 - Exception : accès gratuit et réservé aux membres du personnel UCL sans abonnement et sans avantage mobilité",
+                     "places": "200",
                      "sigle": "",
                      "coord": {
-                         "lat" : "50.670994",
-                         "lng": "4.604714"
+                         "lat" : "50.669204",
+                         "lng": "4.609755"
                      }
                 },
                 {
@@ -1199,6 +1151,54 @@
                      }
                 },
                 {
+                     "nom"  : "P14",
+                     "sigle" : "",
+                     "adresse" : "50.66938115243462, 4.62318754850582",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "569",
+                     "coord": {
+                         "lat" : "50.66938115243462",
+                         "lng": "4.62318754850582"
+                     }
+                },
+                {
+                     "nom"  : "Pierre de Coubertin",
+                     "adresse" : "50.670994, 4.604714",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "66",
+                     "sigle": "",
+                     "coord": {
+                         "lat" : "50.670994",
+                         "lng": "4.604714"
+                     }
+                },
+                {
+                     "nom"  : "Place des Sciences",
+                     "sigle" : "",
+                     "adresse" : "50.668186, 4.619424",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "155",
+                     "coord": {
+                         "lat" : "50.668186",
+                         "lng": "4.619424"
+                     }
+                },
+                {
+                     "nom"  : "Rédimé",
+                     "sigle" : "",
+                     "adresse" : "50.668794, 4.624890",
+                     "vignette" : "./inAppIcon/parking.png",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "74",
+                     "coord": {
+                         "lat" : "50.668794",
+                         "lng": "4.624890"
+                     }
+                },
+                {
                      "nom"  : "Sablon",
                      "adresse" : "50.668232, 4.613864",
                      "vignette" : "./inAppIcon/parking.png",
@@ -1211,15 +1211,15 @@
                      }
                 },
                 {
-                     "nom"  : "Lac (ex-Musée)",
-                     "adresse" : "50.669204, 4.609755",
+                     "nom"  : "Sainte-Barbe",
+                     "sigle" : "",
+                     "adresse" : "50.667591, 4.621585",
                      "vignette" : "./inAppIcon/parking.png",
-                     "type" : "Zone A2 - Exception : accès gratuit et réservé aux membres du personnel UCL sans abonnement et sans avantage mobilité",
-                     "places": "200",
-                     "sigle": "",
+                     "type" : "Zone B : Parking gratuit avec apposition de la vignette UCL",
+                     "places": "182",
                      "coord": {
-                         "lat" : "50.669204",
-                         "lng": "4.609755"
+                         "lat" : "50.667591",
+                         "lng": "4.621585"
                      }
                 }
             ]
