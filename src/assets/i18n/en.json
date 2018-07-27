@@ -64,7 +64,7 @@
         "BADLOG" : "Bad login/password",
         "ERROR" : "There is a problem",
         "ADDCOURSE" : "Adding a course",
-        "MESSAGE" : "Enter the name and acronym of the course to be added",
+        "MESSAGE" : "Enter the exact acronym of the course to be added",
         "NAME" : "Course name",
         "SIGLE" : "Course acronym",
         "CANCEL" : "Cancel",

@@ -63,7 +63,7 @@
 		"BADLOG" : "Mauvais login/password",
 		"ERROR" : "Il y a un problème",
 		"ADDCOURSE" : "Ajout d'un cours",
-		"MESSAGE" : "Entrez le nom et le sigle du cours à ajouter",
+		"MESSAGE" : "Entrez le sigle exact du cours à ajouter",
 		"NAME" : "Nom du cours",
 		"SIGLE" : "Sigle du cours",
 		"CANCEL" : "Annuler",
