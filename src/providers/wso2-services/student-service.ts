@@ -73,7 +73,7 @@ export class StudentService {
     //var C =  7 - new Date().getDay();
       var C = 7 - new Date("10/16/2017").getDay();
     if(C==7) C=C-1;
-    console.log(C);
+    //console.log(C);
     let schedule:Array<any> = [];
     return new Promise(resolve => {
       for(var _i = 0; _i < C; _i++){
@@ -83,19 +83,20 @@ export class StudentService {
             data => {
               let res:any;
               res = data;
+              //console.log(res);
               if(res.items != null){
                 let items = res.items.item;
-                console.log(date);
+                //console.log(date);
                 let dayDate = date.substr(5);
                 dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
                 let daySchedule = {'date':dayDate, 'schedule': items};
-                console.log(daySchedule);
+                //console.log(daySchedule);
                 schedule.push(daySchedule);
                 schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
               }
             });
       }
-        console.log(schedule);
+       // console.log(schedule);
         //schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
         resolve(schedule);
     })
