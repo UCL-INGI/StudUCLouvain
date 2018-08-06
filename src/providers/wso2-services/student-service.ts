@@ -93,8 +93,10 @@ export class StudentService {
                 dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
                 for(let cours of items){
                   let name:any;
+                  let res:any;
                   this.checkCourse(cours.cours,new Date().getFullYear()).then(data =>{
-                    name = data.intituleCompletMap.entry[1].value;
+                    res=data;
+                    name = res.intituleCompletMap.entry[1].value;
                     cours['name'] = name;
                   })
                 }
