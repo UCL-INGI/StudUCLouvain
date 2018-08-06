@@ -79,7 +79,7 @@ export class StudentService {
       for(var _i = 0; _i < C; _i++){
           let date = this.getDate(_i);
           let day = this.getDay(_i);
-          console.log(_i);
+
           let url= newUrl+date;
           this.wso2Service.loadStudent(url).subscribe(
             data => {
@@ -91,8 +91,13 @@ export class StudentService {
                 //console.log(date);
                 let dayDate = date.substr(5);
                 dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
-                
-                
+                for(let cours of items){
+                  let name:any;
+                  this.checkCourse(cours.cours,new Date().getFullYear()).then(data =>{
+                    name = data.intituleCompletMap.entry[1].value;
+                    cours['name'] = name;
+                  })
+                }
                 let daySchedule = {'date':dayDate, 'schedule': items, 'day':day};
                 //console.log(daySchedule);
                 schedule.push(daySchedule);

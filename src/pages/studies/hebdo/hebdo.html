@@ -37,11 +37,11 @@
   <ion-list *ngFor="let course of day.schedule" [hidden]="!isGroupShown(day.date)">
     <ion-item-sliding>
       <ion-item>
-        <h2 text-center> {{course.cours}} </h2>
-        <p> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
+        <h2 text-center> {{course.cours}} - {{course.name}} </h2>
+        <p text-center> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{course.eventendtime | date: 'H:mm' }} </p>
-        <p *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}</p>
-        <p *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} : {{course.enseignants}}</p>
+        <p text-center *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}</p>
+        <p text-center *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} : {{course.enseignants}}</p>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
