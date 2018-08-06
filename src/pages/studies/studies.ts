@@ -150,7 +150,6 @@ export class StudiesPage {
     if(this.connService.isOnline()) {
       this.login().then((res) => {
   	  	if(this.status){
-          this.studentService.weekSchedule();
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result:any = res;
   	  			this.activities = result.activities.activity;
@@ -347,6 +346,7 @@ export class StudiesPage {
   openWeekPage(){
     this.studentService.weekSchedule().then((res) => {
       let result:any = res;
+      //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
       this.navCtrl.push('HebdoPage', {schedule:result});
     });
   }

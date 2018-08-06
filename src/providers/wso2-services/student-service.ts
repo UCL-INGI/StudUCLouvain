@@ -71,7 +71,7 @@ export class StudentService {
   public weekSchedule(){
     let newUrl = this.url +"courseSchedules?date=";
     //var C =  7 - new Date().getDay();
-    var C = 7 - new Date("10/16/2017").getDay();
+      var C = 7 - new Date("10/16/2017").getDay();
     if(C==7) C=C-1;
     console.log(C);
     let schedule:Array<any> = [];
@@ -85,15 +85,18 @@ export class StudentService {
               res = data;
               if(res.items != null){
                 let items = res.items.item;
+                console.log(date);
                 let dayDate = date.substr(5);
                 dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
                 let daySchedule = {'date':dayDate, 'schedule': items};
                 console.log(daySchedule);
                 schedule.push(daySchedule);
+                schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
               }
             });
       }
         console.log(schedule);
+        //schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
         resolve(schedule);
     })
 

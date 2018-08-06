@@ -50,15 +50,11 @@ export class HebdoPage {
               private translateService: TranslateService,
               public navParams:NavParams)
   {
-    function compare(a,b) {
-      if (parseInt(a.date.substr(0,2)) < parseInt(b.date.substr(0,2)))
-        return -1;
-      if (parseInt(a.date.substr(0,2)) > parseInt(b.date.substr(0,2)))
-        return 1;
-      return 0;
-    }
-    this.schedule = this.schedule.sort(compare)
+
     console.log(this.schedule);
+    this.sortByDueDate();
+    console.log(this.schedule);
+    console.log(new Date("2017-10-17"));
   }
 
   /*Display the available sessions for a course*/
@@ -79,6 +75,17 @@ export class HebdoPage {
   isGroupShown(group) {
       return this.shownGroup === group;
   }
+
+  public sortByDueDate(): void {
+    this.schedule.sort((a, b) => {
+         let first =parseInt(a.date.substr(0,2));
+      let second = parseInt(b.date.substr(0,2))
+      console.log(first);
+      console.log(second);
+      return first-second;
+
+    });
+}
 
 
 }
