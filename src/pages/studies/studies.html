@@ -106,7 +106,7 @@
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>
-        {{activity}}
+        {{activity.sigle}} - {{activity.name}}
       </ion-item>
       <ion-item-options>
         <button ion-button outline (tap)="getNameToAddCourse(activity)" class="large-icon">

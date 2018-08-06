@@ -142,8 +142,7 @@ console.log("Startin App");
       {
         if(data!=null) translateService.use(data);
         else translateService.use('fr');
-       }
-        );
+       });
       cache.setDefaultTTL(60 * 60 * 2);
       cache.setOfflineInvalidate(false);
 
