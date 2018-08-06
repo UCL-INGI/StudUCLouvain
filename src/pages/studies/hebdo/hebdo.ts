@@ -52,17 +52,15 @@ export class HebdoPage {
   {
 
     console.log(this.schedule);
-    this.sortByDueDate();
-    console.log(this.schedule);
     console.log(new Date("2017-10-17"));
   }
 
-  /*Display the available sessions for a course*/
+
   ionViewDidLoad() {
 
   }
 
-  /*Display or close the group of sports for one day*/
+
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
           this.shownGroup = null;
@@ -71,21 +69,12 @@ export class HebdoPage {
       }
   }
 
-  /*Check if the list is shown or not*/
+
   isGroupShown(group) {
       return this.shownGroup === group;
   }
 
-  public sortByDueDate(): void {
-    this.schedule.sort((a, b) => {
-         let first =parseInt(a.date.substr(0,2));
-      let second = parseInt(b.date.substr(0,2))
-      console.log(first);
-      console.log(second);
-      return first-second;
-
-    });
-}
+  
 
 
 }

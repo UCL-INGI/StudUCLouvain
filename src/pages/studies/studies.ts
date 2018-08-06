@@ -355,6 +355,8 @@ export class StudiesPage {
   openWeekPage(){
     this.studentService.weekSchedule().then((res) => {
       let result:any = res;
+      console.log(result);
+      
       //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
       this.navCtrl.push('HebdoPage', {schedule:result});
     });
