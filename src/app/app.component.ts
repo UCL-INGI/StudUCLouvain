@@ -81,54 +81,54 @@ console.log("Startin App");
     this.initializeApp();
     this.wso2Service.getToken();
     this.homePage =
-      {title: 'MENU.HOME', component: 'HomePage', icon: 'home',
+      {title: 'MENU.HOME', component: 'HomePage', icon: "./assets/img/home.png",
       iosSchemaName: null, androidPackageName: null,
       appUrl: null, httpUrl: null}
     ;
     this.campusPages =[
-      { title: 'MENU.NEWS', component: 'NewsPage', icon: 'paper',
+      { title: 'MENU.NEWS', component: 'NewsPage', icon: "./assets/img/news.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.EVENTS', component: 'EventsPage', icon: 'calendar',
+      { title: 'MENU.EVENTS', component: 'EventsPage', icon: "./assets/img/event.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.SPORTS', component: 'SportsPage', icon: 'football',
+      { title: 'MENU.SPORTS', component: 'SportsPage', icon: "./assets/img/sport.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
     ];
     this.studiePages =[
-      { title: 'MENU.STUDIES', component: 'StudiesPage', icon: 'school',
+      { title: 'MENU.STUDIES', component: 'StudiesPage', icon: "./assets/img/etudes.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: 'book',
+      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: "./assets/img/biblio.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.HELP', component: 'SupportPage',
-        icon: 'information-circle', iosSchemaName: null,
+        icon: "./assets/img/support.png", iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'MENU.PARTY', component: 'GuindaillePage', icon: 'water',
+      { title: 'MENU.PARTY', component: 'GuindaillePage', icon: "./assets/img/g2.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: 'MapPage', icon: 'map',
+      { title: 'MENU.MAP', component: 'MapPage', icon: "./assets/img/cartes.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : 'restaurant',
+      { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : "./assets/img/resto.png",
         iosSchemaName: 'id1156050719',
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'MENU.MOBILITY', component: 'MobilityPage', icon : 'car',
+      { title: 'MENU.MOBILITY', component: 'MobilityPage', icon : "./assets/img/mobilité.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.PARAM', component: 'ParamPage', icon : 'construct',
+      { title: 'MENU.PARAM', component: 'ParamPage', icon : "./assets/img/setting.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.CREDITS', component: 'CreditPage', icon : 'bulb',
+      { title: 'MENU.CREDITS', component: 'CreditPage', icon : "./assets/img/signature.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }
