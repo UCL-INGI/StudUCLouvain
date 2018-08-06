@@ -24,10 +24,8 @@ import { NavController, NavParams, ItemSliding, ToastController, AlertController
 import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { StudentService } from '../../../providers/wso2-services/student-service';
 import { UserService } from '../../../providers/utils-services/user-service';
 
-import { Course } from '../../../app/entity/course';
 import { Activity } from '../../../app/entity/activity'
 import { Calendar } from '@ionic-native/calendar';
 
@@ -74,7 +72,7 @@ export class HebdoPage {
       return this.shownGroup === group;
   }
 
-  
+
 
 
 }

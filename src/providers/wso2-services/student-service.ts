@@ -78,6 +78,8 @@ export class StudentService {
     return new Promise(resolve => {
       for(var _i = 0; _i < C; _i++){
           let date = this.getDate(_i);
+          let day = this.getDay(_i);
+          console.log(_i);
           let url= newUrl+date;
           this.wso2Service.loadStudent(url).subscribe(
             data => {
@@ -89,7 +91,9 @@ export class StudentService {
                 //console.log(date);
                 let dayDate = date.substr(5);
                 dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
-                let daySchedule = {'date':dayDate, 'schedule': items};
+                
+                
+                let daySchedule = {'date':dayDate, 'schedule': items, 'day':day};
                 //console.log(daySchedule);
                 schedule.push(daySchedule);
                 schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
@@ -107,6 +111,18 @@ export class StudentService {
     console.log( today)*/
     
 
+  }
+
+  getDay(i:number):string{
+    let day:string = '';
+    if(i===0) day = 'Lundi';
+    if(i===1) day = 'Mardi';
+    if(i===2) day = 'Mercredi';
+    if(i===3) day = 'Jeudi';
+    if(i===4) day = 'Vendredi';
+    if(i===5) day = 'Samedi';
+
+    return day;
   }
 
   getDate(i:number):string{
