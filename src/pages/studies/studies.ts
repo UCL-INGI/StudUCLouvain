@@ -55,7 +55,8 @@ export class StudiesPage {
   private password: string = "";
   public error:string = "";
   private status: string = "";
-  activities: any;
+  sigles: any;
+  activities:any = [];
   response:any;
   language;
 
@@ -90,9 +91,7 @@ export class StudiesPage {
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
       (data) =>{
-        console.log(data);
         let res:any = data;
-        console.log(res);
         let exist:boolean;
         let nameFR:string='';
         let nameEN:string ='';
@@ -110,8 +109,10 @@ export class StudiesPage {
   }
 
   toastBadCourse() {
+    let msg;
+    this.translateService.get('STUDY.BADCOURSE').subscribe((res:string) => {msg=res;});
     let toast = this.toastCtrl.create({
-      message: 'Ce sigle n\'existe pas ou n\'est pas encore disponible cette année',
+      message: msg,
       duration: 2000,
       position: 'middle'
     });
@@ -150,11 +151,18 @@ export class StudiesPage {
     if(this.connService.isOnline()) {
       this.login().then((res) => {
   	  	if(this.status){
-          this.studentService.weekSchedule();
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result:any = res;
-  	  			this.activities = result.activities.activity;
-  	  			console.log(this.activities.activity);
+  	  			this.sigles = result.activities.activity;
+  	  			console.log(this.sigles);
+            for(let sigle of this.sigles){
+              let name;
+              this.checkExist(sigle).then(data => {
+                name=data;
+                this.activities.push({'name':name.nameFR,'sigle':sigle});
+              })
+            }
+            console.log(this.activities);
   	  		});
   	  	}
     	});
@@ -347,6 +355,9 @@ export class StudiesPage {
   openWeekPage(){
     this.studentService.weekSchedule().then((res) => {
       let result:any = res;
+      console.log(result);
+      
+      //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
       this.navCtrl.push('HebdoPage', {schedule:result});
     });
   }

@@ -57,7 +57,7 @@
   <ion-list >
     <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
       <ion-item (tap)="openCoursePage(course)" >
-        <h2>{{course.name}} {{course.acronym}}</h2>
+        <h2>{{course.acronym}} - {{course.name}}</h2>
       </ion-item>
       <ion-item-options side="right">
         <!--<button ion-button (tap)="addCourseToCalendar(slidingItem, course)" >
@@ -94,8 +94,7 @@
     <ion-row>
       <ion-col>
         <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b  >{{error}}</b></div>
-        <button id="login" ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
-        </button>
+        <button id="login" ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
       </ion-col>
     </ion-row>
   </form>
@@ -106,7 +105,7 @@
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>
-        {{activity}}
+        {{activity.sigle}} - {{activity.name}}
       </ion-item>
       <ion-item-options>
         <button ion-button outline (tap)="getNameToAddCourse(activity)" class="large-icon">
