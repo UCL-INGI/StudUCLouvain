@@ -162,8 +162,10 @@
       report
     </button>
   </a>
-</ion-fab>
 --------------------------------------->
+<ion-fab bottom center>
+    <img alt="uclouvain" height="35" width="auto" src="./assets/img/uclouvain.png"/>
+</ion-fab>
 
 <!------------------------------------ SOCIAL NETWORK BUTTON ------------------------------------------------------------------>
 <ion-fab bottom left #fab *ngIf="(userS.hasCampus() === true)">
@@ -186,7 +188,7 @@
      <button ion-fab (tap)="openURL('https://www.instagram.com/uclouvain',fab)">
        <ion-icon  name="logo-instagram" ></ion-icon>
      </button>
-    </ion-fab-list>
-  </ion-fab>
+  </ion-fab-list>
+</ion-fab>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
