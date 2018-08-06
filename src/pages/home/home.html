@@ -143,6 +143,11 @@
            <img alt="urgence" src="./assets/img/urgence.png" align="middle" height="auto" (tap)="emergency()"/><p align="center"><b><font color="#002D62">{{'MENU.URG' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col align-self-end text-center>
+          <img alt="uclouvain" align="middle" height="35" width="auto" src="./assets/img/uclouvain.png"/>
+        </ion-col>
+      </ion-row>
     </ion-grid>
 
   </ng-container>
@@ -163,9 +168,6 @@
     </button>
   </a>
 --------------------------------------->
-<ion-fab bottom center>
-    <img alt="uclouvain" height="35" width="auto" src="./assets/img/uclouvain.png"/>
-</ion-fab>
 
 <!------------------------------------ SOCIAL NETWORK BUTTON ------------------------------------------------------------------>
 <ion-fab bottom left #fab *ngIf="(userS.hasCampus() === true)">
