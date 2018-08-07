@@ -190,16 +190,11 @@ console.log("Startin App");
     });
   }
 
-  menuOpened(){
-  	this.open = true;
-  	console.log(this.open);
-  }
-
-  menuClosed(){
-  	this.open=false;
-  	console.log(this.open);
+  menuChanged(){
+  	this.open = !this.open;
 
   }
+
 
   confirmExitApp() {
     let activeVC = this.nav.getActive();
@@ -263,7 +258,16 @@ console.log("Startin App");
       if(page.iosSchemaName != null && page.androidPackageName != null){
         this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
       }
-      this.nav.push(page.component, {title: page.title});
+      if(page != this.homePage){
+       	if(this.nav.length() == 1){
+      		this.nav.push(page.component, {title: page.title});
+      	}
+      	else{
+      		this.nav.pop();
+      		this.nav.push(page.component, {title: page.title});
+      	}
+  		}
+
     }
 
   }

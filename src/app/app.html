@@ -18,17 +18,17 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<ion-fab left middle *ngIf="!open">
-  <button ion-fab mini menuToggle (click)="menuOpened()" left middle *ngIf="!open">
-    <ion-icon name="arrow-dropright-circle"></ion-icon>
+<ion-fab left middle [hidden]="open" *ngIf="this.nav.length() == 2">
+  <button ion-fab mini menuToggle (click)="menuChanged()">
+    <ion-icon name="arrow-dropright"></ion-icon>
   </button>
 </ion-fab>
-<ion-menu id="mainMenu"  [content]="content" (ionClose)="menuClosed()">
+<ion-menu id="mainMenu"  [content]="content" (ionClose)="menuChanged()">
   <ion-content>
     <ion-list scroll=true>
-      <button ion-item (click)="openRootPage(homePage)">
+      <!--<button ion-item (click)="openRootPage(homePage)">
         <div class="box"><img src={{homePage.icon}} width="35" height="35"/> <span>&nbsp;   {{homePage.title | translate}}</span> </div>
-      </button>
+      </button>-->
       <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
         <div class="box"><img src={{p.icon}} width="35" height="35"/> <span>&nbsp;   {{p.title | translate}}</span> </div>
       </button>

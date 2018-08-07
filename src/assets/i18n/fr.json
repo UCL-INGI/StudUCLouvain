@@ -231,7 +231,8 @@
 
         "FAC" : "Facultaires",
         "UNIF" : "Universitaires",
-        "VALVE" : "Valves"
+        "VALVE" : "Valves",
+        "MESVALVES" : "Voir Mes Valves"
     },
 
     "EVENTS" : {

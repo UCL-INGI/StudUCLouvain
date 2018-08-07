@@ -88,6 +88,14 @@
     </ion-row>
 <!--------------------------- ACTUALITES FAC ----------------------------------------->
     <ion-item *ngIf="userS.hasFac()">
+      <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
+      <ion-item *ngIf="facsegment==='valve'" no-lines>
+        <button center ion-button clear small icon-left text-center (tap)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
+          <ion-icon name='share-alt'></ion-icon>
+          {{'NEWS.MESVALVES' | translate}}
+        </button>
+      </ion-item>
+      <!---------------------------------------------------------------------->
       <ion-row center>
         <ion-col text-center>
           <h2><strong>Faculté : {{userS.fac}}</strong></h2>
@@ -99,10 +107,7 @@
         </button>
         <p text-center *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'"><strong>Indisponible pour le moment</strong></p>
 
-<!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
-      <ion-item *ngIf="facsegment==='valve'" no-lines>
-        <p text-center><strong>Indisponible pour le moment</strong></p>
-      </ion-item>
+
     </ion-item>
   </ng-container>
 
