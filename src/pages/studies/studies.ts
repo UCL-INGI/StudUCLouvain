@@ -97,6 +97,7 @@ export class StudiesPage {
         let nameEN:string ='';
         if(data === 400) exist=false;
         else{
+          console.log(res);
           let names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
@@ -304,6 +305,7 @@ export class StudiesPage {
   }
 
   getNameToAddCourse(sigle:string){
+    console.log(sigle);
     let check; 
     this.checkExist(sigle).then(data => {
       check = data;
