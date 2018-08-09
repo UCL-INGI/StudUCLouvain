@@ -48,7 +48,6 @@ export class MyApp {
   page: any;
   homePage;
   checked=false;
-  open=false;
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -190,10 +189,6 @@ console.log("Startin App");
     });
   }
 
-  menuChanged(){
-  	this.open = !this.open;
-
-  }
 
 
   confirmExitApp() {

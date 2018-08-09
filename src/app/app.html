@@ -18,12 +18,8 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<ion-fab left middle [hidden]="open" *ngIf="this.nav.length() == 2">
-  <button ion-fab mini menuToggle (click)="menuChanged()">
-    <ion-icon name="arrow-dropright"></ion-icon>
-  </button>
-</ion-fab>
-<ion-menu id="mainMenu"  [content]="content" (ionClose)="menuChanged()">
+
+<ion-menu id="mainMenu"  [content]="content">
   <ion-content>
     <ion-list scroll=true>
       <!--<button ion-item (click)="openRootPage(homePage)">
