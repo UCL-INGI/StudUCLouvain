@@ -1,4 +1,4 @@
-/*
+  /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
     Date : July 2017
@@ -47,6 +47,7 @@ export class RepertoireService {
         newUrl += "&";
       }
     }
+    newUrl += "&page=1&pageSize=10"
     //newUrl += "&directory=E";
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
