@@ -26,7 +26,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../../providers/utils-services/user-service';
 
-import { Activity } from '../../../app/entity/activity'
 import { Calendar } from '@ionic-native/calendar';
 
 @IonicPage()
@@ -72,7 +71,45 @@ export class HebdoPage {
       return this.shownGroup === group;
   }
 
+  /*Add an activity (a session of the course) to the calendar of the smartphone*/
+  addToCalendar(slidingItem : ItemSliding, activity : any){
+    let options:any = {
+      firstReminderMinutes:15
+    };
+    let message:string;
+    this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
+    this.calendar.createEventWithOptions(activity.name +" : " + activity.type,
+      activity.entitycode, null, new Date(activity.eventstarttime),
+      new Date(activity.eventendtime), options).then(() => {
+        let toast = this.toastCtrl.create({
+          message: message,
+          duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
+    });
+      this.alert();
+  }
 
+    /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
+  alert(){
+    let title:string;
+    let message:string;
+    this.translateService.get('COURSE.WARNING').subscribe((res:string) => {title=res;});
+    this.translateService.get('COURSE.MESSAGE3').subscribe((res:string) => {message=res;});
+         let disclaimerAlert = this.alertCtrl.create({
+            title: title,
+            message: message,
+            buttons: [
+                {
+                    text: "OK",
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        disclaimerAlert.present();
+  }
 
 
 }

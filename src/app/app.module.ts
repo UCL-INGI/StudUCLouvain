@@ -61,9 +61,11 @@ import { SportsService } from '../providers/rss-services/sports-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 
 
+
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
 }
+
 
 
 @NgModule({

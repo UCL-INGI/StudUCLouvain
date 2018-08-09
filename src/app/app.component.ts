@@ -255,19 +255,16 @@ console.log("Startin App");
     this.page = page;
 
     if(!((test instanceof HomePage) && page == this.homePage)){
-      if(page.iosSchemaName != null && page.androidPackageName != null){
-        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-      }
-      if(page != this.homePage){
-       	if(this.nav.length() == 1){
+	    if(page.iosSchemaName != null && page.androidPackageName != null){
+	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+	    }
+	    if(page != this.homePage){
+       		if(this.nav.length() > 1){
+      			this.nav.pop();
+      		}
+      		
       		this.nav.push(page.component, {title: page.title});
-      	}
-      	else{
-      		this.nav.pop();
-      		this.nav.push(page.component, {title: page.title});
-      	}
   		}
-
     }
 
   }
