@@ -33,10 +33,13 @@
 
 .title.title-md {
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 0;
-    transform: translateX(-50%);
     height: 100%;
-    width: 70%;
+    width: 100%;
     text-align: center;
+}
+
+.back-button {
+  z-index: 1;
 }
