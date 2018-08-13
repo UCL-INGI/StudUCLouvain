@@ -22,15 +22,16 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="etudes">
+    <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center"></ion-title>
   </ion-navbar>
- 
+
 </ion-header>
 
 <!--BODY-->
 <ion-content padding #weekContent>
-<ion-list *ngFor="let day of schedule"  > 
+<ion-list *ngFor="let day of schedule"  >
   <ion-item-divider text-center [hidden]="day.schedule.length == 0" (tap)="toggleGroup(day.date)">
     {{day.day}} {{day.date}} ({{day.schedule.length}} séances)
   </ion-item-divider>

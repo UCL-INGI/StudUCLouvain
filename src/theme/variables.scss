@@ -26,7 +26,24 @@ $font-path: "../assets/fonts";
 $colors: (
   primary:    #488aff,
   danger:     #f53d3d,
-  guindaille: #dd156c
+  guindaille: #dd156c,
+  navbarColor: #009688,
+  news:#c10a27,
+  event:#ec690c,
+  sport:#f59d22,
+  g2: #e62175,
+  cred: #b3b3b3,
+  bibli: #0071bc,
+  etudes: #2e3192,
+  support: #8d92c8,
+  ucl: #002e5f,
+  setting: #4d4d4d,
+  map: #00a99d,
+  resto: #8cc63f,
+  mobilite: #006837,
+  urg: #ec1c24,
+  fun: #93278f
+
 );
 
 
@@ -74,4 +91,3 @@ $colors: (
 
 //@import "roboto";
 @import "noto-sans";
-

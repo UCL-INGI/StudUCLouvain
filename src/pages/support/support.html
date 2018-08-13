@@ -21,10 +21,11 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar >
+  <ion-navbar color="support">
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="segment">
@@ -259,10 +260,10 @@
 <!----------------------------------------- TUTO ------------------------------------->
   <ng-container *ngIf="segment==='tuto'">
 
-    <p style="text-align:center"><button ion-button (tap)="openURL('https://www.youtube.com/watch?v=Mfy2y7mZ7-Y')">{{'HELP.TUTO3' | translate }}</button></p> 
+    <p style="text-align:center"><button ion-button (tap)="openURL('https://www.youtube.com/watch?v=Mfy2y7mZ7-Y')">{{'HELP.TUTO3' | translate }}</button></p>
     <h2 text-center><strong>{{'HELP.TUTOTITLE' | translate }}</strong></h2>
     <p style="text-align:center"><button ion-button (tap)="openURL('https://www.youtube.com/watch?v=UVXpEP_0vnc')">{{'HELP.TUTO1' | translate }}</button></p>
-    <p style="text-align:center"><button ion-button (tap)="openURL('https://www.youtube.com/watch?v=k243CT-ylEU')">{{'HELP.TUTO2' | translate }}</button></p> 
+    <p style="text-align:center"><button ion-button (tap)="openURL('https://www.youtube.com/watch?v=k243CT-ylEU')">{{'HELP.TUTO2' | translate }}</button></p>
 
 
   </ng-container>

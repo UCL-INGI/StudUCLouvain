@@ -22,10 +22,11 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="news">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged()" >
