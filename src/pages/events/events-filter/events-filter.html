@@ -20,7 +20,7 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar id="header" class="header">
     <ion-buttons start>
       <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
@@ -45,7 +45,7 @@
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
   </ion-item>
-  <ion-toolbar>
+  <ion-toolbar color="uclouvain">
     <ion-buttons left>
       <button ion-button icon-right end (click)="uncheckAll()">
         {{'EVENTS.UNTOGGLE' | translate}}
