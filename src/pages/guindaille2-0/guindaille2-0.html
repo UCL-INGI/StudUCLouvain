@@ -22,8 +22,11 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="guindaille">
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
+      <img src="./assets/img/s.png" height="28"/>
+<!--<ion-title align="center">{{title | translate}}</ion-title>-->
+<ion-title align="center">
+      <img alt="logo"   height="40" src="./assets/img/guindaille/logo.png" >
+    </ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" class="gelem">
     <ion-segment-button value="pict" style="color:white">
