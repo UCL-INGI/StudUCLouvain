@@ -90,6 +90,10 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
+  paramPage = { title: 'MENU.PARAM', component: 'ParamPage',
+    iosSchemaName: null, androidPackageName: null,
+    appUrl: null, httpUrl: null  };
+
   restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
     iosSchemaName: 'id1156050719',
     androidPackageName: 'com.apptree.resto4u',
