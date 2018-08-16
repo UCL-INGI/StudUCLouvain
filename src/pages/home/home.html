@@ -21,12 +21,12 @@
 -->
 <!--EN-TETE-->
 <ion-header *ngIf="(userS.hasCampus() === true)">
-  <ion-navbar >
+  <ion-navbar color="home">
     <!--<button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>-->
     <ion-title align="center">
-        <img alt="logo"   height="40" src="./assets/img/header.png" >
+        <img alt="logo"   height="40" src="./assets/img/header2.png" >
     </ion-title>
 
     <!--
@@ -64,14 +64,6 @@
       <ion-item class="other">
         <ion-label>St-Gilles</ion-label>
         <ion-radio value="StGilles" disabled></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>Charleroi</ion-label>
-        <ion-radio value="Charleroi" disabled></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>Namur</ion-label>
-        <ion-radio value="Namur" disabled></ion-radio>
       </ion-item>
     </ion-list>
     <ion-row center >
@@ -147,7 +139,7 @@
       </ion-row>
       <ion-row>
         <ion-col align-self-end text-center>
-          <img alt="uclouvain" align="middle" height="35" width="auto" src="./assets/img/uclouvain.png"/>
+          <img alt="uclouvain" align="middle" height="35" width="auto" src="./assets/img/uclouvain.png" (tap)="openUCL('http://www.uclouvain.be')"/>
         </ion-col>
       </ion-row>
     </ion-grid>

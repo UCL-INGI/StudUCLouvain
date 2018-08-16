@@ -83,6 +83,18 @@ export class ParamPage {
           label:'Mons',
           value:'Mons',
           checked:(check == 'Mons')
+        },
+        {
+          type:'radio',
+          label:'Tournai',
+          value:'Tournai',
+          disabled:true
+        },
+        {
+          type:'radio',
+          label:'St-Gilles',
+          value:'StG',
+          disabled:true
         }],
       buttons: [
       {

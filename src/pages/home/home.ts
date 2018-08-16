@@ -176,6 +176,9 @@ export class HomePage {
     this.iab.create(url, '_system');
     fab.close();
   }
+  public openUCL(url: string) {
+    this.iab.create(url, '_system');
+  }
 
   /*If the user change the language of the app, tranlate the text and change the public variable*/
   languageChanged(event:string) {
