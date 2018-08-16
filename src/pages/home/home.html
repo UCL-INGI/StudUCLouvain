@@ -82,7 +82,7 @@
   </ng-container>
 
   <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
-	<ng-container *ngIf="(userS.hasCampus() === true)" class="has-header" padding >
+	<ng-container *ngIf="userS.hasCampus()" padding >
 
     <ion-grid class="other" padding>
       <!--------------------------------------- STUDY PART ------------------------------------------------>
