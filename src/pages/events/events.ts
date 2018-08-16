@@ -192,6 +192,7 @@ export class EventsPage {
           this.filters = result.categories;
           this.searching = false;
           this.updateDisplayedEvents();
+          console.log(this.displayedEventsD);
       })
       .catch(error => {
         if(error == 1) {
