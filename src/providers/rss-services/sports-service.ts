@@ -97,7 +97,7 @@ export class SportsService {
     this.teams = [];
     return new Promise( (resolve, reject) => {
       this.http.get(this.url4).timeout(5000)
-      map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
+      .map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
