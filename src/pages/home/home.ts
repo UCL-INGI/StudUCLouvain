@@ -19,8 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavParams, NavController, App, AlertController, LoadingController, FabContainer} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavParams, NavController, App, AlertController, LoadingController, FabContainer, Content} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -38,6 +38,18 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 })
 export class HomePage {
+
+  @ViewChild('home') content: Content;
+
+
+  resize()
+  {
+    if(this.content)
+    {
+      this.content.resize();
+      console.debug("content resize", this.content)
+    }
+  }
 
   title:string = "UCLCampus";
   shownGroup = null;
@@ -107,16 +119,19 @@ export class HomePage {
       console.log(this.title);
       this.app.setTitle(this.title);
       document.title = this.title;
+      this.resize();
   }
 
   /*Set the title*/
   ionViewDidEnter() {
     this.app.setTitle(this.title);
+    this.resize();
   }
 
   /*Update the public variable campus for the user*/
   updateCampus(){
     this.userS.addCampus(this.where);
+    this.resize();
   }
 
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/

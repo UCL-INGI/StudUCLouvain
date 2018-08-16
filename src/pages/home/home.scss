@@ -21,7 +21,7 @@
 
 page-home {
 
-
+    
     /*.bg{
         background: url('../assets/img/logoprincipal.png');
         background-repeat: no-repeat;
@@ -30,8 +30,15 @@ page-home {
         opacity: 0.3;
     }*/
 
+
+    .menuHome{
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
     .other{
         background-color: transparent;
+        margin-top: -25px !important;
+        padding-top: 0px !important;
     }
 
     b{
