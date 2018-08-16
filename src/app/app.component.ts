@@ -145,7 +145,7 @@ console.log("Startin App");
        });
       cache.setDefaultTTL(60 * 60 * 2);
       cache.setOfflineInvalidate(false);
-      //this.user.storage.set('first',null);
+      this.user.storage.set('first',null);
       this.user.storage.get('first').then((data) =>
       {
       	if(data==null) {
