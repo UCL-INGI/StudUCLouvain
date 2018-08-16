@@ -123,20 +123,20 @@ export class HomePage {
       console.log(this.title);
       this.app.setTitle(this.title);
       document.title = this.title;
-      this.resize();
+      //this.resize();
       //this.userS.removeCampus('');
   }
 
   /*Set the title*/
   ionViewDidEnter() {
     this.app.setTitle(this.title);
-    this.resize();
+    //this.resize();
   }
 
   /*Update the public variable campus for the user*/
   updateCampus(){
     this.userS.addCampus(this.where);
-    this.resize();
+   // this.resize();
   }
 
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
