@@ -120,6 +120,7 @@ export class HomePage {
       this.app.setTitle(this.title);
       document.title = this.title;
       this.resize();
+      //this.userS.removeCampus('');
   }
 
   /*Set the title*/

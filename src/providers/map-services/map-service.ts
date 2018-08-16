@@ -241,11 +241,13 @@ export class MapService {
           //console.log(this.markers[i]);
           //let m: Marker = this.markers[i];
          //m.remove();
+         let m: Marker = this.markers[i];
           this.markers[i].setMap(null);
           //this.markers[i]=null;
           this.markers.splice(i,1);
           //console.log(this.markers);
           if(this.onDevice){
+            m.remove();
             this.map.clear();
             this.addMarker(this.userLocation);
           }
