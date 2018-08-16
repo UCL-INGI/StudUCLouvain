@@ -51,7 +51,7 @@ export class HomePage {
     }
   }
 
-  title:string = "UCLCampus";
+  title:string = "Stud.UCLouvain";
   shownGroup = null;
   where = "";
   myApp : MyApp;
