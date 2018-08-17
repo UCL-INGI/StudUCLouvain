@@ -27,7 +27,7 @@ import { Injectable } from '@angular/core';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform, MenuController } from 'ionic-angular';
-import { GoogleMap,
+import { GoogleMaps,
    GoogleMapsEvent,
    LatLng,
    CameraPosition,
@@ -46,7 +46,8 @@ export class MapService {
   pleaseConnect: any;
   map: any;
   mapInitialised: boolean = false;
-  markers: any = [];
+  markers: Array<Marker> = [];
+  markersB: any = [];
   apiKey: string;
   userLocation: MapLocation;
   onDevice: boolean;
@@ -200,7 +201,8 @@ export class MapService {
             target: latLng,
             zoom: 15
           };
-          this.map = new GoogleMap(this.mapElement, mapOptions);
+          //this.map = new GoogleMap(this.mapElement, mapOptions);
+          this.map = GoogleMaps.create(this.mapElement, mapOptions);
           this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
             console.log('Map is ready!');
             this.map.moveCamera(camPos);
@@ -236,21 +238,28 @@ export class MapService {
   removeMarker(location: MapLocation) {
       //console.log(location);
       //console.log(this.markers);
-      for(var i=0;i<this.markers.length; i++){
-         if(this.markers[i].getTitle() === location.title) {
+      let m;
+      if(this.onDevice) m = this.markers;
+      else m = this.markersB;
+      for(var i=0;i<m.length; i++){
+         if(m[i].getTitle() === location.title) {
           //console.log(this.markers[i]);
           //let m: Marker = this.markers[i];
          //m.remove();
-         let m: Marker = this.markers[i];
-          this.markers[i].setMap(null);
+         if(this.onDevice){
+         this.markers[i].remove();
+          //this.markers[i].setMap(null);
           //this.markers[i]=null;
-          this.markers.splice(i,1);
+          
           //console.log(this.markers);
-          if(this.onDevice){
-            m.remove();
-            this.map.clear();
-            this.addMarker(this.userLocation);
+      	}
+          if(!this.onDevice){
+            //m.remove();
+            this.markersB[i].setMap(null);
+            //this.map.clear();
+            //this.addMarker(this.userLocation);
           }
+          this.markers.splice(i,1);
         }
       }
    }
@@ -264,7 +273,7 @@ export class MapService {
       position: latLng,
       title: title
     });
-    this.markers.push(marker);
+    this.markersB.push(marker);
     this.addBrowserInfoWindow(marker, title+"\n"+content);
   }
   private addBrowserInfoWindow(marker, content){
@@ -296,11 +305,20 @@ export class MapService {
   /*Get a marker for the selected location*/
   private getMarker(title: string) : Marker{
     let res = null;
-    this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
-        res=marker;
-      }
-    });
+    if(this.onDevice){
+	    this.markers.map((marker) => {
+	      if(marker.getTitle() === title) {
+	        res=marker;
+	      }
+	    });
+	}
+	else{
+		this.markersB.map((marker) => {
+	      if(marker.getTitle() === title) {
+	        res=marker;
+	      }
+	    });
+	}
     return res;
   }
 
@@ -313,7 +331,7 @@ export class MapService {
   }
 
   private setCenteredMarkerOnBrowser(title:string) {
-    this.markers.map((marker) => {
+    this.markersB.map((marker) => {
       if(marker.getTitle() == title) {
         this.map.panTo(marker.getPosition());
       }
@@ -403,9 +421,9 @@ export class MapService {
     if(this.onDevice){
       this.map.clear();
     } else {
-      this.markers.map(
+      this.markersB.map(
         marker => {
-          marker.setMap(null);
+         marker.setMap(null)
         }
       );
     }
