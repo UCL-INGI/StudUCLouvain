@@ -70,8 +70,8 @@ export class StudentService {
 
   public weekSchedule(){
     let newUrl = this.url +"courseSchedules?date=";
-    //var C =  7 - new Date().getDay();
-      var C = 7 - new Date("10/16/2017").getDay();
+    var C =  7 - new Date().getDay();
+      //var C = 7 - new Date("10/16/2017").getDay();
     if(C==7) C=C-1;
     //console.log(C);
     let schedule:Array<any> = [];
@@ -133,8 +133,8 @@ export class StudentService {
   }
 
   getDate(i:number):string{
-    //var today = new Date();
-    var today = new Date("10/16/2017");
+    var today = new Date();
+    //var today = new Date("10/16/2017");
     today.setDate(today.getDate() + i);
     var d = today.getDate();
     var dd = d.toString();
