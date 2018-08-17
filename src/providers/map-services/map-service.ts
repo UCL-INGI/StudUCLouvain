@@ -181,6 +181,7 @@ export class MapService {
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
   private initDeviceMap() : Promise<any> {
     console.log("initDeviceMap - ask geolocation");
+    return this.platform.ready().then(() => {
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition().then(
         (position) => {
@@ -212,7 +213,7 @@ export class MapService {
           console.log("Map error initDeviceMap : " + error);
           reject(false);
         });
-    });
+    });})
   }
 
   /*Add marker in the map for a location selected*/
