@@ -30,6 +30,7 @@ import { Platform, MenuController } from 'ionic-angular';
 import { GoogleMaps,
    GoogleMapsEvent,
    LatLng,
+   LocationService,
    CameraPosition,
    MarkerOptions,
    Marker,
@@ -181,17 +182,18 @@ export class MapService {
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
   private initDeviceMap() : Promise<any> {
     console.log("initDeviceMap - ask geolocation");
-    return this.platform.ready().then(() => {
     return new Promise((resolve, reject) => {
-      this.geolocation.getCurrentPosition().then(
+      LocationService.getMyLocation().then(
         (position) => {
           console.log("initDeviceMap - geolocation answered");
           this.userLocation = new MapLocation( "Ma Position",
                                       "",
-                                      String(position.coords.latitude),
-                                      String(position.coords.longitude),
+                                      String(position.latLng.lat),
+                                      String(position.latLng.lng),
                                       "MYPOS");
-          let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
+
+          //let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
+          let latLng = position.latLng;
           let mapOptions = {
             center: latLng,
             zoom: 15,
@@ -213,7 +215,7 @@ export class MapService {
           console.log("Map error initDeviceMap : " + error);
           reject(false);
         });
-    });})
+    });
   }
 
   /*Add marker in the map for a location selected*/
