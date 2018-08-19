@@ -79,7 +79,7 @@ console.log("Startin App");
     //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
-    this.wso2Service.getToken();
+   
     this.homePage =
       {title: 'MENU.HOME', component: 'HomePage', icon: "./assets/img/home.png",
       iosSchemaName: null, androidPackageName: null,
@@ -134,6 +134,7 @@ console.log("Startin App");
         appUrl: null, httpUrl: null }
     ];
     platform.ready().then(() => {
+    	 this.wso2Service.getToken();
       if ((<any>window).TestFairy) {
         TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
       }
