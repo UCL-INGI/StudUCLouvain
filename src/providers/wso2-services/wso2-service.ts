@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http';
 import 'rxjs/add/operator/map';
 //import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../app/variables-config';
@@ -23,9 +22,9 @@ export class Wso2Service {
   private tokenStudent:string = "";
   headers: HttpHeaders;
 
-  constructor(public http: HttpClient, public http2: HTTP) {
+  constructor(public http: HttpClient) {
     this.getToken()
-    .then(
+    .subscribe(
         data => {
               //console.log(this.token);
               this.headers = new HttpHeaders({'Authorization' : this.token});
@@ -55,8 +54,8 @@ export class Wso2Service {
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
     //console.log(finalUrl);
     //console.log(this.optionsToken);
-    return this.http2.post(finalUrl, body, {headers: headers})
-      .then(res => {
+    return this.http.post(finalUrl, body, {headers: headers})
+      .map(res => {
         //console.log(res);
         this.token = "Bearer " + res['access_token'];
         //console.log(this.token);
@@ -66,7 +65,6 @@ export class Wso2Service {
       })
       .catch((error:any) => {
     console.log('Token error');
-    console.log(error);
     return Observable.throw(error)});
   }
 
