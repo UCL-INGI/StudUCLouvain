@@ -52,7 +52,9 @@
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
-        <p style="display:inline">{{'COURSE.STUDENT' | translate}} : </p><p style="display:inline" [innerHTML]="activity.students"></p>
+        <p>{{'COURSE.STUDENT' | translate}} : </p>
+        <button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </button>
+        <p [hidden]="!isGroupShown(activity.start)" style="display:inline" [innerHTML]="activity.students"></p>
         <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
       </ion-item>

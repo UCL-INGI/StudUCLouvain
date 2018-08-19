@@ -97,7 +97,8 @@
         "APPLY" : "Apply",
         "WARNING" : "Warning",
         "MESSAGE3" : "In the event of a change or problem, this reminder will not be modified.<br> Any changes will be visible the next time the application is launched.",
-        "NO" : "No course"
+        "NO" : "No course",
+        "SHOW" : "Show students"
     },
 
     "MODAL" : {
