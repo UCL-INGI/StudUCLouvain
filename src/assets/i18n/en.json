@@ -77,7 +77,8 @@
         "WARNING" : "Warning",
         "MESSAGE4" : "In case of change or problem, these reminders will not be modified.<br> Any possible changes will be visible at the next launch of the application.",
         "WEEK" : "Week schedule",
-        "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année"
+        "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année",
+        "ALCOURSE" : "This course is already in the list"
     },
 
     "COURSE" : {

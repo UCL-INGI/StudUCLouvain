@@ -76,7 +76,8 @@
         "WARNING" : "Avertissement",
         "MESSAGE4" : "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application.",
         "WEEK" : "Horaire de la semaine",
-        "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année"
+        "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année",
+        "ALCOURSE" : "Ce cours est déja dans la liste"
 	},
 
     "COURSE" : {
