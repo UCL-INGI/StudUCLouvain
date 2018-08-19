@@ -170,6 +170,7 @@ export class CoursePage {
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
     if(this.courseSorted.ex.length == 0) this.noEx = true;
     else this.noEx = false;
+    console.log(this.displayedActi);
   }
 
   /*Display a prompt to proprose to the students the slots available for the TP or the CM*/

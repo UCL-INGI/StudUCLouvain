@@ -10,7 +10,7 @@
         "HELP" : "Support",
         "PARTY" : "Guindaille2.0",
         "MAP" : "Map",
-        "RESTAURANT" : "U. Restaurants",
+        "RESTAURANT" : "Resto 4U",
         "MOBILITY" : "Mobility",
         "PARAM" : "Settings",
         "URG" : "Urgency",
@@ -29,9 +29,9 @@
         "HELP" : "Support",
         "TOOLS" : "TOOLS",
         "MAP" :  "Map",
-        "REST" : "U. Restaurants",
+        "REST" : "Resto 4U",
         "MOBILITY" : "Mobility",
-        "WHICH" : "What campus are you from ?",
+        "WHICH" : "Choice of campus",
         "OK" : "Ok",
         "SETTINGS": "Settings",
         "MESSAGE" : "Choose your campus",
@@ -58,8 +58,8 @@
     "STUDY" : {
         "PROGRAM" : "Course program",
         "HORAIRE" : "Schedules",
-        "CHANGEADE" : "Change ADE project",
-        "ADE" : "You are on the ADE project :",
+        "CHANGEADE" : "Change academic year",
+        "ADE" : "Academic year :",
         "CALENDAR" : "Calendar",
         "DEL" : "Delete",
         "BADLOG" : "Bad login/password",
@@ -100,7 +100,7 @@
     },
 
     "MODAL" : {
-        "PROJECT" : "Select an ADE project"
+        "PROJECT" : "Select an academic year"
     },
 
     "HELP" : {

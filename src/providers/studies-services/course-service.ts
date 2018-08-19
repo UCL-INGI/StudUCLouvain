@@ -132,7 +132,7 @@ export class CourseService {
 
     /*Get teacher from the participants*/
     getTeachers(participants) : string {
-      let teachers : string = " ";
+      let teachers : string = "";
       for(let i=0; i < participants.length; i++){
         if(participants[i]._category === "instructor"){
           teachers = teachers + participants[i]._name + "/";
@@ -143,13 +143,14 @@ export class CourseService {
 
     /*Get students accepted at a course in the participants*/
     getStudents(participants) : string {
-      let students : string = " ";
+      let students : string = "";
       for(let i=0; i < participants.length; i++){
         if(participants[i]._category === "trainee"){
-          students = students + participants[i]._name + "/";
+          students = students + participants[i]._name + "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
         }
       }
-      return students;
+
+      return students.substr(0,students.length-28);
     }
 
     /*Get Auditorium in which the course is presented*/

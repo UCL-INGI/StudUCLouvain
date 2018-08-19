@@ -246,10 +246,13 @@ export class StudiesPage {
           cssClass: 'save',
           handler: data => {
             let check; 
-            this.checkExist(data.acronym).then(data2 => {
+            console.log(data);
+            let acro = data.acronym.toUpperCase();
+            console.log(acro);
+            this.checkExist(acro).then(data2 => {
               check = data2;
               if(check.exist){
-                this.saveCourse(check.nameFR, data.acronym);
+                this.saveCourse(check.nameFR, acro);
               }
               else{
                 this.toastBadCourse();
@@ -266,7 +269,7 @@ export class StudiesPage {
 
 
   /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  showPromptAddCourse(sigle : string) {
+  /*showPromptAddCourse(sigle : string) {
     let addcourse:string;
     let message:string;
     let name:string;
@@ -296,20 +299,21 @@ export class StudiesPage {
         {
           text: save,
           handler: data => {
+            console.log(data);
             this.getNameToAddCourse(data)
           }
         }
       ]
     });
     prompt.present();
-  }
+  }*/
 
-  getNameToAddCourse(sigle:string){
+  addCourse(sigle:string, name:string){
     console.log(sigle);
     let check; 
-    this.checkExist(sigle).then(data => {
-      check = data;
-      this.saveCourse(check.nameFR, sigle);
+    //this.checkExist(sigle).then(data => {
+      //check = data;
+      this.saveCourse(name, sigle);
       let toast = this.toastCtrl.create({
         message: 'Cours ajouté',
         duration: 1000,
@@ -317,7 +321,7 @@ export class StudiesPage {
       });
 
       toast.present();
-    })
+   // })
   }
 
   /*Retrieve list of course added previously in the storage*/

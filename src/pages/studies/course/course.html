@@ -23,7 +23,6 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="etudes">
-    <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
     <ion-buttons end (tap)="openModalInfo()">
       <button ion-button icon-only end >
@@ -53,8 +52,8 @@
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
-        <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
-        <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
+        <p style="display:inline">{{'COURSE.STUDENT' | translate}} : </p><p style="display:inline" [innerHTML]="activity.students"></p>
+        <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
       </ion-item>
 

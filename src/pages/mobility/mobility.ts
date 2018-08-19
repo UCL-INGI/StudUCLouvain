@@ -96,6 +96,6 @@ export class MobilityPage {
         this.market.open(app);
       }
     );
-    this.nav.push(page.component, {title: page.title});
+    //this.nav.push(page.component, {title: page.title});
   }
 }
