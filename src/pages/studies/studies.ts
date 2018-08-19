@@ -246,9 +246,9 @@ export class StudiesPage {
           cssClass: 'save',
           handler: data => {
             let check; 
-            console.log(data);
+            //console.log(data);
             let acro = data.acronym.toUpperCase();
-            console.log(acro);
+            //console.log(acro);
             this.checkExist(acro).then(data2 => {
               check = data2;
               if(check.exist){
@@ -309,8 +309,8 @@ export class StudiesPage {
   }*/
 
   addCourse(sigle:string, name:string){
-    console.log(sigle);
-    let check; 
+    //console.log(sigle);
+   // let check; 
     //this.checkExist(sigle).then(data => {
       //check = data;
       this.saveCourse(name, sigle);
