@@ -249,16 +249,25 @@ export class StudiesPage {
             //console.log(data);
             let acro = data.acronym.toUpperCase();
             //console.log(acro);
-            this.checkExist(acro).then(data2 => {
-              check = data2;
-              if(check.exist){
-                this.saveCourse(check.nameFR, acro);
-              }
-              else{
-                this.toastBadCourse();
-                this.showPrompt();
-              }
-            })
+            let already = false;
+            for(let item of this.listCourses){
+              if(item.acronym === acro) already = true;
+            }
+            if(!already){
+              this.checkExist(acro).then(data2 => {
+                check = data2;
+                if(check.exist){
+                  this.addCourse(acro, check.nameFR);
+                }
+                else{
+                  this.toastBadCourse();
+                  this.showPrompt();
+                }
+              })
+            }
+            else{
+              this.toastAlreadyCourse();
+            }
           }
         }
       ]
@@ -266,6 +275,21 @@ export class StudiesPage {
     prompt.present();
   }
 
+  toastAlreadyCourse() {
+    let msg;
+    this.translateService.get('STUDY.ALCOURSE').subscribe((res:string) => {msg=res;});
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 
 
   /*Add a course from course program, a prompt is shown for this and the user can add a name*/
@@ -313,6 +337,7 @@ export class StudiesPage {
    // let check; 
     //this.checkExist(sigle).then(data => {
       //check = data;
+      console.log(this.listCourses);
       this.saveCourse(name, sigle);
       let toast = this.toastCtrl.create({
         message: 'Cours ajouté',
