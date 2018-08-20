@@ -102,14 +102,14 @@
 
   <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
   <ion-list *ngIf="status">
-    <button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>
+    <!--<button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>-->
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>
-        {{activity.sigle}} - {{activity.name}}
+        {{activity.sigle}}<!-- - {{activity.name}}-->
       </ion-item>
       <ion-item-options>
-        <button ion-button outline (tap)="addCourse(activity.sigle, activity.name)" class="large-icon">
+        <button ion-button outline (tap)="showPromptAddCourse(activity.sigle)" class="large-icon">
           <ion-icon name='add-circle'></ion-icon>
         </button>
       </ion-item-options>

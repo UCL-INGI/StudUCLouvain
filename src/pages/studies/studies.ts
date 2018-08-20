@@ -234,6 +234,10 @@ export class StudiesPage {
         {
           name: 'acronym',
           placeholder: sigle
+        },
+        {
+          name:'name',
+          placeholder:'Nom du cours'
         }
       ],
       buttons: [
@@ -259,7 +263,7 @@ export class StudiesPage {
                 //check = data2;
                 //if(check.exist){
                   //this.addCourse(acro, check.nameFR);
-                  this.addCourse(acro,'');
+                  this.addCourse(acro,data.name);
                 //}
                 //else{
                  // this.toastBadCourse();
@@ -295,7 +299,7 @@ export class StudiesPage {
 
 
   /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  /*showPromptAddCourse(sigle : string) {
+  showPromptAddCourse(sigle : string) {
     let addcourse:string;
     let message:string;
     let name:string;
@@ -326,13 +330,14 @@ export class StudiesPage {
           text: save,
           handler: data => {
             console.log(data);
-            this.getNameToAddCourse(data)
+            //this.getNameToAddCourse(data)
+            this.addCourse(sigle, data.name);
           }
         }
       ]
     });
     prompt.present();
-  }*/
+  }
 
   addCourse(sigle:string, name:string){
     //console.log(sigle);
