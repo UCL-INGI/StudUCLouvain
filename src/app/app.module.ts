@@ -27,7 +27,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SQLite } from '@ionic-native/sqlite';
 import { Device } from '@ionic-native/device';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
