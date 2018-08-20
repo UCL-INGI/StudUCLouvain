@@ -59,7 +59,6 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { StudentService } from '../providers/wso2-services/student-service';
 import { SportsService } from '../providers/rss-services/sports-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
-import { HTTP } from '@ionic-native/http';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
