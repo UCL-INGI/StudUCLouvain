@@ -144,7 +144,9 @@ export class HomePage {
     if(page.iosSchemaName != null && page.androidPackageName != null){
       this.launchExternalApp(page);
     }
-    this.nav.push(page.component, {title: page.title});
+    else{
+      this.nav.push(page.component, {title: page.title});
+    }
   }
 
   /*launch external application*/
