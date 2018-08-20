@@ -43,6 +43,7 @@ export class CoursePage {
   year = this.navParams.get("year");
   segment = 'Cours magistral';
   slotTP:string = "no";
+  shownGroup = null;
   slotCM:string = "no";
   displayedActi : Array<Activity> = [];
   courseSorted : {cm:Array<Activity>, tp:Array<Activity>, ex:Array<Activity>};
@@ -289,4 +290,18 @@ export class CoursePage {
     });
     myModal.present();
    }
+
+     /*Open or close the schedule*/
+  toggleGroup(group) {
+      if (this.isGroupShown(group)) {
+          this.shownGroup = null;
+      } else {
+          this.shownGroup = group;
+      }
+  }
+
+  /*The selectionned schedule is displayed?*/
+  isGroupShown(group) {
+      return this.shownGroup === group;
+  }
 }
