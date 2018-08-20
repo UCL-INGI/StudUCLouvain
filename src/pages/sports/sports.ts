@@ -88,12 +88,13 @@ export class SportsPage {
     this.updateDateLimit();
     //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
-      this.loadSports();
+      //this.loadSports();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedSports();
       });
-      this.presentLoading();
+      //this.presentLoading();
+      this.nosport=true;
     }
     //If not go back to previous page and pop an alert
     else{
