@@ -125,8 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SportsService,
     RepertoireService,
     StudentService,
-    FacService,
-    HTTP
+    FacService
   ]
 })
 export class AppModule {}
