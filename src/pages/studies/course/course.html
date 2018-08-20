@@ -24,11 +24,11 @@
 <ion-header>
   <ion-navbar color="etudes">
     <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
-    <ion-buttons end (tap)="openModalInfo()">
+    <!--<ion-buttons end (tap)="openModalInfo()">
       <button ion-button icon-only end >
       <ion-icon name="information"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
     <ion-segment-button value="Cours magistral">
