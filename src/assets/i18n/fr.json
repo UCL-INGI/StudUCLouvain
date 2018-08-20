@@ -415,6 +415,10 @@
         "TITLE" : "Connexion Internet",
         "CONNECT" : "Connectez-vous à Internet pour utiliser la fonction demandée...",
         "CLOSE" : "Fermer"
+    },
+    
+    "SETTING" : {
+        "LANGUE" : "Langue"
     }
 
 }

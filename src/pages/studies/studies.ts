@@ -158,10 +158,11 @@ export class StudiesPage {
   	  			console.log(this.sigles);
             for(let sigle of this.sigles){
               let name;
-              this.checkExist(sigle).then(data => {
-                name=data;
-                this.activities.push({'name':name.nameFR,'sigle':sigle});
-              })
+              //this.checkExist(sigle).then(data => {
+                //name=data;
+                //this.activities.push({'name':name.nameFR,'sigle':sigle});
+              //})
+              this.activities.push({'name':'', 'sigle':sigle});
             }
             console.log(this.activities);
   	  		});
@@ -254,16 +255,17 @@ export class StudiesPage {
               if(item.acronym === acro) already = true;
             }
             if(!already){
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if(check.exist){
-                  this.addCourse(acro, check.nameFR);
-                }
-                else{
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              })
+              //this.checkExist(acro).then(data2 => {
+                //check = data2;
+                //if(check.exist){
+                  //this.addCourse(acro, check.nameFR);
+                  this.addCourse(acro,'');
+                //}
+                //else{
+                 // this.toastBadCourse();
+                  //this.showPrompt();
+                //}
+              //})
             }
             else{
               this.toastAlreadyCourse();

@@ -40,7 +40,7 @@
         "FR": "French",
         "EN": "English",
         "SETTING1" : "Campus",
-        "SETTING2" : "Langue",
+        "SETTING2" : "Language",
         "CLOSE" : "Close",
         "URG" : "EMERGENCY",
         "WARNING" : "Warning",
@@ -418,5 +418,9 @@
         "TITLE" : "Internet connection",
         "CONNECT" : "Connect to the internet to use the requested function ...",
         "CLOSE" : "Close"
+    },
+
+    "SETTING" : {
+        "LANGUE" : "Language"
     }
 }
