@@ -87,7 +87,7 @@ export class MobilityPage {
     }
 
     //Check if the app is installed, if yes launch app else return the user to the market
-    this.appAvailability.check(app).then(
+    this.appAvailability.check(check).then(
       () => { // success callback
         const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
