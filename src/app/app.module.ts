@@ -104,7 +104,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MapService,
     Market,
     POIService,
-    SQLite,
     UserService,
     Device,
     SplashScreen,
