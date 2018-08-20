@@ -74,6 +74,7 @@
         "MESSAGE2" : "Enter the course name",
         "MESSAGE3" : "Activities added",
         "SWIPE" : "Swipe to the left to delete a course.",
+        "SWIPE2" : "Swipe to the left to add a course.",
         "WARNING" : "Warning",
         "MESSAGE4" : "In case of change or problem, these reminders will not be modified.<br> Any possible changes will be visible at the next launch of the application.",
         "WEEK" : "Week schedule",

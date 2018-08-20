@@ -124,6 +124,9 @@
 </ion-content>
 
 <!-------------------------------- BUTTON TO ADD COURSE ---------------------------------------------------->
+<ion-footer text-center *ngIf="segment == 'prog' && status">
+  <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE2' | translate}}</p>
+</ion-footer>
 <ion-footer text-center *ngIf="segment=='cours'">
     <ion-fab bottom right>
     <button id="prompt" ion-fab (tap)="showPrompt()">
@@ -132,3 +135,4 @@
   </ion-fab>
   <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE' | translate}}</p>
 </ion-footer>
+

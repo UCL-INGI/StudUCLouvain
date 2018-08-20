@@ -73,6 +73,7 @@
 		"MESSAGE2" : "Entrez le nom du cours",
 		"MESSAGE3" : "Activités ajoutées",
         "SWIPE" : "Swipe sur la gauche pour supprimer un cours.",
+        "SWIPE2" : "Swipe sur la gauche pour ajouter le cours.",
         "WARNING" : "Avertissement",
         "MESSAGE4" : "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application.",
         "WEEK" : "Horaire de la semaine",
