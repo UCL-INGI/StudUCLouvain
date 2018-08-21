@@ -34,7 +34,6 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from '@ionic-native/network';
 import { Calendar } from '@ionic-native/calendar';
-import { SecureStorage } from '@ionic-native/secure-storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http'
@@ -117,7 +116,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsService,
     RssService,
     LibrariesService,
-    SecureStorage,
     AdeService,
     CourseService,
     Wso2Service,
