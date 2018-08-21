@@ -63,7 +63,7 @@ export class MobilityPage {
     this.trainPage = { title: 'SNCB', component: 'TrainPage',
                             iosSchemaName: 'id403212064',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
-                            appUrl: 'geo://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
+                            appUrl: 'sncb://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
   /*Launch external app*/

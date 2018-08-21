@@ -168,10 +168,12 @@ export class HomePage {
     }
     this.appAvailability.check(check).then(
       () => { // success callback
+      console.log("have APP");
         const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
       },
       () => { // error callback
+      console.log("not have APP");
         this.market.open(app);
       }
     );
