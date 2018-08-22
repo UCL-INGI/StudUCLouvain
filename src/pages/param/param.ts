@@ -149,4 +149,8 @@ export class ParamPage {
     this.userS.storage.set('lan',event);
     this.translateService.use(event);
   }
+
+  openTuto(){
+    this.navCtrl.push('TutoPage');
+  }
 }

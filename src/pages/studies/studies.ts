@@ -157,7 +157,7 @@ export class StudiesPage {
   	  			this.sigles = result.activities.activity;
   	  			console.log(this.sigles);
             for(let sigle of this.sigles){
-              let name;
+              //let name;
               //this.checkExist(sigle).then(data => {
                 //name=data;
                 //this.activities.push({'name':name.nameFR,'sigle':sigle});
@@ -250,7 +250,7 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            let check; 
+            //let check; 
             //console.log(data);
             let acro = data.acronym.toUpperCase();
             //console.log(acro);
