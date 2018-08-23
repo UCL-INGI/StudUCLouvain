@@ -21,20 +21,10 @@
 
 page-home {
 
-    
-    /*.bg{
-        background: url('../assets/img/logoprincipal.png');
-        background-repeat: no-repeat;
-        background-size:contain;
-        background-position: center;
-        opacity: 0.3;
-    }*/
-
-
-    .menuHome{
-        margin-top: 0px !important;
-        padding-top: 0px !important;
+    .scroll-content{
+        margin-top: 56px;
     }
+
     .other{
         background-color: transparent;
     }
@@ -44,10 +34,10 @@ page-home {
     }
 
     .fab {
-    contain: layout;
+        contain: layout;
     }
 
-        button[ion-fab] {
+    button[ion-fab] {
         overflow: visible;
         position: relative;
 
@@ -63,5 +53,39 @@ page-home {
             border-radius: 4px;
         }
     }
+
+
+    ion-grid{
+        height: 100%;
+
+        ion-row.homeM{
+            height: 20%;
+
+            img{
+                height: 80%;
+            }
+            p {
+                height: 100%;
+                b{
+                    height: 100%;
+
+                    font{
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+        ion-row.ucl{
+            height: 20%;
+
+            img{
+ 
+            }
+        }
+    }
+
+    
+
 
 }

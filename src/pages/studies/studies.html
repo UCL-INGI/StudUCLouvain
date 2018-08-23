@@ -103,6 +103,7 @@
   <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
   <ion-list *ngIf="status">
     <!--<button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>-->
+    <button ion-button full (tap)="openExamPage()">{{'STUDY.EXAM' | translate}}</button>
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>

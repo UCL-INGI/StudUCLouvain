@@ -400,6 +400,22 @@ export class StudiesPage {
     });
   }
 
+  unavailableAlert(){
+
+    let alert = this.alertCtrl.create({
+      title: 'Indisponible',
+      subTitle: 'Cette fonctionnalité n\'est pas encore disponible',
+      buttons: ['OK']
+    });
+    alert.present();
+
+  }
+
+  openExamPage(){
+    this.unavailableAlert();
+      //this.navCtrl.push('ExamPage');
+  }
+
   /*Launch moodle or ucl portal*/
   launch(url) {
     this.iab.create(url,'_system');
