@@ -20,13 +20,12 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ToastController, AlertController, ModalController  } from 'ionic-angular';
+import { NavController, NavParams, ToastController, ModalController  } from 'ionic-angular';
 import { IonicPage } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../../providers/utils-services/user-service';
 
-import { Calendar } from '@ionic-native/calendar';
+
 
 @IonicPage()
 @Component({
@@ -38,12 +37,9 @@ export class ExamPage {
 
 
   constructor(public navCtrl: NavController,
-              private calendar: Calendar,
               public toastCtrl: ToastController,
               public userS:UserService,
               public modalCtrl: ModalController,
-              private alertCtrl : AlertController,
-              private translateService: TranslateService,
               public navParams:NavParams)
   {
 
