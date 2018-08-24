@@ -406,7 +406,9 @@
         "TITLEF3": "Max!",
         "TITLEF4": "Heavy Limit!",
         "TITLEF5": "Screw-up party, screwed-up tomorrow!",
-        "TITLEF6": "Maximum Danger!"
+        "TITLEF6": "Maximum Danger!",
+
+        "CLICK" : "Click to see more info"
     },
 
     "CREDIT" : {

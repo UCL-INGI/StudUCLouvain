@@ -76,6 +76,45 @@ page-home {
             }
         }
 
+        ion-row.homeML{
+            height: 25%;
+
+            img{
+                height: 80%;
+            }
+            p {
+                height: 100%;
+                b{
+                    height: 100%;
+
+                    font{
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    @media all and (orientation: landscape) {
+        ion-row.homeM{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 25%;
+
+            img{
+ 
+            }
+        }
+    }
+    @media all and (orientation: portrait) {
+        ion-row.homeML{
+            display:none
+        }
+
         ion-row.ucl{
             height: 20%;
 
@@ -84,8 +123,6 @@ page-home {
             }
         }
     }
-
-    
 
 
 }

@@ -403,7 +403,9 @@
         "TITLEF3" : "Au max!",
         "TITLEF4" : "Limite Lourd!",
         "TITLEF5" : "Soirée foirée, Lendemain foireux!",
-        "TITLEF6" : "Danger Maximum!"
+        "TITLEF6" : "Danger Maximum!",
+
+        "CLICK" : "Cliquez pour voir plus d'infos"
     },
 
     "CREDIT" : {

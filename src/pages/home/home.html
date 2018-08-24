@@ -149,6 +149,80 @@
            <p align="center"><b><font color="#002D62">{{'MENU.URG' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
+
+
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+      <ion-row class="homeML">
+        <ion-col col-3  text-center>
+          <img alt="biblio" src="./assets/img/biblio.png" align="middle"  (tap)="changePage(libraryPage)"/> 
+          <p align="center"><b><font color="#002D62">{{'HOME.LIBRARY' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center id="study">
+          <img alt="etudes" src="./assets/img/études.png" align="middle"   (tap)="changePage(studiesPage)"/>
+          <p align="center"><b><font color="#002D62" >{{'HOME.ETUDES' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center>
+          <img alt="aide" src="./assets/img/support.png" align="middle"   (tap)="changePage(helpDeskPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
+        </ion-col>
+      
+      <!---------------------------------------------- CAMPUS PART ----------------------------------------------------->
+      <!--<ion-row>
+        <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
+      </ion-row>-->
+      
+        <ion-col col-3 text-center>
+          <img alt="logo" src="./assets/img/news.png" align="middle"  (tap)="changePage(newsPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.NEWS' | translate}}</font></b></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="homeML">
+        <ion-col col-3  text-center >
+          <img alt="louvinfo" src="./assets/img/event.png" align="middle"   (tap)="changePage(eventPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.EVENTS' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center>
+          <img alt="sport" src="./assets/img/sport.png" align="middle"  (tap)="changePage(sportPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.SPORTS' | translate}}</font></b></p>
+        </ion-col>
+      
+      <!-------------------------------------------------- TOOLS PART ---------------------------------------------------->
+      <!--<ion-row>
+        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p></ion-col>
+      </ion-row>-->
+      
+        <ion-col col-3  text-center>
+          <img alt="carte" src="./assets/img/cartes.png" align="middle"  (tap)="changePage(mapPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.MAP' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center>
+          <img alt="resto" src="./assets/img/resto.png" align="middle" (tap)="changePage(restoPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.REST' | translate}}</font></b></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="homeML">
+        <ion-col col-3 text-center>
+          <img alt="voiture" src="./assets/img/mobilité.png" align="middle"  (tap)="changePage(mobilityPage)"/>
+          <p align="center"><b><font color="#002D62">{{'HOME.MOBILITY' | translate}}</font></b></p>
+        </ion-col>
+      
+      <!---------------------------------------- GUINDAILLE2.0 PART -------------------------------------------------------->
+
+        <ion-col col-3  text-center>
+           <img alt="param" src="./assets/img/setting.png" align="middle"  (tap)="changePage(paramPage)"/>
+           <p align="center"><b><font color="#002D62">{{'MENU.PARAM' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center>
+           <img alt="guindaille" src="./assets/img/g2.png" align="middle" (tap)="changePage(guindaillePage)"/>
+           <p align="center"><b><font color="#002D62">{{'MENU.PARTY' | translate}}</font></b></p>
+        </ion-col>
+        <ion-col col-3  text-center >
+           <img alt="urgence" src="./assets/img/urgence.png" align="middle"  (tap)="emergency()"/>
+           <p align="center"><b><font color="#002D62">{{'MENU.URG' | translate}}</font></b></p>
+        </ion-col>
+      </ion-row>
+
+
       <ion-row class="ucl">
         <ion-col col-6 offset-3 align-self-center text-center>
           <img class="five" alt="uclouvain" align="middle"  src="./assets/img/uclouvain.png" (tap)="openUCL('http://www.uclouvain.be')"/>
