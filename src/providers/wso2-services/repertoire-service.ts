@@ -87,6 +87,7 @@ export class RepertoireService {
 
   /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
+    console.log(data);
     emp.address = data.address
     emp.contracts = data.contracts;
     emp.businessContacts = data.businessContacts;

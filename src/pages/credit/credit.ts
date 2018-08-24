@@ -23,6 +23,8 @@ import { Component} from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicPage } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
+
 
 @IonicPage()
 @Component({
@@ -33,13 +35,20 @@ import { IonicPage } from 'ionic-angular';
 export class CreditPage {
   title: any;
   shownGroup = null;
+  version;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public modalCtrl: ModalController, 
-              private iab: InAppBrowser) 
+              private iab: InAppBrowser,
+              private appVersion: AppVersion) 
   {
     this.title = this.navParams.get('title');
+    this.appVersion.getVersionNumber().then(version => {
+      this.version = version;
+      console.log(this.version);
+    });
+    console.log(this.version);
   }
 
   public openURL(url: string) {

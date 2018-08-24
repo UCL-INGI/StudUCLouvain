@@ -145,3 +145,7 @@
     </ion-item>
   </ion-content>
 </ion-content>
+
+<ion-footer text-center *ngIf="segment === 'effect' || segment === 'pict'">
+  <ion-icon name='help-circle'></ion-icon><p>{{'GUINDAILLE.CLICK' | translate}}</p>
+</ion-footer>

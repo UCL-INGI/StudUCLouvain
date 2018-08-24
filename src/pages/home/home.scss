@@ -64,16 +64,39 @@ page-home {
             img{
                 height: 80%;
             }
-            p {
-                height: 100%;
-                b{
-                    height: 100%;
-
-                    font{
-                        height: 100%;
-                    }
-                }
+            p{
+                margin-top: 0px;
             }
+        }
+
+        ion-row.homeML{
+            height: 25%;
+
+            img{
+                height: 75%;
+            }
+            p{
+                margin-top: 0px;
+            }
+        }
+    }
+
+    @media all and (orientation: landscape) {
+        ion-row.homeM{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 25%;
+
+            img{
+            
+            }
+        }
+    }
+    @media all and (orientation: portrait) {
+        ion-row.homeML{
+            display:none
         }
 
         ion-row.ucl{
@@ -84,8 +107,6 @@ page-home {
             }
         }
     }
-
-    
 
 
 }

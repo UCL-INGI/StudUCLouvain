@@ -34,9 +34,9 @@
 <ion-content padding>
     <!--Get text from assets from en.json or fr.json-->
     <div item-content>
-      <p> Version 0.0.35 </p>
+      <p> Version {{version}} </p>
       <p>{{'CREDIT.PROJET' | translate}}</p>
-      <p>{{'CREDIT.DEV' | translate}}</p>
+      <p [innerHTML]="'CREDIT.DEV' | translate"></p>
       <p>{{'CREDIT.LICENCE' | translate}} <a (tap)="openURL('https://github.com/bmarchesini/UCLCampus')">https://github.com/bmarchesini/UCLCampus</a></p>
       <p>{{'CREDIT.CONTRIB' | translate}} <a href="mailto:StudUCLouvain@UCLouvain.be" target="_top">StudUCLouvain@UCLouvain.be</a></p>
     </div>
