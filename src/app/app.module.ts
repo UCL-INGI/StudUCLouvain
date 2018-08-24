@@ -42,6 +42,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SQLite } from '@ionic-native/sqlite';
 import { SecureStorage } from '@ionic-native/secure-storage';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { FacService } from '../providers/utils-services/fac-service';
@@ -125,7 +126,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudentService,
     FacService,
     SQLite,
-    SecureStorage
+    SecureStorage,
+    AppVersion
   ]
 })
 export class AppModule {}
