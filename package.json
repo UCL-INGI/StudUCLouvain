@@ -92,7 +92,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.7.5",
     "@angular/cli": "^6.1.5",
-    "@ionic/app-scripts": "^3.2.0",
+    "@ionic/app-scripts": "3.1.11",
     "@types/jasmine": "^2.8.8",
     "@types/node": "^10.9.2",
     "@types/x2js": "3.1.0",
