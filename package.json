@@ -56,7 +56,6 @@
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-calendar": "^5.0.0",
     "cordova-plugin-compat": "^1.2.0",
-    "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.0",
     "cordova-plugin-geolocation": "^4.0.0",
     "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
