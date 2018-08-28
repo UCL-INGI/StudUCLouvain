@@ -23,7 +23,12 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="uclouvain">
-    <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
+    
+    <ion-row>
+      <ion-col>
+        <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
+      </ion-col>
+    </ion-row>
     <ion-buttons end (tap)="openModalInfo()">
       <button ion-button icon-only end >
       <ion-icon name="information"></ion-icon>
