@@ -234,11 +234,11 @@ export class StudiesPage {
         {
           name: 'acronym',
           placeholder: sigle
-        },
+        }/*,
         {
           name:'name',
           placeholder:'Nom du cours'
-        }
+        }*/
       ],
       buttons: [
         {
@@ -250,7 +250,7 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            //let check; 
+            let check; 
             //console.log(data);
             let acro = data.acronym.toUpperCase();
             //console.log(acro);
@@ -259,17 +259,17 @@ export class StudiesPage {
               if(item.acronym === acro) already = true;
             }
             if(!already){
-              //this.checkExist(acro).then(data2 => {
-                //check = data2;
-                //if(check.exist){
-                  //this.addCourse(acro, check.nameFR);
-                  this.addCourse(acro,data.name);
-                //}
-                //else{
-                 // this.toastBadCourse();
-                  //this.showPrompt();
-                //}
-              //})
+              this.checkExist(acro).then(data2 => {
+                check = data2;
+                if(check.exist){
+                  this.addCourse(acro, check.nameFR);
+                  //this.addCourse(acro,data.name);
+                }
+                else{
+                  this.toastBadCourse();
+                  this.showPrompt();
+                }
+              })
             }
             else{
               this.toastAlreadyCourse();
@@ -331,12 +331,40 @@ export class StudiesPage {
           handler: data => {
             console.log(data);
             //this.getNameToAddCourse(data)
+            let check;
+
             this.addCourse(sigle, data.name);
           }
         }
       ]
     });
     prompt.present();
+  }
+
+  addCourseFromProgram(acro:string){
+                let check; 
+            //console.log(data);
+            //console.log(acro);
+            let already = false;
+            for(let item of this.listCourses){
+              if(item.acronym === acro) already = true;
+            }
+            if(!already){
+              this.checkExist(acro).then(data2 => {
+                check = data2;
+                if(check.exist){
+                  this.addCourse(acro, check.nameFR);
+                  //this.addCourse(acro,data.name);
+                }
+                else{
+                  this.toastBadCourse();
+                  this.showPrompt();
+                }
+              })
+            }
+            else{
+              this.toastAlreadyCourse();
+            }
   }
 
   addCourse(sigle:string, name:string){

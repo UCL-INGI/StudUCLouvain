@@ -37,7 +37,6 @@ export class Wso2Service {
     //console.log(this.token);
     //console.log(this.token);
     let finalUrl = this.wso2ServiceBaseUrl + url;
-    console.log(this.headers);
     return  this.http.get(finalUrl, {headers: this.headers}).map(res => res);
   }
 
@@ -56,7 +55,6 @@ export class Wso2Service {
     //console.log(this.optionsToken);
     return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
-        console.log(res);
         this.token = "Bearer " + res['access_token'];
         //console.log(this.token);
         console.log("Token ok");

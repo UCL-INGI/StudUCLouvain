@@ -118,11 +118,6 @@ export class HomePage {
       document.title = this.title;
       //this.resize();
       //this.userS.removeCampus('');
-      this.studentService.checkCourse('LINGI1123',2018).then(data => {
-        console.log(data);
-      }).catch(error =>{
-        console.log(error);
-      })
   }
 
   /*Set the title*/
