@@ -120,6 +120,8 @@ export class HomePage {
       //this.userS.removeCampus('');
       this.studentService.checkCourse('LINGI1123',2018).then(data => {
         console.log(data);
+      }).catch(error =>{
+        console.log(error);
       })
   }
 

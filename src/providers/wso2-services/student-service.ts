@@ -63,6 +63,7 @@ export class StudentService {
           resolve(res.ficheActivite);
         },
         (err) => {
+          console.log(err);
           resolve(err.status);
         });
     })
