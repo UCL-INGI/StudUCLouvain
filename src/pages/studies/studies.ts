@@ -299,7 +299,7 @@ export class StudiesPage {
 
 
   /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  showPromptAddCourse(sigle : string) {
+  /*showPromptAddCourse(sigle : string) {
     let addcourse:string;
     let message:string;
     let name:string;
@@ -331,7 +331,7 @@ export class StudiesPage {
           handler: data => {
             console.log(data);
             //this.getNameToAddCourse(data)
-            let check;
+            //let check;
 
             this.addCourse(sigle, data.name);
           }
@@ -339,7 +339,7 @@ export class StudiesPage {
       ]
     });
     prompt.present();
-  }
+  }*/
 
   addCourseFromProgram(acro:string){
                 let check; 
