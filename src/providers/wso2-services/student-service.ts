@@ -64,6 +64,7 @@ export class StudentService {
         },
         (err) => {
           console.log(err);
+          console.log(err.error);
           resolve(err.status);
         });
     })
