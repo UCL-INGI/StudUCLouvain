@@ -30,6 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage } from 'ionic-angular';
 
 import { UserService } from '../../providers/utils-services/user-service';
+import { StudentService } from '../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
@@ -41,15 +42,6 @@ export class HomePage {
 
   @ViewChild('home') content: Content;
 
-
-  resize()
-  {
-    if(this.content)
-    {
-      this.content.resize();
-      console.debug("content resize", this.content)
-    }
-  }
 
   title:string = "Stud.UCLouvain";
   shownGroup = null;
@@ -115,7 +107,8 @@ export class HomePage {
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public market: Market,
-              public loadingCtrl: LoadingController)
+              public loadingCtrl: LoadingController,
+              public studentService : StudentService)
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -125,6 +118,9 @@ export class HomePage {
       document.title = this.title;
       //this.resize();
       //this.userS.removeCampus('');
+      this.studentService.checkCourse('LINGI1123',2018).then(data => {
+        console.log(data);
+      })
   }
 
   /*Set the title*/

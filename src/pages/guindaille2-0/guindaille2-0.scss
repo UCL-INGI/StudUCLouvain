@@ -41,7 +41,6 @@ page-guindaille2-0 {
     }
 
 
-
     .gtext {
         font-family: 'Museo' !important;
         font-size: 24px;
@@ -96,7 +95,21 @@ page-guindaille2-0 {
         }
     }
 
-    ion-content > .scroll-content{
-      padding-bottom: 61px !important;
+    .guindailleHelp > .scroll-content{
+        background-color: map-get($colors, guindaille);
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
     }
+    .guindaille > .scroll-content{
+        background-color: map-get($colors, guindaille);
+        padding-bottom: 61px !important;
+    }
+
+
+
+    .guindaille > .fixed-content{
+        background-color: map-get($colors, guindaille);
+    }
+
+
 }

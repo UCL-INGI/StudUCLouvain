@@ -16,7 +16,6 @@ import {Observable} from 'rxjs/Rx';
 export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
-  //wso2ServiceBaseUrl = 'https://esb-test.sipr.ucl.ac.be:8248/';
 
   private token:string ="";
   private tokenStudent:string = "";

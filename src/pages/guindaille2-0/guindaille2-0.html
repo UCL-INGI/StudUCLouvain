@@ -42,7 +42,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content class="guindaille" >
+<ion-content [ngClass]="{'guindailleHelp' : segment === 'help', 'guindaille' : segment !== 'help'}" >
   <ng-container *ngIf="segment==='pict'" class="gelem">
     <ion-item-divider  class="gelem">
       <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p></button>
@@ -142,8 +142,11 @@
       </div>
     </ion-item>
   </ng-container>
+
+
+
 </ion-content>
 
-<ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'">
-  <ion-icon name='help-circle'></ion-icon><p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
-</ion-footer>
+  <ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
+    <ion-icon name='help-circle'></ion-icon><p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
+  </ion-footer>
