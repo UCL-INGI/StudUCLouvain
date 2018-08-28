@@ -77,13 +77,8 @@
 	<ng-container *ngIf="userS.hasCampus()" class="menuHome" class="has-header has-subheader">
 
     <ion-grid class="menuHome" #menuHome  >
-      <!--------------------------------------- STUDY PART ------------------------------------------------>
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.STUDY' | translate}}</b></p></ion-col>
-      </ion-row>-->
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:28px;"><b> </b></p></ion-col>
-      </ion-row>-->
+
+      <!----------------------------------------------------------GRID FOR PORTRAIT------------------------------------------------------------------------------->
       <ion-row class="homeM">
         <ion-col col-4  text-center>
           <img alt="biblio" src="./assets/img/biblio.png" align="middle"  (tap)="changePage(libraryPage)"/> 
@@ -98,10 +93,7 @@
           <p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
-      <!---------------------------------------------- CAMPUS PART ----------------------------------------------------->
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
-      </ion-row>-->
+
       <ion-row class="homeM">
         <ion-col col-4 text-center>
           <img alt="logo" src="./assets/img/news.png" align="middle"  (tap)="changePage(newsPage)"/>
@@ -116,10 +108,7 @@
           <p align="center"><b><font color="#002D62">{{'HOME.SPORTS' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
-      <!-------------------------------------------------- TOOLS PART ---------------------------------------------------->
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p></ion-col>
-      </ion-row>-->
+
       <ion-row class="homeM">
         <ion-col col-4  text-center>
           <img alt="carte" src="./assets/img/cartes.png" align="middle"  (tap)="changePage(mapPage)"/>
@@ -134,7 +123,7 @@
           <p align="center"><b><font color="#002D62">{{'HOME.MOBILITY' | translate}}</font></b></p>
         </ion-col>
       </ion-row >
-      <!---------------------------------------- GUINDAILLE2.0 PART -------------------------------------------------------->
+
       <ion-row class="homeM">
         <ion-col col-4  text-center>
            <img alt="param" src="./assets/img/setting.png" align="middle"  (tap)="changePage(paramPage)"/>
@@ -151,7 +140,7 @@
       </ion-row>
 
 
-<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------GRID FOR LANDSCAPE------------------------------------------------------------------------------->
       <ion-row class="homeML">
         <ion-col col-3  text-center>
           <img alt="biblio" src="./assets/img/biblio.png" align="middle"  (tap)="changePage(libraryPage)"/> 
@@ -165,17 +154,12 @@
           <img alt="aide" src="./assets/img/support.png" align="middle"   (tap)="changePage(helpDeskPage)"/>
           <p align="center"><b><font color="#002D62">{{'HOME.HELP' | translate}}</font></b></p>
         </ion-col>
-      
-      <!---------------------------------------------- CAMPUS PART ----------------------------------------------------->
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:22px;" ><b>{{'HOME.CAMPUS' | translate}}</b></p></ion-col>
-      </ion-row>-->
-      
         <ion-col col-3 text-center>
           <img alt="logo" src="./assets/img/news.png" align="middle"  (tap)="changePage(newsPage)"/>
           <p align="center"><b><font color="#002D62">{{'HOME.NEWS' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
+
       <ion-row class="homeML">
         <ion-col col-3  text-center >
           <img alt="louvinfo" src="./assets/img/event.png" align="middle"   (tap)="changePage(eventPage)"/>
@@ -185,12 +169,6 @@
           <img alt="sport" src="./assets/img/sport.png" align="middle"  (tap)="changePage(sportPage)"/>
           <p align="center"><b><font color="#002D62">{{'HOME.SPORTS' | translate}}</font></b></p>
         </ion-col>
-      
-      <!-------------------------------------------------- TOOLS PART ---------------------------------------------------->
-      <!--<ion-row>
-        <ion-col><p align="center" style="font-size:22px;"><b>{{'HOME.TOOLS' | translate}}</b></p></ion-col>
-      </ion-row>-->
-      
         <ion-col col-3  text-center>
           <img alt="carte" src="./assets/img/cartes.png" align="middle"  (tap)="changePage(mapPage)"/>
           <p align="center"><b><font color="#002D62">{{'HOME.MAP' | translate}}</font></b></p>
@@ -200,14 +178,12 @@
           <p align="center"><b><font color="#002D62">{{'HOME.REST' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
+
       <ion-row class="homeML">
         <ion-col col-3 text-center>
           <img alt="voiture" src="./assets/img/mobilité.png" align="middle"  (tap)="changePage(mobilityPage)"/>
           <p align="center"><b><font color="#002D62">{{'HOME.MOBILITY' | translate}}</font></b></p>
         </ion-col>
-      
-      <!---------------------------------------- GUINDAILLE2.0 PART -------------------------------------------------------->
-
         <ion-col col-3  text-center>
            <img alt="param" src="./assets/img/setting.png" align="middle"  (tap)="changePage(paramPage)"/>
            <p align="center"><b><font color="#002D62">{{'MENU.PARAM' | translate}}</font></b></p>
@@ -221,7 +197,6 @@
            <p align="center"><b><font color="#002D62">{{'MENU.URG' | translate}}</font></b></p>
         </ion-col>
       </ion-row>
-
 
       <ion-row class="ucl">
         <ion-col col-6 offset-3 col-md-4 offset-md-4 align-self-center text-center>

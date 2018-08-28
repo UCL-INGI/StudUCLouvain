@@ -22,14 +22,20 @@
 page-guindaille2-0 {
 
     @font-face {
-      font-family: 'Guindaille';
-      font-style: normal;
-      font-weight: 400;
-      src: local('Museo 100'), url(assets/fonts/Museoregular/Museo.ttf) format('woff2');
+        font-family: 'Museo';
+        src: url("assets/fonts/Museoregular/Museo.eot");
+        src: url("assets/fonts/Museoregular/Museo.eot") format("embedded-opentype"),
+             url("assets/fonts/Museoregular/Museo.woff2") format("woff2"),
+             url("assets/fonts/Museoregular/Museo.woff") format("woff"),
+             url("assets/fonts/Museoregular/Museo.ttf") format("truetype"),
+             url("assets/fonts/Museoregular/Museo.svg#Museo") format("svg");
     }
 
+
+
+
     .guindaille {
-        font-family: 'Guindaille';
+        font-family: 'Museo' !important;
 
         background-color: map-get($colors, guindaille);
     }
@@ -37,7 +43,7 @@ page-guindaille2-0 {
 
 
     .gtext {
-        font-family: 'Guindaille';
+        font-family: 'Museo' !important;
         font-size: 24px;
         color: white;
         padding: 5px;
@@ -52,5 +58,45 @@ page-guindaille2-0 {
     .gelem {
         background-color: map-get($colors, guindaille);
         text-align: center;
+    }
+
+    .gfoot {
+        background-color: map-get($colors, guindaille);
+    }
+
+    .gtextf{
+        color:white;
+        font-family: 'Museo' !important;
+        text-align: center;
+    }
+
+    .gtexth{
+        color:white;
+        font-family: 'Museo' !important;
+        text-align: center;
+    }
+
+    ion-grid{   
+        height: 100%;
+        width: 100%;
+
+        ion-row{
+            height: 25%;
+            width: 100%;
+
+            ion-col{
+                height: 100%;
+                width: 33%;
+
+                img{
+                    max-height: 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    ion-content > .scroll-content{
+      padding-bottom: 61px !important;
     }
 }
