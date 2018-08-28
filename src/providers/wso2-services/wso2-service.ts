@@ -56,7 +56,7 @@ export class Wso2Service {
     //console.log(this.optionsToken);
     return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
-        //console.log(res);
+        console.log(res);
         this.token = "Bearer " + res['access_token'];
         //console.log(this.token);
         console.log("Token ok");
@@ -64,8 +64,9 @@ export class Wso2Service {
         return "OK";
       })
       .catch((error:any) => {
-    console.log('Token error');
-    return Observable.throw(error)});
+          console.log('Token error');
+          return Observable.throw(error)
+    });
   }
 
   /*Log in the user*/
