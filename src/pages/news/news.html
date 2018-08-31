@@ -132,7 +132,7 @@
   </ng-container>
 
 <!----------------- BUTTON TO CHANGE FAC ------------------------->
-  <ion-fab bottom right *ngIf="segment==='fac' && facsegment === 'news'">
+  <ion-fab bottom right *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
     <button ion-fab (tap)="removeFac(fac)">
       <ion-icon name="swap" ></ion-icon>
     </button>

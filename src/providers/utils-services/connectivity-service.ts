@@ -71,7 +71,7 @@ export class ConnectivityService {
     this.diagnostic.isLocationAvailable()
     .then((isAvailable) => {
       console.log("Location available");
-      this.diagnostic.isLocationAuthorized()
+      this.diagnostic.isLocationEnabled()
       .then((isAuthorized) => {
         console.log("Location authorized");
         available=true;
