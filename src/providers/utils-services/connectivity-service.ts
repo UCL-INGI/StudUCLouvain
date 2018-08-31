@@ -65,26 +65,42 @@ export class ConnectivityService {
     alert.present();
   }
 
-  isLocationEnabled(): boolean {
+  async isLocationEnabled() {
     let available:boolean;
+    console.log("start test location");
     this.diagnostic.isLocationAvailable()
     .then((isAvailable) => {
-      available=true;
-      return true;
+      console.log("Location available");
+      this.diagnostic.isLocationAuthorized()
+      .then((isAuthorized) => {
+        console.log("Location authorized");
+        available=true;
+        return true;
+      })
+      .catch((error) => {
+        console.log('Location is ' + error);
+        available=false;
+        return false;
+      })
+      
     })
     .catch((error) => {
       console.log('Location is ' + error);
       available = false;
       return false;
     })
+
+    console.log("end test location");
     return available;
   }
 
   enableLocation():boolean{
     let enable:boolean = false;
+    console.log("start enable");
     this.locationAccuracy.canRequest().then((canRequest: boolean) => {
 
       if(canRequest) {
+        console.log("can request");
         // the accuracy option will be ignored by iOS
         this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
           () => {
@@ -96,6 +112,7 @@ export class ConnectivityService {
       }
 
     })
+    console.log("end enable");
     return enable;
   }
 }
