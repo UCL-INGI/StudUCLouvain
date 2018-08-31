@@ -23,6 +23,8 @@ import { Injectable} from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform, AlertController} from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 declare var Connection;
 
@@ -30,7 +32,12 @@ declare var Connection;
 export class ConnectivityService {
   onDevice: boolean;
 
-  constructor(public platform: Platform, private network: Network, private translateService: TranslateService, private alertCtrl: AlertController){
+  constructor(public platform: Platform, 
+              private network: Network, 
+              private translateService: TranslateService, 
+              private alertCtrl: AlertController,
+              private diagnostic: Diagnostic,
+              private locationAccuracy: LocationAccuracy){
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -56,5 +63,39 @@ export class ConnectivityService {
       buttons: [close]
     });
     alert.present();
+  }
+
+  isLocationEnabled(): boolean {
+    let available:boolean;
+    this.diagnostic.isLocationAvailable()
+    .then((isAvailable) => {
+      available=true;
+      return true;
+    })
+    .catch((error) => {
+      console.log('Location is ' + error);
+      available = false;
+      return false;
+    })
+    return available;
+  }
+
+  enableLocation():boolean{
+    let enable:boolean = false;
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+      if(canRequest) {
+        // the accuracy option will be ignored by iOS
+        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+          () => {
+            console.log('Request successful');
+            enable=true;
+          },
+          error => console.log('Error requesting location permissions', error)
+        );
+      }
+
+    })
+    return enable;
   }
 }

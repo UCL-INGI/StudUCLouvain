@@ -83,7 +83,13 @@ export class MapService {
     this.pleaseConnect = pleaseConnect;
 
     if(this.onDevice) {
-      return this.loadDeviceGoogleMaps();
+      if(this.connectivityService.isLocationEnabled()){
+        return this.loadDeviceGoogleMaps();
+      }
+      else{
+        let ok = this.connectivityService.enableLocation();
+        if(ok) this.init(mapElement, pleaseConnect);
+      }
     } else {
       return this.loadBrowserGoogleMaps();
     }
