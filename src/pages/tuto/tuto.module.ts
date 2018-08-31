@@ -22,6 +22,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TutoPage } from './tuto';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TutoPage } from './tuto';
   ],
   imports: [
     IonicPageModule.forChild(TutoPage),
+    TranslateModule.forChild()
   ],
 })
 export class TutoPageModule {}
