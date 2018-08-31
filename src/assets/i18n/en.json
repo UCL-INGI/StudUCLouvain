@@ -112,6 +112,9 @@
         "SEGMENT2" : "Help services",
         "SEGMENT3" : "Tutorials",
 
+        "PROB": "Application issues",
+        "TEXTP1": "For any problem encountered when using this application, turn to the address:",
+
         "DESK" : "Service Desk",
         "TEXT1" : "The Service Desk is a <em><strong>single point of contact</strong></em> for all IT requests at UCL. A <em>call center</em> will direct the user to the right contact.",
         "TEXT2" : "It helps any new UCL member to solve problems related to his identity: access card, global identifier, password. It also receives requests related to IT services (e-mail, calendar, WiFi, portal, etc.).",

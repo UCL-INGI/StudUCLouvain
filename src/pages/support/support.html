@@ -45,6 +45,18 @@
 <ion-content  padding class="has-header">
   <!----------------INFORMATIONS ---------------------->
   <ng-container *ngIf="segment==='info'">
+
+    <ion-item-divider  (tap)="toggleGroup('prob_app')">
+      {{'HELP.PROB' | translate}}
+    </ion-item-divider>
+
+    <ion-item [hidden]="!isGroupShown('prob_app')">
+      <div item-content>
+        <p [innerHTML]="'HELP.TEXTP1' | translate"></p>
+        <p><a href="mailto:studuclouvain@uclouvain.be">studuclouvain@uclouvain.be</a> </p>
+      </div>
+    </ion-item>
+
     <ion-item-divider  (tap)="toggleGroup('service_desk')">
       {{'HELP.DESK' | translate}}
     </ion-item-divider>
