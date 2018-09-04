@@ -124,7 +124,7 @@
         "CARD" : "SmartCard",
         "TEXT5": "The smartcard allows access to libraries and books, access to educational rooms, protected buildings, parking lots, etc.",
         "TEXT6": "The <em><strong>recto</strong></em> highlights the elements related to the identity of the person: first and last name, identity photo, card number and FGS number. <br/>The <em><strong>verso </strong></em> equipped with a magnetic track, highlights the \"multi-site\" aspect of the University. The card also has a 'contactless' feature.",
-        "TEXT7": "The 'normal' time to receive the card is 15 <em>workable</em> if you returned a photo corresponding to the specifications required with the form. If the card is not in your possession after 15 working days: <br />- If you are a member of staff, please contact",
+        "TEXT7": "The 'normal' time to receive the card is 15 <em>workable</em> days if you returned a photo corresponding to the specifications required with the form. If the card is not in your possession after 15 working days: <br />- If you are a member of staff, please contact",
         "TEXTBTN1": "Personnel Department",
         "TEXT8":"- If you are a student, please contact",
         "TEXTBTN2": "Registration Service",

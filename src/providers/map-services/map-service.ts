@@ -84,15 +84,11 @@ export class MapService {
 
     if(this.onDevice) {
       if(this.connectivityService.isLocationEnabled()){
-        console.log("location enabled");
         return this.loadDeviceGoogleMaps();
       }
       else{
-        console.log("location disabled");
         let ok = this.connectivityService.enableLocation();
-        console.log(ok);
-        if(ok) this.loadDeviceGoogleMaps();
-        else this.init(mapElement,pleaseConnect);
+        if(ok) this.init(mapElement, pleaseConnect);
       }
     } else {
       return this.loadBrowserGoogleMaps();
@@ -223,7 +219,6 @@ export class MapService {
           });
         }, (error) => {
           console.log("Map error initDeviceMap : " + error);
-          console.log(error.code);
           reject(false);
         });
     });

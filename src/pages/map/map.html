@@ -59,6 +59,14 @@
       {{'MAP.LIBRARY' | translate}}
     </ion-item-divider>
 
+    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
+      <div item-content >
+        <h3>{{bibli.title}} {{bibli.sigle}}</h3>
+        <p>{{bibli.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
+    </ion-item>
+
     <ion-item-divider (tap)="toggleDetails(zone.locaux)" >
       {{'MAP.LOC' | translate}}
     </ion-item-divider>
@@ -68,14 +76,6 @@
         <h3>{{loc.title}}</h3>
       </div>
       <ion-toggle [(ngModel)]="zone.locaux.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(loc, zone.locaux.listChecked, i)"></ion-toggle>
-    </ion-item>
-
-    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
-      <div item-content >
-        <h3>{{bibli.title}} {{bibli.sigle}}</h3>
-        <p>{{bibli.address}}</p>
-      </div>
-      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
     </ion-item>
 
     <ion-item-divider (tap)="toggleDetails(zone.sports)">

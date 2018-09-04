@@ -123,11 +123,11 @@
         "CARD" : "SmartCard",
         "TEXT5" : "La smartcard permet l'accès aux bibliothèques et l'emprunt de livres, l'accès aux salles didactiques, aux bâtiments protégés, aux parkings, etc.",
         "TEXT6" : "Le <em><strong>recto</strong></em> met en avant les éléments liés à l'identité de la personne: prénom et nom, photo d'identité, n° de la carte et n° FGS. <br/>Le <em><strong>verso </strong></em>équipé d'une piste magnétique, met en avant l'aspect 'multisite' de l'Université. <br />La carte dispose également une fonctionnalité 'sans-contact'.",
-        "TEXT7" : "Le délai 'normal' pour recevoir la carte est de 15 <em>ouvrables</em> si vous avez renvoyé une photo correspondant aux spécifications requises avec le formulaire. <br />Si la carte n'est pas en votre possession après 15 jours ouvrables : <br />- Si vous êtes membre du personnel, veuillez prendre contact avec le",
+        "TEXT7" : "Le délai 'normal' pour recevoir la carte est de 15 jours <em>ouvrables</em> si vous avez renvoyé une photo correspondant aux spécifications requises avec le formulaire. <br />Si la carte n'est pas en votre possession après 15 jours ouvrables : <br />- Si vous êtes membre du personnel, veuillez prendre contact avec le",
         "TEXTBTN1" : "Service du personnel",
         "TEXT8" : "- Si vous êtes étudiant, veuillez prendre contact avec le",
         "TEXTBTN2" : "Service des Inscriptions",
-        "TEXT9" : "- Si vous êtes lecteur des bibliothèques, veuillez prendre contact avec la bibliothèque dans laquelle vous vous êtes inscrits.",
+        "TEXT9" : "- Si vous êtes lecteur des bibliothèques, veuillez prendre contact avec la bibliothèque dans laquelle vous vous êtes inscrit.",
         "TEXT10" : "La première carte de l'UCL est <strong>automatiquement activée</strong>. Si vous aviez déjà une carte magnétique en cours de validité, la nouvelle carte sera automatiquement activée 7 jours après la date d'envoi. L'ancienne carte sera désactivée pour vous permettre d'utiliser la nouvelle. Si vous souhaitez <strong>activer cette carte plus tôt </strong>, suivez les instructions sur la page :",
         "TEXTBTN3" : "Activation d'une carte à puce",
 
