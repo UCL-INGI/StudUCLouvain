@@ -57,57 +57,5 @@ export class ConnectivityService {
     });
     alert.present();
   }
-<<<<<<< HEAD
 
-  isLocationEnabled(): boolean {
-    let available:boolean;
-    this.diagnostic.isLocationAvailable()
-    .then((isAvailable) => {
-<<<<<<< HEAD
-      console.log("Location available");
-      this.diagnostic.isLocationEnabled()
-      .then((isAuthorized) => {
-        console.log("Location authorized");
-        available=true;
-        return true;
-      })
-      .catch((error) => {
-        console.log('Location is ' + error);
-        available=false;
-        return false;
-      })
-      
-=======
-      available=true;
-      return true;
->>>>>>> parent of b7a46af... test map
-    })
-    .catch((error) => {
-      console.log('Location is ' + error);
-      available = false;
-      return false;
-    })
-    return available;
-  }
-
-  enableLocation():boolean{
-    let enable:boolean = false;
-    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-
-      if(canRequest) {
-        // the accuracy option will be ignored by iOS
-        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-          () => {
-            console.log('Request successful');
-            enable=true;
-          },
-          error => console.log('Error requesting location permissions', error)
-        );
-      }
-
-    })
-    return enable;
-  }
-=======
->>>>>>> parent of 8812a42... location
 }
