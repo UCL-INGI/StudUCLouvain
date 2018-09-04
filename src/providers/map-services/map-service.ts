@@ -58,7 +58,7 @@ export class MapService {
               private platform: Platform,
               menuCtrl: MenuController) {
     //Check the platform used
-    this.onDevice = this.platform.is('android') || this.platform.is('ios');
+    this.onDevice = this.platform.is('cordova');
 
     this.apiKey = jsApiKey;
 
