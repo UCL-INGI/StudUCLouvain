@@ -429,5 +429,22 @@
 
     "SETTING" : {
         "LANGUE" : "Language"
+    },
+
+    "TUTO" : {
+        "SIDE" : "Side menu",
+        "SIDEB": "Studies",
+        "SIDEC": "Studies",
+        "SIDED": "Studies (tab \"schedules\")",
+        "SIDEE": "Repertory",
+        "SIDEF": "News (tab \"faculty\")",
+        "SIDE1": "You can swipe on the right on each page to display the side menu.",
+        "SIDE2" : "You can swipe on the left on the study page to display the side menu.",
+        "SIDE3": "For the tab \"schedules\", if you want to add a course manually you can click on the plus button.",
+        "SIDE4": "For a selected course, you can add an individual class session to your calendar by dragging it to the left. Or add all sessions using the "calendar" button at the bottom left.",
+        "SIDE5": "For a selected course, if different sessions are available you can select yours using the scissors button. You can also get more information about the course using the button at the top right.",
+        "SIDE6" : "You can find the repertory on the support page.",
+        "SIDE7": "At your first connection, select the desired faculty and save your choice with the button \"Save\" at the bottom of the list. You can change faculty using the button at the bottom right which will appear on the faculty news page.",
+        "SIDE8" : "You can find these tutorials in the \"Settings\" section."
     }
 }

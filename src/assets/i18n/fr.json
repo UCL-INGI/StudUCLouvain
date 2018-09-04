@@ -426,6 +426,22 @@
 
     "SETTING" : {
         "LANGUE" : "Langue"
-    }
+    },
 
+		"TUTO" : {
+        "SIDE" : "Side menu",
+				"SIDEB" : "Etudes",
+				"SIDEC": "Etudes",
+				"SIDED": "Etudes (onglet \"horaires\")",
+				"SIDEE": "Répertoire",
+				"SIDEF": "Actualités (onglet \"facultaires\")",
+				"SIDE1": "Vous pouvez glisser chaque page vers la droite pour faire apparaitre le menu latéral.",
+				"SIDE2" : "Vous pouvez glisser la page \"Etudes\" vers la gauche afin d'avoir accès au menu latéral droit.",
+				"SIDE3" : "Pour l'onglet \"horaires\", si vous voulez ajouter un cours manuellement, vous pouvez cliquer sur le bouton plus.",
+				"SIDE4" : "Pour un cours sélectionné, vous pouvez ajouter une session de classe individuelle à votre calendrier en la faisant glisser vers la gauche. Ou ajoutez toutes les sessions en utilisant le bouton \"calendrier\" en bas à gauche.",
+				"SIDE5" : "Pour un cours sélectionné, si différentes sessions sont disponibles, vous pouvez sélectionner la vôtre à l'aide du bouton ciseaux. Vous pouvez également obtenir plus d'informations sur le cours en utilisant le bouton en haut à droite.",
+				"SIDE6" : "Vous trouverez le répertoire sur la page support.",
+				"SIDE7" : "Lors de votre première connexion, sélectionnez la faculté désirée et enregistrez votre choix avec le bouton \"Sauver\" en bas de la liste. Vous pouvez changer de faculté en utilisant le bouton en bas à droite qui apparaîtra sur la page des nouvelles de la faculté.",
+				"SIDE8" : "Vous pouvez trouver ces tutoriels dans la section \"Paramètres\"."
+    }
 }

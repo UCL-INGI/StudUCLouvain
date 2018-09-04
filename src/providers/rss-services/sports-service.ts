@@ -41,10 +41,10 @@ export class SportsService {
   callLimit=30;
 
   url = "";
-  url1 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t1"; //LLN
-  url2 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t3"; //woluwe
-  url3 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t5"; //mons
-  url4 = "http://ucl-fms01.sipr.ucl.ac.be:82/ucl_sport/rsssport.php?-action=t7"; //equipe universitaire
+  url1 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=louv"; //LLN
+  url2 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=wol"; //woluwe
+  url3 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=wol"; //mons
+  url4 = "https://uclsport.uclouvain.be/smartrss.php?-public=equip&-site=louv"; //equipe universitaire
 
   constructor(private http: Http, public user:UserService, public rssService : RssService) {
 
