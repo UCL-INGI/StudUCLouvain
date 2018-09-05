@@ -23,14 +23,20 @@ import { Injectable} from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Platform, AlertController} from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 declare var Connection;
 
 @Injectable()
 export class ConnectivityService {
   onDevice: boolean;
-
-  constructor(public platform: Platform, private network: Network, private translateService: TranslateService, private alertCtrl: AlertController){
+  available:boolean;
+  enable:boolean;
+  constructor(public platform: Platform, 
+              private network: Network, 
+              private translateService: TranslateService, 
+              private alertCtrl: AlertController,
+              private diagnostic: Diagnostic){
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -57,5 +63,23 @@ export class ConnectivityService {
     });
     alert.present();
   }
+
+    successCallback = (isAvailable) => { 
+                      console.log('Is available? ' + isAvailable); 
+                      this.available = isAvailable; 
+                      return isAvailable;
+                    };
+
+    errorCallback = (e) => console.error(e);
+
+   async isLocationEnabled() {
+
+    console.log("start test location");
+    await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
+    console.log("available : " + this.available);
+    return this.available;
+  }
+
+
 
 }

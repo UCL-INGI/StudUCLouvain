@@ -25,6 +25,7 @@
 
 import { Injectable } from '@angular/core';
 import { ConnectivityService } from '../utils-services/connectivity-service';
+import { UserService } from '../utils-services/user-service';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform, MenuController } from 'ionic-angular';
 import { GoogleMaps,
@@ -56,7 +57,8 @@ export class MapService {
   constructor(public connectivityService: ConnectivityService,
               private geolocation : Geolocation,
               private platform: Platform,
-              menuCtrl: MenuController) {
+              menuCtrl: MenuController,
+              public userS: UserService) {
     //Check the platform used
     this.onDevice = this.platform.is('cordova');
 
@@ -180,42 +182,81 @@ export class MapService {
   }
 
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
-  private initDeviceMap() : Promise<any> {
-    console.log("initDeviceMap - ask geolocation");
-    return new Promise((resolve, reject) => {
-      LocationService.getMyLocation().then(
-        (position) => {
-          console.log("initDeviceMap - geolocation answered");
-          this.userLocation = new MapLocation( "Ma Position",
-                                      "",
-                                      String(position.latLng.lat),
-                                      String(position.latLng.lng),
-                                      "MYPOS");
+   private async initDeviceMap() : Promise<any> {
+    console.log("Geolocation enabled ?");
+    if(await this.connectivityService.isLocationEnabled() ){
+      console.log("Geolocation enabled");
+      return new Promise((resolve, reject) => {
+        console.log("initDeviceMap - ask geolocation");
+        LocationService.getMyLocation().then(
+          (position) => {
+            console.log("initDeviceMap - geolocation answered");
+            this.userLocation = new MapLocation( "Ma Position",
+                                        "",
+                                        String(position.latLng.lat),
+                                        String(position.latLng.lng),
+                                        "MYPOS");
 
-          //let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
-          let latLng = position.latLng;
-          let mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: GoogleMapsMapTypeId.ROADMAP
-          }
-          // create CameraPosition
-          let camPos: CameraPosition<LatLng> = {
-            target: latLng,
-            zoom: 15
-          };
-          //this.map = new GoogleMap(this.mapElement, mapOptions);
-          this.map = GoogleMaps.create(this.mapElement, mapOptions);
-          this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-            console.log('Map is ready!');
-            this.map.moveCamera(camPos);
-            resolve(true);
-          });
-        }, (error) => {
-          console.log("Map error initDeviceMap : " + error);
-          reject(false);
+            //let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
+            let latLng = position.latLng;
+            let mapOptions = {
+              center: latLng,
+              zoom: 15,
+              mapTypeId: GoogleMapsMapTypeId.ROADMAP
+            }
+            // create CameraPosition
+            let camPos: CameraPosition<LatLng> = {
+              target: latLng,
+              zoom: 15
+            };
+            //this.map = new GoogleMap(this.mapElement, mapOptions);
+            this.map = GoogleMaps.create(this.mapElement, mapOptions);
+            this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+              console.log('Map is ready!');
+              this.map.moveCamera(camPos);
+              resolve(true);
+            });
+          }, (error) => {
+            console.log("Map error initDeviceMap : " + error);
+            reject(false);
+          })
+        })
+      }
+        else{
+          return new Promise((resolve, reject) => {
+            console.log("Geolocation disabled");
+              let campus = this.userS.campus;
+              let latLng: LatLng;
+              if(campus === 'LLN') latLng = new LatLng(50.66808100000001,4.611832400000026);
+              if(campus === 'Woluwe') latLng = new LatLng(50.8489094,4.432088300000032);
+              if(campus === 'Mons') latLng = new LatLng(50.45424080000001,3.956658999999945);
+
+              this.userLocation = new MapLocation( "Campus Position",
+                                        "",
+                                        String(latLng.lat),
+                                        String(latLng.lng),
+                                        "CAMPUSPOS");
+              let mapOptions = {
+                center: latLng,
+                zoom: 15,
+                mapTypeId: GoogleMapsMapTypeId.ROADMAP
+              }
+              let camPos: CameraPosition<LatLng> = {
+                target: latLng,
+                zoom: 5
+              }
+              
+            this.map = GoogleMaps.create(this.mapElement,mapOptions);
+            console.log("Map created");
+            this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+              console.log('Map is ready!');
+
+
+              this.map.moveCamera(camPos);
+              resolve(true);
+            });
         });
-    });
+      }
   }
 
   /*Add marker in the map for a location selected*/

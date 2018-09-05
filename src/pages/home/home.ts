@@ -211,7 +211,7 @@ export class HomePage {
                 },
                 {
                     type:'radio',
-                    label:'Woluwé',
+                    label:'Woluwe',
                     value:'Woluwe',
                     checked:(check == 'Woluwe')
                 },
