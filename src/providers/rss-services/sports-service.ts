@@ -20,7 +20,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
@@ -37,16 +37,14 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
   nbCalls = 0;
+  nbCallsT = 0;
 
-  callLimit=30;
+  callLimit=10;
 
-  url = "";
-  url1 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=louv"; //LLN
-  url2 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=wol"; //woluwe
-  url3 = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-site=wol"; //mons
-  url4 = "https://uclsport.uclouvain.be/smartrss.php?-public=equip&-site=louv"; //equipe universitaire
+  url = ""; //students
+  urlT = ""; //equipe universitaire
 
-  constructor(private http: Http, public user:UserService, public rssService : RssService) {
+  constructor(private http: HttpClient, public user:UserService, public rssService : RssService) {
 
   }
 
@@ -59,10 +57,49 @@ export class SportsService {
 
   /*Get the good URL in function of the user's campus*/
   update(){
+    //reset url
+    this.url = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate=";
+    this.urlT = "https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate="
+
+    // first day of the week : today
+    let today:Date = new Date();
+
+    //last day of the week : today +7
+    let end:Date = new Date();
+    end.setDate(today.getDate() +7);
+
+    //convert date to string : dd-mm-yyyy
+    let stringDate = today.toLocaleDateString();
+    let re = /\//g;
+    let todayString = stringDate.replace(re,'-');
+    //invert month and day
+    let day = todayString.substr(0,2);
+    let month = todayString.substr(3,2);
+    let year = todayString.substr(6,4);
+    todayString=  month+'-'+day+'-'+year;
+
+
+    stringDate=end.toLocaleDateString();
+    let endString= stringDate.replace(re,'-');
+    day = endString.substr(0,2);
+    month = endString.substr(3,2);
+    year = endString.substr(6,4);
+    endString = month+'-'+day+'-'+year;
+
+    //which campus ?
+    let site:string;
     let campus = this.user.campus;
-    if(campus == "LLN") this.url = this.url1;
-    if(campus == "Woluwe") this.url = this.url2;
-    if(campus == "Mons") this.url = this.url3;
+    if(campus == "LLN") site = 'louv';
+    if(campus == "Woluwe") site = 'wol';
+    if(campus == "Mons") site = 'mons';
+
+    //final URL
+    let restUrl = /*todayString*/"10-10-2018" + "&-enddate=" + "10-12-2018"/*endString*/ + "&-site=" ;
+    let urlTemp = this.url + restUrl + site;
+    let urlTempT = this.urlT + restUrl + 'louv';
+    this.url = urlTemp;
+    this.urlT = urlTempT;
+
   }
 
   /*Get sports for the URL specific to the campus of the user*/
@@ -70,8 +107,9 @@ export class SportsService {
     this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {
-      this.http.get(this.url).timeout(5000)
-      .map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
+      
+      this.http.get(this.url, {responseType: 'text'}).timeout(5000)
+      .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
@@ -81,7 +119,7 @@ export class SportsService {
             reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
           } else {
             this.nbCalls = 0;
-            this.extractSports(result.rss.channel.item,true);
+            this.extractSports(result.xml.item,true);
 
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
@@ -96,18 +134,18 @@ export class SportsService {
   public getTeams(segment:string) {
     this.teams = [];
     return new Promise( (resolve, reject) => {
-      this.http.get(this.url4).timeout(5000)
-      .map(data => {return this.convertXmlToJson(data.text());}).subscribe( result => {
-          this.nbCalls++;
+      this.http.get(this.urlT, {responseType: 'text'}).timeout(5000)
+      .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
+          this.nbCallsT++;
           if (result == null) {
-            if(this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
+            if(this.nbCallsT >= this.callLimit) {
+              this.nbCallsT = 0;
               reject(2); //2 = data.query.results == null  & callLimit reached, no sports to display
             }
             reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
           } else {
-            this.nbCalls = 0;
-            this.extractSports(result.rss.channel.item,false);
+            this.nbCallsT = 0;
+            this.extractSports(result.xml.item,false);
 
             resolve({teams : this.teams, shownTeams: this.shownTeams, categoriesT: this.allCategoriesT});
           }
@@ -132,27 +170,26 @@ export class SportsService {
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
-      if (item.sport) {
+      if (item.activite) {
         if(isSport){
-          if (this.allCategories.indexOf(item.sport) < 0) {
-            this.allCategories.push(item.sport);
+          if (this.allCategories.indexOf(item.activite) < 0) {
+            this.allCategories.push(item.activite);
           }
           this.allCategories.sort();
         }
         else{
-          if (this.allCategoriesT.indexOf(item.sport) < 0) {
-            this.allCategoriesT.push(item.sport);
+          if (this.allCategoriesT.indexOf(item.activite) < 0) {
+            this.allCategoriesT.push(item.activite);
           }
           this.allCategoriesT.sort();
         }
       }
       if(isSport) this.shownSports++;
       else this.shownTeams++;
-
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
-      let newSportItem = new SportItem(item.sport, item.sexe, item.lieu, item.salle, item.jour, startDate,
-                      hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.sport.concat(item.date.toString()));
+      let newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate,
+                      hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
 
 
       if(isSport) this.sports.push(newSportItem);

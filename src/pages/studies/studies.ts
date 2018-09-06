@@ -164,9 +164,11 @@ export class StudiesPage {
               //})
               this.activities.push({'name':'', 'sigle':sigle});
             }
+
             console.log(this.activities);
   	  		});
   	  	}
+        
     	});
     }
     else{

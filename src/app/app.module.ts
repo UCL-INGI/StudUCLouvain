@@ -83,7 +83,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicStorageModule.forRoot(),
     HttpModule,
     HttpClientModule,
-    //NgCalendarModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,

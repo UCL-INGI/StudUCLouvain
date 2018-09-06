@@ -55,9 +55,10 @@ export class SportsPage {
   filters : any = [];
   filtersT : any = [];
   excludedFilters : any = [];
+  excludedFiltersT : any = [];
   displayedSports : Array<SportItem> = [];
   displayedSportsD :any = [];
-  dateRange: any = 1;
+  dateRange: any = 7;
   dateLimit: Date = new Date();
   campus:string;
   shownGroup = null;
@@ -89,6 +90,7 @@ export class SportsPage {
     //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
       this.loadSports();
+      this.loadTeams();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedSports();
@@ -106,6 +108,7 @@ export class SportsPage {
   /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports();
+    this.loadTeams();
     refresher.complete();
   }
 
@@ -158,12 +161,27 @@ export class SportsPage {
             console.log("Loading sports : YQL req timed out > limit, suppose no sports to be displayed");
           } else {
             console.log("Error loading sports : " + error);
+            console.log(error);
           }
           this.searching = false;
           this.nosport=true;
           this.updateDisplayedSports();
         }
       });
+    } else {
+      this.searching = false;
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
+  }
+
+  loadTeams(){
+    this.searching = true;
+    this.sportsList && this.sportsList.closeSlidingItems();
+    let result: any;
+    this.campus = this.user.campus;
+    //Check the connexion, if it's ok, load them else return to previous page and display an alert
+    if(this.connService.isOnline()) {
       //get sports for university teams
       this.sportsService.getTeams(this.segment).then(
         res => {
@@ -173,10 +191,11 @@ export class SportsPage {
           this.filtersT = result.categoriesT;
           this.searching = false;
           this.updateDisplayedSports();
+
       })
       .catch(error => {
         if(error == 1) {
-          this.loadSports();
+          this.loadTeams();
         } else {
           if(error == 2) {
             console.log("Loading teams : YQL req timed out > limit, suppose no sports to be displayed");
@@ -231,7 +250,7 @@ export class SportsPage {
     if (this.segment === 'all') {
       this.displayedSports = this.sports.filter((item) => {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
+            && (Math.floor(item.date.getTime()/86400000) >= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
     //list of sports put in favorite
@@ -250,8 +269,8 @@ export class SportsPage {
     //List of sports for university teams
     else if (this.segment === 'team') {
       this.displayedSports = this.teams.filter((item) => {
-        return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
+        return ( this.excludedFiltersT.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+            && (Math.floor(item.date.getTime()/86400000) >= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
 
@@ -266,10 +285,22 @@ export class SportsPage {
     if(this.filters === undefined){
       this.filters = [];
     }
-
+    if(this.filtersT === undefined){
+      this.filtersT = [];
+    }
+    let cat;
+    let exclude;
+    if(this.segment === 'all'){
+      cat = this.filters;
+      exclude = this.excludedFilters;
+    }
+    if(this.segment === 'team'){ 
+      cat = this.filtersT;
+      exclude = this.excludedFiltersT;
+    }
     //Create a modal in which the filter will be by the SportsFilterPage
     let modal = this.modalCtrl.create('SportsFilterPage',
-                  { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
+                  { excludedFilters : exclude, filters : cat, dateRange : this.dateRange});
     modal.present();
 
     //Applied changing of date range when dismiss the modal
@@ -280,7 +311,9 @@ export class SportsPage {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
-        this.excludedFilters = data.pop();
+        let newExclude = data.pop();
+        if(this.segment === 'all') this.excludedFilters = newExclude;
+        if(this.segment === 'team') this.excludedFiltersT = newExclude;
         this.updateDisplayedSports();
       }
     });
@@ -289,7 +322,7 @@ export class SportsPage {
   /*Update the dateLimit when that is changed by the filter*/
   private updateDateLimit(){
     let today = new Date();
-    this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
+    this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate()+this.dateRange);
   }
 
   /*Add a sport to calendar of the smartphone*/
