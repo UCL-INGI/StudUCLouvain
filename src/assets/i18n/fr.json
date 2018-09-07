@@ -426,7 +426,8 @@
     },
 
     "SETTING" : {
-        "LANGUE" : "Langue"
+        "LANGUE" : "Langue",
+        "TUTO" : "Tutoriels"
     },
 
 		"TUTO" : {
