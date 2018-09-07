@@ -161,7 +161,7 @@ console.log("Startin App");
     /*this.storage.get('disclaimer').then((disclaimer) => {
       if(!disclaimer) this.disclaimer();
     });*/
-    this.disclaimer();
+    //this.disclaimer();
 
   }
 
