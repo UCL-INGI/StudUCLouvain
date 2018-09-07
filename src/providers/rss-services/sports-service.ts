@@ -94,7 +94,7 @@ export class SportsService {
     if(campus == "Mons") site = 'mons';
 
     //final URL
-    let restUrl = /*todayString*/"10-10-2018" + "&-enddate=" + "10-12-2018"/*endString*/ + "&-site=" ;
+    let restUrl = todayString/*"10-10-2018"*/ + "&-enddate=" + /*"10-12-2018"*/endString + "&-site=" ;
     let urlTemp = this.url + restUrl + site;
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
