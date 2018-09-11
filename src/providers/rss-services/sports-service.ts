@@ -66,7 +66,7 @@ export class SportsService {
 
     //last day of the week : today +7
     let end:Date = new Date();
-    end.setDate(today.getDate() +7);
+    end.setDate(today.getDate() +7 );
 
     //convert date to string : dd-mm-yyyy
     let stringDate = today.toLocaleDateString();
@@ -76,7 +76,7 @@ export class SportsService {
     let day = todayString.substr(0,2);
     let month = todayString.substr(3,2);
     let year = todayString.substr(6,4);
-    todayString=  month+'-'+day+'-'+year;
+    todayString=  year+'-'+month+'-'+day;
 
 
     stringDate=end.toLocaleDateString();
@@ -84,7 +84,7 @@ export class SportsService {
     day = endString.substr(0,2);
     month = endString.substr(3,2);
     year = endString.substr(6,4);
-    endString = month+'-'+day+'-'+year;
+    endString = year+'-'+month+'-'+day;
 
     //which campus ?
     let site:string;
@@ -99,6 +99,7 @@ export class SportsService {
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
+    console.log(this.url);
 
   }
 
@@ -111,6 +112,7 @@ export class SportsService {
       this.http.get(this.url, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
+          console.log(result);
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
@@ -120,7 +122,7 @@ export class SportsService {
           } else {
             this.nbCalls = 0;
             this.extractSports(result.xml.item,true);
-
+            console.log(this.sports);
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
         },
@@ -162,7 +164,15 @@ export class SportsService {
       console.log("Error sports data undefined!!!")
       return;
     }
+    if(data.length === undefined){
+      let temp = data;
+      data = [];
+      data.push(temp);
+    }
+    this.shownSports = 0;
+    this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
+      console.log(i);
       let item = data[i];
       let favorite = false;
       let hidden = false;

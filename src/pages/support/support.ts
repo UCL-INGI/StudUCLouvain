@@ -51,7 +51,7 @@ export class SupportPage {
   lastname:string = "";
   firstname:string = "";
   loading;
-  segment:string="info";
+  segment:string="aide";
   shownHelp = null;
 
   constructor(public navCtrl: NavController,

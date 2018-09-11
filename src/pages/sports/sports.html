@@ -90,7 +90,7 @@
 
     </ion-list>
 
-  <ion-list-header *ngIf="nosport && !searching" class="all" [ngClass]="{'team' : segment == 'team'}">
+  <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching" class="all" [ngClass]="{'team' : segment == 'team'}">
     {{'SPORTS.NOTHING' | translate}}
   </ion-list-header>
 </ion-content>

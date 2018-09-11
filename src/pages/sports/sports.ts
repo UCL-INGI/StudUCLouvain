@@ -64,6 +64,7 @@ export class SportsPage {
   shownGroup = null;
   loading;
   nosport:any = false;
+  noteams:any = false;
 
   constructor(
     public alertCtrl: AlertController,
@@ -151,6 +152,7 @@ export class SportsPage {
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
+          console.log(result);
           this.updateDisplayedSports();
       })
       .catch(error => {
@@ -203,7 +205,7 @@ export class SportsPage {
             console.log("Error loading teams : " + error);
           }
           this.searching = false;
-          this.nosport=true;
+          this.noteams=true;
           this.updateDisplayedSports();
         }
       });
@@ -250,7 +252,7 @@ export class SportsPage {
     if (this.segment === 'all') {
       this.displayedSports = this.sports.filter((item) => {
         return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) >= Math.floor(this.dateLimit.getTime()/86400000));
+            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
     //list of sports put in favorite
@@ -270,13 +272,15 @@ export class SportsPage {
     else if (this.segment === 'team') {
       this.displayedSports = this.teams.filter((item) => {
         return ( this.excludedFiltersT.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) >= Math.floor(this.dateLimit.getTime()/86400000));
+            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
       });
     }
 
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
+    console.log(this.displayedSports)
+    console.log(this.noteams);
     this.dismissLoading();
   }
 

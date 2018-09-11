@@ -29,12 +29,13 @@
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="info">
-      {{'HELP.SEGMENT1' | translate}}
-    </ion-segment-button>
     <ion-segment-button value="aide">
       {{'HELP.SEGMENT2' | translate}}
     </ion-segment-button>
+    <ion-segment-button value="info">
+      {{'HELP.SEGMENT1' | translate}}
+    </ion-segment-button>
+
     <ion-segment-button value="tuto">
       {{'HELP.SEGMENT3' | translate}}
     </ion-segment-button>
