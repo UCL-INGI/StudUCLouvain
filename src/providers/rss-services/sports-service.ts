@@ -64,9 +64,9 @@ export class SportsService {
     // first day of the week : today
     let today:Date = new Date();
 
-    //last day of the week : today +7
+    //last day of the week : today +6
     let end:Date = new Date();
-    end.setDate(today.getDate() +7 );
+    end.setDate(today.getDate() + 6 );
 
     //convert date to string : dd-mm-yyyy
     let stringDate = today.toLocaleDateString();
@@ -99,7 +99,6 @@ export class SportsService {
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
-    console.log(this.url);
 
   }
 
@@ -112,7 +111,6 @@ export class SportsService {
       this.http.get(this.url, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
-          console.log(result);
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
@@ -122,7 +120,6 @@ export class SportsService {
           } else {
             this.nbCalls = 0;
             this.extractSports(result.xml.item,true);
-            console.log(this.sports);
             resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
           }
         },
@@ -148,7 +145,7 @@ export class SportsService {
           } else {
             this.nbCallsT = 0;
             this.extractSports(result.xml.item,false);
-
+            console.log(this.teams);
             resolve({teams : this.teams, shownTeams: this.shownTeams, categoriesT: this.allCategoriesT});
           }
         },
@@ -172,7 +169,6 @@ export class SportsService {
     this.shownSports = 0;
     this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
-      console.log(i);
       let item = data[i];
       let favorite = false;
       let hidden = false;

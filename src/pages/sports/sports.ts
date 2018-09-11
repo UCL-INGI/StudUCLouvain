@@ -152,7 +152,6 @@ export class SportsPage {
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
-          console.log(result);
           this.updateDisplayedSports();
       })
       .catch(error => {
@@ -279,8 +278,6 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    console.log(this.displayedSports)
-    console.log(this.noteams);
     this.dismissLoading();
   }
 
