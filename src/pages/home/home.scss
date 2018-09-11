@@ -108,5 +108,42 @@ page-home {
         }
     }
 
+    @media only screen 
+    and (min-device-width : 320px) 
+    and (max-device-width : 568px) 
+    and (orientation : landscape) {
+    
+        ion-row.homeM{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 25%;
+
+            img{
+            
+            }
+        }
+}
+
+/* iPhone 5 & 5S in portrait */
+    @media only screen 
+    and (min-device-width : 320px) 
+    and (max-device-width : 568px) 
+    and (orientation : portrait) {
+
+        ion-row.homeML{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 20%;
+
+            img{
+ 
+            }
+        }
+}
+
 
 }
