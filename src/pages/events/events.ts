@@ -88,6 +88,7 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
+    console.log(this.dateLimit);
       this.cachedOrNot();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
@@ -191,6 +192,7 @@ export class EventsPage {
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
+          console.log(this.events);
           this.updateDisplayedEvents();
           console.log(this.displayedEventsD);
       })
@@ -222,7 +224,7 @@ export class EventsPage {
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
       var temp = new Date(date.getFullYear(),0,4);
-      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7) - weekUCL;
+      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7);// - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
@@ -230,6 +232,7 @@ export class EventsPage {
     var eventsD = Object.keys(groups).map(function(key){
       return {weeks: key, event: groups[key]};
     });
+    console.log(eventsD);
     return eventsD;
   }
 
@@ -255,6 +258,7 @@ export class EventsPage {
     rangeIsFrom = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
     rangeIsTo = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear() ;
+    console.log(rangeIsTo);
     return {from:rangeIsFrom, to:rangeIsTo};
   }
 
