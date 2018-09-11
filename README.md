@@ -1,5 +1,5 @@
-# UCLCampus
-UCLcampus is an application designed to accompany UCL students in their daily life on campus. Contributions are welcome for any good feature.
+# Stud.UCLouvain
+Stud.UCLouvain is an application designed to accompany UCLouvain students in their daily life on campus. Contributions are welcome for any good feature.
 
 [![Join the chat at https://gitter.im/UCLCampus/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UCLCampus/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -98,21 +98,24 @@ $ npm run e2e
 
 ### Existing Features
 
-* Display event of CarpeStudentem
+* Display course schedule (ADE) and select your session
+* Add course schedule to your calendar
+* Display annual course program
+* Display Libraries schedule and more informations
+* Display News of UCL
+* Display events of CarpeStudentem
+* Display Sports schedule
 * Launch carpooling app https://www.commuty.net
+* Launch train app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
+* Launch bus app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
 * Launch Resto4u app
 * Help Desk, How to connect to the university network
 * Maps with point of interest on campus
+* Staffbook
 
 ### Future Features
 
-* Display News of UCL
-* Display course schedule (ADE)
-* Add course schedule to your calendar
-* Display Libraries schedule and more informations
-* Authentication with OAuth 2.0
-* Studentbook and Staffbook
-* Display Sports schedule
+* Display exam score
 
 ## User Guide
 
@@ -128,4 +131,4 @@ Contributions are welcome!
 
 
 ## License
-UCLCampus is available under the GNU/GPLv3 license. See the LICENSE file for more info.
+Stud.UCLouvain is available under the GNU/GPLv3 license. See the LICENSE file for more info.
