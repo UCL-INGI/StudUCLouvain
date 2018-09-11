@@ -261,6 +261,7 @@ export class EventsPage {
     console.log(rangeIsTo);
     rangeIsTo = rangeIsTo.replace(/-/g, "/")
     console.log(rangeIsTo);
+    rangeIsFrom = rangeIsFrom.replace(/-/g, "/")
     return {from:rangeIsFrom, to:rangeIsTo};
   }
 
