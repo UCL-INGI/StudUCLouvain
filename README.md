@@ -109,7 +109,7 @@ $ npm run e2e
 * Display Sports schedule
 * Launch carpooling app https://www.commuty.net
 * Launch train app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
-* Launch bus app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
+* Launch bus app https://nextride.be/timetables
 * Launch Resto4u app
 * Help Desk, How to connect to the university network
 * Maps with point of interest on campus
@@ -121,7 +121,6 @@ $ npm run e2e
 * Display exam score
 
 ## User Guide
-
 
 ## Contribution
 Contributions are welcome!
