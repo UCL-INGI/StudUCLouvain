@@ -72,7 +72,7 @@ export class SportsService {
     let stringDate = today.toLocaleDateString();
     let re = /\//g;
     let todayString = stringDate.replace(re,'-');
-    //invert month and day
+    //invert date
     let day = todayString.substr(0,2);
     let month = todayString.substr(3,2);
     let year = todayString.substr(6,4);
@@ -94,7 +94,7 @@ export class SportsService {
     if(campus == "Mons") site = 'mons';
 
     //final URL
-    let restUrl = todayString/*"10-10-2018"*/ + "&-enddate=" + /*"10-12-2018"*/endString + "&-site=" ;
+    let restUrl = todayString + "&-enddate=" + endString + "&-site=" ;
     let urlTemp = this.url + restUrl + site;
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
