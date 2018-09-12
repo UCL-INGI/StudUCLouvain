@@ -64,21 +64,21 @@ $ ionic serve
 
 ### Android
 
-```bash
 * Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
     ```bash
     $ cordova prepare
     ```
+```bash
 $ ionic cordova platform add android
 $ ionic cordova run android
 ```
 
 ### iOS
-```bash
 * Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
     ```bash
     $ cordova prepare
     ```
+```bash
 $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
