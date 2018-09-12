@@ -36,22 +36,24 @@ npm -v
     $ npm uninstall -g ionic cordova
     $ npm install -g ionic cordova
     ```
-    
-* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file UCLCampus/config.xml
-    
+* Install node_modules
+    ```bash
+    $ npm install
+    ```    
+* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file UCLCampus/config.xml  
     ```xml
     <plugin name="cordova-plugin-googlemaps" spec="~1.4.0">
       <variable name="API_KEY_FOR_ANDROID" value="myapikeyforandroid" />
       <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
     </plugin>
     ```
-
-* Replace the value of "myapikey" by your Javascript key in the file UCLCampus/src/providers/map-service.ts (line 46)
-
-* Install node_modules
-    ```bash
-    $ npm install
+* or install it with
+   ```bash
+   $ ionic cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="YOUR_ANDROID_API_KEY_HERE" --variable API_KEY_FOR_IOS="YOUR_IOS_API_KEY_HERE"
     ```
+* Replace the value of "myapikey" by your Javascript key in the file StudUCLouvain/src/app/variables-config.ts
+
+
     
 ## Run
 
