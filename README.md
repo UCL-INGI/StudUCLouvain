@@ -105,7 +105,7 @@ $ npm run e2e
 * Display annual course program
 * Display Libraries schedule and more informations
 * Display News of UCL
-* Display events of CarpeStudentem
+* Display Events of CarpeStudentem
 * Display Sports schedule
 * Launch carpooling app https://www.commuty.net
 * Launch train app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
@@ -114,6 +114,7 @@ $ npm run e2e
 * Help Desk, How to connect to the university network
 * Maps with point of interest on campus
 * Staffbook
+* Campaign Guindaille2.0
 
 ### Future Features
 
@@ -131,6 +132,8 @@ Contributions are welcome!
 
 ### Developper Guide
 
+## Contact
+* In case of problems, please contact us : StudUCLouvain@uclouvain.be
 
 ## License
 Stud.UCLouvain is available under the GNU/GPLv3 license. See the LICENSE file for more info.
