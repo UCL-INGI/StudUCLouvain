@@ -108,7 +108,7 @@ export class SportsService {
     this.sports = [];
     return new Promise( (resolve, reject) => {
       
-      this.http.get(this.url, {responseType: 'text'})
+      this.http.get(this.url, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
           if (result == null) {
@@ -133,7 +133,7 @@ export class SportsService {
   public getTeams(segment:string) {
     this.teams = [];
     return new Promise( (resolve, reject) => {
-      this.http.get(this.urlT, {responseType: 'text'})
+      this.http.get(this.urlT, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCallsT++;
           if (result == null) {
