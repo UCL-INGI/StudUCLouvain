@@ -81,7 +81,7 @@
         "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année",
         "ALCOURSE" : "This course is already in the list",
         "EXAM" : "See my exam notes",
-        "NO" : "Your registration is not yet finalized this year"
+        "NO" : "Your registration is not yet finalized this year or you are not yet registered for the courses"
     },
 
     "COURSE" : {

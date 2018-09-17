@@ -72,7 +72,6 @@ export class CourseService {
           activities = activities.concat(newActivities);
         }
       }
-      console.log(activities);
       return activities;
     }
 
