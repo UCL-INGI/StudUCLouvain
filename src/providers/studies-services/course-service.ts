@@ -66,13 +66,13 @@ export class CourseService {
       let activities : Activity[] = [];
       if(data.activities !== undefined){
         let activitiesList = data.activities.activity
-        console.log(data);
         for (let i =0; i< activitiesList.length ;i++){
           let activityElem = activitiesList[i];
           let newActivities : Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
         }
       }
+      console.log(activities);
       return activities;
     }
 
@@ -83,6 +83,11 @@ export class CourseService {
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if(events !== undefined){
+        if(events.length === undefined){
+          let temp = events;
+          events = [];
+          events.push(temp);
+        }
         for(let i=0; i<events.length; i++){
           let event = events[i];
           let endHour = event._endHour;
