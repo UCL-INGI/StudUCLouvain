@@ -258,9 +258,7 @@ export class EventsPage {
     rangeIsFrom = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
     rangeIsTo = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear() ;
-    console.log(rangeIsTo);
     rangeIsTo = rangeIsTo.replace(/-/g, "/")
-    console.log(rangeIsTo);
     rangeIsFrom = rangeIsFrom.replace(/-/g, "/")
     return {from:rangeIsFrom, to:rangeIsTo};
   }

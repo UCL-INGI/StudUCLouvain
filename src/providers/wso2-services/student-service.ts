@@ -152,5 +152,23 @@ export class StudentService {
     return yyyy+"-"+mm+"-"+dd;
   }
 
+  getStatus(){
+    let newUrl = this.url + "inscriptions";
+    return new Promise(resolve => {
+      this.wso2Service.loadStudent(newUrl).subscribe(
+        (data) => {
+          let res:any;
+          res=data;
+          console.log(res.lireInscriptionAnacResponse.return);
+          resolve(res.lireInscriptionAnacResponse.return);
+        },
+        (err) => {
+          console.log(err);
+          console.log(err.error);
+          resolve(err.status);
+        });
+    })
+  }
+
 
 }

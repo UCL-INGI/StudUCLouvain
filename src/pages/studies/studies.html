@@ -104,6 +104,8 @@
   <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
   <ion-list *ngIf="status">
     <!--<button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>-->
+    <h4 text-center *ngIf="prog">{{prog}}</h4>
+    <p text-center> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
     <button ion-button full (tap)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</button>
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>

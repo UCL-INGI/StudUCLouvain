@@ -80,7 +80,8 @@
         "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année",
         "ALCOURSE" : "Ce cours est déja dans la liste",
         "EXAM" : "Voir mes notes d'examens",
-        "NO" : "Votre inscription n'est pas encore finalisée cette année ou vous n'êtes pas encore inscrits aux cours."
+        "NO" : "Vous n'êtes pas encore inscrit aux cours.",
+        "STATUS" : "Statut d'inscription"
 	},
 
     "COURSE" : {

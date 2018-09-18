@@ -59,6 +59,8 @@ export class StudiesPage {
   activities:any = [];
   response:any;
   language;
+  private statusInsc:string = "";
+  private prog:string = "";
 
   constructor(
     public studiesService: StudiesService,
@@ -155,7 +157,6 @@ export class StudiesPage {
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result:any = res;
   	  			this.sigles = result.activities.activity;
-  	  			console.log(this.sigles);
             for(let sigle of this.sigles){
               //let name;
               //this.checkExist(sigle).then(data => {
@@ -164,9 +165,19 @@ export class StudiesPage {
               //})
               this.activities.push({'name':'', 'sigle':sigle});
             }
+  	  		})
+          .catch((err) => {
+            console.log("Error during load of course program");
+          });
 
-            console.log(this.activities);
-  	  		});
+          this.studentService.getStatus().then((res) => {
+            let result:any = res;
+            this.statusInsc = result[0].etatInscription;
+            this.prog = result[0].intitOffreComplet;
+          })
+          .catch((err) => {
+            console.log("Error during load of inscription status");
+          })
   	  	}
         
     	});
