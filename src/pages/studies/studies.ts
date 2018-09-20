@@ -432,7 +432,7 @@ export class StudiesPage {
   }
 
   openWeekPage(){
-    this.studentService.weekSchedule().then((res) => {
+    this.studentService.todaySchedule().then((res) => {
       let result:any = res;
       console.log(result);
       

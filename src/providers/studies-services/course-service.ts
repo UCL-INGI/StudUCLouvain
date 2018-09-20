@@ -68,6 +68,7 @@ export class CourseService {
         let activitiesList = data.activities.activity
         for (let i =0; i< activitiesList.length ;i++){
           let activityElem = activitiesList[i];
+          //console.log(activityElem);
           let newActivities : Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
         }
@@ -81,17 +82,19 @@ export class CourseService {
       let type : string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
-      if(events !== undefined){
+      if(!isExam && events !== undefined){
         if(events.length === undefined){
           let temp = events;
           events = [];
           events.push(temp);
         }
+        
         for(let i=0; i<events.length; i++){
           let event = events[i];
           let endHour = event._endHour;
           let startHour = event._startHour;
-          let date = event._date
+          let date = event._date;
+          //console.log(event);
           let participants = event.eventParticipants.eventParticipant
           let teachers = this.getTeachers(participants)
           let students = this.getStudents(participants)
@@ -104,20 +107,28 @@ export class CourseService {
         }
       }
       if(isExam && events !== undefined){
-          let event = events;
+        if(events.length === undefined){
+          let temp = events;
+          events = [];
+          events.push(temp);
+        }
+          for(let i=0; i<events.length; i++){
+
+          let event = events[i];
           let endHour = event._endHour;
           let startHour = event._startHour;
-          let date = event._date
-          let participants = event.eventParticipants.eventParticipant
-          let teachers = this.getTeachers(participants)
-          let students = this.getStudents(participants)
+          let date = event._date;
+          //console.log(event);
+          let participants = event.eventParticipants.eventParticipant;
+          let teachers = this.getTeachers(participants);
+          let students = this.getStudents(participants);
           let auditorium = this.getAuditorium(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
           let name = event._name;
           let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
           activities.push(activity);
-      }
+      }}
       return activities;
     }
 

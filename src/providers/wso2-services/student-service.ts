@@ -122,6 +122,45 @@ export class StudentService {
 
   }
 
+    public todaySchedule(){
+    let newUrl = this.url +"courseSchedules?date=";
+
+    let schedule:Array<any> = [];
+    return new Promise(resolve => {
+          let date = this.getDate(0);
+
+          let url= newUrl+date;
+          this.wso2Service.loadStudent(url).subscribe(
+            data => {
+              let res:any;
+              res = data;
+              //console.log(res);
+              if(res.items != null){
+                let items = res.items.item;
+                //console.log(date);
+                let dayDate = date.substr(5);
+                dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
+                for(let cours of items){
+                  let name:any;
+                  let res:any;
+                  this.checkCourse(cours.cours,new Date().getFullYear()).then(data =>{
+                    res=data;
+                    name = res.intituleCompletMap.entry[1].value;
+                    cours['name'] = name;
+                  })
+                }
+                let daySchedule = {'date':dayDate, 'schedule': items};
+                console.log(daySchedule);
+                schedule.push(daySchedule);
+                schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
+              }
+            });
+
+        resolve(schedule);
+    })
+
+  }
+
   getDay(i:number):string{
     let day:string = '';
     if(i===0) day = 'Lundi';

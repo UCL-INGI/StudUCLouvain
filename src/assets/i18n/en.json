@@ -420,7 +420,8 @@
         "PROJET": "Stud.UCLouvain is an Open Source application developed by students for students.  This application was developed by computer science students at UCLouvain as part of various master thesis, under the coordination of Professor Yves Deville.",
         "DEV": "Developers: <br>Daubry Benjamin and Marchesini Bruno (2017-2018); <br>Jérôme Lemaire and Corentin Lamy (2016-2017); <br>Lacasse Baptiste and Moyaux Arnold (2015-2016).",
         "LICENCE": "This project is under GPL 3.0 license and is available under github ",
-        "CONTRIB": "If you wish to participate in the development of this project or propose ideas for extensions, please contact "
+        "CONTRIB": "If you wish to participate in the development of this project or propose ideas for extensions, please contact ",
+        "DESIGN" : "Design : Dominos"
     },
 
     "NET" : {

@@ -37,11 +37,23 @@ export class Wso2Service {
     //console.log(this.token);
     //console.log(this.token);
     let finalUrl = this.wso2ServiceBaseUrl + url;
-    return  this.http.get(finalUrl, {headers: this.headers}).map(res => res);
+    return  this.http.get(finalUrl, {headers: this.headers}).map(res => res)
+    .catch((error) => {
+      console.log(error.status);
+      if(error.status === 401){
+        console.log("ok");
+        this.getToken();
+        return this.load(url);
+      }
+      else{
+        return Observable.throw(new Error(error.status));
+      }
+    });
   }
 
   /*Retrieves the token*/
   getToken(){
+    console.log("gettoken")
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type','application/x-www-form-urlencoded');
 

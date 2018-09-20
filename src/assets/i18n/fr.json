@@ -75,7 +75,7 @@
         "SWIPE" : "Swipe sur la gauche pour supprimer un cours.",
         "SWIPE2" : "Swipe sur la gauche pour ajouter le cours.",
         "WARNING" : "Avertissement",
-        "MESSAGE4" : "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application.",
+        "MESSAGE4" : "En cas de changement ou problème, ces rappels ne seront pas modifiés.<br> Tout changements éventuels seront visibles au prochain lancement de l'application dans la section Horaire.",
         "WEEK" : "Horaire de la semaine",
         "BADCOURSE" : "Ce sigle n'existe pas ou n'est pas encore disponible cette année",
         "ALCOURSE" : "Ce cours est déja dans la liste",
@@ -417,7 +417,8 @@
         "PROJET" : "L'application Stud.UCLouvain est une application Open Source développée par des étudiants pour les étudiants.  Cette application a été réalisée par des étudiants en informatique de l'UCLouvain dans le cadre de différents travaux de fin d'études, sous la coordination du Professeur Yves Deville.",
         "DEV" : "Développeurs: <br>Daubry Benjamin et Marchesini Bruno (2017-2018); <br>Jérôme Lemaire et Corentin Lamy (2016-2017); <br>Lacasse Baptiste et Moyaux Arnold (2015-2016).",
         "LICENCE" : "Ce projet est sous licence GPL 3.0 et est disponible sous github ",
-        "CONTRIB" : "Si vous souhaitez participer au développement de ce projet ou proposer des idées d'extensions, merci de contacter "
+        "CONTRIB" : "Si vous souhaitez participer au développement de ce projet ou proposer des idées d'extensions, merci de contacter ",
+        "DESIGN" : "Design : Dominos"
     },
 
     "NET" : {
