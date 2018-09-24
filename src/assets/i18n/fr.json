@@ -287,7 +287,9 @@
     	"APPLY" : "Appliquer",
     	"UNTOGGLE" : "Tout décocher",
     	"RESTORE" : "Restaurer le filtre",
-    	"SPORTS" : "Sports"
+    	"SPORTS" : "Sports",
+        "ANNULE" : "Séance annulée",
+        "ONLINE" : "Inscription en ligne"
     },
 
     "MAP" : {

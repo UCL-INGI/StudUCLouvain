@@ -23,4 +23,17 @@ page-studies {
     ion-navbar[hidebackbutton] button[menutoggle] {
   display: block !important;
 }
+
+ion-content > .scroll-content{
+
+  margin-bottom: 60px !important;
+
+}
+.fixed-div{
+    align-items: center;
+}
+ion-content.cours > .scroll-content {
+    margin-top: 190px !important;
+}
+
 }

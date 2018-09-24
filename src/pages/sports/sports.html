@@ -69,7 +69,9 @@
               <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>
               <p class="text">{{sport.lieu}} - Salle : {{sport.salle}}</p>
               <p class="text">{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
+              <p style="color:red;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
               <p style="color:red;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
+              <p style="color:red;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
             </ion-item>
 
             <ion-item-options side="right">

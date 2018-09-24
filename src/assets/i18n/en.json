@@ -289,7 +289,9 @@
         "APPLY" : "Apply",
         "UNTOGGLE" : "Uncheck all",
         "RESTORE" : "Restore the filter",
-        "SPORTS" : "Sports"
+        "SPORTS" : "Sports",
+        "ANNULE" : "Session canceled",
+        "ONLINE" : "Registration online"
     },
 
     "MAP" : {

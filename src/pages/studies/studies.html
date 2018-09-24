@@ -40,6 +40,7 @@
       {{'STUDY.HORAIRE' | translate}}
     </ion-segment-button>
   </ion-segment>
+  <h4  text-center padding *ngIf="project!==null && segment === 'cours'"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
 </ion-header>
 
 <!--BODY-->
@@ -51,12 +52,13 @@
   <button ion-item (tap)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </button>
 </ion-menu>
 
-<ion-content padding #studiesContent>
+<ion-content padding #studiesContent [ngClass]="{'cours' : segment === 'cours'}">
 
   <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
-<ion-content padding *ngIf="segment==='cours'" id="cours">
-  <h4 text-center *ngIf="project!==null"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
-  <ion-list >
+
+<ng-container padding *ngIf="segment==='cours'" id="cours">
+  
+  <ion-list class="cours">
     <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
       <ion-item (tap)="openCoursePage(course)" >
         <h2>{{course.acronym}} - {{course.name}}</h2>
@@ -74,10 +76,10 @@
     </ion-item-sliding>
   </ion-list>
 
-</ion-content>
+</ng-container>
 
 <!------------------------------------ PROGRAMME DE COURS --------------------------------------------------------->
-<ion-content padding  *ngIf="segment==='prog'">
+<ng-container padding  *ngIf="segment==='prog'" >
 
   <!----------------------------------------------- LOGIN ----------------------------------------------------------->
   <form #loginForm="ngForm" (ngSubmit)="loadActivities()" autocomplete="off" *ngIf="!status">
@@ -122,7 +124,7 @@
     <p *ngIf="activities.length <= 0">{{'STUDY.NO' | translate}}</p>
   </ion-list>
 
-</ion-content>
+</ng-container>
 
 
 </ion-content>
