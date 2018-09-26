@@ -360,8 +360,8 @@
     	"SLIDE" : "Glisser vers la droite pour continuer",
 
     	"HELP" : "Urgences",
-    	"HELP1" : "N° tél. urgences générales",
-    	"HELP2" : "N° tél. gardiennage UCL",
+    	"HELP1" : "Urgences UCLouvain",
+    	"HELP2" : "Appel à la sécurité",
     	"HELP3" : "Gardez votre calme et précisez: ",
     	"HELP4" : "Qui?",
     	"HELP5" : "Votre nom et numéro d'appel.",
@@ -377,6 +377,7 @@
         "HELP15" : "qui touche un membre de l'UCL",
         "HELP16" : "qui implique des conséquences dommageables tant sur les personnes que sur les biens de l'UCL",
         "HELP17" : "qui survient au sein du périmètre d'activité de l'UCL (activité/infrastructure)",
+        "HELP18" : "En dehors d'UCLouvain",
 
     	"PIC1" : "Si tu veux rester joyeux toute la soirée, alterne avec des softs. Cela te permettra de rester dans cet état, de t’hydrater (oui, oui, l’alcool déshydrate !), de te souvenir de tout et de ne rien regretter…",
     	"PIC2" : "Louvain-la-Neuve est une ville qui bouge, même la nuit. Tous les soirs, il y a des occasions de s’occuper et de faire la fête. Et les salles sont prévues pour, mais n’oublie pas le retour au calme une fois dehors.\nQuand tu décides de rentrer dormir, d’autres l’ont déjà fait avant toi alors… Chut, plus de bruits.",

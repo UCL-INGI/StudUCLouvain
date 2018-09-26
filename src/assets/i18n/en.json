@@ -362,8 +362,8 @@
         "SLIDE" : "Swipe to the right to continue",
 
         "HELP" : "Emergency",
-        "HELP1" : "General emergency number",
-        "HELP2" : "No. tel. gardiennage UCL",
+        "HELP1" : "Emergency UCLouvain",
+        "HELP2" : "Call for security",
         "HELP3" : "Keep calm and specify: ",
         "HELP4" : "Who?",
         "HELP5" : "Your name and number.",
@@ -380,6 +380,7 @@
         "HELP15" : "which touches a member of the UCL",
         "HELP16" : "which involves damaging consequences for both people and property of UCL",
         "HELP17" : "which occurs within the scope of activity of the UCL (activity/infrastructure)",
+        "HELP18" : "Outside UCLouvain",
 
         "PIC1": "If you want to stay happy all night, alternate with softs. It will allow you to stay in this state, to hydrate yourself (yes, yes, dehydrated alcohol!), to remember everything and not regret anything...",
         "PIC2": "Louvain-la-Neuve is a city that moves, even at night. Every night, there are opportunities to keep busy and party. When you decide to go home to sleep, others have already done it before you, so... Shh, no more noises.",
