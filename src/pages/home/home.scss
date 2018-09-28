@@ -59,10 +59,10 @@ page-home {
         height: 100%;
 
         ion-row.homeM{
-            height: 20%;
+            height: 20vh;
 
             img{
-                height: 80%;
+                height: 16vh;
             }
             p{
                 margin-top: 0px;
@@ -70,10 +70,10 @@ page-home {
         }
 
         ion-row.homeML{
-            height: 25%;
+            height: 25vh;
 
             img{
-                height: 75%;
+                height: 18.75vh;
             }
             p{
                 margin-top: 0px;
@@ -87,7 +87,7 @@ page-home {
         }
 
         ion-row.ucl{
-            height: 25%;
+            height: 18.75vh;
 
             img{
             
@@ -100,50 +100,12 @@ page-home {
         }
 
         ion-row.ucl{
-            height: 20%;
+            height: 16vh;
 
             img{
  
             }
         }
     }
-
-    @media only screen 
-    and (min-device-width : 320px) 
-    and (max-device-width : 568px) 
-    and (orientation : landscape) {
-    
-        ion-row.homeM{
-            display:none
-        }
-
-        ion-row.ucl{
-            height: 25%;
-
-            img{
-            
-            }
-        }
-}
-
-/* iPhone 5 & 5S in portrait */
-    @media only screen 
-    and (min-device-width : 320px) 
-    and (max-device-width : 568px) 
-    and (orientation : portrait) {
-
-        ion-row.homeML{
-            display:none
-        }
-
-        ion-row.ucl{
-            height: 20%;
-
-            img{
- 
-            }
-        }
-}
-
 
 }
