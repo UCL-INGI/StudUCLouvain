@@ -21,6 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, NavController, App, AlertController, LoadingController, FabContainer, Content} from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -108,7 +109,9 @@ export class HomePage {
               private translateService: TranslateService,
               public market: Market,
               public loadingCtrl: LoadingController,
-              public studentService : StudentService)
+              public studentService : StudentService,
+              public splashscreen: SplashScreen
+            )
   {
       if(this.navParams.get('title') !== undefined) {
         this.title = this.navParams.get('title');
@@ -123,6 +126,9 @@ export class HomePage {
   /*Set the title*/
   ionViewDidEnter() {
     this.app.setTitle(this.title);
+    setTimeout(()=>{
+      this.splashscreen.hide();
+    },1000);
     //this.resize();
   }
 

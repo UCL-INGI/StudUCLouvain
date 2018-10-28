@@ -21,6 +21,7 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 
@@ -31,11 +32,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TutoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public splashscreen: SplashScreen) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad TutoPage');
+    setTimeout(()=>{
+      this.splashscreen.hide();
+    },1000);
   }
 
   goToHome(){
