@@ -66,9 +66,12 @@ export class CourseService {
       let activities : Activity[] = [];
       if(data.activities !== undefined){
         let activitiesList = data.activities.activity
+        if(activitiesList.length=== undefined){
+           activitiesList = [];
+           activitiesList.push(data.activities.activity)
+         }
         for (let i =0; i< activitiesList.length ;i++){
           let activityElem = activitiesList[i];
-          //console.log(activityElem);
           let newActivities : Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
         }
@@ -94,7 +97,6 @@ export class CourseService {
           let endHour = event._endHour;
           let startHour = event._startHour;
           let date = event._date;
-          //console.log(event);
           let participants = event.eventParticipants.eventParticipant
           let teachers = this.getTeachers(participants)
           let students = this.getStudents(participants)
@@ -118,7 +120,6 @@ export class CourseService {
           let endHour = event._endHour;
           let startHour = event._startHour;
           let date = event._date;
-          //console.log(event);
           let participants = event.eventParticipants.eventParticipant;
           let teachers = this.getTeachers(participants);
           let students = this.getStudents(participants);
