@@ -68,23 +68,9 @@ export class SportsService {
     let end:Date = new Date();
     end.setDate(today.getDate() + 6 );
 
-    //convert date to string : dd-mm-yyyy
-    let stringDate = today.toLocaleDateString();
-    let re = /\//g;
-    let todayString = stringDate.replace(re,'-');
     //invert date
-    let day = todayString.substr(0,2);
-    let month = todayString.substr(3,2);
-    let year = todayString.substr(6,4);
-    todayString=  year+'-'+month+'-'+day;
-
-
-    stringDate=end.toLocaleDateString();
-    let endString= stringDate.replace(re,'-');
-    day = endString.substr(0,2);
-    month = endString.substr(3,2);
-    year = endString.substr(6,4);
-    endString = year+'-'+month+'-'+day;
+    let todayString = dateToString(today);
+    let endString =  dateToString(end);
 
     //which campus ?
     let site:string;
@@ -100,14 +86,20 @@ export class SportsService {
     this.url = urlTemp;
     this.urlT = urlTempT;
 
+    function dateToString(date){
+      return date.toISOString().split('T')[0];
+    }
   }
+
 
   /*Get sports for the URL specific to the campus of the user*/
   public getSports(segment:string) {
     this.update();
     this.sports = [];
     return new Promise( (resolve, reject) => {
-      
+
+      console.log(this.url);
+
       this.http.get(this.url, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
