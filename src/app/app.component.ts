@@ -79,7 +79,7 @@ console.log("Startin App");
     //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
-   
+
     this.homePage =
       {title: 'MENU.HOME', component: 'HomePage', icon: "./assets/img/home.png",
       iosSchemaName: null, androidPackageName: null,
@@ -170,7 +170,6 @@ console.log("Startin App");
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashscreen.hide();
     });
 
 
@@ -267,7 +266,7 @@ console.log("Startin App");
        		if(this.nav.length() > 1){
       			this.nav.pop();
       		}
-      		
+
       		this.nav.push(page.component, {title: page.title});
   		}}
     }

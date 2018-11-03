@@ -22,9 +22,10 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <preference name="loadUrlTimeoutValue" value="700000" />
-    <hook src="scripts/increment_version.js" type="before_prepare"/>
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <hook src="scripts/increment_version.js" type="before_prepare" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -118,4 +119,5 @@
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.10" />
 </widget>
