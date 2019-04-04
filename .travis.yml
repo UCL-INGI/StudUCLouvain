@@ -1,14 +1,14 @@
 language: node_js
-node_js:
- — “10.7.0”
-branches:
- only:
- — master
-before_script:
- — npm install -g ionic cordova
-script:
- — ionic cordova build browser — prod
-deploy:
+-node_js:
+ - “10.7.0”
+-branches:
+  only:
+ - master
+-before_script:
+ - npm install -g ionic cordova
+-script:
+ - ionic cordova build browser — prod
+-deploy:
  provider: pages
  skip-cleanup: true
  github-token: $GITHUB_TOKEN 
