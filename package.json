@@ -8,11 +8,6 @@
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
-    "test": "karma start ./test-config/karma.conf.js",
-    "e2e-old": "webdriver-manager update --standalone false --gecko false; protractor ./test-config/protractor.conf.js",
-    "test-ci": "karma start ./test-config/karma.conf.js --single-run",
-    "test-coverage": "karma start ./test-config/karma.conf.js --coverage",
-    "e2e-update": "webdriver-manager update --standalone false --gecko false"
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",
