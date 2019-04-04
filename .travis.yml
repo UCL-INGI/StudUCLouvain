@@ -1,10 +1,6 @@
 language: node_js
--node_js:
- - “10.7.0”
--branches:
-  only:
- - master
+-node_js: "10.7.0"
 -before_script:
- - npm install -g ionic cordova
+      - npm install -g ionic cordova
 -script:
  - ionic cordova build browser — prod
