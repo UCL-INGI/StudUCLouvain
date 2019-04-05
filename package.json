@@ -42,6 +42,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "@reactivex/rxjs": "^5.5.12",
     "ajv": "^6.10.0",
+    "blob": "0.0.5",
     "cordova-android": "^8.0.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
