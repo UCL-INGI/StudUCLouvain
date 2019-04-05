@@ -53,7 +53,7 @@
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.0",
     "cordova-plugin-geolocation": "^4.0.0",
-    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
+    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-market": "^1.2.0",
