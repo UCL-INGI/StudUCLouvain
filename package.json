@@ -110,7 +110,6 @@
     "tslint": "^5.13.1",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "~2.6.2",
-    "com.testfairy.cordova-plugin": "^2.14.0"
   },
   "description": "An Ionic project",
   "cordova": {
