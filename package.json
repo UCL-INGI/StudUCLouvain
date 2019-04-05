@@ -43,12 +43,14 @@
     "@reactivex/rxjs": "^5.5.12",
     "ajv": "^6.10.0",
     "cordova-android": "^8.0.0",
+    "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
     "cordova-plugin-add-swift-support": "^1.7.2",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-calendar": "^5.1.4",
     "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.0",
     "cordova-plugin-geolocation": "^4.0.0",
     "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
@@ -107,7 +109,8 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "~2.6.2"
+    "typescript": "~2.6.2",
+    "com.testfairy.cordova-plugin": "^2.14.0"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -141,7 +144,8 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+",
         "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
-      }
+      },
+      "com.testfairy.cordova-plugin": {}
     },
     "platforms": [
       "android",
