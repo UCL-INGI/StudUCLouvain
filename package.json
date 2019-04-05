@@ -76,7 +76,6 @@
     "rxjs-compat": "^6.4.0",
     "sass-loader": "^7.1.0",
     "sw-toolbox": "^3.6.0",
-    "timespan": "^2.3.0",
     "tsickle": "^0.34.3",
     "tunnel-agent": "^0.6.0",
     "webpack": "^4.29.6",
