@@ -136,8 +136,8 @@
       "com.googlemaps.ios": {},
       "cordova.plugins.diagnostic": {},
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyDrAhXMgtGFlNsu8eu4rW6Yk-LzxCVoudI",
-        "API_KEY_FOR_IOS": "AIzaSyBYCVBnRvQBO0G7iz64iAlnqKp_KbnY4vk",
+        "API_KEY_FOR_ANDROID": "apikeyformapandroid",
+        "API_KEY_FOR_IOS": "apikeyformapios",
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+",
         "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
