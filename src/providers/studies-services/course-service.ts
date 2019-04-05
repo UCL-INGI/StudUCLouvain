@@ -86,11 +86,7 @@ export class CourseService {
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if(!isExam && events !== undefined){
-        if(events.length === undefined){
-          let temp = events;
-          events = [];
-          events.push(temp);
-        }
+        events = this.handleSpecialCase(events);
         
         for(let i=0; i<events.length; i++){
           let event = events[i];
@@ -109,11 +105,7 @@ export class CourseService {
         }
       }
       if(isExam && events !== undefined){
-        if(events.length === undefined){
-          let temp = events;
-          events = [];
-          events.push(temp);
-        }
+          events = this.handleSpecialCase(events);
           for(let i=0; i<events.length; i++){
 
           let event = events[i];
@@ -132,6 +124,15 @@ export class CourseService {
       }}
       return activities;
     }
+
+  private handleSpecialCase(events: any) {
+    if (events.length === undefined) {
+      let temp = events;
+      events = [];
+      events.push(temp);
+    }
+    return events;
+  }
 
     /*Create a date*/
     createDate(date : string, hour : string) : Date{

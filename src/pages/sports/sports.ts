@@ -249,10 +249,7 @@ export class SportsPage {
 
     //List of sports for all students
     if (this.segment === 'all') {
-      this.displayedSports = this.sports.filter((item) => {
-        return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      });
+      this.filterDisplayedSports(this.sports);
     }
     //list of sports put in favorite
     else if (this.segment === 'favorites') {
@@ -269,16 +266,20 @@ export class SportsPage {
     }
     //List of sports for university teams
     else if (this.segment === 'team') {
-      this.displayedSports = this.teams.filter((item) => {
-        return ( this.excludedFiltersT.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      });
+      this.filterDisplayedSports(this.teams);
     }
 
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
     this.dismissLoading();
+  }
+
+  private filterDisplayedSports(items: Array<SportItem>) {
+    this.displayedSports = items.filter((item) => {
+      return (this.excludedFilters.indexOf(item.sport) < 0) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+        && (Math.floor(item.date.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
+    });
   }
 
   /*Display a modal to select as filter only the sports that the user want to see*/

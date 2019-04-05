@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
+    "lint": "ionic-app-scripts lint"
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",
