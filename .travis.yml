@@ -1,15 +1,14 @@
 language: node_js
--node_js: 
-      - "11.13.0"
--branches:
+node_js: "11.13.0"
+branches:
       only:
       - master
--before_script:
+before_script:
       - npm update -g npm
       - npm install -g ionic cordova
--script:
+script:
       - ionic cordova build browser --prod
--deploy:
+deploy:
       provider: pages
       skip-cleanup: true
       github-token: $GITHUB_TOKEN 
