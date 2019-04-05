@@ -5,6 +5,7 @@ language: node_js
       only:
       - master
 -before_script:
+      - npm update -g npm
       - npm install -g ionic cordova
 -script:
       - ionic cordova build browser --prod
