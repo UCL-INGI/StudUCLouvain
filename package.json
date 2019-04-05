@@ -135,7 +135,6 @@
       "cordova-plugin-market": {},
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-app-version": {},
-      "com.googlemaps.ios": {},
       "cordova.plugins.diagnostic": {},
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "apikeyformapandroid",
