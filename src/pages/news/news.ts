@@ -151,9 +151,7 @@ export class NewsPage {
   findSite(){
     for(let sector of this.listFac){
       for(let facs of sector.facs){
-        console.log(facs) 
         if(facs.acro === this.fac) {
-          console.log("OK")
           return {'site':facs.site, 'rss': facs.rss};
         }
       }
