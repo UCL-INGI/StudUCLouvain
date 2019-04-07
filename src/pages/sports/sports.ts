@@ -91,7 +91,6 @@ export class SportsPage {
     //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
       this.loadSports();
-      this.loadTeams();
       this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
         this.searching = false;
         this.updateDisplayedSports();
@@ -109,7 +108,6 @@ export class SportsPage {
   /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports();
-    this.loadTeams();
     refresher.complete();
   }
 
@@ -140,74 +138,28 @@ export class SportsPage {
   public loadSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
-    let result: any;
     this.campus = this.user.campus;
     //Check the connexion, if it's ok, load them else return to previous page and display an alert
     if(this.connService.isOnline()) {
       //get sports for all students
       this.sportsService.getSports(this.segment).then(
-        res => {
-          result = res;
+        result => {
           this.sports = result.sports;
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
+          this.nosport = this.sports.length == 0;
           this.updateDisplayedSports();
       })
-      .catch(error => {
-        if(error == 1) {
-          this.loadSports();
-        } else {
-          if(error == 2) {
-            console.log("Loading sports : YQL req timed out > limit, suppose no sports to be displayed");
-          } else {
-            console.log("Error loading sports : " + error);
-            console.log(error);
-          }
-          this.searching = false;
-          this.nosport=true;
-          this.updateDisplayedSports();
-        }
-      });
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }
-  }
-
-  loadTeams(){
-    this.searching = true;
-    this.sportsList && this.sportsList.closeSlidingItems();
-    let result: any;
-    this.campus = this.user.campus;
-    //Check the connexion, if it's ok, load them else return to previous page and display an alert
-    if(this.connService.isOnline()) {
-      //get sports for university teams
       this.sportsService.getTeams(this.segment).then(
-        res => {
-          result = res;
+        result => {
           this.teams = result.teams;
           this.shownTeams = result.shownTeams;
           this.filtersT = result.categoriesT;
-          this.searching = false;
+          this.searching = false;          
+          this.noteams = this.teams.length == 0;
           this.updateDisplayedSports();
-
       })
-      .catch(error => {
-        if(error == 1) {
-          this.loadTeams();
-        } else {
-          if(error == 2) {
-            console.log("Loading teams : YQL req timed out > limit, suppose no sports to be displayed");
-          } else {
-            console.log("Error loading teams : " + error);
-          }
-          this.searching = false;
-          this.noteams=true;
-          this.updateDisplayedSports();
-        }
-      });
     } else {
       this.searching = false;
       this.navCtrl.pop();

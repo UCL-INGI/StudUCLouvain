@@ -30,8 +30,7 @@ export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
-  nbCalls = 0;
-  callLimit = 30;
+
 
   url = "http://louvainfo.be/calendrier/feed/calendar/";
 
@@ -40,25 +39,27 @@ export class EventsService {
   /*Get the events*/
   public getEvents(segment:string) {
     this.events = [];
-    return new Promise( (resolve, reject) => {
-      this.rssService.load(this.url).subscribe(
-        data => {
-          this.nbCalls++;
-          if (data['query']['results'] == null) {
-            if(this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no events to display
-            }
-            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
-          } else {
-            this.nbCalls = 0;
-            this.extractEvents(data['query']['results']['item']);
-            resolve({events : this.events, shownEvents: this.shownEvents, categories: this.allCategories});
-          }
-        },
-        err => {
-          reject(err);
-        });;
+    return this.rssService.load(this.url).then(result => {
+      this.extractEvents(result);
+      return {
+        events: this.events,
+        shownEvents: this.shownEvents
+      }
+    })
+    .catch(error => {
+      if(error == 1) {
+        return this.getEvents(segment);
+      } else {
+        if(error == 2) {
+          console.log("Loading events : GET req timed out > limit, suppose no news to be displayed");
+        } else {
+          console.log("Error loading events : " + error);
+        }
+        return {
+          events: [],
+          shownEvents: 0
+        }
+      }
     });
   }
 
