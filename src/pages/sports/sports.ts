@@ -138,7 +138,6 @@ export class SportsPage {
   public loadSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
-    let result: any;
     this.campus = this.user.campus;
     //Check the connexion, if it's ok, load them else return to previous page and display an alert
     if(this.connService.isOnline()) {

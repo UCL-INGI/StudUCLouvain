@@ -93,13 +93,13 @@ export class SportsService {
         return this.getSports(segment);
       } else {
         if(error == 2) {
-          console.log("Loading news : GET req timed out > limit, suppose no news to be displayed");
+          console.log("Loading sports : GET req timed out > limit, suppose no sports to be displayed");
         } else {
-          console.log("Error loading news : " + error);
+          console.log("Error loading sports : " + error);
         }
         return {
-          news: [],
-          shownNews: 0
+          sports: [],
+          shownSports: 0
         }
       }
     });
