@@ -47,10 +47,8 @@ export class RssService {
       this.http.get(url, {responseType: 'text'}).timeout(5000)
       .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
           this.nbCalls++;
-          console.log(isSport);
           if (isSport) result = result['xml'];
           else result = result['rss']['channel'];
-          console.log(result);
           if (result == null) {
             if(this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
