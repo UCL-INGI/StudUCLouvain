@@ -1,0 +1,145 @@
+{
+  "return": {
+    "library": {
+      "id": 33,
+      "name": "UCL - BDRT: Bibliothèque de droit",
+      "locationId": 100000,
+      "address": {
+        "street": "Place Montesquieu 2, bte L2.07.01",
+        "place": "Collège Thomas More",
+        "locality": "Louvain-la-Neuve",
+        "postalCode": "B-1348",
+        "country": "BE"
+      },
+      "phone": "+32 (0) 10 47 46 31",
+      "email": null,
+      "website": "https://uclouvain.be/fr/bibliotheques/bdrt",
+      "openingHours": [
+        {
+          "day": "Lundi",
+          "startHour": "10:00",
+          "endHour": "18:45"
+        },
+        {
+          "day": "Mardi",
+          "startHour": "09:00",
+          "endHour": "18:45"
+        },
+        {
+          "day": "Mercredi",
+          "startHour": "09:00",
+          "endHour": "18:45"
+        },
+        {
+          "day": "Jeudi",
+          "startHour": "09:00",
+          "endHour": "18:45"
+        },
+        {
+          "day": "Vendredi",
+          "startHour": "09:00",
+          "endHour": "16:45"
+        }
+      ],
+      "openingExaminationHours": [
+        {
+          "day": "Lundi",
+          "startHour": "10:00",
+          "endHour": "17:45"
+        },
+        {
+          "day": "Mardi",
+          "startHour": "09:00",
+          "endHour": "17:45"
+        },
+        {
+          "day": "Mercredi",
+          "startHour": "09:00",
+          "endHour": "17:45"
+        },
+        {
+          "day": "Jeudi",
+          "startHour": "09:00",
+          "endHour": "17:45"
+        },
+        {
+          "day": "Vendredi",
+          "startHour": "09:00",
+          "endHour": "16:45"
+        }
+      ],
+      "openingSummerHours": [
+        {
+          "day": "Lundi",
+          "startHour": "10:00",
+          "endHour": "16:45"
+        },
+        {
+          "day": "Mardi",
+          "startHour": "09:00",
+          "endHour": "16:40"
+        },
+        {
+          "day": "Mercredi",
+          "startHour": "09:00",
+          "endHour": "16:45"
+        },
+        {
+          "day": "Jeudi",
+          "startHour": "09:00",
+          "endHour": "16:45"
+        },
+        {
+          "day": "Vendredi",
+          "startHour": "09:00",
+          "endHour": "16:45"
+        }
+      ],
+      "openingHoursNote": " L’horaire d’été s’étale de la fin de la session d’examens de juin à la rentrée académique (mi-septembre).",
+      "closedDates": [
+        {
+          "from": "Mardi, 27 septembre 2016",
+          "description": "Fête de la Fédération Wallonie-Bruxelles"
+        },
+        {
+          "from": "Mardi, 1 novembre 2016",
+          "description": "Toussaint"
+        },
+        {
+          "from": "Vendredi, 11 novembre 2016",
+          "description": "Armistice"
+        },
+        {
+          "from": "Samedi, 24 décembre 2016",
+          "to": "Mercredi, 4 janvier 2017",
+          "description": "Congé Noël - Nouvel An"
+        },
+        {
+          "from": "Mardi, 31 janvier 2017",
+          "to": "Jeudi, 2 Février 2017",
+          "description": "Fermé pour travaux"
+        },
+        {
+          "from": "Lundi, 17 avril 2017",
+          "description": "lundi de Pâques"
+        },
+        {
+          "from": "Lundi, 1 mai 2017",
+          "description": "fête du travail"
+        },
+        {
+          "from": "Jeudi, 25 mai 2017",
+          "description": "Ascension"
+        },
+        {
+          "from": "Lundi, 5 juin 2017",
+          "description": "lundi de Pentecôte"
+        },
+        {
+          "from": "Vendredi, 21 juillet 2017",
+          "description": "Fête nationale"
+        }
+      ]
+    }
+  }
+}

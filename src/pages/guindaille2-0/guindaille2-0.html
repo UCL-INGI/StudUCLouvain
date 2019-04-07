@@ -1,0 +1,171 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="guindaille">
+      <img src="./assets/img/s.png" height="28"/>
+<!--<ion-title align="center">{{title | translate}}</ion-title>-->
+<ion-title align="center">
+      <img alt="logo"   height="40" src="./assets/img/guindaille/logo.png" >
+    </ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment" class="gelem gtext">
+    <ion-segment-button value="pict" style="color:white">
+      {{'GUINDAILLE.PICTO' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="effect" style="color:white">
+      {{'GUINDAILLE.EFFECT' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="help" style="color:white">
+      {{'GUINDAILLE.HELP' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<!--BODY-->
+<ion-content [ngClass]="{'guindailleHelp' : segment === 'help', 'guindaille' : segment !== 'help'}" >
+  <ng-container *ngIf="segment==='pict'" class="gelem">
+    <ion-item-divider  class="gelem">
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p></button>
+    </ion-item-divider>
+
+    <ion-grid class="gelem" no-lines>
+          <ion-row>
+            <ion-col col-4>
+              <img alt="alterner" src="./assets/img/guindaille/alterner.png" align="middle"  height="auto" (tap)="showAlert(alterner)"/>
+            </ion-col >
+            <ion-col col-4>
+              <img alt="bruit" src="./assets/img/guindaille/Bruit-exterieur.png" align="middle"  height="auto" (tap)="showAlert(bruit)"/>
+            </ion-col>
+            <ion-col col-4>
+              <img alt="eau" src="./assets/img/guindaille/eau-gratuite.png" align="middle"  height="auto" (tap)="showAlert(eau)"/>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col col-4>
+              <img alt="ou" src="./assets/img/guindaille/jen-suis-ou.png" align="middle"  height="auto" (tap)="showAlert(ou)"/>
+            </ion-col>
+            <ion-col col-4>
+              <img alt="cans" src="./assets/img/guindaille/no-cans-no-glass.png" align="middle"  height="auto" (tap)="showAlert(cans)"/>
+            </ion-col>
+            <ion-col col-4>
+              <img alt="preservatif" src="./assets/img/guindaille/preservatif-jy-pense.png" align="middle"  height="auto" (tap)="showAlert(preservatif)"/>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-4>
+              <img alt="racompagner" src="./assets/img/guindaille/racompagner.png" align="middle"  height="auto" (tap)="showAlert(racompagner)"/>
+            </ion-col>
+            <ion-col col-4>
+              <img alt="uriner" src="./assets/img/guindaille/uriner-dans-le-pot.png" align="middle"  height="auto" (tap)="showAlert(uriner)"/>
+            </ion-col>
+            <ion-col col-4>
+              <img alt="urinerD" src="./assets/img/guindaille/uriner-dehors.png" align="middle"  height="auto" (tap)="showAlert(dehors)"/>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col col-4 offset-4 >
+              <img alt="violence" src="./assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" align="center" (tap)="showAlert(violence)"/>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  </ng-container>
+
+  <ng-container *ngIf="segment==='effect'" class="gelem">
+    <ion-item-divider   class="gelem" no-lines>
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.EFFECT' | translate}}</p></button>
+    </ion-item-divider>
+
+    <ion-item class="gelem" no-lines>
+      <ion-slides pager>
+        <ion-slide *ngFor="let slide of slides">
+          <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)"/>
+        </ion-slide>
+      </ion-slides>
+      <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
+    </ion-item>
+  </ng-container>
+
+  <ng-container *ngIf="segment==='help'" class="gelem">
+    <ion-item-divider  class="gelem" no-lines>
+      <button ion-button round class="gbutton" ><p class="gtext">{{'GUINDAILLE.HELP' | translate}}</p></button>
+    </ion-item-divider>
+
+    <ion-item  class="gelem">
+      <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" text-wrap>
+        <p>
+          <strong>{{'GUINDAILLE.HELP1' | translate}}</strong>: <a href="tel:010 47 22 22">010 47 22 22</a>
+        </p>
+        <p>
+          <strong>{{'GUINDAILLE.HELP2' | translate}}</strong>: 
+          <br>
+          <a href="tel:010 47 24 24">010 47 24 24</a>
+          <br>
+          ou
+          <br>
+          <a href="tel:02 764 93 93">02 764 93 93</a>
+          <br>
+          (Woluwe - St Gilles - Tournai)
+          <br>
+          ou
+          <br>
+          <a href="tel:065 32 35 55">065 32 35 55</a> (Mons)
+        </p>
+        <p>
+          <strong>Contact: </strong> <a href="mailto:security@uclouvain.be">security@uclouvain.be</a>
+        </p>
+        <p>
+          <strong>{{'GUINDAILLE.HELP18' | translate}} : </strong>
+          <a href="tel:112">112</a>
+        </p>
+        <p>
+          <br>{{'GUINDAILLE.HELP3' | translate}} <br><br>
+          <strong>{{'GUINDAILLE.HELP4' | translate}}</strong> {{'GUINDAILLE.HELP5' | translate}}<br>
+          <strong>{{'GUINDAILLE.HELP6' | translate}}</strong> {{'GUINDAILLE.HELP7' | translate}}<br>
+          <strong>{{'GUINDAILLE.HELP8' | translate}}</strong> {{'GUINDAILLE.HELP9' | translate}}<br>
+          <br> {{'GUINDAILLE.HELP10' | translate}} <br>
+        </p> <br>
+        <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
+        <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
+        <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
+        <p style="text-align: left">
+          <li>{{'GUINDAILLE.HELP14' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP15' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP16' | translate}}</li>
+          <li>{{'GUINDAILLE.HELP17' | translate}}</li>
+        </p>
+      </div>
+    </ion-item>
+  </ng-container>
+
+
+
+</ion-content>
+
+  <ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
+    <ion-icon name='help-circle'></ion-icon><p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
+  </ion-footer>

@@ -1,0 +1,128 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="map">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img src="./assets/img/s.png" height="28"/>
+    <ion-title align="center">{{title | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div #pleaseConnect id="please-connect">
+    <p> {{'MAP.NET' | translate}}</p>
+  </div>
+  <div id="container">
+    <div #map id="map"></div>
+  </div>
+
+  <ion-card *ngFor="let zone of zones" overflow-scroll=false>
+
+    <ion-item-divider (tap)="toggleDetails(zone.auditoires)">
+      {{'MAP.AUDIT' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let auditoire of zone.auditoires.list, let i=index" [hidden]="!zone.auditoires.showDetails">
+      <div item-content>
+        <h3>{{auditoire.title}} {{auditoire.sigle}}</h3>
+        <p>{{auditoire.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.bibliotheques)" >
+      {{'MAP.LIBRARY' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
+      <div item-content >
+        <h3>{{bibli.title}} {{bibli.sigle}}</h3>
+        <p>{{bibli.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.locaux)" >
+      {{'MAP.LOC' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let loc of zone.locaux.list, let i=index" [hidden]="!zone.locaux.showDetails">
+      <div item-content>
+        <h3>{{loc.title}}</h3>
+      </div>
+      <ion-toggle [(ngModel)]="zone.locaux.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(loc, zone.locaux.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.sports)">
+      {{'MAP.SPORT' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let sport of zone.sports.list, let i=index" [hidden]="!zone.sports.showDetails">
+      <div item-content>
+        <h3>{{sport.title}}</h3>
+        <p>{{sport.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.sports.listChecked[i]" color="secondary" (ionChange)="toggleLocation(sport, zone.sports.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.restaurants_universitaires)">
+      {{'MAP.REST' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.restaurants_universitaires.showDetails">
+      <div item-content >
+        <h3>{{restau.title}}</h3>
+        <p>{{restau.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.services)" >
+      {{'MAP.SERV' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let service of zone.services.list, let i=index" [hidden]="!zone.services.showDetails">
+      <div item-content>
+        <h3>{{service.title}}</h3>
+        <p>{{service.address}}</p>
+      </div>
+      <ion-toggle [(ngModel)]="zone.services.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(service, zone.services.listChecked, i)"></ion-toggle>
+    </ion-item>
+
+    <ion-item-divider (tap)="toggleDetails(zone.parkings)" >
+      {{'MAP.PARK' | translate}}
+    </ion-item-divider>
+
+    <ion-item *ngFor="let parking of zone.parkings.list, let i=index" [hidden]="!zone.parkings.showDetails">
+      <div item-content>
+        <h3>{{parking.title}}</h3>
+      </div>
+      <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
+    </ion-item>
+  </ion-card>
+</ion-content>

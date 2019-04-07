@@ -1,0 +1,7 @@
+{
+  "name": "UCLCampus",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

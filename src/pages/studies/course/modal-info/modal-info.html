@@ -1,0 +1,152 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire and Corentin Lamy
+    Date : July 2017
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+    <ion-buttons end>
+        <button ion-button icon-only end (tap)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-header>
+
+<!--BODY-->
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            <ion-row>
+                <h1 class="break"><strong>{{course.name}} <br>{{course.acronym}}</strong></h1>
+            </ion-row>
+            <ion-row>
+                {{information?.localisation.localisation}}
+            </ion-row>
+            <ion-row>
+                <ion-col>{{information?.credit}} crédits</ion-col>
+                <ion-col *ngIf="information?.volume.vol1 || information?.volume.vol2">{{information?.volume.vol1}}h + {{information?.volume.vol2}}h</ion-col>
+                <ion-col>{{information?.quadri}}</ion-col>
+            </ion-row>
+        </ion-card-header>
+
+        <ion-card-content>
+
+                <ion-row>
+                    <ion-col><strong>Enseignants</strong></ion-col>
+                </ion-row>
+                <ion-item *ngIf="information?.prof">
+                    <ion-row *ngIf="information?.prof.length >1">
+                        <ion-col *ngFor="let item of information?.prof">{{item.nom}} {{item.prenom}}</ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="!information?.prof.length">
+                        <ion-col>{{information?.prof.nom}} {{information?.prof.prenom}}</ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-row *ngIf="langue">
+                    <ion-col><strong>Langue d'enseignement</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col *ngIf="langue=='F'">Français</ion-col>
+                    <ion-col *ngIf="langue=='E'">Anglais</ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.ressourcesEnLigne">
+                    <ion-col><strong>Ressources en ligne</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.ressourcesEnLigne"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.cahierCharges.prerequis">
+                    <ion-col><strong>Préalables</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.cahierCharges.prerequis"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.cahierCharges.themes">
+                    <ion-col><strong>Thèmes abordés</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.cahierCharges.themes"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.cahierCharges.competencesAcquerir">
+                    <ion-col><strong>Acquis d'apprentissage</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.cahierCharges.competencesAcquerir"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.methodesEvaluation">
+                    <ion-col><strong>Modes d'évaluation des acquis des étudiants</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.methodesEvaluation"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.methodesEnseignement">
+                    <ion-col><strong>Méthodes d'enseignement</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.methodesEnseignement"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.descriptif">
+                    <ion-col><strong>Contenu</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.descriptif"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.bibliographie">
+                    <ion-col><strong>Bibliographie</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.bibliographie"></ion-col>
+                </ion-row>
+                <ion-row *ngIf="information?.resume.autresInfos">
+                    <ion-col><strong>Autres infos</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col [innerHTML]="information?.resume.autresInfos"></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col><strong>Faculté ou entité en charge</strong></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>{{information?.entite}}</ion-col>
+                </ion-row>
+
+            
+
+                    <h2 class="break"><strong>Programmes le proposant </strong></h2>
+
+                <ion-item *ngIf="information?.programmeprerequis.length >1">
+                        <ion-row *ngFor="let item of information?.programmeprerequis">
+                            <ion-col><strong style="white-space: pre-line;">{{item.intituleProgrammeCompletFr}}</strong></ion-col>
+                            <ion-col>{{item.sigleProgramme}}</ion-col>
+                            <ion-col>{{item.credit}} crédits</ion-col>
+                        </ion-row>
+                </ion-item>
+                <ion-item *ngIf="!information?.programmeprerequis.length">
+                    <ion-row >
+                        <ion-col><strong style="white-space: pre-line;">{{information?.programmeprerequis.intituleProgrammeCompletFr}}</strong></ion-col>
+                        <ion-col>{{information?.programmeprerequis.sigleProgramme}}</ion-col>
+                        <ion-col>{{information?.programmeprerequis.credit}} crédits</ion-col>
+                    </ion-row>
+                </ion-item>
+
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

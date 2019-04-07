@@ -1,0 +1,103 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="event">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img src="./assets/img/s.png" height="28"/>
+    <ion-title>{{title | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (tap)="presentFilter()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
+    <ion-segment-button value="all">
+      {{'EVENTS.ALL' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      {{'EVENTS.FAV' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<!--BODY-->
+<ion-content class="feed-list">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+
+  <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
+
+    <ion-item-divider *ngIf="item.event.length > 0" (tap)="toggleGroup(item.weeks)" text-center>
+        <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
+    </ion-item-divider>
+
+    <ion-list *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks)">
+
+      <ion-item-sliding #slidingItem [hidden]="event.hidden">
+
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img [src]="event.iconCategory">
+          </ion-thumbnail>
+          <button ion-item (tap)="goToEventDetail(event)" no-lines>
+            <h3>{{event.title}}</h3>
+            <p [innerHtml]="event.trimmedDescription"></p>
+            <p [innerHtml]="event.location"></p>
+            <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
+          </button>
+        </ion-item>
+
+        <ion-item-options>
+          <button ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
+            <ion-icon name='calendar'></ion-icon>
+          </button>
+
+          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
+            <ion-icon name="star-outline"></ion-icon>
+          </button>
+
+          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+            <ion-icon name='close'></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-list>
+
+  <ion-list-header *ngIf="(noevents && !searching)">
+    {{'EVENTS.NOTHING' | translate}}
+  </ion-list-header>
+</ion-content>
+
+<ion-footer text-center *ngIf="segment=='all'">
+  <ion-icon name='help-circle'></ion-icon><p>{{'EVENTS.SWIPE' | translate}}</p>
+</ion-footer>

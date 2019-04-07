@@ -1,0 +1,101 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire and Corentin Lamy
+    Date : July 2017
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="support">
+    <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content padding>
+  <ion-card>
+    <ion-row text-wrap>
+      <ion-col text-right>
+      </ion-col>
+      <ion-col text-right>
+      </ion-col>
+    </ion-row>
+
+    <ion-row text-wrap padding>
+        <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
+
+
+    </ion-row>
+
+    <ion-row padding text-wrap>
+      <ion-list>
+        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract"> <p *ngIf="c.grade!=null">({{c.grade}})</p></ion-item>
+        <ion-item *ngFor="let emp of empDetails.departments.department">
+          <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
+          <p *ngIf="emp.linkType == 'Appartenance'"><ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+
+    <ion-row padding>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            {{'EMPLOYEE.CONTACT' | translate}}
+          </ion-card-title>
+        </ion-card-content>
+        <ion-row>
+          <ion-col><b>{{'EMPLOYEE.ADRESSE' | translate}}</b></ion-col>
+          <ion-col>
+            {{empDetails.address?.acronym}}<br>
+            {{empDetails.address?.streetName}} {{empDetails.address?.streetNumber}}/{{empDetails.address?.mailBox}}<br>
+            {{empDetails.address?.postCode}} {{empDetails.address?.town}}<br>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><b>{{'EMPLOYEE.MAIL' | translate}}</b></ion-col>
+          <ion-col>
+            <a href="mailto:{{empDetails?.email}}" target="_top">{{empDetails?.email}}</a>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-card *ngFor="let contact of empDetails.businessContacts?.businessContact">
+          <ion-card-content>
+            <ion-card-title>
+              {{contact.acronym}}
+            </ion-card-title>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col> {{'EMPLOYEE.TEL' | translate}} </ion-col>
+            <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
+          </ion-row>
+          <ion-row *ngIf="contact.secretary!=null">
+            <ion-col > {{'EMPLOYEE.SECRETARIAT' | translate}} </ion-col>
+            <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
+          </ion-row>
+        </ion-card>
+
+
+      </ion-card>
+    </ion-row>
+  </ion-card>
+</ion-content>

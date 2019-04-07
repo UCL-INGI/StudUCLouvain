@@ -1,0 +1,141 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date : July 2018
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="news">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img src="./assets/img/s.png" height="28"/>
+    <ion-title align="center">{{title | translate}}</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged()" >
+    <ion-segment-button value="univ">
+      {{'NEWS.UNIF' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="fac">
+      {{'NEWS.FAC' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
+    <ion-segment-button value="P1">
+      {{'NEWS.STUDY' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="P2">
+      {{'NEWS.SEARCH' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="P3">
+      {{'NEWS.SERVICE' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment [(ngModel)]="facsegment" (ionChange)="facTabChange()" *ngIf="segment==='fac'">
+    <ion-segment-button value="news">
+      {{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong>
+    </ion-segment-button>
+    <ion-segment-button value="valve">
+      {{'NEWS.VALVE' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" *ngIf="segment === 'univ'"></ion-searchbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content class="feed-list" #news>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+<!------------------------------NEWS FACULTAIRES -------------------------------->
+<!------------------------------CHOIX FAC -------------------------------->
+  <ng-container *ngIf="segment === 'fac'">
+    <ion-list radio-group [(ngModel)]="fac" *ngIf="!userS.hasFac() && facsegment === 'news'">
+      <ion-item-group *ngFor="let sector of listFac">
+        <ion-item-divider><strong>{{sector.name}}</strong></ion-item-divider>
+        <ion-item *ngFor="let facs of sector.facs">
+          <ion-label>{{facs.acro}} : {{facs.name}}</ion-label>
+          <ion-radio value="{{facs.acro}}"></ion-radio>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+    <ion-row center>
+      <ion-col text-center>
+        <button ion-button round (tap)="updateFac()" *ngIf="!userS.hasFac() && facsegment ==='news'">Sauver</button>
+      </ion-col>
+    </ion-row>
+
+    <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
+      <ion-item *ngIf="facsegment==='valve'" no-lines>
+        <button center ion-button clear small icon-left text-center (tap)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
+          <ion-icon name='share-alt'></ion-icon>
+          {{'NEWS.MESVALVES' | translate}}
+        </button>
+      </ion-item>
+<!--------------------------- ACTUALITES FAC ----------------------------------------->
+
+    <ion-item *ngIf="userS.hasFac()">
+      
+      <!---------------------------------------------------------------------->
+      <ion-row center>
+        <ion-col text-center>
+          <h2 *ngIf="facsegment === 'news'"><strong>Faculté : {{userS.fac}}</strong></h2>
+        </ion-col>
+      </ion-row>
+        <button center ion-button clear small icon-left (tap)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'">
+          <ion-icon name='share-alt'></ion-icon>
+          {{'NEWS.WEB' | translate}}
+        </button>
+        <p text-center *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'"><strong>Indisponible pour le moment</strong></p>
+
+
+    </ion-item>
+  </ng-container>
+
+<!------------------------------NEWS UNIVERSITAIRES & FACULTAIRES-------------------------------->
+  <ng-container *ngIf="segment==='univ' || (segment === 'fac' && facsegment === 'news' && userS.hasFac())">
+    <ion-list #newsList  [hidden]="shownNews === 0" >
+      <ion-item *ngFor = "let item of displayedNews">
+        <button ion-item (tap)="goToNewsDetail(item)" no-lines>
+          <h3>{{item.title}}</h3>
+          <p [innerHtml]="item.trimmedDescription"></p>
+          <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list-header *ngIf="nonews && !searching">
+      {{'NEWS.NOTHING' | translate}}
+    </ion-list-header>
+  </ng-container>
+
+<!----------------- BUTTON TO CHANGE FAC ------------------------->
+  <ion-fab bottom right *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
+    <button ion-fab (tap)="removeFac(fac)">
+      <ion-icon name="swap" ></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
