@@ -73,20 +73,15 @@
 <!------------------------------NEWS FACULTAIRES -------------------------------->
 <!------------------------------CHOIX FAC -------------------------------->
   <ng-container *ngIf="segment === 'fac'">
-    <ion-list radio-group [(ngModel)]="fac" *ngIf="!userS.hasFac() && facsegment === 'news'">
+    <ion-list *ngIf="!userS.hasFac() && facsegment === 'news'">
       <ion-item-group *ngFor="let sector of listFac">
         <ion-item-divider><strong>{{sector.name}}</strong></ion-item-divider>
-        <ion-item *ngFor="let facs of sector.facs">
+        <ion-item *ngFor="let facs of sector.facs" >
           <ion-label>{{facs.acro}} : {{facs.name}}</ion-label>
-          <ion-radio value="{{facs.acro}}"></ion-radio>
+          <ion-radio (tap)="updateFac(facs.acro)"></ion-radio>
         </ion-item>
       </ion-item-group>
     </ion-list>
-    <ion-row center>
-      <ion-col text-center>
-        <button ion-button round (tap)="updateFac()" *ngIf="!userS.hasFac() && facsegment ==='news'">Sauver</button>
-      </ion-col>
-    </ion-row>
 
     <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
       <ion-item *ngIf="facsegment==='valve'" no-lines>

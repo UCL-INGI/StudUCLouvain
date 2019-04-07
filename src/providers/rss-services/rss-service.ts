@@ -23,19 +23,48 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
+import  X2JS  from 'x2js';
 
 @Injectable()
 export class RssService {
-  rssServiceBaseUrl: string = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%27";
-  rssServiceBaseOptions: string = "%27&format=json";
+  nbCalls = 0;
+  callLimit = 30;
 
   constructor(public http: HttpClient) {
 
   }
 
+      /*Parse the xml to json*/
+    convertXmlToJson(xml) : any{
+      let parser : any = new X2JS();
+      let json = parser.xml2js(xml);
+      return json;
+    }
+
   /*Load data from the RSS flux*/
-  load(url: string) {
-    let encodedURL = this.rssServiceBaseUrl + encodeURIComponent(url) + this.rssServiceBaseOptions;
-    return  this.http.get(encodedURL).map(res => res);
+  load(url: string, isSport:boolean = false){
+    return new Promise( (resolve, reject) => {
+      this.http.get(url, {responseType: 'text'}).timeout(5000)
+      .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
+          this.nbCalls++;
+          if (isSport) result = result['xml'];
+          else result = result['rss']['channel'];
+          if (result == null) {
+            if(this.nbCalls >= this.callLimit) {
+              this.nbCalls = 0;
+              reject(2); //2 = data.query.results == null  & callLimit reached, no neitemsws to display
+            }
+            reject(1); //1 = data.query.results == null, retry rssService
+          } else {
+            this.nbCalls = 0;
+            resolve(result['item']);
+          }
+        },
+        err => {
+          reject(err);
+        });;
+    });
+
+    
   }
 }

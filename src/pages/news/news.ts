@@ -137,7 +137,8 @@ export class NewsPage {
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
-  updateFac(){
+  updateFac(fac:string){
+    this.fac = fac;
     this.userS.addFac(this.fac);
     this.resize();
     let links = this.findSite();
@@ -216,12 +217,9 @@ export class NewsPage {
       if(part === 'P1') key = 'cache-P1';
       else if(part === 'P2') key = 'cache-P2';
       else key = 'cache-P3';
-      console.log(key);
       await this.cache.getItem(key)
       .then((data) => {
         this.presentLoading();
-        console.log("cached news");
-        console.log(data);
         this.news=data.news;
         this.shownNews = data.shownNews;
         this.searching=false;
@@ -248,34 +246,14 @@ export class NewsPage {
       if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
       this.newsService.getNews(actu)
       .then(
-        res => {
-          let result:any = res;
-          //return result.news;
-
+        result => {
           this.news = result.news;
-          if(key)this.cache.saveItem(key, result);
+          if(key) this.cache.saveItem(key, result);
           this.shownNews = result.shownNews;
-          console.log(this.shownNews);
           this.searching = false;
+          this.nonews = this.news.length == 0;
           this.updateDisplayedNews();
       })
-      .catch(error => {
-          if(error == 1) {
-            this.loadNews();
-          } else {
-            if(error == 2) {
-              console.log("Loading news : YQL req timed out > limit, suppose no news to be displayed");
-            } else {
-              console.log("Error loading news : " + error);
-            }
-            this.searching = false;
-            this.nonews=true;
-            this.updateDisplayedNews();
-          }
-      });
-
-
-
     //If no connexion pop an alert and go back to previous page
     } else {
       //return [];

@@ -20,13 +20,10 @@
 */
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { SportItem } from '../../app/entity/sportItem';
-//import xml2js from 'xml2js';
-import X2JS from 'x2js';
 
 @Injectable()
 export class SportsService {
@@ -36,23 +33,12 @@ export class SportsService {
   allCategoriesT: any = [];
   shownSports = 0;
   shownTeams = 0;
-  nbCalls = 0;
-  nbCallsT = 0;
-
-  callLimit=10;
 
   url = ""; //students
   urlT = ""; //equipe universitaire
 
-  constructor(private http: HttpClient, public user:UserService, public rssService : RssService) {
+  constructor(public user:UserService, public rssService : RssService) {
 
-  }
-
-  /*Parse the xml to json*/
-  convertXmlToJson(xml) : any{
-    let parser : any = new X2JS();
-    let json = parser.xml2js(xml);
-    return json;
   }
 
   /*Get the good URL in function of the user's campus*/
@@ -96,59 +82,58 @@ export class SportsService {
   public getSports(segment:string) {
     this.update();
     this.sports = [];
-    return new Promise( (resolve, reject) => {
-
-      console.log(this.url);
-
-      this.http.get(this.url, {responseType: 'text'}).timeout(5000)
-      .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
-          this.nbCalls++;
-          if (result == null) {
-            if(this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no sports to display
-            }
-            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
-          } else {
-            this.nbCalls = 0;
-            this.extractSports(result.xml.item,true);
-            resolve({sports : this.sports, shownSports: this.shownSports, categories: this.allCategories});
-          }
-        },
-        err => {
-          reject(err);
-        });
+    return this.rssService.load(this.url, true).then(result => {
+      this.extractSports(result);
+      return {
+        sports: this.sports,
+        showSports: this.shownSports
+      }
+    }) .catch(error => {
+      if(error == 1) {
+        return this.getSports(segment);
+      } else {
+        if(error == 2) {
+          console.log("Loading sports : GET req timed out > limit, suppose no sports to be displayed");
+        } else {
+          console.log("Error loading sports : " + error);
+        }
+        return {
+          sports: [],
+          shownSports: 0
+        }
+      }
     });
   }
 
   /*Get sports for the university teams*/
   public getTeams(segment:string) {
     this.teams = [];
-    return new Promise( (resolve, reject) => {
-      this.http.get(this.urlT, {responseType: 'text'}).timeout(5000)
-      .map(data => {return this.convertXmlToJson(data);}).subscribe( result => {
-          this.nbCallsT++;
-          if (result == null) {
-            if(this.nbCallsT >= this.callLimit) {
-              this.nbCallsT = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no sports to display
-            }
-            reject(1); //1 = data.query.results == null, YQL req timed out, retry rssService
-          } else {
-            this.nbCallsT = 0;
-            this.extractSports(result.xml.item,false);
-            console.log(this.teams);
-            resolve({teams : this.teams, shownTeams: this.shownTeams, categoriesT: this.allCategoriesT});
-          }
-        },
-        err => {
-          reject(err);
-        });
+    return this.rssService.load(this.urlT, true).then(result => {
+      this.extractSports(result, false);
+      return {
+        teams: this.teams,
+        shownTeams: this.shownTeams
+      }
+    }) 
+    .catch(error => {
+      if(error == 1) {
+        return this.getTeams(segment);
+      } else {
+        if(error == 2) {
+          console.log("Loading teams : GET req timed out > limit, suppose no teams to be displayed");
+        } else {
+          console.log("Error loading teams : " + error);
+        }
+        return {
+          teams: [],
+          shownTeams: 0
+        }
+      }
     });
   }
 
   /*Extract sports with all the details*/
-  private extractSports(data: any, isSport:boolean) {
+  private extractSports(data: any, isSport:boolean = true) {
     if(data === undefined){
       console.log("Error sports data undefined!!!")
       return;

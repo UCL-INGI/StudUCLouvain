@@ -22,7 +22,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -64,7 +63,6 @@ export class MyApp {
     private appAvailability : AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
-    private splashscreen: SplashScreen,
     private alertCtrl : AlertController,
     private user: UserService,
     private statusBar: StatusBar,
