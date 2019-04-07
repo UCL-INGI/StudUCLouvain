@@ -247,15 +247,10 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
 
-    //List of sports for all students
-    if (this.segment === 'all') {
-      this.displayedSports = this.sports.filter((item) => {
-        return ( this.excludedFilters.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      });
+    if (this.segment === 'all') { //List of sports for all students
+      this.filterDisplayedSports(this.sports);
     }
-    //list of sports put in favorite
-    else if (this.segment === 'favorites') {
+    else if (this.segment === 'favorites') { //list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
         if(item.favorite || this.user.hasFavoriteS(item.guid)) {
@@ -264,21 +259,23 @@ export class SportsPage {
           }
         }
       });
-
       this.displayedSports = favSports;
     }
-    //List of sports for university teams
-    else if (this.segment === 'team') {
-      this.displayedSports = this.teams.filter((item) => {
-        return ( this.excludedFiltersT.indexOf(item.sport) < 0 ) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.date.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      });
+    else if (this.segment === 'team') { //List of sports for university teams
+      this.filterDisplayedSports(this.teams);
     }
 
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
     this.dismissLoading();
+  }
+
+  private filterDisplayedSports(items: Array<SportItem>) {
+    this.displayedSports = items.filter((item) => {
+      return (this.excludedFilters.indexOf(item.sport) < 0) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+        && (Math.floor(item.date.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
+    });
   }
 
   /*Display a modal to select as filter only the sports that the user want to see*/

@@ -85,12 +85,8 @@ export class CourseService {
       let type : string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
-      if(!isExam && events !== undefined){
-        if(events.length === undefined){
-          let temp = events;
-          events = [];
-          events.push(temp);
-        }
+      if(events !== undefined){
+        events = this.handleSpecialCase(events);
         
         for(let i=0; i<events.length; i++){
           let event = events[i];
@@ -108,30 +104,17 @@ export class CourseService {
           activities.push(activity);
         }
       }
-      if(isExam && events !== undefined){
-        if(events.length === undefined){
-          let temp = events;
-          events = [];
-          events.push(temp);
-        }
-          for(let i=0; i<events.length; i++){
-
-          let event = events[i];
-          let endHour = event._endHour;
-          let startHour = event._startHour;
-          let date = event._date;
-          let participants = event.eventParticipants.eventParticipant;
-          let teachers = this.getTeachers(participants);
-          let students = this.getStudents(participants);
-          let auditorium = this.getAuditorium(participants)
-          let start = this.createDate(date, startHour);
-          let end = this.createDate(date, endHour);
-          let name = event._name;
-          let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
-          activities.push(activity);
-      }}
       return activities;
     }
+
+  private handleSpecialCase(events: any) {
+    if (events.length === undefined) {
+      let temp = events;
+      events = [];
+      events.push(temp);
+    }
+    return events;
+  }
 
     /*Create a date*/
     createDate(date : string, hour : string) : Date{
