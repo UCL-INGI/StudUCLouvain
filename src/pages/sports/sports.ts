@@ -152,23 +152,9 @@ export class SportsPage {
           this.shownSports = result.shownSports;
           this.filters = result.categories;
           this.searching = false;
+          this.nosport = this.sports.length == 0;
           this.updateDisplayedSports();
       })
-      .catch(error => {
-        if(error == 1) {
-          this.loadSports();
-        } else {
-          if(error == 2) {
-            console.log("Loading sports : YQL req timed out > limit, suppose no sports to be displayed");
-          } else {
-            console.log("Error loading sports : " + error);
-            console.log(error);
-          }
-          this.searching = false;
-          this.nosport=true;
-          this.updateDisplayedSports();
-        }
-      });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -190,9 +176,9 @@ export class SportsPage {
           this.teams = result.teams;
           this.shownTeams = result.shownTeams;
           this.filtersT = result.categoriesT;
-          this.searching = false;
+          this.searching = false;          
+          this.noteams = this.sports.length == 0;
           this.updateDisplayedSports();
-
       })
       .catch(error => {
         if(error == 1) {

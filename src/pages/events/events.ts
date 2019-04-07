@@ -188,28 +188,13 @@ export class EventsPage {
         res => {
           let result:any = res;
           this.events = result.events;
-          if(key)this.cache.saveItem(key, result);
+          if(key) this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
-          console.log(this.events);
+          this.noevents = this.events.length == 0;
           this.updateDisplayedEvents();
-          console.log(this.displayedEventsD);
       })
-      .catch(error => {
-        if(error == 1) {
-          this.loadEvents();
-        } else {
-          if(error == 2) {
-            console.log("Loading events : YQL req timed out > limit, suppose no events to be displayed");
-          } else {
-            console.log("Error loading events : " + error);
-          }
-          this.searching = false;
-          this.noevents = true;
-          this.updateDisplayedEvents();
-        }
-      });
     } else {
       this.searching = false;
       this.navCtrl.pop();

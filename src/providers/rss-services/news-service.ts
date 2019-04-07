@@ -31,8 +31,6 @@ export class NewsService {
   url1 = "https://uclouvain.be/actualites/p1/rss";
   url2 = "https://uclouvain.be/actualites/p2/rss";
   url3 = "https://uclouvain.be/actualites/p3/rss";
-  nbCalls = 0;
-  callLimit = 30;
 
   news = [];
   shownNews = 0;
@@ -40,6 +38,7 @@ export class NewsService {
   constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
+
 
   /*Get the appropriate news in function of the tab in which the user is*/
   public getNews(segment:string) {
@@ -63,33 +62,39 @@ export class NewsService {
           break;
        }
     }
-    return new Promise( (resolve, reject) => {
-      this.rssService.load(baseURL).subscribe(
-        data => {
-          this.nbCalls++;
-          if (data['query']['results'] == null) {
-            if(this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no news to display
-            }
-            reject(1); //1 = data.query.results == null, retry rssService
-          } else {
-            this.nbCalls = 0;
-            this.extractNews(data['query']['results']['item']);
-            resolve({news : this.news, shownNews: this.shownNews});
-          }
-        },
-        err => {
-          reject(err);
-        });;
+    return this.rssService.load(baseURL).then(result => {
+        this.extractNews(result);
+        return {
+          news: this.news,
+          shownNews: this.shownNews
+        }
+    })
+    .catch(error => {
+      if(error == 1) {
+        return this.getNews(segment);
+      } else {
+        if(error == 2) {
+          console.log("Loading news : GET req timed out > limit, suppose no news to be displayed");
+        } else {
+          console.log("Error loading news : " + error);
+        }
+        return {
+          news: [],
+          shownNews: 0
+        }
+      }
     });
   }
 
   /*Extract news*/
   private extractNews(data : any){
-    this.shownNews=0;
+    if(data.length === undefined){
+      let temp = data;
+      data = [];
+      data.push(temp);
+    }
+    this.shownNews = 0;
     let maxDescLength = 20;
-
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       let trimmedDescription = "...";
