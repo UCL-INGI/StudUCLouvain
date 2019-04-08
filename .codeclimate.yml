@@ -1,0 +1,26 @@
+version: "2"
+
+checks:
+  file-lines:
+    enabled: false
+  method-complexity:
+    config:
+      threshold: 8
+
+plugins:
+  tslint:
+    enabled: true
+    config: tslint.json
+  duplication:
+    enabled: true
+    config:
+        count_threshold: 3
+
+exclude_patterns:
+- config/**/*
+- node_modules/**/*
+- webpack.*.js
+- karma.conf.js
+- platforms/
+- plugins/
+- www/
