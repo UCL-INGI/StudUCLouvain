@@ -1,0 +1,91 @@
+app-home {
+
+    .scroll-content{
+        margin-top: 56px;
+    }
+
+    .other{
+        background-color: transparent;
+    }
+
+    b{
+        color: black;
+    }
+
+    .fab {
+        contain: layout;
+    }
+
+    button[ion-fab] {
+        overflow: visible;
+        position: relative;
+
+        ion-label {
+            position: absolute;
+            top: -37px;
+            right: -24px;
+
+            color: black;
+            //background-color: rgba(0,0,0,0.7);
+            line-height: 24px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+    }
+
+
+    ion-grid{
+        height: 100%;
+
+        ion-row.homeM{
+            height: 20vh;
+
+            img{
+                height: 16vh;
+            }
+            p{
+                margin-top: 0px;
+            }
+        }
+
+        ion-row.homeML{
+            height: 25vh;
+
+            img{
+                height: 18.75vh;
+            }
+            p{
+                margin-top: 0px;
+            }
+        }
+    }
+
+    @media all and (orientation: landscape) {
+        ion-row.homeM{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 18.75vh;
+
+            img{
+            
+            }
+        }
+    }
+    @media all and (orientation: portrait) {
+        ion-row.homeML{
+            display:none
+        }
+
+        ion-row.ucl{
+            height: 16vh;
+
+            img{
+ 
+            }
+        }
+    }
+
+}
+

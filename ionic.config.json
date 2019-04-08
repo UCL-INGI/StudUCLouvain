@@ -1,5 +1,7 @@
 {
   "name": "StudUCLouvain",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

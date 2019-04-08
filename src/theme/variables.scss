@@ -74,4 +74,34 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  --ion-color-primary:    #488aff;
+  --ion-color-danger:     #f53d3d;
+  --ion-color-guindaille: #dd156c;
+  --ion-color-navbarColor: #009688;
+  --ion-color-news:#c10a27;
+  --ion-color-event:#ec690c;
+  --ion-color-sport:#f59d22;
+  --ion-color-g2: #e62175;
+  --ion-color-cred: #b3b3b3;
+  --ion-color-bibli: #0071bc;
+  --ion-color-etudes: #2e3192;
+  --ion-color-support: #8d92c8;
+  --ion-color-ucl: #002e5f;
+  --ion-color-setting: #4d4d4d;
+  --ion-color-map: #00a99d;
+  --ion-color-resto: #8cc63f;
+  --ion-color-mobilite: #006837;
+  --ion-color-urg: #ec1c24;
+  --ion-color-fun: #93278f;
+  --ion-color-uclouvain: rgb(0,33,78);
+  --ion-color-home: #002A6A;
+}
+
+.ion-color-home {
+  --ion-color-base: var(--ion-color-home) !important;
+  --ion-color-base-rgb: var(--ion-color-home-rgb) !important;
+  --ion-color-contrast: var(--ion-color-home-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-home-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-home-shade) !important;
+  --ion-color-tint: var(--ion-color-home-tint) !important;
 }

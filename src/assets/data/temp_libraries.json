@@ -1,0 +1,59 @@
+{
+  "return": {
+    "library": [
+      {
+        "id": 33,
+        "name": "UCL - BDRT: Bibliothèque de droit"
+      },
+      {
+        "id": 43,
+        "name": "UCL - BFLT: Bibliothèque des arts et des lettres"
+      },
+      {
+        "id": 5633,
+        "name": "UCL - BSPO: Bibliothèque de sciences économiques, sociales et politiques"
+      },
+      {
+        "id": 5663,
+        "name": "UCL - BST: Bibliothèque des Sciences et technologies"
+      },
+      {
+        "id": 5673,
+        "name": "UCL - BIMS : Bibliothèque de Mons"
+      },
+      {
+        "id": 7513,
+        "name": "UCL - BISP: Bibliothèque de philosophie"
+      },
+      {
+        "id": 7523,
+        "name": "UCL - BTEC: Bibliothèque de théologie"
+      },
+      {
+        "id": 7533,
+        "name": "UCL - BSS: Bibliothèque des sciences de la Santé"
+      },
+      {
+        "id": 7543,
+        "name": "UCL - BPSP: Bibliothèque de psychologie et des sciences de l'éducation"
+      },
+      {
+        "id": 7593,
+        "name": "UCL - BSM: Bibliothèque des Sciences de la Motricité"
+      },
+      {
+        "id": 2077955,
+        "name": "BAIU-Bruxelles"
+      },
+      {
+        "id": 2078260,
+        "name": "BAIU - LLN"
+      },
+      {
+        "id": 2078265,
+        "name": "BAIU - Tournai"
+      }
+    ],
+    "count": 13
+  }
+}
