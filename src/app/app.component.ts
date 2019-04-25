@@ -19,34 +19,41 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
-import { Device } from '@ionic-native/device';
-import { StatusBar } from '@ionic-native/status-bar';
-import { Market } from '@ionic-native/market';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { MenuController, NavController, Platform, AlertController,LoadingController, ActionSheetController, PopoverController, ModalController, IonRouterOutlet } from '@ionic/angular';
+import { Device } from '@ionic-native/device/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { HomePage } from '../pages/home/home';
+import { HomePage } from './home/home.page';
 
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { UserService } from './services/utils-services/user-service';
+import { Wso2Service } from './services/wso2-services/wso2-service';
 import { CacheService } from "ionic-cache";
+import { Router } from '@angular/router';
+import { Toast } from '@ionic-native/toast/ngx';
+
 
 //declare var TestFairy: any;
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
 })
 
 
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+export class AppComponent {
   rootPage ='';// = 'HomePage';
   alertPresented: any;
   page: any;
   homePage;
   checked=false;
+  lastTimeBackPress = 0;
+    timePeriodToExit = 2000;
+    @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+
   campusPages: Array<{title: string, component: any, icon: any,
     iosSchemaName: string, androidPackageName: string,
     appUrl: string, httpUrl: string}>;
@@ -64,13 +71,18 @@ export class MyApp {
     private iab: InAppBrowser,
     private device: Device,
     private alertCtrl : AlertController,
+    private popoverCtrl: PopoverController,
     private user: UserService,
     private statusBar: StatusBar,
+    public modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
     public translateService: TranslateService,
     public loadingCtrl: LoadingController,
-    private ionicApp: IonicApp,
     private wso2Service : Wso2Service,
-    public cache: CacheService
+    public cache: CacheService,
+    private router: Router,
+    private toast: Toast,
+    private nav: NavController
   ) {
 console.log("Startin App");
     this.user.getCampus();
@@ -169,10 +181,79 @@ console.log("Startin App");
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
     });
+  }
 
+    backButtonEvent() {
+      this.platform.backButton.subscribe(async () => {
+          // close action sheet
+          try {
+              const element = await this.actionSheetCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+          }
 
+          // close popover
+          try {
+              const element = await this.popoverCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+          }
+
+          // close modal
+          try {
+              const element = await this.modalCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+              console.log(error);
+
+          }
+
+          // close side menua
+          try {
+              const element = await this.menu.getOpen();
+              if (element) {
+                  this.menu.close();
+                  return;
+
+              }
+
+          } catch (error) {
+
+          }
+
+          this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+              if (outlet && outlet.canGoBack()) {
+                  outlet.pop();
+
+              } else if (this.router.url === '/home') {
+                  if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+                      // this.platform.exitApp(); // Exit from app
+                      navigator['app'].exitApp(); // work in ionic 4
+
+                  } else {
+                      this.toast.show(
+                          `Press back again to exit App.`,
+                          '2000',
+                          'center')
+                          .subscribe(toast => {
+                              // console.log(JSON.stringify(toast));
+                          });
+                      this.lastTimeBackPress = new Date().getTime();
+                  }
+              }
+          });
+      });
     // Confirm exit
-    this.platform.registerBackButtonAction(() => {
+    /* this.platform.registerBackButtonAction(() => {
 
         let activePortal = this.ionicApp._loadingPortal.getActive() ||
            this.ionicApp._modalPortal.getActive() ||
@@ -193,11 +274,11 @@ console.log("Startin App");
           this.nav.pop();
         }
 
-    });
+    }); */
   }
 
 
-
+/* 
   confirmExitApp() {
     let activeVC = this.nav.getActive();
     let page = activeVC.instance;
@@ -205,7 +286,7 @@ console.log("Startin App");
       if(!this.alertPresented){
         this.alertPresented = true;
         let confirmAlert = this.alertCtrl.create({
-            title: "Fermeture",
+            header: "Fermeture",
             message: "Désirez-vous quitter l'application ?",
             buttons: [
                 {
@@ -221,12 +302,11 @@ console.log("Startin App");
                     }
                 }
             ]
-        });
-        confirmAlert.present();
-    }
+        }).then(alert => alert.present());
+    }confirmExitApp
   }
   else this.openRootPage(this.homePage);
-}
+} */
 
   disclaimer(){
         //let title:string;
@@ -234,7 +314,7 @@ console.log("Startin App");
     //this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
     //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
      let disclaimerAlert = this.alertCtrl.create({
-            title: "Avertissement",
+            header: "Avertissement",
             message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test.</p>",
 
             buttons: [
@@ -245,27 +325,23 @@ console.log("Startin App");
                     }
                 }
             ]
-        });
-        disclaimerAlert.present();
+        }).then(alert => alert.present());
   }
 
   openRootPage(page) {
-    let activeVC = this.nav.getActive();
-    let test = activeVC.instance;
+    let activeUrl = this.router.url;
+
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
 
-    if(!((test instanceof HomePage) && page == this.homePage)){
+    if(!((activeUrl == this.homePage.url) && page == this.homePage)){
 	    if(page.iosSchemaName != null && page.androidPackageName != null){
 	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
 	    else {if(page != this.homePage){
-       		if(this.nav.length() > 1){
-      			this.nav.pop();
-      		}
 
-      		this.nav.push(page.component, {title: page.title});
+      		this.nav.navigateForward([page.component, {title: page.title}]);
   		}}
     }
 

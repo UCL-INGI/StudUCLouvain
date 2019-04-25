@@ -20,7 +20,7 @@
 */
 
 import { async, TestBed } from '@angular/core/testing';
-import { IonicModule, MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
+import { IonicModule, MenuController, Platform, AlertController,LoadingController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -29,7 +29,6 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 /*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpModule, Http } from '@angular/http'
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
@@ -38,24 +37,23 @@ import { IonicStorageModule  } from '@ionic/storage';*/
 //import { UserService } from '../providers/utils-services/user-service';
 
 
-import { MyApp } from './app.component';
-import {PlatformMock, StatusBarMock, SplashScreenMock, UserServiceMock, Wso2ServiceMock} from '../../test-config/mocks-ionic';
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { AppComponent } from './app.component';
+import { UserService } from './services/utils-services/user-service';
+import { Wso2Service } from './services/wso2-services/wso2-service';
 
 /*export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
 }*/
-class IonicAppMock { }
+
 describe('MyApp Component', () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MyApp],
+      declarations: [AppComponent],
       imports: [
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(),
         TranslateModule.forRoot()
         /*TranslateModule.forRoot({
                     loader: {
@@ -65,22 +63,15 @@ describe('MyApp Component', () => {
                     }
                 }),
         IonicStorageModule.forRoot(),
-        HttpModule*/
+       */
       ],
       providers: [
-        {provide: StatusBar, useClass: StatusBarMock },
-        {provide: SplashScreen, useClass: SplashScreenMock },
-        {provide: Platform, useClass: PlatformMock },
         AlertController,
         LoadingController,
-        {provide:IonicApp, useClass: IonicAppMock},
-        Nav,
         Market,
         AppAvailability,
         InAppBrowser,
         Device,
-        {provide:UserService, useClass:UserServiceMock},
-        {provide: Wso2Service, useClass: Wso2ServiceMock}
         /*AppAvailability,
         InAppBrowser,
         Device,
@@ -90,12 +81,12 @@ describe('MyApp Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyApp);
+    fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
   });
 
   it ('should be created', () => {
-    expect(component instanceof MyApp).toBe(true);
+    expect(component instanceof AppComponent).toBe(true);
   });
 
 });

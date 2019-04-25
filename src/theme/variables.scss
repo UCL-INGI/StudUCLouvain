@@ -1,95 +1,159 @@
 // Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/v2/theming/
-$font-path: "../assets/fonts";
+// http://ionicframework.com/docs/theming/
 
-@import "ionic.globals";
+/** Ionic CSS Variables **/
+:root {
+  /** primary **/
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
 
+  /** secondary **/
+  --ion-color-secondary: #0cd1e8;
+  --ion-color-secondary-rgb: 12, 209, 232;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0bb8cc;
+  --ion-color-secondary-tint: #24d6ea;
 
-// Shared Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass variables found in Ionic's source scss files.
-// To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+  /** tertiary **/
+  --ion-color-tertiary: #7044ff;
+  --ion-color-tertiary-rgb: 112, 68, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #633ce0;
+  --ion-color-tertiary-tint: #7e57ff;
 
+  /** success **/
+  --ion-color-success: #10dc60;
+  --ion-color-success-rgb: 16, 220, 96;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ec254;
+  --ion-color-success-tint: #28e070;
 
+  /** warning **/
+  --ion-color-warning: #ffce00;
+  --ion-color-warning-rgb: 255, 206, 0;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #e0b500;
+  --ion-color-warning-tint: #ffd31a;
 
+  /** danger **/
+  --ion-color-danger: #f04141;
+  --ion-color-danger-rgb: 245, 61, 61;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d33939;
+  --ion-color-danger-tint: #f25454;
 
-// Named Color Variables
-// --------------------------------------------------
-// Named colors makes it easy to reuse colors on various components.
-// It's highly recommended to change the default colors
-// to match your app's branding. Ionic uses a Sass map of
-// colors so you can add, rename and remove colors as needed.
-// The "primary" color is the only required color in the map.
+  /** dark **/
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 34, 34;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
 
-$colors: (
-  primary:    #488aff,
-  danger:     #f53d3d,
-  guindaille: #dd156c,
-  navbarColor: #009688,
-  news:#c10a27,
-  event:#ec690c,
-  sport:#f59d22,
-  g2: #e62175,
-  cred: #b3b3b3,
-  bibli: #0071bc,
-  etudes: #2e3192,
-  support: #8d92c8,
-  ucl: #002e5f,
-  setting: #4d4d4d,
-  map: #00a99d,
-  resto: #8cc63f,
-  mobilite: #006837,
-  urg: #ec1c24,
-  fun: #93278f,
-  uclouvain: rgb(0,33,78),
-  home: #002A6A
+  /** medium **/
+  --ion-color-medium: #989aa2;
+  --ion-color-medium-rgb: 152, 154, 162;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #86888f;
+  --ion-color-medium-tint: #a2a4ab;
 
-);
+  /** light **/
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244, 244, 244;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
 
+  --ion-color-primary: #488aff;
+  --ion-color-danger:     #f53d3d;
+  --ion-color-guindaille: #dd156c;
+  --ion-color-navbarColor: #009688;
+  --ion-color-news:#c10a27;
+  --ion-color-event:#ec690c;
+  --ion-color-sport:#f59d22;
+  --ion-color-g2: #e62175;
+  --ion-color-cred: #b3b3b3;
+  --ion-color-bibli: #0071bc;
+  --ion-color-etudes: #2e3192;
+  --ion-color-support: #8d92c8;
+  --ion-color-ucl: #002e5f;
+  --ion-color-setting: #4d4d4d;
+  --ion-color-map: #00a99d;
+  --ion-color-resto: #8cc63f;
+  --ion-color-mobilite: #006837;
+  --ion-color-urg: #ec1c24;
+  --ion-color-fun: #93278f;
+  --ion-color-uclouvain: rgb(0,33,78);
+  --ion-color-home: #002A6A;
+}
 
-// App iOS Variables
-// --------------------------------------------------
-// iOS only Sass variables can go here
+.ion-color-news {
+  --ion-color-base: var(--ion-color-news) !important;
+  --ion-color-base-rgb: var(--ion-color-news-rgb) !important;
+  --ion-color-contrast: var(--ion-color-news-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-news-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-news-shade) !important;
+  --ion-color-tint: var(--ion-color-news-tint) !important;
+}
 
-$content-ios-transition-background: transparent;
+.ion-color-home {
+  --ion-color-base: var(--ion-color-home) !important;
+  --ion-color-base-rgb: var(--ion-color-home-rgb) !important;
+  --ion-color-contrast: var(--ion-color-home-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-home-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-home-shade) !important;
+  --ion-color-tint: var(--ion-color-home-tint) !important;
+}
 
+ion-segment-button ion-label {
+  color: white;
+}
+ion-title {
+  color: white;
+}
+.modal-fullscreen {
+  .modal-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+  }
+}
 
-// App Material Design Variables
-// --------------------------------------------------
-// Material Design only Sass variables can go here
+.box {
+ display: flex;
+ align-items:center;
+}
 
+.title.title-md {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
 
+.back-button {
+z-index: 1;
+}
 
-
-// App Windows Variables
-// --------------------------------------------------
-// Windows only Sass variables can go here
-
-
-
-
-// App Theme
-// --------------------------------------------------
-// Ionic apps can have different themes applied, which can
-// then be future customized. This import comes last
-// so that the above variables are used and Ionic's
-// default are overridden.
-
-@import "ionic.theme.default";
-
-
-// Ionicons
-// --------------------------------------------------
-// The premium icon font for Ionic. For more info, please see:
-// http://ionicframework.com/docs/v2/ionicons/
-
-@import "ionic.ionicons";
-
-
-// Fonts
-// --------------------------------------------------
-
-//@import "roboto";
-@import "noto-sans";
+ion-segment {
+  background-color: rgb(0,33,78);
+}
+.segment-button {
+  color: white !important;
+}

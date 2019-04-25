@@ -1,0 +1,20 @@
+<ion-app>
+    <ion-split-pane>
+      <ion-menu-toggle id="mainMenu">
+        <ion-content>
+          <ion-list scroll=true>
+            <ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
+              <div class="box"><img src={{p.icon}} width="35" height="35"/> <span>&nbsp;   {{p.title | translate}}</span> </div>
+            </ion-item>
+            <ion-item *ngFor="let p of studiePages" (click)="openRootPage(p)">
+              <div class="box"><img src={{p.icon}} width="35" height="35"/> <span>&nbsp;   {{p.title | translate}}</span> </div>
+            </ion-item>
+            <ion-item  *ngFor="let p of toolPages" (click)="openRootPage(p)">
+              <div class="box"><img src={{p.icon}} width="35" height="35"/> <span>&nbsp;   {{p.title | translate}}</span> </div>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu-toggle>
+      <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
+  </ion-app>

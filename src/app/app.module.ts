@@ -21,46 +21,50 @@
 
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
-import { Market } from '@ionic-native/market';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { Market } from '@ionic-native/market/ngx';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation';
-import { Network } from '@ionic-native/network';
-import { Calendar } from '@ionic-native/calendar';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { HttpModule } from '@angular/http';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { CacheModule } from 'ionic-cache';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SQLite } from '@ionic-native/sqlite';
-import { SecureStorage } from '@ionic-native/secure-storage';
-import { AppVersion } from '@ionic-native/app-version';
-import { Diagnostic } from '@ionic-native/diagnostic';
+import { SQLite } from '@ionic-native/sqlite/ngx';
+import { SecureStorage } from '@ionic-native/secure-storage/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 
-import { ConnectivityService } from '../providers/utils-services/connectivity-service';
-import { FacService } from '../providers/utils-services/fac-service';
-import { CourseService } from '../providers/studies-services/course-service';
-import { StudiesService } from '../providers/studies-services/studies-service';
-import { EventsService } from '../providers/rss-services/events-service';
-import { MapService } from '../providers/map-services/map-service'
-import { POIService } from '../providers/map-services/poi-service';
-import { UserService } from '../providers/utils-services/user-service';
-import { RssService } from '../providers/rss-services/rss-service';
-import { NewsService } from '../providers/rss-services/news-service';
-import { LibrariesService } from '../providers/wso2-services/libraries-service';
-import { AdeService } from '../providers/studies-services/ade-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
-import { StudentService } from '../providers/wso2-services/student-service';
-import { SportsService } from '../providers/rss-services/sports-service';
-import { RepertoireService } from '../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from './services/utils-services/connectivity-service';
+import { FacService } from './services/utils-services/fac-service';
+import { CourseService } from './services/studies-services/course-service';
+import { StudiesService } from './services/studies-services/studies-service';
+import { EventsService } from './services/rss-services/events-service';
+import { MapService } from './services/map-services/map-service'
+import { POIService } from './services/map-services/poi-service';
+import { UserService } from './services/utils-services/user-service';
+import { RssService } from './services/rss-services/rss-service';
+import { NewsService } from './services/rss-services/news-service';
+import { LibrariesService } from './services/wso2-services/libraries-service';
+import { AdeService } from './services/studies-services/ade-service';
+import { Wso2Service } from './services/wso2-services/wso2-service';
+import { StudentService } from './services/wso2-services/student-service';
+import { SportsService } from './services/rss-services/sports-service';
+import { RepertoireService } from './services/wso2-services/repertoire-service';
+import { AppRoutingModule } from './app-routing.module';
+import { RouteReuseStrategy } from '@angular/router';
+import { Toast } from '@ionic-native/toast/ngx';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -71,17 +75,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    MyApp
+    AppComponent
   ],
   exports: [
     TranslateModule
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(),
+    AppRoutingModule,
     CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
     IonicStorageModule.forRoot(),
-    HttpModule,
     HttpClientModule,
     TranslateModule.forRoot({
         loader: {
@@ -91,19 +95,18 @@ export function HttpLoaderFactory(http: HttpClient) {
         }
     })
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [AppComponent],
   entryComponents: [
-    MyApp
+    
   ],
   providers: [
-    { provide : ErrorHandler, useClass : IonicErrorHandler},
+    { provide : ErrorHandler, useClass : ErrorHandler},
     AppAvailability,
     ConnectivityService,
     CourseService,
     StudiesService,
     EventsService,
     InAppBrowser,
-    MapService,
     Market,
     POIService,
     UserService,
@@ -128,7 +131,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     SQLite,
     SecureStorage,
     AppVersion,
-    Diagnostic
+    Diagnostic,
+    Toast,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ]
 })
 export class AppModule {}

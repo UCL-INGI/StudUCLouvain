@@ -1,0 +1,144 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Daubry Benjamin & Marchesini Bruno
+    Date : July 2017
+    This file is part of Stud.UCLouvain
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Stud.UCLouvain is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-toolbar color="uclouvain">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img src="./assets/img/s.png" height="28"/>
+    <ion-title align="center">{{title | translate}}</ion-title>
+    <button ion-button icon-only end  menuToggle="studiesMenu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-toolbar>
+    <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="prog">
+      {{'STUDY.PROGRAM' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="cours" name="cours">
+      {{'STUDY.HORAIRE' | translate}}
+    </ion-segment-button>
+  </ion-segment>
+  <h4  text-center padding *ngIf="project!==null && segment === 'cours'"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
+</ion-header>
+
+<!--BODY-->
+<!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
+<ion-menu persistent=true id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
+  <button> </button>
+  <button ion-item (tap)="launch('http://www.uclouvain.be/')"> uclouvain.be </button>
+  <button ion-item (tap)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </button>
+  <button ion-item (tap)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </button>
+</ion-menu>
+
+<ion-content padding #studiesContent [ngClass]="{'cours' : segment === 'cours'}">
+
+  <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
+
+<ng-container padding *ngIf="segment==='cours'" id="cours">
+  
+  <ion-list class="cours">
+    <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
+      <ion-item (tap)="openCoursePage(course)" >
+        <h2>{{course.acronym}} - {{course.name}}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <!--<button ion-button (tap)="addCourseToCalendar(slidingItem, course)" >
+          <ion-icon name="calendar"></ion-icon>
+            {{'STUDY.CALENDAR' | translate}}
+        </button>-->
+        <button ion-button (tap)="removeCourse(course)" >
+          <ion-icon name="trash"></ion-icon>
+            {{'STUDY.DEL' | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ng-container>
+
+<!------------------------------------ PROGRAMME DE COURS --------------------------------------------------------->
+<ng-container padding  *ngIf="segment==='prog'" >
+
+  <!----------------------------------------------- LOGIN ----------------------------------------------------------->
+  <form #loginForm="ngForm" (ngSubmit)="loadActivities()" autocomplete="off" *ngIf="!status">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item class="inputField">
+            <ion-input id="userField" placeholder="Username" name="username"  type="text" required [(ngModel)]="username" #userName autocapitalize="none"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b  >{{error}}</b></div>
+        <button id="login" ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
+  <ion-list *ngIf="status">
+    <!--<button ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</button>-->
+    <h4 text-center *ngIf="prog">{{prog}}</h4>
+    <p text-center> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
+    <button ion-button full (tap)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</button>
+    <ion-list *ngFor="let activity of activities">
+    <ion-item-sliding #slidingItem>
+      <ion-item>
+        {{activity.sigle}}<!-- - {{activity.name}}-->
+      </ion-item>
+      <ion-item-options>
+        <button ion-button outline (tap)="addCourseFromProgram(activity.sigle)" class="large-icon">
+          <ion-icon name='add-circle'></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    </ion-list>
+    <p *ngIf="activities.length <= 0">{{'STUDY.NO' | translate}}</p>
+  </ion-list>
+
+</ng-container>
+
+
+</ion-content>
+
+<!-------------------------------- BUTTON TO ADD COURSE ---------------------------------------------------->
+<ion-footer text-center *ngIf="segment == 'prog' && status">
+  <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE2' | translate}}</p>
+</ion-footer>
+<ion-footer text-center *ngIf="segment=='cours'">
+    <ion-fab fab fab-bottom right style="margin-bottom:65px;">
+    <button id="prompt" ion-fab fab-fixed (tap)="showPrompt()">
+      <ion-icon name="add"> </ion-icon>
+    </button>
+  </ion-fab>
+  <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE' | translate}}</p>
+</ion-footer>
+
