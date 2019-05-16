@@ -5,7 +5,7 @@ checks:
     enabled: false
   method-complexity:
     config:
-      threshold: 8
+      threshold: 5
 
 plugins:
   tslint:
@@ -14,7 +14,7 @@ plugins:
   duplication:
     enabled: true
     config:
-        count_threshold: 3
+        count_threshold: 2
 
 exclude_patterns:
 - config/**/*
