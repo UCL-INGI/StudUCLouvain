@@ -1,6 +1,9 @@
 # Stud.UCLouvain
 Stud.UCLouvain is an application designed to accompany UCLouvain students in their daily life on campus. Contributions are welcome for any good feature.
 
+## Feel free to collaborate. 
+### Anyone wishing to participate and/or propose new features should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
+
 [![Join the chat at https://gitter.im/UCLCampus/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UCLCampus/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Prerequisites
