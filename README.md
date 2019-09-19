@@ -1,5 +1,6 @@
 # Stud.UCLouvain
 Stud.UCLouvain is an application designed to accompany UCLouvain students in their daily life on campus. Contributions are welcome for any good feature.
+
 [WIP] Possible major update (+ migration to Ionic_v4) : https://github.com/BenJneB/StudUCLouvain_ionic-v4
 
 ## Feel free to collaborate. 
