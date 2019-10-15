@@ -84,6 +84,7 @@ $ ionic cordova run android
     $ cordova prepare
     ```
 ```bash
+Have to be runned on MacOS
 $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
