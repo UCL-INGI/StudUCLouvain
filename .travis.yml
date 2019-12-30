@@ -10,5 +10,6 @@ branches:
       - master
 before_script:
       - export DISPLAY=:99.0
+      - npm install -g ionic cordova
 script:	
       - ionic cordova build browser --prod
