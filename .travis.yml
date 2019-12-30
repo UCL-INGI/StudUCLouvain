@@ -10,3 +10,5 @@ branches:
       - master
 before_script:
       - export DISPLAY=:99.0
+script:	
+      - ionic cordova build browser --prod
