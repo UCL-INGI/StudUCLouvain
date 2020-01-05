@@ -19,19 +19,21 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { App, List, Content, NavController, NavParams, Platform, AlertController,LoadingController } from 'ionic-angular';
-import { FormControl } from '@angular/forms';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { IonicPage } from 'ionic-angular';
+import {
+    AlertController, App, Content, IonicPage, List, LoadingController, NavController, NavParams,
+    Platform
+} from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
-import { NewsService } from '../../providers/rss-services/news-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { FacService } from '../../providers/utils-services/fac-service';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { NewsItem } from '../../app/entity/newsItem';
+import { NewsService } from '../../providers/rss-services/news-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { FacService } from '../../providers/utils-services/fac-service';
+import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
@@ -39,74 +41,71 @@ import { NewsItem } from '../../app/entity/newsItem';
   templateUrl: 'news.html'
 })
 export class NewsPage {
+  // url = 'assets/data/fac.json';
+
+  constructor(
+    public platform: Platform,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public app: App,
+    public userS: UserService,
+    public newsService: NewsService,
+    public connService: ConnectivityService,
+    private iab: InAppBrowser,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public facService: FacService,
+    private cache: CacheService) {
+    if (this.navParams.get('title') !== undefined) {
+      this.title = this.navParams.get('title');
+    }
+    this.searchControl = new FormControl();
+    this.facService.loadResources().then((data) => {
+      this.listFac = data;
+    });
+  }
 
   @ViewChild('newsList', { read: List }) newsList: List;
   @ViewChild('news') content: Content;
 
-  // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
-  resize()
-  {
-    if(this.content)
-    {
-      this.content.resize();
-      console.debug("content resize", this.content)
-    }
-  }
-
   news: Array<NewsItem> = [];
-  segment = "univ";
-  subsegment = "P1";
-  facsegment="news";
+  segment = 'univ';
+  subsegment = 'P1';
+  facsegment = 'news';
   shownNews = 0;
-  displayedNews : Array<NewsItem> = [];
+  displayedNews: Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
-  searchTerm: string = '';
-  title:string ="Actualités" ;
-  nonews:any = false;
+  searchTerm = '';
+  title = 'Actualités';
+  nonews: any = false;
   loading;
-  fac:string="";
-  listFac:any=[];
-  site:string="";
-  rss:string="";
-  //url = 'assets/data/fac.json';
+  fac = '';
+  listFac: any = [];
+  site = '';
+  rss = '';
 
-  constructor(
-    public platform : Platform,
-    public navCtrl: NavController,
-    public navParams:NavParams,
-    public app:App,
-    public userS:UserService,
-    public newsService : NewsService,
-    public connService : ConnectivityService,
-    private iab: InAppBrowser,
-    public alertCtrl : AlertController,
-    public loadingCtrl: LoadingController,
-    public facService: FacService,
-    private cache: CacheService)
-  {
-      if(this.navParams.get('title') !== undefined) {
-        this.title = this.navParams.get('title');
-      }
-      this.searchControl = new FormControl();
-      this.facService.loadResources().then((data) => {
-        this.listFac=data;
-      });
+  // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
+  resize() {
+    if (this.content) {
+      this.content.resize();
+      console.debug('content resize', this.content);
+    }
   }
 
   /*load the view, Call function to load news, display them*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
-    //Check the connexion, if it's ok, load the news
-    //if(this.connService.isOnline()) {
-      this.cachedOrNot();
-      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayedNews();
-      });
-      //this.presentLoading();
-    //}
-    //If no connexion, go back to the previous page and pop an alert
+    // Check the connexion, if it's ok, load the news
+    // if(this.connService.isOnline()) {
+    this.cachedOrNot();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.updateDisplayedNews();
+    });
+    // this.presentLoading();
+    // }
+    // If no connexion, go back to the previous page and pop an alert
     /*else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -115,7 +114,7 @@ export class NewsPage {
 
   /*Display an loading pop up*/
   presentLoading() {
-    if(!this.loading){
+    if (!this.loading) {
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
@@ -124,60 +123,57 @@ export class NewsPage {
   }
 
   /*Cancel the loading pop up*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
     }
   }
 
   /*Open a page with the details of a news*/
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, '_system', 'location=yes');
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
-  updateFac(fac:string){
+  updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
     this.resize();
-    let links = this.findSite();
+    const links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
     this.loadNews();
   }
 
   /*If there is a site for a fac, return the good site*/
-  findSite(){
-    for(let sector of this.listFac){
-      for(let facs of sector.facs){
-        if(facs.acro === this.fac) {
-          return {'site':facs.site, 'rss': facs.rss};
+  findSite() {
+    for (const sector of this.listFac) {
+      for (const facs of sector.facs) {
+        if (facs.acro === this.fac) {
+          return { 'site': facs.site, 'rss': facs.rss };
         }
       }
     }
   }
 
   /*Remove a fac for a user*/
-  removeFac(fac:string){
+  removeFac(fac: string) {
     this.userS.removeFac(fac);
-        this.resize();
+    this.resize();
   }
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    if(this.connService.isOnline()) {
-      if(this.segment ==='univ' || (this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac())){
-        if(this.segment==='univ'){
-          let part = this.subsegment;
+    if (this.connService.isOnline()) {
+      if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
+        if (this.segment === 'univ') {
+          const part = this.subsegment;
           let key;
-          if(part === 'P1') key = 'cache-P1';
-          else if(part === 'P2') key = 'cache-P2';
-          else key = 'cache-P3';
+          if (part === 'P1') { key = 'cache-P1'; } else if (part === 'P2') { key = 'cache-P2'; } else { key = 'cache-P3'; }
           this.cache.removeItem(key);
           this.loadNews(key);
-        }
-        else this.loadNews();
+        } else { this.loadNews(); }
       }
       refresher.complete();
     } else {
@@ -186,19 +182,19 @@ export class NewsPage {
     }
   }
 
-  facTabChange(){
+  facTabChange() {
 
   }
 
   /*Tab change*/
-  tabChanged(){
+  tabChanged() {
     this.resize();
-    if(this.segment==='univ') this.cachedOrNot();
-    if(this.segment==='fac'){
-      this.fac=this.userS.fac;
-      if(this.facsegment === 'news' && this.userS.hasFac()){
-        let links = this.findSite();
-        this.site= links.site;
+    if (this.segment === 'univ') { this.cachedOrNot(); }
+    if (this.segment === 'fac') {
+      this.fac = this.userS.fac;
+      if (this.facsegment === 'news' && this.userS.hasFac()) {
+        const links = this.findSite();
+        this.site = links.site;
         this.rss = links.rss;
 
         this.loadNews();
@@ -207,30 +203,27 @@ export class NewsPage {
     }
   }
 
-/*Check if data are cached or not */
-  async cachedOrNot(){
-    //this.cache.removeItem('cache-P1');
+  /*Check if data are cached or not */
+  async cachedOrNot() {
+    // this.cache.removeItem('cache-P1');
     let key;
-    let part = this.subsegment;
-    if(this.segment === 'univ'){
+    const part = this.subsegment;
+    if (this.segment === 'univ') {
 
-      if(part === 'P1') key = 'cache-P1';
-      else if(part === 'P2') key = 'cache-P2';
-      else key = 'cache-P3';
+      if (part === 'P1') { key = 'cache-P1'; } else if (part === 'P2') { key = 'cache-P2'; } else { key = 'cache-P3'; }
       await this.cache.getItem(key)
-      .then((data) => {
-        this.presentLoading();
-        this.news=data.news;
-        this.shownNews = data.shownNews;
-        this.searching=false;
-        this.updateDisplayedNews();
-      })
-      .catch(() => {
-        console.log("Oh no! My data is expired or doesn't exist!");
-        this.loadNews(key);
-      });
-    }
-    else{
+        .then((data) => {
+          this.presentLoading();
+          this.news = data.news;
+          this.shownNews = data.shownNews;
+          this.searching = false;
+          this.updateDisplayedNews();
+        })
+        .catch(() => {
+          console.log('Oh no! My data is expired or doesn\'t exist!');
+          this.loadNews(key);
+        });
+    } else {
       this.loadNews();
     }
   }
@@ -239,24 +232,24 @@ export class NewsPage {
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
-    //Check connexion before load news
-    if(this.connService.isOnline()) {
+    // Check connexion before load news
+    if (this.connService.isOnline()) {
       this.presentLoading();
       let actu = this.subsegment;
-      if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
+      if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
       this.newsService.getNews(actu)
-      .then(
-        result => {
-          this.news = result.news;
-          if(key) this.cache.saveItem(key, result);
-          this.shownNews = result.shownNews;
-          this.searching = false;
-          this.nonews = this.news.length == 0;
-          this.updateDisplayedNews();
-      })
-    //If no connexion pop an alert and go back to previous page
+        .then(
+          result => {
+            this.news = result.news;
+            if (key) { this.cache.saveItem(key, result); }
+            this.shownNews = result.shownNews;
+            this.searching = false;
+            this.nonews = this.news.length == 0;
+            this.updateDisplayedNews();
+          });
+      // If no connexion pop an alert and go back to previous page
     } else {
-      //return [];
+      // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -272,7 +265,7 @@ export class NewsPage {
       return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
     });
     this.shownNews = this.displayedNews.length;
-    this.nonews = this.shownNews ==0;
+    this.nonews = this.shownNews == 0;
     this.searching = false;
     this.dismissLoading();
     console.log(this.displayedNews);
@@ -280,6 +273,6 @@ export class NewsPage {
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push( 'NewsDetailsPage', { 'news': news });
+    this.navCtrl.push('NewsDetailsPage', { 'news': news });
   }
 }
