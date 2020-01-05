@@ -19,21 +19,23 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { App, AlertController, ItemSliding, List, NavController,
-  ModalController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { Calendar } from '@ionic-native/calendar';
-import { FormControl } from '@angular/forms';
-import { IonicPage } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
+
+import {
+    AlertController, App, IonicPage, ItemSliding, List, LoadingController, ModalController,
+    NavController, NavParams, ToastController
+} from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
-import { UserService } from '../../providers/utils-services/user-service';
-import { EventsService } from '../../providers/rss-services/events-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Calendar } from '@ionic-native/calendar';
+import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../app/entity/eventItem';
+import { EventsService } from '../../providers/rss-services/events-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
@@ -48,11 +50,11 @@ export class EventsPage {
   segment = 'all';
   shownEvents = 0;
   title: any;
-  searchTerm: string = '';
+  searchTerm = '';
   searchControl: FormControl;
-  filters : any = [];
-  excludedFilters : any = [];
-  displayedEvents : Array<EventItem> = [];
+  filters: any = [];
+  excludedFilters: any = [];
+  displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
   loading;
@@ -60,14 +62,14 @@ export class EventsPage {
 
   now = new Date();
   year = this.now.getFullYear();
-  noevents:any =false;
-  displayedEventsD : any = [];
+  noevents: any = false;
+  displayedEventsD: any = [];
 
   weekUCL = 5;
 
   constructor(
     public alertCtrl: AlertController,
-    public app:App,
+    public app: App,
     private navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -75,7 +77,7 @@ export class EventsPage {
     public user: UserService,
     public toastCtrl: ToastController,
     private calendar: Calendar,
-    public connService : ConnectivityService,
+    public connService: ConnectivityService,
     private translateService: TranslateService,
     private loadingCtrl: LoadingController,
     private cache: CacheService
@@ -89,17 +91,17 @@ export class EventsPage {
     this.app.setTitle(this.title);
     this.updateDateLimit();
     console.log(this.dateLimit);
-      this.cachedOrNot();
-      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayedEvents();
-      });
+    this.cachedOrNot();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.updateDisplayedEvents();
+    });
 
   }
 
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.cache.removeItem('cache-event');
       this.loadEvents('cache-event');
       refresher.complete();
@@ -111,7 +113,7 @@ export class EventsPage {
 
   /*Display an loading window*/
   presentLoading() {
-    if(!this.loading){
+    if (!this.loading) {
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
@@ -121,14 +123,14 @@ export class EventsPage {
   }
 
   /*Close the loading window*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
     }
   }
 
-  public onSearchInput(){
+  public onSearchInput() {
     this.searching = true;
   }
 
@@ -139,41 +141,41 @@ export class EventsPage {
 
   /*To display or close a group of events (1 group = events for one week)*/
   toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
   }
 
   /*Check if the display group is the group in arg*/
   isGroupShown(group) {
-      return this.shownGroup === group;
+    return this.shownGroup === group;
   }
 
-    /*Check if data are cached or not */
-    async cachedOrNot(){
-      //this.cache.removeItem('cache-event');
-        let key = 'cache-event';
-        await this.cache.getItem(key)
-        .then((data) => {
-          this.presentLoading();
-          console.log("cached events");
-          this.events=data.events;
-          this.events.forEach(function(element) {
-            element.startDate = new Date(element.startDate);
-            element.endDate = new Date(element.endDate);
-          });
-          this.shownEvents = data.shownEvents;
-          this.filters = data.categories;
-          this.searching=false;
-          this.updateDisplayedEvents();
-        })
-        .catch(() => {
-          console.log("Oh no! My data is expired or doesn't exist!");
-          this.loadEvents(key);
+  /*Check if data are cached or not */
+  async cachedOrNot() {
+    // this.cache.removeItem('cache-event');
+    const key = 'cache-event';
+    await this.cache.getItem(key)
+      .then((data) => {
+        this.presentLoading();
+        console.log('cached events');
+        this.events = data.events;
+        this.events.forEach(function (element) {
+          element.startDate = new Date(element.startDate);
+          element.endDate = new Date(element.endDate);
         });
-    }
+        this.shownEvents = data.shownEvents;
+        this.filters = data.categories;
+        this.searching = false;
+        this.updateDisplayedEvents();
+      })
+      .catch(() => {
+        console.log('Oh no! My data is expired or doesn\'t exist!');
+        this.loadEvents(key);
+      });
+  }
 
 
   /*Load the list of events to display*/
@@ -181,20 +183,19 @@ export class EventsPage {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
 
-    //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-    if(this.connService.isOnline()) {
+    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
+    if (this.connService.isOnline()) {
       this.presentLoading();
       this.eventsService.getEvents(this.segment).then(
-        res => {
-          let result:any = res;
+        result => {
           this.events = result.events;
-          if(key) this.cache.saveItem(key, result);
+          if (key) { this.cache.saveItem(key, result); }
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
-          this.noevents = this.events.length == 0;
+          this.noevents = this.events.length === 0;
           this.updateDisplayedEvents();
-      })
+        });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -202,50 +203,50 @@ export class EventsPage {
     }
   }
 
-   /*Make an array with events sorted by week*/
-   changeArray(array, weekUCL){
-    var groups = array.reduce(function(obj,item){
-      var date = new Date(item.startDate.getTime());
-      date.setHours(0,0,0,0);
-      date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
-      var temp = new Date(date.getFullYear(),0,4);
-      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7);// - weekUCL;
+  /*Make an array with events sorted by week*/
+  changeArray(array, weekUCL) {
+    const groups = array.reduce(function (obj, item) {
+      const date = new Date(item.startDate.getTime());
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+      const temp = new Date(date.getFullYear(), 0, 4);
+      const week = 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); // - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
     }, {});
-    var eventsD = Object.keys(groups).map(function(key){
-      return {weeks: key, event: groups[key]};
+    const eventsD = Object.keys(groups).map(function (key) {
+      return { weeks: key, event: groups[key] };
     });
     console.log(eventsD);
     return eventsD;
   }
 
   /*Returns the ISO week of the date*/
-  getWeek(d:Date) {
-    var date = new Date(d.getTime());
+  getWeek(d: Date) {
+    const date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
     // Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
     // January 4 is always in week 1.
-    var week1 = new Date(date.getFullYear(), 0, 4);
+    const week1 = new Date(date.getFullYear(), 0, 4);
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
   /*Return first day of the week and last day of the week (to display range)*/
-  getRangeWeek(week,year){
-    var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
-    d1 = new Date(''+year+'');
+  getRangeWeek(week, year) {
+    let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
+    d1 = new Date('' + year + '');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
     d1.setDate(d1.getDate() + (7 * (week - this.getWeek(d1))));
-    rangeIsFrom = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear();
+    rangeIsFrom = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
-    rangeIsTo = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear() ;
-    rangeIsTo = rangeIsTo.replace(/-/g, "/")
-    rangeIsFrom = rangeIsFrom.replace(/-/g, "/")
-    return {from:rangeIsFrom, to:rangeIsTo};
+    rangeIsTo = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
+    rangeIsTo = rangeIsTo.replace(/-/g, '/');
+    rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
+    return { from: rangeIsFrom, to: rangeIsTo };
   }
 
   /*Update the displayed events and close the loading when it's finished*/
@@ -254,17 +255,17 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-     // try{
+      // try{
       this.displayedEvents = this.events.filter((item) => {
-        //console.log(item);
-        return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      })//}catch(error) {console.log(error)}
+        // console.log(item);
+        return (this.excludedFilters.indexOf(item.category) < 0) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+          && (Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
+      }); // }catch(error) {console.log(error)}
     } else if (this.segment === 'favorites') {
-      let favEvents = [];
+      const favEvents = [];
       this.events.filter((item) => {
-        if(item.favorite || this.user.hasFavorite(item.guid)) {
-          if(item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
+        if (item.favorite || this.user.hasFavorite(item.guid)) {
+          if (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
             favEvents.push(item);
           }
         }
@@ -274,23 +275,23 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
+    this.displayedEventsD = this.changeArray(this.displayedEvents, this.weekUCL);
     this.dismissLoading();
   }
 
   /*Display the modal with the filters and update data with them*/
   presentFilter() {
-    if(this.filters === undefined){
+    if (this.filters === undefined) {
       this.filters = [];
     }
 
-    let modal = this.modalCtrl.create('EventsFilterPage',
-                  { excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange});
+    const modal = this.modalCtrl.create('EventsFilterPage',
+      { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange });
     modal.present();
     modal.onWillDismiss((data: any[]) => {
       if (data) {
-        let tmpRange = data.pop();
-        if(tmpRange !== this.dateRange) {
+        const tmpRange = data.pop();
+        if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
@@ -301,23 +302,23 @@ export class EventsPage {
   }
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/
-  private updateDateLimit(){
-    let today = new Date();
-    this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
+  private updateDateLimit() {
+    const today = new Date();
+    this.dateLimit = new Date(today.getFullYear(), today.getMonth() + this.dateRange, today.getUTCDate() + 1);
   }
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
-  public createEvent(slidingItem: ItemSliding, itemData: any):void{
-    let options:any = {
-      firstReminderMinutes:15
+  public createEvent(slidingItem: ItemSliding, itemData: any): void {
+    const options: any = {
+      firstReminderMinutes: 15
     };
-    let message:string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res:string) => {message=res;});
+    let message: string;
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });
 
     this.calendar.createEventWithOptions(itemData.title, itemData.location,
       null, itemData.startDate, itemData.endDate, options).then(() => {
-        let toast = this.toastCtrl.create({
-          message:  message,
+        const toast = this.toastCtrl.create({
+          message: message,
           duration: 3000
         });
         toast.present();
@@ -330,15 +331,15 @@ export class EventsPage {
     if (this.user.hasFavorite(itemData.guid)) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
-      let message:string;
-      this.translateService.get('EVENTS.MESSAGEFAV').subscribe((res:string) => {message=res;});
+      let message: string;
+      this.translateService.get('EVENTS.MESSAGEFAV').subscribe((res: string) => { message = res; });
       this.removeFavorite(slidingItem, itemData, message);
     } else {
       // remember this session as a user favorite
       this.user.addFavorite(itemData.guid);
-      let message:string;
-      this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
-      let toast = this.toastCtrl.create({
+      let message: string;
+      this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => { message = res; });
+      const toast = this.toastCtrl.create({
         message: message,
         duration: 3000
       });
@@ -350,13 +351,13 @@ export class EventsPage {
 
   /*Remove an event from the favorites*/
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
-    let message:string;
-    let cancel:string;
-    let delet:string;
-    this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res:string) => {message=res;});
-    this.translateService.get('EVENTS.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('EVENTS.DEL').subscribe((res:string) => {delet=res;});
-    let alert = this.alertCtrl.create({
+    let message: string;
+    let cancel: string;
+    let delet: string;
+    this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res: string) => { message = res; });
+    this.translateService.get('EVENTS.CANCEL').subscribe((res: string) => { cancel = res; });
+    this.translateService.get('EVENTS.DEL').subscribe((res: string) => { delet = res; });
+    const alert = this.alertCtrl.create({
       title: title,
       message: message,
       buttons: [
