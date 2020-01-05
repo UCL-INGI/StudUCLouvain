@@ -10,7 +10,7 @@ branches:
       - master
 before_script:
       - export DISPLAY=:99.0
-      - npm install -g ionic cordova@8.0.0
+      - npm install -g ionic cordova@^8.0.0
       - ionic cordova platform add browser
 script:	
       - ionic cordova build browser --prod
