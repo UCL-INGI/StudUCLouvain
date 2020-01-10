@@ -6,11 +6,19 @@ services:
 addons:
   chrome: stable
 branches:
-      only:
-      - master
+  only:
+    - master
 before_script:
-      - export DISPLAY=:99.0
-      - npm install -g ionic cordova@^8.0.0
-      - ionic cordova platform add browser
-script:	
-      - ionic cordova build browser --prod
+  - export DISPLAY=:99.0
+  - npm install -g ionic cordova@^8.0.0
+
+script:
+  - ionic cordova build browser — prod
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
+  local_dir: www
