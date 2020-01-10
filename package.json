@@ -1,8 +1,8 @@
 {
   "name": "Stud.UCLouvain",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "UCLouvain INGI Students",
+  "homepage": "https://www.facebook.com/Stud.UCLouvain",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -83,12 +83,6 @@
     "@angular/cli": "^6.2.9",
     "@ionic/app-scripts": "~3.1.11",
     "@types/node": "^11.15.4",
-    "karma": "^4.0.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage-istanbul-reporter": "^2.0.5",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
     "ts-node": "^8.6.0",
     "tslint": "^5.13.1",
     "typescript": "~2.6.2"
