@@ -190,20 +190,16 @@ export class MapService {
               String(position.latLng.lat),
               String(position.latLng.lng),
               'MYPOS');
-
-            // let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
             const latLng = position.latLng;
             const mapOptions = {
               center: latLng,
               zoom: 15,
               mapTypeId: GoogleMapsMapTypeId.ROADMAP
             };
-            // create CameraPosition
             const camPos: CameraPosition<LatLng> = {
               target: latLng,
               zoom: 15
             };
-            // this.map = new GoogleMap(this.mapElement, mapOptions);
             this.map = GoogleMaps.create(this.mapElement, mapOptions);
             this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
               console.log('Map is ready!');
@@ -243,8 +239,6 @@ export class MapService {
         console.log('Map created');
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
-
-
           this.map.moveCamera(camPos);
           resolve(true);
         });
@@ -254,23 +248,18 @@ export class MapService {
 
   /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
-    // console.log(this.markers);
     const marker = this.getMarker(location.title);
     if (!marker) {
       const contentString = '<p>' + location.address + '</p>';
-      if (this.onDevice) {
-        for (const loc of this.markers) {
-          if (loc.getTitle() !== this.userLocation.title) {
-            this.removeMarker(new MapLocation(loc.getTitle()));
-          }
+      const m = this.onDevice ? this.markers : this.markersB;
+      for (const loc of m) {
+        if (loc.getTitle() !== this.userLocation.title) {
+          this.removeMarker(new MapLocation(loc.getTitle()));
         }
+      }
+      if (this.onDevice) {
         this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title);
       } else {
-        for (const loc of this.markersB) {
-          if (loc.getTitle() !== this.userLocation.title) {
-            this.removeMarker(new MapLocation(loc.getTitle()));
-          }
-        }
         this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
       }
     } else {
@@ -278,32 +267,19 @@ export class MapService {
         marker.showInfoWindow();
       }
     }
-    // console.log(this.markers);
   }
 
   /*Remove a marker for a location unselected*/
   removeMarker(location: MapLocation) {
-    // console.log(location);
-    // console.log(this.markers);
     let m;
     if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
     for (let i = 0; i < m.length; i++) {
       if (m[i].getTitle() === location.title) {
-        // console.log(this.markers[i]);
-        // let m: Marker = this.markers[i];
-        // m.remove();
         if (this.onDevice) {
           this.markers[i].remove();
-          // this.markers[i].setMap(null);
-          // this.markers[i]=null;
-
-          // console.log(this.markers);
         }
         if (!this.onDevice) {
-          // m.remove();
           this.markersB[i].setMap(null);
-          // this.map.clear();
-          // this.addMarker(this.userLocation);
         }
         this.markers.splice(i, 1);
       }
