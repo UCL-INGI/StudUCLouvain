@@ -4,7 +4,7 @@ branches:
   only:
     - master
 before_script:
-  - npm install -g ionic cordova@^8.0.0
+  - npm install -g ionic cordova
 
 script:
   - ionic cordova platform add browser
