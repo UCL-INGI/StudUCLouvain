@@ -19,14 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController, NavParams } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
+import {
+    ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform
+} from 'ionic-angular';
 
-import { POIService } from '../../providers/map-services/poi-service';
-import { MapService } from '../../providers/map-services/map-service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { MapLocation } from '../../app/entity/mapLocation';
+import { MapService } from '../../providers/map-services/map-service';
+import { POIService } from '../../providers/map-services/poi-service';
 
 @IonicPage()
 @Component({
@@ -39,31 +40,30 @@ export class MapPage {
   @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
   showedLocations: MapLocation[] = [];
   zones: any;
-  filters : any;
-  excludedFilters : any = [];
+  filters: any;
+  excludedFilters: any = [];
   selectedLocation: any = [];
-  userLocation:any = [];
+  userLocation: any = [];
   showLocationList = false;
   title: any;
-  searching: boolean = false;
-  temp:any;
-  temp2:any;
+  searching = false;
+  temp: any;
+  temp2: any;
 
   constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,
-              public mapService: MapService,
-              public platform: Platform,
-              public navParams: NavParams,
-              public poilocations: POIService)
-  {
-      this.title = this.navParams.get('title');
+    public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController,
+    public mapService: MapService,
+    public platform: Platform,
+    public navParams: NavParams,
+    public poilocations: POIService) {
+    this.title = this.navParams.get('title');
   }
 
   /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
-  ngAfterViewInit(){
-    let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-    let zones = this.poilocations.loadResources();
+  ngAfterViewInit() {
+    const mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+    const zones = this.poilocations.loadResources();
     this.searching = true;
 
     Promise.all([
@@ -76,7 +76,7 @@ export class MapPage {
       this.userLocation = this.mapService.getUserLocation();
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
-      if(result[0]) {
+      if (result[0]) {
         this.mapService.addMarker(this.selectedLocation);
       }
     }, (error) => {
@@ -86,39 +86,41 @@ export class MapPage {
   /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
   toggleDetails(data) {
     if (data.showDetails) {
-        data.showDetails = false;
-        data.icon = 'arrow-dropdown';
+      data.showDetails = false;
+      data.icon = 'arrow-dropdown';
     } else {
-        data.showDetails = true;
-        data.icon = 'arrow-dropup';
+      data.showDetails = true;
+      data.icon = 'arrow-dropup';
     }
   }
 
   /*select or unselect a specific location*/
   toggleLocation(data, checkList, index) {
-    if (checkList[index] === true) {
+    if (checkList[index] === false) {
       this.addShowedLocations(data);
       this.onSelect(data);
+      checkList[index] = true;
     } else {
       this.removeShowedLocations(data);
       this.mapService.removeMarker(data);
+      checkList[index] = false;
     }
   }
 
   /*push a location to display*/
-  addShowedLocations(rawLocation){
+  addShowedLocations(rawLocation) {
     this.showedLocations.push(rawLocation);
   }
 
   /*remove a location displayed*/
-  removeShowedLocations(rawLocation){
-    let locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
-    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
+  removeShowedLocations(rawLocation) {
+    const locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
+    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove), 1);
   }
 
   /*when select an location*/
-  onSelect(data:any){
-    if(this.selectedLocation !== data){
+  onSelect(data: any) {
+    if (this.selectedLocation !== data) {
       this.selectedLocation = data;
     }
     this.mapService.addMarker(this.selectedLocation);
