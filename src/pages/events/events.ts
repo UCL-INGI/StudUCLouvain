@@ -162,7 +162,7 @@ export class EventsPage {
         this.presentLoading();
         console.log("cached events");
         this.events = data.events;
-        this.events.forEach(function(element) {
+        this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
           element.endDate = new Date(element.endDate);
         });
@@ -205,7 +205,7 @@ export class EventsPage {
 
   /*Make an array with events sorted by week*/
   changeArray(array, weekUCL) {
-    const groups = array.reduce(function(obj, item) {
+    const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
       date.setHours(0, 0, 0, 0);
       date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
@@ -216,13 +216,13 @@ export class EventsPage {
           ((date.getTime() - temp.getTime()) / 86400000 -
             3 +
             ((temp.getDay() + 6) % 7)) /
-            7
+          7
         ); // - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
     }, {});
-    const eventsD = Object.keys(groups).map(function(key) {
+    const eventsD = Object.keys(groups).map(function (key) {
       return { weeks: key, event: groups[key] };
     });
     console.log(eventsD);
@@ -244,7 +244,7 @@ export class EventsPage {
         ((date.getTime() - week1.getTime()) / 86400000 -
           3 +
           ((week1.getDay() + 6) % 7)) /
-          7
+        7
       )
     );
   }
@@ -273,10 +273,8 @@ export class EventsPage {
       this.displayedEvents = this.events.filter(item => {
         return (
           this.excludedFilters.indexOf(item.category) < 0 &&
-          item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >
-            -1 &&
-          Math.floor(item.startDate.getTime() / 86400000) <=
-            Math.floor(this.dateLimit.getTime() / 86400000)
+          item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
+          Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000)
         );
       });
     } else if (this.segment === "favorites") {

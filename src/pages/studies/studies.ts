@@ -129,23 +129,17 @@ export class StudiesPage {
   private login() {
     this.error = "";
     return new Promise(resolve => {
-      this.wso2Service
-        .login(this.username, this.password)
-        .catch(error => {
-          if (error.status == 400)
-            this.translateService
-              .get("STUDY.BADLOG")
-              .subscribe((res: string) => {
-                this.error = res;
-              });
-          else
-            this.translateService
-              .get("STUDY.ERROR")
-              .subscribe((res: string) => {
-                this.error = res;
-              });
-          return error;
-        })
+      this.wso2Service.login(this.username, this.password).catch(error => {
+        if (error.status == 400)
+          this.translateService.get("STUDY.BADLOG").subscribe((res: string) => {
+            this.error = res;
+          });
+        else
+          this.translateService.get("STUDY.ERROR").subscribe((res: string) => {
+            this.error = res;
+          });
+        return error;
+      })
         .subscribe(data => {
           if (data != null) {
             this.status = data.toString();
@@ -269,7 +263,7 @@ export class StudiesPage {
       buttons: [
         {
           text: cancel,
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: save,

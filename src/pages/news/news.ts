@@ -175,12 +175,7 @@ export class NewsPage {
       ) {
         if (this.segment === "univ") {
           const part = this.subsegment;
-          const key =
-            part === "P1"
-              ? "cache-P1"
-              : part === "P2"
-              ? "cache-P2"
-              : "cache-P3";
+          const key = part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
           this.cache.removeItem(key);
           this.loadNews(key);
         } else {
@@ -194,7 +189,7 @@ export class NewsPage {
     }
   }
 
-  facTabChange() {}
+  facTabChange() { }
 
   /*Tab change*/
   tabChanged() {
