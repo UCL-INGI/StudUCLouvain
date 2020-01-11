@@ -37,8 +37,8 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-news',
-  templateUrl: 'news.html'
+  selector: "page-news",
+  templateUrl: "news.html"
 })
 export class NewsPage {
   // url = 'assets/data/fac.json';
@@ -55,41 +55,42 @@ export class NewsPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public facService: FacService,
-    private cache: CacheService) {
-    if (this.navParams.get('title') !== undefined) {
-      this.title = this.navParams.get('title');
+    private cache: CacheService
+  ) {
+    if (this.navParams.get("title") !== undefined) {
+      this.title = this.navParams.get("title");
     }
     this.searchControl = new FormControl();
-    this.facService.loadResources().then((data) => {
+    this.facService.loadResources().then(data => {
       this.listFac = data;
     });
   }
 
-  @ViewChild('newsList', { read: List }) newsList: List;
-  @ViewChild('news') content: Content;
+  @ViewChild("newsList", { read: List }) newsList: List;
+  @ViewChild("news") content: Content;
 
   news: Array<NewsItem> = [];
-  segment = 'univ';
-  subsegment = 'P1';
-  facsegment = 'news';
+  segment = "univ";
+  subsegment = "P1";
+  facsegment = "news";
   shownNews = 0;
   displayedNews: Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
-  searchTerm = '';
-  title = 'Actualités';
+  searchTerm = "";
+  title = "Actualités";
   nonews: any = false;
   loading;
-  fac = '';
+  fac = "";
   listFac: any = [];
-  site = '';
-  rss = '';
+  site = "";
+  rss = "";
 
   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize() {
     if (this.content) {
       this.content.resize();
-      console.debug('content resize', this.content);
+      console.debug("content resize", this.content);
     }
   }
 
@@ -116,7 +117,7 @@ export class NewsPage {
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
+        content: "Please wait..."
       });
       this.loading.present();
     }
@@ -132,7 +133,7 @@ export class NewsPage {
 
   /*Open a page with the details of a news*/
   public openURL(url: string) {
-    this.iab.create(url, '_system', 'location=yes');
+    this.iab.create(url, "_system", "location=yes");
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
@@ -151,7 +152,7 @@ export class NewsPage {
     for (const sector of this.listFac) {
       for (const facs of sector.facs) {
         if (facs.acro === this.fac) {
-          return { 'site': facs.site, 'rss': facs.rss };
+          return { site: facs.site, rss: facs.rss };
         }
       }
     }
@@ -166,14 +167,20 @@ export class NewsPage {
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
-      if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
-        if (this.segment === 'univ') {
+      if (
+        this.segment === "univ" ||
+        (this.segment === "fac" &&
+          this.facsegment === "news" &&
+          this.userS.hasFac())
+      ) {
+        if (this.segment === "univ") {
           const part = this.subsegment;
-          let key;
-          if (part === 'P1') { key = 'cache-P1'; } else if (part === 'P2') { key = 'cache-P2'; } else { key = 'cache-P3'; }
+          const key = part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
           this.cache.removeItem(key);
           this.loadNews(key);
-        } else { this.loadNews(); }
+        } else {
+          this.loadNews();
+        }
       }
       refresher.complete();
     } else {
@@ -182,37 +189,35 @@ export class NewsPage {
     }
   }
 
-  facTabChange() {
-
-  }
+  facTabChange() { }
 
   /*Tab change*/
   tabChanged() {
     this.resize();
-    if (this.segment === 'univ') { this.cachedOrNot(); }
-    if (this.segment === 'fac') {
+    if (this.segment === "univ") {
+      this.cachedOrNot();
+    }
+    if (this.segment === "fac") {
       this.fac = this.userS.fac;
-      if (this.facsegment === 'news' && this.userS.hasFac()) {
+      if (this.facsegment === "news" && this.userS.hasFac()) {
         const links = this.findSite();
         this.site = links.site;
         this.rss = links.rss;
 
         this.loadNews();
       }
-
     }
   }
 
   /*Check if data are cached or not */
   async cachedOrNot() {
-    // this.cache.removeItem('cache-P1');
-    let key;
     const part = this.subsegment;
-    if (this.segment === 'univ') {
-
-      if (part === 'P1') { key = 'cache-P1'; } else if (part === 'P2') { key = 'cache-P2'; } else { key = 'cache-P3'; }
-      await this.cache.getItem(key)
-        .then((data) => {
+    if (this.segment === "univ") {
+      const key =
+        part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
+      await this.cache
+        .getItem(key)
+        .then(data => {
           this.presentLoading();
           this.news = data.news;
           this.shownNews = data.shownNews;
@@ -220,7 +225,7 @@ export class NewsPage {
           this.updateDisplayedNews();
         })
         .catch(() => {
-          console.log('Oh no! My data is expired or doesn\'t exist!');
+          console.log("Oh no! My data is expired or doesn't exist!");
           this.loadNews(key);
         });
     } else {
@@ -232,28 +237,26 @@ export class NewsPage {
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
-    // Check connexion before load news
     if (this.connService.isOnline()) {
       this.presentLoading();
       let actu = this.subsegment;
-      if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
-      this.newsService.getNews(actu)
-        .then(
-          result => {
-            this.news = result.news;
-            if (key) { this.cache.saveItem(key, result); }
-            this.shownNews = result.shownNews;
-            this.searching = false;
-            this.nonews = this.news.length == 0;
-            this.updateDisplayedNews();
-          });
-      // If no connexion pop an alert and go back to previous page
+      if (this.segment === "fac" && this.facsegment === "news") {
+        actu = this.rss;
+      }
+      this.newsService.getNews(actu).then(result => {
+        this.news = result.news;
+        if (key) {
+          this.cache.saveItem(key, result);
+        }
+        this.shownNews = result.shownNews;
+        this.searching = false;
+        this.nonews = this.news.length == 0;
+        this.updateDisplayedNews();
+      });
     } else {
-      // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
-
     }
   }
 
@@ -261,8 +264,10 @@ export class NewsPage {
   public updateDisplayedNews() {
     this.searching = true;
     this.displayedNews = this.news;
-    this.displayedNews = this.news.filter((item) => {
-      return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
+    this.displayedNews = this.news.filter(item => {
+      return (
+        item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+      );
     });
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews == 0;
@@ -273,6 +278,6 @@ export class NewsPage {
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push('NewsDetailsPage', { 'news': news });
+    this.navCtrl.push("NewsDetailsPage", { news: news });
   }
 }

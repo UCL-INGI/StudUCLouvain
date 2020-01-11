@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+
+import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { EventsFilterPage } from './events-filter';
@@ -7,8 +8,8 @@ import { EventsFilterPage } from './events-filter';
 @NgModule({
   declarations: [EventsFilterPage],
   imports: [
-  	IonicPageModule.forChild(EventsFilterPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(EventsFilterPage),
+    TranslateModule.forChild()
   ]
 })
-export class EventsFilterModule { }
+export class EventsFilterModule {}

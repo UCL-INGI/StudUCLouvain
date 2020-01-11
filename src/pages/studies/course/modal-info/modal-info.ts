@@ -19,87 +19,93 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController }
-        from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-import { IonicPage } from 'ionic-angular';
-import { StudentService} from '../../../../providers/wso2-services/student-service';
+import { Component } from '@angular/core';
+
+import { StudentService } from '../../../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-modal-info',
-  templateUrl: 'modal-info.html',
+  selector: "page-modal-info",
+  templateUrl: "modal-info.html"
 })
 export class ModalInfoPage {
-  course = this.navParams.get('course');
-  year = this.navParams.get('year');
-  information:any;
+  course = this.navParams.get("course");
+  year = this.navParams.get("year");
+  information: any;
   langue;
 
-
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
 
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public studentService: StudentService)
-  {
+    public studentService: StudentService
+  ) {
     this.getInfo().then(data => {
       console.log(data);
-      this.information=data;
-      this.langue=data.langue;
+      this.information = data;
+      this.langue = data.langue;
     });
   }
 
-    getInfo() : Promise<any>{
-      let response:any;
-      return new Promise(resolve => {
-        this.studentService.checkCourse(this.course.acronym,this.year).then(
-        (data) =>{
+  getInfo(): Promise<any> {
+    let response: any;
+    return new Promise(resolve => {
+      this.studentService
+        .checkCourse(this.course.acronym, this.year)
+        .then(data => {
           console.log(data);
-          let res:any = data;
+          let res: any = data;
           console.log(res);
-          if(data === 400) {
-
+          if (data === 400) {
             this.closeModal();
             resolve(400);
-          }
-          else{
-             let cahier = '';
+          } else {
+            let cahier = "";
             let campus = res.campus;
             let teacher = res.fichesIntervenants;
             let offres = res.fichesOffres;
             let langue = res.langueEnseignement;
             let loca = res.localisation;
             let credit = res.ects;
-            let entite = res.entiteCharge
+            let entite = res.entiteCharge;
             let progpre = res.programmesEtPrerequis;
-            let quadri = res.quadrimestre
+            let quadri = res.quadrimestre;
             let resume = res.resumeCoursMap.entry[1].value;
-            let vol = {'vol1':res.volTot1, 'vol2' : res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
-            if(res.cahierChargesExiste){
+            let vol = {
+              vol1: res.volTot1,
+              vol2: res.volTot2,
+              vol1Coef: res.volTot1AvecCoef,
+              vol2Coef: res.volTot2AvecCoef
+            };
+            if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
- 
             }
 
-            response={'cahierCharges':cahier, 'offre' : offres,
-                        'campus':campus, 'entite': entite,
-                        'prof': teacher, 'localisation': loca,
-                        'credit' : credit, 'programmeprerequis' : progpre,
-                        'quadri' : quadri, 'resume': resume, 'volume' : vol, 'langue':langue
-                      };
-                      console.log(response);
+            response = {
+              cahierCharges: cahier,
+              offre: offres,
+              campus: campus,
+              entite: entite,
+              prof: teacher,
+              localisation: loca,
+              credit: credit,
+              programmeprerequis: progpre,
+              quadri: quadri,
+              resume: resume,
+              volume: vol,
+              langue: langue
+            };
+            console.log(response);
             resolve(response);
           }
-          
-        })
-      })    
-    }
+        });
+    });
+  }
 
-   closeModal() {
- 
-     this.viewCtrl.dismiss();
-   }
-
-
+  closeModal() {
+    this.viewCtrl.dismiss();
+  }
 }

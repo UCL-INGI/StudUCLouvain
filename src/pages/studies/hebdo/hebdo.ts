@@ -19,97 +19,103 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import {
+    AlertController, IonicPage, ItemSliding, ModalController, NavController, NavParams,
+    ToastController
+} from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ToastController, AlertController, ModalController  } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
+import { Calendar } from '@ionic-native/calendar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../../providers/utils-services/user-service';
 
-import { Calendar } from '@ionic-native/calendar';
-
 @IonicPage()
 @Component({
-  selector: 'page-hebdo',
-  templateUrl: 'hebdo.html'
+  selector: "page-hebdo",
+  templateUrl: "hebdo.html"
 })
-
 export class HebdoPage {
-  schedule : Array<any> = this.navParams.get('schedule');
+  schedule: Array<any> = this.navParams.get("schedule");
   shownGroup = null;
 
-  constructor(public navCtrl: NavController,
-              private calendar: Calendar,
-              public toastCtrl: ToastController,
-              public userS:UserService,
-              public modalCtrl: ModalController,
-              private alertCtrl : AlertController,
-              private translateService: TranslateService,
-              public navParams:NavParams)
-  {
-
+  constructor(
+    public navCtrl: NavController,
+    private calendar: Calendar,
+    public toastCtrl: ToastController,
+    public userS: UserService,
+    public modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private translateService: TranslateService,
+    public navParams: NavParams
+  ) {
     console.log(this.schedule);
     console.log(new Date("2017-10-17"));
   }
 
-
-  ionViewDidLoad() {
-
-  }
-
+  ionViewDidLoad() {}
 
   toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
   }
 
-
   isGroupShown(group) {
-      return this.shownGroup === group;
+    return this.shownGroup === group;
   }
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
-  addToCalendar(slidingItem : ItemSliding, activity : any){
-    let options:any = {
-      firstReminderMinutes:15
+  addToCalendar(slidingItem: ItemSliding, activity: any) {
+    let options: any = {
+      firstReminderMinutes: 15
     };
-    let message:string;
-    this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
-    this.calendar.createEventWithOptions(activity.name +" : " + activity.type,
-      activity.entitycode, null, new Date(activity.eventstarttime),
-      new Date(activity.eventendtime), options).then(() => {
+    let message: string;
+    this.translateService.get("COURSE.MESSAGE").subscribe((res: string) => {
+      message = res;
+    });
+    this.calendar
+      .createEventWithOptions(
+        activity.name + " : " + activity.type,
+        activity.entitycode,
+        null,
+        new Date(activity.eventstarttime),
+        new Date(activity.eventendtime),
+        options
+      )
+      .then(() => {
         let toast = this.toastCtrl.create({
           message: message,
           duration: 3000
         });
         toast.present();
         slidingItem.close();
+      });
+    this.alert();
+  }
+
+  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
+  alert() {
+    let title: string;
+    let message: string;
+    this.translateService.get("COURSE.WARNING").subscribe((res: string) => {
+      title = res;
     });
-      this.alert();
+    this.translateService.get("COURSE.MESSAGE3").subscribe((res: string) => {
+      message = res;
+    });
+    let disclaimerAlert = this.alertCtrl.create({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          text: "OK",
+          handler: data => {}
+        }
+      ]
+    });
+    disclaimerAlert.present();
   }
-
-    /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
-  alert(){
-    let title:string;
-    let message:string;
-    this.translateService.get('COURSE.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res:string) => {message=res;});
-         let disclaimerAlert = this.alertCtrl.create({
-            title: title,
-            message: message,
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        });
-        disclaimerAlert.present();
-  }
-
-
 }

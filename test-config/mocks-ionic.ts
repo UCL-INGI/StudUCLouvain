@@ -96,13 +96,13 @@ export class SplashScreenMock extends SplashScreen {
 
 export class NavMock {
   public pop(): any {
-    return new Promise(function(resolve: Function): void {
+    return new Promise(function (resolve: Function): void {
       resolve();
     });
   }
 
   public push(): any {
-    return new Promise(function(resolve: Function): void {
+    return new Promise(function (resolve: Function): void {
       resolve();
     });
   }
@@ -139,7 +139,7 @@ export class TranslateServiceMock {
   }
 }
 
-export class DeepLinkerMock {}
+export class DeepLinkerMock { }
 
 export class MenuMock {
   public static instance(): any {
@@ -238,19 +238,19 @@ export class LoadingMock extends BaseMock {
 }
 
 export class UserServiceMock {
-  constructor() {}
+  constructor() { }
   getCampus() {
     return "LLN";
   }
 }
 
 export class Wso2ServiceMock {
-  constructor() {}
+  constructor() { }
   getToken() {
     return "XXXX";
   }
 }
 
 export class RssServiceMock {
-  constructor() {}
+  constructor() { }
 }

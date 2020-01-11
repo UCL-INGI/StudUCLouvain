@@ -4,7 +4,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -25,19 +25,19 @@ export class NewsItem {
   title: string;
   image: string;
   trimmedDescription: string;
-  hidden : boolean;
-  guid : string;
-  pubDate : Date;
+  hidden: boolean;
+  guid: string;
+  pubDate: Date;
 
   constructor(
     description: string,
     link: string,
     title: string,
-    image:string,
+    image: string,
     trimmedDescription: string,
     hidden: boolean,
     guid: string,
-    pubDate : Date
+    pubDate: Date
   ) {
     this.description = description;
     this.link = link;

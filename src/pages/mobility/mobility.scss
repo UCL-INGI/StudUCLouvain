@@ -20,26 +20,27 @@
 */
 
 page-mobility {
-    .scroll-content{
-        margin-top: 56px;
-    }
+  .scroll-content {
+    margin-top: 56px;
+  }
 
-    ion-grid{
+  ion-grid {
+    height: 100%;
+
+    ion-row {
+      height: 33%;
+
+      ion-col {
         height: 100%;
 
-        ion-row{
-            height: 33%;
-
-            ion-col{
-                height: 100%;
-
-                img{
-                    max-height:100%;
-                }
-                p{
-                    margin-top: 0px;
-                }
-            }
+        img {
+          max-height: 100%;
         }
+
+        p {
+          margin-top: 0px;
+        }
+      }
     }
+  }
 }

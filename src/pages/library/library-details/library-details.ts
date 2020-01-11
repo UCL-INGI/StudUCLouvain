@@ -19,46 +19,47 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
 
 import { LibraryItem } from '../../../app/entity/libraryItem';
+import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
+import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-library-details',
-  templateUrl: 'library-details.html',
+  selector: "page-library-details",
+  templateUrl: "library-details.html",
   animations: [
-    trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
-      transition('void => *', animate('0s')),
-      transition('* <=> *', animate('250ms ease-in-out'))
+    trigger("expand", [
+      state("true", style({ height: "45px" })),
+      state("false", style({ height: "0" })),
+      transition("void => *", animate("0s")),
+      transition("* <=> *", animate("250ms ease-in-out"))
     ])
   ]
 })
-
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
   searching: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public libService: LibrariesService, public connService: ConnectivityService) {
-    this.libDetails = navParams.get('lib');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public libService: LibrariesService,
+    public connService: ConnectivityService
+  ) {
+    this.libDetails = navParams.get("lib");
     this.searching = true;
-    if(this.connService.isOnline()) {
-      this.libService.loadLibDetails(this.libDetails).then(
-        res => {
-          let result:any = res;
-          this.libDetails = result.libDetails;
-          this.searching = false;
-        }
-      );
+    if (this.connService.isOnline()) {
+      this.libService.loadLibDetails(this.libDetails).then(res => {
+        let result: any = res;
+        this.libDetails = result.libDetails;
+        this.searching = false;
+      });
     } else {
       this.searching = false;
       this.connService.presentConnectionAlert();
@@ -67,20 +68,20 @@ export class LibraryDetailsPage {
 
   /*Open or close the schedule*/
   toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
   }
 
   /*The selectionned schedule is displayed?*/
   isGroupShown(group) {
-      return this.shownGroup === group;
+    return this.shownGroup === group;
   }
 
   /*Open the page of the library for more details*/
   openPage(url: string) {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 }

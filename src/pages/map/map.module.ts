@@ -7,9 +7,6 @@ import { MapPage } from './map';
 
 @NgModule({
   declarations: [MapPage],
-  imports: [
-    IonicPageModule.forChild(MapPage),
-    TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(MapPage), TranslateModule.forChild()]
 })
-export class MapPageModule { }
+export class MapPageModule {}

@@ -4,7 +4,7 @@
     Date : July 2017
     This file is part of UCLCampus
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    
+
     UCLCampus is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or

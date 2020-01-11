@@ -19,31 +19,30 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component} from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { IonicPage } from 'ionic-angular';
-import { AppVersion } from '@ionic-native/app-version';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
+import { Component } from '@angular/core';
+import { AppVersion } from '@ionic-native/app-version';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @IonicPage()
 @Component({
-  selector: 'page-credit',
-  templateUrl: 'credit.html',
+  selector: "page-credit",
+  templateUrl: "credit.html"
 })
-
 export class CreditPage {
   title: any;
   shownGroup = null;
   version;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public modalCtrl: ModalController, 
-              private iab: InAppBrowser,
-              private appVersion: AppVersion) 
-  {
-    this.title = this.navParams.get('title');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private iab: InAppBrowser,
+    private appVersion: AppVersion
+  ) {
+    this.title = this.navParams.get("title");
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;
       console.log(this.version);
@@ -52,6 +51,6 @@ export class CreditPage {
   }
 
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, "_system", "location=yes");
   }
 }

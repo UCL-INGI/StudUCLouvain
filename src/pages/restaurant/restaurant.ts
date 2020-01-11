@@ -19,21 +19,18 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-restaurant',
-  templateUrl: 'restaurant.html'
+  selector: "page-restaurant",
+  templateUrl: "restaurant.html"
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams) 
-  {
-    this.title = this.navParams.get('title');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.title = this.navParams.get("title");
   }
-
 }

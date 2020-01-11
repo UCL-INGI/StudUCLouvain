@@ -19,10 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
-
 import { Events } from 'ionic-angular';
+
+import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+
 //import { EventItem } from '../../app/entity/eventItem';
 //import { SportItem } from '../../app/entity/sportItem';
 
@@ -33,9 +34,9 @@ export class UserService {
   favorites: string[] = [];
   sports: string[] = [];
   campus: string = "";
-  slots: Array<{course:string, TP:string, CM:string}> = [];
+  slots: Array<{ course: string, TP: string, CM: string }> = [];
   fac: string = "";
-  disclaimer:boolean = false;
+  disclaimer: boolean = false;
 
   constructor(
     public eventss: Events,
@@ -52,82 +53,76 @@ export class UserService {
     this.getDisclaimer();
   }
 
-  getFavorites(){
-    this.storage.get('listEvents').then((data) =>
-    {
-      if(data==null){
-        this.favorites=[];
+  getFavorites() {
+    this.storage.get('listEvents').then((data) => {
+      if (data == null) {
+        this.favorites = [];
       } else {
-        this.favorites=data;
-        }
+        this.favorites = data;
+      }
     });
   }
 
-  getSports(){
-    this.storage.get('listSports').then((data) =>
-    {
-      if(data==null){
-        this.sports=[];
+  getSports() {
+    this.storage.get('listSports').then((data) => {
+      if (data == null) {
+        this.sports = [];
       } else {
-        this.sports=data;
-        }
+        this.sports = data;
+      }
     });
   }
 
-  getCampus(){
-    this.storage.get('campus').then((data) =>
-    {
-      if(data == null){
+  getCampus() {
+    this.storage.get('campus').then((data) => {
+      if (data == null) {
         this.campus = "";
       } else {
-        this.campus=data;
-        }
+        this.campus = data;
+      }
     });
   }
 
-  getDisclaimer(){
-    this.storage.get('disclaimer').then((data) =>
-    {
-      if(data==null){
-        this.disclaimer=false;
+  getDisclaimer() {
+    this.storage.get('disclaimer').then((data) => {
+      if (data == null) {
+        this.disclaimer = false;
       } else {
-        this.disclaimer=data;
-        }
+        this.disclaimer = data;
+      }
     });
   }
 
-  getFac(){
-    this.storage.get('fac').then((data) =>
-    {
-      if(data == null){
+  getFac() {
+    this.storage.get('fac').then((data) => {
+      if (data == null) {
         this.fac = "";
       } else {
-        this.fac=data;
-        }
+        this.fac = data;
+      }
     });
   }
 
-  getSlots(){
-    this.storage.get('slots').then((data) =>
-    {
-      if(data==null){
+  getSlots() {
+    this.storage.get('slots').then((data) => {
+      if (data == null) {
         this.slots = [];
       }
-      else{
+      else {
         this.slots = data;
       }
     })
   }
 
-  getSlotCM(acronym:string){
+  getSlotCM(acronym: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].CM;
+    if (index > -1) return this.slots[index].CM;
     else return "";
   }
 
-  getSlotTP(acronym:string){
+  getSlotTP(acronym: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].TP;
+    if (index > -1) return this.slots[index].TP;
     else return "";
   }
 
@@ -135,52 +130,52 @@ export class UserService {
     return (this.favorites.indexOf(itemGuid) > -1);
   };
 
-  hasFavoriteS(itemGuid : string) {
+  hasFavoriteS(itemGuid: string) {
     return (this.sports.indexOf(itemGuid) > -1);
   };
 
   hasCampus() {
-    return(this.campus.length > 0);
+    return (this.campus.length > 0);
   }
 
   hasFac() {
-    return(this.fac.length > 0);
+    return (this.fac.length > 0);
   }
 
-  hasDisclaimer(){
-    return(this.disclaimer == true);
+  hasDisclaimer() {
+    return (this.disclaimer == true);
   }
 
-  hasSlotTP(acronym:string){
+  hasSlotTP(acronym: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
-      return this.slots[index].TP.length >0;
+    if (index > -1) {
+      return this.slots[index].TP.length > 0;
     }
     else return index > -1;
 
   }
 
-  hasSlotCM(acronym:string){
+  hasSlotCM(acronym: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
-      return this.slots[index].CM.length >0;
+    if (index > -1) {
+      return this.slots[index].CM.length > 0;
     }
     else return index > -1;
   }
 
-  addDisclaimer(discl:boolean){
+  addDisclaimer(discl: boolean) {
     this.disclaimer = discl;
-    this.storage.set('disclaimer',this.disclaimer);
+    this.storage.set('disclaimer', this.disclaimer);
   }
 
-  removeDisclaimer(discl:boolean){
+  removeDisclaimer(discl: boolean) {
     this.disclaimer = false;
     this.storage.set('disclaimer', this.disclaimer);
   }
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
-    this.storage.set('listEvents',this.favorites);
+    this.storage.set('listEvents', this.favorites);
 
   };
 
@@ -189,12 +184,12 @@ export class UserService {
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
-    this.storage.set('listEvents',this.favorites);
+    this.storage.set('listEvents', this.favorites);
   };
 
-  addFavoriteS(itemGuid : string) {
+  addFavoriteS(itemGuid: string) {
     this.sports.push(itemGuid);
-    this.storage.set('listSports',this.sports);
+    this.storage.set('listSports', this.sports);
   };
 
   removeFavoriteS(itemGuid: string) {
@@ -202,68 +197,68 @@ export class UserService {
     if (index > -1) {
       this.sports.splice(index, 1);
     }
-    this.storage.set('listSports',this.sports);
+    this.storage.set('listSports', this.sports);
   };
 
 
   addCampus(campus: string) {
     this.campus = campus;
-    this.storage.set('campus',this.campus);
+    this.storage.set('campus', this.campus);
   };
 
   removeCampus(campus: string) {
-    this.campus="";
-    this.storage.set('campus',this.campus);
+    this.campus = "";
+    this.storage.set('campus', this.campus);
   };
 
   addFac(fac: string) {
     this.fac = fac;
-    this.storage.set('fac',this.fac);
+    this.storage.set('fac', this.fac);
   };
 
   removeFac(fac: string) {
-    this.fac="";
-    this.storage.set('fac',this.fac);
+    this.fac = "";
+    this.storage.set('fac', this.fac);
   };
 
-  addSlotTP(acronym:string, slot:string){
+  addSlotTP(acronym: string, slot: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+    if (index > -1) {
       this.slots[index].TP = slot;
     }
-    else{
-      let item = {course:acronym,TP:slot,CM:""};
+    else {
+      let item = { course: acronym, TP: slot, CM: "" };
       this.slots.push(item);
     }
-    this.storage.set('slots',this.slots);
+    this.storage.set('slots', this.slots);
   }
 
-  removeSlotTP(acronym:string){
-      var index = this.slots.findIndex(item => item.course === acronym);
-      if(index > -1){
-        this.slots[index].TP = "";
-      }
-      this.storage.set('slots',this.slots);
-  }
-
-  addSlotCM(acronym:string, slot:string){
+  removeSlotTP(acronym: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+    if (index > -1) {
+      this.slots[index].TP = "";
+    }
+    this.storage.set('slots', this.slots);
+  }
+
+  addSlotCM(acronym: string, slot: string) {
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
       this.slots[index].CM = slot;
     }
-    else{
-      let item = {course:acronym,TP:"",CM:slot};
+    else {
+      let item = { course: acronym, TP: "", CM: slot };
       this.slots.push(item);
     }
-    this.storage.set('slots',this.slots);
+    this.storage.set('slots', this.slots);
   }
 
-  removeSlotCM(acronym:string){
-      var index = this.slots.findIndex(item => item.course === acronym);
-      if(index > -1){
-        this.slots[index].CM = "";
-      }
-      this.storage.set('slots',this.slots);
+  removeSlotCM(acronym: string) {
+    var index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
+      this.slots[index].CM = "";
+    }
+    this.storage.set('slots', this.slots);
   }
 
 }

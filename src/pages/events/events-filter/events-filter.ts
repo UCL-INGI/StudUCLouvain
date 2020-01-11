@@ -19,19 +19,23 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
 
 import { EventsService } from '../../../providers/rss-services/events-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-events-filter',
-  templateUrl: 'events-filter.html'
+  selector: "page-events-filter",
+  templateUrl: "events-filter.html"
 })
 export class EventsFilterPage {
-  categories: Array<{name: string, iconCategory: string, isChecked: boolean}> = [];
+  categories: Array<{
+    name: string;
+    iconCategory: string;
+    isChecked: boolean;
+  }> = [];
   dateRange: any;
   results: any = [];
 
@@ -48,7 +52,7 @@ export class EventsFilterPage {
       this.categories.push({
         name: filterName,
         iconCategory: this.eventService.getIconCategory(filterName),
-        isChecked: (excludedFilters.indexOf(filterName) === -1)
+        isChecked: excludedFilters.indexOf(filterName) === -1
       });
     }
   }
@@ -69,13 +73,15 @@ export class EventsFilterPage {
 
   /*Pass Back a New Array of Categories Name to Exclude*/
   applyFilters() {
-    let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
+    let excludedFilters = this.categories
+      .filter(c => !c.isChecked)
+      .map(c => c.name);
     this.dismiss(excludedFilters);
   }
 
   /*Cancel Filter*/
   dismiss(data?: any) {
-    if(typeof data == "undefined" ) {
+    if (typeof data == "undefined") {
       data = [];
     }
     this.results.push(data);

@@ -1,4 +1,4 @@
-import {  BehaviorSubject } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
 
 /**
  * @class NavParamsMock
@@ -39,13 +39,13 @@ export class FormMock {
 export class NavMock {
 
   public pop(): any {
-    return new Promise(function(resolve: Function): void {
+    return new Promise(function (resolve: Function): void {
       resolve();
     });
   }
 
   public push(): any {
-    return new Promise(function(resolve: Function): void {
+    return new Promise(function (resolve: Function): void {
       resolve();
     });
   }
@@ -67,7 +67,7 @@ export class NavMock {
  * @class PlatformMock
  */ new BehaviorSubject(this.HOME_VIEW);
 export class PlatformMock {
-  public ready(): Promise<{String}> {
+  public ready(): Promise<{ String }> {
     return new Promise((resolve) => {
       return 'READY';
     });

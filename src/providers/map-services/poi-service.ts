@@ -19,18 +19,20 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
+
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
 import { MapLocation } from '../../app/entity/mapLocation';
 import { UserService } from '../utils-services/user-service';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class POIService {
 
   zones: any = [];
   url = '';
-  urlLLN ='assets/data/resourcesLLN.json';
+  urlLLN = 'assets/data/resourcesLLN.json';
   urlMons = 'assets/data/resourcesMons.json';
   urlWol = 'assets/data/resourcesWoluwe.json';
   old = '';
@@ -43,12 +45,12 @@ export class POIService {
   }
 
   /*Put the good campus for the user to display the good map with the good locations*/
-  update(){
+  update() {
     let campus = this.user.campus;
-    if(campus == "LLN") this.url = this.urlLLN;
-    if(campus == "Woluwe") this.url = this.urlWol;
-    if(campus == "Mons") this.url = this.urlMons;
-    if(campus != this.old) {
+    if (campus == "LLN") this.url = this.urlLLN;
+    if (campus == "Woluwe") this.url = this.urlWol;
+    if (campus == "Mons") this.url = this.urlMons;
+    if (campus != this.old) {
       this.zones = [];
       this.old = campus;
     }
@@ -57,64 +59,71 @@ export class POIService {
   /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
-    if(this.zones.length == 0) return new Promise(resolve => {
+    if (this.zones.length == 0) return new Promise(resolve => {
       this.http.get(this.url).map(res => res).subscribe(data => {
-          let tmpZones = data['zones'];
-          let auditoiresLength = tmpZones.auditoires.length;
-          let locauxLength = tmpZones.locaux.length;
-          let bibliothequesLength = tmpZones.bibliotheques.length;
-          let sportsLength = tmpZones.sports.length;
-          let restauULength = tmpZones.restaurants_universitaires.length;
-          let servicesLength = tmpZones.services.length;
-          let parkingsLength = tmpZones.parkings.length;
+        let tmpZones = data['zones'];
+        let auditoiresLength = tmpZones.auditoires.length;
+        let locauxLength = tmpZones.locaux.length;
+        let bibliothequesLength = tmpZones.bibliotheques.length;
+        let sportsLength = tmpZones.sports.length;
+        let restauULength = tmpZones.restaurants_universitaires.length;
+        let servicesLength = tmpZones.services.length;
+        let parkingsLength = tmpZones.parkings.length;
 
-          //Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
-          function compare(a,b) {
-            if (a.nom < b.nom)
-              return -1;
-            if (a.nom > b.nom)
-              return 1;
-            return 0;
-          }
+        //Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
+        function compare(a, b) {
+          if (a.nom < b.nom)
+            return -1;
+          if (a.nom > b.nom)
+            return 1;
+          return 0;
+        }
 
-          let newZone = {
-            auditoires: {
-              list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
-              listChecked: Array(auditoiresLength).fill(false),
-                        showDetails: false},
-            locaux: {
-              list: this.createMapLocations(tmpZones.locaux.sort(compare)),
-              listChecked: Array(locauxLength).fill(false),
-                        showDetails: false},
-            bibliotheques: {
-              list: this.createMapLocations(tmpZones.bibliotheques.sort(compare)),
-              listChecked: Array(bibliothequesLength).fill(false),
-                        showDetails: false},
-            sports: {
-              list: this.createMapLocations(tmpZones.sports.sort(compare)),
-              listChecked: Array(sportsLength).fill(false),
-                        showDetails: false},
-            restaurants_universitaires: {
-              list: this.createMapLocations(tmpZones.restaurants_universitaires.sort(compare)),
-              listChecked: Array(restauULength).fill(false),
-                        showDetails: false},
-            services: {
-              list: this.createMapLocations(tmpZones.services.sort(compare)),
-              listChecked: Array(servicesLength).fill(false),
-                        showDetails: false},
-            parkings: {
-              list: this.createMapLocations(tmpZones.parkings.sort(compare)),
-              listChecked: Array(parkingsLength).fill(false),
-                        showDetails: false},
-            icon: 'arrow-dropdown',
-          };
-          this.zones.push(newZone);
+        let newZone = {
+          auditoires: {
+            list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
+            listChecked: Array(auditoiresLength).fill(false),
+            showDetails: false
+          },
+          locaux: {
+            list: this.createMapLocations(tmpZones.locaux.sort(compare)),
+            listChecked: Array(locauxLength).fill(false),
+            showDetails: false
+          },
+          bibliotheques: {
+            list: this.createMapLocations(tmpZones.bibliotheques.sort(compare)),
+            listChecked: Array(bibliothequesLength).fill(false),
+            showDetails: false
+          },
+          sports: {
+            list: this.createMapLocations(tmpZones.sports.sort(compare)),
+            listChecked: Array(sportsLength).fill(false),
+            showDetails: false
+          },
+          restaurants_universitaires: {
+            list: this.createMapLocations(tmpZones.restaurants_universitaires.sort(compare)),
+            listChecked: Array(restauULength).fill(false),
+            showDetails: false
+          },
+          services: {
+            list: this.createMapLocations(tmpZones.services.sort(compare)),
+            listChecked: Array(servicesLength).fill(false),
+            showDetails: false
+          },
+          parkings: {
+            list: this.createMapLocations(tmpZones.parkings.sort(compare)),
+            listChecked: Array(parkingsLength).fill(false),
+            showDetails: false
+          },
+          icon: 'arrow-dropdown',
+        };
+        this.zones.push(newZone);
         resolve(this.zones);
       });
     });
-      else return new Promise(resolve => {
-        resolve(this.zones);
-      });
+    else return new Promise(resolve => {
+      resolve(this.zones);
+    });
   }
 
   /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
@@ -122,59 +131,59 @@ export class POIService {
     let locationsList: MapLocation[] = [];
     for (let elem of list) {
       let newLocation = new MapLocation(elem.nom,
-                                    elem.adresse,
-                                    elem.coord.lat,
-                                    elem.coord.lng,
-                                    elem.sigle);
+        elem.adresse,
+        elem.coord.lat,
+        elem.coord.lng,
+        elem.sigle);
       locationsList.push(newLocation);
     }
     return locationsList;
   }
 
- /* private applyHaversine(locations, userLocation:any){
+  /* private applyHaversine(locations, userLocation:any){
 
-    locations.map((location) => {
+     locations.map((location) => {
 
-      let placeLocation = {
-        lat: location.latitude,
-        lng: location.longitude
-      };
+       let placeLocation = {
+         lat: location.latitude,
+         lng: location.longitude
+       };
 
-      location.distance = this.getDistanceBetweenPoints(
-        userLocation,
-        placeLocation,
-        'miles'
-      ).toFixed(2);
-    });
+       location.distance = this.getDistanceBetweenPoints(
+         userLocation,
+         placeLocation,
+         'miles'
+       ).toFixed(2);
+     });
 
-    return locations;
-  }*/
+     return locations;
+   }*/
 
- /* private getDistanceBetweenPoints(start, end, units){
+  /* private getDistanceBetweenPoints(start, end, units){
 
-    let earthRadius = {
-      miles: 3958.8,
-      km: 6371
-    };
+     let earthRadius = {
+       miles: 3958.8,
+       km: 6371
+     };
 
-    let R = earthRadius[units || 'miles'];
-    let lat1 = start.lat;
-    let lon1 = start.lng;
-    let lat2 = end.lat;
-    let lon2 = end.lng;
+     let R = earthRadius[units || 'miles'];
+     let lat1 = start.lat;
+     let lon1 = start.lng;
+     let lat2 = end.lat;
+     let lon2 = end.lng;
 
-    let dLat = this.toRad((lat2 - lat1));
-    let dLon = this.toRad((lon2 - lon1));
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
-    Math.sin(dLon / 2) *
-    Math.sin(dLon / 2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    let d = R * c;
+     let dLat = this.toRad((lat2 - lat1));
+     let dLon = this.toRad((lon2 - lon1));
+     let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+     Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
+     Math.sin(dLon / 2) *
+     Math.sin(dLon / 2);
+     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+     let d = R * c;
 
-    return d;
+     return d;
 
-  }*/
+   }*/
 
   /*private toRad(x){
     return x * Math.PI / 180;

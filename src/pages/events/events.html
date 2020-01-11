@@ -25,7 +25,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28"/>
+    <img src="./assets/img/s.png" height="28" />
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button (tap)="presentFilter()">
@@ -46,18 +46,16 @@
 <!--BODY-->
 <ion-content class="feed-list">
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
-  <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
+  <ion-list #eventsList *ngFor="let item of displayedEventsD" [hidden]="shownEvents === 0">
 
     <ion-item-divider *ngIf="item.event.length > 0" (tap)="toggleGroup(item.weeks)" text-center>
-        <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
+      <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}}
+      &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
     </ion-item-divider>
 
     <ion-list *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks)">
@@ -81,11 +79,13 @@
             <ion-icon name='calendar'></ion-icon>
           </button>
 
-          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
+          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'"
+            class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
           </button>
 
-          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')"
+            *ngIf="segment === 'favorites'" class="large-icon">
             <ion-icon name='close'></ion-icon>
           </button>
         </ion-item-options>
@@ -99,5 +99,6 @@
 </ion-content>
 
 <ion-footer text-center *ngIf="segment=='all'">
-  <ion-icon name='help-circle'></ion-icon><p>{{'EVENTS.SWIPE' | translate}}</p>
+  <ion-icon name='help-circle'></ion-icon>
+  <p>{{'EVENTS.SWIPE' | translate}}</p>
 </ion-footer>

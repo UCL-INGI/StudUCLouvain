@@ -24,11 +24,13 @@
     <ion-buttons start>
       <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
-    <ion-row><ion-col>
-    <ion-title>
-      {{'EVENTS.FILTER' | translate}}
-    </ion-title>
-  </ion-col></ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-title>
+          {{'EVENTS.FILTER' | translate}}
+        </ion-title>
+      </ion-col>
+    </ion-row>
     <ion-buttons end>
       <button ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
@@ -38,11 +40,12 @@
 <!--BODY-->
 <ion-content class="outer-content">
   <ion-item>
-    <ion-label *ngIf="dateRange > 1" center >
-       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}} {{'EVENTS.TIMEEVENTS3' | translate}}
+    <ion-label *ngIf="dateRange > 1" center>
+      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+      {{'EVENTS.TIMEEVENTS3' | translate}}
     </ion-label>
-    <ion-label *ngIf="dateRange == 1" center >
-       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
+    <ion-label *ngIf="dateRange == 1" center>
+      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
