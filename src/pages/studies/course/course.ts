@@ -19,17 +19,19 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import {
+    AlertController, IonicPage, ItemSliding, ModalController, NavController, NavParams,
+    ToastController
+} from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ToastController, AlertController, ModalController  } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
+import { Calendar } from '@ionic-native/calendar';
 import { TranslateService } from '@ngx-translate/core';
 
+import { Activity } from '../../../app/entity/activity';
+import { Course } from '../../../app/entity/course';
 import { CourseService } from '../../../providers/studies-services/course-service';
 import { UserService } from '../../../providers/utils-services/user-service';
-
-import { Course } from '../../../app/entity/course';
-import { Activity } from '../../../app/entity/activity'
-import { Calendar } from '@ionic-native/calendar';
 
 @IonicPage()
 @Component({

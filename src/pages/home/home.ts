@@ -19,17 +19,20 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { NavParams, NavController, App, AlertController, LoadingController, FabContainer, Content} from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { MyApp } from '../../app/app.component';
-import { Market } from '@ionic-native/market';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage } from 'ionic-angular';
+import {
+    AlertController, App, Content, FabContainer, IonicPage, LoadingController, NavController,
+    NavParams
+} from 'ionic-angular';
 
+import { Component, ViewChild } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { TranslateService } from '@ngx-translate/core';
+
+import { MyApp } from '../../app/app.component';
 import { UserService } from '../../providers/utils-services/user-service';
 import { StudentService } from '../../providers/wso2-services/student-service';
 

@@ -19,14 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AppAvailability } from '@ionic-native/app-availability';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({

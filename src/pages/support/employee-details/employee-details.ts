@@ -19,16 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { RepertoireService } from '../../../providers/wso2-services/repertoire-service';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
 
 import { EmployeeItem } from '../../../app/entity/employeeItem';
-
+import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
+import { RepertoireService } from '../../../providers/wso2-services/repertoire-service';
 
 @IonicPage()
 @Component({

@@ -19,10 +19,12 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TutoPage } from './tuto';
+
+import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { TutoPage } from './tuto';
 
 @NgModule({
   declarations: [

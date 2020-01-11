@@ -19,9 +19,9 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+
 import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
-import { IonicPage } from 'ionic-angular';
 
 import { EventsService } from '../../../providers/rss-services/events-service';
 

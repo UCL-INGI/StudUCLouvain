@@ -19,20 +19,22 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild } from '@angular/core';
-import { App, AlertController, ItemSliding, List,
-  ModalController, NavParams, ToastController, LoadingController, NavController} from 'ionic-angular';
-import { Calendar } from '@ionic-native/calendar';
-import { FormControl } from '@angular/forms';
-import { IonicPage } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/debounceTime';
 
-import { UserService } from '../../providers/utils-services/user-service';
-import { SportsService } from '../../providers/rss-services/sports-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import {
+    AlertController, App, IonicPage, ItemSliding, List, LoadingController, ModalController,
+    NavController, NavParams, ToastController
+} from 'ionic-angular';
+
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Calendar } from '@ionic-native/calendar';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SportItem } from '../../app/entity/sportItem';
+import { SportsService } from '../../providers/rss-services/sports-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({

@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-//import { Http } from '@angular/http';
-import { HttpLoaderFactory } from '../../app/app.module'
-import { HttpClient } from '@angular/common/http';
-import { ParamPage } from './param';
 
+import { HttpClient } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+//import { Http } from '@angular/http';
+import { HttpLoaderFactory } from '../../app/app.module';
+import { ParamPage } from './param';
 
 @NgModule({
   declarations: [ParamPage],

@@ -19,21 +19,22 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import {
+    AlertController, IonicPage, MenuController, ModalController, NavController, NavParams, Platform,
+    ToastController
+} from 'ionic-angular';
+
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { AlertController, MenuController, ModalController, ToastController } from 'ionic-angular';
-import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { IonicPage } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { StudiesService} from '../../providers/studies-services/studies-service';
-import { StudentService} from '../../providers/wso2-services/student-service';
-import { Wso2Service} from '../../providers/wso2-services/wso2-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-
-import { Course } from '../../app/entity/course';
 import { AdeProject } from '../../app/entity/adeProject';
+import { Course } from '../../app/entity/course';
+import { StudiesService } from '../../providers/studies-services/studies-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { StudentService } from '../../providers/wso2-services/student-service';
+import { Wso2Service } from '../../providers/wso2-services/wso2-service';
 
 @IonicPage()
 @Component({
