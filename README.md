@@ -60,7 +60,12 @@ npm -v
     ```
 * Replace the value of "myapikey" by your Javascript key in the file StudUCLouvain/src/app/variables-config.ts
 
-
+## Build
+```bash
+$ ionic cordova build <platform>
+$ ionic cordova build <platform> --prod
+$ ionic cordova build <platform> --prod --release
+```
     
 ## Run
 
@@ -80,13 +85,6 @@ $ ionic cordova platform add <android/iOS>
 $ ionic cordova run <android/iOS>
 ```
 For iOS, a Mac device is mandatory.
-
-## Build
-```bash
-$ ionic cordova build <platform>
-$ ionic cordova build <platform> --prod
-$ ionic cordova build <platform> --prod --release
-```
 
 ## Tests
 
