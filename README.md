@@ -69,27 +69,17 @@ npm -v
 $ ionic serve
 ```
 
-### Android
+### Android/iOS
 
 * Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
     ```bash
     $ cordova prepare
     ```
 ```bash
-$ ionic cordova platform add android
-$ ionic cordova run android
+$ ionic cordova platform add <android/iOS>
+$ ionic cordova run <android/iOS>
 ```
-
-### iOS
-* Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
-    ```bash
-    $ cordova prepare
-    ```
-```bash
-Have to be runned on MacOS
-$ ionic cordova platform add ios
-$ ionic cordova build ios
-```
+For iOS, a Mac device is mandatory.
 
 ## Build
 ```bash
