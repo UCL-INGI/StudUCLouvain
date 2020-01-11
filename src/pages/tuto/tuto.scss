@@ -21,19 +21,19 @@
 
 page-tuto {
 
- 	#slides {
+  #slides {
 
- 		background : map-get($colors, uclouvain) !important;
- 	}
+    background: map-get($colors, uclouvain) !important;
+  }
 
-    ion-slide img {
+  ion-slide img {
 
-      height: 50vh !important;
-    }
- 
-    ion-slide p {
-    	color: white;
-    }
+    height: 50vh !important;
+  }
+
+  ion-slide p {
+    color: white;
+  }
 
 
 

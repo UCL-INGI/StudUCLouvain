@@ -132,7 +132,6 @@ export class StudiesPage {
       this.wso2Service
         .login(this.username, this.password)
         .catch(error => {
-          console.log(error);
           if (error.status == 400)
             this.translateService
               .get("STUDY.BADLOG")

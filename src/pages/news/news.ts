@@ -175,14 +175,12 @@ export class NewsPage {
       ) {
         if (this.segment === "univ") {
           const part = this.subsegment;
-          let key;
-          if (part === "P1") {
-            key = "cache-P1";
-          } else if (part === "P2") {
-            key = "cache-P2";
-          } else {
-            key = "cache-P3";
-          }
+          const key =
+            part === "P1"
+              ? "cache-P1"
+              : part === "P2"
+              ? "cache-P2"
+              : "cache-P3";
           this.cache.removeItem(key);
           this.loadNews(key);
         } else {
@@ -218,17 +216,10 @@ export class NewsPage {
 
   /*Check if data are cached or not */
   async cachedOrNot() {
-    // this.cache.removeItem('cache-P1');
-    let key;
     const part = this.subsegment;
     if (this.segment === "univ") {
-      if (part === "P1") {
-        key = "cache-P1";
-      } else if (part === "P2") {
-        key = "cache-P2";
-      } else {
-        key = "cache-P3";
-      }
+      const key =
+        part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
       await this.cache
         .getItem(key)
         .then(data => {
@@ -251,7 +242,6 @@ export class NewsPage {
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
-    // Check connexion before load news
     if (this.connService.isOnline()) {
       this.presentLoading();
       let actu = this.subsegment;
@@ -268,9 +258,7 @@ export class NewsPage {
         this.nonews = this.news.length == 0;
         this.updateDisplayedNews();
       });
-      // If no connexion pop an alert and go back to previous page
     } else {
-      // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
