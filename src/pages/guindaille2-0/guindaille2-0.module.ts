@@ -8,8 +8,8 @@ import { GuindaillePage } from './guindaille2-0';
 @NgModule({
   declarations: [GuindaillePage],
   imports: [
-  	IonicPageModule.forChild(GuindaillePage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(GuindaillePage),
+    TranslateModule.forChild()
   ]
 })
-export class GuindaillePageModule { }
+export class GuindaillePageModule {}

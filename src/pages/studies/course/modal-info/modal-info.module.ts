@@ -7,9 +7,6 @@ import { ModalInfoPage } from './modal-info';
 
 @NgModule({
   declarations: [ModalInfoPage],
-  imports: [
-  	IonicPageModule.forChild(ModalInfoPage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(ModalInfoPage), TranslateModule.forChild()]
 })
-export class ModalInfoPageModule { }
+export class ModalInfoPageModule {}

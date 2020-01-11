@@ -27,22 +27,22 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @IonicPage()
 @Component({
-  selector: 'page-credit',
-  templateUrl: 'credit.html',
+  selector: "page-credit",
+  templateUrl: "credit.html"
 })
-
 export class CreditPage {
   title: any;
   shownGroup = null;
   version;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public modalCtrl: ModalController, 
-              private iab: InAppBrowser,
-              private appVersion: AppVersion) 
-  {
-    this.title = this.navParams.get('title');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private iab: InAppBrowser,
+    private appVersion: AppVersion
+  ) {
+    this.title = this.navParams.get("title");
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;
       console.log(this.version);
@@ -51,6 +51,6 @@ export class CreditPage {
   }
 
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, "_system", "location=yes");
   }
 }

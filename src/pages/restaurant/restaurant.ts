@@ -25,15 +25,12 @@ import { Component } from '@angular/core';
 
 @IonicPage()
 @Component({
-  selector: 'page-restaurant',
-  templateUrl: 'restaurant.html'
+  selector: "page-restaurant",
+  templateUrl: "restaurant.html"
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams) 
-  {
-    this.title = this.navParams.get('title');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.title = this.navParams.get("title");
   }
-
 }

@@ -27,12 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TutoPage } from './tuto';
 
 @NgModule({
-  declarations: [
-    TutoPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(TutoPage),
-    TranslateModule.forChild()
-  ],
+  declarations: [TutoPage],
+  imports: [IonicPageModule.forChild(TutoPage), TranslateModule.forChild()]
 })
 export class TutoPageModule {}

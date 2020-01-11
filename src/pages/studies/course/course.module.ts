@@ -7,9 +7,6 @@ import { CoursePage } from './course';
 
 @NgModule({
   declarations: [CoursePage],
-  imports: [
-  	IonicPageModule.forChild(CoursePage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(CoursePage), TranslateModule.forChild()]
 })
-export class CoursePageModule { }
+export class CoursePageModule {}

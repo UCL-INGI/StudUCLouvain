@@ -30,8 +30,8 @@ import { LibrariesService } from '../../providers/wso2-services/libraries-servic
 
 @IonicPage()
 @Component({
-  selector: 'page-libraries',
-  templateUrl: 'libraries.html'
+  selector: "page-libraries",
+  templateUrl: "libraries.html"
 })
 export class LibrariesPage {
   title: any;
@@ -42,13 +42,12 @@ export class LibrariesPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
-    public libService : LibrariesService,
-    public connService : ConnectivityService,
-    private cache:CacheService)
-  {
-    this.title = this.navParams.get('title');
+    public libService: LibrariesService,
+    public connService: ConnectivityService,
+    private cache: CacheService
+  ) {
+    this.title = this.navParams.get("title");
     this.cachedOrNot();
-
   }
 
   ionViewDidLoad() {
@@ -57,12 +56,11 @@ export class LibrariesPage {
 
   /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
-    if(this.connService.isOnline()) {
-      this.cache.removeItem('cache-libraries');
-      this.loadLibraries('cache-libraries');
+    if (this.connService.isOnline()) {
+      this.cache.removeItem("cache-libraries");
+      this.loadLibraries("cache-libraries");
       refresher.complete();
-    }
-    else{
+    } else {
       this.connService.presentConnectionAlert();
       refresher.complete();
     }
@@ -72,15 +70,13 @@ export class LibrariesPage {
   loadLibraries(key?) {
     this.searching = true;
     //Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
-    if(this.connService.isOnline()) {
-      this.libService.loadLibraries().then(
-        res => {
-          let result:any = res;
-          this.libraries = result.libraries;
-          if(key)this.cache.saveItem(key, this.libraries);
-          this.searching = false;
-        }
-      );
+    if (this.connService.isOnline()) {
+      this.libService.loadLibraries().then(res => {
+        let result: any = res;
+        this.libraries = result.libraries;
+        if (key) this.cache.saveItem(key, this.libraries);
+        this.searching = false;
+      });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -90,22 +86,23 @@ export class LibrariesPage {
 
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push('LibraryDetailsPage', { 'lib': lib});
+    this.navCtrl.push("LibraryDetailsPage", { lib: lib });
   }
 
-  async cachedOrNot(){
-      //this.cache.removeItem('cache-event');
-      let key = 'cache-libraries';
-      await this.cache.getItem(key)
-        .then((data) => {
-          //this.presentLoading();
-          console.log("cached libraries");
-          this.libraries=data;
-          this.searching=false;
-        })
-        .catch(() => {
-          console.log("Oh no! My data is expired or doesn't exist!");
-          this.loadLibraries(key);
-        });
-    }
+  async cachedOrNot() {
+    //this.cache.removeItem('cache-event');
+    let key = "cache-libraries";
+    await this.cache
+      .getItem(key)
+      .then(data => {
+        //this.presentLoading();
+        console.log("cached libraries");
+        this.libraries = data;
+        this.searching = false;
+      })
+      .catch(() => {
+        console.log("Oh no! My data is expired or doesn't exist!");
+        this.loadLibraries(key);
+      });
+  }
 }

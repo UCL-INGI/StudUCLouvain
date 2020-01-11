@@ -29,26 +29,17 @@ import { UserService } from '../../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-exam',
-  templateUrl: 'exam.html'
+  selector: "page-exam",
+  templateUrl: "exam.html"
 })
-
 export class ExamPage {
+  constructor(
+    public navCtrl: NavController,
+    public toastCtrl: ToastController,
+    public userS: UserService,
+    public modalCtrl: ModalController,
+    public navParams: NavParams
+  ) {}
 
-
-  constructor(public navCtrl: NavController,
-              public toastCtrl: ToastController,
-              public userS:UserService,
-              public modalCtrl: ModalController,
-              public navParams:NavParams)
-  {
-
-  }
-
-
-  ionViewDidLoad() {
-
-  }
-
-
+  ionViewDidLoad() {}
 }

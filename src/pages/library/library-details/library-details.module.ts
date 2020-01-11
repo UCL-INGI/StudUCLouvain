@@ -8,8 +8,8 @@ import { LibraryDetailsPage } from './library-details';
 @NgModule({
   declarations: [LibraryDetailsPage],
   imports: [
-  	IonicPageModule.forChild(LibraryDetailsPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(LibraryDetailsPage),
+    TranslateModule.forChild()
   ]
 })
-export class LibraryDetailsPageModule { }
+export class LibraryDetailsPageModule {}

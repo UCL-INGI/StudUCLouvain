@@ -8,8 +8,8 @@ import { EventsFilterPage } from './events-filter';
 @NgModule({
   declarations: [EventsFilterPage],
   imports: [
-  	IonicPageModule.forChild(EventsFilterPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(EventsFilterPage),
+    TranslateModule.forChild()
   ]
 })
-export class EventsFilterModule { }
+export class EventsFilterModule {}

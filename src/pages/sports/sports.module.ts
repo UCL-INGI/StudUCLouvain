@@ -7,9 +7,6 @@ import { SportsPage } from './sports';
 
 @NgModule({
   declarations: [SportsPage],
-  imports: [
-  	IonicPageModule.forChild(SportsPage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(SportsPage), TranslateModule.forChild()]
 })
-export class SportsPageModule { }
+export class SportsPageModule {}

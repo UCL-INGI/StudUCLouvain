@@ -8,8 +8,8 @@ import { SportsFilterPage } from './sports-filter';
 @NgModule({
   declarations: [SportsFilterPage],
   imports: [
-  	IonicPageModule.forChild(SportsFilterPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(SportsFilterPage),
+    TranslateModule.forChild()
   ]
 })
-export class SportsFilterPageModule { }
+export class SportsFilterPageModule {}

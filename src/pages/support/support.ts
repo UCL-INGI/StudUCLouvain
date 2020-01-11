@@ -33,14 +33,14 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
 
 @IonicPage()
 @Component({
-  selector: 'page-support',
-  templateUrl: 'support.html',
+  selector: "page-support",
+  templateUrl: "support.html",
   animations: [
-    trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
-      transition('void => *', animate('0s')),
-      transition('* <=> *', animate('250ms ease-in-out'))
+    trigger("expand", [
+      state("true", style({ height: "45px" })),
+      state("false", style({ height: "0" })),
+      transition("void => *", animate("0s")),
+      transition("* <=> *", animate("250ms ease-in-out"))
     ])
   ]
 })
@@ -49,54 +49,54 @@ export class SupportPage {
   shownGroup = null;
   employees: EmployeeItem[];
   searching: boolean = false;
-  lastname:string = "";
-  firstname:string = "";
+  lastname: string = "";
+  firstname: string = "";
   loading;
-  segment:string="aide";
+  segment: string = "aide";
   shownHelp = null;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public modalCtrl: ModalController,
-              private iab: InAppBrowser,
-              public platform: Platform,
-              public repService : RepertoireService,
-              public connService : ConnectivityService,
-              public loadingCtrl: LoadingController)
-  {
-    this.title = this.navParams.get('title');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private iab: InAppBrowser,
+    public platform: Platform,
+    public repService: RepertoireService,
+    public connService: ConnectivityService,
+    public loadingCtrl: LoadingController
+  ) {
+    this.title = this.navParams.get("title");
   }
 
   /*Display loading pop up*/
   presentLoading() {
-    if(!this.loading){
-        this.loading = this.loadingCtrl.create({
-          content: 'Please wait...'
-        });
+    if (!this.loading) {
+      this.loading = this.loadingCtrl.create({
+        content: "Please wait..."
+      });
 
       this.loading.present();
     }
-
   }
 
   /*Dismiss loading pop up*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
     }
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
-  update(){
+  update() {
     this.presentLoading();
-    let options: Array<string>= [];
+    let options: Array<string> = [];
     let values: Array<string> = [];
-    if(this.lastname.length>0){
+    if (this.lastname.length > 0) {
       values.push(this.lastname);
       options.push("lastname");
     }
-    if(this.firstname.length>0){
+    if (this.firstname.length > 0) {
       values.push(this.firstname);
       options.push("firstname");
     }
@@ -104,15 +104,13 @@ export class SupportPage {
   }
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
-  searchEmployees(options:Array<string>, values:Array<string>){
-    if(this.connService.isOnline()) {
-      this.repService.searchEmployees(options, values).then(
-        res => {
-          let result:any = res;
-          this.employees = result.employees;
-          this.searching = true;
-        }
-      );
+  searchEmployees(options: Array<string>, values: Array<string>) {
+    if (this.connService.isOnline()) {
+      this.repService.searchEmployees(options, values).then(res => {
+        let result: any = res;
+        this.employees = result.employees;
+        this.searching = true;
+      });
     } else {
       this.searching = false;
       this.connService.presentConnectionAlert();
@@ -122,24 +120,24 @@ export class SupportPage {
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push('EmployeeDetailsPage', { 'emp': emp});
+    this.navCtrl.push("EmployeeDetailsPage", { emp: emp });
   }
 
   /*Show or close the informations for the section selectionned*/
   toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
   }
 
   isGroupShown(group) {
-      return this.shownGroup === group;
+    return this.shownGroup === group;
   }
 
   /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, "_system", "location=yes");
   }
 }

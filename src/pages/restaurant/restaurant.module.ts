@@ -8,8 +8,8 @@ import { RestaurantPage } from './restaurant';
 @NgModule({
   declarations: [RestaurantPage],
   imports: [
-  	IonicPageModule.forChild(RestaurantPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(RestaurantPage),
+    TranslateModule.forChild()
   ]
 })
-export class RestaurantPageModule { }
+export class RestaurantPageModule {}

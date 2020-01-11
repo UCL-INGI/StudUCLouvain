@@ -7,9 +7,6 @@ import { SupportPage } from './support';
 
 @NgModule({
   declarations: [SupportPage],
-  imports: [
-  	IonicPageModule.forChild(SupportPage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(SupportPage), TranslateModule.forChild()]
 })
-export class SupportPageModule { }
+export class SupportPageModule {}

@@ -8,8 +8,8 @@ import { ModalProjectPage } from './modal-project';
 @NgModule({
   declarations: [ModalProjectPage],
   imports: [
-  	IonicPageModule.forChild(ModalProjectPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(ModalProjectPage),
+    TranslateModule.forChild()
   ]
 })
-export class ModalProjectPageModule { }
+export class ModalProjectPageModule {}

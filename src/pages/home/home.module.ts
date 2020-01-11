@@ -11,15 +11,15 @@ import { HomePage } from './home';
 @NgModule({
   declarations: [HomePage],
   imports: [
-  	IonicPageModule.forChild(HomePage),
-  	TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+    IonicPageModule.forChild(HomePage),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [TranslateModule]
 })
-export class HomePageModule { }
+export class HomePageModule {}

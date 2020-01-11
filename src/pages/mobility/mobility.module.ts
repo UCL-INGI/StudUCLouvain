@@ -7,9 +7,6 @@ import { MobilityPage } from './mobility';
 
 @NgModule({
   declarations: [MobilityPage],
-  imports: [
-  	IonicPageModule.forChild(MobilityPage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(MobilityPage), TranslateModule.forChild()]
 })
-export class MobilityPageModule { }
+export class MobilityPageModule {}

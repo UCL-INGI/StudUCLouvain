@@ -7,9 +7,6 @@ import { NewsPage } from './news';
 
 @NgModule({
   declarations: [NewsPage],
-  imports: [
-  	IonicPageModule.forChild(NewsPage),
-  	TranslateModule.forChild()
-  ]
+  imports: [IonicPageModule.forChild(NewsPage), TranslateModule.forChild()]
 })
-export class NewsPageModule { }
+export class NewsPageModule {}

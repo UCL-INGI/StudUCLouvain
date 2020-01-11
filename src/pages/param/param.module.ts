@@ -11,14 +11,14 @@ import { ParamPage } from './param';
 @NgModule({
   declarations: [ParamPage],
   imports: [
-  	IonicPageModule.forChild(ParamPage),
-  	TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+    IonicPageModule.forChild(ParamPage),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ]
 })
-export class ParamPageModule { }
+export class ParamPageModule {}

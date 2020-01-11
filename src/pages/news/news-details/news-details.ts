@@ -27,19 +27,18 @@ import { NewsItem } from '../../../app/entity/newsItem';
 
 @IonicPage()
 @Component({
-  selector: 'page-news-details',
-  templateUrl: 'news-details.html'
+  selector: "page-news-details",
+  templateUrl: "news-details.html"
 })
-
 export class NewsDetailsPage {
   news: NewsItem;
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.news = navParams.get('news');
+    this.news = navParams.get("news");
   }
-  
+
   /*Open the url for a news to see more details*/
   public openPage(url: string) {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 }

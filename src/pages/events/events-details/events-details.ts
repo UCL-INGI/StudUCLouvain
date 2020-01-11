@@ -29,31 +29,35 @@ import { UserService } from '../../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-events-details',
-  templateUrl: 'events-details.html'
+  selector: "page-events-details",
+  templateUrl: "events-details.html"
 })
 export class EventsDetailsPage {
   event: EventItem;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public user: UserService,
     private translateService: TranslateService,
     public toastCtrl: ToastController,
-    navParams: NavParams) {
-    this.event = navParams.get('event');
+    navParams: NavParams
+  ) {
+    this.event = navParams.get("event");
   }
 
   /*OPEN THE EXTERNAL PAGE OF THE EVENT*/
   public openPage(url: string) {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   /*ADD EVENT TO FAVORITE*/
-  public addFavorite(event : EventItem){
-    let message:string;
-    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
+  public addFavorite(event: EventItem) {
+    let message: string;
+    this.translateService.get("EVENTS.MESSAGEFAV2").subscribe((res: string) => {
+      message = res;
+    });
 
-    if(!this.user.hasFavorite(event.guid)){
+    if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid);
       let toast = this.toastCtrl.create({
         message: message,
@@ -61,7 +65,5 @@ export class EventsDetailsPage {
       });
       toast.present();
     }
-
   }
-
 }

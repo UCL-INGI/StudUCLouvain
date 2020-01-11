@@ -8,8 +8,8 @@ import { EmployeeDetailsPage } from './employee-details';
 @NgModule({
   declarations: [EmployeeDetailsPage],
   imports: [
-  	IonicPageModule.forChild(EmployeeDetailsPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(EmployeeDetailsPage),
+    TranslateModule.forChild()
   ]
 })
-export class EmployeeDetailsPageModule { }
+export class EmployeeDetailsPageModule {}

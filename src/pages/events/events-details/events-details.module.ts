@@ -8,8 +8,8 @@ import { EventsDetailsPage } from './events-details';
 @NgModule({
   declarations: [EventsDetailsPage],
   imports: [
-  	IonicPageModule.forChild(EventsDetailsPage),
-  	TranslateModule.forChild()
+    IonicPageModule.forChild(EventsDetailsPage),
+    TranslateModule.forChild()
   ]
 })
-export class EventsDetailsPageModule { }
+export class EventsDetailsPageModule {}
