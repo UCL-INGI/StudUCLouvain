@@ -91,6 +91,13 @@ $ ionic cordova platform add ios
 $ ionic cordova build ios
 ```
 
+## Build
+```bash
+$ ionic cordova build <platform>
+$ ionic cordova build <platform> --prod
+$ ionic cordova build <platform> --prod --release
+```
+
 ## Tests
 
 ### Unit Tests : Karma
