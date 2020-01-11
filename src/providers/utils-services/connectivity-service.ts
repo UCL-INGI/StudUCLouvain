@@ -19,30 +19,31 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable} from '@angular/core';
-import { Network } from '@ionic-native/network';
-import { Platform, AlertController} from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+import { AlertController, Platform } from 'ionic-angular';
+
+import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { Network } from '@ionic-native/network';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection;
 
 @Injectable()
 export class ConnectivityService {
   onDevice: boolean;
-  available:boolean;
-  enable:boolean;
-  constructor(public platform: Platform, 
-              private network: Network, 
-              private translateService: TranslateService, 
-              private alertCtrl: AlertController,
-              private diagnostic: Diagnostic){
+  available: boolean;
+  enable: boolean;
+  constructor(public platform: Platform,
+    private network: Network,
+    private translateService: TranslateService,
+    private alertCtrl: AlertController,
+    private diagnostic: Diagnostic) {
     this.onDevice = this.platform.is('cordova');
   }
 
   /*Check if there is a connexion*/
   isOnline(): boolean {
-    if(this.onDevice && this.network.type){
+    if (this.onDevice && this.network.type) {
       return this.network.type !== Connection.NONE;
     } else {
       return navigator.onLine;
@@ -50,12 +51,12 @@ export class ConnectivityService {
   }
   /*pop up an alert to say to the user to connect him to the internet*/
   presentConnectionAlert() {
-    let title:string;
-    let message:string;
-    let close:string;
-    this.translateService.get('NET.TITLE').subscribe((res:string) => {title=res;});
-    this.translateService.get('NET.CONNECT').subscribe((res:string) => {message=res;});
-    this.translateService.get('NET.CLOSE').subscribe((res:string) => {close=res;});
+    let title: string;
+    let message: string;
+    let close: string;
+    this.translateService.get('NET.TITLE').subscribe((res: string) => { title = res; });
+    this.translateService.get('NET.CONNECT').subscribe((res: string) => { message = res; });
+    this.translateService.get('NET.CLOSE').subscribe((res: string) => { close = res; });
     let alert = this.alertCtrl.create({
       title: title,
       subTitle: message,
@@ -64,15 +65,15 @@ export class ConnectivityService {
     alert.present();
   }
 
-    successCallback = (isAvailable) => { 
-                      console.log('Is available? ' + isAvailable); 
-                      this.available = isAvailable; 
-                      return isAvailable;
-                    };
+  successCallback = (isAvailable) => {
+    console.log('Is available? ' + isAvailable);
+    this.available = isAvailable;
+    return isAvailable;
+  };
 
-    errorCallback = (e) => console.error(e);
+  errorCallback = (e) => console.error(e);
 
-   async isLocationEnabled() {
+  async isLocationEnabled() {
 
     console.log("start test location");
     await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);

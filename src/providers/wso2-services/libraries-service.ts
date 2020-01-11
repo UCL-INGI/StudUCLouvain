@@ -19,19 +19,20 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { LibraryItem } from '../../app/entity/libraryItem';
-import { MapLocation } from '../../app/entity/mapLocation';
-import { TimeSlot } from '../../app/entity/timeSlot';
-import { Wso2Service} from './wso2-service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { LibraryItem } from '../../app/entity/libraryItem';
+import { MapLocation } from '../../app/entity/mapLocation';
+import { TimeSlot } from '../../app/entity/timeSlot';
+import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class LibrariesService {
-  libraries:Array<LibraryItem> = [];
+  libraries: Array<LibraryItem> = [];
   url = 'libraries/v1/list';
   options: any;
 
@@ -39,31 +40,31 @@ export class LibrariesService {
   }
 
   /*Load the list of the libraries*/
-  public loadLibraries(){
+  public loadLibraries() {
     this.libraries = [];
     return new Promise(resolve => {
       this.wso2Service.load(this.url).subscribe(
         data => {
           this.extractLibraries(data['return'].library);
-          resolve({libraries:this.libraries});
+          resolve({ libraries: this.libraries });
         });
     });
   }
 
   /*Load the details of a specific library, the library selected by the user*/
-  public loadLibDetails(lib:LibraryItem){
+  public loadLibDetails(lib: LibraryItem) {
     return new Promise(resolve => {
       let url_details = this.url + '/' + lib.id;
       this.wso2Service.load(url_details).subscribe(
         data => {
           lib = this.extractLibraryDetails(lib, data['return'].library);
-          resolve({libDetails:lib});
+          resolve({ libDetails: lib });
         });
     });
   }
 
   /*Extract the list of the libraries*/
-  private extractLibraries(data: any){
+  private extractLibraries(data: any) {
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       let library = new LibraryItem(item.id, item.name);
@@ -73,59 +74,59 @@ export class LibrariesService {
 
   /*Extract all the details for a specific library, the library selected by the user*/
   /*Retrieves all the necessary information*/
-  private extractLibraryDetails(lib : LibraryItem, data:any): LibraryItem {
-    if ( data.locationId == null ) {
+  private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
+    if (data.locationId == null) {
       lib.locationId = -1;
     } else {
       lib.locationId = data.locationId;
     }
 
-    if ( data.mapLocation == null ) {
-      lib.mapLocation = new MapLocation(lib.name,"","","","");
+    if (data.mapLocation == null) {
+      lib.mapLocation = new MapLocation(lib.name, "", "", "", "");
     } else {
-      lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "","",""); //TODO update maplocation with lat lng code
+      lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "", "", ""); //TODO update maplocation with lat lng code
     }
 
-    if ( data.phone == null ) {
+    if (data.phone == null) {
       lib.phone = "";
     } else {
       lib.phone = data.phone.substr(3);
     }
 
-    if ( data.email == null ) {
+    if (data.email == null) {
       lib.email = false;
     } else {
       lib.email = data.email;
     }
 
 
-    if ( data.website == null ) {
+    if (data.website == null) {
       lib.website = "";
     } else {
       lib.website = data.website;
     }
 
-    if(data.openingHours) {
-      for( let i=0; i < data.openingHours.length; i++) {
+    if (data.openingHours) {
+      for (let i = 0; i < data.openingHours.length; i++) {
         lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
       }
     }
 
-    if(data.openingExaminationHours) {
-      for( let i=0; i < data.openingExaminationHours.length; i++) {
+    if (data.openingExaminationHours) {
+      for (let i = 0; i < data.openingExaminationHours.length; i++) {
         lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
       }
     }
 
-    if(data.openingSummerHours) {
-      for( let i=0; i < data.openingSummerHours.length; i++) {
+    if (data.openingSummerHours) {
+      for (let i = 0; i < data.openingSummerHours.length; i++) {
         lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
       }
     }
 
     lib.openingHoursNote = data.openingHoursNote;
 
-    if(data.closedDates.length === undefined) {
+    if (data.closedDates.length === undefined) {
       lib.closedDates = [data.closedDates];
     } else {
       lib.closedDates = data.closedDates;

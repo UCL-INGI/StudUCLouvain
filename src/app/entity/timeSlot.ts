@@ -22,7 +22,7 @@
 export class TimeSlot {
   day: string;
   startHour: string;
-  endHour : string;
+  endHour: string;
 
   constructor(day: string, startHour: string, endHour: string) {
     this.day = day;

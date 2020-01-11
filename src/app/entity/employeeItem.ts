@@ -26,10 +26,10 @@ export class EmployeeItem {
   email: string;
   departments: any;
   address: any;
-  businessContacts:Array<any>;
-  contracts:Array<any>;
-  gender:string;
-  photo_url:string;
+  businessContacts: Array<any>;
+  contracts: Array<any>;
+  gender: string;
+  photo_url: string;
 
   constructor(
     matric_fgs: number,
@@ -39,7 +39,7 @@ export class EmployeeItem {
     departments: any,
     address?: any,
     businessContacts?: Array<any>,
-    contracts?:Array<any>,
+    contracts?: Array<any>,
     gender?: string,
     photo_url?: string
   ) {
@@ -48,7 +48,7 @@ export class EmployeeItem {
     this.firstname = firstname;
     this.email = email;
     this.departments = departments;
-    this.address = address ;
+    this.address = address;
     this.businessContacts = businessContacts;
     this.contracts = contracts;
     this.gender = gender;

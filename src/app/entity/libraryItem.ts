@@ -26,29 +26,29 @@ export class LibraryItem {
   id: number;
   name: string;
   locationId: number;
-  mapLocation : MapLocation;
+  mapLocation: MapLocation;
   phone: string;
-  email : boolean;
-  website : string;
+  email: boolean;
+  website: string;
   openingHours: Array<TimeSlot>;
   openingExaminationHours: Array<TimeSlot>;
   openingSummerHours: Array<TimeSlot>;
-  openingHoursNote : string;
-  closedDates : Array<{from: string, description: string}>;
+  openingHoursNote: string;
+  closedDates: Array<{ from: string, description: string }>;
 
   constructor(
     id: number,
     name: string,
     locationId?: number,
-    mapLocation? : MapLocation,
+    mapLocation?: MapLocation,
     phone?: string,
-    email? : boolean,
-    website? : string,
+    email?: boolean,
+    website?: string,
     openingHours?: Array<TimeSlot>,
     openingExaminationHours?: Array<TimeSlot>,
     openingSummerHours?: Array<TimeSlot>,
     openingHoursNote?: string,
-    closedDates?: Array<{from: string, description: string}>
+    closedDates?: Array<{ from: string, description: string }>
   ) {
     this.id = id;
     this.name = name;

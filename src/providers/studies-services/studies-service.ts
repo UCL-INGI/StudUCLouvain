@@ -19,71 +19,72 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { AdeService } from './ade-service';
-import { AdeProject } from '../../app/entity/adeProject';
 
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { AdeProject } from '../../app/entity/adeProject';
+import { AdeService } from './ade-service';
 
 @Injectable()
 export class StudiesService {
-  url:String;
-  projects : AdeProject[];
-  data:any;
+  url: String;
+  projects: AdeProject[];
+  data: any;
   constructor(
     public http: HttpClient,
-    public ade : AdeService) {}
+    public ade: AdeService) { }
 
   /*Open session for the user*/
   openSession() {
-    return new Promise<string>( (resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       console.log("StudiesService openSession")
       this.ade.httpOpenSession().subscribe(
         data => {
           console.log("data");
           console.log(data);
-          resolve( data.session._id);
+          resolve(data.session._id);
         }
       );
     });
   }
 
   /*Get the projects ADE*/
-  getProjects(sessionId : string) {
-    return new Promise( (resolve, reject) => {
+  getProjects(sessionId: string) {
+    return new Promise((resolve, reject) => {
       console.log("Studiesservice getProjects")
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
           console.log("project");
           console.log(data.projects);
           resolve(this.extractAdeProjects(data));
-          }
-        );
-      });
+        }
+      );
+    });
   }
 
   /*Extract the projects ADE*/
-  extractAdeProjects(data) : AdeProject[]{
-    let projects : AdeProject[] = [];
+  extractAdeProjects(data): AdeProject[] {
+    let projects: AdeProject[] = [];
     console.log(data.projects)
     console.log(data.projects.project.length)
-    if (data.projects.project.length === undefined){
+    if (data.projects.project.length === undefined) {
       let name = data.projects.project._name.toString();
       console.log("name : " + name);
       let id = data.projects.project._id.toString();
-      console.log("id : "+ id);
+      console.log("id : " + id);
       let project = new AdeProject(id, name);
       console.log("project" + project)
       console.log("projects" + projects)
       projects.push(project)
     }
-    else{
-      for(let i=0 ; i<data.projects.project.length ; i++){
+    else {
+      for (let i = 0; i < data.projects.project.length; i++) {
         let name = data.projects.project[i]._name.toString();
         console.log("name : " + name);
         let id = data.projects.project[i]._id.toString();
-        console.log("id : "+ id);
+        console.log("id : " + id);
         let project = new AdeProject(id, name);
         console.log("project" + project)
         console.log("projects" + projects)
@@ -96,11 +97,11 @@ export class StudiesService {
   }
 
   /*Set the project selected by the user*/
-  setProject(sessionId : string, projectId : string){
-    return new Promise( (resolve, reject) => {
-      console.log("studiesService setProject:" + sessionId + " projectId : " +  projectId);
+  setProject(sessionId: string, projectId: string) {
+    return new Promise((resolve, reject) => {
+      console.log("studiesService setProject:" + sessionId + " projectId : " + projectId);
       this.ade.httpSetProject(sessionId, projectId).subscribe(
-        data => { resolve(data);       }
+        data => { resolve(data); }
       );
     });
   }
