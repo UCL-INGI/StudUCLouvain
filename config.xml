@@ -129,8 +129,6 @@
     <variable name="ANDROID_SUPPORT_V4_VERSION" value="26.1.0"/>
   </plugin>
   <plugin name="cordova-plugin-market" spec="^1.2.0"/>
-    <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="Use geocoder service"/>
-  </plugin>
   <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2"/>
   <plugin name="cordova-sqlite-storage" spec="^2.4.0"/>
   <plugin name="cordova-plugin-app-version" spec="^0.1.9"/>
