@@ -19,74 +19,51 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import {
+    AlertController, IonicApp, IonicModule, LoadingController, Nav, Platform
+} from 'ionic-angular';
+
 import { async, TestBed } from '@angular/core/testing';
-import { IonicModule, MenuController, Nav, Platform, AlertController,LoadingController, IonicApp } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-/*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpModule, Http } from '@angular/http'
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-import { IonicStorageModule  } from '@ionic/storage';*/
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
-//import { UserService } from '../providers/utils-services/user-service';
-
-
-import { MyApp } from './app.component';
-import {PlatformMock, StatusBarMock, SplashScreenMock, UserServiceMock, Wso2ServiceMock} from '../../test-config/mocks-ionic';
+import {
+    PlatformMock, SplashScreenMock, StatusBarMock, UserServiceMock, Wso2ServiceMock
+} from '../../test-config/mocks-ionic';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { MyApp } from './app.component';
 
-/*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
-}*/
-class IonicAppMock { }
-describe('MyApp Component', () => {
+class IonicAppMock {}
+describe("MyApp Component", () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MyApp],
-      imports: [
-        IonicModule.forRoot(MyApp),
-        TranslateModule.forRoot()
-        /*TranslateModule.forRoot({
-                    loader: {
-                        provide: TranslateLoader,
-                        useFactory: HttpLoaderFactory,
-                        deps: [Http]
-                    }
-                }),
-        IonicStorageModule.forRoot(),
-        HttpModule*/
-      ],
+      imports: [IonicModule.forRoot(MyApp), TranslateModule.forRoot()],
       providers: [
-        {provide: StatusBar, useClass: StatusBarMock },
-        {provide: SplashScreen, useClass: SplashScreenMock },
-        {provide: Platform, useClass: PlatformMock },
+        { provide: StatusBar, useClass: StatusBarMock },
+        { provide: SplashScreen, useClass: SplashScreenMock },
+        { provide: Platform, useClass: PlatformMock },
         AlertController,
         LoadingController,
-        {provide:IonicApp, useClass: IonicAppMock},
+        { provide: IonicApp, useClass: IonicAppMock },
         Nav,
         Market,
         AppAvailability,
         InAppBrowser,
         Device,
-        {provide:UserService, useClass:UserServiceMock},
-        {provide: Wso2Service, useClass: Wso2ServiceMock}
-        /*AppAvailability,
-        InAppBrowser,
-        Device,
-        UserService*/
+        { provide: UserService, useClass: UserServiceMock },
+        { provide: Wso2Service, useClass: Wso2ServiceMock }
       ]
-    })
+    });
   }));
 
   beforeEach(() => {
@@ -94,8 +71,7 @@ describe('MyApp Component', () => {
     component = fixture.componentInstance;
   });
 
-  it ('should be created', () => {
+  it("should be created", () => {
     expect(component instanceof MyApp).toBe(true);
   });
-
 });
