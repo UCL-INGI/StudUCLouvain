@@ -1,11 +1,11 @@
 language: node_js
-node_js: "12.12.0"
+node_js: "12.14.0"
 branches:
   only:
     - master
 
 before_script:
-  - npm install -g ionic cordova
+  - npm install -g ionic cordova@^8
 
 script:
   - ionic cordova platform add browser

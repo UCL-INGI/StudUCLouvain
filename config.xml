@@ -115,7 +115,7 @@
   <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0"/>
   <plugin name="cordova-plugin-device" spec="^2.0.0"/>
   <plugin name="cordova-plugin-calendar" spec="^5.0.0">
-    <variable name="CALENDAR_USAGE_DESCRIPTION" value="This app uses your calendar"/>
+        <variable name="CALENDAR_USAGE_DESCRIPTION" value="Need calendar access to add events to it." />
   </plugin>
   <plugin name="cordova-plugin-network-information" spec="^2.0.0"/>
   <plugin name="cordova-plugin-geolocation" spec="^4.0.0"/>
