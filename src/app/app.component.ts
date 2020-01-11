@@ -29,7 +29,6 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
-import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { HomePage } from '../pages/home/home';
@@ -85,7 +84,6 @@ export class MyApp {
     private device: Device,
     private alertCtrl: AlertController,
     private user: UserService,
-    private statusBar: StatusBar,
     public translateService: TranslateService,
     public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
@@ -327,7 +325,7 @@ export class MyApp {
       buttons: [
         {
           text: "OK",
-          handler: data => {}
+          handler: data => { }
         }
       ]
     });
