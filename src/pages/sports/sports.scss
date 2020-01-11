@@ -21,28 +21,29 @@
 
 page-sports {
   .spinner-container {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
   .large-icon {
     font-size: 40px;
   }
 
-    .team {
-        //#90c53e
-        background-color: #90c53e;
-        color:white;
-    }
+  .team {
+    //#90c53e
+    background-color: #90c53e;
+    color: white;
+  }
 
-    .all {
-        background-color: #0f1d41;
-        color:white;
-        //#0f1d41
-    }
+  .all {
+    background-color: #0f1d41;
+    color: white;
+    //#0f1d41
+  }
 
-    .text {
+  .text {
 
-        color: white;
-    }
+    color: white;
+  }
 }

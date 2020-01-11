@@ -27,10 +27,10 @@
 <!--BODY-->
 <ion-content padding>
 
-<div text-center> {{'MODAL.PROJECT' | translate}} : </div>
+  <div text-center> {{'MODAL.PROJECT' | translate}} : </div>
   <ion-list>
-    <button ion-item *ngFor= "let project of projects" (click)="closeModal(project)">
-      <button ion-button full  > {{project.name}} </button>
+    <button ion-item *ngFor="let project of projects" (click)="closeModal(project)">
+      <button ion-button full> {{project.name}} </button>
     </button>
   </ion-list>
 

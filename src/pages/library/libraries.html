@@ -26,7 +26,7 @@
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28"/>
+    <img src="./assets/img/s.png" height="28" />
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -34,10 +34,7 @@
 <!--BODY-->
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
   <div *ngIf="searching" class="spinner-container">
