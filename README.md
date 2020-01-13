@@ -16,9 +16,9 @@ Contributions are welcome for any good feature.
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
- - should be >= 12.12.0
+ - should be >= 12.0.0
 npm -v
- - should be >= 6.12.0
+ - should be >= 6.0.0
 ```
 - For iOS, update XCode version to 8.0 or higher
 
