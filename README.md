@@ -47,7 +47,7 @@ npm -v
     ```bash
     $ npm install
     ```    
-* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file UCLCampus/config.xml  
+* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file StudUCLouvain/config.xml  
     ```xml
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="myapikeyforandroid"/>
     <plugin name="cordova-plugin-googlemaps">
