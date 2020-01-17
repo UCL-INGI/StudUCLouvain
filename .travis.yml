@@ -3,6 +3,8 @@ node_js: "12.14.0"
 branches:
   only:
     - master
+addons:
+  chrome: stable
 
 before_script:
   - npm install -g ionic cordova@^8
@@ -13,6 +15,7 @@ jobs:
       name: "Unit testing"
       script: npm test
     - before_script:
+      - npm install -g ionic cordova@^8
       - ionic cordova platform add browser
       script: ionic cordova build browser --prod
       name: "Build browser"
