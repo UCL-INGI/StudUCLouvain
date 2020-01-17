@@ -30,3 +30,6 @@ jobs:
         on:
           branch: master
         local_dir: www
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
