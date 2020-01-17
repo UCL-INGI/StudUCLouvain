@@ -5,7 +5,7 @@
   "homepage": "https://www.facebook.com/Stud.UCLouvain",
   "private": true,
   "scripts": {
-    "test": "ng test",
+    "test": "ng test --watch=false",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint"
@@ -88,6 +88,7 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^3.1.0",
     "karma-jasmine-html-reporter": "^1.5.1",
+    "karma-mocha-reporter": "^2.2.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
     "ts-node": "^8.6.2",
