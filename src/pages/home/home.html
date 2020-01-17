@@ -22,20 +22,10 @@
 <!--EN-TETE-->
 <ion-header *ngIf="(userS.hasCampus() === true)">
   <ion-navbar color="home">
-    <!--<button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>-->
     <ion-title align="center">
       <img alt="logo" height="40" src="./assets/img/header2.png">
     </ion-title>
 
-    <!--
-    <ion-buttons end *ngIf="(userS.hasCampus() === true)">
-      <button ion-button icon-only end (tap)="settings()">
-        <ion-icon name="settings"></ion-icon>
-      </button>
-    </ion-buttons>
-  -->
   </ion-navbar>
 </ion-header>
 
@@ -253,47 +243,40 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </ng-container>
-
 </ion-content>
 
-<!------------------------------------ EMERGENCY BUTTON --------------------------------------------------------------------->
-<!--<ion-fab bottom right>
-  <img alt="urg" width="60" height="60" src="./assets/img/urgence.png" (tap)="emergency()"/>
-  <ion-label><strong>{{'HOME.URG' | translate}}</strong></ion-label>
-</ion-fab>-->
-
-<!--------------------------------REPORTBUG
-<ion-fab bottom center>
-  <a href="mailto:bruno.marchesini@student.uclouvain.be">
-    <button ion-button icon-start >
-      <ion-icon name="mail"></ion-icon>
-      report
-    </button>
-  </a>
---------------------------------------->
 
 <!------------------------------------ SOCIAL NETWORK BUTTON ------------------------------------------------------------------>
-<ion-fab bottom left #fab *ngIf="(userS.hasCampus() === true)">
-  <button ion-fab mini>
-    <ion-icon name="arrow-dropup"></ion-icon>
-  </button>
-  <ion-fab-list side="top">
-    <button ion-fab (tap)="openURL('https://www.linkedin.com/school/universite-catholique-de-louvain/',fab)">
-      <ion-icon name="logo-linkedin"></ion-icon>
-    </button>
-    <button ion-fab (tap)="openURL('https://twitter.com/UCLouvain_be',fab)">
-      <ion-icon name="logo-twitter"></ion-icon>
-    </button>
-    <button ion-fab (tap)="openURL('https://www.facebook.com/univc.louvain',fab)">
-      <ion-icon name="logo-facebook"></ion-icon>
-    </button>
-    <button ion-fab (tap)="openURL('https://www.youtube.com/user/universitedelouvain',fab)">
-      <ion-icon name="logo-youtube"></ion-icon>
-    </button>
-    <button ion-fab (tap)="openURL('https://www.instagram.com/uclouvain',fab)">
-      <ion-icon name="logo-instagram"></ion-icon>
-    </button>
-  </ion-fab-list>
-</ion-fab>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row text-center>
+      <ion-col>
+        <a ion-button clear small href='https://www.facebook.com/UCLouvain/' target="_blank">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a ion-button clear small href='https://twitter.com/UCLouvain_be' target="_blank">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a ion-button clear small href='https://www.linkedin.com/school/universite-catholique-de-louvain/'
+          target="_blank">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a ion-button clear small href='https://www.instagram.com/uclouvain' target="_blank">
+          <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a ion-button clear small href='https://www.youtube.com/user/universitedelouvain' target="_blank">
+          <ion-icon name="logo-youtube"></ion-icon>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
