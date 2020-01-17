@@ -37,23 +37,6 @@ page-home {
     contain: layout;
   }
 
-  button[ion-fab] {
-    overflow: visible;
-    position: relative;
-
-    ion-label {
-      position: absolute;
-      top: -37px;
-      right: -24px;
-
-      color: black;
-      //background-color: rgba(0,0,0,0.7);
-      line-height: 24px;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-  }
-
 
   ion-grid {
     height: 100%;
@@ -90,8 +73,6 @@ page-home {
 
     ion-row.ucl {
       height: 18.75vh;
-
-      img {}
     }
   }
 
@@ -102,9 +83,11 @@ page-home {
 
     ion-row.ucl {
       height: 16vh;
-
-      img {}
     }
   }
 
+}
+
+ion-footer ion-toolbar ion-row ion-col {
+  width: 20vw !important;
 }
