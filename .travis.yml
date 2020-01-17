@@ -1,3 +1,7 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=54dd0fdf61f7a1a570fe21458b847cc05f2f5e480d9a6679200b8e1e1222273c
+
 language: node_js
 node_js: "12.14.0"
 branches:
@@ -10,6 +14,9 @@ addons:
   chrome: stable
 
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - npm install -g ionic cordova@^8
 
 jobs:
