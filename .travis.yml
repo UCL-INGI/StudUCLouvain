@@ -42,22 +42,7 @@ jobs:
           - build-tools-28.0.3	
           - android-28
           - extra
-          - extra-android-m2repository
           - extra-google-google_play_services
-          - extra-google-m2repository
-        licenses:
-          - 'android-sdk-preview-license-.+'
-          - 'android-sdk-license-.+'
-          - 'google-gdk-license-.+'
-          
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
-          - $HOME/.android/build-cache
           
       before_install:
         - nvm install 12.14.0
@@ -75,12 +60,6 @@ jobs:
         - ionic info
       script: ionic cordova build android --prod
 
-      before_deploy:
-        # start install android
-        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-        - tar -xzvf /sdk-tools-linux-4333796.zip
-        - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
-        - export ANDROID_HOME=${PWD}/android-sdk-linux
       deploy:
         provider: pages
         skip-cleanup: true
