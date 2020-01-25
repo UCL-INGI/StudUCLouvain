@@ -7,6 +7,7 @@
   },
   "client": [{
     "client_info": {
+      "mobilesdk_app_id": "1:6772565565:android:f30a57264f214892442c54",
       "android_client_info": {
         "package_name": "io.ionic.StudUCLouvain"
       }
