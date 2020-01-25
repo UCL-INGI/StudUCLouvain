@@ -1,0 +1,31 @@
+{
+  "project_info": {
+    "project_number": "p_number",
+    "firebase_url": "https://studuclouvain.firebaseio.com",
+    "project_id": "studuclouvain",
+    "storage_bucket": "studuclouvain.appspot.com"
+  },
+  "client": [{
+    "client_info": {
+      "android_client_info": {
+        "package_name": "io.ionic.StudUCLouvain"
+      }
+    },
+    "oauth_client": [{
+      "client_id": "client_id",
+      "client_type": 3
+    }],
+    "api_key": [{
+      "current_key": "key"
+    }],
+    "services": {
+      "appinvite_service": {
+        "other_platform_oauth_client": [{
+          "client_id": "client_id",
+          "client_type": 3
+        }]
+      }
+    }
+  }],
+  "configuration_version": "1"
+}
