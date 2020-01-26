@@ -3,7 +3,18 @@ sudo: false
 branches:
   only:
     - master
-
+    
+cache:
+  npm: true
+  cocoapods: true
+  bundler: true
+  directories:
+    - $ANDROID_HOME/
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+    - plugins
+    
 jobs:
   include:
     - stage: "Tests"
@@ -44,14 +55,6 @@ jobs:
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        npm: true
-        directories:
-          - $ANDROID_HOME/
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
-          - $HOME/.android/build-cache
-          - plugins
 
       before_install:
         - nvm install 12.14.0
@@ -71,12 +74,6 @@ jobs:
     - stage: "Build iOS"
       os: osx
       language: objective-c
-      cache:
-        npm: true
-        cocoapods: true
-        bundler: true
-        directories:
-          - plugins
           
       before_install:
         - nvm install 12.14.0
