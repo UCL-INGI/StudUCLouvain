@@ -17,6 +17,7 @@ jobs:
         chrome: stable
         
       install:
+        - npm ls --global --loglevel error
         - npm install
         - npm install -g ionic cordova@^8
         - ionic info
@@ -53,6 +54,7 @@ jobs:
       before_install:
         - nvm install 12.14.0
       install:
+        - npm ls --global --loglevel error
         - npm install
         - npm install -g ionic cordova@^8
         - node --version
@@ -74,6 +76,7 @@ jobs:
       before_install:
         - nvm install 12.14.0
       install:
+        - npm ls --global --loglevel error
         - npm install
         - npm install -g ionic cordova@^8
         - node --version
