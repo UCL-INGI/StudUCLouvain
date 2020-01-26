@@ -29,7 +29,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
-import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Market } from '@ionic-native/market';
 import { Network } from '@ionic-native/network';
@@ -98,7 +97,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     StatusBar,
     GoogleMaps,
-    Geolocation,
     Network,
     Calendar,
     NewsService,
