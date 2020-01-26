@@ -19,7 +19,7 @@ jobs:
         chrome: stable
         
       install:
-        - npm config --global --loglevel error --save
+        - npm config --global set loglevel error --save
         - npm install
         - npm install -g ionic cordova@^8
         - ionic info
@@ -58,7 +58,7 @@ jobs:
       before_install:
         - nvm install 12.14.0
       install:
-        - npm config --global --loglevel error --save
+        - npm config --global set loglevel error --save
         - npm install
         - npm install -g ionic cordova@^8
         - node --version
@@ -84,7 +84,7 @@ jobs:
       before_install:
         - nvm install 12.14.0
       install:
-        - npm config --global --loglevel error --save
+        - npm config --global set loglevel error --save
         - npm install
         - npm install -g ionic cordova@^8 cordova-res
         - node --version
