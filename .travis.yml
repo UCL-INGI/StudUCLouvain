@@ -1,9 +1,5 @@
 sudo: false
-env:
-  global:
-    - ANDROID_API_LEVEL=28
-    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-    - ANDROID_ABI=armeabi-v7a
+
 branches:
   only:
     - master
@@ -33,7 +29,11 @@ jobs:
 
     - stage: "Build Android"
       language: android
-      dist: trusty
+      env:
+        global:
+          - ANDROID_API_LEVEL=28
+          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+          - ANDROID_ABI=armeabi-v7a
       jdk: oraclejdk8
       android:
         components:
