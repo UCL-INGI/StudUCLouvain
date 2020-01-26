@@ -53,13 +53,12 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova@^8 cordova-res
+        - npm install -g ionic cordova@^8
         - node --version
         - npm --version
         - gradle --version
 
       before_script:
-        - ionic cordova resources android
         - ionic cordova platform add android
         - ionic info
       script: ionic cordova build android --prod
@@ -83,12 +82,11 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova@^8 cordova-res
+        - npm install -g ionic cordova@^8
         - node --version
         - npm --version
 
       before_script:
-        - ionic cordova resources ios
         - ionic cordova platform add ios
         - ionic info
       script: ionic cordova build ios --prod
