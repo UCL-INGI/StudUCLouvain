@@ -76,8 +76,8 @@ jobs:
           branch: master
 
     - stage: "Build iOS"
-      language: objective-c
       os: osx
+      language: objective-c
       
       before_install:
         - nvm install 12.14.0
@@ -86,24 +86,13 @@ jobs:
         - npm install -g ionic cordova@^8 cordova-res
         - node --version
         - npm --version
-        - gradle --version
 
       before_script:
         - ionic cordova resources ios
         - ionic cordova platform add ios
         - ionic info
       script: ionic cordova build ios --prod
-
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        file_glob: true
-        file: "/home/travis/build/UCL-INGI/StudUCLouvain/platforms/android/app/build/outputs/apk/*/*.apk"
-        on:
-          repo: UCL-INGI/StudUCLouvain
-          branch: master
+          
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
