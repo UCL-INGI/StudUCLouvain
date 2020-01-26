@@ -5,36 +5,28 @@
     "project_id": "studuclouvain",
     "storage_bucket": "studuclouvain.appspot.com"
   },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "sdk_app_id",
-        "android_client_info": {
-          "package_name": "io.ionic.StudUCLouvain"
-        }
-      },
-      "oauth_client": [
-        {
+  "client": [{
+    "client_info": {
+      "mobilesdk_app_id": "1:6772565565:android:f30a57264f214892442c54",
+      "android_client_info": {
+        "package_name": "io.ionic.StudUCLouvain"
+      }
+    },
+    "oauth_client": [{
+      "client_id": "client_id",
+      "client_type": 3
+    }],
+    "api_key": [{
+      "current_key": "key"
+    }],
+    "services": {
+      "appinvite_service": {
+        "other_platform_oauth_client": [{
           "client_id": "client_id",
           "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "key"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "client_id",
-              "client_type": 3
-            }
-          ]
-        }
+        }]
       }
     }
-  ],
+  }],
   "configuration_version": "1"
 }

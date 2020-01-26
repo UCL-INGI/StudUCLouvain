@@ -25,7 +25,6 @@
     "@ionic-native/calendar": "^4.20.0",
     "@ionic-native/core": "^4.20.0",
     "@ionic-native/device": "^4.20.0",
-    "@ionic-native/diagnostic": "^4.20.0",
     "@ionic-native/geolocation": "^4.20.0",
     "@ionic-native/google-maps": "^4.21.0",
     "@ionic-native/in-app-browser": "^4.20.0",
@@ -46,24 +45,19 @@
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
     "cordova-plugin-add-swift-support": "^1.7.2",
-    "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-calendar": "^5.1.5",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
-    "cordova-plugin-inappbrowser": "^3.2.0",
     "cordova-plugin-market": "^1.2.0",
-    "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "^1.3.4",
     "cordova-sqlite-storage": "^3.4.1",
     "cordova-support-google-services": "^1.3.2",
-    "cordova.plugins.diagnostic": "^4.0.12",
     "hoek": "^6.1.2",
     "ionic-angular": "^3.9.4",
     "ionic-cache": "^3.1.3",
@@ -90,25 +84,20 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-appavailability": {},
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-device": {},
       "cordova-plugin-calendar": {
         "CALENDAR_USAGE_DESCRIPTION": "Need calendar access to add events to it."
       },
-      "cordova-plugin-network-information": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-geolocation": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-market": {},
       "cordova-plugin-add-swift-support": {},
-      "cordova-plugin-app-version": {},
-      "cordova.plugins.diagnostic": {},
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "apikeyformapandroid",
         "API_KEY_FOR_IOS": "apikeyformapios",
         "PLAY_SERVICES_VERSION": "15.0.1",
-        "ANDROID_SUPPORT_V4_VERSION": "27.+",
+        "ANDROID_SUPPORT_V4_VERSION": "28.+",
         "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
       },
@@ -117,8 +106,8 @@
     },
     "platforms": [
       "ios",
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
