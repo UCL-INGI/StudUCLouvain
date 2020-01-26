@@ -74,6 +74,7 @@ jobs:
       cache:
         npm: true
         cocoapods: true
+        bundler: true
         directories:
           - plugins
           
