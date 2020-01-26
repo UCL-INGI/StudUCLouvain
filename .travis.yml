@@ -63,17 +63,6 @@ jobs:
         - ionic info
       script: ionic cordova build android --prod
 
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        file_glob: true
-        file: "/home/travis/build/UCL-INGI/StudUCLouvain/platforms/android/app/build/outputs/apk/*/*.apk"
-        on:
-          repo: UCL-INGI/StudUCLouvain
-          branch: master
-
     - stage: "Build iOS"
       os: osx
       language: objective-c
