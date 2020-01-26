@@ -4,13 +4,9 @@ env:
     - ANDROID_API_LEVEL=28
     - ANDROID_BUILD_TOOLS_VERSION=28.0.3
     - ANDROID_ABI=armeabi-v7a
-services:
-  - xvfb
 branches:
   only:
     - master
-addons:
-  chrome: stable
 
 jobs:
   include:
@@ -19,7 +15,11 @@ jobs:
       language: node_js
       node_js: "12.14.0"
       dist: xenial
-
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+        
       install:
         - npm install
         - npm install -g ionic cordova@^8
