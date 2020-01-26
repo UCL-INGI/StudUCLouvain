@@ -22,7 +22,6 @@
 import { AlertController, Platform } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
-import { Diagnostic } from '@ionic-native/diagnostic';
 import { Network } from '@ionic-native/network';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -36,8 +35,7 @@ export class ConnectivityService {
   constructor(public platform: Platform,
     private network: Network,
     private translateService: TranslateService,
-    private alertCtrl: AlertController,
-    private diagnostic: Diagnostic) {
+    private alertCtrl: AlertController) {
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -57,7 +55,7 @@ export class ConnectivityService {
     this.translateService.get('NET.TITLE').subscribe((res: string) => { title = res; });
     this.translateService.get('NET.CONNECT').subscribe((res: string) => { message = res; });
     this.translateService.get('NET.CLOSE').subscribe((res: string) => { close = res; });
-    let alert = this.alertCtrl.create({
+    const alert = this.alertCtrl.create({
       title: title,
       subTitle: message,
       buttons: [close]
@@ -69,15 +67,15 @@ export class ConnectivityService {
     console.log('Is available? ' + isAvailable);
     this.available = isAvailable;
     return isAvailable;
-  };
+  }
 
   errorCallback = (e) => console.error(e);
 
   async isLocationEnabled() {
 
-    console.log("start test location");
-    await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
-    console.log("available : " + this.available);
+    console.log('start test location');
+    // await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
+    console.log('available : ' + this.available);
     return this.available;
   }
 

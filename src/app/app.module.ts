@@ -30,7 +30,6 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { AppVersion } from '@ionic-native/app-version';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
-import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Market } from '@ionic-native/market';
@@ -115,8 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FacService,
     SQLite,
     SecureStorage,
-    AppVersion,
-    Diagnostic
+    AppVersion
   ]
 })
 export class AppModule { }
