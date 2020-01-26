@@ -27,7 +27,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
-import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Market } from '@ionic-native/market';
@@ -98,7 +97,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     GoogleMaps,
     Network,
-    Calendar,
     NewsService,
     RssService,
     LibrariesService,
