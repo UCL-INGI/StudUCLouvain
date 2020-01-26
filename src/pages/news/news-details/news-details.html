@@ -1,0 +1,54 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire and Corentin Lamy
+    Date : July 2017
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="news" secondary>
+    <ion-row>
+      <ion-col>
+        <ion-title>{{news.title}}</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content>
+  <ion-card>
+    <img src="{{news.image}}" />
+
+    <ion-card-content>
+      <ion-card-title>
+        {{news.title}}
+      </ion-card-title>
+      <p [innerHTML]="news.description"></p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col text-right>
+        <button ion-button clear small icon-left (click)="openPage(news.link)">
+          <ion-icon name='share-alt'></ion-icon>
+          {{'NEWS.SITE' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

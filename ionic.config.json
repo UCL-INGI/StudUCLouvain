@@ -1,0 +1,7 @@
+{
+  "name": "Stud.UCLouvain",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

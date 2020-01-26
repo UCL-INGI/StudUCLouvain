@@ -1,0 +1,57 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors :  Jérôme Lemaire and Corentin Lamy
+    Date : July 2017
+    This file is part of UCLCampus
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    UCLCampus is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCLCampus is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--EN-TETE-->
+<ion-header>
+  <ion-navbar color="event" secondary>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{event.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content>
+  <ion-card>
+    <img src="{{event.image}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{event.title}}
+      </ion-card-title>
+      <p [innerHTML]="event.description"></p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col text-right>
+        <button ion-button clear small icon-left (click)="addFavorite(event)">
+          <ion-icon name='star'></ion-icon>
+          {{'EVENTS.FAV' | translate}}
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small icon-left (click)="openPage(event.link)">
+          <ion-icon name='share-alt'></ion-icon>
+          {{'EVENTS.SITE' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

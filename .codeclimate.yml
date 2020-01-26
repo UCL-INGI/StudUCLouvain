@@ -1,0 +1,21 @@
+version: "2"
+
+plugins:
+  nodesecurity:
+    enabled: true
+  git-legal:
+   enabled: true
+  fixme:
+    enabled: true
+  tslint:
+    enabled: true
+    config: tslint.json
+
+exclude_patterns:
+- config/**/*
+- node_modules/**/*
+- webpack.*.js
+- karma.conf.js
+- platforms/
+- plugins/
+- www/
