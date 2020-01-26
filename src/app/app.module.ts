@@ -27,7 +27,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
-import { AppVersion } from '@ionic-native/app-version';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -113,8 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudentService,
     FacService,
     SQLite,
-    SecureStorage,
-    AppVersion
+    SecureStorage
   ]
 })
 export class AppModule { }
