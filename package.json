@@ -110,7 +110,7 @@
         "API_KEY_FOR_ANDROID": "apikeyformapandroid",
         "API_KEY_FOR_IOS": "apikeyformapios",
         "PLAY_SERVICES_VERSION": "15.0.1",
-        "ANDROID_SUPPORT_V4_VERSION": "27.+",
+        "ANDROID_SUPPORT_V4_VERSION": "28.+",
         "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
       },
