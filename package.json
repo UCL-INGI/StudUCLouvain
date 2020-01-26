@@ -44,7 +44,6 @@
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
-    "cordova-plugin-add-swift-support": "^1.7.2",
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-calendar": "^5.1.5",
     "cordova-plugin-compat": "^1.2.0",
@@ -92,7 +91,6 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-market": {},
-      "cordova-plugin-add-swift-support": {},
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "apikeyformapandroid",
         "API_KEY_FOR_IOS": "apikeyformapios",
