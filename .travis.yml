@@ -24,7 +24,6 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova@^8
-        - ionic info
 
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -50,18 +49,14 @@ jobs:
         - nvm install 12.14.0
         - gem install cocoapods
       install:
-        - npm config --global set loglevel error --save
         - npm install
         - npm install -g ionic cordova@^8 cordova-res
-        - node --version
-        - npm --version
 
       before_script:
         - ionic cordova platform add ios
         - pod repo update
         - cd platforms/ios
         - pod install
-        - ionic info
       script: ionic cordova build ios --prod
       
     - stage: "Build Android"
@@ -95,13 +90,9 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova@^8
-        - node --version
-        - npm --version
-        - gradle --version
 
       before_script:
         - ionic cordova platform add android
-        - ionic info
       script: ionic cordova build android --prod
           
 after_script:
