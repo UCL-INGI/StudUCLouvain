@@ -45,7 +45,6 @@ jobs:
         - nvm install 12.14.0
         - gem install cocoapods
         - pod repo update
-        - pod install
       install:
         - npm config --global set loglevel error --save
         - npm install
