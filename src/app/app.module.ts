@@ -33,7 +33,6 @@ import { Device } from '@ionic-native/device';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { Network } from '@ionic-native/network';
 import { SecureStorage } from '@ionic-native/secure-storage';
@@ -63,7 +62,7 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { MyApp } from './app.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -72,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CacheModule.forRoot({ keyPrefix: "UCL-cache" }),
+    CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
     IonicStorageModule.forRoot(),
     HttpModule,
     HttpClientModule,
@@ -93,7 +92,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CourseService,
     StudiesService,
     EventsService,
-    InAppBrowser,
     MapService,
     Market,
     POIService,
@@ -121,4 +119,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     Diagnostic
   ]
 })
-export class AppModule {}
+export class AppModule { }

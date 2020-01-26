@@ -112,7 +112,6 @@
         <splash height="1125" src="resources/ios/splash/Default-Landscape-2436h.png" width="2436" />
     </platform>
     <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-device" spec="^2.0.0" />
     <plugin name="cordova-plugin-calendar" spec="^5.0.0">
         <variable name="CALENDAR_USAGE_DESCRIPTION" value="Need calendar access to add events to it." />

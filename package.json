@@ -90,7 +90,6 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-appavailability": {},
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-device": {},
       "cordova-plugin-calendar": {
         "CALENDAR_USAGE_DESCRIPTION": "Need calendar access to add events to it."
