@@ -54,7 +54,7 @@ jobs:
       before_script:
         - ionic cordova platform add ios
         - pod repo update
-        - cd platform/ios
+        - cd platforms/ios
         - pod install
         - ionic info
       script: ionic cordova build ios --prod
