@@ -71,6 +71,7 @@ jobs:
       os: osx
       language: objective-c
       cache:
+        cocoapods: true
         directories:
           - plugins
           
