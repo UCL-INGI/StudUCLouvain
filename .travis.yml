@@ -44,7 +44,6 @@ jobs:
       before_install:
         - nvm install 12.14.0
         - gem install cocoapods
-        - pod repo update
       install:
         - npm config --global set loglevel error --save
         - npm install
@@ -54,6 +53,9 @@ jobs:
 
       before_script:
         - ionic cordova platform add ios
+        - pod repo update
+        - cd platform/ios
+        - pod install
         - ionic info
       script: ionic cordova build ios --prod
       
