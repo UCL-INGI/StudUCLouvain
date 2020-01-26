@@ -72,7 +72,7 @@ jobs:
 
     - stage: "Build iOS"
       os: osx
-      language: objective-c
+      language: swift
           
       cache:
         npm: true
