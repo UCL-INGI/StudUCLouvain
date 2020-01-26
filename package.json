@@ -24,6 +24,7 @@
     "@ionic-native/calendar": "^4.20.0",
     "@ionic-native/core": "^4.20.0",
     "@ionic-native/device": "^4.20.0",
+    "@ionic-native/geolocation": "^5.19.1",
     "@ionic-native/google-maps": "^4.21.0",
     "@ionic-native/in-app-browser": "^4.20.0",
     "@ionic-native/market": "^4.20.0",
