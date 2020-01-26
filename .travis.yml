@@ -45,6 +45,7 @@ jobs:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
       cache:
+        npm: true
         directories:
           - $ANDROID_HOME/
           - $HOME/.gradle/caches/
@@ -71,6 +72,7 @@ jobs:
       os: osx
       language: objective-c
       cache:
+        npm: true
         cocoapods: true
         directories:
           - plugins
