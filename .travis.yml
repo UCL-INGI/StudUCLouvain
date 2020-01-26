@@ -79,7 +79,7 @@ jobs:
       install:
         - npm ls --global --loglevel error
         - npm install
-        - npm install -g ionic cordova@^8
+        - npm install -g ionic cordova@^8 cordova-res
         - node --version
         - npm --version
 
