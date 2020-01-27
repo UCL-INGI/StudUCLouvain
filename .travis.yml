@@ -6,37 +6,12 @@ branches:
     
 jobs:
   include:
-    - stage: "Tests"
-      name: "Unit Tests"
-      language: node_js
-      env:
-        global:
-          - NPM_CONFIG_LOGLEVEL=error
-      cache:
-        npm: true
-      node_js: "12.14.0"
-      dist: xenial
-      services:
-        - xvfb
-      addons:
-        chrome: stable
-        
-      install:
-        - npm install
-        - npm install -g ionic cordova@^8
-
-      before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
-      script: npm test
-      
     - stage: "Build iOS"
       os: osx
       language: swift
       env:
         global:
-          - NPM_CONFIG_LOGLEVEL=error    
+          - NPM_CONFIG_LOGLEVEL=ERROR    
           
       cache:
         npm: true
@@ -57,8 +32,33 @@ jobs:
         - ionic cordova platform add ios
       script: 
         - ionic cordova build ios --prod
-        - pod init /platform/ios
+        - pod init platforms/ios
         - pod install
+      
+    - stage: "Tests"
+      name: "Unit Tests"
+      language: node_js
+      env:
+        global:
+          - NPM_CONFIG_LOGLEVEL=ERROR
+      cache:
+        npm: true
+      node_js: "12.14.0"
+      dist: xenial
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+        
+      install:
+        - npm install
+        - npm install -g ionic cordova@^8
+
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script: npm test
       
     - stage: "Build Android"
       language: android
@@ -67,7 +67,7 @@ jobs:
           - ANDROID_API_LEVEL=28
           - ANDROID_BUILD_TOOLS_VERSION=28.0.3
           - ANDROID_ABI=armeabi-v7a
-          - NPM_CONFIG_LOGLEVEL=error
+          - NPM_CONFIG_LOGLEVEL=ERROR
       jdk: oraclejdk8
       android:
         components:
