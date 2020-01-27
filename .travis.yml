@@ -55,9 +55,10 @@ jobs:
 
       before_script:
         - ionic cordova platform add ios
+      script: 
+        - ionic cordova build ios --prod
         - pod init /platform/ios
         - pod install
-      script: ionic cordova build ios --prod
       
     - stage: "Build Android"
       language: android
