@@ -32,8 +32,8 @@ jobs:
         - ionic cordova platform add ios
       script: 
         - ionic cordova build ios --prod
-        - pod init platforms/ios
-        - pod install
+        - pod repo update
+        - pod install --project-directory='./platforms/ios/'
       
     - stage: "Tests"
       name: "Unit Tests"
