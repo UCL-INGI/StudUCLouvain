@@ -51,6 +51,7 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova@^8 cordova-res
+        - pod install
 
       before_script:
         - ionic cordova platform add ios
