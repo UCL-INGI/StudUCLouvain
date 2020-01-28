@@ -56,8 +56,9 @@ jobs:
         - pod repo update
         - ionic cordova platform add ios
         - cd platforms/ios
-        - pod install --project-directory='./platforms/ios/'
+        - pod repo update
         - cd ../..
+        - pod install --project-directory='./platforms/ios/'
       script: 
         - ionic cordova build ios --prod
       
