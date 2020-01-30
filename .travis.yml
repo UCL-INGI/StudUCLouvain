@@ -83,10 +83,10 @@ jobs:
         - node --version
 
       before_script:
-        - ionic cordova platform add ios --prod
+        - ionic cordova platform add ios
         - ionic info
       script: 
-        - ionic cordova build ios
+        - ionic cordova build ios --prod
         
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
