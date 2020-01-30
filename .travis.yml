@@ -64,7 +64,7 @@ jobs:
       before_script:
         - ionic cordova platform add android
         - ionic info
-      script: ionic cordova build android
+      script: ionic cordova build android --prod
           
     - stage: "Build iOS"
       os: osx
@@ -83,7 +83,7 @@ jobs:
         - node --version
 
       before_script:
-        - ionic cordova platform add ios
+        - ionic cordova platform add ios --prod
         - ionic info
       script: 
         - ionic cordova build ios
