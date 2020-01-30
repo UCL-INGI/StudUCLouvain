@@ -45,7 +45,6 @@
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
     "cordova-plugin-appavailability": "^0.4.2",
-    "cordova-plugin-calendar": "^5.1.5",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -84,9 +83,6 @@
     "plugins": {
       "cordova-plugin-appavailability": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-calendar": {
-        "CALENDAR_USAGE_DESCRIPTION": "Need calendar access to add events to it."
-      },
       "cordova-sqlite-storage": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
