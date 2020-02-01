@@ -39,11 +39,9 @@ export class StudiesService {
   /*Open session for the user*/
   openSession() {
     return new Promise<string>((resolve, reject) => {
-      console.log("StudiesService openSession")
+      console.log('StudiesService openSession');
       this.ade.httpOpenSession().subscribe(
         data => {
-          console.log("data");
-          console.log(data);
           resolve(data.session._id);
         }
       );
@@ -53,11 +51,9 @@ export class StudiesService {
   /*Get the projects ADE*/
   getProjects(sessionId: string) {
     return new Promise((resolve, reject) => {
-      console.log("Studiesservice getProjects")
+      console.log('Studiesservice getProjects');
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
-          console.log("project");
-          console.log(data.projects);
           resolve(this.extractAdeProjects(data));
         }
       );
@@ -66,40 +62,26 @@ export class StudiesService {
 
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[] {
-    let projects: AdeProject[] = [];
-    console.log(data.projects)
-    console.log(data.projects.project.length)
+    const projects: AdeProject[] = [];
     if (data.projects.project.length === undefined) {
-      let name = data.projects.project._name.toString();
-      console.log("name : " + name);
-      let id = data.projects.project._id.toString();
-      console.log("id : " + id);
-      let project = new AdeProject(id, name);
-      console.log("project" + project)
-      console.log("projects" + projects)
-      projects.push(project)
-    }
-    else {
+      const name = data.projects.project._name.toString();
+      const id = data.projects.project._id.toString();
+      const project = new AdeProject(id, name);
+      projects.push(project);
+    } else {
       for (let i = 0; i < data.projects.project.length; i++) {
-        let name = data.projects.project[i]._name.toString();
-        console.log("name : " + name);
-        let id = data.projects.project[i]._id.toString();
-        console.log("id : " + id);
-        let project = new AdeProject(id, name);
-        console.log("project" + project)
-        console.log("projects" + projects)
-        projects.push(project)
+        const name = data.projects.project[i]._name.toString();
+        const id = data.projects.project[i]._id.toString();
+        const project = new AdeProject(id, name);
+        projects.push(project);
       }
     }
-    console.log("extractAdeProjects return projects ");
-    console.log(projects);
     return projects;
   }
 
   /*Set the project selected by the user*/
   setProject(sessionId: string, projectId: string) {
     return new Promise((resolve, reject) => {
-      console.log("studiesService setProject:" + sessionId + " projectId : " + projectId);
       this.ade.httpSetProject(sessionId, projectId).subscribe(
         data => { resolve(data); }
       );

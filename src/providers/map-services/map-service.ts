@@ -41,7 +41,6 @@ declare var google;
 
 @Injectable()
 export class MapService {
-
   mapElement: any;
   pleaseConnect: any;
   map: any;
@@ -52,11 +51,13 @@ export class MapService {
   userLocation: MapLocation;
   onDevice: boolean;
 
-  constructor(public connectivityService: ConnectivityService,
-    private geolocation: Geolocation,
+  constructor(
+    public connectivityService: ConnectivityService,
     private platform: Platform,
     menuCtrl: MenuController,
-    public userS: UserService) {
+    public userS: UserService,
+    private geolocation: Geolocation
+  ) {
     this.onDevice = this.platform.is('cordova');
 
     this.apiKey = jsApiKey;
@@ -177,14 +178,11 @@ export class MapService {
 
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
   private async initDeviceMap(): Promise<any> {
-    console.log('Geolocation enabled ?');
     if (await this.connectivityService.isLocationEnabled()) {
       console.log('Geolocation enabled');
       return new Promise((resolve, reject) => {
-        console.log('initDeviceMap - ask geolocation');
         LocationService.getMyLocation().then(
           (position) => {
-            console.log('initDeviceMap - geolocation answered');
             this.userLocation = new MapLocation('Ma Position',
               '',
               String(position.latLng.lat),
@@ -361,7 +359,7 @@ export class MapService {
 
   private setCenteredMarkerOnDevice(title: string, lat: number, lng: number) {
     this.markers.map((marker) => {
-      if (marker.getTitle() == title) {
+      if (marker.getTitle() === title) {
         const latLng = new LatLng(lat, lng);
         const camPos: CameraPosition<LatLng> = {
           target: latLng,
@@ -414,7 +412,7 @@ export class MapService {
               }
               this.hidePleaseConnect();
             } else {
-              if (typeof google == 'undefined' || typeof google.maps == 'undefined') {
+              if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 this.loadBrowserGoogleMaps();
               } else {
                 if (!this.mapInitialised) {

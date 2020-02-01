@@ -27,12 +27,12 @@ import { StudentService } from '../../../../providers/wso2-services/student-serv
 
 @IonicPage()
 @Component({
-  selector: "page-modal-info",
-  templateUrl: "modal-info.html"
+  selector: 'page-modal-info',
+  templateUrl: 'modal-info.html'
 })
 export class ModalInfoPage {
-  course = this.navParams.get("course");
-  year = this.navParams.get("year");
+  course = this.navParams.get('course');
+  year = this.navParams.get('year');
   information: any;
   langue;
 
@@ -44,7 +44,6 @@ export class ModalInfoPage {
     public studentService: StudentService
   ) {
     this.getInfo().then(data => {
-      console.log(data);
       this.information = data;
       this.langue = data.langue;
     });
@@ -56,25 +55,23 @@ export class ModalInfoPage {
       this.studentService
         .checkCourse(this.course.acronym, this.year)
         .then(data => {
-          console.log(data);
-          let res: any = data;
-          console.log(res);
+          const res: any = data;
           if (data === 400) {
             this.closeModal();
             resolve(400);
           } else {
-            let cahier = "";
-            let campus = res.campus;
-            let teacher = res.fichesIntervenants;
-            let offres = res.fichesOffres;
-            let langue = res.langueEnseignement;
-            let loca = res.localisation;
-            let credit = res.ects;
-            let entite = res.entiteCharge;
-            let progpre = res.programmesEtPrerequis;
-            let quadri = res.quadrimestre;
-            let resume = res.resumeCoursMap.entry[1].value;
-            let vol = {
+            let cahier = '';
+            const campus = res.campus;
+            const teacher = res.fichesIntervenants;
+            const offres = res.fichesOffres;
+            const langue = res.langueEnseignement;
+            const loca = res.localisation;
+            const credit = res.ects;
+            const entite = res.entiteCharge;
+            const progpre = res.programmesEtPrerequis;
+            const quadri = res.quadrimestre;
+            const resume = res.resumeCoursMap.entry[1].value;
+            const vol = {
               vol1: res.volTot1,
               vol2: res.volTot2,
               vol1Coef: res.volTot1AvecCoef,
@@ -98,7 +95,6 @@ export class ModalInfoPage {
               volume: vol,
               langue: langue
             };
-            console.log(response);
             resolve(response);
           }
         });

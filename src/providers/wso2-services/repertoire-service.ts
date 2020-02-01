@@ -41,15 +41,15 @@ export class RepertoireService {
   public searchEmployees(options: Array<string>, values: Array<string>) {
     this.employees = [];
     let newUrl = this.url;
-    newUrl += "search?";
-    for (var i = 0; i < options.length; i++) {
-      newUrl += options[i] + "=" + values[i];
+    newUrl += 'search?';
+    for (let i = 0; i < options.length; i++) {
+      newUrl += options[i] + '=' + values[i];
       if (i != options.length - 1) {
-        newUrl += "&";
+        newUrl += '&';
       }
     }
-    newUrl += "&page=1&pageSize=10"
-    //newUrl += "&directory=E";
+    newUrl += '&page=1&pageSize=10';
+    // newUrl += "&directory=E";
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
@@ -65,7 +65,7 @@ export class RepertoireService {
   public loadEmpDetails(emp: EmployeeItem) {
     return new Promise(resolve => {
 
-      let url_details = this.url + emp.matric_fgs + "/detail";
+      const url_details = this.url + emp.matric_fgs + '/detail';
 
       this.wso2Service.load(url_details).subscribe(
         data => {
@@ -79,8 +79,8 @@ export class RepertoireService {
   private extractEmployees(data: any) {
     if (data != null) {
       for (let i = 0; i < data.length; i++) {
-        let item = data[i];
-        let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
+        const item = data[i];
+        const employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
         this.employees.push(employee);
       }
     }
@@ -88,13 +88,12 @@ export class RepertoireService {
 
   /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
-    console.log(data);
-    emp.address = data.address
+    emp.address = data.address;
     emp.contracts = data.contracts;
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;
     emp.photo_url = data.photo_url;
-    //let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
+    // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }

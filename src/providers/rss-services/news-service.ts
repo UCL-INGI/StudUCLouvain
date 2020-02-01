@@ -71,10 +71,10 @@ export class NewsService {
       };
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.getNews(segment);
         } else {
-          if (error == 2) {
+          if (error === 2) {
             console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
           } else {
             console.log('Error loading news : ' + error);
@@ -107,7 +107,7 @@ export class NewsService {
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
       let img = '';
-      if (item.enclosure != null) { img = item.enclosure.url; }
+      if (item.enclosure != null) { img = item.enclosure._url; }
       const newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
     }

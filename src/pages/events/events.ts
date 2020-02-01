@@ -39,18 +39,18 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: "page-events",
-  templateUrl: "events.html"
+  selector: 'page-events',
+  templateUrl: 'events.html'
 })
 export class EventsPage {
-  @ViewChild("eventsList", { read: List }) eventsList: List;
+  @ViewChild('eventsList', { read: List }) eventsList: List;
 
   events: Array<EventItem> = [];
   searching: any = false;
-  segment = "all";
+  segment = 'all';
   shownEvents = 0;
   title: any;
-  searchTerm = "";
+  searchTerm = '';
   searchControl: FormControl;
   filters: any = [];
   excludedFilters: any = [];
@@ -82,7 +82,7 @@ export class EventsPage {
     private loadingCtrl: LoadingController,
     private cache: CacheService
   ) {
-    this.title = this.navParams.get("title");
+    this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
 
@@ -90,7 +90,6 @@ export class EventsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    console.log(this.dateLimit);
     this.cachedOrNot();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
       this.searching = false;
@@ -101,8 +100,8 @@ export class EventsPage {
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
-      this.cache.removeItem("cache-event");
-      this.loadEvents("cache-event");
+      this.cache.removeItem('cache-event');
+      this.loadEvents('cache-event');
       refresher.complete();
     } else {
       this.connService.presentConnectionAlert();
@@ -114,7 +113,7 @@ export class EventsPage {
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
-        content: "Please wait..."
+        content: 'Please wait...'
       });
 
       this.loading.present();
@@ -135,7 +134,7 @@ export class EventsPage {
 
   /*Open the details page for an event*/
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.push("EventsDetailsPage", { event: event });
+    this.navCtrl.push('EventsDetailsPage', { event: event });
   }
 
   /*To display or close a group of events (1 group = events for one week)*/
@@ -155,12 +154,11 @@ export class EventsPage {
   /*Check if data are cached or not */
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
-    const key = "cache-event";
+    const key = 'cache-event';
     await this.cache
       .getItem(key)
       .then(data => {
         this.presentLoading();
-        console.log("cached events");
         this.events = data.events;
         this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
@@ -172,7 +170,7 @@ export class EventsPage {
         this.updateDisplayedEvents();
       })
       .catch(() => {
-        console.log("Oh no! My data is expired or doesn't exist!");
+        console.log('Oh no! My data is expired or doesn\'t exist!');
         this.loadEvents(key);
       });
   }
@@ -225,7 +223,6 @@ export class EventsPage {
     const eventsD = Object.keys(groups).map(function (key) {
       return { weeks: key, event: groups[key] };
     });
-    console.log(eventsD);
     return eventsD;
   }
 
@@ -252,16 +249,16 @@ export class EventsPage {
   /*Return first day of the week and last day of the week (to display range)*/
   getRangeWeek(week, year) {
     let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
-    d1 = new Date("" + year + "");
+    d1 = new Date('' + year + '');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
     d1.setDate(d1.getDate() + 7 * (week - this.getWeek(d1)));
     rangeIsFrom =
-      d1.getMonth() + 1 + "-" + d1.getDate() + "-" + d1.getFullYear();
+      d1.getMonth() + 1 + '-' + d1.getDate() + '-' + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
-    rangeIsTo = d1.getMonth() + 1 + "-" + d1.getDate() + "-" + d1.getFullYear();
-    rangeIsTo = rangeIsTo.replace(/-/g, "/");
-    rangeIsFrom = rangeIsFrom.replace(/-/g, "/");
+    rangeIsTo = d1.getMonth() + 1 + '-' + d1.getDate() + '-' + d1.getFullYear();
+    rangeIsTo = rangeIsTo.replace(/-/g, '/');
+    rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
     return { from: rangeIsFrom, to: rangeIsTo };
   }
 
@@ -269,7 +266,7 @@ export class EventsPage {
   public updateDisplayedEvents() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
-    if (this.segment === "all") {
+    if (this.segment === 'all') {
       this.displayedEvents = this.events.filter(item => {
         return (
           this.excludedFilters.indexOf(item.category) < 0 &&
@@ -277,7 +274,7 @@ export class EventsPage {
           Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000)
         );
       });
-    } else if (this.segment === "favorites") {
+    } else if (this.segment === 'favorites') {
       const favEvents = [];
       this.events.filter(item => {
         if (item.favorite || this.user.hasFavorite(item.guid)) {
@@ -305,7 +302,7 @@ export class EventsPage {
       this.filters = [];
     }
 
-    const modal = this.modalCtrl.create("EventsFilterPage", {
+    const modal = this.modalCtrl.create('EventsFilterPage', {
       excludedFilters: this.excludedFilters,
       filters: this.filters,
       dateRange: this.dateRange
@@ -340,7 +337,7 @@ export class EventsPage {
       firstReminderMinutes: 15
     };
     let message: string;
-    this.translateService.get("EVENTS.MESSAGE").subscribe((res: string) => {
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {
       message = res;
     });
 
@@ -370,7 +367,7 @@ export class EventsPage {
       // prompt them to remove it
       let message: string;
       this.translateService
-        .get("EVENTS.MESSAGEFAV")
+        .get('EVENTS.MESSAGEFAV')
         .subscribe((res: string) => {
           message = res;
         });
@@ -380,7 +377,7 @@ export class EventsPage {
       this.user.addFavorite(itemData.guid);
       let message: string;
       this.translateService
-        .get("EVENTS.MESSAGEFAV2")
+        .get('EVENTS.MESSAGEFAV2')
         .subscribe((res: string) => {
           message = res;
         });
@@ -398,13 +395,13 @@ export class EventsPage {
     let message: string;
     let cancel: string;
     let delet: string;
-    this.translateService.get("EVENTS.MESSAGEFAV3").subscribe((res: string) => {
+    this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res: string) => {
       message = res;
     });
-    this.translateService.get("EVENTS.CANCEL").subscribe((res: string) => {
+    this.translateService.get('EVENTS.CANCEL').subscribe((res: string) => {
       cancel = res;
     });
-    this.translateService.get("EVENTS.DEL").subscribe((res: string) => {
+    this.translateService.get('EVENTS.DEL').subscribe((res: string) => {
       delet = res;
     });
     const alert = this.alertCtrl.create({

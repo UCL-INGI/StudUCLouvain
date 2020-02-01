@@ -42,6 +42,7 @@ export class EventsService {
   public getEvents(segment: string) {
     this.events = [];
     return this.rssService.load(this.url).then(result => {
+      console.log(result);
       this.extractEvents(result);
       return {
         events: this.events,
