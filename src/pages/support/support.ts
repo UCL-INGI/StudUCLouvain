@@ -33,14 +33,14 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
 
 @IonicPage()
 @Component({
-  selector: "page-support",
-  templateUrl: "support.html",
+  selector: 'page-support',
+  templateUrl: 'support.html',
   animations: [
-    trigger("expand", [
-      state("true", style({ height: "45px" })),
-      state("false", style({ height: "0" })),
-      transition("void => *", animate("0s")),
-      transition("* <=> *", animate("250ms ease-in-out"))
+    trigger('expand', [
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0' })),
+      transition('void => *', animate('0s')),
+      transition('* <=> *', animate('250ms ease-in-out'))
     ])
   ]
 })
@@ -48,11 +48,11 @@ export class SupportPage {
   title: any;
   shownGroup = null;
   employees: EmployeeItem[];
-  searching: boolean = false;
-  lastname: string = "";
-  firstname: string = "";
+  searching = false;
+  lastname = '';
+  firstname = '';
   loading;
-  segment: string = "aide";
+  segment = 'aide';
   shownHelp = null;
 
   constructor(
@@ -65,14 +65,14 @@ export class SupportPage {
     public connService: ConnectivityService,
     public loadingCtrl: LoadingController
   ) {
-    this.title = this.navParams.get("title");
+    this.title = this.navParams.get('title');
   }
 
   /*Display loading pop up*/
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
-        content: "Please wait..."
+        content: 'Please wait...'
       });
 
       this.loading.present();
@@ -90,15 +90,15 @@ export class SupportPage {
   /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
     this.presentLoading();
-    let options: Array<string> = [];
-    let values: Array<string> = [];
+    const options: Array<string> = [];
+    const values: Array<string> = [];
     if (this.lastname.length > 0) {
       values.push(this.lastname);
-      options.push("lastname");
+      options.push('lastname');
     }
     if (this.firstname.length > 0) {
       values.push(this.firstname);
-      options.push("firstname");
+      options.push('firstname');
     }
     this.searchEmployees(options, values);
   }
@@ -107,7 +107,7 @@ export class SupportPage {
   searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(res => {
-        let result: any = res;
+        const result: any = res;
         this.employees = result.employees;
         this.searching = true;
       });
@@ -120,7 +120,7 @@ export class SupportPage {
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push("EmployeeDetailsPage", { emp: emp });
+    this.navCtrl.push('EmployeeDetailsPage', { emp: emp });
   }
 
   /*Show or close the informations for the section selectionned*/
@@ -138,6 +138,6 @@ export class SupportPage {
 
   /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
-    this.iab.create(url, "_system", "location=yes");
+    this.iab.create(url, '_system', 'location=yes');
   }
 }

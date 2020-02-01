@@ -12,4 +12,4 @@ import { RestaurantPage } from './restaurant';
     TranslateModule.forChild()
   ]
 })
-export class RestaurantPageModule {}
+export class RestaurantPageModule { }

@@ -86,8 +86,8 @@ export class CoursePage {
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(data => {
       const courseId = data;
-      this.courseService.getActivity(sessionId, courseId).then(data => {
-        this.course.activities = data
+      this.courseService.getActivity(sessionId, courseId).then(activity => {
+        this.course.activities = activity
           .sort((a1, a2) => a1.start.valueOf() - a2.start.valueOf())
           .filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
         this.displayedActi = this.course.activities;
@@ -134,7 +134,8 @@ export class CoursePage {
     this.alert();
   }
 
-  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
+  /*Create and display the alert that say that if a course is add to the calendar
+  if this course is changed, the calendar doesn't take that in account*/
   alert() {
     let title: string;
     let message: string;
@@ -160,9 +161,9 @@ export class CoursePage {
   /*Filter TP if a slot is selectionned*/
   updateDisplayedTP() {
     const toFilter = this.courseSorted.tp;
-    if (toFilter.length == 0) { this.noTP = true; } else { this.noTP = false; }
+    if (toFilter.length === 0) { this.noTP = true; } else { this.noTP = false; }
     let toPush;
-    if (this.slotTP != 'no') {
+    if (this.slotTP !== 'no') {
       toPush = toFilter.filter(
         acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1
       );
@@ -173,9 +174,9 @@ export class CoursePage {
   /*Filter CM if a slot is selectionned*/
   updateDisplayedCM() {
     const toFilter = this.courseSorted.cm;
-    if (toFilter.length == 0) { this.noCM = true; } else { this.noCM = false; }
+    if (toFilter.length === 0) { this.noCM = true; } else { this.noCM = false; }
     let toPush: Array<Activity>;
-    if (this.slotCM != 'no') {
+    if (this.slotCM !== 'no') {
       toPush = toFilter.filter(acti => acti.name === this.slotCM);
     } else { toPush = this.courseSorted.cm; }
     this.displayedActi = this.displayedActi.concat(toPush);
@@ -220,11 +221,11 @@ export class CoursePage {
         {
           text: apply,
           handler: data => {
-            if (segment == 'Cours magistral') {
+            if (segment === 'Cours magistral') {
               this.slotCM = data;
               this.userS.addSlotCM(this.course.acronym, this.slotCM);
             }
-            if (segment == 'TD') {
+            if (segment === 'TD') {
               this.slotTP = data;
               this.userS.addSlotTP(this.course.acronym, this.slotTP);
             }
@@ -271,23 +272,23 @@ export class CoursePage {
     let act: Activity[] = this.course.activities;
     act = act.filter(
       acti =>
-        acti.type == segment ||
-        (acti.type == 'TP' && segment == 'TD') ||
-        (segment == 'Examen' && acti.isExam)
+        acti.type === segment ||
+        (acti.type === 'TP' && segment === 'TD') ||
+        (segment === 'Examen' && acti.isExam)
     );
     // retrieve name of each slot
     let slots = act
       .map(item => item.name)
       .filter((value, index, self) => self.indexOf(value) === index); // keep only different
     // delete some session (like seance aide etude)
-    if (segment == 'TD') { slots = slots.filter(acti => acti.indexOf('_') !== -1); }
-    if (segment == 'Cours magistral') {
+    if (segment === 'TD') { slots = slots.filter(acti => acti.indexOf('_') !== -1); }
+    if (segment === 'Cours magistral') {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
     const newAct: Activity[] = [];
     // retrieve one activity of each slot
     for (let i = 0; i < slots.length; i++) {
-      const activity: Activity = act.find(acti => acti.name == slots[i]);
+      const activity: Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
     }
     return newAct;

@@ -273,19 +273,19 @@ export class HomePage {
           type: 'radio',
           label: 'Louvain-la-Neuve',
           value: 'LLN',
-          checked: check == 'LLN'
+          checked: check === 'LLN'
         },
         {
           type: 'radio',
           label: 'Woluwe',
           value: 'Woluwe',
-          checked: check == 'Woluwe'
+          checked: check === 'Woluwe'
         },
         {
           type: 'radio',
           label: 'Mons',
           value: 'Mons',
-          checked: check == 'Mons'
+          checked: check === 'Mons'
         }
       ],
       buttons: [
@@ -308,13 +308,13 @@ export class HomePage {
           type: 'radio',
           label: fr,
           value: 'fr',
-          checked: check2 == 'fr'
+          checked: check2 === 'fr'
         },
         {
           type: 'radio',
           label: en,
           value: 'en',
-          checked: check2 == 'en'
+          checked: check2 === 'en'
         }
       ],
       buttons: [

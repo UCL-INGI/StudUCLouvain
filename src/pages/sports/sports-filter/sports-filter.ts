@@ -25,8 +25,8 @@ import { Component } from '@angular/core';
 
 @IonicPage()
 @Component({
-  selector: "page-sports-filter",
-  templateUrl: "sports-filter.html"
+  selector: 'page-sports-filter',
+  templateUrl: 'sports-filter.html'
 })
 export class SportsFilterPage {
   categories: Array<{ name: string; isChecked: boolean }> = [];
@@ -35,10 +35,10 @@ export class SportsFilterPage {
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController) {
     // passed in array of categories names that should be excluded (unchecked)
-    let excludedFilters = this.navParams.get("excludedFilters");
-    let filters = this.navParams.get("filters");
-    this.dateRange = this.navParams.get("dateRange");
-    for (let filterName of filters) {
+    const excludedFilters = this.navParams.get('excludedFilters');
+    const filters = this.navParams.get('filters');
+    this.dateRange = this.navParams.get('dateRange');
+    for (const filterName of filters) {
       this.categories.push({
         name: filterName,
         isChecked: excludedFilters.indexOf(filterName) === -1
@@ -62,7 +62,7 @@ export class SportsFilterPage {
 
   /*Pass back a new array of categories name to exclude*/
   applyFilters() {
-    let excludedFilters = this.categories
+    const excludedFilters = this.categories
       .filter(c => !c.isChecked)
       .map(c => c.name);
     this.dismiss(excludedFilters);
@@ -70,7 +70,7 @@ export class SportsFilterPage {
 
   /*Dismiss filter*/
   dismiss(data?: any) {
-    if (typeof data == "undefined") {
+    if (typeof data === 'undefined') {
       data = [];
     }
     this.results.push(data);

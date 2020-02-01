@@ -26,24 +26,24 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 @IonicPage()
 @Component({
-  selector: "page-tuto",
-  templateUrl: "tuto.html"
+  selector: 'page-tuto',
+  templateUrl: 'tuto.html'
 })
 export class TutoPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public splashscreen: SplashScreen
-  ) {}
+  ) { }
 
   ionViewDidEnter() {
-    console.log("ionViewDidLoad TutoPage");
+    console.log('ionViewDidLoad TutoPage');
     setTimeout(() => {
       this.splashscreen.hide();
     }, 1000);
   }
 
   goToHome() {
-    this.navCtrl.setRoot("HomePage");
+    this.navCtrl.setRoot('HomePage');
   }
 }

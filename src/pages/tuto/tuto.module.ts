@@ -30,4 +30,4 @@ import { TutoPage } from './tuto';
   declarations: [TutoPage],
   imports: [IonicPageModule.forChild(TutoPage), TranslateModule.forChild()]
 })
-export class TutoPageModule {}
+export class TutoPageModule { }

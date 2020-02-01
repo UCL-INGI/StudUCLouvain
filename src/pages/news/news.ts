@@ -90,7 +90,6 @@ export class NewsPage {
   resize() {
     if (this.content) {
       this.content.resize();
-      console.debug('content resize', this.content);
     }
   }
 
@@ -250,7 +249,7 @@ export class NewsPage {
         }
         this.shownNews = result.shownNews;
         this.searching = false;
-        this.nonews = this.news.length == 0;
+        this.nonews = this.news.length === 0;
         this.updateDisplayedNews();
       });
     } else {

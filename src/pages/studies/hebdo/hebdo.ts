@@ -94,7 +94,8 @@ export class HebdoPage {
     this.alert();
   }
 
-  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
+  /*Create and display the alert that say that if a course is add to the calendar
+  if this course is changed, the calendar doesn't take that in account*/
   alert() {
     let title: string;
     let message: string;

@@ -124,7 +124,7 @@ export class StudiesPage {
     this.error = '';
     return new Promise(resolve => {
       this.wso2Service.login(this.username, this.password).catch(error => {
-        if (error.status == 400) {
+        if (error.status === 400) {
           this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {
             this.error = res;
           });
@@ -147,7 +147,7 @@ export class StudiesPage {
   /*Get course program of student*/
   loadActivities() {
     if (this.connService.isOnline()) {
-      this.login().then(res => {
+      this.login().then(() => {
         if (this.status) {
           this.studentService
             .searchActivities()
@@ -199,17 +199,15 @@ export class StudiesPage {
   /*Set project and connect to ADE*/
   initializeSession() {
     if (this.connService.isOnline()) {
-      this.studiesService.openSession().then(data => {
-        this.sessionId = data;
+      this.studiesService.openSession().then(sessId => {
+        this.sessionId = sessId;
         this.storage.get('adeProject').then(data => {
           this.project = data;
           if (this.project === null) {
             this.openModalProject();
           } else {
             this.studiesService
-              .setProject(this.sessionId, this.project.id)
-              .then(data => {
-              });
+              .setProject(this.sessionId, this.project.id);
           }
         });
       });

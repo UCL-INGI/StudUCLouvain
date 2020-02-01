@@ -30,21 +30,21 @@ import { LibrariesService } from '../../../providers/wso2-services/libraries-ser
 
 @IonicPage()
 @Component({
-  selector: "page-library-details",
-  templateUrl: "library-details.html",
+  selector: 'page-library-details',
+  templateUrl: 'library-details.html',
   animations: [
-    trigger("expand", [
-      state("true", style({ height: "45px" })),
-      state("false", style({ height: "0" })),
-      transition("void => *", animate("0s")),
-      transition("* <=> *", animate("250ms ease-in-out"))
+    trigger('expand', [
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0' })),
+      transition('void => *', animate('0s')),
+      transition('* <=> *', animate('250ms ease-in-out'))
     ])
   ]
 })
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
-  searching: boolean = false;
+  searching = false;
 
   constructor(
     public navCtrl: NavController,
@@ -52,11 +52,11 @@ export class LibraryDetailsPage {
     public libService: LibrariesService,
     public connService: ConnectivityService
   ) {
-    this.libDetails = navParams.get("lib");
+    this.libDetails = navParams.get('lib');
     this.searching = true;
     if (this.connService.isOnline()) {
       this.libService.loadLibDetails(this.libDetails).then(res => {
-        let result: any = res;
+        const result: any = res;
         this.libDetails = result.libDetails;
         this.searching = false;
       });
@@ -82,6 +82,6 @@ export class LibraryDetailsPage {
 
   /*Open the page of the library for more details*/
   openPage(url: string) {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 }

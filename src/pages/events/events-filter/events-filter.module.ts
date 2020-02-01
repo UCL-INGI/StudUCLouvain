@@ -12,4 +12,4 @@ import { EventsFilterPage } from './events-filter';
     TranslateModule.forChild()
   ]
 })
-export class EventsFilterModule {}
+export class EventsFilterModule { }

@@ -31,21 +31,21 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: "page-param",
-  templateUrl: "param.html",
+  selector: 'page-param',
+  templateUrl: 'param.html',
   animations: [
-    trigger("expand", [
-      state("true", style({ height: "45px" })),
-      state("false", style({ height: "0" })),
-      transition("void => *", animate("0s")),
-      transition("* <=> *", animate("250ms ease-in-out"))
+    trigger('expand', [
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0' })),
+      transition('void => *', animate('0s')),
+      transition('* <=> *', animate('250ms ease-in-out'))
     ])
   ]
 })
 export class ParamPage {
   title: any;
   shownGroup = null;
-  setting2: string = "Langue";
+  setting2 = 'Langue';
 
   constructor(
     public navCtrl: NavController,
@@ -55,54 +55,54 @@ export class ParamPage {
     private alertCtrl: AlertController,
     private translateService: TranslateService
   ) {
-    this.title = this.navParams.get("title");
+    this.title = this.navParams.get('title');
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
   campus_choice() {
-    let check = this.userS.campus;
+    const check = this.userS.campus;
     let setting, message, save;
-    this.translateService.get("HOME.SETTING1").subscribe((res: string) => {
+    this.translateService.get('HOME.SETTING1').subscribe((res: string) => {
       setting = res;
     });
-    this.translateService.get("HOME.MESSAGE").subscribe((res: string) => {
+    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
       message = res;
     });
-    this.translateService.get("HOME.SAVE").subscribe((res: string) => {
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
       save = res;
     });
-    let settingsAlert = this.alertCtrl.create({
+    const settingsAlert = this.alertCtrl.create({
       title: setting,
       message: message,
       inputs: [
         {
-          type: "radio",
-          label: "Louvain-la-Neuve",
-          value: "LLN",
-          checked: check == "LLN"
+          type: 'radio',
+          label: 'Louvain-la-Neuve',
+          value: 'LLN',
+          checked: check === 'LLN'
         },
         {
-          type: "radio",
-          label: "Woluwé",
-          value: "Woluwe",
-          checked: check == "Woluwe"
+          type: 'radio',
+          label: 'Woluwé',
+          value: 'Woluwe',
+          checked: check === 'Woluwe'
         },
         {
-          type: "radio",
-          label: "Mons",
-          value: "Mons",
-          checked: check == "Mons"
+          type: 'radio',
+          label: 'Mons',
+          value: 'Mons',
+          checked: check === 'Mons'
         },
         {
-          type: "radio",
-          label: "Tournai",
-          value: "Tournai",
+          type: 'radio',
+          label: 'Tournai',
+          value: 'Tournai',
           disabled: true
         },
         {
-          type: "radio",
-          label: "St-Gilles",
-          value: "StG",
+          type: 'radio',
+          label: 'St-Gilles',
+          value: 'StG',
           disabled: true
         }
       ],
@@ -120,38 +120,38 @@ export class ParamPage {
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
   language_choice() {
-    let check2 = this.translateService.currentLang;
+    const check2 = this.translateService.currentLang;
     let message2, en, fr, setting2, save: string;
-    this.translateService.get("HOME.SETTING2").subscribe((res: string) => {
+    this.translateService.get('HOME.SETTING2').subscribe((res: string) => {
       setting2 = res;
     });
-    this.translateService.get("HOME.MESSAGE2").subscribe((res: string) => {
+    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
       message2 = res;
     });
-    this.translateService.get("HOME.FR").subscribe((res: string) => {
+    this.translateService.get('HOME.FR').subscribe((res: string) => {
       fr = res;
     });
-    this.translateService.get("HOME.EN").subscribe((res: string) => {
+    this.translateService.get('HOME.EN').subscribe((res: string) => {
       en = res;
     });
-    this.translateService.get("HOME.SAVE").subscribe((res: string) => {
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
       save = res;
     });
-    let languageAlert = this.alertCtrl.create({
+    const languageAlert = this.alertCtrl.create({
       title: setting2,
       message: message2,
       inputs: [
         {
-          type: "radio",
+          type: 'radio',
           label: fr,
-          value: "fr",
-          checked: check2 == "fr"
+          value: 'fr',
+          checked: check2 === 'fr'
         },
         {
-          type: "radio",
+          type: 'radio',
           label: en,
-          value: "en",
-          checked: check2 == "en"
+          value: 'en',
+          checked: check2 === 'en'
         }
       ],
       buttons: [
@@ -168,11 +168,11 @@ export class ParamPage {
 
   /*When the language change, translate the page with the applied language*/
   languageChanged(event: string) {
-    this.userS.storage.set("lan", event);
+    this.userS.storage.set('lan', event);
     this.translateService.use(event);
   }
 
   openTuto() {
-    this.navCtrl.push("TutoPage");
+    this.navCtrl.push('TutoPage');
   }
 }
