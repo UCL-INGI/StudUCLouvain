@@ -23,9 +23,8 @@ $font-path: "../assets/fonts";
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
-  primary:    #488aff,
-  danger:     #f53d3d,
+$colors: (primary: #488aff,
+  danger: #f53d3d,
   guindaille: #dd156c,
   navbarColor: #009688,
   news:#c10a27,
@@ -43,10 +42,8 @@ $colors: (
   mobilite: #006837,
   urg: #ec1c24,
   fun: #93278f,
-  uclouvain: rgb(0,33,78),
-  home: #002A6A
-
-);
+  uclouvain: rgb(0, 33, 78),
+  home: #002A6A);
 
 
 // App iOS Variables
