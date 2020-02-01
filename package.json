@@ -40,6 +40,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@reactivex/rxjs": "^5.5.12",
+    "@types/node": "^11.15.5",
     "cordova": "^8.1.2",
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
@@ -70,10 +71,9 @@
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.22",
+    "@angular-devkit/build-angular": "^0.803.24",
     "@angular/cli": "^6.2.9",
     "@ionic/app-scripts": "3.2.4",
-    "@types/node": "^11.15.5",
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "typescript": "~2.6.2"
