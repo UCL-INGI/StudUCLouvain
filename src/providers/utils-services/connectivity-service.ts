@@ -74,7 +74,4 @@ export class ConnectivityService {
     // await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
     return this.available;
   }
-
-
-
 }

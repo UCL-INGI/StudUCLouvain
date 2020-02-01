@@ -42,14 +42,14 @@ export class CourseService {
         data => {
           resolve(this.extractCourseId(data));
         }
-      )
-    })
+      );
+    });
   }
 
   /*Extract the course ID*/
   extractCourseId(data) {
 
-    if (data.resources.resource !== undefined) return data.resources.resource._id;
+    if (data.resources.resource !== undefined) { return data.resources.resource._id; }
   }
 
   /*Get activity for a course ID obtained by getting this from a course selected by the user*/
@@ -59,22 +59,22 @@ export class CourseService {
         data => {
           resolve(this.extractActivity(data));
         }
-      )
-    })
+      );
+    });
   }
 
   /*Extract the activity*/
   extractActivity(data): Activity[] {
     let activities: Activity[] = [];
     if (data.activities !== undefined) {
-      let activitiesList = data.activities.activity
+      let activitiesList = data.activities.activity;
       if (activitiesList.length === undefined) {
         activitiesList = [];
-        activitiesList.push(data.activities.activity)
+        activitiesList.push(data.activities.activity);
       }
       for (let i = 0; i < activitiesList.length; i++) {
-        let activityElem = activitiesList[i];
-        let newActivities: Activity[] = this.createNewActivities(activityElem);
+        const activityElem = activitiesList[i];
+        const newActivities: Activity[] = this.createNewActivities(activityElem);
         activities = activities.concat(newActivities);
       }
     }
@@ -83,26 +83,26 @@ export class CourseService {
 
   /*For each activity collect the right variables to be able to display them*/
   createNewActivities(jsonActivity): Activity[] {
-    let activities: Activity[] = [];
-    let type: string = jsonActivity._type;
-    let isExam = type.indexOf('Examen') !== -1;
+    const activities: Activity[] = [];
+    const type: string = jsonActivity._type;
+    const isExam = type.indexOf('Examen') !== -1;
     let events = jsonActivity.events.event;
     if (events !== undefined) {
       events = this.handleSpecialCase(events);
 
       for (let i = 0; i < events.length; i++) {
-        let event = events[i];
-        let endHour = event._endHour;
-        let startHour = event._startHour;
-        let date = event._date;
-        let participants = event.eventParticipants.eventParticipant
-        let teachers = this.getTeachers(participants)
-        let students = this.getStudents(participants)
-        let auditorium = this.getAuditorium(participants)
-        let start = this.createDate(date, startHour);
-        let end = this.createDate(date, endHour);
-        let name = event._name;
-        let activity = new Activity(type, teachers, students, start, end, auditorium, isExam, name);
+        const event = events[i];
+        const endHour = event._endHour;
+        const startHour = event._startHour;
+        const date = event._date;
+        const participants = event.eventParticipants.eventParticipant;
+        const teachers = this.getTeachers(participants);
+        const students = this.getStudents(participants);
+        const auditorium = this.getAuditorium(participants);
+        const start = this.createDate(date, startHour);
+        const end = this.createDate(date, endHour);
+        const name = event._name;
+        const activity = new Activity(type, teachers, students, start, end, auditorium, isExam, name);
         activities.push(activity);
       }
     }
@@ -111,7 +111,7 @@ export class CourseService {
 
   private handleSpecialCase(events: any) {
     if (events.length === undefined) {
-      let temp = events;
+      const temp = events;
       events = [];
       events.push(temp);
     }
@@ -120,9 +120,9 @@ export class CourseService {
 
   /*Create a date*/
   createDate(date: string, hour: string): Date {
-    let splitDate = date.split("/")
-    let splitHour = hour.split(":")
-    let newdate: Date = new Date(parseInt(splitDate[2]),
+    const splitDate = date.split('/');
+    const splitHour = hour.split(':');
+    const newdate: Date = new Date(parseInt(splitDate[2]),
       parseInt(splitDate[1]) - 1,
       parseInt(splitDate[0]),
       parseInt(splitHour[0]),
@@ -133,10 +133,10 @@ export class CourseService {
 
   /*Get teacher from the participants*/
   getTeachers(participants): string {
-    let teachers: string = "";
+    let teachers = '';
     for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === "instructor") {
-        teachers = teachers + participants[i]._name + "/";
+      if (participants[i]._category === 'instructor') {
+        teachers = teachers + participants[i]._name + '/';
       }
     }
     return teachers;
@@ -144,10 +144,10 @@ export class CourseService {
 
   /*Get students accepted at a course in the participants*/
   getStudents(participants): string {
-    let students: string = "";
+    let students = '';
     for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === "trainee") {
-        students = students + participants[i]._name + "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
+      if (participants[i]._category === 'trainee') {
+        students = students + participants[i]._name + '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
       }
     }
 
@@ -156,10 +156,10 @@ export class CourseService {
 
   /*Get Auditorium in which the course is presented*/
   getAuditorium(participants): string {
-    let auditorium: string = " ";
+    let auditorium = ' ';
     for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === "classroom") {
-        auditorium = auditorium + participants[i]._name + " ";
+      if (participants[i]._category === 'classroom') {
+        auditorium = auditorium + participants[i]._name + ' ';
       }
     }
     return auditorium;

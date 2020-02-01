@@ -38,11 +38,11 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 // declare var TestFairy: any;
 
 @Component({
-  templateUrl: "app.html"
+  templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage = ""; // = 'HomePage';
+  rootPage = ''; // = 'HomePage';
   alertPresented: any;
   page: any;
   homePage;
@@ -90,16 +90,16 @@ export class MyApp {
     private wso2Service: Wso2Service,
     public cache: CacheService
   ) {
-    console.log("Startin App");
+    console.log('Startin App');
     this.user.getCampus();
     // this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
 
     this.homePage = {
-      title: "MENU.HOME",
-      component: "HomePage",
-      icon: "./assets/img/home.png",
+      title: 'MENU.HOME',
+      component: 'HomePage',
+      icon: './assets/img/home.png',
       iosSchemaName: null,
       androidPackageName: null,
       appUrl: null,
@@ -107,27 +107,27 @@ export class MyApp {
     };
     this.campusPages = [
       {
-        title: "MENU.NEWS",
-        component: "NewsPage",
-        icon: "./assets/img/news.png",
+        title: 'MENU.NEWS',
+        component: 'NewsPage',
+        icon: './assets/img/news.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.EVENTS",
-        component: "EventsPage",
-        icon: "./assets/img/event.png",
+        title: 'MENU.EVENTS',
+        component: 'EventsPage',
+        icon: './assets/img/event.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.SPORTS",
-        component: "SportsPage",
-        icon: "./assets/img/sport.png",
+        title: 'MENU.SPORTS',
+        component: 'SportsPage',
+        icon: './assets/img/sport.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
@@ -136,27 +136,27 @@ export class MyApp {
     ];
     this.studiePages = [
       {
-        title: "MENU.STUDIES",
-        component: "StudiesPage",
-        icon: "./assets/img/études.png",
+        title: 'MENU.STUDIES',
+        component: 'StudiesPage',
+        icon: './assets/img/études.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.LIBRARY",
-        component: "LibrariesPage",
-        icon: "./assets/img/biblio.png",
+        title: 'MENU.LIBRARY',
+        component: 'LibrariesPage',
+        icon: './assets/img/biblio.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.HELP",
-        component: "SupportPage",
-        icon: "./assets/img/support.png",
+        title: 'MENU.HELP',
+        component: 'SupportPage',
+        icon: './assets/img/support.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
@@ -165,54 +165,54 @@ export class MyApp {
     ];
     this.toolPages = [
       {
-        title: "MENU.PARTY",
-        component: "GuindaillePage",
-        icon: "./assets/img/g2.png",
+        title: 'MENU.PARTY',
+        component: 'GuindaillePage',
+        icon: './assets/img/g2.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.MAP",
-        component: "MapPage",
-        icon: "./assets/img/cartes.png",
+        title: 'MENU.MAP',
+        component: 'MapPage',
+        icon: './assets/img/cartes.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.RESTAURANT",
-        component: "RestaurantPage",
-        icon: "./assets/img/resto.png",
-        iosSchemaName: "id1156050719",
-        androidPackageName: "com.apptree.resto4u",
-        appUrl: "apptreeresto4u://",
-        httpUrl: "https://uclouvain.be/fr/decouvrir/resto-u"
+        title: 'MENU.RESTAURANT',
+        component: 'RestaurantPage',
+        icon: './assets/img/resto.png',
+        iosSchemaName: 'id1156050719',
+        androidPackageName: 'com.apptree.resto4u',
+        appUrl: 'apptreeresto4u://',
+        httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u'
       },
       {
-        title: "MENU.MOBILITY",
-        component: "MobilityPage",
-        icon: "./assets/img/mobilité.png",
+        title: 'MENU.MOBILITY',
+        component: 'MobilityPage',
+        icon: './assets/img/mobilité.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.PARAM",
-        component: "ParamPage",
-        icon: "./assets/img/setting.png",
+        title: 'MENU.PARAM',
+        component: 'ParamPage',
+        icon: './assets/img/setting.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
         httpUrl: null
       },
       {
-        title: "MENU.CREDITS",
-        component: "CreditPage",
-        icon: "./assets/img/signature.png",
+        title: 'MENU.CREDITS',
+        component: 'CreditPage',
+        icon: './assets/img/signature.png',
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null,
@@ -224,23 +224,23 @@ export class MyApp {
       /*if ((<any>window).TestFairy) {
         TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
       }*/
-      translateService.setDefaultLang("fr");
-      this.user.storage.get("lan").then(data => {
+      translateService.setDefaultLang('fr');
+      this.user.storage.get('lan').then(data => {
         if (data != null) {
           translateService.use(data);
         } else {
-          translateService.use("fr");
+          translateService.use('fr');
         }
       });
       cache.setDefaultTTL(60 * 60 * 2);
       cache.setOfflineInvalidate(false);
       // this.user.storage.set('first',null);
-      this.user.storage.get("first").then(data => {
+      this.user.storage.get('first').then(data => {
         if (data == null) {
-          this.rootPage = "TutoPage";
-          this.user.storage.set("first", false);
+          this.rootPage = 'TutoPage';
+          this.user.storage.set('first', false);
         } else {
-          this.rootPage = "HomePage";
+          this.rootPage = 'HomePage';
         }
       });
     });
@@ -288,17 +288,17 @@ export class MyApp {
       if (!this.alertPresented) {
         this.alertPresented = true;
         const confirmAlert = this.alertCtrl.create({
-          title: "Fermeture",
-          message: "Désirez-vous quitter l'application ?",
+          title: 'Fermeture',
+          message: 'Désirez-vous quitter l\'application ?',
           buttons: [
             {
-              text: "Annuler",
+              text: 'Annuler',
               handler: () => {
                 this.alertPresented = false;
               }
             },
             {
-              text: "Quitter",
+              text: 'Quitter',
               handler: () => {
                 this.platform.exitApp();
               }
@@ -318,13 +318,13 @@ export class MyApp {
     // this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
     // this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
     const disclaimerAlert = this.alertCtrl.create({
-      title: "Avertissement",
+      title: 'Avertissement',
       message:
-        "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test.</p>",
+        '<p>Version beta de l\'application Stud@UCLouvain.</p> <p>Cette version n\'est pas publique et est uniquement destinée à une phase de test.</p>',
 
       buttons: [
         {
-          text: "OK",
+          text: 'OK',
           handler: data => { }
         }
       ]
@@ -368,22 +368,22 @@ export class MyApp {
     let app: string;
     // let storeUrl:string;
     let check: string;
-    if (this.device.platform === "iOS") {
+    if (this.device.platform === 'iOS') {
       app = iosSchemaName;
       // storeUrl=httpUrl;
       check = appUrl;
-    } else if (this.device.platform === "Android") {
+    } else if (this.device.platform === 'Android') {
       app = androidPackageName;
       // storeUrl= 'market://details?id='+ app;
       check = app;
     } else {
-      const browser = this.iab.create(httpUrl, "_system");
+      const browser = this.iab.create(httpUrl, '_system');
       browser.close();
     }
     this.appAvailability.check(check).then(
       () => {
         // success callback
-        const browser = this.iab.create(appUrl, "_system");
+        const browser = this.iab.create(appUrl, '_system');
         browser.close();
       },
       () => {
