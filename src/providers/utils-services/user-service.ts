@@ -136,7 +136,7 @@ export class UserService {
   }
 
   hasDisclaimer() {
-    return (this.disclaimer == true);
+    return (this.disclaimer === true);
   }
 
   hasSlotTP(acronym: string) {

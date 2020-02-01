@@ -47,10 +47,14 @@ export class POIService {
   /*Put the good campus for the user to display the good map with the good locations*/
   update() {
     const campus = this.user.campus;
-    if (campus == 'LLN') { this.url = this.urlLLN; }
-    if (campus == 'Woluwe') { this.url = this.urlWol; }
-    if (campus == 'Mons') { this.url = this.urlMons; }
-    if (campus != this.old) {
+    const campuses = ['LLN', 'Woluwe', 'Mons'];
+    const urls = {
+      LLN: this.urlLLN,
+      Woluwe: this.urlWol,
+      Mons: this.urlMons
+    };
+    if (campus in campuses) { this.url = urls[campus]; }
+    if (campus !== this.old) {
       this.zones = [];
       this.old = campus;
     }
@@ -59,28 +63,30 @@ export class POIService {
   /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
-    if (this.zones.length == 0) {
+    if (this.zones.length === 0) {
       return new Promise(resolve => {
         this.http.get(this.url).map(res => res).subscribe(data => {
-          let tmpZones = data['zones'];
-          let auditoiresLength = tmpZones.auditoires.length;
-          let locauxLength = tmpZones.locaux.length;
-          let bibliothequesLength = tmpZones.bibliotheques.length;
-          let sportsLength = tmpZones.sports.length;
-          let restauULength = tmpZones.restaurants_universitaires.length;
-          let servicesLength = tmpZones.services.length;
-          let parkingsLength = tmpZones.parkings.length;
+          const tmpZones = data['zones'];
+          const auditoiresLength = tmpZones.auditoires.length;
+          const locauxLength = tmpZones.locaux.length;
+          const bibliothequesLength = tmpZones.bibliotheques.length;
+          const sportsLength = tmpZones.sports.length;
+          const restauULength = tmpZones.restaurants_universitaires.length;
+          const servicesLength = tmpZones.services.length;
+          const parkingsLength = tmpZones.parkings.length;
 
-          //Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
+          // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
           function compare(a, b) {
-            if (a.nom < b.nom)
+            if (a.nom < b.nom) {
               return -1;
-            if (a.nom > b.nom)
+            }
+            if (a.nom > b.nom) {
               return 1;
+            }
             return 0;
           }
 
-          let newZone = {
+          const newZone = {
             auditoires: {
               list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
               listChecked: Array(auditoiresLength).fill(false),
@@ -122,8 +128,7 @@ export class POIService {
           resolve(this.zones);
         });
       });
-    }
-    else {
+    } else {
       return new Promise(resolve => {
         resolve(this.zones);
       });

@@ -114,13 +114,17 @@ export class LibrariesService {
 
     if (data.openingExaminationHours) {
       for (let i = 0; i < data.openingExaminationHours.length; i++) {
-        lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
+        lib.openingExaminationHours.push(new TimeSlot(
+          data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour
+        ));
       }
     }
 
     if (data.openingSummerHours) {
       for (let i = 0; i < data.openingSummerHours.length; i++) {
-        lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
+        lib.openingSummerHours.push(new TimeSlot(
+          data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour
+        ));
       }
     }
 

@@ -351,7 +351,7 @@ export class MapService {
 
   private setCenteredMarkerOnBrowser(title: string) {
     this.markersB.map((marker) => {
-      if (marker.getTitle() == title) {
+      if (marker.getTitle() === title) {
         this.map.panTo(marker.getPosition());
       }
     });

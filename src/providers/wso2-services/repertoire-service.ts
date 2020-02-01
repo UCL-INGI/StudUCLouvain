@@ -44,7 +44,7 @@ export class RepertoireService {
     newUrl += 'search?';
     for (let i = 0; i < options.length; i++) {
       newUrl += options[i] + '=' + values[i];
-      if (i != options.length - 1) {
+      if (i !== options.length - 1) {
         newUrl += '&';
       }
     }
@@ -93,7 +93,6 @@ export class RepertoireService {
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;
     emp.photo_url = data.photo_url;
-    // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }

@@ -108,7 +108,12 @@ export class NewsService {
       const pubDate = this.createDateForNews(item.pubDate);
       let img = '';
       if (item.enclosure != null) { img = item.enclosure._url; }
-      const newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
+      const newNewsItem = new NewsItem(
+        item.description || 'No description...',
+        item.link || 'No link',
+        item.title || 'No title',
+        img, trimmedDescription, hidden, item.guid, pubDate
+      );
       this.news.push(newNewsItem);
     }
   }

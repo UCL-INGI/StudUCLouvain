@@ -50,10 +50,10 @@ export class EventsService {
       };
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.getEvents(segment);
         } else {
-          if (error == 2) {
+          if (error === 2) {
             console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
           } else {
             console.log('Error loading events : ' + error);

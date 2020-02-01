@@ -34,68 +34,68 @@ import { Http } from '@angular/http';
 */
 @Injectable()
 export class AdeService {
-  AdeserviceBaseUrl: string = "http://horaire.uclouvain.be/jsp/webapi?";
-  AdeserviceConnection: string = "function=connect&login=etudiant&password=student";
-  AdeServiceGetProjects: string = "&function=getProjects&detail=2";
+  AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
+  AdeserviceConnection = 'function=connect&login=etudiant&password=student';
+  AdeServiceGetProjects = '&function=getProjects&detail=2';
   constructor(public http: Http) {
   }
   /*Convert Xml to JSON*/
   convertXmlToJson(xml): any {
-    let parser: any = new X2JS();
-    let json = parser.xml2js(xml);
+    const parser: any = new X2JS();
+    const json = parser.xml2js(xml);
     return json;
   }
 
   /*Open a session*/
   httpOpenSession() {
-    let encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
     },
       err => {
 
-      })
+      });
   }
 
   /*Get the projects from ADE*/
   httpGetProjects(sessionId: string) {
-    let encodedURL: string = this.AdeserviceBaseUrl
-      + "sessionId=" + sessionId
+    const encodedURL: string = this.AdeserviceBaseUrl
+      + 'sessionId=' + sessionId
       + this.AdeServiceGetProjects;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
-    })
+    });
   }
 
   /*Set the project selected by the user*/
   httpSetProject(sessionId: string, projectId: string) {
-    let encodedURL: string = this.AdeserviceBaseUrl
-      + "sessionId=" + sessionId
-      + "&function=setProject&projectId=" + projectId;
+    const encodedURL: string = this.AdeserviceBaseUrl
+      + 'sessionId=' + sessionId
+      + '&function=setProject&projectId=' + projectId;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
-    })
+    });
   }
 
   /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId: string, acronym: string) {
-    let encodedURL: string = this.AdeserviceBaseUrl
-      + "sessionId=" + sessionId
-      + "&function=getResources&code=" + acronym;
+    const encodedURL: string = this.AdeserviceBaseUrl
+      + 'sessionId=' + sessionId
+      + '&function=getResources&code=' + acronym;
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
-    })
+    });
   }
 
   /*For a course selected get the activities*/
   httpGetActivity(sessionId: string, courseId: string) {
-    let encodedURL: string = this.AdeserviceBaseUrl
-      + "sessionId=" + sessionId
-      + "&function=getActivities&resources=" + courseId
-      + "&detail=17";
+    const encodedURL: string = this.AdeserviceBaseUrl
+      + 'sessionId=' + sessionId
+      + '&function=getActivities&resources=' + courseId
+      + '&detail=17';
     return this.http.get(encodedURL).map(res => {
       return this.convertXmlToJson(res.text());
-    })
+    });
   }
 
 

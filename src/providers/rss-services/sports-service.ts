@@ -91,10 +91,10 @@ export class SportsService {
         showSports: this.shownSports
       };
     }).catch(error => {
-      if (error == 1) {
+      if (error === 1) {
         return this.getSports(segment);
       } else {
-        if (error == 2) {
+        if (error === 2) {
           console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
         } else {
           console.log('Error loading sports : ' + error);

@@ -273,7 +273,7 @@ export class MyApp {
         this.menu.close();
         return;
       }
-      if (this.nav.length() == 1) {
+      if (this.nav.length() === 1) {
         this.confirmExitApp();
       } else {
         this.nav.pop();
@@ -339,7 +339,7 @@ export class MyApp {
     this.menu.close();
     this.page = page;
 
-    if (!(test instanceof HomePage && page == this.homePage)) {
+    if (!(test instanceof HomePage && page === this.homePage)) {
       if (page.iosSchemaName != null && page.androidPackageName != null) {
         this.launchExternalApp(
           page.iosSchemaName,
@@ -348,7 +348,7 @@ export class MyApp {
           page.httpUrl
         );
       } else {
-        if (page != this.homePage) {
+        if (page !== this.homePage) {
           if (this.nav.length() > 1) {
             this.nav.pop();
           }

@@ -73,7 +73,7 @@ export class StudentService {
     const newUrl = this.url + 'courseSchedules?date=';
     let C = 7 - new Date().getDay();
     // var C = 7 - new Date("10/16/2017").getDay();
-    if (C == 7) { C = C - 1; }
+    if (C === 7) { C = C - 1; }
     const schedule: Array<any> = [];
     return new Promise(resolve => {
       for (let _i = 0; _i < C; _i++) {
@@ -91,10 +91,8 @@ export class StudentService {
               dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
               for (const cours of items) {
                 let name: any;
-                let res: any;
-                this.checkCourse(cours.cours, new Date().getFullYear()).then(data => {
-                  res = data;
-                  name = res.intituleCompletMap.entry[1].value;
+                this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
+                  name = data.intituleCompletMap.entry[1].value;
                   cours['name'] = name;
                 });
               }
@@ -127,10 +125,8 @@ export class StudentService {
             dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
             for (const cours of items) {
               let name: any;
-              let res: any;
-              this.checkCourse(cours.cours, new Date().getFullYear()).then(data => {
-                res = data;
-                name = res.intituleCompletMap.entry[1].value;
+              this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
+                name = data.intituleCompletMap.entry[1].value;
                 cours['name'] = name;
               });
             }
