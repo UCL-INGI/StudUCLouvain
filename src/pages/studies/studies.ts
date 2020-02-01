@@ -58,8 +58,8 @@ export class StudiesPage {
   activities: any = [];
   response: any;
   language;
-  private statusInsc = '';
-  private prog = '';
+  statusInsc = '';
+  prog = '';
 
   constructor(
     public studiesService: StudiesService,
@@ -155,11 +155,6 @@ export class StudiesPage {
               const result: any = res;
               this.sigles = result.activities.activity;
               for (const sigle of this.sigles) {
-                // let name;
-                // this.checkExist(sigle).then(data => {
-                // name=data;
-                // this.activities.push({'name':name.nameFR,'sigle':sigle});
-                // })
                 this.activities.push({ name: '', sigle: sigle });
               }
             })
@@ -246,11 +241,7 @@ export class StudiesPage {
         {
           name: 'acronym',
           placeholder: sigle
-        } /*,
-        {
-          name:'name',
-          placeholder:'Nom du cours'
-        }*/
+        }
       ],
       buttons: [
         {
@@ -261,23 +252,13 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            let check;
             const acro = data.acronym.toUpperCase();
             let already = false;
             for (const item of this.listCourses) {
               if (item.acronym === acro) { already = true; }
             }
             if (!already) {
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if (check.exist) {
-                  this.addCourse(acro, check.nameFR);
-                  // this.addCourse(acro,data.name);
-                } else {
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              });
+              this.checkExistAndAddOrToast(acro);
             } else {
               this.toastAlreadyCourse();
             }
@@ -288,8 +269,19 @@ export class StudiesPage {
     prompt.present();
   }
 
+  private checkExistAndAddOrToast(acro: any) {
+    this.checkExist(acro).then(check => {
+      if (check.exist) {
+        this.addCourse(acro, check.nameFR);
+      } else {
+        this.toastBadCourse();
+        this.showPrompt();
+      }
+    });
+  }
+
   toastAlreadyCourse() {
-    let msg;
+    let msg: string;
     this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {
       msg = res;
     });
@@ -306,84 +298,26 @@ export class StudiesPage {
     toast.present();
   }
 
-  /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  /*showPromptAddCourse(sigle : string) {
-    let addcourse:string;
-    let message:string;
-    let name:string;
-    let cancel:string;
-    let save:string;
-    this.translateService.get('STUDY.ADDCOURSE2').subscribe((res:string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE2').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
-    let prompt = this.alertCtrl.create({
-      title: addcourse,
-      cssClass: "alert",
-      message: message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: name
-        }
-      ],
-      buttons: [
-        {
-          text: cancel,
-          handler: data => {
-          }
-        },
-        {
-          text: save,
-          handler: data => {
-            console.log(data);
-            //this.getNameToAddCourse(data)
-            //let check;
-
-            this.addCourse(sigle, data.name);
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }*/
-
   addCourseFromProgram(acro: string) {
-    let check;
     let already = false;
     for (const item of this.listCourses) {
       if (item.acronym === acro) { already = true; }
     }
     if (!already) {
-      this.checkExist(acro).then(data2 => {
-        check = data2;
-        if (check.exist) {
-          this.addCourse(acro, check.nameFR);
-          // this.addCourse(acro,data.name);
-        } else {
-          this.toastBadCourse();
-          this.showPrompt();
-        }
-      });
+      this.checkExistAndAddOrToast(acro);
     } else {
       this.toastAlreadyCourse();
     }
   }
 
   addCourse(sigle: string, name: string) {
-    // let check;
-    // this.checkExist(sigle).then(data => {
-    // check = data;
     this.saveCourse(name, sigle);
     const toast = this.toastCtrl.create({
       message: 'Cours ajouté',
       duration: 1000,
       position: 'bottom'
     });
-
     toast.present();
-    // })
   }
 
   /*Retrieve list of course added previously in the storage*/
