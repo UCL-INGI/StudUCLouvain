@@ -146,29 +146,38 @@ export class StudentService {
   }
 
   getDay(i: number): string {
+    let day = '';
     switch (i) {
       case 0: {
-        return 'Lundi';
+        day = 'Lundi';
+        break;
       }
       case 1: {
-        return 'Mardi';
+        day = 'Mardi';
+        break;
       }
       case 2: {
-        return 'Mercredi';
+        day = 'Mercredi';
+        break;
       }
       case 3: {
-        return 'Jeudi';
+        day = 'Jeudi';
+        break;
       }
       case 4: {
-        return 'Vendredi';
+        day = 'Vendredi';
+        break;
       }
       case 5: {
-        return 'Samedi';
+        day = 'Samedi';
+        break;
       }
       case 6: {
-        return 'Dimanche';
+        day = 'Dimanche';
+        break;
       }
     }
+    return day;
   }
 
   getDate(i: number): string {
