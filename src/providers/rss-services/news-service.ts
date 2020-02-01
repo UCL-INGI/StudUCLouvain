@@ -35,7 +35,7 @@ export class NewsService {
 
   news = [];
   shownNews = 0;
-
+  maxDescLength = 20;
   constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
@@ -95,15 +95,13 @@ export class NewsService {
       data.push(temp);
     }
     this.shownNews = 0;
-    const maxDescLength = 20;
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       let trimmedDescription = '...';
       if (item.description !== undefined) {
-        trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+        trimmedDescription = item.description.length > this.maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
       const hidden = false;
-
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
       let img = '';
