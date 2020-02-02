@@ -9,4 +9,4 @@ import { HebdoPage } from './hebdo';
   declarations: [HebdoPage],
   imports: [IonicPageModule.forChild(HebdoPage), TranslateModule.forChild()]
 })
-export class HebdoPageModule {}
+export class HebdoPageModule { }

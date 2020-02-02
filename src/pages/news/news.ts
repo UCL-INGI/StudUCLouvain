@@ -37,8 +37,8 @@ import { UserService } from '../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: "page-news",
-  templateUrl: "news.html"
+  selector: 'page-news',
+  templateUrl: 'news.html'
 })
 export class NewsPage {
   // url = 'assets/data/fac.json';
@@ -57,8 +57,8 @@ export class NewsPage {
     public facService: FacService,
     private cache: CacheService
   ) {
-    if (this.navParams.get("title") !== undefined) {
-      this.title = this.navParams.get("title");
+    if (this.navParams.get('title') !== undefined) {
+      this.title = this.navParams.get('title');
     }
     this.searchControl = new FormControl();
     this.facService.loadResources().then(data => {
@@ -66,31 +66,30 @@ export class NewsPage {
     });
   }
 
-  @ViewChild("newsList", { read: List }) newsList: List;
-  @ViewChild("news") content: Content;
+  @ViewChild('newsList', { read: List }) newsList: List;
+  @ViewChild('news') content: Content;
 
   news: Array<NewsItem> = [];
-  segment = "univ";
-  subsegment = "P1";
-  facsegment = "news";
+  segment = 'univ';
+  subsegment = 'P1';
+  facsegment = 'news';
   shownNews = 0;
   displayedNews: Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
-  searchTerm = "";
-  title = "Actualités";
+  searchTerm = '';
+  title = 'Actualités';
   nonews: any = false;
   loading;
-  fac = "";
+  fac = '';
   listFac: any = [];
-  site = "";
-  rss = "";
+  site = '';
+  rss = '';
 
   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize() {
     if (this.content) {
       this.content.resize();
-      console.debug("content resize", this.content);
     }
   }
 
@@ -117,7 +116,7 @@ export class NewsPage {
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
-        content: "Please wait..."
+        content: 'Please wait...'
       });
       this.loading.present();
     }
@@ -133,7 +132,7 @@ export class NewsPage {
 
   /*Open a page with the details of a news*/
   public openURL(url: string) {
-    this.iab.create(url, "_system", "location=yes");
+    this.iab.create(url, '_system', 'location=yes');
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
@@ -168,14 +167,14 @@ export class NewsPage {
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
       if (
-        this.segment === "univ" ||
-        (this.segment === "fac" &&
-          this.facsegment === "news" &&
+        this.segment === 'univ' ||
+        (this.segment === 'fac' &&
+          this.facsegment === 'news' &&
           this.userS.hasFac())
       ) {
-        if (this.segment === "univ") {
+        if (this.segment === 'univ') {
           const part = this.subsegment;
-          const key = part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
+          const key = part === 'P1' ? 'cache-P1' : part === 'P2' ? 'cache-P2' : 'cache-P3';
           this.cache.removeItem(key);
           this.loadNews(key);
         } else {
@@ -194,12 +193,12 @@ export class NewsPage {
   /*Tab change*/
   tabChanged() {
     this.resize();
-    if (this.segment === "univ") {
+    if (this.segment === 'univ') {
       this.cachedOrNot();
     }
-    if (this.segment === "fac") {
+    if (this.segment === 'fac') {
       this.fac = this.userS.fac;
-      if (this.facsegment === "news" && this.userS.hasFac()) {
+      if (this.facsegment === 'news' && this.userS.hasFac()) {
         const links = this.findSite();
         this.site = links.site;
         this.rss = links.rss;
@@ -212,9 +211,9 @@ export class NewsPage {
   /*Check if data are cached or not */
   async cachedOrNot() {
     const part = this.subsegment;
-    if (this.segment === "univ") {
+    if (this.segment === 'univ') {
       const key =
-        part === "P1" ? "cache-P1" : part === "P2" ? "cache-P2" : "cache-P3";
+        part === 'P1' ? 'cache-P1' : part === 'P2' ? 'cache-P2' : 'cache-P3';
       await this.cache
         .getItem(key)
         .then(data => {
@@ -225,7 +224,7 @@ export class NewsPage {
           this.updateDisplayedNews();
         })
         .catch(() => {
-          console.log("Oh no! My data is expired or doesn't exist!");
+          console.log('Oh no! My data is expired or doesn\'t exist!');
           this.loadNews(key);
         });
     } else {
@@ -240,7 +239,7 @@ export class NewsPage {
     if (this.connService.isOnline()) {
       this.presentLoading();
       let actu = this.subsegment;
-      if (this.segment === "fac" && this.facsegment === "news") {
+      if (this.segment === 'fac' && this.facsegment === 'news') {
         actu = this.rss;
       }
       this.newsService.getNews(actu).then(result => {
@@ -250,7 +249,7 @@ export class NewsPage {
         }
         this.shownNews = result.shownNews;
         this.searching = false;
-        this.nonews = this.news.length == 0;
+        this.nonews = this.news.length === 0;
         this.updateDisplayedNews();
       });
     } else {
@@ -270,14 +269,13 @@ export class NewsPage {
       );
     });
     this.shownNews = this.displayedNews.length;
-    this.nonews = this.shownNews == 0;
+    this.nonews = this.shownNews === 0;
     this.searching = false;
     this.dismissLoading();
-    console.log(this.displayedNews);
   }
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push("NewsDetailsPage", { news: news });
+    this.navCtrl.push('NewsDetailsPage', { news: news });
   }
 }

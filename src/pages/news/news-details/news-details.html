@@ -32,13 +32,15 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    <img src="{{news.image}}" />
-
     <ion-card-content>
-      <ion-card-title>
-        {{news.title}}
-      </ion-card-title>
-      <p [innerHTML]="news.description"></p>
+      <ion-row>
+        <ion-col col-4 *ngIf="news.image !== undefined && news.image.length > 0">
+          <img style="float:left; margin-right: 5px;" src="{{news.image}}" />
+        </ion-col>
+        <ion-col>
+          <p style="text-align: left;" [innerHTML]="news.description"></p>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
 
     <ion-row no-padding>

@@ -24,28 +24,24 @@ import { Events } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-//import { EventItem } from '../../app/entity/eventItem';
-//import { SportItem } from '../../app/entity/sportItem';
-
-
 @Injectable()
 export class UserService {
 
   favorites: string[] = [];
   sports: string[] = [];
-  campus: string = "";
+  campus = '';
   slots: Array<{ course: string, TP: string, CM: string }> = [];
-  fac: string = "";
-  disclaimer: boolean = false;
+  fac = '';
+  disclaimer = false;
 
   constructor(
     public eventss: Events,
     public storage: Storage
   ) {
-    //USE THIS LINE TO CLEAR THE STORAGE
-    //storage.clear();
+    // USE THIS LINE TO CLEAR THE STORAGE
+    // storage.clear();
     this.getFavorites();
-    //this.storage.set('campus',"");
+    // this.storage.set('campus',"");
     this.getCampus();
     this.getSports();
     this.getSlots();
@@ -76,7 +72,7 @@ export class UserService {
   getCampus() {
     this.storage.get('campus').then((data) => {
       if (data == null) {
-        this.campus = "";
+        this.campus = '';
       } else {
         this.campus = data;
       }
@@ -96,7 +92,7 @@ export class UserService {
   getFac() {
     this.storage.get('fac').then((data) => {
       if (data == null) {
-        this.fac = "";
+        this.fac = '';
       } else {
         this.fac = data;
       }
@@ -107,32 +103,29 @@ export class UserService {
     this.storage.get('slots').then((data) => {
       if (data == null) {
         this.slots = [];
-      }
-      else {
+      } else {
         this.slots = data;
       }
-    })
+    });
   }
 
   getSlotCM(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) return this.slots[index].CM;
-    else return "";
+    const index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) { return this.slots[index].CM; } else { return ''; }
   }
 
   getSlotTP(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) return this.slots[index].TP;
-    else return "";
+    const index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) { return this.slots[index].TP; } else { return ''; }
   }
 
   hasFavorite(itemGuid: string) {
     return (this.favorites.indexOf(itemGuid) > -1);
-  };
+  }
 
   hasFavoriteS(itemGuid: string) {
     return (this.sports.indexOf(itemGuid) > -1);
-  };
+  }
 
   hasCampus() {
     return (this.campus.length > 0);
@@ -143,24 +136,22 @@ export class UserService {
   }
 
   hasDisclaimer() {
-    return (this.disclaimer == true);
+    return (this.disclaimer === true);
   }
 
   hasSlotTP(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       return this.slots[index].TP.length > 0;
-    }
-    else return index > -1;
+    } else { return index > -1; }
 
   }
 
   hasSlotCM(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       return this.slots[index].CM.length > 0;
-    }
-    else return index > -1;
+    } else { return index > -1; }
   }
 
   addDisclaimer(discl: boolean) {
@@ -177,86 +168,84 @@ export class UserService {
     this.favorites.push(itemGuid);
     this.storage.set('listEvents', this.favorites);
 
-  };
+  }
 
   removeFavorite(itemGuid: string) {
-    let index = this.favorites.indexOf(itemGuid);
+    const index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
     this.storage.set('listEvents', this.favorites);
-  };
+  }
 
   addFavoriteS(itemGuid: string) {
     this.sports.push(itemGuid);
     this.storage.set('listSports', this.sports);
-  };
+  }
 
   removeFavoriteS(itemGuid: string) {
-    let index = this.sports.indexOf(itemGuid);
+    const index = this.sports.indexOf(itemGuid);
     if (index > -1) {
       this.sports.splice(index, 1);
     }
     this.storage.set('listSports', this.sports);
-  };
+  }
 
 
   addCampus(campus: string) {
     this.campus = campus;
     this.storage.set('campus', this.campus);
-  };
+  }
 
   removeCampus(campus: string) {
-    this.campus = "";
+    this.campus = '';
     this.storage.set('campus', this.campus);
-  };
+  }
 
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac', this.fac);
-  };
+  }
 
   removeFac(fac: string) {
-    this.fac = "";
+    this.fac = '';
     this.storage.set('fac', this.fac);
-  };
+  }
 
   addSlotTP(acronym: string, slot: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       this.slots[index].TP = slot;
-    }
-    else {
-      let item = { course: acronym, TP: slot, CM: "" };
+    } else {
+      const item = { course: acronym, TP: slot, CM: '' };
       this.slots.push(item);
     }
     this.storage.set('slots', this.slots);
   }
 
   removeSlotTP(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      this.slots[index].TP = "";
+      this.slots[index].TP = '';
     }
     this.storage.set('slots', this.slots);
   }
 
   addSlotCM(acronym: string, slot: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       this.slots[index].CM = slot;
-    }
-    else {
-      let item = { course: acronym, TP: "", CM: slot };
+    } else {
+      const item = { course: acronym, TP: '', CM: slot };
       this.slots.push(item);
     }
     this.storage.set('slots', this.slots);
   }
 
   removeSlotCM(acronym: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      this.slots[index].CM = "";
+      this.slots[index].CM = '';
     }
     this.storage.set('slots', this.slots);
   }

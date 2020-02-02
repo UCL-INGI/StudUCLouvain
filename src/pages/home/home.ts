@@ -38,22 +38,22 @@ import { StudentService } from '../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
-  selector: "page-home",
-  templateUrl: "home.html"
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild("home") content: Content;
+  @ViewChild('home') content: Content;
 
-  title: string = "Stud.UCLouvain";
+  title = 'Stud.UCLouvain';
   shownGroup = null;
-  where = "";
+  where = '';
   myApp: MyApp;
 
   /*Create an object Page for each feature of our application display in the home page*/
 
   libraryPage = {
-    title: "MENU.LIBRARY",
-    component: "LibrariesPage",
+    title: 'MENU.LIBRARY',
+    component: 'LibrariesPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -61,8 +61,8 @@ export class HomePage {
   };
 
   newsPage = {
-    title: "MENU.NEWS",
-    component: "NewsPage",
+    title: 'MENU.NEWS',
+    component: 'NewsPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -70,8 +70,8 @@ export class HomePage {
   };
 
   eventPage = {
-    title: "MENU.EVENTS",
-    component: "EventsPage",
+    title: 'MENU.EVENTS',
+    component: 'EventsPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -79,8 +79,8 @@ export class HomePage {
   };
 
   sportPage = {
-    title: "MENU.SPORTS",
-    component: "SportsPage",
+    title: 'MENU.SPORTS',
+    component: 'SportsPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -88,8 +88,8 @@ export class HomePage {
   };
 
   studiesPage = {
-    title: "MENU.STUDIES",
-    component: "StudiesPage",
+    title: 'MENU.STUDIES',
+    component: 'StudiesPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -97,8 +97,8 @@ export class HomePage {
   };
 
   helpDeskPage = {
-    title: "MENU.HELP",
-    component: "SupportPage",
+    title: 'MENU.HELP',
+    component: 'SupportPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -106,8 +106,8 @@ export class HomePage {
   };
 
   mapPage = {
-    title: "MENU.MAP",
-    component: "MapPage",
+    title: 'MENU.MAP',
+    component: 'MapPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -115,8 +115,8 @@ export class HomePage {
   };
 
   guindaillePage = {
-    title: "MENU.PARTY",
-    component: "GuindaillePage",
+    title: 'MENU.PARTY',
+    component: 'GuindaillePage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -124,8 +124,8 @@ export class HomePage {
   };
 
   paramPage = {
-    title: "MENU.PARAM",
-    component: "ParamPage",
+    title: 'MENU.PARAM',
+    component: 'ParamPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -133,17 +133,17 @@ export class HomePage {
   };
 
   restoPage = {
-    title: "MENU.RESTAURANT",
-    component: "RestaurantPage",
-    iosSchemaName: "id1156050719",
-    androidPackageName: "com.apptree.resto4u",
-    appUrl: "apptreeresto4u://",
-    httpUrl: "https://uclouvain.be/fr/decouvrir/resto-u"
+    title: 'MENU.RESTAURANT',
+    component: 'RestaurantPage',
+    iosSchemaName: 'id1156050719',
+    androidPackageName: 'com.apptree.resto4u',
+    appUrl: 'apptreeresto4u://',
+    httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u'
   };
 
   mobilityPage = {
-    title: "MENU.MOBILITY",
-    component: "MobilityPage",
+    title: 'MENU.MOBILITY',
+    component: 'MobilityPage',
     iosSchemaName: null,
     androidPackageName: null,
     appUrl: null,
@@ -165,14 +165,13 @@ export class HomePage {
     public studentService: StudentService,
     public splashscreen: SplashScreen
   ) {
-    if (this.navParams.get("title") !== undefined) {
-      this.title = this.navParams.get("title");
+    if (this.navParams.get('title') !== undefined) {
+      this.title = this.navParams.get('title');
     }
-    console.log(this.title);
     this.app.setTitle(this.title);
     document.title = this.title;
-    //this.resize();
-    //this.userS.removeCampus('');
+    // this.resize();
+    // this.userS.removeCampus('');
   }
 
   /*Set the title*/
@@ -181,7 +180,7 @@ export class HomePage {
     setTimeout(() => {
       this.splashscreen.hide();
     }, 1000);
-    //this.resize();
+    // this.resize();
   }
 
   /*Update the public variable campus for the user*/
@@ -202,30 +201,26 @@ export class HomePage {
   /*launch external application*/
   launchExternalApp(page) {
     let app: string;
-    //let storeUrl:string;
+    // let storeUrl:string;
     let check: string;
-    if (this.device.platform === "iOS") {
+    if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
-      //storeUrl=page.httpUrl;
+      // storeUrl=page.httpUrl;
       check = page.appUrl;
-    } else if (this.device.platform === "Android") {
+    } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
+      // storeUrl= 'market://details?id='+ app;
       check = app;
     } else {
-      const browser = this.iab.create(page.httpUrl, "_system");
+      const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
     this.appAvailability.check(check).then(
       () => {
-        // success callback
-        console.log("have APP");
-        const browser = this.iab.create(page.appUrl, "_system");
+        const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
       },
       () => {
-        // error callback
-        console.log("not have APP");
         this.market.open(app);
       }
     );
@@ -233,64 +228,64 @@ export class HomePage {
 
   /*Open the URL for the social media of the UCL*/
   public openURL(url: string, fab: FabContainer) {
-    this.iab.create(url, "_system");
+    this.iab.create(url, '_system');
     fab.close();
   }
   public openUCL(url: string) {
-    this.iab.create(url, "_system");
+    this.iab.create(url, '_system');
   }
 
   /*If the user change the language of the app, tranlate the text and change the public variable*/
   languageChanged(event: string) {
-    this.userS.storage.set("lan", event);
+    this.userS.storage.set('lan', event);
     this.translateService.use(event);
   }
 
   /*Create an alert to allow the user to change the parameters of the application (language and campus)*/
   settings() {
-    let check = this.userS.campus;
-    let check2 = this.translateService.currentLang;
+    const check = this.userS.campus;
+    const check2 = this.translateService.currentLang;
     let settings, message, save, message2, fr, en: string;
-    this.translateService.get("HOME.SETTINGS").subscribe((res: string) => {
+    this.translateService.get('HOME.SETTINGS').subscribe((res: string) => {
       settings = res;
     });
-    this.translateService.get("HOME.MESSAGE").subscribe((res: string) => {
+    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
       message = res;
     });
-    this.translateService.get("HOME.SAVE").subscribe((res: string) => {
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
       save = res;
     });
-    this.translateService.get("HOME.MESSAGE2").subscribe((res: string) => {
+    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
       message2 = res;
     });
-    this.translateService.get("HOME.FR").subscribe((res: string) => {
+    this.translateService.get('HOME.FR').subscribe((res: string) => {
       fr = res;
     });
-    this.translateService.get("HOME.EN").subscribe((res: string) => {
+    this.translateService.get('HOME.EN').subscribe((res: string) => {
       en = res;
     });
 
-    let settingsAlert = this.alertCtrl.create({
+    const settingsAlert = this.alertCtrl.create({
       title: settings,
       message: message,
       inputs: [
         {
-          type: "radio",
-          label: "Louvain-la-Neuve",
-          value: "LLN",
-          checked: check == "LLN"
+          type: 'radio',
+          label: 'Louvain-la-Neuve',
+          value: 'LLN',
+          checked: check === 'LLN'
         },
         {
-          type: "radio",
-          label: "Woluwe",
-          value: "Woluwe",
-          checked: check == "Woluwe"
+          type: 'radio',
+          label: 'Woluwe',
+          value: 'Woluwe',
+          checked: check === 'Woluwe'
         },
         {
-          type: "radio",
-          label: "Mons",
-          value: "Mons",
-          checked: check == "Mons"
+          type: 'radio',
+          label: 'Mons',
+          value: 'Mons',
+          checked: check === 'Mons'
         }
       ],
       buttons: [
@@ -305,21 +300,21 @@ export class HomePage {
     });
     settingsAlert.present();
 
-    let languageAlert = this.alertCtrl.create({
+    const languageAlert = this.alertCtrl.create({
       title: settings,
       message: message2,
       inputs: [
         {
-          type: "radio",
+          type: 'radio',
           label: fr,
-          value: "fr",
-          checked: check2 == "fr"
+          value: 'fr',
+          checked: check2 === 'fr'
         },
         {
-          type: "radio",
+          type: 'radio',
           label: en,
-          value: "en",
-          checked: check2 == "en"
+          value: 'en',
+          checked: check2 === 'en'
         }
       ],
       buttons: [
@@ -336,49 +331,49 @@ export class HomePage {
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency() {
     let close: string;
-    this.translateService.get("HOME.CLOSE").subscribe((res: string) => {
+    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {
       close = res;
     });
     let urg: string;
-    this.translateService.get("HOME.URG").subscribe((res: string) => {
+    this.translateService.get('HOME.URG').subscribe((res: string) => {
       urg = res;
     });
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
-    this.translateService.get("GUINDAILLE.HELP1").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {
       msg1 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP2").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {
       msg2 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP3").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {
       msg3 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP4").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {
       msg4 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP5").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {
       msg5 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP6").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {
       msg6 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP7").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {
       msg7 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP8").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {
       msg8 = res;
     });
-    this.translateService.get("GUINDAILLE.HELP9").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {
       msg9 = res;
     });
     let out: string;
-    this.translateService.get("GUINDAILLE.HELP18").subscribe((res: string) => {
+    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {
       out = res;
     });
-    let alert = this.alertCtrl.create({
+    const alert = this.alertCtrl.create({
       title: urg,
       message:
-        "<p> <strong>" +
+        '<p> <strong>' +
         msg1 +
         '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
         msg2 +
@@ -386,24 +381,24 @@ export class HomePage {
         out +
         ':</strong> <font size="+1"><a href="tel:112">112</a></font></p>  <p> <br>' +
         msg3 +
-        " <br><br> <strong>" +
+        ' <br><br> <strong>' +
         msg4 +
-        "</strong> " +
+        '</strong> ' +
         msg5 +
-        "<br> <strong>" +
+        '<br> <strong>' +
         msg6 +
-        "</strong> " +
+        '</strong> ' +
         msg7 +
-        "<br> <strong>" +
+        '<br> <strong>' +
         msg8 +
-        "</strong> " +
+        '</strong> ' +
         msg9 +
-        "<br>",
-      cssClass: "emergency",
+        '<br>',
+      cssClass: 'emergency',
       buttons: [
         {
           text: close,
-          handler: data => {}
+          handler: data => { }
         }
       ]
     });

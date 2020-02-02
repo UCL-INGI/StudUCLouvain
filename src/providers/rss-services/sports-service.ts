@@ -91,10 +91,10 @@ export class SportsService {
         showSports: this.shownSports
       };
     }).catch(error => {
-      if (error == 1) {
+      if (error === 1) {
         return this.getSports(segment);
       } else {
-        if (error == 2) {
+        if (error === 2) {
           console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
         } else {
           console.log('Error loading sports : ' + error);
@@ -118,10 +118,10 @@ export class SportsService {
       };
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.getTeams(segment);
         } else {
-          if (error == 2) {
+          if (error === 2) {
             console.log('Loading teams : GET req timed out > limit, suppose no teams to be displayed');
           } else {
             console.log('Error loading teams : ' + error);
@@ -171,7 +171,8 @@ export class SportsService {
       if (isSport) { this.shownSports++; } else { this.shownTeams++; }
       const startDate = this.createDateForSport(item.date, item.hdebut);
       const endDate = this.createDateForSport(item.date, item.hfin);
-      const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate,
+      const jour = item.jour[1].toUpperCase() + item.jour.substr(2);
+      const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, jour, startDate,
         hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
 
 

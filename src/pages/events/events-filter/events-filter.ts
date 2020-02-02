@@ -27,8 +27,8 @@ import { EventsService } from '../../../providers/rss-services/events-service';
 
 @IonicPage()
 @Component({
-  selector: "page-events-filter",
-  templateUrl: "events-filter.html"
+  selector: 'page-events-filter',
+  templateUrl: 'events-filter.html'
 })
 export class EventsFilterPage {
   categories: Array<{
@@ -44,11 +44,11 @@ export class EventsFilterPage {
     public viewCtrl: ViewController,
     private eventService: EventsService
   ) {
-    //passed in array of categories names that should be excluded (unchecked)
-    let excludedFilters = this.navParams.get("excludedFilters");
-    let filters = this.navParams.get("filters");
-    this.dateRange = this.navParams.get("dateRange");
-    for (let filterName of filters) {
+    // passed in array of categories names that should be excluded (unchecked)
+    const excludedFilters = this.navParams.get('excludedFilters');
+    const filters = this.navParams.get('filters');
+    this.dateRange = this.navParams.get('dateRange');
+    for (const filterName of filters) {
       this.categories.push({
         name: filterName,
         iconCategory: this.eventService.getIconCategory(filterName),
@@ -73,7 +73,7 @@ export class EventsFilterPage {
 
   /*Pass Back a New Array of Categories Name to Exclude*/
   applyFilters() {
-    let excludedFilters = this.categories
+    const excludedFilters = this.categories
       .filter(c => !c.isChecked)
       .map(c => c.name);
     this.dismiss(excludedFilters);
@@ -81,7 +81,7 @@ export class EventsFilterPage {
 
   /*Cancel Filter*/
   dismiss(data?: any) {
-    if (typeof data == "undefined") {
+    if (typeof data === 'undefined') {
       data = [];
     }
     this.results.push(data);

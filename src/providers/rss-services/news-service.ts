@@ -35,7 +35,7 @@ export class NewsService {
 
   news = [];
   shownNews = 0;
-
+  maxDescLength = 20;
   constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
@@ -71,10 +71,10 @@ export class NewsService {
       };
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.getNews(segment);
         } else {
-          if (error == 2) {
+          if (error === 2) {
             console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
           } else {
             console.log('Error loading news : ' + error);
@@ -95,20 +95,23 @@ export class NewsService {
       data.push(temp);
     }
     this.shownNews = 0;
-    const maxDescLength = 20;
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       let trimmedDescription = '...';
       if (item.description !== undefined) {
-        trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+        trimmedDescription = item.description.length > this.maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
       const hidden = false;
-
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
       let img = '';
-      if (item.enclosure != null) { img = item.enclosure.url; }
-      const newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
+      if (item.enclosure != null) { img = item.enclosure._url; }
+      const newNewsItem = new NewsItem(
+        item.description || 'No description...',
+        item.link || 'No link',
+        item.title || 'No title',
+        img, trimmedDescription, hidden, item.guid, pubDate
+      );
       this.news.push(newNewsItem);
     }
   }

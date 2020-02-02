@@ -16,7 +16,7 @@ export abstract class BaseMock {
 export class PlatformMock {
   public ready(): Promise<string> {
     return new Promise(resolve => {
-      resolve("READY");
+      resolve('READY');
     });
   }
 
@@ -42,10 +42,10 @@ export class PlatformMock {
 
   public getElementComputedStyle(container: any): any {
     return {
-      paddingLeft: "10",
-      paddingTop: "10",
-      paddingRight: "10",
-      paddingBottom: "10"
+      paddingLeft: '10',
+      paddingTop: '10',
+      paddingRight: '10',
+      paddingBottom: '10'
     };
   }
 
@@ -78,7 +78,7 @@ export class PlatformMock {
   }
 
   public getActiveElement(): any {
-    return document["activeElement"];
+    return document['activeElement'];
   }
 }
 
@@ -110,7 +110,7 @@ export class NavMock {
   public getActive(): any {
     return {
       instance: {
-        model: "something"
+        model: 'something'
       }
     };
   }
@@ -143,14 +143,14 @@ export class DeepLinkerMock { }
 
 export class MenuMock {
   public static instance(): any {
-    let instance = jasmine.createSpyObj("Menu", ["blank", "open", "close"]);
-    instance["content"] = "menu content";
-    instance["enabled"] = true;
-    instance["id"] = "menuId";
-    instance["persistent"] = true;
-    instance["side"] = "left";
-    instance["swipeEnabled"] = true;
-    instance["type"] = "reveal";
+    const instance = jasmine.createSpyObj('Menu', ['blank', 'open', 'close']);
+    instance['content'] = 'menu content';
+    instance['enabled'] = true;
+    instance['id'] = 'menuId';
+    instance['persistent'] = true;
+    instance['side'] = 'left';
+    instance['swipeEnabled'] = true;
+    instance['type'] = 'reveal';
 
     instance.open.and.returnValue(Promise.resolve(true));
     instance.close.and.returnValue(Promise.resolve(true));
@@ -161,18 +161,18 @@ export class MenuMock {
 
 export class MenuControllerMock {
   public static instance(menu?: MenuMock): any {
-    let m = menu || MenuMock.instance();
-    let instance = jasmine.createSpyObj("MenuController", [
-      "close",
-      "enable",
-      "get",
-      "getMenus",
-      "getOpen",
-      "isEnabled",
-      "isOpen",
-      "open",
-      "swipeEnable",
-      "toggle"
+    const m = menu || MenuMock.instance();
+    const instance = jasmine.createSpyObj('MenuController', [
+      'close',
+      'enable',
+      'get',
+      'getMenus',
+      'getOpen',
+      'isEnabled',
+      'isOpen',
+      'open',
+      'swipeEnable',
+      'toggle'
     ]);
     instance.close.and.returnValue(Promise.resolve());
     instance.enable.and.returnValue(m);
@@ -189,24 +189,11 @@ export class MenuControllerMock {
   }
 }
 
-const METHODS = ["create"];
-
-export class AlertControllerMock extends BaseMock {
-  constructor(alertMock?: AlertMock) {
-    super("AlertController", METHODS);
-    this.spyObj.create.and.returnValue(alertMock || new AlertMock());
-  }
-
-  public static instance(alertMock?: AlertMock): any {
-    return new AlertControllerMock(alertMock);
-  }
-}
-
-const METHODS2 = ["present", "dismiss", "onDidDismiss"];
+const METHODS2 = ['present', 'dismiss', 'onDidDismiss'];
 
 export class AlertMock extends BaseMock {
   constructor() {
-    super("Alert", METHODS2);
+    super('Alert', METHODS2);
 
     this.spyObj.present.and.returnValue(Promise.resolve());
   }
@@ -216,19 +203,24 @@ export class AlertMock extends BaseMock {
   }
 }
 
-export class LoadingControllerMock {
-  public static instance(loading?: LoadingMock): any {
-    let instance = jasmine.createSpyObj("LoadingController", ["create"]);
-    instance.create.and.returnValue(loading || LoadingMock.instance());
+const METHODS = ['create'];
 
-    return instance;
+export class AlertControllerMock extends BaseMock {
+  constructor(alertMock?: AlertMock) {
+    super('AlertController', METHODS);
+    this.spyObj.create.and.returnValue(alertMock || new AlertMock());
+  }
+
+  public static instance(alertMock?: AlertMock): any {
+    return new AlertControllerMock(alertMock);
   }
 }
 
-const METHODS3 = ["present", "dismiss", "setContent", "setSpinner"];
+const METHODS3 = ['present', 'dismiss', 'setContent', 'setSpinner'];
+
 export class LoadingMock extends BaseMock {
   constructor() {
-    super("Loading", METHODS3);
+    super('Loading', METHODS3);
     this.spyObj.present.and.returnValue(Promise.resolve());
   }
 
@@ -236,18 +228,26 @@ export class LoadingMock extends BaseMock {
     return new LoadingMock();
   }
 }
+export class LoadingControllerMock {
+  public static instance(loading?: LoadingMock): any {
+    const instance = jasmine.createSpyObj('LoadingController', ['create']);
+    instance.create.and.returnValue(loading || LoadingMock.instance());
+
+    return instance;
+  }
+}
 
 export class UserServiceMock {
   constructor() { }
   getCampus() {
-    return "LLN";
+    return 'LLN';
   }
 }
 
 export class Wso2ServiceMock {
   constructor() { }
   getToken() {
-    return "XXXX";
+    return 'XXXX';
   }
 }
 

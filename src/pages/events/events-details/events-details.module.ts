@@ -12,4 +12,4 @@ import { EventsDetailsPage } from './events-details';
     TranslateModule.forChild()
   ]
 })
-export class EventsDetailsPageModule {}
+export class EventsDetailsPageModule { }

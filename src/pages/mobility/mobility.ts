@@ -30,8 +30,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
-  selector: "page-mobility",
-  templateUrl: "mobility.html"
+  selector: 'page-mobility',
+  templateUrl: 'mobility.html'
 })
 export class MobilityPage {
   public title: any;
@@ -47,65 +47,65 @@ export class MobilityPage {
     private device: Device,
     private translateService: TranslateService
   ) {
-    this.title = this.navParams.get("title");
+    this.title = this.navParams.get('title');
     let titlecar: string;
-    this.translateService.get("MOBI.COVOIT").subscribe((res: string) => {
+    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {
       titlecar = res;
     });
 
-    //Information to launch external app
+    // Information to launch external app
     this.carpoolingPage = {
       title: titlecar,
-      component: "CarpoolingPage",
-      iosSchemaName: "id1143545052",
-      androidPackageName: "net.commuty.mobile",
-      appUrl: "commutynet://",
-      httpUrl: "https://app.commuty.net/sign-in"
+      component: 'CarpoolingPage',
+      iosSchemaName: 'id1143545052',
+      androidPackageName: 'net.commuty.mobile',
+      appUrl: 'commutynet://',
+      httpUrl: 'https://app.commuty.net/sign-in'
     };
     this.busPage = {
-      title: "NextRide",
-      component: "BusPage",
-      iosSchemaName: "id568042532",
-      androidPackageName: "be.thomashermine.prochainbus",
-      appUrl: "nextride://",
-      httpUrl: "https://nextride.be/timetables"
+      title: 'NextRide',
+      component: 'BusPage',
+      iosSchemaName: 'id568042532',
+      androidPackageName: 'be.thomashermine.prochainbus',
+      appUrl: 'nextride://',
+      httpUrl: 'https://nextride.be/timetables'
     };
     this.trainPage = {
-      title: "SNCB",
-      component: "TrainPage",
-      iosSchemaName: "id403212064",
-      androidPackageName: "de.hafas.android.sncbnmbs",
-      appUrl: "sncb://",
+      title: 'SNCB',
+      component: 'TrainPage',
+      iosSchemaName: 'id403212064',
+      androidPackageName: 'de.hafas.android.sncbnmbs',
+      appUrl: 'sncb://',
       httpUrl:
-        "http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx"
+        'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx'
     };
   }
 
   /*Launch external app*/
   launchExternalApp(page: any) {
     let app: string;
-    //let storeUrl:string;
+    // let storeUrl:string;
     let check: string;
 
-    //Check the platform of the user
-    if (this.device.platform === "iOS") {
+    // Check the platform of the user
+    if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
-      //storeUrl=page.httpUrl;
+      // storeUrl=page.httpUrl;
       check = page.appUrl;
-    } else if (this.device.platform === "Android") {
+    } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
+      // storeUrl= 'market://details?id='+ app;
       check = app;
     } else {
-      const browser = this.iab.create(page.httpUrl, "_system");
+      const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
 
-    //Check if the app is installed, if yes launch app else return the user to the market
+    // Check if the app is installed, if yes launch app else return the user to the market
     this.appAvailability.check(check).then(
       () => {
         // success callback
-        const browser = this.iab.create(page.appUrl, "_system");
+        const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
       },
       () => {
@@ -113,6 +113,6 @@ export class MobilityPage {
         this.market.open(app);
       }
     );
-    //this.nav.push(page.component, {title: page.title});
+    // this.nav.push(page.component, {title: page.title});
   }
 }

@@ -9,4 +9,4 @@ import { StudiesPage } from './studies';
   declarations: [StudiesPage],
   imports: [IonicPageModule.forChild(StudiesPage), TranslateModule.forChild()]
 })
-export class StudiesPageModule {}
+export class StudiesPageModule { }

@@ -9,4 +9,4 @@ import { SupportPage } from './support';
   declarations: [SupportPage],
   imports: [IonicPageModule.forChild(SupportPage), TranslateModule.forChild()]
 })
-export class SupportPageModule {}
+export class SupportPageModule { }

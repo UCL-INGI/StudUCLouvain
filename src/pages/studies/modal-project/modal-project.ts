@@ -29,11 +29,11 @@ import { StudiesService } from '../../../providers/studies-services/studies-serv
 
 @IonicPage()
 @Component({
-  selector: "page-modal-project",
-  templateUrl: "modal-project.html"
+  selector: 'page-modal-project',
+  templateUrl: 'modal-project.html'
 })
 export class ModalProjectPage {
-  sessionId: string = this.navParams.get("sessionId");
+  sessionId: string = this.navParams.get('sessionId');
   public projects;
 
   constructor(
@@ -42,12 +42,12 @@ export class ModalProjectPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studiesService: StudiesService
-  ) {}
+  ) { }
 
   /*Set the project and close de view of the modal*/
   closeModal(project: AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(data => {
-      this.storage.set("adeProject", project);
+      this.storage.set('adeProject', project);
       this.viewCtrl.dismiss(project);
     });
   }

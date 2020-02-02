@@ -1,15 +1,7 @@
-import { BehaviorSubject } from 'rxjs/Rx';
-
-/**
- * @class NavParamsMock
- */
 export class NavParamsMock {
   data: Object = { Example: 1234 };
 }
 
-/**
- * @class ConfigMock
- */
 export class ConfigMock {
   public get(): any {
     return '';
@@ -24,18 +16,12 @@ export class ConfigMock {
   }
 }
 
-/**
- * @class FormMock
- */
 export class FormMock {
   public register(): any {
     return true;
   }
 }
 
-/**
- * @class NavMock
- */
 export class NavMock {
 
   public pop(): any {
@@ -63,9 +49,6 @@ export class NavMock {
   }
 }
 
-/**
- * @class PlatformMock
- */ new BehaviorSubject(this.HOME_VIEW);
 export class PlatformMock {
   public ready(): Promise<{ String }> {
     return new Promise((resolve) => {
@@ -115,10 +98,6 @@ export class PlatformMock {
   }
 }
 
-
-/**
- * @class MenuMock
- */
 export class MenuMock {
   public close(): any {
     return new Promise((resolve: Function) => {

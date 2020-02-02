@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { CacheModule } from 'ionic-cache';
 
@@ -28,7 +27,9 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Device } from '@ionic-native/device';
+import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { Network } from '@ionic-native/network';
 import { SecureStorage } from '@ionic-native/secure-storage';
@@ -108,7 +109,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudentService,
     FacService,
     SQLite,
-    SecureStorage
+    SecureStorage,
+    InAppBrowser,
+    Geolocation
   ]
 })
 export class AppModule { }

@@ -31,12 +31,15 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    <img src="{{event.image}}" />
     <ion-card-content>
-      <ion-card-title>
-        {{event.title}}
-      </ion-card-title>
-      <p [innerHTML]="event.description"></p>
+      <ion-row>
+        <ion-col col-4 *ngIf="event.image !== undefined && event.image.length > 0">
+          <img style="float:left; margin-right: 5px;" src="{{event.image}}" />
+        </ion-col>
+        <ion-col>
+          <p style="text-align: left;" [innerHTML]="event.description"></p>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
     <ion-row no-padding>
       <ion-col text-right>

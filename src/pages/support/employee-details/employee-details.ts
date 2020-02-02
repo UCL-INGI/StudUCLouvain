@@ -30,14 +30,14 @@ import { RepertoireService } from '../../../providers/wso2-services/repertoire-s
 
 @IonicPage()
 @Component({
-  selector: "page-employee-details",
-  templateUrl: "employee-details.html",
+  selector: 'page-employee-details',
+  templateUrl: 'employee-details.html',
   animations: [
-    trigger("expand", [
-      state("true", style({ height: "45px" })),
-      state("false", style({ height: "0" })),
-      transition("void => *", animate("0s")),
-      transition("* <=> *", animate("250ms ease-in-out"))
+    trigger('expand', [
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0' })),
+      transition('void => *', animate('0s')),
+      transition('* <=> *', animate('250ms ease-in-out'))
     ])
   ]
 })
@@ -45,7 +45,7 @@ export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
   shownGroup = null;
   address: any;
-  searching: boolean = false;
+  searching = false;
 
   constructor(
     public navCtrl: NavController,
@@ -53,29 +53,26 @@ export class EmployeeDetailsPage {
     public repService: RepertoireService,
     public connService: ConnectivityService
   ) {
-    this.empDetails = navParams.get("emp");
+    this.empDetails = navParams.get('emp');
     this.searching = true;
-    //Check if the connexion is Ok before search details pour an employee
+    // Check if the connexion is Ok before search details pour an employee
     if (this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(res => {
-        let result: any = res;
+        const result: any = res;
         this.empDetails = result.empDetails;
-        console.log(this.empDetails);
         this.searching = false;
       });
-    }
-    //if not return to previous page and pop up an alert
-    else {
+    } else {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() { }
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
-    window.open(url, "_blank");
+    // InAppBrowser.open(url, '_blank');
+    window.open(url, '_blank');
   }
 }

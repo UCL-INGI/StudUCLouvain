@@ -42,6 +42,7 @@ export class EventsService {
   public getEvents(segment: string) {
     this.events = [];
     return this.rssService.load(this.url).then(result => {
+      console.log(result);
       this.extractEvents(result);
       return {
         events: this.events,
@@ -49,10 +50,10 @@ export class EventsService {
       };
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.getEvents(segment);
         } else {
-          if (error == 2) {
+          if (error === 2) {
             console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
           } else {
             console.log('Error loading events : ' + error);

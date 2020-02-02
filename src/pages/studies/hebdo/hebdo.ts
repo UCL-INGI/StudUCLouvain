@@ -32,11 +32,11 @@ import { UserService } from '../../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({
-  selector: "page-hebdo",
-  templateUrl: "hebdo.html"
+  selector: 'page-hebdo',
+  templateUrl: 'hebdo.html'
 })
 export class HebdoPage {
-  schedule: Array<any> = this.navParams.get("schedule");
+  schedule: Array<any> = this.navParams.get('schedule');
   shownGroup = null;
 
   constructor(
@@ -49,11 +49,9 @@ export class HebdoPage {
     private translateService: TranslateService,
     public navParams: NavParams
   ) {
-    console.log(this.schedule);
-    console.log(new Date("2017-10-17"));
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() { }
 
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
@@ -69,16 +67,16 @@ export class HebdoPage {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: ItemSliding, activity: any) {
-    let options: any = {
+    const options: any = {
       firstReminderMinutes: 15
     };
     let message: string;
-    this.translateService.get("COURSE.MESSAGE").subscribe((res: string) => {
+    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {
       message = res;
     });
     this.calendar
       .createEventWithOptions(
-        activity.name + " : " + activity.type,
+        activity.name + ' : ' + activity.type,
         activity.entitycode,
         null,
         new Date(activity.eventstarttime),
@@ -86,7 +84,7 @@ export class HebdoPage {
         options
       )
       .then(() => {
-        let toast = this.toastCtrl.create({
+        const toast = this.toastCtrl.create({
           message: message,
           duration: 3000
         });
@@ -96,23 +94,24 @@ export class HebdoPage {
     this.alert();
   }
 
-  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
+  /*Create and display the alert that say that if a course is add to the calendar
+  if this course is changed, the calendar doesn't take that in account*/
   alert() {
     let title: string;
     let message: string;
-    this.translateService.get("COURSE.WARNING").subscribe((res: string) => {
+    this.translateService.get('COURSE.WARNING').subscribe((res: string) => {
       title = res;
     });
-    this.translateService.get("COURSE.MESSAGE3").subscribe((res: string) => {
+    this.translateService.get('COURSE.MESSAGE3').subscribe((res: string) => {
       message = res;
     });
-    let disclaimerAlert = this.alertCtrl.create({
+    const disclaimerAlert = this.alertCtrl.create({
       title: title,
       message: message,
       buttons: [
         {
-          text: "OK",
-          handler: data => {}
+          text: 'OK',
+          handler: data => { }
         }
       ]
     });

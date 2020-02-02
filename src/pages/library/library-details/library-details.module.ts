@@ -12,4 +12,4 @@ import { LibraryDetailsPage } from './library-details';
     TranslateModule.forChild()
   ]
 })
-export class LibraryDetailsPageModule {}
+export class LibraryDetailsPageModule { }
