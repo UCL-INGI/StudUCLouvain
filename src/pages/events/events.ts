@@ -265,7 +265,7 @@ export class EventsPage {
   /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayedEvents() {
     this.searching = true;
-    this.eventsList.closeSlidingItems();
+    this.eventsList && this.eventsList.closeSlidingItems();
     if (this.segment === 'all') {
       this.displayedEvents = this.events.filter(item => {
         return (

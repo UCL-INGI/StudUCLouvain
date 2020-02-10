@@ -19,6 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import 'rxjs/add/operator/debounceTime';
+
 import {
     AlertController, App, Content, IonicPage, List, LoadingController, NavController, NavParams,
     Platform
