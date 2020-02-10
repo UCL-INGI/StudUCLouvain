@@ -19,42 +19,29 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/map';
-
 import X2JS from 'x2js';
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
-/*
-  Generated class for the AdeserviceProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class AdeService {
   AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
-  AdeserviceConnection = 'function=connect&login=etudiant&password=student';
+  AdeserviceConnection = 'function=connect&login=' + 'etudiant' + '&password=' + 'student';
   AdeServiceGetProjects = '&function=getProjects&detail=2';
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
   }
   /*Convert Xml to JSON*/
   convertXmlToJson(xml): any {
-    const parser: any = new X2JS();
-    const json = parser.xml2js(xml);
-    return json;
+    return new X2JS().xml2js(xml);
   }
 
   /*Open a session*/
   httpOpenSession() {
     const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.http.get(encodedURL).map(res => {
-      return this.convertXmlToJson(res.text());
-    },
-      err => {
-
-      });
+    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+      return this.convertXmlToJson(res);
+    });
   }
 
   /*Get the projects from ADE*/
@@ -62,8 +49,8 @@ export class AdeService {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + this.AdeServiceGetProjects;
-    return this.http.get(encodedURL).map(res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+      return this.convertXmlToJson(res);
     });
   }
 
@@ -72,8 +59,8 @@ export class AdeService {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=setProject&projectId=' + projectId;
-    return this.http.get(encodedURL).map(res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+      return this.convertXmlToJson(res);
     });
   }
 
@@ -82,8 +69,8 @@ export class AdeService {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=getResources&code=' + acronym;
-    return this.http.get(encodedURL).map(res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+      return this.convertXmlToJson(res);
     });
   }
 
@@ -93,11 +80,8 @@ export class AdeService {
       + 'sessionId=' + sessionId
       + '&function=getActivities&resources=' + courseId
       + '&detail=17';
-    return this.http.get(encodedURL).map(res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+      return this.convertXmlToJson(res);
     });
   }
-
-
-
 }

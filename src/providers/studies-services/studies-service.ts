@@ -29,7 +29,7 @@ import { AdeService } from './ade-service';
 
 @Injectable()
 export class StudiesService {
-  url: String;
+  url: string;
   projects: AdeProject[];
   data: any;
   constructor(
@@ -61,7 +61,7 @@ export class StudiesService {
   }
 
   /*Extract the projects ADE*/
-  extractAdeProjects(data): AdeProject[] {
+  extractAdeProjects(data: any): AdeProject[] {
     const projects: AdeProject[] = [];
     if (data.projects.project.length === undefined) {
       const name = data.projects.project._name.toString();
@@ -87,5 +87,4 @@ export class StudiesService {
       );
     });
   }
-
 }

@@ -86,7 +86,7 @@ export class StudiesPage {
 
   checkExist(sigle: string): Promise<any> {
     let response: any;
-    const year = parseInt(this.project.name.split('-')[0]);
+    const year = this.project.name.split('-')[0];
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle, year).then(data => {
         const res: any = data;
