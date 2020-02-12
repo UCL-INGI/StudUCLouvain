@@ -50,23 +50,22 @@ export class UserService {
   }
 
   getFavorites() {
-    this.storage.get('listEvents').then((data) => {
+    this.favorites = this.getFromStorage('listEvents');
+  }
+
+  private getFromStorage(key: string) {
+    this.storage.get(key).then((data) => {
       if (data == null) {
-        this.favorites = [];
+        return [];
       } else {
-        this.favorites = data;
+        return data;
       }
     });
+    return [];
   }
 
   getSports() {
-    this.storage.get('listSports').then((data) => {
-      if (data == null) {
-        this.sports = [];
-      } else {
-        this.sports = data;
-      }
-    });
+    this.sports = this.getFromStorage('listSports');
   }
 
   getCampus() {
@@ -100,13 +99,7 @@ export class UserService {
   }
 
   getSlots() {
-    this.storage.get('slots').then((data) => {
-      if (data == null) {
-        this.slots = [];
-      } else {
-        this.slots = data;
-      }
-    });
+    this.slots = this.getFromStorage('slots');
   }
 
   getSlotCM(acronym: string) {
