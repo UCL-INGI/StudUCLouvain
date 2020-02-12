@@ -131,13 +131,15 @@ export class CoursePage {
     this.alert();
   }
 
-  alert() {
+  alert(all: boolean = false) {
     let title: string;
     let message: string;
-    this.translateService.get('COURSE.WARNING').subscribe((res: string) => {
+    const prefix = all ? 'COURSE' : 'STUDY';
+    const msg_number = all ? '3' : '4';
+    this.translateService.get(prefix + '.WARNING').subscribe((res: string) => {
       title = res;
     });
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res: string) => {
+    this.translateService.get(prefix + '.MESSAGE' + msg_number).subscribe((res: string) => {
       message = res;
     });
     const disclaimerAlert = this.alertCtrl.create({
@@ -308,29 +310,7 @@ export class CoursePage {
       duration: 3000
     });
     toast.present();
-    this.alertAll();
-  }
-
-  alertAll() {
-    let title: string;
-    let message: string;
-    this.translateService.get('STUDY.WARNING').subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get('STUDY.MESSAGE4').subscribe((res: string) => {
-      message = res;
-    });
-    const disclaimerAlert = this.alertCtrl.create({
-      title: title,
-      message: message,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => { }
-        }
-      ]
-    });
-    disclaimerAlert.present();
+    this.alert(true);
   }
 
   openModalInfo() {
