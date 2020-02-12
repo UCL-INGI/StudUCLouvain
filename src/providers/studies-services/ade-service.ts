@@ -31,12 +31,11 @@ export class AdeService {
   AdeServiceGetProjects = '&function=getProjects&detail=2';
   constructor(public http: HttpClient) {
   }
-  /*Convert Xml to JSON*/
+
   convertXmlToJson(xml): any {
     return new X2JS().xml2js(xml);
   }
 
-  /*Open a session*/
   httpOpenSession() {
     const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
@@ -44,7 +43,6 @@ export class AdeService {
     });
   }
 
-  /*Get the projects from ADE*/
   httpGetProjects(sessionId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
@@ -54,7 +52,6 @@ export class AdeService {
     });
   }
 
-  /*Set the project selected by the user*/
   httpSetProject(sessionId: string, projectId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
@@ -64,7 +61,6 @@ export class AdeService {
     });
   }
 
-  /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId: string, acronym: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
@@ -74,7 +70,6 @@ export class AdeService {
     });
   }
 
-  /*For a course selected get the activities*/
   httpGetActivity(sessionId: string, courseId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
