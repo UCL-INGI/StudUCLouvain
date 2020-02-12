@@ -36,38 +36,36 @@ export class AdeService {
     return new X2JS().xml2js(xml);
   }
 
-  httpOpenSession() {
-    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+  load(url: string) {
+    return this.http.get(url, { responseType: 'text' }).map(res => {
       return this.convertXmlToJson(res);
     });
+  }
+
+  httpOpenSession() {
+    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+    return this.load(encodedURL);
   }
 
   httpGetProjects(sessionId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + this.AdeServiceGetProjects;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
   httpSetProject(sessionId: string, projectId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=setProject&projectId=' + projectId;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
   httpGetCourseId(sessionId: string, acronym: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=getResources&code=' + acronym;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
   httpGetActivity(sessionId: string, courseId: string) {
@@ -75,8 +73,6 @@ export class AdeService {
       + 'sessionId=' + sessionId
       + '&function=getActivities&resources=' + courseId
       + '&detail=17';
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 }
