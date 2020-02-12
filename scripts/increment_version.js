@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// This script increments patch number (mayor.minor.patch) but you can
+ // This script increments patch number (mayor.minor.patch) but you can
 // choose to increment any other segment by modifying lines `45` to `53`.
 //
 // 1. Make sure you've installed *xml2js*: `$ npm install xml2js -D`
@@ -9,6 +9,7 @@
 var fs = require('fs');
 var xml2js = require('xml2js');
 
+// TODO: Improve to increment only on release build (not on tests, run, emulate, build without --release)
 // Read config.xml
 fs.readFile('config.xml', 'utf8', function (err, data) {
   if (err) {
@@ -41,13 +42,12 @@ fs.readFile('config.xml', 'utf8', function (err, data) {
     // Increment patch: you can change it to incremente
     // the segment you prefer: mayor, minor or patch
     // ----------------------------------------------------
-   
+
     // To increment patch
-    patchNum = parseInt(patch);
-    patchNum++;
+    var patchNum = parseInt(patch) + 1;
     patch = patchNum.toString();
-  
-    // Uncomment to increment minor 
+
+    // Uncomment to increment minor
     /*minorNum = parseInt(minor);
     minorNum++;
     minor = minorNum.toString();*/

@@ -34,10 +34,8 @@ export class RepertoireService {
   url = 'directories/v1/employees/';
   options: any;
 
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
-  }
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) { }
 
-  /*Search employees that match with the options & values*/
   public searchEmployees(options: Array<string>, values: Array<string>) {
     this.employees = [];
     let newUrl = this.url;
@@ -49,7 +47,6 @@ export class RepertoireService {
       }
     }
     newUrl += '&page=1&pageSize=10';
-    // newUrl += "&directory=E";
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
@@ -61,12 +58,9 @@ export class RepertoireService {
     });
   }
 
-  /*Load the details for a selected employee*/
   public loadEmpDetails(emp: EmployeeItem) {
     return new Promise(resolve => {
-
       const url_details = this.url + emp.matric_fgs + '/detail';
-
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
@@ -75,7 +69,6 @@ export class RepertoireService {
     });
   }
 
-  /*Extract the employees*/
   private extractEmployees(data: any) {
     if (data != null) {
       for (let i = 0; i < data.length; i++) {
@@ -86,7 +79,6 @@ export class RepertoireService {
     }
   }
 
-  /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
     emp.address = data.address;
     emp.contracts = data.contracts;

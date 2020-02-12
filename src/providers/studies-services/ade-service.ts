@@ -31,57 +31,48 @@ export class AdeService {
   AdeServiceGetProjects = '&function=getProjects&detail=2';
   constructor(public http: HttpClient) {
   }
-  /*Convert Xml to JSON*/
+
   convertXmlToJson(xml): any {
     return new X2JS().xml2js(xml);
   }
 
-  /*Open a session*/
-  httpOpenSession() {
-    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
+  load(url: string) {
+    return this.http.get(url, { responseType: 'text' }).map(res => {
       return this.convertXmlToJson(res);
     });
   }
 
-  /*Get the projects from ADE*/
+  httpOpenSession() {
+    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+    return this.load(encodedURL);
+  }
+
   httpGetProjects(sessionId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + this.AdeServiceGetProjects;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
-  /*Set the project selected by the user*/
   httpSetProject(sessionId: string, projectId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=setProject&projectId=' + projectId;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
-  /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId: string, acronym: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=getResources&code=' + acronym;
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 
-  /*For a course selected get the activities*/
   httpGetActivity(sessionId: string, courseId: string) {
     const encodedURL: string = this.AdeserviceBaseUrl
       + 'sessionId=' + sessionId
       + '&function=getActivities&resources=' + courseId
       + '&detail=17';
-    return this.http.get(encodedURL, { responseType: 'text' }).map(res => {
-      return this.convertXmlToJson(res);
-    });
+    return this.load(encodedURL);
   }
 }

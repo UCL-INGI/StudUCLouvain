@@ -29,19 +29,16 @@ import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class StudentService {
-  activities: Array<String> = [];
+  activities: Array<string> = [];
   url = 'my/v0/student/';
   options: any;
-  courseUrl = 'learning/v1/learningUnits/';
 
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
-  /*Search activities (courses)*/
   public searchActivities() {
     this.activities = [];
-    let newUrl = this.url;
-    newUrl += 'activities';
+    const newUrl = this.url + 'activities';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
@@ -53,123 +50,17 @@ export class StudentService {
   }
 
   public checkCourse(sigle: string, year) {
-    const newUrl = this.courseUrl + year + '/' + sigle + '/fullInformation';
+    const newUrl = 'learningUnits/v1/' + year + '/' + sigle + '?lang=fr';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
-        (data) => {
-          let res: any;
-          res = data;
-          resolve(res.ficheActivite);
+        (data: any) => {
+          resolve(data);
         },
         (err) => {
           console.log(err);
-          console.log(err.error);
           resolve(err.status);
         });
     });
-  }
-
-  public weekSchedule() {
-    const newUrl = this.url + 'courseSchedules?date=';
-    let C = 7 - new Date().getDay();
-    // var C = 7 - new Date("10/16/2017").getDay();
-    if (C === 7) { C = C - 1; }
-    const schedule: Array<any> = [];
-    return new Promise(resolve => {
-      for (let _i = 0; _i < C; _i++) {
-        const date = this.getDate(_i);
-        const day = this.getDay(_i);
-
-        const url = newUrl + date;
-        this.wso2Service.loadStudent(url).subscribe(
-          data => {
-            let res: any;
-            res = data;
-            if (res.items != null) {
-              const items = res.items.item;
-              let dayDate = date.substr(5);
-              dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
-              for (const cours of items) {
-                let name: any;
-                this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
-                  name = data.intituleCompletMap.entry[1].value;
-                  cours['name'] = name;
-                });
-              }
-              const daySchedule = { 'date': dayDate, 'schedule': items, 'day': day };
-              schedule.push(daySchedule);
-              schedule.sort((a, b) => parseInt(a.date.substr(0, 2)) - parseInt(b.date.substr(0, 2)));
-            }
-          });
-      }
-      // schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-      resolve(schedule);
-    });
-  }
-
-  public todaySchedule() {
-    const newUrl = this.url + 'courseSchedules?date=';
-
-    const schedule: Array<any> = [];
-    return new Promise(resolve => {
-      const date = this.getDate(0);
-
-      const url = newUrl + date;
-      this.wso2Service.loadStudent(url).subscribe(
-        data => {
-          let res: any;
-          res = data;
-          if (res.items != null) {
-            const items = res.items.item;
-            let dayDate = date.substr(5);
-            dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
-            for (const cours of items) {
-              let name: any;
-              this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
-                name = data.intituleCompletMap.entry[1].value;
-                cours['name'] = name;
-              });
-            }
-            const daySchedule = { 'date': dayDate, 'schedule': items };
-            schedule.push(daySchedule);
-            schedule.sort((a, b) => parseInt(a.date.substr(0, 2)) - parseInt(b.date.substr(0, 2)));
-          }
-        });
-
-      resolve(schedule);
-    });
-
-  }
-
-  getDay(i: number): string {
-    const days = [
-      'Lundi',
-      'Mardi',
-      'Mercredi',
-      'Jeudi',
-      'Vendredi',
-      'Samedi',
-      'Dimanche'
-    ];
-    return days[i];
-  }
-
-  getDate(i: number): string {
-    const today = new Date();
-    // var today = new Date("10/16/2017");
-    today.setDate(today.getDate() + i);
-    const d = today.getDate();
-    let dd = d.toString();
-    const m = today.getMonth() + 1;
-    let mm = m.toString();
-    if (m < 10) {
-      mm = '0' + mm;
-    }
-    if (d < 10) {
-      dd = '0' + dd;
-    }
-    const yyyy = today.getFullYear();
-    return yyyy + '-' + mm + '-' + dd;
   }
 
   getStatus() {
@@ -183,7 +74,6 @@ export class StudentService {
         },
         (err) => {
           console.log(err);
-          console.log(err.error);
           resolve(err.status);
         });
     });

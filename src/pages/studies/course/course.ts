@@ -77,12 +77,10 @@ export class CoursePage {
     }
   }
 
-  /*Display the available sessions for a course*/
   ionViewDidLoad() {
     this.getCourse(this.sessionId, this.course.acronym);
   }
 
-  /*Get sessions of the course to display for the selectionned project and display them*/
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(data => {
       const courseId = data;
@@ -105,7 +103,6 @@ export class CoursePage {
     });
   }
 
-  /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: ItemSliding, activity: Activity) {
     const options: any = {
       firstReminderMinutes: 15
@@ -134,15 +131,15 @@ export class CoursePage {
     this.alert();
   }
 
-  /*Create and display the alert that say that if a course is add to the calendar
-  if this course is changed, the calendar doesn't take that in account*/
-  alert() {
+  alert(all: boolean = false) {
     let title: string;
     let message: string;
-    this.translateService.get('COURSE.WARNING').subscribe((res: string) => {
+    const prefix = all ? 'COURSE' : 'STUDY';
+    const msg_number = all ? '3' : '4';
+    this.translateService.get(prefix + '.WARNING').subscribe((res: string) => {
       title = res;
     });
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res: string) => {
+    this.translateService.get(prefix + '.MESSAGE' + msg_number).subscribe((res: string) => {
       message = res;
     });
     const disclaimerAlert = this.alertCtrl.create({
@@ -158,7 +155,6 @@ export class CoursePage {
     disclaimerAlert.present();
   }
 
-  /*Filter TP if a slot is selectionned*/
   updateDisplayedTP() {
     const toFilter = this.courseSorted.tp;
     if (toFilter.length === 0) { this.noTP = true; } else { this.noTP = false; }
@@ -171,7 +167,6 @@ export class CoursePage {
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
-  /*Filter CM if a slot is selectionned*/
   updateDisplayedCM() {
     const toFilter = this.courseSorted.cm;
     if (toFilter.length === 0) { this.noCM = true; } else { this.noCM = false; }
@@ -182,7 +177,6 @@ export class CoursePage {
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
-  /*Update the display if a filter is applicated*/
   updateDisplayed() {
     this.displayedActi = [];
     this.updateDisplayedCM();
@@ -191,7 +185,6 @@ export class CoursePage {
     if (this.courseSorted.ex.length === 0) { this.noEx = true; } else { this.noEx = false; }
   }
 
-  /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
   showPrompt(segment: string) {
     let title: string;
     let message: string;
@@ -267,7 +260,6 @@ export class CoursePage {
     if (options.inputs.length > 1) { prompt.present(); }
   }
 
-  /*Return the different slots available for a course TP or CM */
   getSlots(segment: string) {
     let act: Activity[] = this.course.activities;
     act = act.filter(
@@ -294,7 +286,6 @@ export class CoursePage {
     return newAct;
   }
 
-  /*Add a course to the calendar*/
   addCourseToCalendar() {
     const options: any = {
       firstReminderMinutes: 15
@@ -319,30 +310,7 @@ export class CoursePage {
       duration: 3000
     });
     toast.present();
-    this.alertAll();
-  }
-
-  /*Alert to warning that changes are possible*/
-  alertAll() {
-    let title: string;
-    let message: string;
-    this.translateService.get('STUDY.WARNING').subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get('STUDY.MESSAGE4').subscribe((res: string) => {
-      message = res;
-    });
-    const disclaimerAlert = this.alertCtrl.create({
-      title: title,
-      message: message,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => { }
-        }
-      ]
-    });
-    disclaimerAlert.present();
+    this.alert(true);
   }
 
   openModalInfo() {
@@ -355,7 +323,6 @@ export class CoursePage {
     myModal.present();
   }
 
-  /*Open or close the schedule*/
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
       this.shownGroup = null;
@@ -364,7 +331,6 @@ export class CoursePage {
     }
   }
 
-  /*The selectionned schedule is displayed?*/
   isGroupShown(group) {
     return this.shownGroup === group;
   }

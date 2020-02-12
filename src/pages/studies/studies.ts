@@ -88,16 +88,14 @@ export class StudiesPage {
     let response: any;
     const year = this.project.name.split('-')[0];
     return new Promise(resolve => {
-      this.studentService.checkCourse(sigle, year).then(data => {
-        const res: any = data;
-        let exist: boolean;
+      this.studentService.checkCourse(sigle, year).then((data: any) => {
+        const exist = data !== 404 && data !== 500;
         let nameFR = '';
         let nameEN = '';
-        if (data === 400) { exist = false; } else {
-          const names = res.intituleCompletMap.entry;
-          nameFR = names[1].value;
-          nameEN = names[0].value;
-          exist = true;
+        if (exist === true) {
+          const names = data.title;
+          nameFR = names;
+          nameEN = '';
         }
         response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
         resolve(response);
@@ -106,7 +104,7 @@ export class StudiesPage {
   }
 
   toastBadCourse() {
-    let msg;
+    let msg: string;
     this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {
       msg = res;
     });
@@ -115,11 +113,9 @@ export class StudiesPage {
       duration: 2000,
       position: 'middle'
     });
-
     toast.present();
   }
 
-  /*Authenticate a student*/
   private login() {
     this.error = '';
     return new Promise(resolve => {
@@ -144,7 +140,6 @@ export class StudiesPage {
     });
   }
 
-  /*Get course program of student*/
   loadActivities() {
     if (this.connService.isOnline()) {
       this.login().then(() => {
@@ -180,10 +175,8 @@ export class StudiesPage {
     }
   }
 
-  /*Open modalprojectpage to choose an ade project*/
   openModalProject() {
     const obj = { sessionId: this.sessionId };
-
     const myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
@@ -191,7 +184,6 @@ export class StudiesPage {
     myModal.present();
   }
 
-  /*Set project and connect to ADE*/
   initializeSession() {
     if (this.connService.isOnline()) {
       this.studiesService.openSession().then(sessId => {
@@ -212,7 +204,6 @@ export class StudiesPage {
     }
   }
 
-  /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
   showPrompt() {
     let addcourse: string;
     let message: string;
@@ -294,7 +285,6 @@ export class StudiesPage {
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-
     toast.present();
   }
 
@@ -320,7 +310,6 @@ export class StudiesPage {
     toast.present();
   }
 
-  /*Retrieve list of course added previously in the storage*/
   getCourses() {
     this.storage.get('listCourses').then(data => {
       if (data == null) {
@@ -331,14 +320,12 @@ export class StudiesPage {
     });
   }
 
-  /*Save course into storage*/
   saveCourse(name: string, tag: string) {
     const course = new Course(name, tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Remove course from storage*/
   removeCourse(course: Course) {
     const index = this.listCourses.indexOf(course);
     if (index >= 0) {
@@ -347,21 +334,12 @@ export class StudiesPage {
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course) {
-    const year = parseInt(this.project.name.split('-')[0]);
+    const year = this.project.name.split('-')[0];
     this.navCtrl.push('CoursePage', {
       course: course,
       sessionId: this.sessionId,
       year: year
-    });
-  }
-
-  openWeekPage() {
-    this.studentService.weekSchedule().then(res => {
-      const result: any = res;
-      // result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-      this.navCtrl.push('HebdoPage', { schedule: result });
     });
   }
 
@@ -376,10 +354,8 @@ export class StudiesPage {
 
   openExamPage() {
     this.unavailableAlert();
-    // this.navCtrl.push('ExamPage');
   }
 
-  /*Launch moodle or ucl portal*/
   launch(url) {
     this.iab.create(url, '_system');
   }

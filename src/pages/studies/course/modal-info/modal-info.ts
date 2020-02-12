@@ -54,29 +54,31 @@ export class ModalInfoPage {
     return new Promise(resolve => {
       this.studentService
         .checkCourse(this.course.acronym, this.year)
-        .then(data => {
-          const res: any = data;
-          if (data === 400) {
+        .then((res: any) => {
+          if (res === 400) {
             this.closeModal();
             resolve(400);
           } else {
             let cahier = '';
-            const campus = res.campus;
+            const campus = res.campus.name;
             const teacher = res.fichesIntervenants;
             const offres = res.fichesOffres;
-            const langue = res.langueEnseignement;
-            const loca = res.localisation;
-            const credit = res.ects;
-            const entite = res.entiteCharge;
+            const langue = res.language;
+            const loca = res.campus.name;
+            const credit = res.credits;
+            const entite = res.allocation_entity;
             const progpre = res.programmesEtPrerequis;
-            const quadri = res.quadrimestre;
-            const resume = res.resumeCoursMap.entry[1].value;
-            const vol = {
-              vol1: res.volTot1,
-              vol2: res.volTot2,
-              vol1Coef: res.volTot1AvecCoef,
-              vol2Coef: res.volTot2AvecCoef
-            };
+            const quadri = res.quadrimester_text;
+            // const resume = res.resumeCoursMap.entry[1].value;
+            const resume = res.resumeCoursMap;
+            const volume = { vol1: '', vol2: '', vol1Coef: '', vol2Coef: '' };
+            for (const vol of res.components) {
+              if (vol.type === 'LECTURING') {
+                volume.vol1 = vol.hourly_volume_total_annual;
+              } else if (vol.type === 'PRACTICAL_EXERCISES') {
+                volume.vol2 = vol.hourly_volume_total_annual;
+              }
+            }
             if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
@@ -92,7 +94,7 @@ export class ModalInfoPage {
               programmeprerequis: progpre,
               quadri: quadri,
               resume: resume,
-              volume: vol,
+              volume: volume,
               langue: langue
             };
             resolve(response);
