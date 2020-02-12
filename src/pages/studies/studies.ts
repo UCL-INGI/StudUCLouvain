@@ -343,13 +343,6 @@ export class StudiesPage {
     });
   }
 
-  openWeekPage() {
-    this.studentService.weekSchedule().then(res => {
-      const result: any = res;
-      this.navCtrl.push('HebdoPage', { schedule: result });
-    });
-  }
-
   unavailableAlert() {
     const alert = this.alertCtrl.create({
       title: 'Indisponible',
