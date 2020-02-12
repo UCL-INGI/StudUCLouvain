@@ -136,7 +136,7 @@ export class SportsPage {
   /*Load sports to display*/
   public loadSports() {
     this.searching = true;
-    this.sportsList.closeSlidingItems();
+    this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     // Check the connexion, if it's ok, load them else return to previous page and display an alert
     if (this.connService.isOnline()) {
@@ -194,7 +194,7 @@ export class SportsPage {
   /*Display the good list of sports according to the tab*/
   public updateDisplayedSports() {
     this.searching = true;
-    this.sportsList.closeSlidingItems();
+    this.sportsList && this.sportsList.closeSlidingItems();
 
     if (this.segment === 'all') {
       // List of sports for all students

@@ -46,6 +46,7 @@
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.0",
     "cordova-plugin-appavailability": "^0.4.2",
+    "cordova-plugin-calendar": "~5.1.5",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.3",
@@ -96,7 +97,8 @@
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
       },
       "cordova-support-google-services": {},
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-calendar": {}
     },
     "platforms": [
       "ios",

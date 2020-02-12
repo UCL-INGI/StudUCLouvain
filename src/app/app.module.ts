@@ -70,7 +70,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(MyApp),
     CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
     IonicStorageModule.forRoot(),
-    HttpModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
