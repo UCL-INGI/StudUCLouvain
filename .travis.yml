@@ -66,27 +66,27 @@ jobs:
         - ionic info
       script: ionic cordova build android --prod
           
-    - stage: "Build iOS"
-      os: osx
-      language: swift
-      cache: 
-        directories: 
-          - node_modules
-          - plugins
+    # - stage: "Build iOS"
+    #   os: osx
+    #   language: swift
+    #   cache: 
+    #     directories: 
+    #       - node_modules
+    #       - plugins
           
-      before_install:
-        - nvm install 12.14.0
-      install:
-        - npm install
-        - npm install -g ionic cordova@^8
-        - npm --version
-        - node --version
+    #   before_install:
+    #     - nvm install 12.14.0
+    #   install:
+    #     - npm install
+    #     - npm install -g ionic cordova@^8
+    #     - npm --version
+    #     - node --version
 
-      before_script:
-        - ionic cordova platform add ios
-        - ionic info
-      script: 
-        - ionic cordova build ios --prod
+    #   before_script:
+    #     - ionic cordova platform add ios
+    #     - ionic info
+    #   script: 
+    #     - ionic cordova build ios --prod
         
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
