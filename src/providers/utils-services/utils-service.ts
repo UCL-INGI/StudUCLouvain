@@ -18,10 +18,13 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Loading, LoadingController } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
 
 @Injectable()
 export class UtilsService {
@@ -29,7 +32,11 @@ export class UtilsService {
     shownGroup = null;
 
     constructor(
-        private loadingCtrl: LoadingController
+        private loadingCtrl: LoadingController,
+        private device: Device,
+        private appAvailability: AppAvailability,
+        private iab: InAppBrowser,
+        private market: Market
     ) { }
 
     presentLoading() {
@@ -58,5 +65,29 @@ export class UtilsService {
 
     isGroupShown(group) {
         return this.shownGroup === group;
+    }
+
+    launchExternalApp(page) {
+        let app: string;
+        let check: string;
+        if (this.device.platform === 'iOS') {
+            app = page.iosSchemaName;
+            check = page.appUrl;
+        } else if (this.device.platform === 'Android') {
+            app = page.androidPackageName;
+            check = app;
+        } else {
+            const browser = this.iab.create(page.httpUrl, '_system');
+            browser.close();
+        }
+        this.appAvailability.check(check).then(
+            () => {
+                const browser = this.iab.create(page.appUrl, '_system');
+                browser.close();
+            },
+            () => {
+                this.market.open(app);
+            }
+        );
     }
 }

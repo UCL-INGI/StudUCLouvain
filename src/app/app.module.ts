@@ -52,6 +52,7 @@ import { StudiesService } from '../providers/studies-services/studies-service';
 import { ConnectivityService } from '../providers/utils-services/connectivity-service';
 import { FacService } from '../providers/utils-services/fac-service';
 import { UserService } from '../providers/utils-services/user-service';
+import { UtilsService } from '../providers/utils-services/utils-service';
 import { LibrariesService } from '../providers/wso2-services/libraries-service';
 import { RepertoireService } from '../providers/wso2-services/repertoire-service';
 import { StudentService } from '../providers/wso2-services/student-service';
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LibrariesService,
     AdeService,
     CourseService,
+    UtilsService,
     Wso2Service,
     SportsService,
     RepertoireService,
