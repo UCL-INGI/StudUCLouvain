@@ -32,18 +32,14 @@ export class RssService {
   nbCalls = 0;
   callLimit = 30;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient) { }
 
-  }
-
-  /*Parse the xml to json*/
   convertXmlToJson(xml): any {
     const parser: any = new X2JS();
     const json = parser.xml2js(xml);
     return json;
   }
 
-  /*Load data from the RSS flux*/
   load(url: string, isSport: boolean = false) {
     return new Promise((resolve, reject) => {
       this.http.get(url, { responseType: 'text' }).timeout(5000)

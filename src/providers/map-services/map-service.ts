@@ -65,14 +65,10 @@ export class MapService {
     const leftMenu = menuCtrl.get('left');
     if (leftMenu) {
       leftMenu.ionOpen.subscribe(() => {
-        if (this.map && this.onDevice) {
-          this.map.setClickable(false);
-        }
+        this.disableMap();
       });
       leftMenu.ionClose.subscribe(() => {
-        if (this.map && this.onDevice) {
-          this.map.setClickable(true);
-        }
+        this.enableMap();
       });
     }
   }
@@ -164,7 +160,7 @@ export class MapService {
         this.initDeviceMap().then(
           (init) => {
             resolve(true);
-          }, (error) => {
+          }, () => {
             reject(false);
           });
         this.hidePleaseConnect();
@@ -210,7 +206,7 @@ export class MapService {
           });
       });
     } else {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         console.log('Geolocation disabled');
         const campus = this.userS.campus;
         let latLng: LatLng;
@@ -232,13 +228,12 @@ export class MapService {
           target: latLng,
           zoom: 5
         };
-
         this.map = GoogleMaps.create(this.mapElement, mapOptions);
         console.log('Map created');
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
           this.map.moveCamera(camPos);
-          resolve(true);
+          resolve();
         });
       });
     }
@@ -322,21 +317,14 @@ export class MapService {
       });
   }
 
-  /*Get a marker for the selected location*/
   private getMarker(title: string): Marker {
     let res = null;
-    if (this.onDevice) {
-      this.markers.map((marker) => {
-        if (marker.getTitle() === title) {
-          res = marker;
-        }
-      });
-    } else {
-      this.markersB.map((marker) => {
-        if (marker.getTitle() === title) {
-          res = marker;
-        }
-      });
+    const markers = this.onDevice ? this.markers : this.markersB;
+    for (const marker of markers) {
+      if (marker.getTitle() === title) {
+        res = marker;
+        break;
+      }
     }
     return res;
   }
@@ -350,7 +338,7 @@ export class MapService {
   }
 
   private setCenteredMarkerOnBrowser(title: string) {
-    this.markersB.map((marker) => {
+    this.markersB.map(marker => {
       if (marker.getTitle() === title) {
         this.map.panTo(marker.getPosition());
       }
@@ -358,7 +346,7 @@ export class MapService {
   }
 
   private setCenteredMarkerOnDevice(title: string, lat: number, lng: number) {
-    this.markers.map((marker) => {
+    for (const marker of this.markers) {
       if (marker.getTitle() === title) {
         const latLng = new LatLng(lat, lng);
         const camPos: CameraPosition<LatLng> = {
@@ -366,8 +354,9 @@ export class MapService {
           zoom: 15
         };
         this.map.moveCamera(camPos);
+        break;
       }
-    });
+    }
   }
 
   /*Disable Map*/
