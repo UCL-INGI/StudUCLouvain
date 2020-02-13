@@ -57,7 +57,6 @@ export class EventsPage {
   displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
-  shownGroup = null;
 
   now = new Date();
   year = this.now.getFullYear();
@@ -110,18 +109,6 @@ export class EventsPage {
 
   public goToEventDetail(event: EventItem) {
     this.navCtrl.push('EventsDetailsPage', { event: event });
-  }
-
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  isGroupShown(group) {
-    return this.shownGroup === group;
   }
 
   async cachedOrNot() {

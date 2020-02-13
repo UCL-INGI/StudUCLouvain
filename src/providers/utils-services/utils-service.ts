@@ -26,6 +26,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UtilsService {
     loading: Loading;
+    shownGroup = null;
+
     constructor(
         private loadingCtrl: LoadingController
     ) { }
@@ -44,5 +46,17 @@ export class UtilsService {
             this.loading.dismiss();
             this.loading = null;
         }
+    }
+
+    toggleGroup(group) {
+        if (this.isGroupShown(group)) {
+            this.shownGroup = null;
+        } else {
+            this.shownGroup = group;
+        }
+    }
+
+    isGroupShown(group) {
+        return this.shownGroup === group;
     }
 }

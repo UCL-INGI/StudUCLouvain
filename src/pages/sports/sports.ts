@@ -63,7 +63,6 @@ export class SportsPage {
   dateRange: any = 7;
   dateLimit: Date = new Date();
   campus: string;
-  shownGroup = null;
   nosport: any = false;
   noteams: any = false;
 
@@ -148,18 +147,6 @@ export class SportsPage {
       return { jour: key, name: groups[key] };
     });
     return sportsD;
-  }
-
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  isGroupShown(group) {
-    return this.shownGroup === group;
   }
 
   public updateDisplayedSports() {
