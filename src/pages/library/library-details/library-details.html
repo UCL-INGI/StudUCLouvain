@@ -64,41 +64,41 @@
       {{libDetails.openingHoursNote}}
     </ion-row>
 
-    <ion-item-divider (click)="toggleGroup('opening_hours')">
+    <ion-item-divider (click)="utilsService.toggleGroup('opening_hours')">
       {{'LIBRARY.HOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_hours')">
+    <ion-item [hidden]="!utilsService.isGroupShown('opening_hours')">
       <p *ngFor="let timeSlot of libDetails.openingHours">
         {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
-    <ion-item-divider (click)="toggleGroup('opening_examination_hours')">
+    <ion-item-divider (click)="utilsService.toggleGroup('opening_examination_hours')">
       {{'LIBRARY.EXAMHOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_examination_hours')">
+    <ion-item [hidden]="!utilsService.isGroupShown('opening_examination_hours')">
       <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
         {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
-    <ion-item-divider (click)="toggleGroup('opening_summer_hours')">
+    <ion-item-divider (click)="utilsService.toggleGroup('opening_summer_hours')">
       {{'LIBRARY.SUMMERHOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_summer_hours')">
+    <ion-item [hidden]="!utilsService.isGroupShown('opening_summer_hours')">
       <p *ngFor="let timeSlot of libDetails.openingSummerHours">
         {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
       </p>
     </ion-item>
 
-    <ion-item-divider (click)="toggleGroup('closed_dates')">
+    <ion-item-divider (click)="utilsService.toggleGroup('closed_dates')">
       {{'LIBRARY.CLOSED' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('closed_dates')" text-wrap>
+    <ion-item [hidden]="!utilsService.isGroupShown('closed_dates')" text-wrap>
       <p *ngFor="let cd of libDetails.closedDates">
         {{cd.from}} - {{cd.to}} : {{cd.description}}
       </p>
