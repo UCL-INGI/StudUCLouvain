@@ -18,12 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, Content, IonicPage, List, Loading, LoadingController, NavController,
-    NavParams, Platform
+    AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform
 } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
@@ -36,6 +34,7 @@ import { NewsService } from '../../providers/rss-services/news-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { FacService } from '../../providers/utils-services/fac-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -55,9 +54,9 @@ export class NewsPage {
     public connService: ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
     public facService: FacService,
-    private cache: CacheService
+    private cache: CacheService,
+    private utilsService: UtilsService
   ) {
     if (this.navParams.get('title') !== undefined) {
       this.title = this.navParams.get('title');
@@ -82,7 +81,6 @@ export class NewsPage {
   searchTerm = '';
   title = 'Actualités';
   nonews: any = false;
-  loading: Loading;
   fac = '';
   listFac: any = [];
   site = '';
@@ -102,22 +100,6 @@ export class NewsPage {
       this.searching = false;
       this.updateDisplayedNews();
     });
-  }
-
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-      this.loading.present();
-    }
-  }
-
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
-    }
   }
 
   public openURL(url: string) {
@@ -199,7 +181,7 @@ export class NewsPage {
       await this.cache
         .getItem(key)
         .then(data => {
-          this.presentLoading();
+          this.utilsService.presentLoading();
           this.news = data.news;
           this.shownNews = data.shownNews;
           this.searching = false;
@@ -218,7 +200,7 @@ export class NewsPage {
     this.searching = true;
     this.news = [];
     if (this.connService.isOnline()) {
-      this.presentLoading();
+      this.utilsService.presentLoading();
       let actu = this.subsegment;
       if (this.segment === 'fac' && this.facsegment === 'news') {
         actu = this.rss;
@@ -251,7 +233,7 @@ export class NewsPage {
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews === 0;
     this.searching = false;
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
   public goToNewsDetail(news: NewsItem) {

@@ -22,8 +22,8 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, LoadingController, ModalController,
-    NavController, NavParams, ToastController
+    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
+    ToastController
 } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
@@ -35,6 +35,7 @@ import { SportItem } from '../../app/entity/sportItem';
 import { SportsService } from '../../providers/rss-services/sports-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -63,7 +64,6 @@ export class SportsPage {
   dateLimit: Date = new Date();
   campus: string;
   shownGroup = null;
-  loading;
   nosport: any = false;
   noteams: any = false;
 
@@ -78,8 +78,8 @@ export class SportsPage {
     private calendar: Calendar,
     public connService: ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -89,12 +89,12 @@ export class SportsPage {
     this.app.setTitle(this.title);
     this.updateDateLimit();
     if (this.connService.isOnline()) {
+      this.utilsService.presentLoading();
       this.loadSports();
       this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
         this.searching = false;
         this.updateDisplayedSports();
       });
-      this.presentLoading();
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -104,22 +104,6 @@ export class SportsPage {
   public doRefresh(refresher) {
     this.loadSports();
     refresher.complete();
-  }
-
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-      this.loading.present();
-    }
-  }
-
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
-    }
   }
 
   public onSearchInput() {
@@ -137,18 +121,16 @@ export class SportsPage {
         this.sports = result.sports;
         this.shownSports = result.shownSports;
         this.filters = result.categories;
-        this.searching = false;
         this.nosport = this.sports.length === 0;
-        this.updateDisplayedSports();
       });
       this.sportsService.getTeams(this.segment).then(result => {
         this.teams = result.teams;
         this.shownTeams = result.shownTeams;
         this.filtersT = result.categoriesT;
-        this.searching = false;
         this.noteams = this.teams.length === 0;
-        this.updateDisplayedSports();
       });
+      this.searching = false;
+      this.updateDisplayedSports();
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -206,7 +188,7 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
   private filterDisplayedSports(items: Array<SportItem>) {

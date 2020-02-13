@@ -18,12 +18,11 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, Loading, LoadingController, ModalController,
-    NavController, NavParams, ToastController
+    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
+    ToastController
 } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
@@ -36,6 +35,7 @@ import { EventItem } from '../../app/entity/eventItem';
 import { EventsService } from '../../providers/rss-services/events-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -57,15 +57,12 @@ export class EventsPage {
   displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
-  loading: Loading;
   shownGroup = null;
 
   now = new Date();
   year = this.now.getFullYear();
   noevents: any = false;
   displayedEventsD: any = [];
-
-  weekUCL = 5;
 
   constructor(
     public alertCtrl: AlertController,
@@ -79,8 +76,8 @@ export class EventsPage {
     private calendar: Calendar,
     public connService: ConnectivityService,
     private translateService: TranslateService,
-    private loadingCtrl: LoadingController,
-    private cache: CacheService
+    private cache: CacheService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -104,22 +101,6 @@ export class EventsPage {
     } else {
       this.connService.presentConnectionAlert();
       refresher.complete();
-    }
-  }
-
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-      this.loading.present();
-    }
-  }
-
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
     }
   }
 
@@ -149,7 +130,7 @@ export class EventsPage {
     await this.cache
       .getItem(key)
       .then(data => {
-        this.presentLoading();
+        this.utilsService.presentLoading();
         this.events = data.events;
         this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
@@ -173,7 +154,7 @@ export class EventsPage {
     }
 
     if (this.connService.isOnline()) {
-      this.presentLoading();
+      this.utilsService.presentLoading();
       this.eventsService.getEvents(this.segment).then(result => {
         this.events = result.events;
         if (key) {
@@ -280,7 +261,7 @@ export class EventsPage {
     this.displayedEventsD = this.changeArray(
       this.displayedEvents
     );
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
   presentFilter() {
