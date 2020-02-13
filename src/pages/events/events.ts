@@ -22,7 +22,7 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, LoadingController, ModalController,
+    AlertController, App, IonicPage, ItemSliding, List, Loading, LoadingController, ModalController,
     NavController, NavParams, ToastController
 } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
@@ -57,7 +57,7 @@ export class EventsPage {
   displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
-  loading;
+  loading: Loading;
   shownGroup = null;
 
   now = new Date();
@@ -86,18 +86,16 @@ export class EventsPage {
     this.searchControl = new FormControl();
   }
 
-  /*Like the constructor, ionViewDidLoad fires all his body*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
     this.cachedOrNot();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+    this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
       this.searching = false;
       this.updateDisplayedEvents();
     });
   }
 
-  /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
       this.cache.removeItem('cache-event');
@@ -109,18 +107,15 @@ export class EventsPage {
     }
   }
 
-  /*Display an loading window*/
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'
       });
-
       this.loading.present();
     }
   }
 
-  /*Close the loading window*/
   dismissLoading() {
     if (this.loading) {
       this.loading.dismiss();
@@ -132,12 +127,10 @@ export class EventsPage {
     this.searching = true;
   }
 
-  /*Open the details page for an event*/
   public goToEventDetail(event: EventItem) {
     this.navCtrl.push('EventsDetailsPage', { event: event });
   }
 
-  /*To display or close a group of events (1 group = events for one week)*/
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
       this.shownGroup = null;
@@ -146,12 +139,10 @@ export class EventsPage {
     }
   }
 
-  /*Check if the display group is the group in arg*/
   isGroupShown(group) {
     return this.shownGroup === group;
   }
 
-  /*Check if data are cached or not */
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
     const key = 'cache-event';
@@ -175,12 +166,12 @@ export class EventsPage {
       });
   }
 
-  /*Load the list of events to display*/
   public loadEvents(key?) {
     this.searching = true;
-    this.eventsList && this.eventsList.closeSlidingItems();
+    if (this.eventsList) {
+      this.eventsList.closeSlidingItems();
+    }
 
-    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
       this.presentLoading();
       this.eventsService.getEvents(this.segment).then(result => {
@@ -201,8 +192,7 @@ export class EventsPage {
     }
   }
 
-  /*Make an array with events sorted by week*/
-  changeArray(array, weekUCL) {
+  changeArray(array: any) {
     const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
       date.setHours(0, 0, 0, 0);
@@ -215,7 +205,7 @@ export class EventsPage {
             3 +
             ((temp.getDay() + 6) % 7)) /
           7
-        ); // - weekUCL;
+        );
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
@@ -226,7 +216,6 @@ export class EventsPage {
     return eventsD;
   }
 
-  /*Returns the ISO week of the date*/
   getWeek(d: Date) {
     const date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
@@ -240,13 +229,11 @@ export class EventsPage {
       Math.round(
         ((date.getTime() - week1.getTime()) / 86400000 -
           3 +
-          ((week1.getDay() + 6) % 7)) /
-        7
+          ((week1.getDay() + 6) % 7)) / 7
       )
     );
   }
 
-  /*Return first day of the week and last day of the week (to display range)*/
   getRangeWeek(week, year) {
     let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date('' + year + '');
@@ -262,10 +249,11 @@ export class EventsPage {
     return { from: rangeIsFrom, to: rangeIsTo };
   }
 
-  /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayedEvents() {
     this.searching = true;
-    this.eventsList && this.eventsList.closeSlidingItems();
+    if (this.eventsList) {
+      this.eventsList.closeSlidingItems();
+    }
     if (this.segment === 'all') {
       this.displayedEvents = this.events.filter(item => {
         return (
@@ -276,7 +264,7 @@ export class EventsPage {
       });
     } else if (this.segment === 'favorites') {
       const favEvents = [];
-      this.events.filter(item => {
+      this.events.forEach(item => {
         if (item.favorite || this.user.hasFavorite(item.guid)) {
           if (
             item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
@@ -290,13 +278,11 @@ export class EventsPage {
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.displayedEventsD = this.changeArray(
-      this.displayedEvents,
-      this.weekUCL
+      this.displayedEvents
     );
     this.dismissLoading();
   }
 
-  /*Display the modal with the filters and update data with them*/
   presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
@@ -321,7 +307,6 @@ export class EventsPage {
     });
   }
 
-  /*Update the date limit, take account if a change is done by filter with the dateRange value*/
   private updateDateLimit() {
     const today = new Date();
     this.dateLimit = new Date(
@@ -331,7 +316,6 @@ export class EventsPage {
     );
   }
 
-  /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: ItemSliding, itemData: any): void {
     const options: any = {
       firstReminderMinutes: 15
@@ -360,11 +344,8 @@ export class EventsPage {
       });
   }
 
-  /*Add an event to the favorites*/
   addFavorite(slidingItem: ItemSliding, itemData: any) {
     if (this.user.hasFavorite(itemData.guid)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
       let message: string;
       this.translateService
         .get('EVENTS.MESSAGEFAV')
@@ -373,7 +354,6 @@ export class EventsPage {
         });
       this.removeFavorite(slidingItem, itemData, message);
     } else {
-      // remember this session as a user favorite
       this.user.addFavorite(itemData.guid);
       let message: string;
       this.translateService
@@ -390,7 +370,6 @@ export class EventsPage {
     }
   }
 
-  /*Remove an event from the favorites*/
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     let message: string;
     let cancel: string;
@@ -411,25 +390,19 @@ export class EventsPage {
         {
           text: cancel,
           handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
             slidingItem.close();
           }
         },
         {
           text: delet,
           handler: () => {
-            // they want to remove this session from their favorites
             this.user.removeFavorite(itemData.guid);
             this.updateDisplayedEvents();
-
-            // close the sliding item and hide the option buttons
             slidingItem.close();
           }
         }
       ]
     });
-    // now present the alert on top of all other content
     alert.present();
   }
 }
