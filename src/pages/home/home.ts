@@ -18,15 +18,12 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     AlertController, App, Content, FabContainer, IonicPage, LoadingController, NavController,
     NavParams
 } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,6 +31,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { MyApp } from '../../app/app.component';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 import { StudentService } from '../../providers/wso2-services/student-service';
 
 @IonicPage()
@@ -48,8 +46,6 @@ export class HomePage {
   shownGroup = null;
   where = '';
   myApp: MyApp;
-
-  /*Create an object Page for each feature of our application display in the home page*/
 
   libraryPage = {
     title: 'MENU.LIBRARY',
@@ -156,77 +152,41 @@ export class HomePage {
     public userS: UserService,
     public nav: NavController,
     private iab: InAppBrowser,
-    private appAvailability: AppAvailability,
-    private device: Device,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
     public market: Market,
     public loadingCtrl: LoadingController,
     public studentService: StudentService,
-    public splashscreen: SplashScreen
+    public splashscreen: SplashScreen,
+    private utilsService: UtilsService
   ) {
     if (this.navParams.get('title') !== undefined) {
       this.title = this.navParams.get('title');
     }
     this.app.setTitle(this.title);
     document.title = this.title;
-    // this.resize();
     // this.userS.removeCampus('');
   }
 
-  /*Set the title*/
   ionViewDidEnter() {
     this.app.setTitle(this.title);
     setTimeout(() => {
       this.splashscreen.hide();
     }, 1000);
-    // this.resize();
   }
 
-  /*Update the public variable campus for the user*/
   updateCampus() {
     this.userS.addCampus(this.where);
-    // this.resize();
   }
 
-  /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
-      this.launchExternalApp(page);
+      this.utilsService.launchExternalApp(page);
     } else {
       this.nav.push(page.component, { title: page.title });
     }
   }
 
-  /*launch external application*/
-  launchExternalApp(page) {
-    let app: string;
-    // let storeUrl:string;
-    let check: string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      // storeUrl=page.httpUrl;
-      check = page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      // storeUrl= 'market://details?id='+ app;
-      check = app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-    this.appAvailability.check(check).then(
-      () => {
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => {
-        this.market.open(app);
-      }
-    );
-  }
-
-  /*Open the URL for the social media of the UCL*/
   public openURL(url: string, fab: FabContainer) {
     this.iab.create(url, '_system');
     fab.close();
@@ -235,13 +195,11 @@ export class HomePage {
     this.iab.create(url, '_system');
   }
 
-  /*If the user change the language of the app, tranlate the text and change the public variable*/
   languageChanged(event: string) {
     this.userS.storage.set('lan', event);
     this.translateService.use(event);
   }
 
-  /*Create an alert to allow the user to change the parameters of the application (language and campus)*/
   settings() {
     const check = this.userS.campus;
     const check2 = this.translateService.currentLang;
@@ -264,7 +222,32 @@ export class HomePage {
     this.translateService.get('HOME.EN').subscribe((res: string) => {
       en = res;
     });
-
+    const languageAlert = this.alertCtrl.create({
+      title: settings,
+      message: message2,
+      inputs: [
+        {
+          type: 'radio',
+          label: fr,
+          value: 'fr',
+          checked: check2 === 'fr'
+        },
+        {
+          type: 'radio',
+          label: en,
+          value: 'en',
+          checked: check2 === 'en'
+        }
+      ],
+      buttons: [
+        {
+          text: save,
+          handler: data => {
+            this.languageChanged(data);
+          }
+        }
+      ]
+    });
     const settingsAlert = this.alertCtrl.create({
       title: settings,
       message: message,
@@ -299,36 +282,8 @@ export class HomePage {
       ]
     });
     settingsAlert.present();
-
-    const languageAlert = this.alertCtrl.create({
-      title: settings,
-      message: message2,
-      inputs: [
-        {
-          type: 'radio',
-          label: fr,
-          value: 'fr',
-          checked: check2 === 'fr'
-        },
-        {
-          type: 'radio',
-          label: en,
-          value: 'en',
-          checked: check2 === 'en'
-        }
-      ],
-      buttons: [
-        {
-          text: save,
-          handler: data => {
-            this.languageChanged(data);
-          }
-        }
-      ]
-    });
   }
 
-  /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency() {
     let close: string;
     this.translateService.get('HOME.CLOSE').subscribe((res: string) => {

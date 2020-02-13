@@ -18,15 +18,13 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Component } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
+
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -42,10 +40,8 @@ export class MobilityPage {
     public nav: NavController,
     public market: Market,
     public navParams: NavParams,
-    private iab: InAppBrowser,
-    private appAvailability: AppAvailability,
-    private device: Device,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     let titlecar: string;
@@ -53,7 +49,6 @@ export class MobilityPage {
       titlecar = res;
     });
 
-    // Information to launch external app
     this.carpoolingPage = {
       title: titlecar,
       component: 'CarpoolingPage',
@@ -79,40 +74,5 @@ export class MobilityPage {
       httpUrl:
         'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx'
     };
-  }
-
-  /*Launch external app*/
-  launchExternalApp(page: any) {
-    let app: string;
-    // let storeUrl:string;
-    let check: string;
-
-    // Check the platform of the user
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      // storeUrl=page.httpUrl;
-      check = page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      // storeUrl= 'market://details?id='+ app;
-      check = app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-
-    // Check if the app is installed, if yes launch app else return the user to the market
-    this.appAvailability.check(check).then(
-      () => {
-        // success callback
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => {
-        // error callback
-        this.market.open(app);
-      }
-    );
-    // this.nav.push(page.component, {title: page.title});
   }
 }
