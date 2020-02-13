@@ -47,13 +47,12 @@ export class POIService {
   /*Put the good campus for the user to display the good map with the good locations*/
   update() {
     const campus = this.user.campus;
-    const campuses = ['LLN', 'Woluwe', 'Mons'];
     const urls = {
-      LLN: this.urlLLN,
-      Woluwe: this.urlWol,
-      Mons: this.urlMons
+      'LLN': this.urlLLN,
+      'Woluwe': this.urlWol,
+      'Mons': this.urlMons
     };
-    if (campus in campuses) { this.url = urls[campus]; }
+    if (urls[campus]) { this.url = urls[campus]; }
     if (campus !== this.old) {
       this.zones = [];
       this.old = campus;
