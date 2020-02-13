@@ -92,10 +92,34 @@ export class MyApp {
   ) {
     console.log('Startin App');
     this.user.getCampus();
-    // this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
+    this.getPages();
+    platform.ready().then(() => {
+      this.wso2Service.getToken();
+      translateService.setDefaultLang('fr');
+      this.user.storage.get('lan').then(data => {
+        if (data != null) {
+          translateService.use(data);
+        } else {
+          translateService.use('fr');
+        }
+      });
+      cache.setDefaultTTL(60 * 60 * 2);
+      cache.setOfflineInvalidate(false);
+      // this.user.storage.set('first',null);
+      this.user.storage.get('first').then(data => {
+        if (data == null) {
+          this.rootPage = 'TutoPage';
+          this.user.storage.set('first', false);
+        } else {
+          this.rootPage = 'HomePage';
+        }
+      });
+    });
+  }
 
+  private getPages() {
     this.homePage = {
       title: 'MENU.HOME',
       component: 'HomePage',
@@ -219,36 +243,6 @@ export class MyApp {
         httpUrl: null
       }
     ];
-    platform.ready().then(() => {
-      this.wso2Service.getToken();
-      /*if ((<any>window).TestFairy) {
-        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
-      }*/
-      translateService.setDefaultLang('fr');
-      this.user.storage.get('lan').then(data => {
-        if (data != null) {
-          translateService.use(data);
-        } else {
-          translateService.use('fr');
-        }
-      });
-      cache.setDefaultTTL(60 * 60 * 2);
-      cache.setOfflineInvalidate(false);
-      // this.user.storage.set('first',null);
-      this.user.storage.get('first').then(data => {
-        if (data == null) {
-          this.rootPage = 'TutoPage';
-          this.user.storage.set('first', false);
-        } else {
-          this.rootPage = 'HomePage';
-        }
-      });
-    });
-
-    /*this.storage.get('disclaimer').then((disclaimer) => {
-      if(!disclaimer) this.disclaimer();
-    });*/
-    // this.disclaimer();
   }
 
   initializeApp() {
