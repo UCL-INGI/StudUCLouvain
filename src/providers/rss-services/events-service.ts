@@ -38,7 +38,6 @@ export class EventsService {
 
   constructor(public user: UserService, public rssService: RssService) { }
 
-  /*Get the events*/
   public getEvents(segment: string) {
     this.events = [];
     return this.rssService.load(this.url).then(result => {
@@ -66,7 +65,6 @@ export class EventsService {
       });
   }
 
-  /*Extraction of events*/
   private extractEvents(data: any) {
     this.shownEvents = 0;
     const maxDescLength = 20;
@@ -98,7 +96,6 @@ export class EventsService {
     }
   }
 
-  /*Get the good icon for a catagory*/
   public getIconCategory(category: string): string {
     switch (category.toLowerCase()) {
       case 'sensibilisation': {
@@ -125,13 +122,10 @@ export class EventsService {
     }
   }
 
-  /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str: string): Date {
-    // new Date(Year : number, (month-1) : number, day : number)
     const dateTimeSplit = str.split(' ');
     const dateSplit = dateTimeSplit[0].split('/');
     const timeSplit = dateTimeSplit[1].split(':');
-
     const year = parseInt(dateSplit[2]);
     const month = parseInt(dateSplit[1]) - 1;
     const day = parseInt(dateSplit[0]);
@@ -140,12 +134,4 @@ export class EventsService {
 
     return new Date(year, month, day, hours, minutes);
   }
-
-  /*Return the items of filter*/
-  public filterItems(myList, searchTerm) {
-    return myList.filter((item) => {
-      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-  }
-
 }
