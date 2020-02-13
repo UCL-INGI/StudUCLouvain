@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     AlertController, IonicPage, ItemSliding, ModalController, NavController, NavParams,
     ToastController
@@ -32,6 +31,7 @@ import { Activity } from '../../../app/entity/activity';
 import { Course } from '../../../app/entity/course';
 import { CourseService } from '../../../providers/studies-services/course-service';
 import { UserService } from '../../../providers/utils-services/user-service';
+import { UtilsService } from '../../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -44,7 +44,6 @@ export class CoursePage {
   year = this.navParams.get('year');
   segment = 'Cours magistral';
   slotTP = 'no';
-  shownGroup = null;
   slotCM = 'no';
   displayedActi: Array<Activity> = [];
   courseSorted: {
@@ -65,7 +64,8 @@ export class CoursePage {
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private utilsService: UtilsService
   ) {
     this.courseSorted = { cm: [], tp: [], ex: [] };
     const acro = this.course.acronym;
@@ -321,17 +321,5 @@ export class CoursePage {
     );
     myModal.onDidDismiss(data => { });
     myModal.present();
-  }
-
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  isGroupShown(group) {
-    return this.shownGroup === group;
   }
 }

@@ -26,6 +26,7 @@ import { Component } from '@angular/core';
 
 import { LibraryItem } from '../../../app/entity/libraryItem';
 import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
+import { UtilsService } from '../../../providers/utils-services/utils-service';
 import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
 
 @IonicPage()
@@ -43,14 +44,14 @@ import { LibrariesService } from '../../../providers/wso2-services/libraries-ser
 })
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
-  shownGroup = null;
   searching = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public libService: LibrariesService,
-    public connService: ConnectivityService
+    public connService: ConnectivityService,
+    private utilsService: UtilsService
   ) {
     this.libDetails = navParams.get('lib');
     this.searching = true;
@@ -66,21 +67,6 @@ export class LibraryDetailsPage {
     }
   }
 
-  /*Open or close the schedule*/
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  /*The selectionned schedule is displayed?*/
-  isGroupShown(group) {
-    return this.shownGroup === group;
-  }
-
-  /*Open the page of the library for more details*/
   openPage(url: string) {
     window.open(url, '_blank');
   }

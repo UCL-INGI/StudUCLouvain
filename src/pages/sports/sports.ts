@@ -22,8 +22,8 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, LoadingController, ModalController,
-    NavController, NavParams, ToastController
+    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
+    ToastController
 } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
@@ -35,6 +35,7 @@ import { SportItem } from '../../app/entity/sportItem';
 import { SportsService } from '../../providers/rss-services/sports-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -62,8 +63,6 @@ export class SportsPage {
   dateRange: any = 7;
   dateLimit: Date = new Date();
   campus: string;
-  shownGroup = null;
-  loading;
   nosport: any = false;
   noteams: any = false;
 
@@ -78,85 +77,59 @@ export class SportsPage {
     private calendar: Calendar,
     public connService: ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
 
-  /*update the date with in real time value, load sport and display them*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    // Check connxion, if it's ok, load and display sports
     if (this.connService.isOnline()) {
+      this.utilsService.presentLoading();
       this.loadSports();
-      this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
         this.searching = false;
         this.updateDisplayedSports();
       });
-      this.presentLoading();
-      // this.nosport=true;
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
-  /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports();
     refresher.complete();
-  }
-
-  /*display an loading pop up*/
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-
-      this.loading.present();
-    }
-  }
-
-  /*Cancel loading pop up*/
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
-    }
   }
 
   public onSearchInput() {
     this.searching = true;
   }
 
-  /*Load sports to display*/
   public loadSports() {
     this.searching = true;
-    this.sportsList && this.sportsList.closeSlidingItems();
+    if (this.sportsList) {
+      this.sportsList.closeSlidingItems();
+    }
     this.campus = this.user.campus;
-    // Check the connexion, if it's ok, load them else return to previous page and display an alert
     if (this.connService.isOnline()) {
-      // get sports for all students
       this.sportsService.getSports(this.segment).then(result => {
         this.sports = result.sports;
         this.shownSports = result.shownSports;
         this.filters = result.categories;
-        this.searching = false;
         this.nosport = this.sports.length === 0;
-        this.updateDisplayedSports();
       });
       this.sportsService.getTeams(this.segment).then(result => {
         this.teams = result.teams;
         this.shownTeams = result.shownTeams;
         this.filtersT = result.categoriesT;
-        this.searching = false;
         this.noteams = this.teams.length === 0;
-        this.updateDisplayedSports();
       });
+      this.searching = false;
+      this.updateDisplayedSports();
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -164,7 +137,6 @@ export class SportsPage {
     }
   }
 
-  /*Sort sports BY DAY*/
   public changeArray(array) {
     const groups = array.reduce(function (obj, item) {
       obj[item.jour] = obj[item.jour] || [];
@@ -177,32 +149,17 @@ export class SportsPage {
     return sportsD;
   }
 
-  /*Display or close the group of sports for one day*/
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  /*Check if the list is shown or not*/
-  isGroupShown(group) {
-    return this.shownGroup === group;
-  }
-
-  /*Display the good list of sports according to the tab*/
   public updateDisplayedSports() {
     this.searching = true;
-    this.sportsList && this.sportsList.closeSlidingItems();
+    if (this.sportsList) {
+      this.sportsList.closeSlidingItems();
+    }
 
     if (this.segment === 'all') {
-      // List of sports for all students
       this.filterDisplayedSports(this.sports);
     } else if (this.segment === 'favorites') {
-      // list of sports put in favorite
       const favSports = [];
-      this.sports.filter(item => {
+      this.sports.forEach(item => {
         if (item.favorite || this.user.hasFavoriteS(item.guid)) {
           if (
             item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
@@ -213,14 +170,12 @@ export class SportsPage {
       });
       this.displayedSports = favSports;
     } else if (this.segment === 'team') {
-      // List of sports for university teams
       this.filterDisplayedSports(this.teams);
     }
-
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
   private filterDisplayedSports(items: Array<SportItem>) {
@@ -234,7 +189,6 @@ export class SportsPage {
     });
   }
 
-  /*Display a modal to select as filter only the sports that the user want to see*/
   presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
@@ -252,7 +206,6 @@ export class SportsPage {
       cat = this.filtersT;
       exclude = this.excludedFiltersT;
     }
-    // Create a modal in which the filter will be by the SportsFilterPage
     const modal = this.modalCtrl.create('SportsFilterPage', {
       excludedFilters: exclude,
       filters: cat,
@@ -260,7 +213,6 @@ export class SportsPage {
     });
     modal.present();
 
-    // Applied changing of date range when dismiss the modal
     modal.onWillDismiss((data: any[]) => {
       if (data) {
         const tmpRange = data.pop();
@@ -276,7 +228,6 @@ export class SportsPage {
     });
   }
 
-  /*Update the dateLimit when that is changed by the filter*/
   private updateDateLimit() {
     const today = new Date();
     this.dateLimit = new Date(
@@ -286,7 +237,6 @@ export class SportsPage {
     );
   }
 
-  /*Add a sport to calendar of the smartphone*/
   addToCalendar(slidingItem: ItemSliding, itemData: SportItem) {
     const options: any = {
       firstReminderMinutes: 30
@@ -311,11 +261,8 @@ export class SportsPage {
       });
   }
 
-  /*Add a sport to favorite, each slot for the day selected*/
   addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
     if (this.user.hasFavoriteS(itemData.guid)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
       let message: string;
       this.translateService
         .get('SPORTS.MESSAGEFAV')
@@ -324,7 +271,6 @@ export class SportsPage {
         });
       this.removeFavorite(slidingItem, itemData, message);
     } else {
-      // remember this session as a user favorite
       this.user.addFavoriteS(itemData.guid);
       let message: string;
       this.translateService.get('SPORTS.FAVADD').subscribe((res: string) => {
@@ -340,7 +286,6 @@ export class SportsPage {
     }
   }
 
-  /*Remove a sport of the favorites*/
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
     let message: string;
     let delet: string;
@@ -361,25 +306,19 @@ export class SportsPage {
         {
           text: cancel,
           handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
             slidingItem.close();
           }
         },
         {
           text: delet,
           handler: () => {
-            // they want to remove this session from their favorites
             this.user.removeFavoriteS(itemData.guid);
             this.updateDisplayedSports();
-
-            // close the sliding item and hide the option buttons
             slidingItem.close();
           }
         }
       ]
     });
-    // now present the alert on top of all other content
     alert.present();
   }
 }

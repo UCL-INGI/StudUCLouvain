@@ -46,7 +46,6 @@
 </ion-header>
 
 <!--BODY-->
-<!--class="feed-list" -->
 <ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
@@ -55,12 +54,12 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)" text-center class="all"
+    <ion-item-divider *ngIf="item.name.length > 0" (tap)="utilsService.toggleGroup(item.jour)" text-center class="all"
       [ngClass]="{'team' : segment == 'team'}">
       {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
     </ion-item-divider>
 
-    <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
+    <ion-list *ngFor="let sport of item.name" [hidden]="!utilsService.isGroupShown(item.jour)">
 
       <ion-item-sliding #slidingItem [hidden]="sport.hidden">
         <ion-item text-center class="all" [ngClass]="{'team' : segment == 'team'}">

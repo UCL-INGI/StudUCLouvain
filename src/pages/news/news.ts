@@ -18,12 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, Content, IonicPage, List, LoadingController, NavController, NavParams,
-    Platform
+    AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform
 } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
@@ -36,6 +34,7 @@ import { NewsService } from '../../providers/rss-services/news-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { FacService } from '../../providers/utils-services/fac-service';
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -55,9 +54,9 @@ export class NewsPage {
     public connService: ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
     public facService: FacService,
-    private cache: CacheService
+    private cache: CacheService,
+    private utilsService: UtilsService
   ) {
     if (this.navParams.get('title') !== undefined) {
       this.title = this.navParams.get('title');
@@ -82,7 +81,6 @@ export class NewsPage {
   searchTerm = '';
   title = 'Actualités';
   nonews: any = false;
-  loading;
   fac = '';
   listFac: any = [];
   site = '';
@@ -95,49 +93,19 @@ export class NewsPage {
     }
   }
 
-  /*load the view, Call function to load news, display them*/
   ionViewDidLoad() {
     this.app.setTitle(this.title);
-    // Check the connexion, if it's ok, load the news
-    // if(this.connService.isOnline()) {
     this.cachedOrNot();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
       this.searching = false;
       this.updateDisplayedNews();
     });
-    // this.presentLoading();
-    // }
-    // If no connexion, go back to the previous page and pop an alert
-    /*else{
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }*/
   }
 
-  /*Display an loading pop up*/
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-      this.loading.present();
-    }
-  }
-
-  /*Cancel the loading pop up*/
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
-    }
-  }
-
-  /*Open a page with the details of a news*/
   public openURL(url: string) {
     this.iab.create(url, '_system', 'location=yes');
   }
 
-  /*Select the good fac for the selection of the user and load the good news*/
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
@@ -148,7 +116,6 @@ export class NewsPage {
     this.loadNews();
   }
 
-  /*If there is a site for a fac, return the good site*/
   findSite() {
     for (const sector of this.listFac) {
       for (const facs of sector.facs) {
@@ -159,13 +126,11 @@ export class NewsPage {
     }
   }
 
-  /*Remove a fac for a user*/
   removeFac(fac: string) {
     this.userS.removeFac(fac);
     this.resize();
   }
 
-  /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
       if (
@@ -192,7 +157,6 @@ export class NewsPage {
 
   facTabChange() { }
 
-  /*Tab change*/
   tabChanged() {
     this.resize();
     if (this.segment === 'univ') {
@@ -204,13 +168,11 @@ export class NewsPage {
         const links = this.findSite();
         this.site = links.site;
         this.rss = links.rss;
-
         this.loadNews();
       }
     }
   }
 
-  /*Check if data are cached or not */
   async cachedOrNot() {
     const part = this.subsegment;
     if (this.segment === 'univ') {
@@ -219,7 +181,7 @@ export class NewsPage {
       await this.cache
         .getItem(key)
         .then(data => {
-          this.presentLoading();
+          this.utilsService.presentLoading();
           this.news = data.news;
           this.shownNews = data.shownNews;
           this.searching = false;
@@ -234,12 +196,11 @@ export class NewsPage {
     }
   }
 
-  /*Load news to display*/
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
     if (this.connService.isOnline()) {
-      this.presentLoading();
+      this.utilsService.presentLoading();
       let actu = this.subsegment;
       if (this.segment === 'fac' && this.facsegment === 'news') {
         actu = this.rss;
@@ -261,7 +222,6 @@ export class NewsPage {
     }
   }
 
-  /*Update display news*/
   public updateDisplayedNews() {
     this.searching = true;
     this.displayedNews = this.news;
@@ -273,10 +233,9 @@ export class NewsPage {
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews === 0;
     this.searching = false;
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
-  /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
     this.navCtrl.push('NewsDetailsPage', { news: news });
   }

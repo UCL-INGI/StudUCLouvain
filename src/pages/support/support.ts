@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     IonicPage, LoadingController, ModalController, NavController, NavParams, Platform
 } from 'ionic-angular';
@@ -29,6 +28,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { EmployeeItem } from '../../app/entity/employeeItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
 
 @IonicPage()
@@ -46,7 +46,6 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
 })
 export class SupportPage {
   title: any;
-  shownGroup = null;
   employees: EmployeeItem[];
   searching = false;
   lastname = '';
@@ -63,33 +62,14 @@ export class SupportPage {
     public platform: Platform,
     public repService: RepertoireService,
     public connService: ConnectivityService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
   }
 
-  /*Display loading pop up*/
-  presentLoading() {
-    if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-
-      this.loading.present();
-    }
-  }
-
-  /*Dismiss loading pop up*/
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismiss();
-      this.loading = null;
-    }
-  }
-
-  /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
-    this.presentLoading();
+    this.utilsService.presentLoading();
     const options: Array<string> = [];
     const values: Array<string> = [];
     if (this.lastname.length > 0) {
@@ -103,7 +83,6 @@ export class SupportPage {
     this.searchEmployees(options, values);
   }
 
-  /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
   searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(res => {
@@ -115,28 +94,13 @@ export class SupportPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
-    this.dismissLoading();
+    this.utilsService.dismissLoading();
   }
 
-  /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
     this.navCtrl.push('EmployeeDetailsPage', { emp: emp });
   }
 
-  /*Show or close the informations for the section selectionned*/
-  toggleGroup(group) {
-    if (this.isGroupShown(group)) {
-      this.shownGroup = null;
-    } else {
-      this.shownGroup = group;
-    }
-  }
-
-  isGroupShown(group) {
-    return this.shownGroup === group;
-  }
-
-  /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
     this.iab.create(url, '_system', 'location=yes');
   }
