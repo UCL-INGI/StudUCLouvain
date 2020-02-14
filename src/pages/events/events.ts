@@ -328,8 +328,7 @@ export class EventsPage {
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
-    const alert = this.utilsService.removeFavorite(slidingItem, itemData, title);
+    this.utilsService.removeFavorite(slidingItem, itemData, title, false);
     this.updateDisplayedEvents();
-    alert.present();
   }
 }

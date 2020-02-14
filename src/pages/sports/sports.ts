@@ -277,8 +277,7 @@ export class SportsPage {
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
-    const alert = this.utilsService.removeFavorite(slidingItem, itemData, title);
+    this.utilsService.removeFavorite(slidingItem, itemData, title, true);
     this.updateDisplayedSports();
-    alert.present();
   }
 }

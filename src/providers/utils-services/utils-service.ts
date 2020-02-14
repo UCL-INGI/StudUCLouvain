@@ -125,7 +125,7 @@ export class UtilsService {
         return text;
     }
 
-    removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
+    removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
         let message: string;
         let cancel: string;
         let delet: string;
@@ -138,7 +138,7 @@ export class UtilsService {
         this.translateService.get('EVENTS.DEL').subscribe((res: string) => {
             delet = res;
         });
-        return this.alertCtrl.create({
+        const alert = this.alertCtrl.create({
             title: title,
             message: message,
             buttons: [
@@ -149,11 +149,12 @@ export class UtilsService {
                     text: delet,
                     handler: () => {
                         slidingItem.close();
-                        this.user.removeFavorite(itemData.guid);
+                        isSport ? this.user.removeFavoriteS(itemData.guid) : this.user.removeFavorite(itemData.guid);
                     }
                 }
             ]
         });
+        alert.present();
     }
 
     hasNotFavorite(slidingItem: ItemSliding) {
