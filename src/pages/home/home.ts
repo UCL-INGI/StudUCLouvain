@@ -291,15 +291,17 @@ export class HomePage {
     return { settings, message2, fr, check2, en, save, message, check };
   }
 
+  private getEmergencyText(page: string, name: string) {
+    let text: string;
+    this.translateService.get(page + '.' + name).subscribe((res: string) => {
+      text = res;
+    });
+    return text;
+  }
+
   emergency() {
-    let close: string;
-    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {
-      close = res;
-    });
-    let urg: string;
-    this.translateService.get('HOME.URG').subscribe((res: string) => {
-      urg = res;
-    });
+    const close = this.getEmergencyText('HOME', 'CLOSE');
+    const urg = this.getEmergencyText('HOME', 'URG');
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
     const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
     for (let i = 0; i < msgs.length; i++) {
@@ -308,10 +310,7 @@ export class HomePage {
         msgs[i] = res;
       });
     }
-    let out: string;
-    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {
-      out = res;
-    });
+    const out = this.getEmergencyText('GUINDAILLE', 'HELP18');
     const alert = this.alertCtrl.create({
       title: urg,
       message:
