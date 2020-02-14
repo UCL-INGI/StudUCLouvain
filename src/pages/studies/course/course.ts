@@ -175,6 +175,45 @@ export class CoursePage {
   }
 
   showPrompt(segment: string) {
+    const options = this.getInitialOptions(segment);
+    const aucun =
+      (this.slotTP === 'no' && segment === 'TD') ||
+      (this.slotCM === 'no' && segment === 'Cours magistral');
+    const array = this.getSlots(segment);
+    for (let i = 0; i < array.length; i++) {
+      const slotChosen =
+        this.slotTP === array[i].name || this.slotCM === array[i].name;
+      options.inputs.push({
+        name: 'options',
+        value: array[i].name,
+        label:
+          this.getLabel(array, i),
+        type: 'radio',
+        checked: slotChosen
+      });
+    }
+    if (options.inputs.length > 1) {
+      options.inputs.push({
+        name: 'options',
+        value: 'no',
+        label: 'Toutes',
+        type: 'radio',
+        checked: aucun
+      });
+    }
+    const prompt = this.alertCtrl.create(options);
+    if (options.inputs.length > 1) { prompt.present(); }
+  }
+
+  private getLabel(array: Activity[], i: number) {
+    return array[i].name +
+      ' ' +
+      array[i].start.getHours() +
+      ':' +
+      array[i].start.getUTCMinutes();
+  }
+
+  private getInitialOptions(segment: string) {
     const title = this.utilsService.getText('COURSE', 'TITLE');
     const message = this.utilsService.getText('COURSE', 'MESSAGE2');
     const cancel = this.utilsService.getText('COURSE', 'CANCEL');
@@ -202,37 +241,7 @@ export class CoursePage {
         }
       ]
     };
-    const aucun =
-      (this.slotTP === 'no' && segment === 'TD') ||
-      (this.slotCM === 'no' && segment === 'Cours magistral');
-    const array = this.getSlots(segment);
-    for (let i = 0; i < array.length; i++) {
-      const slotChosen =
-        this.slotTP === array[i].name || this.slotCM === array[i].name;
-      options.inputs.push({
-        name: 'options',
-        value: array[i].name,
-        label:
-          array[i].name +
-          ' ' +
-          array[i].start.getHours() +
-          ':' +
-          array[i].start.getUTCMinutes(),
-        type: 'radio',
-        checked: slotChosen
-      });
-    }
-    if (options.inputs.length > 1) {
-      options.inputs.push({
-        name: 'options',
-        value: 'no',
-        label: 'Toutes',
-        type: 'radio',
-        checked: aucun
-      });
-    }
-    const prompt = this.alertCtrl.create(options);
-    if (options.inputs.length > 1) { prompt.present(); }
+    return options;
   }
 
   getSlots(segment: string) {

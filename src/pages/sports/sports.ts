@@ -201,18 +201,20 @@ export class SportsPage {
     if (this.segment === 'all') {
       cat = this.filters;
       exclude = this.excludedFilters;
-    }
-    if (this.segment === 'team') {
+    } else if (this.segment === 'team') {
       cat = this.filtersT;
       exclude = this.excludedFiltersT;
     }
+    this.modalFilter(exclude, cat);
+  }
+
+  private modalFilter(exclude: any, cat: any) {
     const modal = this.modalCtrl.create('SportsFilterPage', {
       excludedFilters: exclude,
       filters: cat,
       dateRange: this.dateRange
     });
     modal.present();
-
     modal.onWillDismiss((data: any[]) => {
       if (data) {
         const tmpRange = data.pop();
@@ -221,8 +223,12 @@ export class SportsPage {
           this.updateDateLimit();
         }
         const newExclude = data.pop();
-        if (this.segment === 'all') { this.excludedFilters = newExclude; }
-        if (this.segment === 'team') { this.excludedFiltersT = newExclude; }
+        if (this.segment === 'all') {
+          this.excludedFilters = newExclude;
+        }
+        if (this.segment === 'team') {
+          this.excludedFiltersT = newExclude;
+        }
         this.updateDisplayedSports();
       }
     });
