@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     AlertController, IonicPage, MenuController, ModalController, NavController, NavParams, Platform,
     ToastController
@@ -33,6 +32,7 @@ import { AdeProject } from '../../app/entity/adeProject';
 import { Course } from '../../app/entity/course';
 import { StudiesService } from '../../providers/studies-services/studies-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 import { StudentService } from '../../providers/wso2-services/student-service';
 import { Wso2Service } from '../../providers/wso2-services/wso2-service';
 
@@ -75,7 +75,8 @@ export class StudiesPage {
     public connService: ConnectivityService,
     private translateService: TranslateService,
     private wso2Service: Wso2Service,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
 
@@ -104,10 +105,7 @@ export class StudiesPage {
   }
 
   toastBadCourse() {
-    let msg: string;
-    this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {
-      msg = res;
-    });
+    const msg = this.utilsService.getText('STUDY', 'BADCOURSE');
     const toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
@@ -121,13 +119,9 @@ export class StudiesPage {
     return new Promise(resolve => {
       this.wso2Service.login(this.username, this.password).catch(error => {
         if (error.status === 400) {
-          this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {
-            this.error = res;
-          });
+          this.error = this.utilsService.getText('STUDY', 'BADLOG');
         } else {
-          this.translateService.get('STUDY.ERROR').subscribe((res: string) => {
-            this.error = res;
-          });
+          this.error = this.utilsService.getText('STUDY', 'ERROR');
         }
         return error;
       })
@@ -205,26 +199,11 @@ export class StudiesPage {
   }
 
   showPrompt() {
-    let addcourse: string;
-    let message: string;
-    let sigle: string;
-    let cancel: string;
-    let save: string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {
-      addcourse = res;
-    });
-    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {
-      sigle = res;
-    });
-    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {
-      cancel = res;
-    });
-    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {
-      save = res;
-    });
+    const addcourse = this.utilsService.getText('STUDY', 'ADDCOURSE');
+    const message = this.utilsService.getText('STUDY', 'MESSAGE');
+    const sigle = this.utilsService.getText('STUDY', 'SIGLE');
+    const cancel = this.utilsService.getText('STUDY', 'CANCEL');
+    const save = this.utilsService.getText('STUDY', 'SAVE');
     const prompt = this.alertCtrl.create({
       title: addcourse,
       message: message,
@@ -272,10 +251,7 @@ export class StudiesPage {
   }
 
   toastAlreadyCourse() {
-    let msg: string;
-    this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {
-      msg = res;
-    });
+    const msg = this.utilsService.getText('STUDY', 'ALCOURSE');
     const toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,

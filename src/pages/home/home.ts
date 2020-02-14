@@ -27,7 +27,6 @@ import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { TranslateService } from '@ngx-translate/core';
 
 import { MyApp } from '../../app/app.component';
 import { UserService } from '../../providers/utils-services/user-service';
@@ -153,7 +152,6 @@ export class HomePage {
     public nav: NavController,
     private iab: InAppBrowser,
     private alertCtrl: AlertController,
-    private translateService: TranslateService,
     public market: Market,
     public loadingCtrl: LoadingController,
     public studentService: StudentService,
@@ -195,137 +193,25 @@ export class HomePage {
     this.iab.create(url, '_system');
   }
 
-  languageChanged(event: string) {
-    this.userS.storage.set('lan', event);
-    this.translateService.use(event);
-  }
-
-  settings() {
-    const { settings, message2, fr, check2, en, save, message, check }: {
-      settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
-    } = this.getSettingsData();
-    const languageAlert = this.createLanguageAlert(settings, message2, fr, check2, en, save);
-    const settingsAlert = this.getSettingsAlert(settings, message, check, save, languageAlert);
-    settingsAlert.present();
-  }
-
-  private getSettingsAlert(settings: any, message: any, check: string, save: any, languageAlert) {
-    return this.alertCtrl.create({
-      title: settings,
-      message: message,
-      inputs: this.getSettingsInputs(check),
-      buttons: [
-        {
-          text: save,
-          handler: data => {
-            this.userS.addCampus(data);
-            languageAlert.present();
-          }
-        }
-      ]
-    });
-  }
-
-  private getSettingsInputs(check: string) {
-    return [
-      {
-        type: 'radio',
-        label: 'Louvain-la-Neuve',
-        value: 'LLN',
-        checked: check === 'LLN'
-      },
-      {
-        type: 'radio',
-        label: 'Woluwe',
-        value: 'Woluwe',
-        checked: check === 'Woluwe'
-      },
-      {
-        type: 'radio',
-        label: 'Mons',
-        value: 'Mons',
-        checked: check === 'Mons'
-      }
-    ];
-  }
-
-  private createLanguageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
-    return this.alertCtrl.create({
-      title: settings,
-      message: message2,
-      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
-      buttons: [
-        {
-          text: save,
-          handler: data => this.languageChanged(data)
-        }
-      ]
-    });
-  }
-
-  private getSettingsData() {
-    const check = this.userS.campus;
-    const check2 = this.translateService.currentLang;
-    let settings, message, save, message2, fr, en: string;
-    this.translateService.get('HOME.SETTINGS').subscribe((res: string) => {
-      settings = res;
-    });
-    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
-      message2 = res;
-    });
-    this.translateService.get('HOME.FR').subscribe((res: string) => {
-      fr = res;
-    });
-    this.translateService.get('HOME.EN').subscribe((res: string) => {
-      en = res;
-    });
-    return { settings, message2, fr, check2, en, save, message, check };
-  }
-
-  private getEmergencyText(page: string, name: string) {
-    let text: string;
-    this.translateService.get(page + '.' + name).subscribe((res: string) => {
-      text = res;
-    });
-    return text;
-  }
-
   emergency() {
-    const close = this.getEmergencyText('HOME', 'CLOSE');
-    const urg = this.getEmergencyText('HOME', 'URG');
-    let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
-    const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
-    for (let i = 0; i < msgs.length; i++) {
-      const real_index = i + i;
-      this.translateService.get('GUINDAILLE.HELP' + real_index).subscribe((res: string) => {
-        msgs[i] = res;
-      });
-    }
-    const out = this.getEmergencyText('GUINDAILLE', 'HELP18');
+    const close = this.utilsService.getText('HOME', 'CLOSE');
+    const urg = this.utilsService.getText('HOME', 'URG');
     const alert = this.alertCtrl.create({
       title: urg,
       message:
-        this.getAlertEmergencyMsg(msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9),
+        this.getAlertEmergencyMsg(),
       cssClass: 'emergency',
       buttons: [
         {
-          text: close,
-          handler: data => { }
+          text: close
         }
       ]
     });
     alert.present();
   }
 
-  private getAlertEmergencyMsg(
-    msg1: any, msg2: any, out: string, msg3: any, msg4: any, msg5: any, msg6: any, msg7: any, msg8: any, msg9: string
-  ): string {
+  private getAlertEmergencyMsg(): string {
+    const { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 } = this.getAlertEmergencyTexts();
     return '<p> <strong>' +
       msg1 +
       '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
@@ -347,5 +233,19 @@ export class HomePage {
       '</strong> ' +
       msg9 +
       '<br>';
+  }
+
+  private getAlertEmergencyTexts() {
+    const msg1 = this.utilsService.getText('GUINDAILLE', 'HELP1');
+    const msg2 = this.utilsService.getText('GUINDAILLE', 'HELP2');
+    const msg3 = this.utilsService.getText('GUINDAILLE', 'HELP3');
+    const msg4 = this.utilsService.getText('GUINDAILLE', 'HELP4');
+    const msg5 = this.utilsService.getText('GUINDAILLE', 'HELP5');
+    const msg6 = this.utilsService.getText('GUINDAILLE', 'HELP6');
+    const msg7 = this.utilsService.getText('GUINDAILLE', 'HELP7');
+    const msg8 = this.utilsService.getText('GUINDAILLE', 'HELP8');
+    const msg9 = this.utilsService.getText('GUINDAILLE', 'HELP9');
+    const out = this.utilsService.getText('GUINDAILLE', 'HELP18');
+    return { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 };
   }
 }
