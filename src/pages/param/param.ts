@@ -71,7 +71,12 @@ export class ParamPage {
     this.translateService.get('HOME.SAVE').subscribe((res: string) => {
       save = res;
     });
-    const settingsAlert = this.alertCtrl.create({
+    const settingsAlert = this.getSettingsAlert(setting, message, check, save);
+    settingsAlert.present();
+  }
+
+  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
+    return this.alertCtrl.create({
       title: setting,
       message: message,
       inputs: [
@@ -115,7 +120,6 @@ export class ParamPage {
         }
       ]
     });
-    settingsAlert.present();
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/

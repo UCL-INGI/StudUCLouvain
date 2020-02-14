@@ -204,33 +204,13 @@ export class HomePage {
     const { settings, message2, fr, check2, en, save, message, check }: {
       settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
     } = this.getSettingsData();
-    const languageAlert = this.alertCtrl.create({
-      title: settings,
-      message: message2,
-      inputs: [
-        {
-          type: 'radio',
-          label: fr,
-          value: 'fr',
-          checked: check2 === 'fr'
-        },
-        {
-          type: 'radio',
-          label: en,
-          value: 'en',
-          checked: check2 === 'en'
-        }
-      ],
-      buttons: [
-        {
-          text: save,
-          handler: data => {
-            this.languageChanged(data);
-          }
-        }
-      ]
-    });
-    const settingsAlert = this.alertCtrl.create({
+    const languageAlert = this.createLanguageAlert(settings, message2, fr, check2, en, save);
+    const settingsAlert = this.getSettingsAlert(settings, message, check, save, languageAlert);
+    settingsAlert.present();
+  }
+
+  private getSettingsAlert(settings: any, message: any, check: string, save: any, languageAlert) {
+    return this.alertCtrl.create({
       title: settings,
       message: message,
       inputs: [
@@ -263,7 +243,35 @@ export class HomePage {
         }
       ]
     });
-    settingsAlert.present();
+  }
+
+  private createLanguageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
+    return this.alertCtrl.create({
+      title: settings,
+      message: message2,
+      inputs: [
+        {
+          type: 'radio',
+          label: fr,
+          value: 'fr',
+          checked: check2 === 'fr'
+        },
+        {
+          type: 'radio',
+          label: en,
+          value: 'en',
+          checked: check2 === 'en'
+        }
+      ],
+      buttons: [
+        {
+          text: save,
+          handler: data => {
+            this.languageChanged(data);
+          }
+        }
+      ]
+    });
   }
 
   private getSettingsData() {
