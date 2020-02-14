@@ -110,29 +110,6 @@ export class UtilsService {
         ];
     }
 
-    getSettingsInputs(check: string) {
-        return [
-            {
-                type: 'radio',
-                label: 'Louvain-la-Neuve',
-                value: 'LLN',
-                checked: check === 'LLN'
-            },
-            {
-                type: 'radio',
-                label: 'Woluwe',
-                value: 'Woluwe',
-                checked: check === 'Woluwe'
-            },
-            {
-                type: 'radio',
-                label: 'Mons',
-                value: 'Mons',
-                checked: check === 'Mons'
-            }
-        ];
-    }
-
     getText(page: string, name: string) {
         let text: string;
         this.translateService.get(page + '.' + name).subscribe((res: string) => {

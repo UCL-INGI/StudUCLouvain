@@ -195,79 +195,13 @@ export class HomePage {
     this.iab.create(url, '_system');
   }
 
-  languageChanged(event: string) {
-    this.userS.storage.set('lan', event);
-    this.translateService.use(event);
-  }
-
-  settings() {
-    const { settings, message2, fr, currentLang, en, save, message, campus }: {
-      settings: any; message2: any; fr: any; currentLang: string; en: string; save: any; message: any; campus: string;
-    } = this.getSettingsData();
-    const languageAlert = this.createLanguageAlert(settings, message2, fr, currentLang, en, save);
-    const settingsAlert = this.getSettingsAlert(settings, message, campus, save, languageAlert);
-    settingsAlert.present();
-  }
-
-  private getSettingsAlert(settings: any, message: any, check: string, save: any, languageAlert) {
-    return this.alertCtrl.create({
-      title: settings,
-      message: message,
-      inputs: this.utilsService.getSettingsInputs(check),
-      buttons: [
-        {
-          text: save,
-          handler: data => {
-            this.userS.addCampus(data);
-            languageAlert.present();
-          }
-        }
-      ]
-    });
-  }
-
-  private createLanguageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
-    return this.alertCtrl.create({
-      title: settings,
-      message: message2,
-      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
-      buttons: [
-        {
-          text: save,
-          handler: data => this.languageChanged(data)
-        }
-      ]
-    });
-  }
-
-  private getSettingsData() {
-    const campus = this.userS.campus;
-    const currentLang = this.translateService.currentLang;
-    const settings = this.utilsService.getText('HOME', 'SETTINGS');
-    const message = this.utilsService.getText('HOME', 'MESSAGE');
-    const save = this.utilsService.getText('HOME', 'SAVE');
-    const message2 = this.utilsService.getText('HOME', 'MESSAGE2');
-    const fr = this.utilsService.getText('HOME', 'FR');
-    const en = this.utilsService.getText('HOME', 'EN');
-    return { settings, message2, fr, currentLang, en, save, message, campus };
-  }
-
   emergency() {
     const close = this.utilsService.getText('HOME', 'CLOSE');
     const urg = this.utilsService.getText('HOME', 'URG');
-    let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
-    const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
-    for (let i = 0; i < msgs.length; i++) {
-      const real_index = i + i;
-      this.translateService.get('GUINDAILLE.HELP' + real_index).subscribe((res: string) => {
-        msgs[i] = res;
-      });
-    }
-    const out = this.utilsService.getText('GUINDAILLE', 'HELP18');
     const alert = this.alertCtrl.create({
       title: urg,
       message:
-        this.getAlertEmergencyMsg(msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9),
+        this.getAlertEmergencyMsg(),
       cssClass: 'emergency',
       buttons: [
         {
@@ -279,9 +213,8 @@ export class HomePage {
     alert.present();
   }
 
-  private getAlertEmergencyMsg(
-    msg1: any, msg2: any, out: string, msg3: any, msg4: any, msg5: any, msg6: any, msg7: any, msg8: any, msg9: string
-  ): string {
+  private getAlertEmergencyMsg(): string {
+    const { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 } = this.getAlertEmergencyTexts();
     return '<p> <strong>' +
       msg1 +
       '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
@@ -303,5 +236,19 @@ export class HomePage {
       '</strong> ' +
       msg9 +
       '<br>';
+  }
+
+  private getAlertEmergencyTexts() {
+    const msg1 = this.utilsService.getText('GUINDAILLE', 'HELP1');
+    const msg2 = this.utilsService.getText('GUINDAILLE', 'HELP2');
+    const msg3 = this.utilsService.getText('GUINDAILLE', 'HELP3');
+    const msg4 = this.utilsService.getText('GUINDAILLE', 'HELP4');
+    const msg5 = this.utilsService.getText('GUINDAILLE', 'HELP5');
+    const msg6 = this.utilsService.getText('GUINDAILLE', 'HELP6');
+    const msg7 = this.utilsService.getText('GUINDAILLE', 'HELP7');
+    const msg8 = this.utilsService.getText('GUINDAILLE', 'HELP8');
+    const msg9 = this.utilsService.getText('GUINDAILLE', 'HELP9');
+    const out = this.utilsService.getText('GUINDAILLE', 'HELP18');
+    return { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 };
   }
 }
