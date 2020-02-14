@@ -130,7 +130,6 @@ export class MyApp {
       httpUrl: null
     };
 
-    this.campusPages = [];
     const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
     const campusComp = ['News', 'Events', 'Sports'];
     const campusIcon = ['news', 'event', 'sport'];
