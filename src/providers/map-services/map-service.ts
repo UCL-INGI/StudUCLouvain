@@ -59,25 +59,17 @@ export class MapService {
     private geolocation: Geolocation
   ) {
     this.onDevice = this.platform.is('cordova');
-
     this.apiKey = jsApiKey;
-
     const leftMenu = menuCtrl.get('left');
     if (leftMenu) {
-      leftMenu.ionOpen.subscribe(() => {
-        this.disableMap();
-      });
-      leftMenu.ionClose.subscribe(() => {
-        this.enableMap();
-      });
+      leftMenu.ionOpen.subscribe(() => this.disableMap());
+      leftMenu.ionClose.subscribe(() => this.enableMap());
     }
   }
 
-  /*Initializes the map for the device or the browser*/
   init(mapElement: any, pleaseConnect: any): Promise<any> {
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
-
     if (this.onDevice) {
       return this.loadDeviceGoogleMaps();
     } else {
@@ -85,7 +77,6 @@ export class MapService {
     }
   }
 
-  /*Load the map for the browser and check the connectivity, if no connexion display a message to ask to connect*/
   private loadBrowserGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
@@ -93,11 +84,9 @@ export class MapService {
         if (this.connectivityService.isOnline()) {
           window['mapInit'] = () => {
             this.initBrowserMap().then(
-              (init) => {
-                resolve(init);
-              }, error => {
-                reject(error);
-              });
+              init => resolve(init),
+              error => reject(error)
+            );
             this.hidePleaseConnect();
           };
           const script = document.createElement('script');
@@ -109,101 +98,90 @@ export class MapService {
           }
           document.body.appendChild(script);
         }
-      } else {
-        if (this.connectivityService.isOnline()) {
-          this.initBrowserMap().then(
-            (init) => {
-              resolve(init);
-            }, error => {
-              reject(error);
-            });
-          this.hidePleaseConnect();
-        } else {
-          this.showPleaseConnect();
-        }
-      }
-      this.addConnectivityListeners();
-    });
-  }
-
-  /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
-  private initBrowserMap(): Promise<any> {
-    this.mapInitialised = true;
-    return new Promise((resolve, reject) => {
-      this.geolocation.getCurrentPosition().then(
-        (position) => {
-          this.userLocation = new MapLocation('Ma Position',
-            'Mon adresse',
-            String(position.coords.latitude),
-            String(position.coords.longitude),
-            'MYPOS');
-          const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          const mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          this.map = new google.maps.Map(this.mapElement, mapOptions);
-          resolve(true);
-        }, (error) => {
-          console.log('Map error loadDeviceGoogleMaps : ' + error);
-          reject(false);
-        });
-
-    });
-  }
-
-  /*Load the map for the device and check the connectivity, if no connexion display a message to ask to connect*/
-  private loadDeviceGoogleMaps(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (this.connectivityService.isOnline()) {
-        this.initDeviceMap().then(
+      } else if (this.connectivityService.isOnline()) {
+        this.initBrowserMap().then(
           (init) => {
-            resolve(true);
-          }, () => {
-            reject(false);
+            resolve(init);
+          }, error => {
+            reject(error);
           });
         this.hidePleaseConnect();
       } else {
         this.showPleaseConnect();
       }
-
       this.addConnectivityListeners();
     });
   }
 
-  /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
+  private initBrowserMap(): Promise<any> {
+    this.mapInitialised = true;
+    return new Promise((resolve, reject) => {
+      this.geolocation.getCurrentPosition().then((position) => {
+        this.userLocation = new MapLocation('Ma Position',
+          'Mon adresse',
+          String(position.coords.latitude),
+          String(position.coords.longitude),
+          'MYPOS');
+        const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        const mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement, mapOptions);
+        resolve(true);
+      }, (error) => {
+        console.log('Map error loadDeviceGoogleMaps : ' + error);
+        reject(false);
+      });
+    });
+  }
+
+  private loadDeviceGoogleMaps(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (this.connectivityService.isOnline()) {
+        this.initDeviceMap().then(
+          () => resolve(true),
+          () => reject(false)
+        );
+        this.hidePleaseConnect();
+      } else {
+        this.showPleaseConnect();
+      }
+      this.addConnectivityListeners();
+    });
+  }
+
   private async initDeviceMap(): Promise<any> {
     if (await this.connectivityService.isLocationEnabled()) {
       console.log('Geolocation enabled');
       return new Promise((resolve, reject) => {
-        LocationService.getMyLocation().then(
-          (position) => {
-            this.userLocation = new MapLocation('Ma Position',
-              '',
-              String(position.latLng.lat),
-              String(position.latLng.lng),
-              'MYPOS');
-            const latLng = position.latLng;
-            const mapOptions = {
-              center: latLng,
-              zoom: 15,
-              mapTypeId: GoogleMapsMapTypeId.ROADMAP
-            };
-            const camPos: CameraPosition<LatLng> = {
-              target: latLng,
-              zoom: 15
-            };
-            this.map = GoogleMaps.create(this.mapElement, mapOptions);
-            this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-              console.log('Map is ready!');
-              this.map.moveCamera(camPos);
-              resolve(true);
-            });
-          }, (error) => {
-            console.log('Map error initDeviceMap : ' + error);
-            reject(false);
+        LocationService.getMyLocation().then((position) => {
+          this.userLocation = new MapLocation('Ma Position',
+            '',
+            String(position.latLng.lat),
+            String(position.latLng.lng),
+            'MYPOS');
+          const latLng = position.latLng;
+          const mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: GoogleMapsMapTypeId.ROADMAP
+          };
+          const camPos: CameraPosition<LatLng> = {
+            target: latLng,
+            zoom: 15
+          };
+          this.map = GoogleMaps.create(this.mapElement, mapOptions);
+          this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+            console.log('Map is ready!');
+            this.map.moveCamera(camPos);
+            resolve(true);
           });
+        }, (error) => {
+          console.log('Map error initDeviceMap : ' + error);
+          reject(false);
+        });
       });
     } else {
       return new Promise((resolve) => {
@@ -213,7 +191,6 @@ export class MapService {
         if (campus === 'LLN') { latLng = new LatLng(50.66808100000001, 4.611832400000026); }
         if (campus === 'Woluwe') { latLng = new LatLng(50.8489094, 4.432088300000032); }
         if (campus === 'Mons') { latLng = new LatLng(50.45424080000001, 3.956658999999945); }
-
         this.userLocation = new MapLocation('Campus Position',
           '',
           String(latLng.lat),
@@ -239,7 +216,6 @@ export class MapService {
     }
   }
 
-  /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
     const marker = this.getMarker(location.title);
     if (!marker) {
@@ -255,14 +231,11 @@ export class MapService {
       } else {
         this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
       }
-    } else {
-      if (this.onDevice) {
-        marker.showInfoWindow();
-      }
+    } else if (this.onDevice) {
+      marker.showInfoWindow();
     }
   }
 
-  /*Remove a marker for a location unselected*/
   removeMarker(location: MapLocation) {
     let m;
     if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
@@ -279,7 +252,6 @@ export class MapService {
     }
   }
 
-  /*Add Marker in the map for the browser*/
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
     const latLng = new google.maps.LatLng(lat, lng);
     const marker = new google.maps.Marker({
@@ -291,6 +263,7 @@ export class MapService {
     this.markersB.push(marker);
     this.addBrowserInfoWindow(marker, title + '\n' + content);
   }
+
   private addBrowserInfoWindow(marker, content) {
     const infoWindow = new google.maps.InfoWindow({
       content: content
@@ -301,7 +274,6 @@ export class MapService {
     infoWindow.open(this.map, marker);
   }
 
-  /*Add Marker in the map for the device*/
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
     const latLng = new LatLng(lat, lng);
     const markerOptions: MarkerOptions = {
@@ -309,12 +281,11 @@ export class MapService {
       title: title,
       snippet: address
     };
-    this.map.addMarker(markerOptions).then(
-      (marker: Marker) => {
-        marker.showInfoWindow();
-        this.markers.push(marker);
-        this.setCenteredMarkerOnDevice(title, lat, lng);
-      });
+    this.map.addMarker(markerOptions).then((marker: Marker) => {
+      marker.showInfoWindow();
+      this.markers.push(marker);
+      this.setCenteredMarkerOnDevice(title, lat, lng);
+    });
   }
 
   private getMarker(title: string): Marker {
@@ -359,21 +330,18 @@ export class MapService {
     }
   }
 
-  /*Disable Map*/
   disableMap() {
     if (this.map && this.onDevice) {
       this.map.setClickable(false);
     }
   }
 
-  /*Enable Map*/
   enableMap() {
     if (this.map && this.onDevice) {
       this.map.setClickable(true);
     }
   }
 
-  /*If no connexion disable the map and display message*/
   private showPleaseConnect() {
     if (this.pleaseConnect) {
       this.pleaseConnect.style.display = 'block';
@@ -381,7 +349,6 @@ export class MapService {
     }
   }
 
-  /*Enable map and undisplay message*/
   private hidePleaseConnect() {
     if (this.pleaseConnect) {
       this.pleaseConnect.style.display = 'none';
@@ -389,50 +356,34 @@ export class MapService {
     }
   }
 
-  /*Connectivity listener to check if the connexion persists*/
   private addConnectivityListeners() {
-    document.addEventListener('online',
-      () => {
-        setTimeout(
-          () => {
-            if (this.onDevice) {
-              if (!this.mapInitialised) {
-                this.initDeviceMap();
-              }
-              this.hidePleaseConnect();
-            } else {
-              if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-                this.loadBrowserGoogleMaps();
-              } else {
-                if (!this.mapInitialised) {
-                  this.initBrowserMap();
-                }
-
-                this.hidePleaseConnect();
-              }
-            }
-          }, 2000);
-      }, false);
-    document.addEventListener('offline',
-      () => {
-        this.showPleaseConnect();
-      }, false);
+    document.addEventListener('online', () => {
+      setTimeout(() => {
+        if (this.onDevice) {
+          if (!this.mapInitialised) {
+            this.initDeviceMap();
+          }
+        } else if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+          this.loadBrowserGoogleMaps();
+        } else if (!this.mapInitialised) {
+          this.initBrowserMap();
+        }
+        this.hidePleaseConnect();
+      }, 2000);
+    }, false);
+    document.addEventListener('offline', () => this.showPleaseConnect(), false);
   }
 
-  /*Return the location of the user*/
   getUserLocation(): MapLocation {
     return this.userLocation;
   }
-
 
   clearMarkers() {
     if (this.onDevice) {
       this.map.clear();
     } else {
       this.markersB.map(
-        marker => {
-          marker.setMap(null);
-        }
+        marker => marker.setMap(null)
       );
     }
   }
