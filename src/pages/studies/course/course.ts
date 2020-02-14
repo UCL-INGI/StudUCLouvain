@@ -228,20 +228,22 @@ export class CoursePage {
         },
         {
           text: apply,
-          handler: data => {
-            if (segment === 'Cours magistral') {
-              this.slotCM = data;
-              this.userS.addSlotCM(this.course.acronym, this.slotCM);
-            } else if (segment === 'TD') {
-              this.slotTP = data;
-              this.userS.addSlotTP(this.course.acronym, this.slotTP);
-            }
-            this.updateDisplayed();
-          }
+          handler: data => this.getHandler(segment, data)
         }
       ]
     };
     return options;
+  }
+
+  private getHandler(segment: string, data: any) {
+    if (segment === 'Cours magistral') {
+      this.slotCM = data;
+      this.userS.addSlotCM(this.course.acronym, this.slotCM);
+    } else if (segment === 'TD') {
+      this.slotTP = data;
+      this.userS.addSlotTP(this.course.acronym, this.slotTP);
+    }
+    this.updateDisplayed();
   }
 
   getSlots(segment: string) {
