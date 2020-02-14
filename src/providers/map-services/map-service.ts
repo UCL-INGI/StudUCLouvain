@@ -160,16 +160,7 @@ export class MapService {
     return new Promise((resolve) => {
       console.log('Geolocation disabled');
       const campus = this.userS.campus;
-      let latLng: LatLng;
-      if (campus === 'LLN') {
-        latLng = new LatLng(50.66808100000001, 4.611832400000026);
-      }
-      if (campus === 'Woluwe') {
-        latLng = new LatLng(50.8489094, 4.432088300000032);
-      }
-      if (campus === 'Mons') {
-        latLng = new LatLng(50.45424080000001, 3.956658999999945);
-      }
+      const latLng: LatLng = this.getCampusLocalisation(campus);
       this.userLocation = new MapLocation('Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS');
       const mapOptions = {
         center: latLng,
@@ -188,6 +179,20 @@ export class MapService {
         resolve();
       });
     });
+  }
+
+  private getCampusLocalisation(campus: string) {
+    let latLng: LatLng;
+    if (campus === 'LLN') {
+      latLng = new LatLng(50.66808100000001, 4.611832400000026);
+    }
+    if (campus === 'Woluwe') {
+      latLng = new LatLng(50.8489094, 4.432088300000032);
+    }
+    if (campus === 'Mons') {
+      latLng = new LatLng(50.45424080000001, 3.956658999999945);
+    }
+    return latLng;
   }
 
   private initGeolocatedDevice(): any {

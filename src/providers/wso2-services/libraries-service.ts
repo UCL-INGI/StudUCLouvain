@@ -99,21 +99,9 @@ export class LibrariesService {
   }
 
   private getContactDatas(data: any, lib: LibraryItem) {
-    if (data.phone == null) {
-      lib.phone = '';
-    } else {
-      lib.phone = data.phone.substr(3);
-    }
-    if (data.email == null) {
-      lib.email = false;
-    } else {
-      lib.email = data.email;
-    }
-    if (data.website == null) {
-      lib.website = '';
-    } else {
-      lib.website = data.website;
-    }
+    lib.phone = data.phone ? data.phone.substr(3) : '';
+    lib.email = data.email ? data.email : false;
+    lib.website = data.website ? data.website : '';
   }
 
   private getOpeningHours(data: any, lib: LibraryItem) {
