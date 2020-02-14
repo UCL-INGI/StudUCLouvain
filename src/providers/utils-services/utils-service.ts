@@ -18,7 +18,9 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { Loading, LoadingController } from 'ionic-angular';
+import {
+    AlertController, ItemSliding, Loading, LoadingController, ToastController
+} from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -26,6 +28,8 @@ import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
+
+import { UserService } from './user-service';
 
 @Injectable()
 export class UtilsService {
@@ -39,6 +43,9 @@ export class UtilsService {
         private iab: InAppBrowser,
         private market: Market,
         private translateService: TranslateService,
+        public alertCtrl: AlertController,
+        public user: UserService,
+        public toastCtrl: ToastController,
     ) { }
 
     presentLoading() {
@@ -116,5 +123,53 @@ export class UtilsService {
             text = res;
         });
         return text;
+    }
+
+    removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
+        const page = isSport ? 'SPORTS' : 'EVENTS';
+        const number = isSport ? 2 : 3;
+        const message = this.getText(page, 'MESSAGEFAV' + number);
+        const cancel = this.getText(page, 'CANCEL');
+        const delet = this.getText(page, 'DEL');
+        const alert = this.alertCtrl.create({
+            title: title,
+            message: message,
+            buttons: [
+                {
+                    text: cancel
+                },
+                {
+                    text: delet,
+                    handler: () => {
+                        slidingItem.close();
+                        isSport ? this.user.removeFavoriteS(itemData.guid) : this.user.removeFavorite(itemData.guid);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    favoriteAdded(slidingItem: ItemSliding, page: string) {
+        const key = page === 'EVENTS' ? 'MESSAGEFAV2' : 'FAVADD';
+        const message = this.getText(page, key);
+        const toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
+    }
+
+    addFavorite(slidingItem: ItemSliding, itemData: any, page: string) {
+        const isSport = page === 'SPORTS';
+        const hasFav = isSport ? this.user.hasFavoriteS(itemData.guid) : this.user.hasFavorite(itemData.guid);
+        if (hasFav) {
+            const message = this.getText(page, 'MESSAGEFAV');
+            this.removeFavorite(slidingItem, itemData, message, isSport);
+        } else {
+            isSport ? this.user.addFavoriteS(itemData.guid) : this.user.addFavorite(itemData.guid);
+            this.favoriteAdded(slidingItem, page);
+        }
     }
 }

@@ -261,64 +261,8 @@ export class SportsPage {
       });
   }
 
-  addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
-    if (this.user.hasFavoriteS(itemData.guid)) {
-      let message: string;
-      this.translateService
-        .get('SPORTS.MESSAGEFAV')
-        .subscribe((res: string) => {
-          message = res;
-        });
-      this.removeFavorite(slidingItem, itemData, message);
-    } else {
-      this.user.addFavoriteS(itemData.guid);
-      let message: string;
-      this.translateService.get('SPORTS.FAVADD').subscribe((res: string) => {
-        message = res;
-      });
-
-      const toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      });
-      toast.present();
-      slidingItem.close();
-    }
-  }
-
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
-    let message: string;
-    let delet: string;
-    let cancel: string;
-    this.translateService.get('SPORTS.MESSAGEFAV2').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('SPORTS.CANCEL').subscribe((res: string) => {
-      cancel = res;
-    });
-    this.translateService.get('SPORTS.DEL').subscribe((res: string) => {
-      delet = res;
-    });
-    const alert = this.alertCtrl.create({
-      title: title,
-      message: message,
-      buttons: [
-        {
-          text: cancel,
-          handler: () => {
-            slidingItem.close();
-          }
-        },
-        {
-          text: delet,
-          handler: () => {
-            this.user.removeFavoriteS(itemData.guid);
-            this.updateDisplayedSports();
-            slidingItem.close();
-          }
-        }
-      ]
-    });
-    alert.present();
+    this.utilsService.removeFavorite(slidingItem, itemData, title, true);
+    this.updateDisplayedSports();
   }
 }
