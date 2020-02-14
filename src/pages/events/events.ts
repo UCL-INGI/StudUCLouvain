@@ -314,16 +314,11 @@ export class EventsPage {
 
   addFavorite(slidingItem: ItemSliding, itemData: any) {
     if (this.user.hasFavorite(itemData.guid)) {
-      let message: string;
-      this.translateService
-        .get('EVENTS.MESSAGEFAV')
-        .subscribe((res: string) => {
-          message = res;
-        });
+      const message = this.utilsService.getText('EVENTS', 'MESSAGEFAV');
       this.removeFavorite(slidingItem, itemData, message);
     } else {
       this.user.addFavorite(itemData.guid);
-      this.utilsService.hasNotFavorite(slidingItem);
+      this.utilsService.favoriteAdded(slidingItem, 'EVENTS');
     }
   }
 

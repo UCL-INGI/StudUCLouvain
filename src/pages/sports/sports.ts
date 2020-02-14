@@ -263,16 +263,11 @@ export class SportsPage {
 
   addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
     if (this.user.hasFavoriteS(itemData.guid)) {
-      let message: string;
-      this.translateService
-        .get('SPORTS.MESSAGEFAV')
-        .subscribe((res: string) => {
-          message = res;
-        });
+      const message = this.utilsService.getText('SPORTS', 'MESSAGEFAV');
       this.removeFavorite(slidingItem, itemData, message);
     } else {
       this.user.addFavoriteS(itemData.guid);
-      this.utilsService.hasNotFavorite(slidingItem);
+      this.utilsService.favoriteAdded(slidingItem, 'SPORTS');
     }
   }
 

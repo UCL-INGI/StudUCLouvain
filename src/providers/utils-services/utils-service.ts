@@ -126,18 +126,11 @@ export class UtilsService {
     }
 
     removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
-        let message: string;
-        let cancel: string;
-        let delet: string;
-        this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res: string) => {
-            message = res;
-        });
-        this.translateService.get('EVENTS.CANCEL').subscribe((res: string) => {
-            cancel = res;
-        });
-        this.translateService.get('EVENTS.DEL').subscribe((res: string) => {
-            delet = res;
-        });
+        const page = isSport ? 'SPORTS' : 'EVENTS';
+        const number = isSport ? 2 : 3;
+        const message = this.getText(page, 'MESSAGEFAV' + number);
+        const cancel = this.getText(page, 'CANCEL');
+        const delet = this.getText(page, 'DEL');
         const alert = this.alertCtrl.create({
             title: title,
             message: message,
@@ -157,13 +150,9 @@ export class UtilsService {
         alert.present();
     }
 
-    hasNotFavorite(slidingItem: ItemSliding) {
-        let message: string;
-        this.translateService
-            .get('EVENTS.MESSAGEFAV2')
-            .subscribe((res: string) => {
-                message = res;
-            });
+    favoriteAdded(slidingItem: ItemSliding, page: string) {
+        const key = page === 'EVENTS' ? 'MESSAGEFAV2' : 'FAVADD';
+        const message = this.getText(page, key);
         const toast = this.toastCtrl.create({
             message: message,
             duration: 3000
