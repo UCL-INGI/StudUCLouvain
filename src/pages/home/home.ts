@@ -213,26 +213,7 @@ export class HomePage {
     return this.alertCtrl.create({
       title: settings,
       message: message,
-      inputs: [
-        {
-          type: 'radio',
-          label: 'Louvain-la-Neuve',
-          value: 'LLN',
-          checked: check === 'LLN'
-        },
-        {
-          type: 'radio',
-          label: 'Woluwe',
-          value: 'Woluwe',
-          checked: check === 'Woluwe'
-        },
-        {
-          type: 'radio',
-          label: 'Mons',
-          value: 'Mons',
-          checked: check === 'Mons'
-        }
-      ],
+      inputs: this.getSettingsInputs(check),
       buttons: [
         {
           text: save,
@@ -243,6 +224,29 @@ export class HomePage {
         }
       ]
     });
+  }
+
+  private getSettingsInputs(check: string) {
+    return [
+      {
+        type: 'radio',
+        label: 'Louvain-la-Neuve',
+        value: 'LLN',
+        checked: check === 'LLN'
+      },
+      {
+        type: 'radio',
+        label: 'Woluwe',
+        value: 'Woluwe',
+        checked: check === 'Woluwe'
+      },
+      {
+        type: 'radio',
+        label: 'Mons',
+        value: 'Mons',
+        checked: check === 'Mons'
+      }
+    ];
   }
 
   private createLanguageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
@@ -266,9 +270,7 @@ export class HomePage {
       buttons: [
         {
           text: save,
-          handler: data => {
-            this.languageChanged(data);
-          }
+          handler: data => this.languageChanged(data)
         }
       ]
     });

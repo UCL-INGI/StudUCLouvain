@@ -79,38 +79,7 @@ export class ParamPage {
     return this.alertCtrl.create({
       title: setting,
       message: message,
-      inputs: [
-        {
-          type: 'radio',
-          label: 'Louvain-la-Neuve',
-          value: 'LLN',
-          checked: check === 'LLN'
-        },
-        {
-          type: 'radio',
-          label: 'Woluwé',
-          value: 'Woluwe',
-          checked: check === 'Woluwe'
-        },
-        {
-          type: 'radio',
-          label: 'Mons',
-          value: 'Mons',
-          checked: check === 'Mons'
-        },
-        {
-          type: 'radio',
-          label: 'Tournai',
-          value: 'Tournai',
-          disabled: true
-        },
-        {
-          type: 'radio',
-          label: 'St-Gilles',
-          value: 'StG',
-          disabled: true
-        }
-      ],
+      inputs: this.getSettingsInputs(check),
       buttons: [
         {
           text: save,
@@ -120,6 +89,41 @@ export class ParamPage {
         }
       ]
     });
+  }
+
+  private getSettingsInputs(check: string) {
+    return [
+      {
+        type: 'radio',
+        label: 'Louvain-la-Neuve',
+        value: 'LLN',
+        checked: check === 'LLN'
+      },
+      {
+        type: 'radio',
+        label: 'Woluwé',
+        value: 'Woluwe',
+        checked: check === 'Woluwe'
+      },
+      {
+        type: 'radio',
+        label: 'Mons',
+        value: 'Mons',
+        checked: check === 'Mons'
+      },
+      {
+        type: 'radio',
+        label: 'Tournai',
+        value: 'Tournai',
+        disabled: true
+      },
+      {
+        type: 'radio',
+        label: 'St-Gilles',
+        value: 'StG',
+        disabled: true
+      }
+    ];
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
