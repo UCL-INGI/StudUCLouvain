@@ -201,7 +201,7 @@ export class HomePage {
   }
 
   settings() {
-    let { settings, message2, fr, check2, en, save, message, check }: {
+    const { settings, message2, fr, check2, en, save, message, check }: {
       settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
     } = this.getSettingsData();
     const languageAlert = this.alertCtrl.create({
@@ -301,33 +301,13 @@ export class HomePage {
       urg = res;
     });
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
-    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {
-      msg1 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {
-      msg2 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {
-      msg3 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {
-      msg4 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {
-      msg5 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {
-      msg6 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {
-      msg7 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {
-      msg8 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {
-      msg9 = res;
-    });
+    const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
+    for (let i = 0; i < msgs.length; i++) {
+      const real_index = i + i;
+      this.translateService.get('GUINDAILLE.HELP' + real_index).subscribe((res: string) => {
+        msgs[i] = res;
+      });
+    }
     let out: string;
     this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {
       out = res;
