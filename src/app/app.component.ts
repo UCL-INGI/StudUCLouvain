@@ -149,16 +149,21 @@ export class MyApp {
   getPagesSection(titles: Array<string>, components: Array<string>, icons: Array<string>) {
     const pages = [];
     for (let i = 0; i < titles.length; i++) {
-      const needExtApp = titles[i] === 'RESTAURANT';
       const page = {
         title: 'MENU.' + titles[i],
         component: components[i] + 'PAGE',
         icon: './assets/img/' + icons[i] + '.png',
-        iosSchemaName: needExtApp ? 'id1156050719' : null,
-        androidPackageName: needExtApp ? 'com.apptree.resto4u' : null,
-        appUrl: needExtApp ? 'apptreeresto4u://' : null,
-        httpUrl: needExtApp ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
+        iosSchemaName: null,
+        androidPackageName: null,
+        appUrl: null,
+        httpUrl: null
       };
+      if (titles[i] === 'RESTAURANT') {
+        page.iosSchemaName = 'id1156050719';
+        page.androidPackageName = 'com.apptree.resto4u';
+        page.appUrl = 'apptreeresto4u://';
+        page.httpUrl = 'https://uclouvain.be/fr/decouvrir/resto-u';
+      }
       pages.push(page);
     }
     return pages;
