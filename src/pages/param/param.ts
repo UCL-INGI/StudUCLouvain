@@ -92,26 +92,19 @@ export class ParamPage {
     });
   }
 
+  private getCampusChoiceInput(label: string, value: string, check: string) {
+    return {
+      type: 'radio',
+      label: label,
+      value: value,
+      checked: check === value
+    };
+  }
   private getSettingsInputs(check: string) {
     return [
-      {
-        type: 'radio',
-        label: 'Louvain-la-Neuve',
-        value: 'LLN',
-        checked: check === 'LLN'
-      },
-      {
-        type: 'radio',
-        label: 'Woluwé',
-        value: 'Woluwe',
-        checked: check === 'Woluwe'
-      },
-      {
-        type: 'radio',
-        label: 'Mons',
-        value: 'Mons',
-        checked: check === 'Mons'
-      },
+      this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
+      this.getCampusChoiceInput('Woluwé', 'Woluwe', check),
+      this.getCampusChoiceInput('Mons', 'Mons', check),
       {
         type: 'radio',
         label: 'Tournai',
