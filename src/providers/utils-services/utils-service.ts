@@ -90,4 +90,21 @@ export class UtilsService {
             }
         );
     }
+
+    getLanguageAlertInputs(fr, en, check2) {
+        return [
+            {
+                type: 'radio',
+                label: fr,
+                value: 'fr',
+                checked: check2 === 'fr'
+            },
+            {
+                type: 'radio',
+                label: en,
+                value: 'en',
+                checked: check2 === 'en'
+            }
+        ];
+    }
 }

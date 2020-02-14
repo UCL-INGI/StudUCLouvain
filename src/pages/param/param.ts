@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     AlertController, IonicPage, ModalController, NavController, NavParams
 } from 'ionic-angular';
@@ -28,6 +27,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -53,7 +53,8 @@ export class ParamPage {
     public modalCtrl: ModalController,
     public userS: UserService,
     private alertCtrl: AlertController,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
   }
@@ -71,41 +72,15 @@ export class ParamPage {
     this.translateService.get('HOME.SAVE').subscribe((res: string) => {
       save = res;
     });
-    const settingsAlert = this.alertCtrl.create({
+    const settingsAlert = this.getSettingsAlert(setting, message, check, save);
+    settingsAlert.present();
+  }
+
+  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
+    return this.alertCtrl.create({
       title: setting,
       message: message,
-      inputs: [
-        {
-          type: 'radio',
-          label: 'Louvain-la-Neuve',
-          value: 'LLN',
-          checked: check === 'LLN'
-        },
-        {
-          type: 'radio',
-          label: 'Woluwé',
-          value: 'Woluwe',
-          checked: check === 'Woluwe'
-        },
-        {
-          type: 'radio',
-          label: 'Mons',
-          value: 'Mons',
-          checked: check === 'Mons'
-        },
-        {
-          type: 'radio',
-          label: 'Tournai',
-          value: 'Tournai',
-          disabled: true
-        },
-        {
-          type: 'radio',
-          label: 'St-Gilles',
-          value: 'StG',
-          disabled: true
-        }
-      ],
+      inputs: this.getSettingsInputs(check),
       buttons: [
         {
           text: save,
@@ -115,7 +90,34 @@ export class ParamPage {
         }
       ]
     });
-    settingsAlert.present();
+  }
+
+  private getCampusChoiceInput(label: string, value: string, check: string) {
+    return {
+      type: 'radio',
+      label: label,
+      value: value,
+      checked: check === value
+    };
+  }
+  private getSettingsInputs(check: string) {
+    return [
+      this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
+      this.getCampusChoiceInput('Woluwé', 'Woluwe', check),
+      this.getCampusChoiceInput('Mons', 'Mons', check),
+      {
+        type: 'radio',
+        label: 'Tournai',
+        value: 'Tournai',
+        disabled: true
+      },
+      {
+        type: 'radio',
+        label: 'St-Gilles',
+        value: 'StG',
+        disabled: true
+      }
+    ];
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
@@ -140,20 +142,7 @@ export class ParamPage {
     const languageAlert = this.alertCtrl.create({
       title: setting2,
       message: message2,
-      inputs: [
-        {
-          type: 'radio',
-          label: fr,
-          value: 'fr',
-          checked: check2 === 'fr'
-        },
-        {
-          type: 'radio',
-          label: en,
-          value: 'en',
-          checked: check2 === 'en'
-        }
-      ],
+      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
       buttons: [
         {
           text: save,
