@@ -100,11 +100,9 @@ export class MapService {
         }
       } else if (this.connectivityService.isOnline()) {
         this.initBrowserMap().then(
-          (init) => {
-            resolve(init);
-          }, error => {
-            reject(error);
-          });
+          init => resolve(init),
+          error => reject(error)
+        );
         this.hidePleaseConnect();
       } else {
         this.showPleaseConnect();
