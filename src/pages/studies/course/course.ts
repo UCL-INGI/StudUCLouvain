@@ -25,7 +25,6 @@ import {
 
 import { Component } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Activity } from '../../../app/entity/activity';
 import { Course } from '../../../app/entity/course';
@@ -63,7 +62,6 @@ export class CoursePage {
     public userS: UserService,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private translateService: TranslateService,
     public navParams: NavParams,
     private utilsService: UtilsService
   ) {

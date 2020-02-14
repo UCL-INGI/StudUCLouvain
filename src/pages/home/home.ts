@@ -27,7 +27,6 @@ import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { TranslateService } from '@ngx-translate/core';
 
 import { MyApp } from '../../app/app.component';
 import { UserService } from '../../providers/utils-services/user-service';
@@ -153,7 +152,6 @@ export class HomePage {
     public nav: NavController,
     private iab: InAppBrowser,
     private alertCtrl: AlertController,
-    private translateService: TranslateService,
     public market: Market,
     public loadingCtrl: LoadingController,
     public studentService: StudentService,
@@ -205,8 +203,7 @@ export class HomePage {
       cssClass: 'emergency',
       buttons: [
         {
-          text: close,
-          handler: data => { }
+          text: close
         }
       ]
     });
