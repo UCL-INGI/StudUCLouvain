@@ -243,26 +243,18 @@ export class HomePage {
   private getSettingsData() {
     const campus = this.userS.campus;
     const currentLang = this.translateService.currentLang;
-    const settings = this.getText('HOME', 'SETTINGS');
-    const message = this.getText('HOME', 'MESSAGE');
-    const save = this.getText('HOME', 'SAVE');
-    const message2 = this.getText('HOME', 'MESSAGE2');
-    const fr = this.getText('HOME', 'FR');
-    const en = this.getText('HOME', 'EN');
+    const settings = this.utilsService.getText('HOME', 'SETTINGS');
+    const message = this.utilsService.getText('HOME', 'MESSAGE');
+    const save = this.utilsService.getText('HOME', 'SAVE');
+    const message2 = this.utilsService.getText('HOME', 'MESSAGE2');
+    const fr = this.utilsService.getText('HOME', 'FR');
+    const en = this.utilsService.getText('HOME', 'EN');
     return { settings, message2, fr, currentLang, en, save, message, campus };
   }
 
-  private getText(page: string, name: string) {
-    let text: string;
-    this.translateService.get(page + '.' + name).subscribe((res: string) => {
-      text = res;
-    });
-    return text;
-  }
-
   emergency() {
-    const close = this.getText('HOME', 'CLOSE');
-    const urg = this.getText('HOME', 'URG');
+    const close = this.utilsService.getText('HOME', 'CLOSE');
+    const urg = this.utilsService.getText('HOME', 'URG');
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
     const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
     for (let i = 0; i < msgs.length; i++) {
@@ -271,7 +263,7 @@ export class HomePage {
         msgs[i] = res;
       });
     }
-    const out = this.getText('GUINDAILLE', 'HELP18');
+    const out = this.utilsService.getText('GUINDAILLE', 'HELP18');
     const alert = this.alertCtrl.create({
       title: urg,
       message:

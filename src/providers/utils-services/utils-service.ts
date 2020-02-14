@@ -25,6 +25,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class UtilsService {
@@ -36,7 +37,8 @@ export class UtilsService {
         private device: Device,
         private appAvailability: AppAvailability,
         private iab: InAppBrowser,
-        private market: Market
+        private market: Market,
+        private translateService: TranslateService,
     ) { }
 
     presentLoading() {
@@ -129,5 +131,13 @@ export class UtilsService {
                 checked: check === 'Mons'
             }
         ];
+    }
+
+    getText(page: string, name: string) {
+        let text: string;
+        this.translateService.get(page + '.' + name).subscribe((res: string) => {
+            text = res;
+        });
+        return text;
     }
 }

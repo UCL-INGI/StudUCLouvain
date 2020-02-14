@@ -107,10 +107,7 @@ export class CoursePage {
     const options: any = {
       firstReminderMinutes: 15
     };
-    let message: string;
-    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
+    const message = this.utilsService.getText('COURSE', 'MESSAGE');
     this.calendar
       .createEventWithOptions(
         this.course.name + ' : ' + activity.type,
@@ -132,16 +129,10 @@ export class CoursePage {
   }
 
   alert(all: boolean = false) {
-    let title: string;
-    let message: string;
     const prefix = all ? 'COURSE' : 'STUDY';
     const msg_number = all ? '3' : '4';
-    this.translateService.get(prefix + '.WARNING').subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get(prefix + '.MESSAGE' + msg_number).subscribe((res: string) => {
-      message = res;
-    });
+    const title = this.utilsService.getText(prefix, 'WARNING');
+    const message = this.utilsService.getText(prefix, 'MESSAGE' + msg_number);
     const disclaimerAlert = this.alertCtrl.create({
       title: title,
       message: message,
@@ -186,30 +177,17 @@ export class CoursePage {
   }
 
   showPrompt(segment: string) {
-    let title: string;
-    let message: string;
-    let cancel: string;
-    let apply: string;
-    this.translateService.get('COURSE.TITLE').subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {
-      cancel = res;
-    });
-    this.translateService.get('COURSE.APPLY').subscribe((res: string) => {
-      apply = res;
-    });
+    const title = this.utilsService.getText('COURSE', 'TITLE');
+    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
+    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
+    const apply = this.utilsService.getText('COURSE', 'APPLY');
     const options = {
       title: title,
       message: message,
       inputs: [],
       buttons: [
         {
-          text: cancel,
-          handler: data => { }
+          text: cancel
         },
         {
           text: apply,
@@ -217,8 +195,7 @@ export class CoursePage {
             if (segment === 'Cours magistral') {
               this.slotCM = data;
               this.userS.addSlotCM(this.course.acronym, this.slotCM);
-            }
-            if (segment === 'TD') {
+            } else if (segment === 'TD') {
               this.slotTP = data;
               this.userS.addSlotTP(this.course.acronym, this.slotTP);
             }
@@ -268,17 +245,14 @@ export class CoursePage {
         (acti.type === 'TP' && segment === 'TD') ||
         (segment === 'Examen' && acti.isExam)
     );
-    // retrieve name of each slot
     let slots = act
       .map(item => item.name)
-      .filter((value, index, self) => self.indexOf(value) === index); // keep only different
-    // delete some session (like seance aide etude)
+      .filter((value, index, self) => self.indexOf(value) === index);
     if (segment === 'TD') { slots = slots.filter(acti => acti.indexOf('_') !== -1); }
     if (segment === 'Cours magistral') {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
     const newAct: Activity[] = [];
-    // retrieve one activity of each slot
     for (let i = 0; i < slots.length; i++) {
       const activity: Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
@@ -300,10 +274,7 @@ export class CoursePage {
         options
       );
     }
-    let message: string;
-    this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {
-      message = res;
-    });
+    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
 
     const toast = this.toastCtrl.create({
       message: message,
