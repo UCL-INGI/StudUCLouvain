@@ -161,9 +161,9 @@ export class UtilsService {
         slidingItem.close();
     }
 
-    addFavorite(slidingItem: ItemSliding, itemData: any, isSport: boolean) {
+    addFavorite(slidingItem: ItemSliding, itemData: any, page: string) {
+        const isSport = page === 'SPORTS';
         const hasFav = isSport ? this.user.hasFavoriteS(itemData.guid) : this.user.hasFavorite(itemData.guid);
-        const page = isSport ? 'SPORTS' : 'EVENTS';
         if (hasFav) {
             const message = this.getText(page, 'MESSAGEFAV');
             this.removeFavorite(slidingItem, itemData, message, isSport);
