@@ -152,7 +152,7 @@ export class GuindaillePage {
   private getSlides() {
     const ttls = [this.ttl1, this.ttl2, this.ttl3, this.ttl4, this.ttl5, this.ttl6];
     const efcts = [this.efct1, this.efct2, this.efct3, this.efct4, this.efct5, this.efct6];
-    for (let i = 1; i < ttls.length + 1; i++) {
+    for (let i = 0; i < ttls.length; i++) {
       this.getSlide(i, ttls[i], efcts[i]);
     }
   }
@@ -177,7 +177,7 @@ export class GuindaillePage {
     const items = [
       this.alterner, this.bruit, this.eau, this.ou, this.cans, this.preservatif, this.racompagner, this.uriner, this.dehors, this.violence
     ];
-    for (let i = 1; i < titles.length + 1; i++) {
+    for (let i = 0; i < titles.length; i++) {
       this.getPictogram(i, titles[i], pics[i], items[i]);
     }
   }
