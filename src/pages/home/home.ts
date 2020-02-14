@@ -253,20 +253,7 @@ export class HomePage {
     return this.alertCtrl.create({
       title: settings,
       message: message2,
-      inputs: [
-        {
-          type: 'radio',
-          label: fr,
-          value: 'fr',
-          checked: check2 === 'fr'
-        },
-        {
-          type: 'radio',
-          label: en,
-          value: 'en',
-          checked: check2 === 'en'
-        }
-      ],
+      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
       buttons: [
         {
           text: save,

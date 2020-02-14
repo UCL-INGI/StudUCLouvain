@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import {
     AlertController, IonicPage, ModalController, NavController, NavParams
 } from 'ionic-angular';
@@ -28,6 +27,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -53,7 +53,8 @@ export class ParamPage {
     public modalCtrl: ModalController,
     public userS: UserService,
     private alertCtrl: AlertController,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
   }
@@ -148,20 +149,7 @@ export class ParamPage {
     const languageAlert = this.alertCtrl.create({
       title: setting2,
       message: message2,
-      inputs: [
-        {
-          type: 'radio',
-          label: fr,
-          value: 'fr',
-          checked: check2 === 'fr'
-        },
-        {
-          type: 'radio',
-          label: en,
-          value: 'en',
-          checked: check2 === 'en'
-        }
-      ],
+      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
       buttons: [
         {
           text: save,
