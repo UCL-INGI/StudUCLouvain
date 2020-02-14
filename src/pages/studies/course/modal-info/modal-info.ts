@@ -50,57 +50,60 @@ export class ModalInfoPage {
   }
 
   getInfo(): Promise<any> {
-    let response: any;
     return new Promise(resolve => {
-      this.studentService
-        .checkCourse(this.course.acronym, this.year)
-        .then((res: any) => {
-          if (res === 400) {
-            this.closeModal();
-            resolve(400);
-          } else {
-            let cahier = '';
-            const campus = res.campus.name;
-            const teacher = res.fichesIntervenants;
-            const offres = res.fichesOffres;
-            const langue = res.language;
-            const loca = res.campus.name;
-            const credit = res.credits;
-            const entite = res.allocation_entity;
-            const progpre = res.programmesEtPrerequis;
-            const quadri = res.quadrimester_text;
-            // const resume = res.resumeCoursMap.entry[1].value;
-            const resume = res.resumeCoursMap;
-            const volume = { vol1: '', vol2: '', vol1Coef: '', vol2Coef: '' };
-            for (const vol of res.components) {
-              if (vol.type === 'LECTURING') {
-                volume.vol1 = vol.hourly_volume_total_annual;
-              } else if (vol.type === 'PRACTICAL_EXERCISES') {
-                volume.vol2 = vol.hourly_volume_total_annual;
-              }
-            }
-            if (res.cahierChargesExiste) {
-              cahier = res.cahierChargesMap.entry[1].value;
-            }
-
-            response = {
-              cahierCharges: cahier,
-              offre: offres,
-              campus: campus,
-              entite: entite,
-              prof: teacher,
-              localisation: loca,
-              credit: credit,
-              programmeprerequis: progpre,
-              quadri: quadri,
-              resume: resume,
-              volume: volume,
-              langue: langue
-            };
-            resolve(response);
-          }
-        });
+      this.studentService.checkCourse(this.course.acronym, this.year).then((res: any) => {
+        if (res === 400) {
+          this.closeModal();
+          resolve(400);
+        } else {
+          const {
+            cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue
+          } = this.assignInfosData(res);
+          const response = {
+            cahierCharges: cahier,
+            offre: offres,
+            campus: campus,
+            entite: entite,
+            prof: teacher,
+            localisation: loca,
+            credit: credit,
+            programmeprerequis: progpre,
+            quadri: quadri,
+            resume: resume,
+            volume: volume,
+            langue: langue
+          };
+          resolve(response);
+        }
+      });
     });
+  }
+
+  private assignInfosData(res: any) {
+    let cahier = '';
+    const campus = res.campus.name;
+    const teacher = res.fichesIntervenants;
+    const offres = res.fichesOffres;
+    const langue = res.language;
+    const loca = res.campus.name;
+    const credit = res.credits;
+    const entite = res.allocation_entity;
+    const progpre = res.programmesEtPrerequis;
+    const quadri = res.quadrimester_text;
+    // const resume = res.resumeCoursMap.entry[1].value;
+    const resume = res.resumeCoursMap;
+    const volume = { vol1: '', vol2: '', vol1Coef: '', vol2Coef: '' };
+    for (const vol of res.components) {
+      if (vol.type === 'LECTURING') {
+        volume.vol1 = vol.hourly_volume_total_annual;
+      } else if (vol.type === 'PRACTICAL_EXERCISES') {
+        volume.vol2 = vol.hourly_volume_total_annual;
+      }
+    }
+    if (res.cahierChargesExiste) {
+      cahier = res.cahierChargesMap.entry[1].value;
+    }
+    return { cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue };
   }
 
   closeModal() {

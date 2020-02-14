@@ -26,7 +26,6 @@ import {
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
 
 import { AdeProject } from '../../app/entity/adeProject';
 import { Course } from '../../app/entity/course';
@@ -73,7 +72,6 @@ export class StudiesPage {
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
-    private translateService: TranslateService,
     private wso2Service: Wso2Service,
     private studentService: StudentService,
     private utilsService: UtilsService
@@ -221,22 +219,26 @@ export class StudiesPage {
         {
           text: save,
           cssClass: 'save',
-          handler: data => {
-            const acro = data.acronym.toUpperCase();
-            let already = false;
-            for (const item of this.listCourses) {
-              if (item.acronym === acro) { already = true; }
-            }
-            if (!already) {
-              this.checkExistAndAddOrToast(acro);
-            } else {
-              this.toastAlreadyCourse();
-            }
-          }
+          handler: data => this.promptSaveHandler(data)
         }
       ]
     });
     prompt.present();
+  }
+
+  private promptSaveHandler(data: any) {
+    const acro = data.acronym.toUpperCase();
+    let already = false;
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) {
+        already = true;
+      }
+    }
+    if (!already) {
+      this.checkExistAndAddOrToast(acro);
+    } else {
+      this.toastAlreadyCourse();
+    }
   }
 
   private checkExistAndAddOrToast(acro: any) {

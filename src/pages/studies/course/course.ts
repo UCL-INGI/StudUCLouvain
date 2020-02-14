@@ -175,33 +175,7 @@ export class CoursePage {
   }
 
   showPrompt(segment: string) {
-    const title = this.utilsService.getText('COURSE', 'TITLE');
-    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
-    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
-    const apply = this.utilsService.getText('COURSE', 'APPLY');
-    const options = {
-      title: title,
-      message: message,
-      inputs: [],
-      buttons: [
-        {
-          text: cancel
-        },
-        {
-          text: apply,
-          handler: data => {
-            if (segment === 'Cours magistral') {
-              this.slotCM = data;
-              this.userS.addSlotCM(this.course.acronym, this.slotCM);
-            } else if (segment === 'TD') {
-              this.slotTP = data;
-              this.userS.addSlotTP(this.course.acronym, this.slotTP);
-            }
-            this.updateDisplayed();
-          }
-        }
-      ]
-    };
+    const options = this.getInitialOptions(segment);
     const aucun =
       (this.slotTP === 'no' && segment === 'TD') ||
       (this.slotCM === 'no' && segment === 'Cours magistral');
@@ -213,11 +187,7 @@ export class CoursePage {
         name: 'options',
         value: array[i].name,
         label:
-          array[i].name +
-          ' ' +
-          array[i].start.getHours() +
-          ':' +
-          array[i].start.getUTCMinutes(),
+          this.getLabel(array, i),
         type: 'radio',
         checked: slotChosen
       });
@@ -233,6 +203,47 @@ export class CoursePage {
     }
     const prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) { prompt.present(); }
+  }
+
+  private getLabel(array: Activity[], i: number) {
+    return array[i].name +
+      ' ' +
+      array[i].start.getHours() +
+      ':' +
+      array[i].start.getUTCMinutes();
+  }
+
+  private getInitialOptions(segment: string) {
+    const title = this.utilsService.getText('COURSE', 'TITLE');
+    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
+    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
+    const apply = this.utilsService.getText('COURSE', 'APPLY');
+    const options = {
+      title: title,
+      message: message,
+      inputs: [],
+      buttons: [
+        {
+          text: cancel
+        },
+        {
+          text: apply,
+          handler: data => this.getHandler(segment, data)
+        }
+      ]
+    };
+    return options;
+  }
+
+  private getHandler(segment: string, data: any) {
+    if (segment === 'Cours magistral') {
+      this.slotCM = data;
+      this.userS.addSlotCM(this.course.acronym, this.slotCM);
+    } else if (segment === 'TD') {
+      this.slotTP = data;
+      this.userS.addSlotTP(this.course.acronym, this.slotTP);
+    }
+    this.updateDisplayed();
   }
 
   getSlots(segment: string) {
