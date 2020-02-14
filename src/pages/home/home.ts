@@ -201,7 +201,7 @@ export class HomePage {
   }
 
   settings() {
-    let { settings, message2, fr, check2, en, save, message, check }: {
+    const { settings, message2, fr, check2, en, save, message, check }: {
       settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
     } = this.getSettingsData();
     const languageAlert = this.alertCtrl.create({
@@ -291,71 +291,30 @@ export class HomePage {
     return { settings, message2, fr, check2, en, save, message, check };
   }
 
+  private getEmergencyText(page: string, name: string) {
+    let text: string;
+    this.translateService.get(page + '.' + name).subscribe((res: string) => {
+      text = res;
+    });
+    return text;
+  }
+
   emergency() {
-    let close: string;
-    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {
-      close = res;
-    });
-    let urg: string;
-    this.translateService.get('HOME.URG').subscribe((res: string) => {
-      urg = res;
-    });
+    const close = this.getEmergencyText('HOME', 'CLOSE');
+    const urg = this.getEmergencyText('HOME', 'URG');
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
-    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {
-      msg1 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {
-      msg2 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {
-      msg3 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {
-      msg4 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {
-      msg5 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {
-      msg6 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {
-      msg7 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {
-      msg8 = res;
-    });
-    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {
-      msg9 = res;
-    });
-    let out: string;
-    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {
-      out = res;
-    });
+    const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
+    for (let i = 0; i < msgs.length; i++) {
+      const real_index = i + i;
+      this.translateService.get('GUINDAILLE.HELP' + real_index).subscribe((res: string) => {
+        msgs[i] = res;
+      });
+    }
+    const out = this.getEmergencyText('GUINDAILLE', 'HELP18');
     const alert = this.alertCtrl.create({
       title: urg,
       message:
-        '<p> <strong>' +
-        msg1 +
-        '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
-        msg2 +
-        '</strong>: <br><font size="+1"><a href="tel:010 47 24 24">010 47 24 24</a></font> <br>ou<br> <font size="+1"><a href="tel:02 764 93 93">02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br> ou <br><font size="+1"><a href="tel:065 32 35 55">065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> <a href="mailto:security@uclouvain.be">security@uclouvain.be</a></p> <p><strong>' +
-        out +
-        ':</strong> <font size="+1"><a href="tel:112">112</a></font></p>  <p> <br>' +
-        msg3 +
-        ' <br><br> <strong>' +
-        msg4 +
-        '</strong> ' +
-        msg5 +
-        '<br> <strong>' +
-        msg6 +
-        '</strong> ' +
-        msg7 +
-        '<br> <strong>' +
-        msg8 +
-        '</strong> ' +
-        msg9 +
-        '<br>',
+        this.getAlertEmergencyMsg(msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9),
       cssClass: 'emergency',
       buttons: [
         {
@@ -365,5 +324,31 @@ export class HomePage {
       ]
     });
     alert.present();
+  }
+
+  private getAlertEmergencyMsg(
+    msg1: any, msg2: any, out: string, msg3: any, msg4: any, msg5: any, msg6: any, msg7: any, msg8: any, msg9: string
+  ): string {
+    return '<p> <strong>' +
+      msg1 +
+      '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
+      msg2 +
+      '</strong>: <br><font size="+1"><a href="tel:010 47 24 24">010 47 24 24</a></font> <br>ou<br> <font size="+1"><a href="tel:02 764 93 93">02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br> ou <br><font size="+1"><a href="tel:065 32 35 55">065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> <a href="mailto:security@uclouvain.be">security@uclouvain.be</a></p> <p><strong>' +
+      out +
+      ':</strong> <font size="+1"><a href="tel:112">112</a></font></p>  <p> <br>' +
+      msg3 +
+      ' <br><br> <strong>' +
+      msg4 +
+      '</strong> ' +
+      msg5 +
+      '<br> <strong>' +
+      msg6 +
+      '</strong> ' +
+      msg7 +
+      '<br> <strong>' +
+      msg8 +
+      '</strong> ' +
+      msg9 +
+      '<br>';
   }
 }
