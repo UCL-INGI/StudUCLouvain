@@ -261,16 +261,6 @@ export class SportsPage {
       });
   }
 
-  addFavorite(slidingItem: ItemSliding, itemData: SportItem) {
-    if (this.user.hasFavoriteS(itemData.guid)) {
-      const message = this.utilsService.getText('SPORTS', 'MESSAGEFAV');
-      this.removeFavorite(slidingItem, itemData, message);
-    } else {
-      this.user.addFavoriteS(itemData.guid);
-      this.utilsService.favoriteAdded(slidingItem, 'SPORTS');
-    }
-  }
-
   removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
     this.utilsService.removeFavorite(slidingItem, itemData, title, true);
     this.updateDisplayedSports();

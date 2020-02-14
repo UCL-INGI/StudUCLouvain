@@ -312,16 +312,6 @@ export class EventsPage {
       });
   }
 
-  addFavorite(slidingItem: ItemSliding, itemData: any) {
-    if (this.user.hasFavorite(itemData.guid)) {
-      const message = this.utilsService.getText('EVENTS', 'MESSAGEFAV');
-      this.removeFavorite(slidingItem, itemData, message);
-    } else {
-      this.user.addFavorite(itemData.guid);
-      this.utilsService.favoriteAdded(slidingItem, 'EVENTS');
-    }
-  }
-
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     this.utilsService.removeFavorite(slidingItem, itemData, title, false);
     this.updateDisplayedEvents();

@@ -76,8 +76,8 @@
           <button ion-button (tap)="addToCalendar(slidingItem, sport)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
           </button>
-          <button ion-button (tap)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all' || segment === 'team'"
-            class="large-icon">
+          <button ion-button (tap)="utilsService.addFavorite(slidingItem, sport, true)"
+            *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
           </button>
           <button ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')"

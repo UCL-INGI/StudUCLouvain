@@ -79,8 +79,8 @@
             <ion-icon name='calendar'></ion-icon>
           </button>
 
-          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'"
-            class="large-icon">
+          <button ion-button outline (tap)="utilsService.addFavorite(slidingItem, event, false)"
+            *ngIf="segment === 'all'" class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
           </button>
 

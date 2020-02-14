@@ -160,4 +160,16 @@ export class UtilsService {
         toast.present();
         slidingItem.close();
     }
+
+    addFavorite(slidingItem: ItemSliding, itemData: any, isSport: boolean) {
+        const hasFav = isSport ? this.user.hasFavoriteS(itemData.guid) : this.user.hasFavorite(itemData.guid);
+        const page = isSport ? 'SPORTS' : 'EVENTS';
+        if (hasFav) {
+            const message = this.getText(page, 'MESSAGEFAV');
+            this.removeFavorite(slidingItem, itemData, message, isSport);
+        } else {
+            isSport ? this.user.addFavoriteS(itemData.guid) : this.user.addFavorite(itemData.guid);
+            this.favoriteAdded(slidingItem, page);
+        }
+    }
 }
