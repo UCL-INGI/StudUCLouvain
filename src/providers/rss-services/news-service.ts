@@ -43,26 +43,8 @@ export class NewsService {
 
   /*Get the appropriate news in function of the tab in which the user is*/
   public getNews(segment: string) {
-    let baseURL;
+    const baseURL = this.getBaseURL(segment);
     this.news = [];
-    switch (segment) {
-      case 'P2': {
-        baseURL = this.url2;
-        break;
-      }
-      case 'P3': {
-        baseURL = this.url3;
-        break;
-      }
-      case 'P1': {
-        baseURL = this.url1;
-        break;
-      }
-      default: {
-        baseURL = segment;
-        break;
-      }
-    }
     return this.rssService.load(baseURL).then(result => {
       this.extractNews(result);
       return {
@@ -73,18 +55,33 @@ export class NewsService {
       .catch(error => {
         if (error === 1) {
           return this.getNews(segment);
+        } else if (error === 2) {
+          console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
         } else {
-          if (error === 2) {
-            console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
-          } else {
-            console.log('Error loading news : ' + error);
-          }
-          return {
-            news: [],
-            shownNews: 0
-          };
+          console.log('Error loading news : ' + error);
         }
+        return {
+          news: [],
+          shownNews: 0
+        };
       });
+  }
+
+  private getBaseURL(segment: string) {
+    switch (segment) {
+      case 'P2': {
+        return this.url2;
+      }
+      case 'P3': {
+        return this.url3;
+      }
+      case 'P1': {
+        return this.url1;
+      }
+      default: {
+        return segment;
+      }
+    }
   }
 
   /*Extract news*/

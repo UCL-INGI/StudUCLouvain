@@ -50,20 +50,14 @@ export class LibrariesPage {
     this.cachedOrNot();
   }
 
-  ionViewDidLoad() {
-    // this.loadLibraries();
-  }
-
-  /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
       this.cache.removeItem('cache-libraries');
       this.loadLibraries('cache-libraries');
-      refresher.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
     }
+    refresher.complete();
   }
 
   /*Load libraries*/
@@ -84,7 +78,6 @@ export class LibrariesPage {
     }
   }
 
-  /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
     this.navCtrl.push('LibraryDetailsPage', { lib: lib });
   }

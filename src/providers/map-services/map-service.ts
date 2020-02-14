@@ -150,47 +150,51 @@ export class MapService {
   private async initDeviceMap(): Promise<any> {
     if (await this.connectivityService.isLocationEnabled()) {
       console.log('Geolocation enabled');
-      return new Promise((resolve, reject) => {
-        LocationService.getMyLocation().then((position) => {
-          this.userLocation = new MapLocation('Ma Position',
-            '',
-            String(position.latLng.lat),
-            String(position.latLng.lng),
-            'MYPOS');
-          const latLng = position.latLng;
-          const mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: GoogleMapsMapTypeId.ROADMAP
-          };
-          const camPos: CameraPosition<LatLng> = {
-            target: latLng,
-            zoom: 15
-          };
-          this.map = GoogleMaps.create(this.mapElement, mapOptions);
-          this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-            console.log('Map is ready!');
-            this.map.moveCamera(camPos);
-            resolve(true);
-          });
-        }, (error) => {
-          console.log('Map error initDeviceMap : ' + error);
-          reject(false);
-        });
-      });
+      return this.initGeolocatedDevice();
     } else {
-      return new Promise((resolve) => {
-        console.log('Geolocation disabled');
-        const campus = this.userS.campus;
-        let latLng: LatLng;
-        if (campus === 'LLN') { latLng = new LatLng(50.66808100000001, 4.611832400000026); }
-        if (campus === 'Woluwe') { latLng = new LatLng(50.8489094, 4.432088300000032); }
-        if (campus === 'Mons') { latLng = new LatLng(50.45424080000001, 3.956658999999945); }
-        this.userLocation = new MapLocation('Campus Position',
-          '',
-          String(latLng.lat),
-          String(latLng.lng),
-          'CAMPUSPOS');
+      return this.initLostDevice();
+    }
+  }
+
+  private initLostDevice(): any {
+    return new Promise((resolve) => {
+      console.log('Geolocation disabled');
+      const campus = this.userS.campus;
+      let latLng: LatLng;
+      if (campus === 'LLN') {
+        latLng = new LatLng(50.66808100000001, 4.611832400000026);
+      }
+      if (campus === 'Woluwe') {
+        latLng = new LatLng(50.8489094, 4.432088300000032);
+      }
+      if (campus === 'Mons') {
+        latLng = new LatLng(50.45424080000001, 3.956658999999945);
+      }
+      this.userLocation = new MapLocation('Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS');
+      const mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: GoogleMapsMapTypeId.ROADMAP
+      };
+      const camPos: CameraPosition<LatLng> = {
+        target: latLng,
+        zoom: 5
+      };
+      this.map = GoogleMaps.create(this.mapElement, mapOptions);
+      console.log('Map created');
+      this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+        console.log('Map is ready!');
+        this.map.moveCamera(camPos);
+        resolve();
+      });
+    });
+  }
+
+  private initGeolocatedDevice(): any {
+    return new Promise((resolve, reject) => {
+      LocationService.getMyLocation().then((position) => {
+        this.userLocation = new MapLocation('Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS');
+        const latLng = position.latLng;
         const mapOptions = {
           center: latLng,
           zoom: 15,
@@ -198,17 +202,19 @@ export class MapService {
         };
         const camPos: CameraPosition<LatLng> = {
           target: latLng,
-          zoom: 5
+          zoom: 15
         };
         this.map = GoogleMaps.create(this.mapElement, mapOptions);
-        console.log('Map created');
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
           this.map.moveCamera(camPos);
-          resolve();
+          resolve(true);
         });
+      }, (error) => {
+        console.log('Map error initDeviceMap : ' + error);
+        reject(false);
       });
-    }
+    });
   }
 
   addMarker(location: MapLocation) {
