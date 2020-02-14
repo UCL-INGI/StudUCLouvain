@@ -134,38 +134,35 @@ export class MyApp {
     const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
     const campusComp = ['News', 'Events', 'Sports'];
     const campusIcon = ['news', 'event', 'sport'];
-    for (let i = 0; i < campusTitles.length; i++) {
-      this.campusPages.push(this.getPage(campusTitles[i], campusComp[i], campusIcon[i]));
-    }
+    this.campusPages = this.getPagesSection(campusTitles, campusComp, campusIcon);
 
-    this.studiePages = [];
     const studieTitles = ['STUDIES', 'LIBRARY', 'HELP'];
     const studieComp = ['Studies', 'Libraries', 'Support'];
     const studieIcon = ['études', 'biblio', 'support'];
-    for (let i = 0; i < studieTitles.length; i++) {
-      this.studiePages.push(this.getPage(studieTitles[i], studieComp[i], studieIcon[i]));
-    }
+    this.studiePages = this.getPagesSection(studieTitles, studieComp, studieIcon);
 
-    this.toolPages = [];
     const toolsTitles = ['PARTY', 'MAP', 'RESTAURANT', 'MOBILITY', 'PARAM', 'CREDITS'];
     const toolsComp = ['Guindaille', 'Map', 'Restaurant', 'Mobility', 'Param', 'Credit'];
     const toolsIcon = ['g2', 'cartes', 'resto', 'mobilité', 'setting', 'signature'];
-    for (let i = 0; i < toolsTitles.length; i++) {
-      this.toolPages.push(this.getPage(toolsTitles[i], toolsComp[i], toolsIcon[i]));
-    }
+    this.toolPages = this.getPagesSection(toolsTitles, toolsComp, toolsIcon);
   }
 
-  getPage(title: string, component: string, icon: string) {
-    const needExtApp = title === 'RESTAURANT';
-    return {
-      title: 'MENU.' + title,
-      component: component + 'PAGE',
-      icon: './assets/img/' + icon + '.png',
-      iosSchemaName: needExtApp ? 'id1156050719' : null,
-      androidPackageName: needExtApp ? 'com.apptree.resto4u' : null,
-      appUrl: needExtApp ? 'apptreeresto4u://' : null,
-      httpUrl: needExtApp ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
-    };
+  getPagesSection(titles: Array<string>, components: Array<string>, icons: Array<string>) {
+    const pages = [];
+    for (let i = 0; i < titles.length; i++) {
+      const needExtApp = titles[i] === 'RESTAURANT';
+      const page = {
+        title: 'MENU.' + titles[i],
+        component: components[i] + 'PAGE',
+        icon: './assets/img/' + icons[i] + '.png',
+        iosSchemaName: needExtApp ? 'id1156050719' : null,
+        androidPackageName: needExtApp ? 'com.apptree.resto4u' : null,
+        appUrl: needExtApp ? 'apptreeresto4u://' : null,
+        httpUrl: needExtApp ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
+      };
+      pages.push(page);
+    }
+    return pages;
   }
 
   initializeApp() {
