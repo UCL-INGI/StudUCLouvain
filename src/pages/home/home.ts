@@ -201,11 +201,11 @@ export class HomePage {
   }
 
   settings() {
-    const { settings, message2, fr, check2, en, save, message, check }: {
-      settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
+    const { settings, message2, fr, currentLang, en, save, message, campus }: {
+      settings: any; message2: any; fr: any; currentLang: string; en: string; save: any; message: any; campus: string;
     } = this.getSettingsData();
-    const languageAlert = this.createLanguageAlert(settings, message2, fr, check2, en, save);
-    const settingsAlert = this.getSettingsAlert(settings, message, check, save, languageAlert);
+    const languageAlert = this.createLanguageAlert(settings, message2, fr, currentLang, en, save);
+    const settingsAlert = this.getSettingsAlert(settings, message, campus, save, languageAlert);
     settingsAlert.present();
   }
 
@@ -213,7 +213,7 @@ export class HomePage {
     return this.alertCtrl.create({
       title: settings,
       message: message,
-      inputs: this.getSettingsInputs(check),
+      inputs: this.utilsService.getSettingsInputs(check),
       buttons: [
         {
           text: save,
@@ -224,29 +224,6 @@ export class HomePage {
         }
       ]
     });
-  }
-
-  private getSettingsInputs(check: string) {
-    return [
-      {
-        type: 'radio',
-        label: 'Louvain-la-Neuve',
-        value: 'LLN',
-        checked: check === 'LLN'
-      },
-      {
-        type: 'radio',
-        label: 'Woluwe',
-        value: 'Woluwe',
-        checked: check === 'Woluwe'
-      },
-      {
-        type: 'radio',
-        label: 'Mons',
-        value: 'Mons',
-        checked: check === 'Mons'
-      }
-    ];
   }
 
   private createLanguageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
@@ -264,31 +241,18 @@ export class HomePage {
   }
 
   private getSettingsData() {
-    const check = this.userS.campus;
-    const check2 = this.translateService.currentLang;
-    let settings, message, save, message2, fr, en: string;
-    this.translateService.get('HOME.SETTINGS').subscribe((res: string) => {
-      settings = res;
-    });
-    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
-      message2 = res;
-    });
-    this.translateService.get('HOME.FR').subscribe((res: string) => {
-      fr = res;
-    });
-    this.translateService.get('HOME.EN').subscribe((res: string) => {
-      en = res;
-    });
-    return { settings, message2, fr, check2, en, save, message, check };
+    const campus = this.userS.campus;
+    const currentLang = this.translateService.currentLang;
+    const settings = this.getText('HOME', 'SETTINGS');
+    const message = this.getText('HOME', 'MESSAGE');
+    const save = this.getText('HOME', 'SAVE');
+    const message2 = this.getText('HOME', 'MESSAGE2');
+    const fr = this.getText('HOME', 'FR');
+    const en = this.getText('HOME', 'EN');
+    return { settings, message2, fr, currentLang, en, save, message, campus };
   }
 
-  private getEmergencyText(page: string, name: string) {
+  private getText(page: string, name: string) {
     let text: string;
     this.translateService.get(page + '.' + name).subscribe((res: string) => {
       text = res;
@@ -297,8 +261,8 @@ export class HomePage {
   }
 
   emergency() {
-    const close = this.getEmergencyText('HOME', 'CLOSE');
-    const urg = this.getEmergencyText('HOME', 'URG');
+    const close = this.getText('HOME', 'CLOSE');
+    const urg = this.getText('HOME', 'URG');
     let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
     const msgs = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];
     for (let i = 0; i < msgs.length; i++) {
@@ -307,7 +271,7 @@ export class HomePage {
         msgs[i] = res;
       });
     }
-    const out = this.getEmergencyText('GUINDAILLE', 'HELP18');
+    const out = this.getText('GUINDAILLE', 'HELP18');
     const alert = this.alertCtrl.create({
       title: urg,
       message:
