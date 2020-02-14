@@ -45,9 +45,6 @@ export class GuindaillePage {
   shownGroup = null;
   segment = 'pict';
 
-  /*Create that to use the system of bilingual application, the objects are instantiate here
-  One object for each pictogram*/
-
   alt: string;
   altsub: string;
   alterner = { title: '', subTitle: '', buttons: ['OK'] };
@@ -88,8 +85,6 @@ export class GuindaillePage {
   viosub: string;
   violence = { title: '', subTitle: '', buttons: ['OK'] };
 
-  /*Create that to use the system of bilingual application, the objects are instantiate here
-  title and efct for each part of the effectometre*/
   ttl1: string;
   efct1: string;
   ttl2: string;
@@ -102,9 +97,6 @@ export class GuindaillePage {
   efct5: string;
   ttl6: string;
   efct6: string;
-
-  /*Create that to use the system of bilingual application, the objects are instantiate here
-  One object each part of the effectometre*/
 
   slides = [
     {
@@ -153,185 +145,55 @@ export class GuindaillePage {
     public translateService: TranslateService
   ) {
     this.title = this.navParams.get('title');
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE1').subscribe((res: string) => {
-      this.alt = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC1').subscribe((res: string) => {
-      this.altsub = res;
-    });
-    // put real value for each attributes
-    this.alterner.title = this.alt;
-    this.alterner.subTitle = this.altsub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE2').subscribe((res: string) => {
-      this.brt = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC2').subscribe((res: string) => {
-      this.brtsub = res;
-    });
-    // put real value for each attributes
-    this.bruit.title = this.brt;
-    this.bruit.subTitle = this.brtsub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE3').subscribe((res: string) => {
-      this.wat = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC3').subscribe((res: string) => {
-      this.watsub = res;
-    });
-    // put real value for each attributes
-    this.eau.title = this.wat;
-    this.eau.subTitle = this.watsub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE4').subscribe((res: string) => {
-      this.where = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC4').subscribe((res: string) => {
-      this.wheresub = res;
-    });
-    // put real value for each attributes
-    this.ou.title = this.where;
-    this.ou.subTitle = this.wheresub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE5').subscribe((res: string) => {
-      this.can = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC5').subscribe((res: string) => {
-      this.cansub = res;
-    });
-    // put real value for each attributes
-    this.cans.title = this.can;
-    this.cans.subTitle = this.cansub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE6').subscribe((res: string) => {
-      this.pres = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC6').subscribe((res: string) => {
-      this.pressub = res;
-    });
-    // put real value for each attributes
-    this.preservatif.title = this.pres;
-    this.preservatif.subTitle = this.pressub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE7').subscribe((res: string) => {
-      this.rac = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC7').subscribe((res: string) => {
-      this.racsub = res;
-    });
-    // put real value for each attributes
-    this.racompagner.title = this.rac;
-    this.racompagner.subTitle = this.racsub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE8').subscribe((res: string) => {
-      this.ur = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC8').subscribe((res: string) => {
-      this.ursub = res;
-    });
-    // put real value for each attributes
-    this.uriner.title = this.ur;
-    this.uriner.subTitle = this.ursub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE9').subscribe((res: string) => {
-      this.de = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC9').subscribe((res: string) => {
-      this.desub = res;
-    });
-    // put real value for each attributes
-    this.dehors.title = this.de;
-    this.dehors.subTitle = this.desub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLE10').subscribe((res: string) => {
-      this.vio = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC10').subscribe((res: string) => {
-      this.viosub = res;
-    });
-    // put real value for each attributes
-    this.violence.title = this.vio;
-    this.violence.subTitle = this.viosub;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF1').subscribe((res: string) => {
-      this.ttl1 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT1').subscribe((res: string) => {
-      this.efct1 = res;
-    });
-    // put real value for each attributes
-    this.slides[0].title = this.ttl1;
-    this.slides[0].subTitle = this.efct1;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF2').subscribe((res: string) => {
-      this.ttl2 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT2').subscribe((res: string) => {
-      this.efct2 = res;
-    });
-    // put real value for each attributes
-    this.slides[1].title = this.ttl2;
-    this.slides[1].subTitle = this.efct2;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF3').subscribe((res: string) => {
-      this.ttl3 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT3').subscribe((res: string) => {
-      this.efct3 = res;
-    });
-    // put real value for each attributes
-    this.slides[2].title = this.ttl3;
-    this.slides[2].subTitle = this.efct3;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF4').subscribe((res: string) => {
-      this.ttl4 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT4').subscribe((res: string) => {
-      this.efct4 = res;
-    });
-    // put real value for each attributes
-    this.slides[3].title = this.ttl4;
-    this.slides[3].subTitle = this.efct4;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF5').subscribe((res: string) => {
-      this.ttl5 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT5').subscribe((res: string) => {
-      this.efct5 = res;
-    });
-    // put real value for each attributes
-    this.slides[4].title = this.ttl5;
-    this.slides[4].subTitle = this.efct5;
-
-    // get the good value
-    this.translateService.get('GUINDAILLE.TITLEF6').subscribe((res: string) => {
-      this.ttl6 = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT6').subscribe((res: string) => {
-      this.efct6 = res;
-    });
-    // put real value for each attributes
-    this.slides[5].title = this.ttl6;
-    this.slides[5].subTitle = this.efct6;
+    this.getPictograms();
+    this.getSlides();
   }
 
-  /*Display alert*/
+  private getSlides() {
+    const ttls = [this.ttl1, this.ttl2, this.ttl3, this.ttl4, this.ttl5, this.ttl6];
+    const efcts = [this.efct1, this.efct2, this.efct3, this.efct4, this.efct5, this.efct6];
+    for (let i = 0; i < ttls.length; i++) {
+      this.getSlide(i, ttls[i], efcts[i]);
+    }
+  }
+
+  private getSlide(i: number, title: string, effect: string) {
+    const real_index = i + 1;
+    this.translateService.get('GUINDAILLE.TITLEF' + real_index).subscribe((res: string) => {
+      title = res;
+    });
+    this.translateService.get('GUINDAILLE.EFFECT' + real_index).subscribe((res: string) => {
+      effect = res;
+    });
+    this.slides[i].title = title;
+    this.slides[i].subTitle = effect;
+  }
+
+  private getPictograms() {
+    const titles = [this.alt, this.brt, this.wat, this.where, this.can, this.pres, this.rac, this.ur, this.de, this.vio];
+    const pics = [
+      this.altsub, this.brtsub, this.watsub, this.wheresub, this.cansub, this.pressub, this.racsub, this.ursub, this.desub, this.viosub
+    ];
+    const items = [
+      this.alterner, this.bruit, this.eau, this.ou, this.cans, this.preservatif, this.racompagner, this.uriner, this.dehors, this.violence
+    ];
+    for (let i = 0; i < titles.length; i++) {
+      this.getPictogram(i, titles[i], pics[i], items[i]);
+    }
+  }
+
+  private getPictogram(i: number, title: string, pict: string, item: any) {
+    const real_index = i + 1;
+    this.translateService.get('GUINDAILLE.TITLE' + real_index).subscribe((res: string) => {
+      title = res;
+    });
+    this.translateService.get('GUINDAILLE.PIC' + real_index).subscribe((res: string) => {
+      pict = res;
+    });
+    item.title = title;
+    item.subTitle = pict;
+  }
+
   showAlert(page) {
     const alert = this.alertCtrl.create(page);
     alert.present();

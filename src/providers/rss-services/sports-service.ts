@@ -36,38 +36,30 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
 
-  url = ''; // students
-  urlT = ''; // equipe universitaire
+  url = '';
+  urlT = '';
 
   constructor(public user: UserService, public rssService: RssService) {
 
   }
 
-  /*Get the good URL in function of the user's campus*/
   update() {
-    // reset url
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate=';
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate=';
 
-    // first day of the week : today
     const today: Date = new Date();
-
-    // last day of the week : today +6
     const end: Date = new Date();
     end.setDate(today.getDate() + 6);
 
-    // invert date
     const todayString = dateToString(today);
     const endString = dateToString(end);
 
-    // which campus ?
     let site: string;
     const campus = this.user.campus;
     if (campus === 'LLN') { site = 'louv'; }
     if (campus === 'Woluwe') { site = 'wol'; }
     if (campus === 'Mons') { site = 'mons'; }
 
-    // final URL
     const restUrl = todayString + '&-enddate=' + endString + '&-site=';
     const urlTemp = this.url + restUrl + site;
     const urlTempT = this.urlT + restUrl + 'louv';
@@ -80,7 +72,6 @@ export class SportsService {
   }
 
 
-  /*Get sports for the URL specific to the campus of the user*/
   public getSports(segment: string) {
     this.update();
     this.sports = [];
@@ -107,7 +98,6 @@ export class SportsService {
     });
   }
 
-  /*Get sports for the university teams*/
   public getTeams(segment: string) {
     this.teams = [];
     return this.rssService.load(this.urlT, true).then(result => {
@@ -134,7 +124,6 @@ export class SportsService {
       });
   }
 
-  /*Extract sports with all the details*/
   private extractSports(data: any, isSport: boolean = true) {
     if (data === undefined) {
       console.log('Error sports data undefined!!!');
@@ -174,13 +163,10 @@ export class SportsService {
       const jour = item.jour[1].toUpperCase() + item.jour.substr(2);
       const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, jour, startDate,
         hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
-
-
       if (isSport) { this.sports.push(newSportItem); } else { this.teams.push(newSportItem); }
     }
   }
 
-  /*Return a date in good form by splitting for the sport*/
   private createDateForSport(str: string, hour: string): Date {
     const timeSplit = hour.split(':');
     const dateSplit = str.split('/');
@@ -191,13 +177,4 @@ export class SportsService {
     const minutes = parseInt(timeSplit[1]);
     return new Date(year, month, day, hours, minutes);
   }
-
-  /*Return the items of filter*/
-  public filterItems(myList, searchTerm) {
-    return myList.filter((item) => {
-      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-
-  }
-
 }

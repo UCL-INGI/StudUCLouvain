@@ -201,27 +201,9 @@ export class HomePage {
   }
 
   settings() {
-    const check = this.userS.campus;
-    const check2 = this.translateService.currentLang;
-    let settings, message, save, message2, fr, en: string;
-    this.translateService.get('HOME.SETTINGS').subscribe((res: string) => {
-      settings = res;
-    });
-    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
-      message2 = res;
-    });
-    this.translateService.get('HOME.FR').subscribe((res: string) => {
-      fr = res;
-    });
-    this.translateService.get('HOME.EN').subscribe((res: string) => {
-      en = res;
-    });
+    let { settings, message2, fr, check2, en, save, message, check }: {
+      settings: any; message2: any; fr: any; check2: string; en: string; save: any; message: any; check: string;
+    } = this.getSettingsData();
     const languageAlert = this.alertCtrl.create({
       title: settings,
       message: message2,
@@ -282,6 +264,31 @@ export class HomePage {
       ]
     });
     settingsAlert.present();
+  }
+
+  private getSettingsData() {
+    const check = this.userS.campus;
+    const check2 = this.translateService.currentLang;
+    let settings, message, save, message2, fr, en: string;
+    this.translateService.get('HOME.SETTINGS').subscribe((res: string) => {
+      settings = res;
+    });
+    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
+      message = res;
+    });
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
+      save = res;
+    });
+    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
+      message2 = res;
+    });
+    this.translateService.get('HOME.FR').subscribe((res: string) => {
+      fr = res;
+    });
+    this.translateService.get('HOME.EN').subscribe((res: string) => {
+      en = res;
+    });
+    return { settings, message2, fr, check2, en, save, message, check };
   }
 
   emergency() {
