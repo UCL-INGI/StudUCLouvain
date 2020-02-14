@@ -65,12 +65,12 @@ export class EventsPage {
 
   constructor(
     public alertCtrl: AlertController,
+    public user: UserService,
     public app: App,
     private navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public user: UserService,
     public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService: ConnectivityService,
@@ -323,54 +323,13 @@ export class EventsPage {
       this.removeFavorite(slidingItem, itemData, message);
     } else {
       this.user.addFavorite(itemData.guid);
-      let message: string;
-      this.translateService
-        .get('EVENTS.MESSAGEFAV2')
-        .subscribe((res: string) => {
-          message = res;
-        });
-      const toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      });
-      toast.present();
-      slidingItem.close();
+      this.utilsService.hasNotFavorite(slidingItem);
     }
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
-    let message: string;
-    let cancel: string;
-    let delet: string;
-    this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('EVENTS.CANCEL').subscribe((res: string) => {
-      cancel = res;
-    });
-    this.translateService.get('EVENTS.DEL').subscribe((res: string) => {
-      delet = res;
-    });
-    const alert = this.alertCtrl.create({
-      title: title,
-      message: message,
-      buttons: [
-        {
-          text: cancel,
-          handler: () => {
-            slidingItem.close();
-          }
-        },
-        {
-          text: delet,
-          handler: () => {
-            this.user.removeFavorite(itemData.guid);
-            this.updateDisplayedEvents();
-            slidingItem.close();
-          }
-        }
-      ]
-    });
+    const alert = this.utilsService.removeFavorite(slidingItem, itemData, title);
+    this.updateDisplayedEvents();
     alert.present();
   }
 }

@@ -18,7 +18,9 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { Loading, LoadingController } from 'ionic-angular';
+import {
+    AlertController, ItemSliding, Loading, LoadingController, ToastController
+} from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -26,6 +28,8 @@ import { Device } from '@ionic-native/device';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
+
+import { UserService } from './user-service';
 
 @Injectable()
 export class UtilsService {
@@ -39,6 +43,9 @@ export class UtilsService {
         private iab: InAppBrowser,
         private market: Market,
         private translateService: TranslateService,
+        public alertCtrl: AlertController,
+        public user: UserService,
+        public toastCtrl: ToastController,
     ) { }
 
     presentLoading() {
@@ -116,5 +123,51 @@ export class UtilsService {
             text = res;
         });
         return text;
+    }
+
+    removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
+        let message: string;
+        let cancel: string;
+        let delet: string;
+        this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res: string) => {
+            message = res;
+        });
+        this.translateService.get('EVENTS.CANCEL').subscribe((res: string) => {
+            cancel = res;
+        });
+        this.translateService.get('EVENTS.DEL').subscribe((res: string) => {
+            delet = res;
+        });
+        return this.alertCtrl.create({
+            title: title,
+            message: message,
+            buttons: [
+                {
+                    text: cancel
+                },
+                {
+                    text: delet,
+                    handler: () => {
+                        slidingItem.close();
+                        this.user.removeFavorite(itemData.guid);
+                    }
+                }
+            ]
+        });
+    }
+
+    hasNotFavorite(slidingItem: ItemSliding) {
+        let message: string;
+        this.translateService
+            .get('EVENTS.MESSAGEFAV2')
+            .subscribe((res: string) => {
+                message = res;
+            });
+        const toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
     }
 }
