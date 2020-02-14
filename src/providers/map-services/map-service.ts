@@ -42,7 +42,7 @@ declare var google;
 @Injectable()
 export class MapService {
   mapElement: any;
-  pleaseConnect: any;
+  pleaseConnectVar: any;
   map: any;
   mapInitialised = false;
   markers: Array<Marker> = [];
@@ -69,7 +69,7 @@ export class MapService {
 
   init(mapElement: any, pleaseConnect: any): Promise<any> {
     this.mapElement = mapElement;
-    this.pleaseConnect = pleaseConnect;
+    this.pleaseConnectVar = pleaseConnect;
     if (this.onDevice) {
       return this.loadDeviceGoogleMaps();
     } else {
@@ -80,14 +80,10 @@ export class MapService {
   private loadBrowserGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-        this.showPleaseConnect();
+        this.pleaseConnect(true);
         if (this.connectivityService.isOnline()) {
           window['mapInit'] = () => {
-            this.initBrowserMap().then(
-              init => resolve(init),
-              error => reject(error)
-            );
-            this.hidePleaseConnect();
+            this._initBrowserMap(resolve, reject);
           };
           const script = document.createElement('script');
           script.id = 'googleMaps';
@@ -99,16 +95,17 @@ export class MapService {
           document.body.appendChild(script);
         }
       } else if (this.connectivityService.isOnline()) {
-        this.initBrowserMap().then(
-          init => resolve(init),
-          error => reject(error)
-        );
-        this.hidePleaseConnect();
+        this._initBrowserMap(resolve, reject);
       } else {
-        this.showPleaseConnect();
+        this.pleaseConnect(true);
       }
       this.addConnectivityListeners();
     });
+  }
+
+  private _initBrowserMap(resolve: (value?: any) => void, reject: (reason?: any) => void) {
+    this.initBrowserMap().then(init => resolve(init), error => reject(error));
+    this.pleaseConnect(false);
   }
 
   private initBrowserMap(): Promise<any> {
@@ -142,9 +139,9 @@ export class MapService {
           () => resolve(true),
           () => reject(false)
         );
-        this.hidePleaseConnect();
+        this.pleaseConnect(false);
       } else {
-        this.showPleaseConnect();
+        this.pleaseConnect(true);
       }
       this.addConnectivityListeners();
     });
@@ -340,17 +337,10 @@ export class MapService {
     }
   }
 
-  private showPleaseConnect() {
-    if (this.pleaseConnect) {
-      this.pleaseConnect.style.display = 'block';
-      this.disableMap();
-    }
-  }
-
-  private hidePleaseConnect() {
-    if (this.pleaseConnect) {
-      this.pleaseConnect.style.display = 'none';
-      this.enableMap();
+  private pleaseConnect(disable: boolean) {
+    if (this.pleaseConnectVar) {
+      this.pleaseConnectVar.style.display = disable ? 'block' : 'none';
+      disable ? this.disableMap() : this.enableMap();
     }
   }
 
@@ -366,10 +356,10 @@ export class MapService {
         } else if (!this.mapInitialised) {
           this.initBrowserMap();
         }
-        this.hidePleaseConnect();
+        this.pleaseConnect(false);
       }, 2000);
     }, false);
-    document.addEventListener('offline', () => this.showPleaseConnect(), false);
+    document.addEventListener('offline', () => this.pleaseConnect(true), false);
   }
 
   getUserLocation(): MapLocation {
