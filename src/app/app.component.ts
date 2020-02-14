@@ -129,120 +129,43 @@ export class MyApp {
       appUrl: null,
       httpUrl: null
     };
-    this.campusPages = [
-      {
-        title: 'MENU.NEWS',
-        component: 'NewsPage',
-        icon: './assets/img/news.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.EVENTS',
-        component: 'EventsPage',
-        icon: './assets/img/event.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.SPORTS',
-        component: 'SportsPage',
-        icon: './assets/img/sport.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      }
-    ];
-    this.studiePages = [
-      {
-        title: 'MENU.STUDIES',
-        component: 'StudiesPage',
-        icon: './assets/img/études.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.LIBRARY',
-        component: 'LibrariesPage',
-        icon: './assets/img/biblio.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.HELP',
-        component: 'SupportPage',
-        icon: './assets/img/support.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      }
-    ];
-    this.toolPages = [
-      {
-        title: 'MENU.PARTY',
-        component: 'GuindaillePage',
-        icon: './assets/img/g2.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.MAP',
-        component: 'MapPage',
-        icon: './assets/img/cartes.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.RESTAURANT',
-        component: 'RestaurantPage',
-        icon: './assets/img/resto.png',
-        iosSchemaName: 'id1156050719',
-        androidPackageName: 'com.apptree.resto4u',
-        appUrl: 'apptreeresto4u://',
-        httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u'
-      },
-      {
-        title: 'MENU.MOBILITY',
-        component: 'MobilityPage',
-        icon: './assets/img/mobilité.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.PARAM',
-        component: 'ParamPage',
-        icon: './assets/img/setting.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      },
-      {
-        title: 'MENU.CREDITS',
-        component: 'CreditPage',
-        icon: './assets/img/signature.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      }
-    ];
+
+    this.campusPages = [];
+    const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
+    const campusComp = ['News', 'Events', 'Sports'];
+    const campusIcon = ['news', 'event', 'sport'];
+    for (let i = 0; i < campusTitles.length; i++) {
+      this.campusPages.push(this.getPage(campusTitles[i], campusComp[i], campusIcon[i]));
+    }
+
+    this.studiePages = [];
+    const studieTitles = ['STUDIES', 'LIBRARY', 'HELP'];
+    const studieComp = ['Studies', 'Libraries', 'Support'];
+    const studieIcon = ['études', 'biblio', 'support'];
+    for (let i = 0; i < studieTitles.length; i++) {
+      this.studiePages.push(this.getPage(studieTitles[i], studieComp[i], studieIcon[i]));
+    }
+
+    this.toolPages = [];
+    const toolsTitles = ['PARTY', 'MAP', 'RESTAURANT', 'MOBILITY', 'PARAM', 'CREDITS'];
+    const toolsComp = ['Guindaille', 'Map', 'Restaurant', 'Mobility', 'Param', 'Credit'];
+    const toolsIcon = ['g2', 'cartes', 'resto', 'mobilité', 'setting', 'signature'];
+    for (let i = 0; i < toolsTitles.length; i++) {
+      this.toolPages.push(this.getPage(toolsTitles[i], toolsComp[i], toolsIcon[i]));
+    }
+  }
+
+  getPage(title: string, component: string, icon: string) {
+    const needExtApp = title === 'RESTAURANT';
+    return {
+      title: 'MENU.' + title,
+      component: component + 'PAGE',
+      icon: './assets/img/' + icon + '.png',
+      iosSchemaName: needExtApp ? 'id1156050719' : null,
+      androidPackageName: needExtApp ? 'com.apptree.resto4u' : null,
+      appUrl: needExtApp ? 'apptreeresto4u://' : null,
+      httpUrl: needExtApp ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
+    };
   }
 
   initializeApp() {
