@@ -310,10 +310,8 @@ export class MapService {
   private addConnectivityListeners() {
     document.addEventListener('online', () => {
       setTimeout(() => {
-        if (this.onDevice) {
-          if (!this.mapInitialised) {
-            this.initDeviceMap();
-          }
+        if (this.onDevice && !this.mapInitialised) {
+          this.initDeviceMap();
         } else if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           this.loadBrowserGoogleMaps();
         } else if (!this.mapInitialised) {
