@@ -105,21 +105,19 @@ export class LibrariesService {
   }
 
   private getOpeningHours(data: any, lib: LibraryItem) {
-    if (data.openingHours) {
-      for (const hours of data.openingHours) {
-        lib.openingHours.push(new TimeSlot(hours.day, hours.startHour, hours.endHour));
-      }
-    }
-    if (data.openingExaminationHours) {
-      for (const hours of data.openingExaminationHours) {
-        lib.openingExaminationHours.push(new TimeSlot(hours.day, hours.startHour, hours.endHour));
-      }
-    }
-    if (data.openingSummerHours) {
-      for (const hours of data.openingSummerHours) {
-        lib.openingSummerHours.push(new TimeSlot(hours.day, hours.startHour, hours.endHour));
-      }
-    }
+    lib.openingHours = this.extractOpeningHours(data.openingHours);
+    lib.openingExaminationHours = this.extractOpeningHours(data.openingExaminationHours);
+    lib.openingSummerHours = this.extractOpeningHours(data.openingSummerHours);
     lib.openingHoursNote = data.openingHoursNote;
+  }
+
+  private extractOpeningHours(openingHours: any) {
+    const hours_array = Array<TimeSlot>();
+    if (openingHours) {
+      for (const hours of openingHours) {
+        hours_array.push(new TimeSlot(hours.day, hours.startHour, hours.endHour));
+      }
+    }
+    return hours_array;
   }
 }
