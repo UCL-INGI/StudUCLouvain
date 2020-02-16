@@ -162,18 +162,7 @@ export class EventsPage {
 
   changeArray(array: any) {
     const groups = array.reduce(function (obj, item) {
-      const date = new Date(item.startDate.getTime());
-      date.setHours(0, 0, 0, 0);
-      date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-      const temp = new Date(date.getFullYear(), 0, 4);
-      const week =
-        1 +
-        Math.round(
-          ((date.getTime() - temp.getTime()) / 86400000 -
-            3 +
-            ((temp.getDay() + 6) % 7)) /
-          7
-        );
+      const week = this.getWeek(item.startDate);
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
@@ -203,18 +192,21 @@ export class EventsPage {
   }
 
   getRangeWeek(week, year) {
-    let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
-    d1 = new Date('' + year + '');
-    numOfdaysPastSinceLastMonday = d1.getDay() - 1;
-    d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
-    d1.setDate(d1.getDate() + 7 * (week - this.getWeek(d1)));
-    rangeIsFrom =
-      d1.getMonth() + 1 + '-' + d1.getDate() + '-' + d1.getFullYear();
-    d1.setDate(d1.getDate() + 6);
-    rangeIsTo = d1.getMonth() + 1 + '-' + d1.getDate() + '-' + d1.getFullYear();
-    rangeIsTo = rangeIsTo.replace(/-/g, '/');
-    rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
+    const date = new Date(year);
+    date.setDate(date.getDate() - date.getDay() - 1);
+
+    date.setDate(date.getDate() + 7 * (week - this.getWeek(date)));
+    const rangeIsFrom = this.getRange(date);
+
+    date.setDate(date.getDate() + 6);
+    const rangeIsTo = this.getRange(date);
     return { from: rangeIsFrom, to: rangeIsTo };
+  }
+
+  private getRange(date: Date) {
+    let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
+    range = range.replace(/-/g, '/');
+    return range;
   }
 
   public updateDisplayedEvents() {

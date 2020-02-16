@@ -157,33 +157,22 @@ export class UserService {
     this.storage.set('disclaimer', this.disclaimer);
   }
 
-  addFavorite(itemGuid: string) {
-    this.favorites.push(itemGuid);
-    this.storage.set('listEvents', this.favorites);
-
+  addFavorite(itemGuid: string, listType: string) {
+    const fav = listType === 'listEvents' ? this.favorites : this.sports;
+    fav.push(itemGuid);
+    this.storage.set(listType, fav);
+    listType === 'listEvents' ? this.favorites = fav : this.sports = fav;
   }
 
-  removeFavorite(itemGuid: string) {
-    const index = this.favorites.indexOf(itemGuid);
+  removeFavorite(itemGuid: string, listType: string) {
+    const fav = listType === 'listEvents' ? this.favorites : this.sports;
+    const index = fav.indexOf(itemGuid);
     if (index > -1) {
-      this.favorites.splice(index, 1);
+      fav.splice(index, 1);
     }
-    this.storage.set('listEvents', this.favorites);
+    this.storage.set(listType, fav);
+    listType === 'listEvents' ? this.favorites = fav : this.sports = fav;
   }
-
-  addFavoriteS(itemGuid: string) {
-    this.sports.push(itemGuid);
-    this.storage.set('listSports', this.sports);
-  }
-
-  removeFavoriteS(itemGuid: string) {
-    const index = this.sports.indexOf(itemGuid);
-    if (index > -1) {
-      this.sports.splice(index, 1);
-    }
-    this.storage.set('listSports', this.sports);
-  }
-
 
   addCampus(campus: string) {
     this.campus = campus;
@@ -216,10 +205,10 @@ export class UserService {
     this.storage.set('slots', this.slots);
   }
 
-  removeSlotTP(acronym: string) {
+  removeSlot(acronym: string, isTP: boolean) {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      this.slots[index].TP = '';
+      isTP ? this.slots[index].TP = '' : this.slots[index].CM = '';
     }
     this.storage.set('slots', this.slots);
   }
@@ -234,13 +223,4 @@ export class UserService {
     }
     this.storage.set('slots', this.slots);
   }
-
-  removeSlotCM(acronym: string) {
-    const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) {
-      this.slots[index].CM = '';
-    }
-    this.storage.set('slots', this.slots);
-  }
-
 }

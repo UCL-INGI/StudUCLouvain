@@ -142,7 +142,7 @@ export class UtilsService {
                     text: delet,
                     handler: () => {
                         slidingItem.close();
-                        isSport ? this.user.removeFavoriteS(itemData.guid) : this.user.removeFavorite(itemData.guid);
+                        this.user.removeFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
                     }
                 }
             ]
@@ -168,7 +168,7 @@ export class UtilsService {
             const message = this.getText(page, 'MESSAGEFAV');
             this.removeFavorite(slidingItem, itemData, message, isSport);
         } else {
-            isSport ? this.user.addFavoriteS(itemData.guid) : this.user.addFavorite(itemData.guid);
+            this.user.addFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
             this.favoriteAdded(slidingItem, page);
         }
     }
