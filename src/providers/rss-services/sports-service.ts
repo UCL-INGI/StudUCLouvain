@@ -72,64 +72,37 @@ export class SportsService {
   }
 
 
-  public getSports(segment: string) {
+  public getSports(segment: string, isSport: boolean) {
     this.update();
-    this.sports = [];
+    isSport ? this.sports = [] : this.teams = [];
+    isSport ? this.shownSports = 0 : this.shownTeams = 0;
     return this.rssService.load(this.url, true).then(result => {
       if (result === undefined) {
-        console.log('Error Sports data undefined!!!');
+        console.log('Error Sports/Teams data undefined!!!');
         return;
       }
-      this.extractSports(result);
-      return {
-        sports: this.sports,
-        showSports: this.shownSports
-      };
+      this.extractSports(result, isSport);
+      return this.getAdaptedResult(isSport);
     }).catch(error => {
       if (error === 1) {
-        return this.getSports(segment);
+        return this.getSports(segment, isSport);
+      } else if (error === 2) {
+        console.log('Loading sports/teams : GET req timed out > limit, suppose no sports/teams to be displayed');
       } else {
-        if (error === 2) {
-          console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
-        } else {
-          console.log('Error loading sports : ' + error);
-        }
-        return {
-          sports: [],
-          shownSports: 0
-        };
+        console.log('Error loading sports/teams : ' + error);
       }
+      return this.getAdaptedResult(isSport);
     });
   }
 
-  public getTeams(segment: string) {
-    this.teams = [];
-    return this.rssService.load(this.urlT, true).then(result => {
-      if (result === undefined) {
-        console.log('Error Teams data undefined!!!');
-        return;
-      }
-      this.extractSports(result, false);
-      return {
+  private getAdaptedResult(isSport: boolean) {
+    return isSport ? {
+      sports: this.sports,
+      shownSports: this.shownSports
+    } : {
         teams: this.teams,
         shownTeams: this.shownTeams
       };
-    })
-      .catch(error => {
-        if (error === 1) {
-          return this.getTeams(segment);
-        } else {
-          if (error === 2) {
-            console.log('Loading teams : GET req timed out > limit, suppose no teams to be displayed');
-          } else {
-            console.log('Error loading teams : ' + error);
-          }
-          return {
-            teams: [],
-            shownTeams: 0
-          };
-        }
-      });
   }
 
   private extractSports(data: any, isSport: boolean = true) {

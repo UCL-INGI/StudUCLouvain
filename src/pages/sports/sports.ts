@@ -22,8 +22,8 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
-    ToastController
+  AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
+  ToastController
 } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
@@ -116,13 +116,13 @@ export class SportsPage {
     }
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
-      this.sportsService.getSports(this.segment).then(result => {
+      this.sportsService.getSports(this.segment, true).then(result => {
         this.sports = result.sports;
         this.shownSports = result.shownSports;
         this.filters = result.categories;
         this.nosport = this.sports.length === 0;
       });
-      this.sportsService.getTeams(this.segment).then(result => {
+      this.sportsService.getSports(this.segment, false).then(result => {
         this.teams = result.teams;
         this.shownTeams = result.shownTeams;
         this.filtersT = result.categoriesT;
