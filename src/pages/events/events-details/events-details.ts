@@ -58,7 +58,7 @@ export class EventsDetailsPage {
     });
 
     if (!this.user.hasFavorite(event.guid)) {
-      this.user.addFavorite(event.guid);
+      this.user.addFavorite(event.guid, 'listEvents');
       const toast = this.toastCtrl.create({
         message: message,
         duration: 3000
