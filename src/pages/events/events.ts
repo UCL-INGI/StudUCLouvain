@@ -216,31 +216,27 @@ export class EventsPage {
     }
     if (this.segment === 'all') {
       this.displayedEvents = this.events.filter(item => {
-        return (
-          this.excludedFilters.indexOf(item.category) < 0 &&
-          item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
-          Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000)
-        );
+        return this.getFilterMethod(item);
       });
     } else if (this.segment === 'favorites') {
       const favEvents = [];
       this.events.forEach(item => {
-        if (item.favorite || this.user.hasFavorite(item.guid)) {
-          if (
-            item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-          ) {
-            favEvents.push(item);
-          }
+        if ((item.favorite || this.user.hasFavorite(item.guid)) && item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
+          favEvents.push(item);
         }
       });
       this.displayedEvents = favEvents;
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(
-      this.displayedEvents
-    );
+    this.displayedEventsD = this.changeArray(this.displayedEvents);
     this.utilsService.dismissLoading();
+  }
+
+  private getFilterMethod(item: EventItem): unknown {
+    return (this.excludedFilters.indexOf(item.category) < 0 &&
+      item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
+      Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
   }
 
   presentFilter() {
