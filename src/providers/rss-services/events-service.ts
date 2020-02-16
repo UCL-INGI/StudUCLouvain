@@ -32,6 +32,7 @@ export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
+  maxDescLength = 20;
 
 
   url = 'https://louvainfo.be/calendrier/feed/calendar/';
@@ -42,6 +43,10 @@ export class EventsService {
     this.events = [];
     return this.rssService.load(this.url).then(result => {
       console.log(result);
+      if (result === undefined) {
+        console.log('Error events data undefined!!!');
+        return;
+      }
       this.extractEvents(result);
       return {
         events: this.events,
@@ -51,75 +56,48 @@ export class EventsService {
       .catch(error => {
         if (error === 1) {
           return this.getEvents(segment);
+        } else if (error === 2) {
+          console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
         } else {
-          if (error === 2) {
-            console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
-          } else {
-            console.log('Error loading events : ' + error);
-          }
-          return {
-            events: [],
-            shownEvents: 0
-          };
+          console.log('Error loading events : ' + error);
         }
+        return {
+          events: [],
+          shownEvents: 0
+        };
       });
   }
 
   private extractEvents(data: any) {
     this.shownEvents = 0;
-    const maxDescLength = 20;
-    if (data === undefined) {
-      console.log('Error events data undefined!!!');
-      return;
-    }
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
-      const trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
-      let favorite = false;
-      const hidden = false;
-      let iconCategory = 'assets/icon/events-icon/other.png';
-      if (this.user.hasFavorite(item.guid)) {
-        favorite = true;
+      const trimmedDescription = item.description.length > this.maxDescLength ?
+        item.description.substring(0, 80) + '...' : item.description;
+      const favorite = this.user.hasFavorite(item.guid);
+      if (item.category && this.allCategories.indexOf(item.category) < 0) {
+        this.allCategories.push(item.category);
       }
-      if (item.category) {
-        if (this.allCategories.indexOf(item.category) < 0) {
-          this.allCategories.push(item.category);
-        }
-        iconCategory = this.getIconCategory(item.category);
-      }
+      const iconCategory = this.getIconCategory(item.category);
       this.shownEvents++;
       const startDate = this.createDateForEvent(item.date_begin);
       const endDate = this.createDateForEvent(item.date_end);
       const newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
-        hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
+        false, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
     }
   }
 
   public getIconCategory(category: string): string {
-    switch (category.toLowerCase()) {
-      case 'sensibilisation': {
-        return 'assets/icon/events-icon/sensibilisation.png';
-      }
-      case 'animation': {
-        return 'assets/icon/events-icon/animation.png';
-      }
-      case 'culturel et artistique': {
-        return 'assets/icon/events-icon/cultural.png';
-      }
-      case 'guindaille': {
-        return 'assets/icon/events-icon/party.png';
-      }
-      case 'sportif': {
-        return 'assets/icon/events-icon/sports.png';
-      }
-      case 'services et aides': {
-        return 'assets/icon/events-icon/services.png';
-      }
-      default: {
-        return 'assets/icon/events-icon/other.png';
-      }
-    }
+    const icons = {
+      'sensibilisation': 'sensibilisation.png',
+      'animation': 'animation.png',
+      'culturel et artistique': 'cultural.png',
+      'guindaille': 'party.png',
+      'sportif': 'sports.png',
+      'services et aides': 'services.png'
+    };
+    return 'assets/icon/events-icon/' + icons.hasOwnProperty(category) ? icons[category] : 'other.png';
   }
 
   private createDateForEvent(str: string): Date {
