@@ -116,12 +116,8 @@ export class SportsPage {
     }
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
-      this.sportsService.getSports(this.segment, true).then(result => {
-        this.assignDatas(result, true);
-      });
-      this.sportsService.getSports(this.segment, false).then(result => {
-        this.assignDatas(result, false);
-      });
+      this.getDatas(true);
+      this.getDatas(false);
       this.searching = false;
       this.updateDisplayedSports();
     } else {
@@ -131,11 +127,13 @@ export class SportsPage {
     }
   }
 
-  private assignDatas(result: any, isSport: boolean) {
-    isSport ? this.sports = result.sports : this.teams = result.teams;
-    isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
-    isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
-    isSport ? this.nosport = this.sports.length === 0 : this.noteams = this.teams.length === 0;
+  private getDatas(isSport: boolean) {
+    this.sportsService.getSports(this.segment, isSport).then(result => {
+      isSport ? this.sports = result.sports : this.teams = result.teams;
+      isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
+      isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
+      isSport ? this.nosport = this.sports.length === 0 : this.noteams = this.teams.length === 0;
+    });
   }
 
   public changeArray(array) {
