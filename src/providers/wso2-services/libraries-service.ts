@@ -80,55 +80,15 @@ export class LibrariesService {
     } else {
       lib.locationId = data.locationId;
     }
-
     if (data.mapLocation == null) {
       lib.mapLocation = new MapLocation(lib.name, '', '', '', '');
     } else {
       lib.mapLocation = new MapLocation(lib.name, data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality, '', '', ''); // TODO update maplocation with lat lng code
     }
 
-    if (data.phone == null) {
-      lib.phone = '';
-    } else {
-      lib.phone = data.phone.substr(3);
-    }
+    this.getContactDatas(data, lib);
 
-    if (data.email == null) {
-      lib.email = false;
-    } else {
-      lib.email = data.email;
-    }
-
-
-    if (data.website == null) {
-      lib.website = '';
-    } else {
-      lib.website = data.website;
-    }
-
-    if (data.openingHours) {
-      for (let i = 0; i < data.openingHours.length; i++) {
-        lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
-      }
-    }
-
-    if (data.openingExaminationHours) {
-      for (let i = 0; i < data.openingExaminationHours.length; i++) {
-        lib.openingExaminationHours.push(new TimeSlot(
-          data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour
-        ));
-      }
-    }
-
-    if (data.openingSummerHours) {
-      for (let i = 0; i < data.openingSummerHours.length; i++) {
-        lib.openingSummerHours.push(new TimeSlot(
-          data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour
-        ));
-      }
-    }
-
-    lib.openingHoursNote = data.openingHoursNote;
+    this.getOpeningHours(data, lib);
 
     if (data.closedDates.length === undefined) {
       lib.closedDates = [data.closedDates];
@@ -136,5 +96,28 @@ export class LibrariesService {
       lib.closedDates = data.closedDates;
     }
     return lib;
+  }
+
+  private getContactDatas(data: any, lib: LibraryItem) {
+    lib.phone = data.phone ? data.phone.substr(3) : '';
+    lib.email = data.email ? data.email : false;
+    lib.website = data.website ? data.website : '';
+  }
+
+  private getOpeningHours(data: any, lib: LibraryItem) {
+    lib.openingHours = this.extractOpeningHours(data.openingHours);
+    lib.openingExaminationHours = this.extractOpeningHours(data.openingExaminationHours);
+    lib.openingSummerHours = this.extractOpeningHours(data.openingSummerHours);
+    lib.openingHoursNote = data.openingHoursNote;
+  }
+
+  private extractOpeningHours(openingHours: any) {
+    const hours_array = Array<TimeSlot>();
+    if (openingHours) {
+      for (const hours of openingHours) {
+        hours_array.push(new TimeSlot(hours.day, hours.startHour, hours.endHour));
+      }
+    }
+    return hours_array;
   }
 }
