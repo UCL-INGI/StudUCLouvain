@@ -116,18 +116,8 @@ export class SportsPage {
     }
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
-      this.sportsService.getSports(this.segment).then(result => {
-        this.sports = result.sports;
-        this.shownSports = result.shownSports;
-        this.filters = result.categories;
-        this.nosport = this.sports.length === 0;
-      });
-      this.sportsService.getTeams(this.segment).then(result => {
-        this.teams = result.teams;
-        this.shownTeams = result.shownTeams;
-        this.filtersT = result.categoriesT;
-        this.noteams = this.teams.length === 0;
-      });
+      this.getDatas(true);
+      this.getDatas(false);
       this.searching = false;
       this.updateDisplayedSports();
     } else {
@@ -135,6 +125,15 @@ export class SportsPage {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
+  }
+
+  private getDatas(isSport: boolean) {
+    this.sportsService.getSports(this.segment, isSport).then(result => {
+      isSport ? this.sports = result.sports : this.teams = result.teams;
+      isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
+      isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
+      isSport ? this.nosport = this.sports.length === 0 : this.noteams = this.teams.length === 0;
+    });
   }
 
   public changeArray(array) {

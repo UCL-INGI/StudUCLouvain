@@ -51,20 +51,19 @@ export class NewsService {
         news: this.news,
         shownNews: this.shownNews
       };
-    })
-      .catch(error => {
-        if (error === 1) {
-          return this.getNews(segment);
-        } else if (error === 2) {
-          console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
-        } else {
-          console.log('Error loading news : ' + error);
-        }
-        return {
-          news: [],
-          shownNews: 0
-        };
-      });
+    }).catch(error => {
+      if (error === 1) {
+        return this.getNews(segment);
+      } else if (error === 2) {
+        console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
+      } else {
+        console.log('Error loading news : ' + error);
+      }
+      return {
+        news: [],
+        shownNews: 0
+      };
+    });
   }
 
   private getBaseURL(segment: string) {
