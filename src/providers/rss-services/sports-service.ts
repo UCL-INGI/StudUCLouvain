@@ -76,6 +76,10 @@ export class SportsService {
     this.update();
     this.sports = [];
     return this.rssService.load(this.url, true).then(result => {
+      if (result === undefined) {
+        console.log('Error Sports data undefined!!!');
+        return;
+      }
       this.extractSports(result);
       return {
         sports: this.sports,
@@ -101,6 +105,10 @@ export class SportsService {
   public getTeams(segment: string) {
     this.teams = [];
     return this.rssService.load(this.urlT, true).then(result => {
+      if (result === undefined) {
+        console.log('Error Teams data undefined!!!');
+        return;
+      }
       this.extractSports(result, false);
       return {
         teams: this.teams,
@@ -125,45 +133,29 @@ export class SportsService {
   }
 
   private extractSports(data: any, isSport: boolean = true) {
-    if (data === undefined) {
-      console.log('Error sports data undefined!!!');
-      return;
-    }
     if (data.length === undefined) {
-      const temp = data;
-      data = [];
-      data.push(temp);
+      data = [data];
     }
     this.shownSports = 0;
     this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
-      let favorite = false;
-      const hidden = false;
-
-      if (this.user.hasFavorite(item.guid)) {
-        favorite = true;
-      }
+      const favorite = this.user.hasFavorite(item.guid);
       if (item.activite) {
-        if (isSport) {
-          if (this.allCategories.indexOf(item.activite) < 0) {
-            this.allCategories.push(item.activite);
-          }
-          this.allCategories.sort();
-        } else {
-          if (this.allCategoriesT.indexOf(item.activite) < 0) {
-            this.allCategoriesT.push(item.activite);
-          }
-          this.allCategoriesT.sort();
+        const cats = isSport ? this.allCategories : this.allCategoriesT;
+        if (cats.indexOf(item.activite) < 0) {
+          cats.push(item.activite);
         }
+        cats.sort();
+        isSport ? this.allCategories = cats : this.allCategoriesT = cats;
       }
-      if (isSport) { this.shownSports++; } else { this.shownTeams++; }
+      isSport ? this.shownSports++ : this.shownTeams++;
       const startDate = this.createDateForSport(item.date, item.hdebut);
       const endDate = this.createDateForSport(item.date, item.hfin);
       const jour = item.jour[1].toUpperCase() + item.jour.substr(2);
       const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, jour, startDate,
-        hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
-      if (isSport) { this.sports.push(newSportItem); } else { this.teams.push(newSportItem); }
+        false, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
+      isSport ? this.sports.push(newSportItem) : this.teams.push(newSportItem);
     }
   }
 

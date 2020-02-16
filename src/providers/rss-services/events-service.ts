@@ -42,7 +42,6 @@ export class EventsService {
   public getEvents(segment: string) {
     this.events = [];
     return this.rssService.load(this.url).then(result => {
-      console.log(result);
       if (result === undefined) {
         console.log('Error events data undefined!!!');
         return;
@@ -52,20 +51,19 @@ export class EventsService {
         events: this.events,
         shownEvents: this.shownEvents
       };
-    })
-      .catch(error => {
-        if (error === 1) {
-          return this.getEvents(segment);
-        } else if (error === 2) {
-          console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
-        } else {
-          console.log('Error loading events : ' + error);
-        }
-        return {
-          events: [],
-          shownEvents: 0
-        };
-      });
+    }).catch(error => {
+      if (error === 1) {
+        return this.getEvents(segment);
+      } else if (error === 2) {
+        console.log('Loading events : GET req timed out > limit, suppose no news to be displayed');
+      } else {
+        console.log('Error loading events : ' + error);
+      }
+      return {
+        events: [],
+        shownEvents: 0
+      };
+    });
   }
 
   private extractEvents(data: any) {
