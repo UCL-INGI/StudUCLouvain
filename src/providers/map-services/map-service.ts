@@ -62,19 +62,15 @@ export class MapService {
     this.apiKey = jsApiKey;
     const leftMenu = menuCtrl.get('left');
     if (leftMenu) {
-      leftMenu.ionOpen.subscribe(() => this.disableMap());
-      leftMenu.ionClose.subscribe(() => this.enableMap());
+      leftMenu.ionOpen.subscribe(() => this.setMapClickable(false));
+      leftMenu.ionClose.subscribe(() => this.setMapClickable(true));
     }
   }
 
   init(mapElement: any, pleaseConnect: any): Promise<any> {
     this.mapElement = mapElement;
     this.pleaseConnectVar = pleaseConnect;
-    if (this.onDevice) {
-      return this.loadDeviceGoogleMaps();
-    } else {
-      return this.loadBrowserGoogleMaps();
-    }
+    return this.onDevice ? this.loadDeviceGoogleMaps() : this.loadBrowserGoogleMaps();
   }
 
   private loadBrowserGoogleMaps(): Promise<any> {
@@ -87,11 +83,7 @@ export class MapService {
           };
           const script = document.createElement('script');
           script.id = 'googleMaps';
-          if (this.apiKey) {
-            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
-          } else {
-            script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
-          }
+          script.src = 'http://maps.google.com/maps/api/js?' + this.apiKey ? this.apiKey + '&callback=mapInit' : 'callback=mapInit';
           document.body.appendChild(script);
         }
       } else if (this.connectivityService.isOnline()) {
@@ -117,9 +109,8 @@ export class MapService {
           String(position.coords.latitude),
           String(position.coords.longitude),
           'MYPOS');
-        const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         const mapOptions = {
-          center: latLng,
+          center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -134,15 +125,14 @@ export class MapService {
 
   private loadDeviceGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (this.connectivityService.isOnline()) {
+      const isOnline = this.connectivityService.isOnline();
+      if (isOnline) {
         this.initDeviceMap().then(
           () => resolve(true),
           () => reject(false)
         );
-        this.pleaseConnect(false);
-      } else {
-        this.pleaseConnect(true);
       }
+      this.pleaseConnect(!isOnline);
       this.addConnectivityListeners();
     });
   }
@@ -159,8 +149,7 @@ export class MapService {
   private initLostDevice(): any {
     return new Promise((resolve) => {
       console.log('Geolocation disabled');
-      const campus = this.userS.campus;
-      const latLng: LatLng = this.getCampusLocalisation(campus);
+      const latLng: LatLng = this.getCampusLocalisation(this.userS.campus);
       this.userLocation = new MapLocation('Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS');
       const mapOptions = {
         center: latLng,
@@ -182,31 +171,25 @@ export class MapService {
   }
 
   private getCampusLocalisation(campus: string) {
-    let latLng: LatLng;
-    if (campus === 'LLN') {
-      latLng = new LatLng(50.66808100000001, 4.611832400000026);
-    }
-    if (campus === 'Woluwe') {
-      latLng = new LatLng(50.8489094, 4.432088300000032);
-    }
-    if (campus === 'Mons') {
-      latLng = new LatLng(50.45424080000001, 3.956658999999945);
-    }
-    return latLng;
+    const { lat, lng } = {
+      'LLN': { 'lat': 50.66808100000001, 'lng': 4.611832400000026 },
+      'Woluwe': { 'lat': 50.8489094, 'lng': 4.432088300000032 },
+      'Mons': { 'lat': 50.45424080000001, 'lng': 3.956658999999945 },
+    }[campus];
+    return new LatLng(lat, lng);
   }
 
   private initGeolocatedDevice(): any {
     return new Promise((resolve, reject) => {
       LocationService.getMyLocation().then((position) => {
         this.userLocation = new MapLocation('Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS');
-        const latLng = position.latLng;
         const mapOptions = {
-          center: latLng,
+          center: position.latLng,
           zoom: 15,
           mapTypeId: GoogleMapsMapTypeId.ROADMAP
         };
         const camPos: CameraPosition<LatLng> = {
-          target: latLng,
+          target: position.latLng,
           zoom: 15
         };
         this.map = GoogleMaps.create(this.mapElement, mapOptions);
@@ -232,38 +215,34 @@ export class MapService {
           this.removeMarker(new MapLocation(loc.getTitle()));
         }
       }
-      if (this.onDevice) {
-        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title);
-      } else {
+      this.onDevice ?
+        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title) :
         this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
-      }
     } else if (this.onDevice) {
       marker.showInfoWindow();
     }
   }
 
   removeMarker(location: MapLocation) {
-    let m;
-    if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
+    const m = this.onDevice ? this.markers : this.markersB;
     for (let i = 0; i < m.length; i++) {
       if (m[i].getTitle() === location.title) {
         if (this.onDevice) {
           this.markers[i].remove();
-        }
-        if (!this.onDevice) {
+          this.markers.splice(i, 1);
+        } else {
           this.markersB[i].setMap(null);
+          // this.markersB.splice(i, 1);
         }
-        this.markers.splice(i, 1);
       }
     }
   }
 
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
-    const latLng = new google.maps.LatLng(lat, lng);
     const marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: latLng,
+      position: new google.maps.LatLng(lat, lng),
       title: title
     });
     this.markersB.push(marker);
@@ -281,9 +260,8 @@ export class MapService {
   }
 
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
-    const latLng = new LatLng(lat, lng);
     const markerOptions: MarkerOptions = {
-      position: latLng,
+      position: new LatLng(lat, lng),
       title: title,
       snippet: address
     };
@@ -295,39 +273,19 @@ export class MapService {
   }
 
   private getMarker(title: string): Marker {
-    let res = null;
     const markers = this.onDevice ? this.markers : this.markersB;
     for (const marker of markers) {
       if (marker.getTitle() === title) {
-        res = marker;
-        break;
+        return marker;
       }
     }
-    return res;
-  }
-
-  setCenteredMarker(location: MapLocation) {
-    if (this.onDevice) {
-      this.setCenteredMarkerOnDevice(location.title, parseFloat(location.lat), parseFloat(location.lng));
-    } else {
-      this.setCenteredMarkerOnBrowser(location.title);
-    }
-  }
-
-  private setCenteredMarkerOnBrowser(title: string) {
-    this.markersB.map(marker => {
-      if (marker.getTitle() === title) {
-        this.map.panTo(marker.getPosition());
-      }
-    });
   }
 
   private setCenteredMarkerOnDevice(title: string, lat: number, lng: number) {
     for (const marker of this.markers) {
       if (marker.getTitle() === title) {
-        const latLng = new LatLng(lat, lng);
         const camPos: CameraPosition<LatLng> = {
-          target: latLng,
+          target: new LatLng(lat, lng),
           zoom: 15
         };
         this.map.moveCamera(camPos);
@@ -336,32 +294,24 @@ export class MapService {
     }
   }
 
-  disableMap() {
+  setMapClickable(enable: boolean) {
     if (this.map && this.onDevice) {
-      this.map.setClickable(false);
-    }
-  }
-
-  enableMap() {
-    if (this.map && this.onDevice) {
-      this.map.setClickable(true);
+      this.map.setClickable(enable);
     }
   }
 
   private pleaseConnect(disable: boolean) {
     if (this.pleaseConnectVar) {
       this.pleaseConnectVar.style.display = disable ? 'block' : 'none';
-      disable ? this.disableMap() : this.enableMap();
+      this.setMapClickable(!disable);
     }
   }
 
   private addConnectivityListeners() {
     document.addEventListener('online', () => {
       setTimeout(() => {
-        if (this.onDevice) {
-          if (!this.mapInitialised) {
-            this.initDeviceMap();
-          }
+        if (this.onDevice && !this.mapInitialised) {
+          this.initDeviceMap();
         } else if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
           this.loadBrowserGoogleMaps();
         } else if (!this.mapInitialised) {
@@ -375,15 +325,5 @@ export class MapService {
 
   getUserLocation(): MapLocation {
     return this.userLocation;
-  }
-
-  clearMarkers() {
-    if (this.onDevice) {
-      this.map.clear();
-    } else {
-      this.markersB.map(
-        marker => marker.setMap(null)
-      );
-    }
   }
 }
