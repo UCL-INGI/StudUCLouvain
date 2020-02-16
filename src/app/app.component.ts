@@ -99,11 +99,7 @@ export class MyApp {
       this.wso2Service.getToken();
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then(data => {
-        if (data != null) {
-          translateService.use(data);
-        } else {
-          translateService.use('fr');
-        }
+        translateService.use(data !== null ? data : 'fr');
       });
       cache.setDefaultTTL(60 * 60 * 2);
       cache.setOfflineInvalidate(false);
@@ -175,19 +171,16 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
     });
 
-    // Confirm exit
     this.platform.registerBackButtonAction(() => {
       const activePortal =
         this.ionicApp._loadingPortal.getActive() ||
         this.ionicApp._modalPortal.getActive() ||
         this.ionicApp._toastPortal.getActive() ||
         this.ionicApp._overlayPortal.getActive();
-
       if (activePortal) {
         activePortal.dismiss();
         return;
       } else if (this.menu.isOpen()) {
-        // Close menu if open
         this.menu.close();
         return;
       }
@@ -200,8 +193,7 @@ export class MyApp {
   }
 
   confirmExitApp() {
-    const activeVC = this.nav.getActive();
-    const page = activeVC.instance;
+    const page = this.nav.getActive().instance;
     if (page instanceof HomePage) {
       if (!this.alertPresented) {
         this.alertPresented = true;
@@ -211,15 +203,11 @@ export class MyApp {
           buttons: [
             {
               text: 'Annuler',
-              handler: () => {
-                this.alertPresented = false;
-              }
+              handler: () => this.alertPresented = false
             },
             {
               text: 'Quitter',
-              handler: () => {
-                this.platform.exitApp();
-              }
+              handler: () => this.platform.exitApp()
             }
           ]
         });
@@ -231,10 +219,6 @@ export class MyApp {
   }
 
   disclaimer() {
-    // let title:string;
-    // let message:string;
-    // this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
-    // this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
     const disclaimerAlert = this.alertCtrl.create({
       title: 'Avertissement',
       message:
@@ -256,7 +240,6 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
-
     if (!(test instanceof HomePage && page === this.homePage)) {
       if (page.iosSchemaName != null && page.androidPackageName != null) {
         this.launchExternalApp(
@@ -265,47 +248,33 @@ export class MyApp {
           page.appUrl,
           page.httpUrl
         );
-      } else {
-        if (page !== this.homePage) {
-          if (this.nav.length() > 1) {
-            this.nav.pop();
-          }
-
-          this.nav.push(page.component, { title: page.title });
+      } else if (page !== this.homePage) {
+        if (this.nav.length() > 1) {
+          this.nav.pop();
         }
+        this.nav.push(page.component, { title: page.title });
       }
     }
   }
 
-  launchExternalApp(
-    iosSchemaName: string,
-    androidPackageName: string,
-    appUrl: string,
-    httpUrl: string
-  ) {
+  launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
     let app: string;
-    // let storeUrl:string;
     let check: string;
     if (this.device.platform === 'iOS') {
       app = iosSchemaName;
-      // storeUrl=httpUrl;
       check = appUrl;
     } else if (this.device.platform === 'Android') {
       app = androidPackageName;
-      // storeUrl= 'market://details?id='+ app;
       check = app;
     } else {
       const browser = this.iab.create(httpUrl, '_system');
       browser.close();
     }
-    this.appAvailability.check(check).then(
+    this.appAvailability.check(check).then(() => {
+      const browser = this.iab.create(appUrl, '_system');
+      browser.close();
+    },
       () => {
-        // success callback
-        const browser = this.iab.create(appUrl, '_system');
-        browser.close();
-      },
-      () => {
-        // error callback
         this.market.open(app);
       }
     );
