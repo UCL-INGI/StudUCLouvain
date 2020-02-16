@@ -10,6 +10,9 @@ plugins:
   tslint:
     enabled: true
     config: tslint.json
+  method-complexity:
+    config:
+      threshold: 10
 
 exclude_patterns:
 - config/**/*
