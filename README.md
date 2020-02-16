@@ -73,7 +73,7 @@ $ ionic cordova build <platform> --prod --release
 $ ionic serve
 ```
 
-### Android/iOS
+### Android/Other
 
 * Prepare the cordova build (If this does not work, skip this step and try again after the next step. If this does not work again, ignore and test without): 
     ```bash
