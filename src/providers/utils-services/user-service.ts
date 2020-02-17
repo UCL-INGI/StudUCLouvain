@@ -42,11 +42,10 @@ export class UserService {
     // storage.clear();
     this.getFavorites();
     // this.storage.set('campus',"");
-    this.getCampus();
+    this.getStringData('campus');
     this.getSports();
     this.getSlots();
-    this.getFac();
-    this.getDisclaimer();
+    this.getStringData('fac');
   }
 
   getFavorites() {
@@ -54,12 +53,8 @@ export class UserService {
   }
 
   private getFromStorage(key: string) {
-    this.storage.get(key).then((data) => {
-      if (data == null) {
-        return [];
-      } else {
-        return data;
-      }
+    this.storage.get(key).then(data => {
+      return data ? data : [];
     });
     return [];
   }
@@ -68,34 +63,10 @@ export class UserService {
     this.sports = this.getFromStorage('listSports');
   }
 
-  getCampus() {
-    this.storage.get('campus').then((data) => {
-      if (data == null) {
-        this.campus = '';
-      } else {
-        this.campus = data;
-      }
-    });
-  }
-
-  getDisclaimer() {
-    this.storage.get('disclaimer').then((data) => {
-      if (data == null) {
-        this.disclaimer = false;
-      } else {
-        this.disclaimer = data;
-      }
-    });
-  }
-
-  getFac() {
-    this.storage.get('fac').then((data) => {
-      if (data == null) {
-        this.fac = '';
-      } else {
-        this.fac = data;
-      }
-    });
+  getStringData(key: string) {
+    let temp = key === 'campus' ? this.campus : this.fac;
+    this.storage.get(key).then((data) => temp = data ? data : '');
+    key === 'campus' ? this.campus = temp : this.fac = temp;
   }
 
   getSlots() {
@@ -104,12 +75,12 @@ export class UserService {
 
   getSlotCM(acronym: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) { return this.slots[index].CM; } else { return ''; }
+    return index > -1 ? this.slots[index].CM : '';
   }
 
   getSlotTP(acronym: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) { return this.slots[index].TP; } else { return ''; }
+    return index > -1 ? this.slots[index].TP : '';
   }
 
   hasFavorite(itemGuid: string) {
@@ -128,10 +99,6 @@ export class UserService {
     return (this.fac.length > 0);
   }
 
-  hasDisclaimer() {
-    return (this.disclaimer === true);
-  }
-
   hasSlotTP(acronym: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
@@ -145,16 +112,6 @@ export class UserService {
     if (index > -1) {
       return this.slots[index].CM.length > 0;
     } else { return index > -1; }
-  }
-
-  addDisclaimer(discl: boolean) {
-    this.disclaimer = discl;
-    this.storage.set('disclaimer', this.disclaimer);
-  }
-
-  removeDisclaimer(discl: boolean) {
-    this.disclaimer = false;
-    this.storage.set('disclaimer', this.disclaimer);
   }
 
   addFavorite(itemGuid: string, listType: string) {
