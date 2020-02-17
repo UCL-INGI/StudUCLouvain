@@ -41,7 +41,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "@reactivex/rxjs": "^5.5.12",
     "@types/node": "^11.15.6",
-    "cordova": "^8.1.2",
+    "cordova": "^9.0.0",
     "cordova-android": "^8.1.0",
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-calendar": "~5.1.5",
@@ -74,7 +74,7 @@
     "@angular/cli": "^6.2.9",
     "@ionic/app-scripts": "3.2.4",
     "ts-node": "^8.0.3",
-    "tslint": "^5.13.1",
+    "tslint": "^6.0.0",
     "typescript": "^3.7.5"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",

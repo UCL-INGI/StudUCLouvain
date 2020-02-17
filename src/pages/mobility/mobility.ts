@@ -41,7 +41,7 @@ export class MobilityPage {
     public market: Market,
     public navParams: NavParams,
     private translateService: TranslateService,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     let titlecar: string;
