@@ -91,7 +91,7 @@ export class MyApp {
     public cache: CacheService
   ) {
     console.log('Startin App');
-    this.user.getCampus();
+    this.user.getStringData('campus');
     this.alertPresented = false;
     this.initializeApp();
     this.getPages();
