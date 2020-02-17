@@ -49,7 +49,8 @@ export class EventsService {
       this.extractEvents(result);
       return {
         events: this.events,
-        shownEvents: this.shownEvents
+        shownEvents: this.shownEvents,
+        categories: this.allCategories
       };
     }).catch(error => {
       if (error === 1) {
@@ -61,7 +62,8 @@ export class EventsService {
       }
       return {
         events: [],
-        shownEvents: 0
+        shownEvents: 0,
+        categories: []
       };
     });
   }
@@ -95,7 +97,7 @@ export class EventsService {
       'sportif': 'sports.png',
       'services et aides': 'services.png'
     };
-    return 'assets/icon/events-icon/' + icons.hasOwnProperty(category) ? icons[category] : 'other.png';
+    return 'assets/icon/events-icon/' + (icons.hasOwnProperty(category) ? icons[category] : 'other.png');
   }
 
   private createDateForEvent(str: string): Date {
