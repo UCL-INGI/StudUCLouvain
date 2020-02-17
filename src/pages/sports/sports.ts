@@ -29,7 +29,6 @@ import {
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar';
-import { TranslateService } from '@ngx-translate/core';
 
 import { SportItem } from '../../app/entity/sportItem';
 import { SportsService } from '../../providers/rss-services/sports-service';
@@ -76,7 +75,6 @@ export class SportsPage {
     public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService: ConnectivityService,
-    private translateService: TranslateService,
     public navCtrl: NavController,
     private utilsService: UtilsService
   ) {
@@ -87,17 +85,12 @@ export class SportsPage {
   ionViewDidLoad() {
     this.app.setTitle(this.title);
     this.updateDateLimit();
-    if (this.connService.isOnline()) {
-      this.utilsService.presentLoading();
-      this.loadSports();
-      this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
-        this.searching = false;
-        this.updateDisplayedSports();
-      });
-    } else {
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }
+    this.utilsService.presentLoading();
+    this.loadSports();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
+      this.searching = false;
+      this.updateDisplayedSports();
+    });
   }
 
   public doRefresh(refresher) {
@@ -109,15 +102,15 @@ export class SportsPage {
     this.searching = true;
   }
 
-  public loadSports() {
+  public async loadSports() {
     this.searching = true;
     if (this.sportsList) {
       this.sportsList.closeSlidingItems();
     }
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
-      this.getDatas(true);
-      this.getDatas(false);
+      await this.getDatas(true);
+      await this.getDatas(false);
       this.searching = false;
       this.updateDisplayedSports();
     } else {
@@ -128,7 +121,7 @@ export class SportsPage {
   }
 
   private getDatas(isSport: boolean) {
-    this.sportsService.getSports(this.segment, isSport).then(result => {
+    return this.sportsService.getSports(this.segment, isSport).then(result => {
       isSport ? this.sports = result.sports : this.teams = result.teams;
       isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
       isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
@@ -153,7 +146,6 @@ export class SportsPage {
     if (this.sportsList) {
       this.sportsList.closeSlidingItems();
     }
-
     if (this.segment === 'all') {
       this.filterDisplayedSports(this.sports);
     } else if (this.segment === 'favorites') {

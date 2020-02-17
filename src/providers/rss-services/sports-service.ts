@@ -65,7 +65,6 @@ export class SportsService {
     const urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
-
     function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
@@ -76,7 +75,7 @@ export class SportsService {
     this.update();
     isSport ? this.sports = [] : this.teams = [];
     isSport ? this.shownSports = 0 : this.shownTeams = 0;
-    return this.rssService.load(this.url, true).then(result => {
+    return this.rssService.load(isSport ? this.url : this.urlT, true).then(result => {
       if (result === undefined) {
         console.log('Error Sports/Teams data undefined!!!');
         return;
@@ -98,10 +97,12 @@ export class SportsService {
   private getAdaptedResult(isSport: boolean) {
     return isSport ? {
       sports: this.sports,
-      shownSports: this.shownSports
+      shownSports: this.shownSports,
+      categories: this.allCategories
     } : {
         teams: this.teams,
-        shownTeams: this.shownTeams
+        shownTeams: this.shownTeams,
+        categories: this.allCategoriesT
       };
   }
 

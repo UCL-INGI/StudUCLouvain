@@ -51,7 +51,7 @@ export class LibraryDetailsPage {
     public navParams: NavParams,
     public libService: LibrariesService,
     public connService: ConnectivityService,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) {
     this.libDetails = navParams.get('lib');
     this.searching = true;

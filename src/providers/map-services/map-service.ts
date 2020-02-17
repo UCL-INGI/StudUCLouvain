@@ -83,7 +83,7 @@ export class MapService {
           };
           const script = document.createElement('script');
           script.id = 'googleMaps';
-          script.src = 'http://maps.google.com/maps/api/js?' + this.apiKey ? this.apiKey + '&callback=mapInit' : 'callback=mapInit';
+          script.src = 'http://maps.google.com/maps/api/js?' + (this.apiKey ? this.apiKey + '&callback=mapInit' : 'callback=mapInit');
           document.body.appendChild(script);
         }
       } else if (this.connectivityService.isOnline()) {

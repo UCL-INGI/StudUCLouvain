@@ -47,10 +47,7 @@ export class EventsService {
         return;
       }
       this.extractEvents(result);
-      return {
-        events: this.events,
-        shownEvents: this.shownEvents
-      };
+      return this.getAdaptedReturnDatas(false);
     }).catch(error => {
       if (error === 1) {
         return this.getEvents(segment);
@@ -59,11 +56,16 @@ export class EventsService {
       } else {
         console.log('Error loading events : ' + error);
       }
-      return {
-        events: [],
-        shownEvents: 0
-      };
+      return this.getAdaptedReturnDatas(true);
     });
+  }
+
+  private getAdaptedReturnDatas(error: boolean) {
+    return {
+      events: error ? [] : this.events,
+      shownEvents: error ? 0 : this.shownEvents,
+      categories: error ? [] : this.allCategories
+    };
   }
 
   private extractEvents(data: any) {
@@ -95,7 +97,7 @@ export class EventsService {
       'sportif': 'sports.png',
       'services et aides': 'services.png'
     };
-    return 'assets/icon/events-icon/' + icons.hasOwnProperty(category) ? icons[category] : 'other.png';
+    return 'assets/icon/events-icon/' + (icons.hasOwnProperty(category) ? icons[category] : 'other.png');
   }
 
   private createDateForEvent(str: string): Date {

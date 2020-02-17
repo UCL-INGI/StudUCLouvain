@@ -147,7 +147,7 @@ export class MyApp {
     for (let i = 0; i < titles.length; i++) {
       const page = {
         title: 'MENU.' + titles[i],
-        component: components[i] + 'PAGE',
+        component: components[i] + 'Page',
         icon: './assets/img/' + icons[i] + '.png',
         iosSchemaName: null,
         androidPackageName: null,

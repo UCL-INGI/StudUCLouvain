@@ -33,7 +33,6 @@ import { Market } from '@ionic-native/market';
 import { Network } from '@ionic-native/network';
 import { SecureStorage } from '@ionic-native/secure-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { SQLite } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -108,7 +107,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     RepertoireService,
     StudentService,
     FacService,
-    SQLite,
     SecureStorage,
     InAppBrowser,
     Geolocation
