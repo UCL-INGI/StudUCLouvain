@@ -53,7 +53,9 @@ export class UserService {
   }
 
   private getFromStorage(key: string) {
-    this.storage.get(key).then(data => data ? data : []);
+    this.storage.get(key).then(data => {
+      return data ? data : [];
+    });
     return [];
   }
 

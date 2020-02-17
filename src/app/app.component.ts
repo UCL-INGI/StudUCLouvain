@@ -105,7 +105,7 @@ export class MyApp {
       cache.setOfflineInvalidate(false);
       // this.user.storage.set('first',null);
       this.user.storage.get('first').then(data => {
-        if (data == null) {
+        if (!data) {
           this.rootPage = 'TutoPage';
           this.user.storage.set('first', false);
         } else {
