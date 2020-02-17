@@ -20,7 +20,7 @@ jobs:
 
       install:
         - npm install
-        - npm install -g ionic cordova@^8
+        - npm install -g ionic cordova
         - ionic info
 
       before_script:
@@ -57,7 +57,7 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova@^8
+        - npm install -g ionic cordova
         - npm --version
         - node --version
 
