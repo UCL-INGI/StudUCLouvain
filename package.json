@@ -75,7 +75,7 @@
     "@ionic/app-scripts": "3.2.4",
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
-    "typescript": "~2.6.2"
+    "typescript": "^3.6.5"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",
   "cordova": {

@@ -243,7 +243,6 @@ export class EventsPage {
     if (this.filters === undefined) {
       this.filters = [];
     }
-
     const modal = this.modalCtrl.create('EventsFilterPage', {
       excludedFilters: this.excludedFilters,
       filters: this.filters,
