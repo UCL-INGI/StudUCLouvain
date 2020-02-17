@@ -47,11 +47,7 @@ export class EventsService {
         return;
       }
       this.extractEvents(result);
-      return {
-        events: this.events,
-        shownEvents: this.shownEvents,
-        categories: this.allCategories
-      };
+      return this.getAdaptedReturnDatas(false);
     }).catch(error => {
       if (error === 1) {
         return this.getEvents(segment);
@@ -60,12 +56,16 @@ export class EventsService {
       } else {
         console.log('Error loading events : ' + error);
       }
-      return {
-        events: [],
-        shownEvents: 0,
-        categories: []
-      };
+      return this.getAdaptedReturnDatas(true);
     });
+  }
+
+  private getAdaptedReturnDatas(error: boolean) {
+    return {
+      events: error ? [] : this.events,
+      shownEvents: error ? 0 : this.shownEvents,
+      categories: error ? [] : this.allCategories
+    };
   }
 
   private extractEvents(data: any) {

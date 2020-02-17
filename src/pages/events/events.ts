@@ -139,7 +139,6 @@ export class EventsPage {
     if (this.eventsList) {
       this.eventsList.closeSlidingItems();
     }
-
     if (this.connService.isOnline()) {
       this.utilsService.presentLoading();
       this.eventsService.getEvents(this.segment).then(result => {
