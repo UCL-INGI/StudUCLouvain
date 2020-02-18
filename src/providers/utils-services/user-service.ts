@@ -64,9 +64,10 @@ export class UserService {
   }
 
   getStringData(key: string) {
-    let temp = key === 'campus' ? this.campus : this.fac;
-    this.storage.get(key).then((data) => temp = data ? data : '');
-    key === 'campus' ? this.campus = temp : this.fac = temp;
+    this.storage.get(key).then((data) => {
+      const temp = data ? data : '';
+      key === 'campus' ? this.campus = temp : this.fac = temp;
+    });
   }
 
   getSlots() {
