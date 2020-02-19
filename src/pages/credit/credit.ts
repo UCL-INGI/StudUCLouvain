@@ -22,7 +22,6 @@
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { Component } from '@angular/core';
-import { AppVersion } from '@ionic-native/app-version';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @IonicPage()
@@ -40,12 +39,8 @@ export class CreditPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private iab: InAppBrowser,
-    private appVersion: AppVersion
   ) {
     this.title = this.navParams.get('title');
-    this.appVersion.getVersionNumber().then(version => {
-      this.version = version;
-    });
   }
 
   public openURL(url: string) {

@@ -42,7 +42,6 @@ export class HomePage {
   @ViewChild('home') content: Content;
 
   title = 'Stud.UCLouvain';
-  shownGroup = null;
   where = '';
   myApp: MyApp;
 
