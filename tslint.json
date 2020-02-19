@@ -1,6 +1,6 @@
 {
   "rules": {
-    "no-duplicate-variable": true,
+    "no-duplicate-variable": true
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"
