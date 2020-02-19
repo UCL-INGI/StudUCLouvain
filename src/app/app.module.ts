@@ -31,7 +31,6 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 import { Network } from '@ionic-native/network';
-import { SecureStorage } from '@ionic-native/secure-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
@@ -107,7 +106,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     RepertoireService,
     StudentService,
     FacService,
-    SecureStorage,
     InAppBrowser,
     Geolocation
   ]
