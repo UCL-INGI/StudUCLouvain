@@ -62,6 +62,7 @@
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
+    "@angular-devkit/build-optimizer": "^0.900.3",
     "@angular/cli": "^6.2.9",
     "@ionic/app-scripts": "^3.2.4",
     "ts-node": "^8.0.3",
