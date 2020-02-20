@@ -67,4 +67,13 @@ export class RssService {
         });
     });
   }
+
+  public createDate(dateSplit, timeSplit) {
+    const year = parseInt(dateSplit[2]);
+    const month = parseInt(dateSplit[1]) - 1;
+    const day = parseInt(dateSplit[0]);
+    const hours = parseInt(timeSplit[0]);
+    const minutes = parseInt(timeSplit[1]);
+    return new Date(year, month, day, hours, minutes);
+  }
 }

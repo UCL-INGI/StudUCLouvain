@@ -105,12 +105,6 @@ export class EventsService {
     const dateTimeSplit = str.split(' ');
     const dateSplit = dateTimeSplit[0].split('/');
     const timeSplit = dateTimeSplit[1].split(':');
-    const year = parseInt(dateSplit[2]);
-    const month = parseInt(dateSplit[1]) - 1;
-    const day = parseInt(dateSplit[0]);
-    const hours = parseInt(timeSplit[0]);
-    const minutes = parseInt(timeSplit[1]);
-
-    return new Date(year, month, day, hours, minutes);
+    return this.rssService.createDate(dateSplit, timeSplit);
   }
 }
