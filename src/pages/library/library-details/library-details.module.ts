@@ -1,9 +1,9 @@
-import { IonicPageModule } from 'ionic-angular';
+import {IonicPageModule} from 'ionic-angular';
 
-import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {NgModule} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { LibraryDetailsPage } from './library-details';
+import {LibraryDetailsPage} from './library-details';
 
 @NgModule({
   declarations: [LibraryDetailsPage],
@@ -12,4 +12,5 @@ import { LibraryDetailsPage } from './library-details';
     TranslateModule.forChild()
   ]
 })
-export class LibraryDetailsPageModule { }
+export class LibraryDetailsPageModule {
+}

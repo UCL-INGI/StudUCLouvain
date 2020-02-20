@@ -25,15 +25,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img height="28" src="./assets/img/s.png"/>
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button (tap)="presentFilter()">
+      <button (tap)="presentFilter()" ion-button>
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
+  <ion-segment (ionChange)="cachedOrNot()" [(ngModel)]="segment">
     <ion-segment-button value="all">
       {{'EVENTS.ALL' | translate}}
     </ion-segment-button>
@@ -53,9 +53,9 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD" [hidden]="shownEvents === 0">
 
-    <ion-item-divider *ngIf="item.event.length > 0" (tap)="utilsService.toggleGroup(item.weeks)" text-center>
-      <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}}
-      &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
+    <ion-item-divider (tap)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
+      <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks, year).from | date: 'dd/MM'}}
+      &mdash; {{getRangeWeek(item.weeks, year).to | date: 'dd/MM'}}] ({{item.event.length}})
     </ion-item-divider>
 
     <ion-list *ngFor="let event of item.event" [hidden]="!utilsService.isGroupShown(item.weeks)">
@@ -66,7 +66,7 @@
           <ion-thumbnail item-left>
             <img [src]="event.iconCategory">
           </ion-thumbnail>
-          <button ion-item (tap)="goToEventDetail(event)" no-lines>
+          <button (tap)="goToEventDetail(event)" ion-item no-lines>
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
@@ -75,17 +75,17 @@
         </ion-item>
 
         <ion-item-options>
-          <button ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
+          <button (tap)="createEvent(slidingItem, event)" class="large-icon" ion-button outline>
             <ion-icon name='calendar'></ion-icon>
           </button>
 
-          <button ion-button outline (tap)="utilsService.addFavorite(slidingItem, event, 'EVENTS')"
-            *ngIf="segment === 'all'" class="large-icon">
+          <button (tap)="utilsService.addFavorite(slidingItem, event, 'EVENTS')" *ngIf="segment === 'all'" class="large-icon"
+                  ion-button outline>
             <ion-icon name="star-outline"></ion-icon>
           </button>
 
-          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')"
-            *ngIf="segment === 'favorites'" class="large-icon">
+          <button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+                  class="large-icon" ion-button>
             <ion-icon name='close'></ion-icon>
           </button>
         </ion-item-options>
@@ -98,7 +98,7 @@
   </ion-list-header>
 </ion-content>
 
-<ion-footer text-center *ngIf="segment=='all'">
+<ion-footer *ngIf="segment=='all'" text-center>
   <ion-icon name='help-circle'></ion-icon>
   <p>{{'EVENTS.SWIPE' | translate}}</p>
 </ion-footer>

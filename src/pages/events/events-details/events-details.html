@@ -33,23 +33,23 @@
   <ion-card>
     <ion-card-content>
       <ion-row>
-        <ion-col col-4 *ngIf="event.image !== undefined && event.image.length > 0">
-          <img style="float:left; margin-right: 5px;" src="{{event.image}}" />
+        <ion-col *ngIf="event.image !== undefined && event.image.length > 0" col-4>
+          <img src="{{event.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
-          <p style="text-align: left;" [innerHTML]="event.description"></p>
+          <p [innerHTML]="event.description" style="text-align: left;"></p>
         </ion-col>
       </ion-row>
     </ion-card-content>
     <ion-row no-padding>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="addFavorite(event)">
+        <button (click)="addFavorite(event)" clear icon-left ion-button small>
           <ion-icon name='star'></ion-icon>
           {{'EVENTS.FAV' | translate}}
         </button>
       </ion-col>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(event.link)">
+        <button (click)="openPage(event.link)" clear icon-left ion-button small>
           <ion-icon name='share-alt'></ion-icon>
           {{'EVENTS.SITE' | translate}}
         </button>

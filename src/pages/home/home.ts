@@ -19,19 +19,25 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-    AlertController, App, Content, FabContainer, IonicPage, LoadingController, NavController,
-    NavParams
+  AlertController,
+  App,
+  Content,
+  FabContainer,
+  IonicPage,
+  LoadingController,
+  NavController,
+  NavParams
 } from 'ionic-angular';
 
-import { Component, ViewChild } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component, ViewChild} from '@angular/core';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {Market} from '@ionic-native/market';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
-import { MyApp } from '../../app/app.component';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { StudentService } from '../../providers/wso2-services/student-service';
+import {MyApp} from '../../app/app.component';
+import {UserService} from '../../providers/utils-services/user-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
+import {StudentService} from '../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
@@ -180,7 +186,7 @@ export class HomePage {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsService.launchExternalApp(page);
     } else {
-      this.nav.push(page.component, { title: page.title });
+      this.nav.push(page.component, {title: page.title});
     }
   }
 
@@ -188,6 +194,7 @@ export class HomePage {
     this.iab.create(url, '_system');
     fab.close();
   }
+
   public openUCL(url: string) {
     this.iab.create(url, '_system');
   }
@@ -210,7 +217,7 @@ export class HomePage {
   }
 
   private getAlertEmergencyMsg(): string {
-    const { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 } = this.getAlertEmergencyTexts();
+    const {msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9} = this.getAlertEmergencyTexts();
     return '<p> <strong>' +
       msg1 +
       '</strong>: <br><font size="+1"><a href="tel:010 47 22 22">010 47 22 22</a></font> </p> <p><strong>' +
@@ -245,6 +252,6 @@ export class HomePage {
     const msg8 = this.utilsService.getText('GUINDAILLE', 'HELP8');
     const msg9 = this.utilsService.getText('GUINDAILLE', 'HELP9');
     const out = this.utilsService.getText('GUINDAILLE', 'HELP18');
-    return { msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9 };
+    return {msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9};
   }
 }

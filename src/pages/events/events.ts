@@ -21,21 +21,28 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
-    ToastController
+  AlertController,
+  App,
+  IonicPage,
+  ItemSliding,
+  List,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
 } from 'ionic-angular';
-import { CacheService } from 'ionic-cache';
+import {CacheService} from 'ionic-cache';
 
-import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Calendar } from '@ionic-native/calendar';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Calendar} from '@ionic-native/calendar';
+import {TranslateService} from '@ngx-translate/core';
 
-import { EventItem } from '../../app/entity/eventItem';
-import { EventsService } from '../../providers/rss-services/events-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import {EventItem} from '../../app/entity/eventItem';
+import {EventsService} from '../../providers/rss-services/events-service';
+import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
+import {UserService} from '../../providers/utils-services/user-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -43,7 +50,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'events.html'
 })
 export class EventsPage {
-  @ViewChild('eventsList', { read: List }) eventsList: List;
+  @ViewChild('eventsList', {read: List}) eventsList: List;
 
   events: Array<EventItem> = [];
   searching: any = false;
@@ -108,7 +115,7 @@ export class EventsPage {
   }
 
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.push('EventsDetailsPage', { event: event });
+    this.navCtrl.push('EventsDetailsPage', {event: event});
   }
 
   async cachedOrNot() {
@@ -186,7 +193,7 @@ export class EventsPage {
       return obj;
     }, {});
     const eventsD = Object.keys(groups).map(function (key) {
-      return { weeks: key, event: groups[key] };
+      return {weeks: key, event: groups[key]};
     });
     return eventsD;
   }
@@ -200,13 +207,7 @@ export class EventsPage {
 
     date.setDate(date.getDate() + 6);
     const rangeIsTo = this.getRange(date);
-    return { from: rangeIsFrom, to: rangeIsTo };
-  }
-
-  private getRange(date: Date) {
-    let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
-    range = range.replace(/-/g, '/');
-    return range;
+    return {from: rangeIsFrom, to: rangeIsTo};
   }
 
   public updateDisplayedEvents() {
@@ -233,12 +234,6 @@ export class EventsPage {
     this.utilsService.dismissLoading();
   }
 
-  private getFilterMethod(item: EventItem): unknown {
-    return (this.excludedFilters.indexOf(item.category) < 0 &&
-      item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
-      Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
-  }
-
   presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
@@ -260,15 +255,6 @@ export class EventsPage {
         this.updateDisplayedEvents();
       }
     });
-  }
-
-  private updateDateLimit() {
-    const today = new Date();
-    this.dateLimit = new Date(
-      today.getFullYear(),
-      today.getMonth() + this.dateRange,
-      today.getUTCDate() + 1
-    );
   }
 
   public createEvent(slidingItem: ItemSliding, itemData: any): void {
@@ -302,5 +288,26 @@ export class EventsPage {
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     this.utilsService.removeFavorite(slidingItem, itemData, title, false);
     this.updateDisplayedEvents();
+  }
+
+  private getRange(date: Date) {
+    let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
+    range = range.replace(/-/g, '/');
+    return range;
+  }
+
+  private getFilterMethod(item: EventItem): unknown {
+    return (this.excludedFilters.indexOf(item.category) < 0 &&
+      item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
+      Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
+  }
+
+  private updateDateLimit() {
+    const today = new Date();
+    this.dateLimit = new Date(
+      today.getFullYear(),
+      today.getMonth() + this.dateRange,
+      today.getUTCDate() + 1
+    );
   }
 }
