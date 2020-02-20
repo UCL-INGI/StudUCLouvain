@@ -38,7 +38,8 @@ export class SportsService {
   url = '';
   urlT = '';
 
-  constructor(public user: UserService, public rssService: RssService) {}
+  constructor(public user: UserService, public rssService: RssService) {
+  }
 
   update() {
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate=';

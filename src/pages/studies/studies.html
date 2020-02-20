@@ -96,7 +96,8 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <div *ngIf="error" class="alert alert-danger" id="error" style="color: red" text-center><strong>{{error}}</strong></div>
+          <div *ngIf="error" class="alert alert-danger" id="error" style="color: red" text-center>
+            <strong>{{error}}</strong></div>
           <button [disabled]="!loginForm.form.valid" class="submit-btn" full id="login" ion-button
                   type="submit">Login
           </button>

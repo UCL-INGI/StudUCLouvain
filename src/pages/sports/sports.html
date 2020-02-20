@@ -54,7 +54,8 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider (tap)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0" [ngClass]="{'team' : segment == 'team'}" class="all"
+    <ion-item-divider (tap)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
+                      [ngClass]="{'team' : segment == 'team'}" class="all"
                       text-center>
       {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
     </ion-item-divider>
@@ -76,7 +77,8 @@
           <button (tap)="addToCalendar(slidingItem, sport)" class="large-icon" ion-button>
             <ion-icon name='calendar'></ion-icon>
           </button>
-          <button (tap)="utilsService.addFavorite(slidingItem, sport, 'SPORTS')" *ngIf="segment === 'all' || segment === 'team'"
+          <button (tap)="utilsService.addFavorite(slidingItem, sport, 'SPORTS')"
+                  *ngIf="segment === 'all' || segment === 'team'"
                   class="large-icon" ion-button>
             <ion-icon name="star-outline"></ion-icon>
           </button>
@@ -92,7 +94,8 @@
 
   </ion-list>
 
-  <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching" [ngClass]="{'team' : segment == 'team'}"
+  <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching"
+                   [ngClass]="{'team' : segment == 'team'}"
                    class="all">
     {{'SPORTS.NOTHING' | translate}}
   </ion-list-header>
