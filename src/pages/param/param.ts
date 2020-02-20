@@ -18,16 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    AlertController, IonicPage, ModalController, NavController, NavParams
-} from 'ionic-angular';
+import {AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import {UserService} from '../../providers/utils-services/user-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -35,8 +33,8 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'param.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -74,50 +72,6 @@ export class ParamPage {
     });
     const settingsAlert = this.getSettingsAlert(setting, message, check, save);
     settingsAlert.present();
-  }
-
-  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
-    return this.alertCtrl.create({
-      title: setting,
-      message: message,
-      inputs: this.getSettingsInputs(check),
-      buttons: [
-        {
-          text: save,
-          handler: data => {
-            this.userS.addCampus(data);
-          }
-        }
-      ]
-    });
-  }
-
-  private getCampusChoiceInput(label: string, value: string, check: string) {
-    return {
-      type: 'radio',
-      label: label,
-      value: value,
-      checked: check === value
-    };
-  }
-  private getSettingsInputs(check: string) {
-    return [
-      this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
-      this.getCampusChoiceInput('Woluwé', 'Woluwe', check),
-      this.getCampusChoiceInput('Mons', 'Mons', check),
-      {
-        type: 'radio',
-        label: 'Tournai',
-        value: 'Tournai',
-        disabled: true
-      },
-      {
-        type: 'radio',
-        label: 'St-Gilles',
-        value: 'StG',
-        disabled: true
-      }
-    ];
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
@@ -163,5 +117,50 @@ export class ParamPage {
 
   openTuto() {
     this.navCtrl.push('TutoPage');
+  }
+
+  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
+    return this.alertCtrl.create({
+      title: setting,
+      message: message,
+      inputs: this.getSettingsInputs(check),
+      buttons: [
+        {
+          text: save,
+          handler: data => {
+            this.userS.addCampus(data);
+          }
+        }
+      ]
+    });
+  }
+
+  private getCampusChoiceInput(label: string, value: string, check: string) {
+    return {
+      type: 'radio',
+      label: label,
+      value: value,
+      checked: check === value
+    };
+  }
+
+  private getSettingsInputs(check: string) {
+    return [
+      this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
+      this.getCampusChoiceInput('Woluwé', 'Woluwe', check),
+      this.getCampusChoiceInput('Mons', 'Mons', check),
+      {
+        type: 'radio',
+        label: 'Tournai',
+        value: 'Tournai',
+        disabled: true
+      },
+      {
+        type: 'radio',
+        label: 'St-Gilles',
+        value: 'StG',
+        disabled: true
+      }
+    ];
   }
 }

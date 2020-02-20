@@ -20,21 +20,19 @@
 */
 import 'rxjs/add/operator/debounceTime';
 
-import {
-    AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform
-} from 'ionic-angular';
-import { CacheService } from 'ionic-cache';
+import {AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform} from 'ionic-angular';
+import {CacheService} from 'ionic-cache';
 
-import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {Component, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
-import { NewsItem } from '../../app/entity/newsItem';
-import { NewsService } from '../../providers/rss-services/news-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { FacService } from '../../providers/utils-services/fac-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import {NewsItem} from '../../app/entity/newsItem';
+import {NewsService} from '../../providers/rss-services/news-service';
+import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
+import {FacService} from '../../providers/utils-services/fac-service';
+import {UserService} from '../../providers/utils-services/user-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -43,6 +41,24 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 })
 export class NewsPage {
   // url = 'assets/data/fac.json';
+
+  @ViewChild('newsList', {read: List}) newsList: List;
+  @ViewChild('news') content: Content;
+  news: Array<NewsItem> = [];
+  segment = 'univ';
+  subsegment = 'P1';
+  facsegment = 'news';
+  shownNews = 0;
+  displayedNews: Array<NewsItem> = [];
+  searching: any = false;
+  searchControl: FormControl;
+  searchTerm = '';
+  title = 'Actualités';
+  nonews: any = false;
+  fac = '';
+  listFac: any = [];
+  site = '';
+  rss = '';
 
   constructor(
     public platform: Platform,
@@ -66,25 +82,6 @@ export class NewsPage {
       this.listFac = data;
     });
   }
-
-  @ViewChild('newsList', { read: List }) newsList: List;
-  @ViewChild('news') content: Content;
-
-  news: Array<NewsItem> = [];
-  segment = 'univ';
-  subsegment = 'P1';
-  facsegment = 'news';
-  shownNews = 0;
-  displayedNews: Array<NewsItem> = [];
-  searching: any = false;
-  searchControl: FormControl;
-  searchTerm = '';
-  title = 'Actualités';
-  nonews: any = false;
-  fac = '';
-  listFac: any = [];
-  site = '';
-  rss = '';
 
   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize() {
@@ -120,7 +117,7 @@ export class NewsPage {
     for (const sector of this.listFac) {
       for (const facs of sector.facs) {
         if (facs.acro === this.fac) {
-          return { site: facs.site, rss: facs.rss };
+          return {site: facs.site, rss: facs.rss};
         }
       }
     }
@@ -155,7 +152,8 @@ export class NewsPage {
     }
   }
 
-  facTabChange() { }
+  facTabChange() {
+  }
 
   tabChanged() {
     this.resize();
@@ -237,6 +235,6 @@ export class NewsPage {
   }
 
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push('NewsDetailsPage', { news: news });
+    this.navCtrl.push('NewsDetailsPage', {news: news});
   }
 }

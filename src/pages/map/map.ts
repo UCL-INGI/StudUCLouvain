@@ -18,16 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform
-} from 'ionic-angular';
+import {ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform} from 'ionic-angular';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Geolocation} from '@ionic-native/geolocation';
 
-import { MapLocation } from '../../app/entity/mapLocation';
-import { MapService } from '../../providers/map-services/map-service';
-import { POIService } from '../../providers/map-services/poi-service';
+import {MapLocation} from '../../app/entity/mapLocation';
+import {MapService} from '../../providers/map-services/map-service';
+import {POIService} from '../../providers/map-services/poi-service';
 
 @IonicPage()
 @Component({
@@ -52,12 +50,12 @@ export class MapPage {
   temp2: any;
 
   constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController,
-    public mapService: MapService,
-    public platform: Platform,
-    public navParams: NavParams,
-    public poilocations: POIService) {
+              public modalCtrl: ModalController,
+              public actionSheetCtrl: ActionSheetController,
+              public mapService: MapService,
+              public platform: Platform,
+              public navParams: NavParams,
+              public poilocations: POIService) {
     this.title = this.navParams.get('title');
   }
 
