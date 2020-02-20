@@ -19,10 +19,10 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Events } from 'ionic-angular';
+import {Events} from 'ionic-angular';
 
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import {Injectable} from '@angular/core';
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class UserService {
@@ -50,13 +50,6 @@ export class UserService {
 
   getFavorites() {
     this.favorites = this.getFromStorage('listEvents');
-  }
-
-  private getFromStorage(key: string) {
-    this.storage.get(key).then(data => {
-      return data ? data : [];
-    });
-    return [];
   }
 
   getSports() {
@@ -104,7 +97,9 @@ export class UserService {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       return this.slots[index].TP.length > 0;
-    } else { return index > -1; }
+    } else {
+      return index > -1;
+    }
 
   }
 
@@ -112,7 +107,9 @@ export class UserService {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       return this.slots[index].CM.length > 0;
-    } else { return index > -1; }
+    } else {
+      return index > -1;
+    }
   }
 
   addFavorite(itemGuid: string, listType: string) {
@@ -157,7 +154,7 @@ export class UserService {
     if (index > -1) {
       this.slots[index].TP = slot;
     } else {
-      const item = { course: acronym, TP: slot, CM: '' };
+      const item = {course: acronym, TP: slot, CM: ''};
       this.slots.push(item);
     }
     this.storage.set('slots', this.slots);
@@ -176,9 +173,16 @@ export class UserService {
     if (index > -1) {
       this.slots[index].CM = slot;
     } else {
-      const item = { course: acronym, TP: '', CM: slot };
+      const item = {course: acronym, TP: '', CM: slot};
       this.slots.push(item);
     }
     this.storage.set('slots', this.slots);
+  }
+
+  private getFromStorage(key: string) {
+    this.storage.get(key).then(data => {
+      return data ? data : [];
+    });
+    return [];
   }
 }

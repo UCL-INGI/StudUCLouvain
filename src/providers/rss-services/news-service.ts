@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { NewsItem } from '../../app/entity/newsItem';
-import { RssService } from './rss-service';
+import {NewsItem} from '../../app/entity/newsItem';
+import {RssService} from './rss-service';
 
 @Injectable()
 export class NewsService {
@@ -36,6 +36,7 @@ export class NewsService {
   news = [];
   shownNews = 0;
   maxDescLength = 20;
+
   constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
@@ -101,7 +102,9 @@ export class NewsService {
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
       let img = '';
-      if (item.enclosure != null) { img = item.enclosure._url; }
+      if (item.enclosure != null) {
+        img = item.enclosure._url;
+      }
       const newNewsItem = new NewsItem(
         item.description || 'No description...',
         item.link || 'No link',

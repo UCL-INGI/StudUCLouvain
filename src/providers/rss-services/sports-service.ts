@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { SportItem } from '../../app/entity/sportItem';
-import { UserService } from '../utils-services/user-service';
-import { RssService } from './rss-service';
+import {SportItem} from '../../app/entity/sportItem';
+import {UserService} from '../utils-services/user-service';
+import {RssService} from './rss-service';
 
 @Injectable()
 export class SportsService {
@@ -56,15 +56,22 @@ export class SportsService {
 
     let site: string;
     const campus = this.user.campus;
-    if (campus === 'LLN') { site = 'louv'; }
-    if (campus === 'Woluwe') { site = 'wol'; }
-    if (campus === 'Mons') { site = 'mons'; }
+    if (campus === 'LLN') {
+      site = 'louv';
+    }
+    if (campus === 'Woluwe') {
+      site = 'wol';
+    }
+    if (campus === 'Mons') {
+      site = 'mons';
+    }
 
     const restUrl = todayString + '&-enddate=' + endString + '&-site=';
     const urlTemp = this.url + restUrl + site;
     const urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
+
     function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
@@ -100,10 +107,10 @@ export class SportsService {
       shownSports: this.shownSports,
       categories: this.allCategories
     } : {
-        teams: this.teams,
-        shownTeams: this.shownTeams,
-        categories: this.allCategoriesT
-      };
+      teams: this.teams,
+      shownTeams: this.shownTeams,
+      categories: this.allCategoriesT
+    };
   }
 
   private extractSports(data: any, isSport: boolean = true) {

@@ -21,20 +21,22 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { AdeProject } from '../../app/entity/adeProject';
-import { AdeService } from './ade-service';
+import {AdeProject} from '../../app/entity/adeProject';
+import {AdeService} from './ade-service';
 
 @Injectable()
 export class StudiesService {
   url: string;
   projects: AdeProject[];
   data: any;
+
   constructor(
     public http: HttpClient,
-    public ade: AdeService) { }
+    public ade: AdeService) {
+  }
 
   /*Open session for the user*/
   openSession() {
@@ -83,7 +85,9 @@ export class StudiesService {
   setProject(sessionId: string, projectId: string) {
     return new Promise((resolve, reject) => {
       this.ade.httpSetProject(sessionId, projectId).subscribe(
-        data => { resolve(data); }
+        data => {
+          resolve(data);
+        }
       );
     });
   }

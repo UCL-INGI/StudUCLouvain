@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { Activity } from '../../app/entity/activity';
-import { AdeService } from './ade-service';
+import {Activity} from '../../app/entity/activity';
+import {AdeService} from './ade-service';
 
 @Injectable()
 export class CourseService {
@@ -49,7 +49,9 @@ export class CourseService {
   /*Extract the course ID*/
   extractCourseId(data) {
 
-    if (data.resources.resource !== undefined) { return data.resources.resource._id; }
+    if (data.resources.resource !== undefined) {
+      return data.resources.resource._id;
+    }
   }
 
   /*Get activity for a course ID obtained by getting this from a course selected by the user*/
@@ -109,15 +111,6 @@ export class CourseService {
     return activities;
   }
 
-  private handleSpecialCase(events: any) {
-    if (events.length === undefined) {
-      const temp = events;
-      events = [];
-      events.push(temp);
-    }
-    return events;
-  }
-
   /*Create a date*/
   createDate(date: string, hour: string): Date {
     const splitDate = date.split('/');
@@ -165,6 +158,14 @@ export class CourseService {
     return auditorium;
   }
 
+  private handleSpecialCase(events: any) {
+    if (events.length === undefined) {
+      const temp = events;
+      events = [];
+      events.push(temp);
+    }
+    return events;
+  }
 
 
 }

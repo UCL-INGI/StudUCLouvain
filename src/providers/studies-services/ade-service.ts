@@ -21,14 +21,15 @@
 
 import X2JS from 'x2js';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AdeService {
   AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
   AdeserviceConnection = 'function=connect&login=' + 'etudiant' + '&password=' + 'student';
   AdeServiceGetProjects = '&function=getProjects&detail=2';
+
   constructor(public http: HttpClient) {
   }
 
@@ -37,7 +38,7 @@ export class AdeService {
   }
 
   load(url: string) {
-    return this.http.get(url, { responseType: 'text' }).map(res => {
+    return this.http.get(url, {responseType: 'text'}).map(res => {
       return this.convertXmlToJson(res);
     });
   }

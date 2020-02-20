@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { MapLocation } from '../../app/entity/mapLocation';
-import { UserService } from '../utils-services/user-service';
+import {MapLocation} from '../../app/entity/mapLocation';
+import {UserService} from '../utils-services/user-service';
 
 @Injectable()
 export class POIService {
@@ -36,9 +36,9 @@ export class POIService {
   urlMons = 'assets/data/resourcesMons.json';
   urlWol = 'assets/data/resourcesWoluwe.json';
   old = '';
-  constructor(public http: HttpClient,
 
-    public user: UserService) {
+  constructor(public http: HttpClient,
+              public user: UserService) {
     this.old = this.user.campus;
     this.update();
 
@@ -52,7 +52,9 @@ export class POIService {
       'Woluwe': this.urlWol,
       'Mons': this.urlMons
     };
-    if (urls[campus]) { this.url = urls[campus]; }
+    if (urls[campus]) {
+      this.url = urls[campus];
+    }
     if (campus !== this.old) {
       this.zones = [];
       this.old = campus;

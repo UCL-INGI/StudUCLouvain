@@ -23,19 +23,25 @@
 // This code is inspired from the great Josh Morony tutorials :
 // https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
 
-import { MenuController, Platform } from 'ionic-angular';
+import {MenuController, Platform} from 'ionic-angular';
 
-import { Injectable } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation';
+import {Injectable} from '@angular/core';
+import {Geolocation} from '@ionic-native/geolocation';
 import {
-    CameraPosition, GoogleMaps, GoogleMapsEvent, GoogleMapsMapTypeId, LatLng, LocationService,
-    Marker, MarkerOptions
+  CameraPosition,
+  GoogleMaps,
+  GoogleMapsEvent,
+  GoogleMapsMapTypeId,
+  LatLng,
+  LocationService,
+  Marker,
+  MarkerOptions
 } from '@ionic-native/google-maps';
 
-import { MapLocation } from '../../app/entity/mapLocation';
-import { jsApiKey } from '../../app/variables-config';
-import { ConnectivityService } from '../utils-services/connectivity-service';
-import { UserService } from '../utils-services/user-service';
+import {MapLocation} from '../../app/entity/mapLocation';
+import {jsApiKey} from '../../app/variables-config';
+import {ConnectivityService} from '../utils-services/connectivity-service';
+import {UserService} from '../utils-services/user-service';
 
 declare var google;
 
@@ -71,6 +77,49 @@ export class MapService {
     this.mapElement = mapElement;
     this.pleaseConnectVar = pleaseConnect;
     return this.onDevice ? this.loadDeviceGoogleMaps() : this.loadBrowserGoogleMaps();
+  }
+
+  addMarker(location: MapLocation) {
+    const marker = this.getMarker(location.title);
+    if (!marker) {
+      const contentString = '<p>' + location.address + '</p>';
+      const m = this.onDevice ? this.markers : this.markersB;
+      for (const loc of m) {
+        if (loc.getTitle() !== this.userLocation.title) {
+          this.removeMarker(new MapLocation(loc.getTitle()));
+        }
+      }
+      this.onDevice ?
+        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title) :
+        this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
+    } else if (this.onDevice) {
+      marker.showInfoWindow();
+    }
+  }
+
+  removeMarker(location: MapLocation) {
+    const m = this.onDevice ? this.markers : this.markersB;
+    for (let i = 0; i < m.length; i++) {
+      if (m[i].getTitle() === location.title) {
+        if (this.onDevice) {
+          this.markers[i].remove();
+          this.markers.splice(i, 1);
+        } else {
+          this.markersB[i].setMap(null);
+          // this.markersB.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  setMapClickable(enable: boolean) {
+    if (this.map && this.onDevice) {
+      this.map.setClickable(enable);
+    }
+  }
+
+  getUserLocation(): MapLocation {
+    return this.userLocation;
   }
 
   private loadBrowserGoogleMaps(): Promise<any> {
@@ -171,10 +220,10 @@ export class MapService {
   }
 
   private getCampusLocalisation(campus: string) {
-    const { lat, lng } = {
-      'LLN': { 'lat': 50.66808100000001, 'lng': 4.611832400000026 },
-      'Woluwe': { 'lat': 50.8489094, 'lng': 4.432088300000032 },
-      'Mons': { 'lat': 50.45424080000001, 'lng': 3.956658999999945 },
+    const {lat, lng} = {
+      'LLN': {'lat': 50.66808100000001, 'lng': 4.611832400000026},
+      'Woluwe': {'lat': 50.8489094, 'lng': 4.432088300000032},
+      'Mons': {'lat': 50.45424080000001, 'lng': 3.956658999999945},
     }[campus];
     return new LatLng(lat, lng);
   }
@@ -203,39 +252,6 @@ export class MapService {
         reject(false);
       });
     });
-  }
-
-  addMarker(location: MapLocation) {
-    const marker = this.getMarker(location.title);
-    if (!marker) {
-      const contentString = '<p>' + location.address + '</p>';
-      const m = this.onDevice ? this.markers : this.markersB;
-      for (const loc of m) {
-        if (loc.getTitle() !== this.userLocation.title) {
-          this.removeMarker(new MapLocation(loc.getTitle()));
-        }
-      }
-      this.onDevice ?
-        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title) :
-        this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
-    } else if (this.onDevice) {
-      marker.showInfoWindow();
-    }
-  }
-
-  removeMarker(location: MapLocation) {
-    const m = this.onDevice ? this.markers : this.markersB;
-    for (let i = 0; i < m.length; i++) {
-      if (m[i].getTitle() === location.title) {
-        if (this.onDevice) {
-          this.markers[i].remove();
-          this.markers.splice(i, 1);
-        } else {
-          this.markersB[i].setMap(null);
-          // this.markersB.splice(i, 1);
-        }
-      }
-    }
   }
 
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
@@ -294,12 +310,6 @@ export class MapService {
     }
   }
 
-  setMapClickable(enable: boolean) {
-    if (this.map && this.onDevice) {
-      this.map.setClickable(enable);
-    }
-  }
-
   private pleaseConnect(disable: boolean) {
     if (this.pleaseConnectVar) {
       this.pleaseConnectVar.style.display = disable ? 'block' : 'none';
@@ -321,9 +331,5 @@ export class MapService {
       }, 2000);
     }, false);
     document.addEventListener('offline', () => this.pleaseConnect(true), false);
-  }
-
-  getUserLocation(): MapLocation {
-    return this.userLocation;
   }
 }

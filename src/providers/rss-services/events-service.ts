@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { EventItem } from '../../app/entity/eventItem';
-import { UserService } from '../utils-services/user-service';
-import { RssService } from './rss-service';
+import {EventItem} from '../../app/entity/eventItem';
+import {UserService} from '../utils-services/user-service';
+import {RssService} from './rss-service';
 
 @Injectable()
 export class EventsService {
@@ -37,7 +37,8 @@ export class EventsService {
 
   url = 'https://louvainfo.be/calendrier/feed/calendar/';
 
-  constructor(public user: UserService, public rssService: RssService) { }
+  constructor(public user: UserService, public rssService: RssService) {
+  }
 
   public getEvents(segment: string) {
     this.events = [];
@@ -58,6 +59,18 @@ export class EventsService {
       }
       return this.getAdaptedReturnDatas(true);
     });
+  }
+
+  public getIconCategory(category: string): string {
+    const icons = {
+      'sensibilisation': 'sensibilisation.png',
+      'animation': 'animation.png',
+      'culturel et artistique': 'cultural.png',
+      'guindaille': 'party.png',
+      'sportif': 'sports.png',
+      'services et aides': 'services.png'
+    };
+    return 'assets/icon/events-icon/' + (icons.hasOwnProperty(category) ? icons[category] : 'other.png');
   }
 
   private getAdaptedReturnDatas(error: boolean) {
@@ -86,18 +99,6 @@ export class EventsService {
         false, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
     }
-  }
-
-  public getIconCategory(category: string): string {
-    const icons = {
-      'sensibilisation': 'sensibilisation.png',
-      'animation': 'animation.png',
-      'culturel et artistique': 'cultural.png',
-      'guindaille': 'party.png',
-      'sportif': 'sports.png',
-      'services et aides': 'services.png'
-    };
-    return 'assets/icon/events-icon/' + (icons.hasOwnProperty(category) ? icons[category] : 'other.png');
   }
 
   private createDateForEvent(str: string): Date {

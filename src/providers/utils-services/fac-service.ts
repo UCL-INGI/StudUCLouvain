@@ -21,13 +21,14 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class FacService {
   facultes: any = [];
   url = 'assets/data/fac.json';
+
   constructor(public http: HttpClient) {
 
   }
