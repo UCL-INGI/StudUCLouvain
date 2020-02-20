@@ -19,21 +19,19 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-    AlertController, IonicApp, LoadingController, MenuController, Nav, Platform
-} from 'ionic-angular';
-import { CacheService } from 'ionic-cache';
+import {AlertController, IonicApp, LoadingController, MenuController, Nav, Platform} from 'ionic-angular';
+import {CacheService} from 'ionic-cache';
 
-import { Component, ViewChild } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, ViewChild} from '@angular/core';
+import {AppAvailability} from '@ionic-native/app-availability';
+import {Device} from '@ionic-native/device';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {Market} from '@ionic-native/market';
+import {TranslateService} from '@ngx-translate/core';
 
-import { HomePage } from '../pages/home/home';
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import {HomePage} from '../pages/home/home';
+import {UserService} from '../providers/utils-services/user-service';
+import {Wso2Service} from '../providers/wso2-services/wso2-service';
 
 // declare var TestFairy: any;
 
@@ -113,33 +111,6 @@ export class MyApp {
         }
       });
     });
-  }
-
-  private getPages() {
-    this.homePage = {
-      title: 'MENU.HOME',
-      component: 'HomePage',
-      icon: './assets/img/home.png',
-      iosSchemaName: null,
-      androidPackageName: null,
-      appUrl: null,
-      httpUrl: null
-    };
-
-    const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
-    const campusComp = ['News', 'Events', 'Sports'];
-    const campusIcon = ['news', 'event', 'sport'];
-    this.campusPages = this.getPagesSection(campusTitles, campusComp, campusIcon);
-
-    const studieTitles = ['STUDIES', 'LIBRARY', 'HELP'];
-    const studieComp = ['Studies', 'Libraries', 'Support'];
-    const studieIcon = ['études', 'biblio', 'support'];
-    this.studiePages = this.getPagesSection(studieTitles, studieComp, studieIcon);
-
-    const toolsTitles = ['PARTY', 'MAP', 'RESTAURANT', 'MOBILITY', 'PARAM', 'CREDITS'];
-    const toolsComp = ['Guindaille', 'Map', 'Restaurant', 'Mobility', 'Param', 'Credit'];
-    const toolsIcon = ['g2', 'cartes', 'resto', 'mobilité', 'setting', 'signature'];
-    this.toolPages = this.getPagesSection(toolsTitles, toolsComp, toolsIcon);
   }
 
   getPagesSection(titles: Array<string>, components: Array<string>, icons: Array<string>) {
@@ -227,7 +198,8 @@ export class MyApp {
       buttons: [
         {
           text: 'OK',
-          handler: data => { }
+          handler: data => {
+          }
         }
       ]
     });
@@ -252,7 +224,7 @@ export class MyApp {
         if (this.nav.length() > 1) {
           this.nav.pop();
         }
-        this.nav.push(page.component, { title: page.title });
+        this.nav.push(page.component, {title: page.title});
       }
     }
   }
@@ -271,12 +243,39 @@ export class MyApp {
       browser.close();
     }
     this.appAvailability.check(check).then(() => {
-      const browser = this.iab.create(appUrl, '_system');
-      browser.close();
-    },
+        const browser = this.iab.create(appUrl, '_system');
+        browser.close();
+      },
       () => {
         this.market.open(app);
       }
     );
+  }
+
+  private getPages() {
+    this.homePage = {
+      title: 'MENU.HOME',
+      component: 'HomePage',
+      icon: './assets/img/home.png',
+      iosSchemaName: null,
+      androidPackageName: null,
+      appUrl: null,
+      httpUrl: null
+    };
+
+    const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
+    const campusComp = ['News', 'Events', 'Sports'];
+    const campusIcon = ['news', 'event', 'sport'];
+    this.campusPages = this.getPagesSection(campusTitles, campusComp, campusIcon);
+
+    const studieTitles = ['STUDIES', 'LIBRARY', 'HELP'];
+    const studieComp = ['Studies', 'Libraries', 'Support'];
+    const studieIcon = ['études', 'biblio', 'support'];
+    this.studiePages = this.getPagesSection(studieTitles, studieComp, studieIcon);
+
+    const toolsTitles = ['PARTY', 'MAP', 'RESTAURANT', 'MOBILITY', 'PARAM', 'CREDITS'];
+    const toolsComp = ['Guindaille', 'Map', 'Restaurant', 'Mobility', 'Param', 'Credit'];
+    const toolsIcon = ['g2', 'cartes', 'resto', 'mobilité', 'setting', 'signature'];
+    this.toolPages = this.getPagesSection(toolsTitles, toolsComp, toolsIcon);
   }
 }
