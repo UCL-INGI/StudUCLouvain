@@ -119,8 +119,7 @@ export class EventsPage {
 
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
-    await this.cache
-      .getItem('cache-event').then(data => {
+    await this.cache.getItem('cache-event').then(data => {
         this.utilsService.presentLoading();
         this.events = data.events;
         this.events.forEach(function (element) {
