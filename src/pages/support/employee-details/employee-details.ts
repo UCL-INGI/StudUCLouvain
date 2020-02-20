@@ -19,14 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component} from '@angular/core';
 
-import { EmployeeItem } from '../../../app/entity/employeeItem';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
-import { RepertoireService } from '../../../providers/wso2-services/repertoire-service';
+import {EmployeeItem} from '../../../app/entity/employeeItem';
+import {ConnectivityService} from '../../../providers/utils-services/connectivity-service';
+import {RepertoireService} from '../../../providers/wso2-services/repertoire-service';
 
 @IonicPage()
 @Component({
@@ -34,8 +34,8 @@ import { RepertoireService } from '../../../providers/wso2-services/repertoire-s
   templateUrl: 'employee-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -68,7 +68,8 @@ export class EmployeeDetailsPage {
     }
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+  }
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {

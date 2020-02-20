@@ -1,9 +1,9 @@
-import { IonicPageModule } from 'ionic-angular';
+import {IonicPageModule} from 'ionic-angular';
 
-import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {NgModule} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { SportsFilterPage } from './sports-filter';
+import {SportsFilterPage} from './sports-filter';
 
 @NgModule({
   declarations: [SportsFilterPage],
@@ -12,4 +12,5 @@ import { SportsFilterPage } from './sports-filter';
     TranslateModule.forChild()
   ]
 })
-export class SportsFilterPageModule { }
+export class SportsFilterPageModule {
+}

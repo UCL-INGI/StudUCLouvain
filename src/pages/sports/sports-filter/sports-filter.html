@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button (tap)="dismiss()">{{'SPORTS.CANCEL' | translate}}</button>
+      <button (tap)="dismiss()" ion-button>{{'SPORTS.CANCEL' | translate}}</button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,7 +32,7 @@
       </ion-col>
     </ion-row>
     <ion-buttons end>
-      <button ion-button (tap)="applyFilters()" strong>{{'SPORTS.APPLY' | translate}}</button>
+      <button (tap)="applyFilters()" ion-button strong>{{'SPORTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -42,13 +42,13 @@
 
   <ion-toolbar color="uclouvain">
     <ion-buttons left>
-      <button ion-button icon-right end (tap)="uncheckAll()">
+      <button (tap)="uncheckAll()" end icon-right ion-button>
         {{'SPORTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-right (tap)="resetFilters()">
+      <button (tap)="resetFilters()" icon-right ion-button>
         {{'SPORTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
       </button>
@@ -63,7 +63,6 @@
     </ion-item>
 
   </ion-list>
-
 
 
 </ion-content>

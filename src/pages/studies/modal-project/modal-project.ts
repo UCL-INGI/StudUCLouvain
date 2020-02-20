@@ -19,13 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 
-import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import {Component} from '@angular/core';
+import {Storage} from '@ionic/storage';
 
-import { AdeProject } from '../../../app/entity/adeProject';
-import { StudiesService } from '../../../providers/studies-services/studies-service';
+import {AdeProject} from '../../../app/entity/adeProject';
+import {StudiesService} from '../../../providers/studies-services/studies-service';
 
 @IonicPage()
 @Component({
@@ -42,7 +42,8 @@ export class ModalProjectPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studiesService: StudiesService
-  ) { }
+  ) {
+  }
 
   /*Set the project and close de view of the modal*/
   closeModal(project: AdeProject) {

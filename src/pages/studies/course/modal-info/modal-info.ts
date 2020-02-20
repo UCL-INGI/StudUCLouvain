@@ -19,11 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { StudentService } from '../../../../providers/wso2-services/student-service';
+import {StudentService} from '../../../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
@@ -38,7 +38,6 @@ export class ModalInfoPage {
 
   constructor(
     public navCtrl: NavController,
-
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studentService: StudentService
@@ -79,6 +78,10 @@ export class ModalInfoPage {
     });
   }
 
+  closeModal() {
+    this.viewCtrl.dismiss();
+  }
+
   private assignInfosData(res: any) {
     let cahier = '';
     const campus = res.campus.name;
@@ -92,7 +95,7 @@ export class ModalInfoPage {
     const quadri = res.quadrimester_text;
     // const resume = res.resumeCoursMap.entry[1].value;
     const resume = res.resumeCoursMap;
-    const volume = { vol1: '', vol2: '', vol1Coef: '', vol2Coef: '' };
+    const volume = {vol1: '', vol2: '', vol1Coef: '', vol2Coef: ''};
     for (const vol of res.components) {
       if (vol.type === 'LECTURING') {
         volume.vol1 = vol.hourly_volume_total_annual;
@@ -103,10 +106,6 @@ export class ModalInfoPage {
     if (res.cahierChargesExiste) {
       cahier = res.cahierChargesMap.entry[1].value;
     }
-    return { cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue };
-  }
-
-  closeModal() {
-    this.viewCtrl.dismiss();
+    return {cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue};
   }
 }

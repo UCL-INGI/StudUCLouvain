@@ -22,19 +22,26 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
-    ToastController
+  AlertController,
+  App,
+  IonicPage,
+  ItemSliding,
+  List,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 
-import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Calendar } from '@ionic-native/calendar';
+import {Component, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Calendar} from '@ionic-native/calendar';
 
-import { SportItem } from '../../app/entity/sportItem';
-import { SportsService } from '../../providers/rss-services/sports-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import {SportItem} from '../../app/entity/sportItem';
+import {SportsService} from '../../providers/rss-services/sports-service';
+import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
+import {UserService} from '../../providers/utils-services/user-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -42,7 +49,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'sports.html'
 })
 export class SportsPage {
-  @ViewChild('sportsList', { read: List }) sportsList: List;
+  @ViewChild('sportsList', {read: List}) sportsList: List;
 
   sports: Array<SportItem> = [];
   teams: Array<SportItem> = [];
@@ -120,15 +127,6 @@ export class SportsPage {
     }
   }
 
-  private getDatas(isSport: boolean) {
-    return this.sportsService.getSports(this.segment, isSport).then(result => {
-      isSport ? this.sports = result.sports : this.teams = result.teams;
-      isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
-      isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
-      isSport ? this.nosport = this.sports.length === 0 : this.noteams = this.teams.length === 0;
-    });
-  }
-
   public changeArray(array) {
     const groups = array.reduce(function (obj, item) {
       obj[item.jour] = obj[item.jour] || [];
@@ -136,7 +134,7 @@ export class SportsPage {
       return obj;
     }, {});
     const sportsD = Object.keys(groups).map(function (key) {
-      return { jour: key, name: groups[key] };
+      return {jour: key, name: groups[key]};
     });
     return sportsD;
   }
@@ -169,17 +167,6 @@ export class SportsPage {
     this.utilsService.dismissLoading();
   }
 
-  private filterDisplayedSports(items: Array<SportItem>) {
-    this.displayedSports = items.filter(item => {
-      return (
-        this.excludedFilters.indexOf(item.sport) < 0 &&
-        item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
-        Math.floor(item.date.getTime() / 86400000) <=
-        Math.floor(this.dateLimit.getTime() / 86400000)
-      );
-    });
-  }
-
   presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
@@ -197,6 +184,55 @@ export class SportsPage {
       exclude = this.excludedFiltersT;
     }
     this.modalFilter(exclude, cat);
+  }
+
+  addToCalendar(slidingItem: ItemSliding, itemData: SportItem) {
+    const options: any = {
+      firstReminderMinutes: 30
+    };
+
+    this.calendar
+      .createEventWithOptions(
+        itemData.sport,
+        itemData.lieu,
+        itemData.salle,
+        itemData.date,
+        itemData.hfin,
+        options
+      )
+      .then(() => {
+        const toast = this.toastCtrl.create({
+          message: 'Sport créé',
+          duration: 3000
+        });
+        toast.present();
+        slidingItem.close();
+      });
+  }
+
+  removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
+    this.utilsService.removeFavorite(slidingItem, itemData, title, true);
+    this.updateDisplayedSports();
+  }
+
+  private getDatas(isSport: boolean) {
+    return this.sportsService.getSports(this.segment, isSport).then(result => {
+      isSport ? this.sports = result.sports : this.teams = result.teams;
+      isSport ? this.shownSports = result.shownSports : this.shownTeams = result.shownTeams;
+      isSport ? this.filters = result.categories : this.filtersT = result.categoriesT;
+      isSport ? this.nosport = this.sports.length === 0 : this.noteams = this.teams.length === 0;
+    });
+  }
+
+  private filterDisplayedSports(items: Array<SportItem>) {
+    this.displayedSports = items.filter(item => {
+      return (
+        this.excludedFilters.indexOf(item.sport) < 0 &&
+        item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
+        Math.floor(item.date.getTime() / 86400000) <=
+        Math.floor(this.dateLimit.getTime() / 86400000)
+      );
+    });
   }
 
   private modalFilter(exclude: any, cat: any) {
@@ -232,34 +268,5 @@ export class SportsPage {
       today.getMonth(),
       today.getUTCDate() + this.dateRange
     );
-  }
-
-  addToCalendar(slidingItem: ItemSliding, itemData: SportItem) {
-    const options: any = {
-      firstReminderMinutes: 30
-    };
-
-    this.calendar
-      .createEventWithOptions(
-        itemData.sport,
-        itemData.lieu,
-        itemData.salle,
-        itemData.date,
-        itemData.hfin,
-        options
-      )
-      .then(() => {
-        const toast = this.toastCtrl.create({
-          message: 'Sport créé',
-          duration: 3000
-        });
-        toast.present();
-        slidingItem.close();
-      });
-  }
-
-  removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
-    this.utilsService.removeFavorite(slidingItem, itemData, title, true);
-    this.updateDisplayedSports();
   }
 }
