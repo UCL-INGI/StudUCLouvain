@@ -180,8 +180,9 @@ export class EventsPage {
   }
 
   changeArray(array: any) {
+    const weekMethod = this.getWeek;
     const groups = array.reduce(function (obj, item) {
-      const week = this.getWeek(item.startDate);
+      const week = weekMethod(item.startDate);
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
