@@ -19,8 +19,8 @@ jobs:
         chrome: stable
 
       install:
-        - npm install
         - npm install -g ionic cordova@^9
+        - npm install
         - ionic info
 
       before_script:
