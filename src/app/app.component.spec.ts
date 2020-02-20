@@ -19,27 +19,31 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-    AlertController, IonicApp, IonicModule, LoadingController, Nav, Platform
-} from 'ionic-angular';
+import {AlertController, IonicApp, IonicModule, LoadingController, Nav, Platform} from 'ionic-angular';
 
-import { async, TestBed } from '@angular/core/testing';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { TranslateModule } from '@ngx-translate/core';
+import {async, TestBed} from '@angular/core/testing';
+import {AppAvailability} from '@ionic-native/app-availability';
+import {Device} from '@ionic-native/device';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {Market} from '@ionic-native/market';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
+import {TranslateModule} from '@ngx-translate/core';
 
 import {
-    PlatformMock, SplashScreenMock, StatusBarMock, UserServiceMock, Wso2ServiceMock
+  PlatformMock,
+  SplashScreenMock,
+  StatusBarMock,
+  UserServiceMock,
+  Wso2ServiceMock
 } from '../../test-config/mocks-ionic';
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
-import { MyApp } from './app.component';
+import {UserService} from '../providers/utils-services/user-service';
+import {Wso2Service} from '../providers/wso2-services/wso2-service';
+import {MyApp} from './app.component';
 
-class IonicAppMock {}
+class IonicAppMock {
+}
+
 describe("MyApp Component", () => {
   let fixture;
   let component;
@@ -49,19 +53,19 @@ describe("MyApp Component", () => {
       declarations: [MyApp],
       imports: [IonicModule.forRoot(MyApp), TranslateModule.forRoot()],
       providers: [
-        { provide: StatusBar, useClass: StatusBarMock },
-        { provide: SplashScreen, useClass: SplashScreenMock },
-        { provide: Platform, useClass: PlatformMock },
+        {provide: StatusBar, useClass: StatusBarMock},
+        {provide: SplashScreen, useClass: SplashScreenMock},
+        {provide: Platform, useClass: PlatformMock},
         AlertController,
         LoadingController,
-        { provide: IonicApp, useClass: IonicAppMock },
+        {provide: IonicApp, useClass: IonicAppMock},
         Nav,
         Market,
         AppAvailability,
         InAppBrowser,
         Device,
-        { provide: UserService, useClass: UserServiceMock },
-        { provide: Wso2Service, useClass: Wso2ServiceMock }
+        {provide: UserService, useClass: UserServiceMock},
+        {provide: Wso2Service, useClass: Wso2ServiceMock}
       ]
     });
   }));

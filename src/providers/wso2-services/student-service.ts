@@ -22,10 +22,10 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { Wso2Service } from './wso2-service';
+import {Wso2Service} from './wso2-service';
 
 @Injectable()
 export class StudentService {
@@ -43,7 +43,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           if (data['activities'] != null) {
-            resolve({ activities: data['activities'] });
+            resolve({activities: data['activities']});
           }
         });
     });

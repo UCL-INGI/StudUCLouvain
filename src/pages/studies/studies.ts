@@ -19,21 +19,27 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-    AlertController, IonicPage, MenuController, ModalController, NavController, NavParams, Platform,
-    ToastController
+  AlertController,
+  IonicPage,
+  MenuController,
+  ModalController,
+  NavController,
+  NavParams,
+  Platform,
+  ToastController
 } from 'ionic-angular';
 
-import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Storage } from '@ionic/storage';
+import {Component} from '@angular/core';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {Storage} from '@ionic/storage';
 
-import { AdeProject } from '../../app/entity/adeProject';
-import { Course } from '../../app/entity/course';
-import { StudiesService } from '../../providers/studies-services/studies-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { StudentService } from '../../providers/wso2-services/student-service';
-import { Wso2Service } from '../../providers/wso2-services/wso2-service';
+import {AdeProject} from '../../app/entity/adeProject';
+import {Course} from '../../app/entity/course';
+import {StudiesService} from '../../providers/studies-services/studies-service';
+import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
+import {StudentService} from '../../providers/wso2-services/student-service';
+import {Wso2Service} from '../../providers/wso2-services/wso2-service';
 
 @IonicPage()
 @Component({
@@ -49,16 +55,16 @@ export class StudiesPage {
   public title: any;
   public sessionId: string;
   public project: AdeProject = null;
-  private username = '';
-  private password = '';
   public error = '';
-  private status = '';
   sigles: any;
   activities: any = [];
   response: any;
   language;
   statusInsc = '';
   prog = '';
+  private username = '';
+  private password = '';
+  private status = '';
 
   constructor(
     public studiesService: StudiesService,
@@ -96,7 +102,7 @@ export class StudiesPage {
           nameFR = names;
           nameEN = '';
         }
-        response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
+        response = {exist: exist, nameFR: nameFR, nameEN: nameEN};
         resolve(response);
       });
     });
@@ -112,26 +118,6 @@ export class StudiesPage {
     toast.present();
   }
 
-  private login() {
-    this.error = '';
-    return new Promise(resolve => {
-      this.wso2Service.login(this.username, this.password).catch(error => {
-        if (error.status === 400) {
-          this.error = this.utilsService.getText('STUDY', 'BADLOG');
-        } else {
-          this.error = this.utilsService.getText('STUDY', 'ERROR');
-        }
-        return error;
-      })
-        .subscribe(data => {
-          if (data != null) {
-            this.status = data.toString();
-            resolve(data);
-          }
-        });
-    });
-  }
-
   loadActivities() {
     if (this.connService.isOnline()) {
       this.login().then(() => {
@@ -142,7 +128,7 @@ export class StudiesPage {
               const result: any = res;
               this.sigles = result.activities.activity;
               for (const sigle of this.sigles) {
-                this.activities.push({ name: '', sigle: sigle });
+                this.activities.push({name: '', sigle: sigle});
               }
             })
             .catch(err => {
@@ -168,7 +154,7 @@ export class StudiesPage {
   }
 
   openModalProject() {
-    const obj = { sessionId: this.sessionId };
+    const obj = {sessionId: this.sessionId};
     const myModal = this.modalCtrl.create('ModalProjectPage', obj);
     myModal.onDidDismiss(data => {
       this.project = data;
@@ -214,7 +200,8 @@ export class StudiesPage {
       buttons: [
         {
           text: cancel,
-          handler: data => { }
+          handler: data => {
+          }
         },
         {
           text: save,
@@ -224,32 +211,6 @@ export class StudiesPage {
       ]
     });
     prompt.present();
-  }
-
-  private promptSaveHandler(data: any) {
-    const acro = data.acronym.toUpperCase();
-    let already = false;
-    for (const item of this.listCourses) {
-      if (item.acronym === acro) {
-        already = true;
-      }
-    }
-    if (!already) {
-      this.checkExistAndAddOrToast(acro);
-    } else {
-      this.toastAlreadyCourse();
-    }
-  }
-
-  private checkExistAndAddOrToast(acro: any) {
-    this.checkExist(acro).then(check => {
-      if (check.exist) {
-        this.addCourse(acro, check.nameFR);
-      } else {
-        this.toastBadCourse();
-        this.showPrompt();
-      }
-    });
   }
 
   toastAlreadyCourse() {
@@ -269,7 +230,9 @@ export class StudiesPage {
   addCourseFromProgram(acro: string) {
     let already = false;
     for (const item of this.listCourses) {
-      if (item.acronym === acro) { already = true; }
+      if (item.acronym === acro) {
+        already = true;
+      }
     }
     if (!already) {
       this.checkExistAndAddOrToast(acro);
@@ -336,5 +299,51 @@ export class StudiesPage {
 
   launch(url) {
     this.iab.create(url, '_system');
+  }
+
+  private login() {
+    this.error = '';
+    return new Promise(resolve => {
+      this.wso2Service.login(this.username, this.password).catch(error => {
+        if (error.status === 400) {
+          this.error = this.utilsService.getText('STUDY', 'BADLOG');
+        } else {
+          this.error = this.utilsService.getText('STUDY', 'ERROR');
+        }
+        return error;
+      })
+        .subscribe(data => {
+          if (data != null) {
+            this.status = data.toString();
+            resolve(data);
+          }
+        });
+    });
+  }
+
+  private promptSaveHandler(data: any) {
+    const acro = data.acronym.toUpperCase();
+    let already = false;
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) {
+        already = true;
+      }
+    }
+    if (!already) {
+      this.checkExistAndAddOrToast(acro);
+    } else {
+      this.toastAlreadyCourse();
+    }
+  }
+
+  private checkExistAndAddOrToast(acro: any) {
+    this.checkExist(acro).then(check => {
+      if (check.exist) {
+        this.addCourse(acro, check.nameFR);
+      } else {
+        this.toastBadCourse();
+        this.showPrompt();
+      }
+    });
   }
 }

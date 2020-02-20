@@ -20,9 +20,9 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar id="header" class="header">
+  <ion-toolbar class="header" id="header">
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
+      <button (click)="dismiss()" ion-button>{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,7 +32,7 @@
       </ion-col>
     </ion-row>
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</button>
+      <button (click)="applyFilters()" ion-button strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -41,24 +41,24 @@
 <ion-content class="outer-content">
   <ion-item>
     <ion-label *ngIf="dateRange > 1" center>
-      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+      {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
       {{'EVENTS.TIMEEVENTS3' | translate}}
     </ion-label>
     <ion-label *ngIf="dateRange == 1" center>
-      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
+      {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
-    <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
+    <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
     </ion-range>
   </ion-item>
   <ion-toolbar color="uclouvain">
     <ion-buttons left>
-      <button ion-button icon-right end (click)="uncheckAll()">
+      <button (click)="uncheckAll()" end icon-right ion-button>
         {{'EVENTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-right (click)="resetFilters()">
+      <button (click)="resetFilters()" icon-right ion-button>
         {{'EVENTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
       </button>

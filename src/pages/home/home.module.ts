@@ -1,12 +1,11 @@
-import { IonicPageModule } from 'ionic-angular';
+import {IonicPageModule} from 'ionic-angular';
 
-import { HttpClient } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import {HttpClient} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 // import { Http } from '@angular/http';
-import { HttpLoaderFactory } from '../../app/app.module';
-import { HomePage } from './home';
+import {HttpLoaderFactory} from '../../app/app.module';
+import {HomePage} from './home';
 
 @NgModule({
   declarations: [HomePage],
@@ -22,4 +21,5 @@ import { HomePage } from './home';
   ],
   exports: [TranslateModule]
 })
-export class HomePageModule { }
+export class HomePageModule {
+}

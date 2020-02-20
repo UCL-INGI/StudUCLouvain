@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { SportItem } from '../../app/entity/sportItem';
-import { UserService } from '../utils-services/user-service';
-import { RssService } from './rss-service';
+import {SportItem} from '../../app/entity/sportItem';
+import {UserService} from '../utils-services/user-service';
+import {RssService} from './rss-service';
 
 @Injectable()
 export class SportsService {
@@ -35,12 +35,10 @@ export class SportsService {
   allCategoriesT: any = [];
   shownSports = 0;
   shownTeams = 0;
-
   url = '';
   urlT = '';
 
   constructor(public user: UserService, public rssService: RssService) {
-
   }
 
   update() {
@@ -48,23 +46,21 @@ export class SportsService {
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate=';
 
     const today: Date = new Date();
-    const end: Date = new Date();
-    end.setDate(today.getDate() + 6);
-
+    const end: Date = new Date(new Date().setDate(today.getDate() + 6));
     const todayString = dateToString(today);
     const endString = dateToString(end);
 
-    let site: string;
-    const campus = this.user.campus;
-    if (campus === 'LLN') { site = 'louv'; }
-    if (campus === 'Woluwe') { site = 'wol'; }
-    if (campus === 'Mons') { site = 'mons'; }
+    const site = {
+      'LLN': 'louv',
+      'Woluwe': 'wol',
+      'Mons': 'mons',
+      undefined: ''
+    }[this.user.campus];
 
     const restUrl = todayString + '&-enddate=' + endString + '&-site=';
-    const urlTemp = this.url + restUrl + site;
-    const urlTempT = this.urlT + restUrl + 'louv';
-    this.url = urlTemp;
-    this.urlT = urlTempT;
+    this.url = this.url + restUrl + site;
+    this.urlT = this.urlT + restUrl + 'louv';
+
     function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
@@ -100,10 +96,10 @@ export class SportsService {
       shownSports: this.shownSports,
       categories: this.allCategories
     } : {
-        teams: this.teams,
-        shownTeams: this.shownTeams,
-        categories: this.allCategoriesT
-      };
+      teams: this.teams,
+      shownTeams: this.shownTeams,
+      categories: this.allCategoriesT
+    };
   }
 
   private extractSports(data: any, isSport: boolean = true) {
@@ -136,11 +132,6 @@ export class SportsService {
   private createDateForSport(str: string, hour: string): Date {
     const timeSplit = hour.split(':');
     const dateSplit = str.split('/');
-    const year = parseInt(dateSplit[2]);
-    const month = parseInt(dateSplit[1]) - 1;
-    const day = parseInt(dateSplit[0]);
-    const hours = parseInt(timeSplit[0]);
-    const minutes = parseInt(timeSplit[1]);
-    return new Date(year, month, day, hours, minutes);
+    return this.rssService.createDate(dateSplit, timeSplit);
   }
 }

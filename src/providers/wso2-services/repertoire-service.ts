@@ -22,11 +22,11 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { EmployeeItem } from '../../app/entity/employeeItem';
-import { Wso2Service } from './wso2-service';
+import {EmployeeItem} from '../../app/entity/employeeItem';
+import {Wso2Service} from './wso2-service';
 
 @Injectable()
 export class RepertoireService {
@@ -34,7 +34,8 @@ export class RepertoireService {
   url = 'directories/v1/employees/';
   options: any;
 
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) { }
+  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
+  }
 
   public searchEmployees(options: Array<string>, values: Array<string>) {
     this.employees = [];
@@ -52,7 +53,7 @@ export class RepertoireService {
         data => {
           if (data['persons'] != null) {
             this.extractEmployees(data['persons'].person);
-            resolve({ employees: this.employees });
+            resolve({employees: this.employees});
           }
         });
     });
@@ -64,7 +65,7 @@ export class RepertoireService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({ empDetails: emp });
+          resolve({empDetails: emp});
         });
     });
   }

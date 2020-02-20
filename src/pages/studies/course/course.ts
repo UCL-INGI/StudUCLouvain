@@ -19,18 +19,23 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-    AlertController, IonicPage, ItemSliding, ModalController, NavController, NavParams,
-    ToastController
+  AlertController,
+  IonicPage,
+  ItemSliding,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 
-import { Component } from '@angular/core';
-import { Calendar } from '@ionic-native/calendar';
+import {Component} from '@angular/core';
+import {Calendar} from '@ionic-native/calendar';
 
-import { Activity } from '../../../app/entity/activity';
-import { Course } from '../../../app/entity/course';
-import { CourseService } from '../../../providers/studies-services/course-service';
-import { UserService } from '../../../providers/utils-services/user-service';
-import { UtilsService } from '../../../providers/utils-services/utils-service';
+import {Activity} from '../../../app/entity/activity';
+import {Course} from '../../../app/entity/course';
+import {CourseService} from '../../../providers/studies-services/course-service';
+import {UserService} from '../../../providers/utils-services/user-service';
+import {UtilsService} from '../../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -65,7 +70,7 @@ export class CoursePage {
     public navParams: NavParams,
     private utilsService: UtilsService
   ) {
-    this.courseSorted = { cm: [], tp: [], ex: [] };
+    this.courseSorted = {cm: [], tp: [], ex: []};
     const acro = this.course.acronym;
     if (this.userS.hasSlotCM(acro)) {
       this.slotCM = this.userS.getSlotCM(acro);
@@ -137,7 +142,8 @@ export class CoursePage {
       buttons: [
         {
           text: 'OK',
-          handler: data => { }
+          handler: data => {
+          }
         }
       ]
     });
@@ -146,23 +152,35 @@ export class CoursePage {
 
   updateDisplayedTP() {
     const toFilter = this.courseSorted.tp;
-    if (toFilter.length === 0) { this.noTP = true; } else { this.noTP = false; }
+    if (toFilter.length === 0) {
+      this.noTP = true;
+    } else {
+      this.noTP = false;
+    }
     let toPush;
     if (this.slotTP !== 'no') {
       toPush = toFilter.filter(
         acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1
       );
-    } else { toPush = this.courseSorted.tp; }
+    } else {
+      toPush = this.courseSorted.tp;
+    }
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   updateDisplayedCM() {
     const toFilter = this.courseSorted.cm;
-    if (toFilter.length === 0) { this.noCM = true; } else { this.noCM = false; }
+    if (toFilter.length === 0) {
+      this.noCM = true;
+    } else {
+      this.noCM = false;
+    }
     let toPush: Array<Activity>;
     if (this.slotCM !== 'no') {
       toPush = toFilter.filter(acti => acti.name === this.slotCM);
-    } else { toPush = this.courseSorted.cm; }
+    } else {
+      toPush = this.courseSorted.cm;
+    }
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
@@ -171,7 +189,11 @@ export class CoursePage {
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
-    if (this.courseSorted.ex.length === 0) { this.noEx = true; } else { this.noEx = false; }
+    if (this.courseSorted.ex.length === 0) {
+      this.noEx = true;
+    } else {
+      this.noEx = false;
+    }
   }
 
   showPrompt(segment: string) {
@@ -202,7 +224,69 @@ export class CoursePage {
       });
     }
     const prompt = this.alertCtrl.create(options);
-    if (options.inputs.length > 1) { prompt.present(); }
+    if (options.inputs.length > 1) {
+      prompt.present();
+    }
+  }
+
+  getSlots(segment: string) {
+    let act: Activity[] = this.course.activities;
+    act = act.filter(
+      acti =>
+        acti.type === segment ||
+        (acti.type === 'TP' && segment === 'TD') ||
+        (segment === 'Examen' && acti.isExam)
+    );
+    let slots = act
+      .map(item => item.name)
+      .filter((value, index, self) => self.indexOf(value) === index);
+    if (segment === 'TD') {
+      slots = slots.filter(acti => acti.indexOf('_') !== -1);
+    }
+    if (segment === 'Cours magistral') {
+      slots = slots.filter(acti => acti.indexOf('-') !== -1);
+    }
+    const newAct: Activity[] = [];
+    for (let i = 0; i < slots.length; i++) {
+      const activity: Activity = act.find(acti => acti.name === slots[i]);
+      newAct.push(activity);
+    }
+    return newAct;
+  }
+
+  addCourseToCalendar() {
+    const options: any = {
+      firstReminderMinutes: 15
+    };
+    for (const activity of this.displayedActi) {
+      this.calendar.createEventWithOptions(
+        this.course.name + ' : ' + activity.type,
+        activity.auditorium,
+        null,
+        activity.start,
+        activity.end,
+        options
+      );
+    }
+    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
+
+    const toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+    this.alert(true);
+  }
+
+  openModalInfo() {
+    const myModal = this.modalCtrl.create(
+      'ModalInfoPage',
+      {course: this.course, year: this.year},
+      {cssClass: 'modal-fullscreen'}
+    );
+    myModal.onDidDismiss(data => {
+    });
+    myModal.present();
   }
 
   private getLabel(array: Activity[], i: number) {
@@ -244,62 +328,5 @@ export class CoursePage {
       this.userS.addSlotTP(this.course.acronym, this.slotTP);
     }
     this.updateDisplayed();
-  }
-
-  getSlots(segment: string) {
-    let act: Activity[] = this.course.activities;
-    act = act.filter(
-      acti =>
-        acti.type === segment ||
-        (acti.type === 'TP' && segment === 'TD') ||
-        (segment === 'Examen' && acti.isExam)
-    );
-    let slots = act
-      .map(item => item.name)
-      .filter((value, index, self) => self.indexOf(value) === index);
-    if (segment === 'TD') { slots = slots.filter(acti => acti.indexOf('_') !== -1); }
-    if (segment === 'Cours magistral') {
-      slots = slots.filter(acti => acti.indexOf('-') !== -1);
-    }
-    const newAct: Activity[] = [];
-    for (let i = 0; i < slots.length; i++) {
-      const activity: Activity = act.find(acti => acti.name === slots[i]);
-      newAct.push(activity);
-    }
-    return newAct;
-  }
-
-  addCourseToCalendar() {
-    const options: any = {
-      firstReminderMinutes: 15
-    };
-    for (const activity of this.displayedActi) {
-      this.calendar.createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      );
-    }
-    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
-
-    const toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    });
-    toast.present();
-    this.alert(true);
-  }
-
-  openModalInfo() {
-    const myModal = this.modalCtrl.create(
-      'ModalInfoPage',
-      { course: this.course, year: this.year },
-      { cssClass: 'modal-fullscreen' }
-    );
-    myModal.onDidDismiss(data => { });
-    myModal.present();
   }
 }

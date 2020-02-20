@@ -18,18 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    IonicPage, LoadingController, ModalController, NavController, NavParams, Platform
-} from 'ionic-angular';
+import {IonicPage, LoadingController, ModalController, NavController, NavParams, Platform} from 'ionic-angular';
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component} from '@angular/core';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
-import { EmployeeItem } from '../../app/entity/employeeItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
+import {EmployeeItem} from '../../app/entity/employeeItem';
+import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
+import {UtilsService} from '../../providers/utils-services/utils-service';
+import {RepertoireService} from '../../providers/wso2-services/repertoire-service';
 
 @IonicPage()
 @Component({
@@ -37,8 +35,8 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
   templateUrl: 'support.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -98,7 +96,7 @@ export class SupportPage {
   }
 
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push('EmployeeDetailsPage', { emp: emp });
+    this.navCtrl.push('EmployeeDetailsPage', {emp: emp});
   }
 
   public openURL(url: string) {

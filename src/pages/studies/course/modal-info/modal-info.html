@@ -23,7 +23,7 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-buttons end>
-    <button ion-button icon-only end (tap)="closeModal()">
+    <button (tap)="closeModal()" end icon-only ion-button>
       <ion-icon name="close"></ion-icon>
     </button>
   </ion-buttons>
@@ -42,7 +42,8 @@
       <ion-row>
         <ion-col>{{information?.credit}} crédits</ion-col>
         <ion-col *ngIf="information?.volume.vol1 || information?.volume.vol2">{{information?.volume.vol1}}h +
-          {{information?.volume.vol2}}h</ion-col>
+          {{information?.volume.vol2}}h
+        </ion-col>
         <ion-col>{{information?.quadri}}</ion-col>
       </ion-row>
     </ion-card-header>
@@ -130,7 +131,6 @@
       </ion-row>
 
 
-
       <h2 class="break"><strong>Programmes le proposant </strong></h2>
 
       <ion-item *ngIf="information?.programmeprerequis && information.programmeprerequis.length > 1">
@@ -143,7 +143,7 @@
       <ion-item *ngIf="!information?.programmeprerequis?.length">
         <ion-row>
           <ion-col><strong
-              style="white-space: pre-line;">{{information?.programmeprerequis?.intituleProgrammeCompletFr}}</strong>
+            style="white-space: pre-line;">{{information?.programmeprerequis?.intituleProgrammeCompletFr}}</strong>
           </ion-col>
           <ion-col>{{information?.programmeprerequis?.sigleProgramme}}</ion-col>
           <ion-col>{{information?.programmeprerequis?.credit}} crédits</ion-col>

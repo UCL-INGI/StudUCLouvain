@@ -53,7 +53,7 @@
         <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
       </ion-col>
       <ion-col text-right>
-        <button *ngIf="libDetails.website" ion-button clear small icon-left (click)="openPage(libDetails.website)">
+        <button (click)="openPage(libDetails.website)" *ngIf="libDetails.website" clear icon-left ion-button small>
           <ion-icon name='share-alt'></ion-icon>
           Website
         </button>

@@ -20,7 +20,6 @@
 */
 
 
-
 export class AdeProject {
   id: string;
   name: string;

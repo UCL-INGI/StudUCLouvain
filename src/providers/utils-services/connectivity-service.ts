@@ -19,11 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, Platform } from 'ionic-angular';
+import {AlertController, Platform} from 'ionic-angular';
 
-import { Injectable } from '@angular/core';
-import { Network } from '@ionic-native/network';
-import { TranslateService } from '@ngx-translate/core';
+import {Injectable} from '@angular/core';
+import {Network} from '@ionic-native/network';
+import {TranslateService} from '@ngx-translate/core';
 
 declare var Connection;
 
@@ -32,10 +32,11 @@ export class ConnectivityService {
   onDevice: boolean;
   available: boolean;
   enable: boolean;
+
   constructor(public platform: Platform,
-    private network: Network,
-    private translateService: TranslateService,
-    private alertCtrl: AlertController) {
+              private network: Network,
+              private translateService: TranslateService,
+              private alertCtrl: AlertController) {
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -47,14 +48,21 @@ export class ConnectivityService {
       return navigator.onLine;
     }
   }
+
   /*pop up an alert to say to the user to connect him to the internet*/
   presentConnectionAlert() {
     let title: string;
     let message: string;
     let close: string;
-    this.translateService.get('NET.TITLE').subscribe((res: string) => { title = res; });
-    this.translateService.get('NET.CONNECT').subscribe((res: string) => { message = res; });
-    this.translateService.get('NET.CLOSE').subscribe((res: string) => { close = res; });
+    this.translateService.get('NET.TITLE').subscribe((res: string) => {
+      title = res;
+    });
+    this.translateService.get('NET.CONNECT').subscribe((res: string) => {
+      message = res;
+    });
+    this.translateService.get('NET.CLOSE').subscribe((res: string) => {
+      close = res;
+    });
     const alert = this.alertCtrl.create({
       title: title,
       subTitle: message,
@@ -66,7 +74,7 @@ export class ConnectivityService {
   successCallback = (isAvailable) => {
     this.available = isAvailable;
     return isAvailable;
-  }
+  };
 
   errorCallback = (e) => console.error(e);
 

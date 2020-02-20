@@ -18,43 +18,43 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { CacheModule } from 'ionic-cache';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
+import {CacheModule} from 'ionic-cache';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { Geolocation } from '@ionic-native/geolocation';
-import { GoogleMaps } from '@ionic-native/google-maps';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { Network } from '@ionic-native/network';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppAvailability} from '@ionic-native/app-availability';
+import {Device} from '@ionic-native/device';
+import {Geolocation} from '@ionic-native/geolocation';
+import {GoogleMaps} from '@ionic-native/google-maps';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {Market} from '@ionic-native/market';
+import {Network} from '@ionic-native/network';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
+import {IonicStorageModule} from '@ionic/storage';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import { MapService } from '../providers/map-services/map-service';
-import { POIService } from '../providers/map-services/poi-service';
-import { EventsService } from '../providers/rss-services/events-service';
-import { NewsService } from '../providers/rss-services/news-service';
-import { RssService } from '../providers/rss-services/rss-service';
-import { SportsService } from '../providers/rss-services/sports-service';
-import { AdeService } from '../providers/studies-services/ade-service';
-import { CourseService } from '../providers/studies-services/course-service';
-import { StudiesService } from '../providers/studies-services/studies-service';
-import { ConnectivityService } from '../providers/utils-services/connectivity-service';
-import { FacService } from '../providers/utils-services/fac-service';
-import { UserService } from '../providers/utils-services/user-service';
-import { UtilsService } from '../providers/utils-services/utils-service';
-import { LibrariesService } from '../providers/wso2-services/libraries-service';
-import { RepertoireService } from '../providers/wso2-services/repertoire-service';
-import { StudentService } from '../providers/wso2-services/student-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
-import { MyApp } from './app.component';
+import {MapService} from '../providers/map-services/map-service';
+import {POIService} from '../providers/map-services/poi-service';
+import {EventsService} from '../providers/rss-services/events-service';
+import {NewsService} from '../providers/rss-services/news-service';
+import {RssService} from '../providers/rss-services/rss-service';
+import {SportsService} from '../providers/rss-services/sports-service';
+import {AdeService} from '../providers/studies-services/ade-service';
+import {CourseService} from '../providers/studies-services/course-service';
+import {StudiesService} from '../providers/studies-services/studies-service';
+import {ConnectivityService} from '../providers/utils-services/connectivity-service';
+import {FacService} from '../providers/utils-services/fac-service';
+import {UserService} from '../providers/utils-services/user-service';
+import {UtilsService} from '../providers/utils-services/utils-service';
+import {LibrariesService} from '../providers/wso2-services/libraries-service';
+import {RepertoireService} from '../providers/wso2-services/repertoire-service';
+import {StudentService} from '../providers/wso2-services/student-service';
+import {Wso2Service} from '../providers/wso2-services/wso2-service';
+import {MyApp} from './app.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,7 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
+    CacheModule.forRoot({keyPrefix: 'UCL-cache'}),
     IonicStorageModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
@@ -80,7 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [MyApp],
   providers: [
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppAvailability,
     ConnectivityService,
     CourseService,
@@ -110,4 +110,5 @@ export function HttpLoaderFactory(http: HttpClient) {
     Geolocation
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

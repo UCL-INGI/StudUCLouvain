@@ -1,9 +1,9 @@
-import { IonicPageModule } from 'ionic-angular';
+import {IonicPageModule} from 'ionic-angular';
 
-import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {NgModule} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { RestaurantPage } from './restaurant';
+import {RestaurantPage} from './restaurant';
 
 @NgModule({
   declarations: [RestaurantPage],
@@ -12,4 +12,5 @@ import { RestaurantPage } from './restaurant';
     TranslateModule.forChild()
   ]
 })
-export class RestaurantPageModule { }
+export class RestaurantPageModule {
+}

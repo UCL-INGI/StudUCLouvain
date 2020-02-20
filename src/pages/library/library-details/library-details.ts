@@ -19,15 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component} from '@angular/core';
 
-import { LibraryItem } from '../../../app/entity/libraryItem';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../../providers/utils-services/utils-service';
-import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
+import {LibraryItem} from '../../../app/entity/libraryItem';
+import {ConnectivityService} from '../../../providers/utils-services/connectivity-service';
+import {UtilsService} from '../../../providers/utils-services/utils-service';
+import {LibrariesService} from '../../../providers/wso2-services/libraries-service';
 
 @IonicPage()
 @Component({
@@ -35,8 +35,8 @@ import { LibrariesService } from '../../../providers/wso2-services/libraries-ser
   templateUrl: 'library-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

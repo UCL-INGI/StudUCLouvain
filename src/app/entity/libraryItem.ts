@@ -19,8 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { MapLocation } from './mapLocation';
-import { TimeSlot } from './timeSlot';
+import {MapLocation} from './mapLocation';
+import {TimeSlot} from './timeSlot';
 
 export class LibraryItem {
   id: number;

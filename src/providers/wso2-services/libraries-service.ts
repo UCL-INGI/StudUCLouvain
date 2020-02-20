@@ -22,13 +22,13 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { LibraryItem } from '../../app/entity/libraryItem';
-import { MapLocation } from '../../app/entity/mapLocation';
-import { TimeSlot } from '../../app/entity/timeSlot';
-import { Wso2Service } from './wso2-service';
+import {LibraryItem} from '../../app/entity/libraryItem';
+import {MapLocation} from '../../app/entity/mapLocation';
+import {TimeSlot} from '../../app/entity/timeSlot';
+import {Wso2Service} from './wso2-service';
 
 @Injectable()
 export class LibrariesService {
@@ -46,7 +46,7 @@ export class LibrariesService {
       this.wso2Service.load(this.url).subscribe(
         data => {
           this.extractLibraries(data['return'].library);
-          resolve({ libraries: this.libraries });
+          resolve({libraries: this.libraries});
         });
     });
   }
@@ -58,7 +58,7 @@ export class LibrariesService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           lib = this.extractLibraryDetails(lib, data['return'].library);
-          resolve({ libDetails: lib });
+          resolve({libDetails: lib});
         });
     });
   }
@@ -73,6 +73,7 @@ export class LibrariesService {
   }
 
   /*Extract all the details for a specific library, the library selected by the user*/
+
   /*Retrieves all the necessary information*/
   private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
     if (data.locationId == null) {

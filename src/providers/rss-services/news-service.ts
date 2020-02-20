@@ -21,27 +21,26 @@
 
 import 'rxjs/add/operator/map';
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { NewsItem } from '../../app/entity/newsItem';
-import { RssService } from './rss-service';
+import {NewsItem} from '../../app/entity/newsItem';
+import {RssService} from './rss-service';
 
 @Injectable()
 export class NewsService {
   url1 = 'https://uclouvain.be/actualites/p1/rss';
   url2 = 'https://uclouvain.be/actualites/p2/rss';
   url3 = 'https://uclouvain.be/actualites/p3/rss';
-
   news = [];
   shownNews = 0;
   maxDescLength = 20;
+
   constructor(public http: HttpClient, public rssService: RssService) {
     console.log('Hello NewsService Provider');
   }
 
 
-  /*Get the appropriate news in function of the tab in which the user is*/
   public getNews(segment: string) {
     const baseURL = this.getBaseURL(segment);
     this.news = [];
@@ -83,12 +82,9 @@ export class NewsService {
     }
   }
 
-  /*Extract news*/
   private extractNews(data: any) {
     if (data.length === undefined) {
-      const temp = data;
-      data = [];
-      data.push(temp);
+      data = [data];
     }
     this.shownNews = 0;
     for (let i = 0; i < data.length; i++) {
@@ -97,22 +93,19 @@ export class NewsService {
       if (item.description !== undefined) {
         trimmedDescription = item.description.length > this.maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
-      const hidden = false;
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
-      let img = '';
-      if (item.enclosure != null) { img = item.enclosure._url; }
+      const img = item.enclosure !== null ? item.enclosure._url : '';
       const newNewsItem = new NewsItem(
         item.description || 'No description...',
         item.link || 'No link',
         item.title || 'No title',
-        img, trimmedDescription, hidden, item.guid, pubDate
+        img, trimmedDescription, false, item.guid, pubDate
       );
       this.news.push(newNewsItem);
     }
   }
 
-  /*Return a date in good form by splitting for the new*/
   private createDateForNews(str: string): Date {
     // str : "Fri, 07 Jul 2017 08:51:52 +0200"
     // new Date(Year : number, (month-1) : number, day : number)
@@ -128,7 +121,6 @@ export class NewsService {
     return new Date(year, month, day, hours, minutes);
   }
 
-  /*Get the right month number*/
   private getMonthNumber(str: string) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return months.indexOf(str);

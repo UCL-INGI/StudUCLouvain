@@ -37,22 +37,23 @@
       </ion-col>
     </ion-row>
 
-    <ion-row text-wrap padding>
-      <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
+    <ion-row padding text-wrap>
+      <h1><strong>{{empDetails.firstname}} {{empDetails.lastname}}</strong></h1>
 
 
     </ion-row>
 
     <ion-row padding text-wrap>
       <ion-list>
-        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract">
+        <ion-item *ngFor="let c of empDetails.contracts?.contract" style="text-transform:uppercase">
           <p *ngIf="c.grade!=null">({{c.grade}})</p>
         </ion-item>
         <ion-item *ngFor="let emp of empDetails.departments.department">
           <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
             ({{emp.entity.acronym}})</p>
           <p *ngIf="emp.linkType == 'Appartenance'">
-            <ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
+            <ion-icon name="return-right"></ion-icon>
+            {{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
             ({{emp.entity.acronym}})
           </p>
         </ion-item>
@@ -68,7 +69,7 @@
           </ion-card-title>
         </ion-card-content>
         <ion-row>
-          <ion-col><b>{{'EMPLOYEE.ADRESSE' | translate}}</b></ion-col>
+          <ion-col><strong>{{'EMPLOYEE.ADRESSE' | translate}}</strong></ion-col>
           <ion-col>
             {{empDetails.address?.acronym}}<br>
             {{empDetails.address?.streetName}} {{empDetails.address?.streetNumber}}/{{empDetails.address?.mailBox}}<br>
@@ -76,7 +77,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col><b>{{'EMPLOYEE.MAIL' | translate}}</b></ion-col>
+          <ion-col><strong>{{'EMPLOYEE.MAIL' | translate}}</strong></ion-col>
           <ion-col>
             <a href="mailto:{{empDetails?.email}}" target="_top">{{empDetails?.email}}</a>
           </ion-col>
@@ -92,11 +93,11 @@
 
           <ion-row>
             <ion-col> {{'EMPLOYEE.TEL' | translate}} </ion-col>
-            <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
+            <ion-col><a href="tel:{{contact.phone}}">{{contact.phone}}</a></ion-col>
           </ion-row>
           <ion-row *ngIf="contact.secretary!=null">
             <ion-col> {{'EMPLOYEE.SECRETARIAT' | translate}} </ion-col>
-            <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
+            <ion-col><a href="tel:{{contact.secretary}}">{{contact.secretary}}</a></ion-col>
           </ion-row>
         </ion-card>
 

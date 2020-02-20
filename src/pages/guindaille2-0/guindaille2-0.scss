@@ -25,13 +25,11 @@ page-guindaille2-0 {
     font-family: 'Museo';
     src: url("assets/fonts/Museoregular/Museo.eot");
     src: url("assets/fonts/Museoregular/Museo.eot") format("embedded-opentype"),
-      url("assets/fonts/Museoregular/Museo.woff2") format("woff2"),
-      url("assets/fonts/Museoregular/Museo.woff") format("woff"),
-      url("assets/fonts/Museoregular/Museo.ttf") format("truetype"),
-      url("assets/fonts/Museoregular/Museo.svg#Museo") format("svg");
+    url("assets/fonts/Museoregular/Museo.woff2") format("woff2"),
+    url("assets/fonts/Museoregular/Museo.woff") format("woff"),
+    url("assets/fonts/Museoregular/Museo.ttf") format("truetype"),
+    url("assets/fonts/Museoregular/Museo.svg#Museo") format("svg");
   }
-
-
 
 
   .guindaille {
@@ -95,20 +93,19 @@ page-guindaille2-0 {
     }
   }
 
-  .guindailleHelp>.scroll-content {
+  .guindailleHelp > .scroll-content {
     background-color: map-get($colors, guindaille);
     padding-bottom: 0px !important;
     margin-bottom: 0px !important;
   }
 
-  .guindaille>.scroll-content {
+  .guindaille > .scroll-content {
     background-color: map-get($colors, guindaille);
     padding-bottom: 61px !important;
   }
 
 
-
-  .guindaille>.fixed-content {
+  .guindaille > .fixed-content {
     background-color: map-get($colors, guindaille);
   }
 

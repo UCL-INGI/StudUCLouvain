@@ -1,5 +1,5 @@
 export class NavParamsMock {
-  data: Object = { Example: 1234 };
+  data: Object = {Example: 1234};
 }
 
 export class ConfigMock {

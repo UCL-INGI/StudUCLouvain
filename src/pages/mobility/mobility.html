@@ -21,10 +21,10 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="mobilite">
-    <button ion-button icon-only menuToggle>
+    <button icon-only ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -32,21 +32,21 @@
 <!--BODY-->
 <ion-grid padding>
   <ion-row>
-    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(carpoolingPage)" alt="voiture"
-        src="./assets/img/commuty.png" align="middle" />
-      <p align="center"><b>{{'MOBI.COVOIT' | translate}}</b></p>
+    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(carpoolingPage)" align="middle"
+                                             alt="voiture" src="./assets/img/commuty.png"/>
+      <p align="center"><strong>{{'MOBI.COVOIT' | translate}}</strong></p>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(busPage)" alt="bus"
-        src="./assets/img/nextride.png" align="middle" />
-      <p align="center"><b>{{'MOBI.BUS' | translate}}</b></p>
+    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(busPage)" align="middle"
+                                             alt="bus" src="./assets/img/nextride.png"/>
+      <p align="center"><strong>{{'MOBI.BUS' | translate}}</strong></p>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(trainPage)" alt="train"
-        src="./assets/img/sncb.png" align="middle" />
-      <p align="center"><b>{{'MOBI.SNCB' | translate}}</b></p>
+    <ion-col align-self-end text-center><img (tap)="utilsService.launchExternalApp(trainPage)" align="middle"
+                                             alt="train" src="./assets/img/sncb.png"/>
+      <p align="center"><strong>{{'MOBI.SNCB' | translate}}</strong></p>
     </ion-col>
   </ion-row>
 </ion-grid>
