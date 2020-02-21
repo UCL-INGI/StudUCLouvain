@@ -87,7 +87,7 @@ export class MapService {
           this.removeMarker(new MapLocation(loc.getTitle()));
         }
       }
-      let [ lat, lng, address, title ] = [
+      let [lat, lng, address, title] = [
         parseFloat(location.lat), parseFloat(location.lng), location.address, location.title
       ];
       this.onDevice ?
@@ -268,7 +268,7 @@ export class MapService {
   }
 
   private addBrowserInfoWindow(marker, content) {
-    const infoWindow = new google.maps.InfoWindow({ content: content });
+    const infoWindow = new google.maps.InfoWindow({content: content});
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });

@@ -118,6 +118,7 @@ export class POIService {
       }
       return 0;
     }
+
     const locationsList: MapLocation[] = [];
     for (const elem of list.sort(compare)) {
       locationsList.push(

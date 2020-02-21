@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {EventItem} from '../../app/entity/eventItem';
-import {UserService} from '../utils-services/user-service';
-import {RssService} from './rss-service';
+import { EventItem } from '../../app/entity/eventItem';
+import { UserService } from '../utils-services/user-service';
+import { RssService } from './rss-service';
 
 @Injectable()
 export class EventsService {

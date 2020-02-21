@@ -22,13 +22,13 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {LibraryItem} from '../../app/entity/libraryItem';
-import {MapLocation} from '../../app/entity/mapLocation';
-import {TimeSlot} from '../../app/entity/timeSlot';
-import {Wso2Service} from './wso2-service';
+import { LibraryItem } from '../../app/entity/libraryItem';
+import { MapLocation } from '../../app/entity/mapLocation';
+import { TimeSlot } from '../../app/entity/timeSlot';
+import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class LibrariesService {

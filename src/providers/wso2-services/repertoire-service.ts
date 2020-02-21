@@ -22,11 +22,11 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {EmployeeItem} from '../../app/entity/employeeItem';
-import {Wso2Service} from './wso2-service';
+import { EmployeeItem } from '../../app/entity/employeeItem';
+import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class RepertoireService {

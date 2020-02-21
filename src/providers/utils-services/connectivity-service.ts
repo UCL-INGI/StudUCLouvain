@@ -19,11 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {AlertController, Platform} from 'ionic-angular';
+import { AlertController, Platform } from 'ionic-angular';
 
-import {Injectable} from '@angular/core';
-import {Network} from '@ionic-native/network';
-import {TranslateService} from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection;
 
