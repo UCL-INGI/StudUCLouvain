@@ -57,7 +57,7 @@ export class POIService {
   private getZoneList(listZone) {
     return {
       list: this.createMapLocations(listZone),
-      listChecked: Array(listZone.auditoires.length).fill(false),
+      listChecked: Array(listZone.length).fill(false),
       showDetails: false
     }
   }
