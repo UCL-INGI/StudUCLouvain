@@ -29,17 +29,17 @@ import {
   ToastController
 } from 'ionic-angular';
 
-import {Component} from '@angular/core';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {Storage} from '@ionic/storage';
+import { Component } from '@angular/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Storage } from '@ionic/storage';
 
-import {AdeProject} from '../../app/entity/adeProject';
-import {Course} from '../../app/entity/course';
-import {StudiesService} from '../../providers/studies-services/studies-service';
-import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
-import {StudentService} from '../../providers/wso2-services/student-service';
-import {Wso2Service} from '../../providers/wso2-services/wso2-service';
+import { AdeProject } from '../../app/entity/adeProject';
+import { Course } from '../../app/entity/course';
+import { StudiesService } from '../../providers/studies-services/studies-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
+import { StudentService } from '../../providers/wso2-services/student-service';
+import { Wso2Service } from '../../providers/wso2-services/wso2-service';
 
 @IonicPage()
 @Component({
@@ -122,19 +122,19 @@ export class StudiesPage {
       this.login().then(() => {
         if (this.status) {
           this.studentService.searchActivities().then(res => {
-              const result: any = res;
-              this.sigles = result.activities.activity;
-              for (const sigle of this.sigles) {
-                this.activities.push({name: '', sigle: sigle});
-              }
-            }).catch(() => {
-              console.log('Error during load of course program');
-            });
+            const result: any = res;
+            this.sigles = result.activities.activity;
+            for (const sigle of this.sigles) {
+              this.activities.push({name: '', sigle: sigle});
+            }
+          }).catch(() => {
+            console.log('Error during load of course program');
+          });
 
           this.studentService.getStatus().then(res => {
-              this.statusInsc = res[0].etatInscription;
-              this.prog = res[0].intitOffreComplet;
-            })
+            this.statusInsc = res[0].etatInscription;
+            this.prog = res[0].intitOffreComplet;
+          })
             .catch(() => {
               console.log('Error during load of inscription status');
             });

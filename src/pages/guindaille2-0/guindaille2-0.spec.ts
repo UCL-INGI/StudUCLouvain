@@ -1,10 +1,10 @@
-import {AlertController, IonicModule, ModalController, NavController, NavParams} from 'ionic-angular';
+import { AlertController, IonicModule, ModalController, NavController, NavParams } from 'ionic-angular';
 
-import {async, TestBed} from '@angular/core/testing';
-import {TranslateModule} from '@ngx-translate/core';
+import { async, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {NavParamsMock} from '../../../test-config/mocks-ionic';
-import {GuindaillePage} from './guindaille2-0';
+import { NavParamsMock } from '../../../test-config/mocks-ionic';
+import { GuindaillePage } from './guindaille2-0';
 
 describe('Guindaille2-0', () => {
   let fixture;

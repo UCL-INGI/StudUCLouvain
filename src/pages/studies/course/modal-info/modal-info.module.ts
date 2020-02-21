@@ -1,9 +1,9 @@
-import {IonicPageModule} from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 
-import {NgModule} from '@angular/core';
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {ModalInfoPage} from './modal-info';
+import { ModalInfoPage } from './modal-info';
 
 @NgModule({
   declarations: [ModalInfoPage],

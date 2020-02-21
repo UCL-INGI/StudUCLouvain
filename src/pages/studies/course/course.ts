@@ -28,14 +28,14 @@ import {
   ToastController
 } from 'ionic-angular';
 
-import {Component} from '@angular/core';
-import {Calendar} from '@ionic-native/calendar';
+import { Component } from '@angular/core';
+import { Calendar } from '@ionic-native/calendar';
 
-import {Activity} from '../../../app/entity/activity';
-import {Course} from '../../../app/entity/course';
-import {CourseService} from '../../../providers/studies-services/course-service';
-import {UserService} from '../../../providers/utils-services/user-service';
-import {UtilsService} from '../../../providers/utils-services/utils-service';
+import { Activity } from '../../../app/entity/activity';
+import { Course } from '../../../app/entity/course';
+import { CourseService } from '../../../providers/studies-services/course-service';
+import { UserService } from '../../../providers/utils-services/user-service';
+import { UtilsService } from '../../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -112,26 +112,14 @@ export class CoursePage {
     };
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
     this.getEventWithOptions(activity, options).then(() => {
-        const toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        });
-        toast.present();
-        slidingItem.close();
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
       });
+      toast.present();
+      slidingItem.close();
+    });
     this.alert();
-  }
-
-  private getEventWithOptions(activity: Activity, options: any) {
-    return this.calendar
-      .createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      );
   }
 
   alert(all: boolean = false) {
@@ -228,9 +216,9 @@ export class CoursePage {
   getSlots(segment: string) {
     let act: Activity[] = this.course.activities;
     act = act.filter(acti =>
-        acti.type === segment ||
-        (acti.type === 'TP' && segment === 'TD') ||
-        (segment === 'Examen' && acti.isExam)
+      acti.type === segment ||
+      (acti.type === 'TP' && segment === 'TD') ||
+      (segment === 'Examen' && acti.isExam)
     );
     let slots = act.map(item => item.name).filter((value, index, self) => self.indexOf(value) === index);
     if (segment === 'TD') {
@@ -270,8 +258,21 @@ export class CoursePage {
       {course: this.course, year: this.year},
       {cssClass: 'modal-fullscreen'}
     );
-    myModal.onDidDismiss(data => {});
+    myModal.onDidDismiss(data => {
+    });
     myModal.present();
+  }
+
+  private getEventWithOptions(activity: Activity, options: any) {
+    return this.calendar
+      .createEventWithOptions(
+        this.course.name + ' : ' + activity.type,
+        activity.auditorium,
+        null,
+        activity.start,
+        activity.end,
+        options
+      );
   }
 
   private getLabel(array: Activity[], i: number) {

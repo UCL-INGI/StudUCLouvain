@@ -20,19 +20,19 @@
 */
 import 'rxjs/add/operator/debounceTime';
 
-import {AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform} from 'ionic-angular';
-import {CacheService} from 'ionic-cache';
+import { AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform } from 'ionic-angular';
+import { CacheService } from 'ionic-cache';
 
-import {Component, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import {NewsItem} from '../../app/entity/newsItem';
-import {NewsService} from '../../providers/rss-services/news-service';
-import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
-import {FacService} from '../../providers/utils-services/fac-service';
-import {UserService} from '../../providers/utils-services/user-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
+import { NewsItem } from '../../app/entity/newsItem';
+import { NewsService } from '../../providers/rss-services/news-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { FacService } from '../../providers/utils-services/fac-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({

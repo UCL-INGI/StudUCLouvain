@@ -29,15 +29,15 @@ import {
   NavParams
 } from 'ionic-angular';
 
-import {Component, ViewChild} from '@angular/core';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {Market} from '@ionic-native/market';
-import {SplashScreen} from '@ionic-native/splash-screen';
+import { Component, ViewChild } from '@angular/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {MyApp} from '../../app/app.component';
-import {UserService} from '../../providers/utils-services/user-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
-import {StudentService} from '../../providers/wso2-services/student-service';
+import { MyApp } from '../../app/app.component';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
+import { StudentService } from '../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({

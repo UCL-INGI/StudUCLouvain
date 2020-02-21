@@ -31,18 +31,18 @@ import {
   NavParams,
   ToastController
 } from 'ionic-angular';
-import {CacheService} from 'ionic-cache';
+import { CacheService } from 'ionic-cache';
 
-import {Component, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Calendar} from '@ionic-native/calendar';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Calendar } from '@ionic-native/calendar';
+import { TranslateService } from '@ngx-translate/core';
 
-import {EventItem} from '../../app/entity/eventItem';
-import {EventsService} from '../../providers/rss-services/events-service';
-import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
-import {UserService} from '../../providers/utils-services/user-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
+import { EventItem } from '../../app/entity/eventItem';
+import { EventsService } from '../../providers/rss-services/events-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
@@ -116,20 +116,20 @@ export class EventsPage {
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
     await this.cache.getItem('cache-event').then(data => {
-        this.utilsService.presentLoading();
-        this.events = data.events;
-        this.events.forEach(function (element) {
-          element.startDate = new Date(element.startDate);
-          element.endDate = new Date(element.endDate);
-        });
-        this.shownEvents = data.shownEvents;
-        this.filters = data.categories;
-        this.searching = false;
-        this.updateDisplayedEvents();
-      }).catch(() => {
-        console.log('Oh no! My data is expired or doesn\'t exist!');
-        this.loadEvents('cache-event');
+      this.utilsService.presentLoading();
+      this.events = data.events;
+      this.events.forEach(function (element) {
+        element.startDate = new Date(element.startDate);
+        element.endDate = new Date(element.endDate);
       });
+      this.shownEvents = data.shownEvents;
+      this.filters = data.categories;
+      this.searching = false;
+      this.updateDisplayedEvents();
+    }).catch(() => {
+      console.log('Oh no! My data is expired or doesn\'t exist!');
+      this.loadEvents('cache-event');
+    });
   }
 
   public loadEvents(key?) {
@@ -205,7 +205,7 @@ export class EventsPage {
       this.eventsList.closeSlidingItems();
     }
     if (this.segment === 'all') {
-      this.displayedEvents = this.events.filter(item =>  this.getFilterMethod(item));
+      this.displayedEvents = this.events.filter(item => this.getFilterMethod(item));
     } else if (this.segment === 'favorites') {
       const favEvents = [];
       this.events.forEach(item => {
@@ -254,20 +254,20 @@ export class EventsPage {
     });
 
     this.calendar.createEventWithOptions(
-        itemData.title,
-        itemData.location,
-        null,
-        itemData.startDate,
-        itemData.endDate,
-        options
-      ).then(() => {
-        const toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        });
-        toast.present();
-        slidingItem.close();
+      itemData.title,
+      itemData.location,
+      null,
+      itemData.startDate,
+      itemData.endDate,
+      options
+    ).then(() => {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
       });
+      toast.present();
+      slidingItem.close();
+    });
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
@@ -277,7 +277,7 @@ export class EventsPage {
 
   private getRange(date: Date) {
     let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
-    return  range.replace(/-/g, '/');
+    return range.replace(/-/g, '/');
   }
 
   private getFilterMethod(item: EventItem) {

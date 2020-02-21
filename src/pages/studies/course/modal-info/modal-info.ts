@@ -19,11 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {StudentService} from '../../../../providers/wso2-services/student-service';
+import { StudentService } from '../../../../providers/wso2-services/student-service';
 
 @IonicPage()
 @Component({
