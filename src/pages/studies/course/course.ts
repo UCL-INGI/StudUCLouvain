@@ -86,8 +86,7 @@ export class CoursePage {
 
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(data => {
-      const courseId = data;
-      this.courseService.getActivity(sessionId, courseId).then(activity => {
+      this.courseService.getActivity(sessionId, data).then(activity => {
         this.course.activities = activity
           .sort((a1, a2) => a1.start.valueOf() - a2.start.valueOf())
           .filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
