@@ -21,11 +21,11 @@
 
 import 'rxjs/add/operator/map';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {MapLocation} from '../../app/entity/mapLocation';
-import {UserService} from '../utils-services/user-service';
+import { MapLocation } from '../../app/entity/mapLocation';
+import { UserService } from '../utils-services/user-service';
 
 @Injectable()
 export class POIService {
@@ -123,7 +123,7 @@ export class POIService {
               listChecked: Array(parkingsLength).fill(false),
               showDetails: false
             },
-            icon: 'caret-down',
+            icon: 'arrow-dropdown',
           };
           this.zones.push(newZone);
           resolve(this.zones);
