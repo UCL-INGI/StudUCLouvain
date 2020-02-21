@@ -37,8 +37,14 @@ export class CourseService {
   }
 
   getCourseId(sessionId: string, acronym: string) {
-    return new Promise<string>((resolve) => {
-      this.ade.httpGetCourseId(sessionId, acronym).subscribe(data => resolve(this.extractCourseId(data)));
+    return this.getPromise(false, sessionId, acronym);
+  }
+
+  getPromise(isActivity: boolean, sessionId, filterField) {
+    return new Promise((resolve) => {
+      const getMethod = isActivity ? this.ade.httpGetActivity : this.ade.httpGetCourseId;
+      const extractMethod = isActivity ? this.extractActivity : this.extractCourseId;
+      getMethod(sessionId, filterField).subscribe(data => resolve(extractMethod(data)));
     });
   }
 
@@ -49,9 +55,7 @@ export class CourseService {
   }
 
   getActivity(sessionId: string, courseId: string) {
-    return new Promise<Activity[]>((resolve) => {
-      this.ade.httpGetActivity(sessionId, courseId).subscribe(data => resolve(this.extractActivity(data)));
-    });
+    return this.getPromise(true, sessionId, courseId);
   }
 
   extractActivity(data): Activity[] {
@@ -77,11 +81,15 @@ export class CourseService {
       for (let i = 0; i < events.length; i++) {
         const event = events[i];
         const participants = event.eventParticipants.eventParticipant;
+        const students = this.getDatas(
+          participants, '', 'trainee', '<br>&nbsp;&nbsp;&nbsp;&nbsp;'
+        );
         const activity = new Activity(
           type,
-          this.getTeachers(participants), this.getStudents(participants),
+          this.getDatas(participants, '', 'instructor', ''),
+          students.substr(0, students.length - 28),
           this.createDate(event._date, event._startHour), this.createDate(event._date, event._endHour),
-          this.getAuditorium(participants),
+          this.getDatas(participants, ' ', 'classroom', ' '),
           type.indexOf('Examen') !== -1,
           event._name
         );
@@ -103,34 +111,14 @@ export class CourseService {
     return newdate;
   }
 
-  getTeachers(participants): string {
-    let teachers = '';
+  getDatas(participants, prefix: string, category: string, suffix: string) {
+    let datas = prefix;
     for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === 'instructor') {
-        teachers = teachers + participants[i]._name + '/';
+      if (participants[i]._category === category) {
+        datas = datas + participants[i]._name + suffix;
       }
     }
-    return teachers;
-  }
-
-  getStudents(participants): string {
-    let students = '';
-    for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === 'trainee') {
-        students = students + participants[i]._name + '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
-      }
-    }
-    return students.substr(0, students.length - 28);
-  }
-
-  getAuditorium(participants): string {
-    let auditorium = ' ';
-    for (let i = 0; i < participants.length; i++) {
-      if (participants[i]._category === 'classroom') {
-        auditorium = auditorium + participants[i]._name + ' ';
-      }
-    }
-    return auditorium;
+    return datas;
   }
 
   private handleSpecialCase(events: any) {
