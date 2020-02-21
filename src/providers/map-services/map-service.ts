@@ -23,10 +23,10 @@
 // This code is inspired from the great Josh Morony tutorials :
 // https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
 
-import {MenuController, Platform} from 'ionic-angular';
+import { MenuController, Platform } from 'ionic-angular';
 
-import {Injectable} from '@angular/core';
-import {Geolocation} from '@ionic-native/geolocation';
+import { Injectable } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
 import {
   CameraPosition,
   GoogleMaps,
@@ -38,10 +38,10 @@ import {
   MarkerOptions
 } from '@ionic-native/google-maps';
 
-import {MapLocation} from '../../app/entity/mapLocation';
-import {jsApiKey} from '../../app/variables-config';
-import {ConnectivityService} from '../utils-services/connectivity-service';
-import {UserService} from '../utils-services/user-service';
+import { MapLocation } from '../../app/entity/mapLocation';
+import { jsApiKey } from '../../app/variables-config';
+import { ConnectivityService } from '../utils-services/connectivity-service';
+import { UserService } from '../utils-services/user-service';
 
 declare var google;
 
@@ -73,7 +73,7 @@ export class MapService {
     }
   }
 
-  init(mapElement: any, pleaseConnect: any): Promise<any> {
+  init(mapElement: any, pleaseConnect: any) {
     this.mapElement = mapElement;
     this.pleaseConnectVar = pleaseConnect;
     return this.onDevice ? this.loadDeviceGoogleMaps() : this.loadBrowserGoogleMaps();
@@ -82,16 +82,17 @@ export class MapService {
   addMarker(location: MapLocation) {
     const marker = this.getMarker(location.title);
     if (!marker) {
-      const contentString = '<p>' + location.address + '</p>';
-      const m = this.onDevice ? this.markers : this.markersB;
-      for (const loc of m) {
+      for (const loc of this.onDevice ? this.markers : this.markersB) {
         if (loc.getTitle() !== this.userLocation.title) {
           this.removeMarker(new MapLocation(loc.getTitle()));
         }
       }
+      let [ lat, lng, address, title ] = [
+        parseFloat(location.lat), parseFloat(location.lng), location.address, location.title
+      ];
       this.onDevice ?
-        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title) :
-        this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
+        this.addDeviceMarker(lat, lng, address, title) :
+        this.addBrowserMarker(lat, lng, '<p>' + address + '</p>', title);
     } else if (this.onDevice) {
       marker.showInfoWindow();
     }
@@ -106,7 +107,6 @@ export class MapService {
           this.markers.splice(i, 1);
         } else {
           this.markersB[i].setMap(null);
-          // this.markersB.splice(i, 1);
         }
       }
     }
@@ -127,9 +127,7 @@ export class MapService {
       if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         this.pleaseConnect(true);
         if (this.connectivityService.isOnline()) {
-          window['mapInit'] = () => {
-            this._initBrowserMap(resolve, reject);
-          };
+          window['mapInit'] = () => this._initBrowserMap(resolve, reject);
           const script = document.createElement('script');
           script.id = 'googleMaps';
           script.src = 'http://maps.google.com/maps/api/js?' + (this.apiKey ? this.apiKey + '&callback=mapInit' : 'callback=mapInit');
@@ -144,7 +142,7 @@ export class MapService {
     });
   }
 
-  private _initBrowserMap(resolve: (value?: any) => void, reject: (reason?: any) => void) {
+  private _initBrowserMap(resolve, reject) {
     this.initBrowserMap().then(init => resolve(init), error => reject(error));
     this.pleaseConnect(false);
   }
@@ -153,11 +151,11 @@ export class MapService {
     this.mapInitialised = true;
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition().then((position) => {
-        this.userLocation = new MapLocation('Ma Position',
-          'Mon adresse',
-          String(position.coords.latitude),
-          String(position.coords.longitude),
-          'MYPOS');
+        this.userLocation = new MapLocation(
+          'Ma Position', 'Mon adresse',
+          String(position.coords.latitude), String(position.coords.longitude),
+          'MYPOS'
+        );
         const mapOptions = {
           center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
           zoom: 15,
@@ -199,7 +197,9 @@ export class MapService {
     return new Promise((resolve) => {
       console.log('Geolocation disabled');
       const latLng: LatLng = this.getCampusLocalisation(this.userS.campus);
-      this.userLocation = new MapLocation('Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS');
+      this.userLocation = new MapLocation(
+        'Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS'
+      );
       const mapOptions = {
         center: latLng,
         zoom: 15,
@@ -231,7 +231,9 @@ export class MapService {
   private initGeolocatedDevice(): any {
     return new Promise((resolve, reject) => {
       LocationService.getMyLocation().then((position) => {
-        this.userLocation = new MapLocation('Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS');
+        this.userLocation = new MapLocation(
+          'Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS'
+        );
         const mapOptions = {
           center: position.latLng,
           zoom: 15,
@@ -266,9 +268,7 @@ export class MapService {
   }
 
   private addBrowserInfoWindow(marker, content) {
-    const infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
+    const infoWindow = new google.maps.InfoWindow({ content: content });
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
