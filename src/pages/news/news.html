@@ -62,7 +62,7 @@
 <!--BODY-->
 <ion-content #news class="feed-list">
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+    <ion-refresher-content pullingIcon="caret-down" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
 
@@ -85,7 +85,7 @@
       <button (tap)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')" center clear icon-left
               ion-button small
               text-center>
-        <ion-icon name='share-alt'></ion-icon>
+        <ion-icon name='arrow-redo-outline'></ion-icon>
         {{'NEWS.MESVALVES' | translate}}
       </button>
     </ion-item>
@@ -101,7 +101,7 @@
       </ion-row>
       <button (tap)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'" center clear icon-left ion-button
               small>
-        <ion-icon name='share-alt'></ion-icon>
+        <ion-icon name='arrow-redo-outline'></ion-icon>
         {{'NEWS.WEB' | translate}}
       </button>
       <p *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'" text-center><strong>Indisponible pour le
@@ -130,7 +130,7 @@
   <!----------------- BUTTON TO CHANGE FAC ------------------------->
   <ion-fab *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()" bottom right>
     <button (tap)="removeFac(fac)" ion-fab>
-      <ion-icon name="swap"></ion-icon>
+      <ion-icon name="swap-horizontal"></ion-icon>
     </button>
   </ion-fab>
 

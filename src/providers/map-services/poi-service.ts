@@ -123,7 +123,7 @@ export class POIService {
               listChecked: Array(parkingsLength).fill(false),
               showDetails: false
             },
-            icon: 'arrow-dropdown',
+            icon: 'caret-down',
           };
           this.zones.push(newZone);
           resolve(this.zones);

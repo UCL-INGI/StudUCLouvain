@@ -82,10 +82,10 @@ export class MapPage {
   toggleDetails(data) {
     if (data.showDetails) {
       data.showDetails = false;
-      data.icon = 'arrow-dropdown';
+      data.icon = 'caret-down';
     } else {
       data.showDetails = true;
-      data.icon = 'arrow-dropup';
+      data.icon = 'caret-up';
     }
   }
 

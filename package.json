@@ -51,7 +51,7 @@
     "hoek": "^6.1.2",
     "ionic-angular": "^3.9.4",
     "ionic-cache": "^3.1.3",
-    "ionicons": "^4.5.5",
+    "ionicons": "^5.0.0",
     "rxjs": "^5.5.12",
     "sw-toolbox": "^3.6.0",
     "webpack": "^3.12.0",
@@ -65,7 +65,7 @@
     "@types/jasmine": "^3.5.6",
     "ts-node": "^7.0.1",
     "tslint": "^6.0.0",
-    "typescript": "^2.6.2"
+    "typescript": "~2.6.2"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",
   "cordova": {
