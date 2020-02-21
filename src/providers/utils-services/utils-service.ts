@@ -132,6 +132,13 @@ export class UtilsService {
     return text;
   }
 
+  getTexts(page: string, keys: Array<string>) {
+    let values = [];
+    this.translateService.get(keys.map(key => page + '.' + key)).subscribe(translations => {
+      values = translations.values();
+    });
+    return values;
+  }
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
     const page = isSport ? 'SPORTS' : 'EVENTS';
     const number = isSport ? 2 : 3;
