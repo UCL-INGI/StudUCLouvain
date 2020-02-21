@@ -40,115 +40,17 @@ export class HomePage {
   title = 'Stud.UCLouvain';
   where = '';
 
-  libraryPage = new Page(
-    'MENU.LIBRARY',
-    'LibrariesPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  newsPage = new Page(
-    'MENU.NEWS',
-    'NewsPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  eventPage = new Page(
-    'MENU.EVENTS',
-    'EventsPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  sportPage = new Page(
-    'MENU.SPORTS',
-    'SportsPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  studiesPage = new Page(
-    'MENU.STUDIES',
-    'StudiesPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  helpDeskPage = new Page(
-    'MENU.HELP',
-    'SupportPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  mapPage = new Page(
-    'MENU.MAP',
-    'MapPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  guindaillePage = new Page(
-    'MENU.PARTY',
-    'GuindaillePage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  paramPage = new Page(
-    'MENU.PARAM',
-    'ParamPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
-
-  restoPage = new Page(
-    'MENU.RESTAURANT',
-    'RestaurantPage',
-    null,
-    'id1156050719',
-    'com.apptree.resto4u',
-    'apptreeresto4u://',
-    'https://uclouvain.be/fr/decouvrir/resto-u'
-);
-
-  mobilityPage = new Page(
-    'MENU.MOBILITY',
-    'MobilityPage',
-    null,
-    null,
-    null,
-    null,
-    null
-);
+  libraryPage = this.getPageObject('Libraries', 'LIBRARY');
+  newsPage = this.getPageObject('News');
+  eventPage = this.getPageObject('Events');
+  sportPage = this.getPageObject('Sports');
+  studiesPage = this.getPageObject('Studies');
+  helpDeskPage = this.getPageObject('HELP');
+  mapPage = this.getPageObject('Map');
+  guindaillePage = this.getPageObject('Guindaille', 'PARTY');
+  paramPage = this.getPageObject('Param');
+  restoPage = this.getPageObject('Restaurant', 'RESTAURANT', true);
+  mobilityPage = this.getPageObject('Mobility');
 
   constructor(
     public navParams: NavParams,
@@ -167,6 +69,18 @@ export class HomePage {
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.removeCampus('');
+  }
+
+  getPageObject(component: string, title: string = component.toUpperCase(), is_rest_page: boolean = false) {
+    return new Page(
+      'MENU.' + title,
+      component + 'Page',
+      null,
+      is_rest_page ? 'id1156050719' : null,
+      is_rest_page ? 'com.apptree.resto4u' : null,
+      is_rest_page ? 'apptreeresto4u://' : null,
+      is_rest_page ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
+    );
   }
 
   ionViewDidEnter() {
@@ -225,6 +139,6 @@ export class HomePage {
       '<p><strong>Contact:</strong><a href="mailto:security@uclouvain.be">security@uclouvain.be</a></p>' +
       '<p><strong>' + out + ':</strong><font size="+1"><a href="tel:112">112</a></font></p><p><br>' + msg3 +
       ' <br><br><strong>' + msg4 + '</strong> ' + msg5 + '<br><strong>' + msg6 + '</strong> ' + msg7 + '<br><strong>' +
-      msg8 + '</strong> ' +  msg9 + '<br>';
+      msg8 + '</strong> ' + msg9 + '<br>';
   }
 }
