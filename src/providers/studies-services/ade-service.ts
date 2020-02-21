@@ -21,8 +21,8 @@
 
 import X2JS from 'x2js';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AdeService {
@@ -49,31 +49,26 @@ export class AdeService {
   }
 
   httpGetProjects(sessionId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + this.AdeServiceGetProjects;
+    const encodedURL: string = this.AdeserviceBaseUrl + 'sessionId=' + sessionId + this.AdeServiceGetProjects;
     return this.load(encodedURL);
   }
 
   httpSetProject(sessionId: string, projectId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=setProject&projectId=' + projectId;
-    return this.load(encodedURL);
+    return this.load(
+      this.AdeserviceBaseUrl + 'sessionId=' + sessionId + '&function=setProject&projectId=' + projectId
+    );
   }
 
   httpGetCourseId(sessionId: string, acronym: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=getResources&code=' + acronym;
-    return this.load(encodedURL);
+    return this.load(
+      this.AdeserviceBaseUrl + 'sessionId=' + sessionId + '&function=getResources&code=' + acronym
+    );
   }
 
   httpGetActivity(sessionId: string, courseId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=getActivities&resources=' + courseId
-      + '&detail=17';
-    return this.load(encodedURL);
+    return this.load(
+      this.AdeserviceBaseUrl +
+      'sessionId=' + sessionId + '&function=getActivities&resources=' + courseId + '&detail=17'
+    );
   }
 }

@@ -21,97 +21,76 @@
 
 import 'rxjs/add/operator/map';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {Activity} from '../../app/entity/activity';
-import {AdeService} from './ade-service';
+import { Activity } from '../../app/entity/activity';
+import { AdeService } from './ade-service';
 
 @Injectable()
 export class CourseService {
 
   constructor(
     public http: HttpClient,
-    public ade: AdeService) {
+    public ade: AdeService
+  ) {
   }
 
-  /*Get the course ID for the acronym of the course*/
   getCourseId(sessionId: string, acronym: string) {
-    return new Promise<string>((resolve, reject) => {
-      this.ade.httpGetCourseId(sessionId, acronym).subscribe(
-        data => {
-          resolve(this.extractCourseId(data));
-        }
-      );
+    return new Promise<string>((resolve) => {
+      this.ade.httpGetCourseId(sessionId, acronym).subscribe(data => resolve(this.extractCourseId(data)));
     });
   }
 
-  /*Extract the course ID*/
   extractCourseId(data) {
-
     if (data.resources.resource !== undefined) {
       return data.resources.resource._id;
     }
   }
 
-  /*Get activity for a course ID obtained by getting this from a course selected by the user*/
   getActivity(sessionId: string, courseId: string) {
-    return new Promise<Activity[]>((resolve, reject) => {
-      this.ade.httpGetActivity(sessionId, courseId).subscribe(
-        data => {
-          resolve(this.extractActivity(data));
-        }
-      );
+    return new Promise<Activity[]>((resolve) => {
+      this.ade.httpGetActivity(sessionId, courseId).subscribe(data => resolve(this.extractActivity(data)));
     });
   }
 
-  /*Extract the activity*/
   extractActivity(data): Activity[] {
     let activities: Activity[] = [];
     if (data.activities !== undefined) {
       let activitiesList = data.activities.activity;
       if (activitiesList.length === undefined) {
-        activitiesList = [];
-        activitiesList.push(data.activities.activity);
+        activitiesList = [data.activities.activity];
       }
       for (let i = 0; i < activitiesList.length; i++) {
-        const activityElem = activitiesList[i];
-        const newActivities: Activity[] = this.createNewActivities(activityElem);
-        activities = activities.concat(newActivities);
+        activities = activities.concat(this.createNewActivities(activitiesList[i]));
       }
     }
     return activities;
   }
 
-  /*For each activity collect the right variables to be able to display them*/
   createNewActivities(jsonActivity): Activity[] {
     const activities: Activity[] = [];
     const type: string = jsonActivity._type;
-    const isExam = type.indexOf('Examen') !== -1;
     let events = jsonActivity.events.event;
     if (events !== undefined) {
       events = this.handleSpecialCase(events);
-
       for (let i = 0; i < events.length; i++) {
         const event = events[i];
-        const endHour = event._endHour;
-        const startHour = event._startHour;
-        const date = event._date;
         const participants = event.eventParticipants.eventParticipant;
-        const teachers = this.getTeachers(participants);
-        const students = this.getStudents(participants);
-        const auditorium = this.getAuditorium(participants);
-        const start = this.createDate(date, startHour);
-        const end = this.createDate(date, endHour);
-        const name = event._name;
-        const activity = new Activity(type, teachers, students, start, end, auditorium, isExam, name);
+        const activity = new Activity(
+          type,
+          this.getTeachers(participants), this.getStudents(participants),
+          this.createDate(event._date, event._startHour), this.createDate(event._date, event._endHour),
+          this.getAuditorium(participants),
+          type.indexOf('Examen') !== -1,
+          event._name
+        );
         activities.push(activity);
       }
     }
     return activities;
   }
 
-  /*Create a date*/
   createDate(date: string, hour: string): Date {
     const splitDate = date.split('/');
     const splitHour = hour.split(':');
@@ -124,7 +103,6 @@ export class CourseService {
     return newdate;
   }
 
-  /*Get teacher from the participants*/
   getTeachers(participants): string {
     let teachers = '';
     for (let i = 0; i < participants.length; i++) {
@@ -135,7 +113,6 @@ export class CourseService {
     return teachers;
   }
 
-  /*Get students accepted at a course in the participants*/
   getStudents(participants): string {
     let students = '';
     for (let i = 0; i < participants.length; i++) {
@@ -143,11 +120,9 @@ export class CourseService {
         students = students + participants[i]._name + '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
       }
     }
-
     return students.substr(0, students.length - 28);
   }
 
-  /*Get Auditorium in which the course is presented*/
   getAuditorium(participants): string {
     let auditorium = ' ';
     for (let i = 0; i < participants.length; i++) {
@@ -160,12 +135,8 @@ export class CourseService {
 
   private handleSpecialCase(events: any) {
     if (events.length === undefined) {
-      const temp = events;
-      events = [];
-      events.push(temp);
+      events = [events];
     }
     return events;
   }
-
-
 }
