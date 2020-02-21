@@ -19,19 +19,19 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {AlertController, IonicApp, LoadingController, MenuController, Nav, Platform} from 'ionic-angular';
-import {CacheService} from 'ionic-cache';
+import { AlertController, IonicApp, LoadingController, MenuController, Nav, Platform } from 'ionic-angular';
+import { CacheService } from 'ionic-cache';
 
-import {Component, ViewChild} from '@angular/core';
-import {AppAvailability} from '@ionic-native/app-availability';
-import {Device} from '@ionic-native/device';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {Market} from '@ionic-native/market';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, ViewChild } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
+import { TranslateService } from '@ngx-translate/core';
 
-import {HomePage} from '../pages/home/home';
-import {UserService} from '../providers/utils-services/user-service';
-import {Wso2Service} from '../providers/wso2-services/wso2-service';
+import { HomePage } from '../pages/home/home';
+import { UserService } from '../providers/utils-services/user-service';
+import { Wso2Service } from '../providers/wso2-services/wso2-service';
 
 // declare var TestFairy: any;
 
