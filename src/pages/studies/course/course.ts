@@ -111,16 +111,7 @@ export class CoursePage {
       firstReminderMinutes: 15
     };
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
-    this.calendar
-      .createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      )
-      .then(() => {
+    this.getEventWithOptions(activity, options).then(() => {
         const toast = this.toastCtrl.create({
           message: message,
           duration: 3000
@@ -129,6 +120,18 @@ export class CoursePage {
         slidingItem.close();
       });
     this.alert();
+  }
+
+  private getEventWithOptions(activity: Activity, options: any) {
+    return this.calendar
+      .createEventWithOptions(
+        this.course.name + ' : ' + activity.type,
+        activity.auditorium,
+        null,
+        activity.start,
+        activity.end,
+        options
+      );
   }
 
   alert(all: boolean = false) {
@@ -198,18 +201,14 @@ export class CoursePage {
 
   showPrompt(segment: string) {
     const options = this.getInitialOptions(segment);
-    const aucun =
-      (this.slotTP === 'no' && segment === 'TD') ||
-      (this.slotCM === 'no' && segment === 'Cours magistral');
+    const aucun = (this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral');
     const array = this.getSlots(segment);
     for (let i = 0; i < array.length; i++) {
-      const slotChosen =
-        this.slotTP === array[i].name || this.slotCM === array[i].name;
+      const slotChosen = this.slotTP === array[i].name || this.slotCM === array[i].name;
       options.inputs.push({
         name: 'options',
         value: array[i].name,
-        label:
-          this.getLabel(array, i),
+        label: this.getLabel(array, i),
         type: 'radio',
         checked: slotChosen
       });
@@ -222,24 +221,18 @@ export class CoursePage {
         type: 'radio',
         checked: aucun
       });
-    }
-    const prompt = this.alertCtrl.create(options);
-    if (options.inputs.length > 1) {
-      prompt.present();
+      this.alertCtrl.create(options).present();
     }
   }
 
   getSlots(segment: string) {
     let act: Activity[] = this.course.activities;
-    act = act.filter(
-      acti =>
+    act = act.filter(acti =>
         acti.type === segment ||
         (acti.type === 'TP' && segment === 'TD') ||
         (segment === 'Examen' && acti.isExam)
     );
-    let slots = act
-      .map(item => item.name)
-      .filter((value, index, self) => self.indexOf(value) === index);
+    let slots = act.map(item => item.name).filter((value, index, self) => self.indexOf(value) === index);
     if (segment === 'TD') {
       slots = slots.filter(acti => acti.indexOf('_') !== -1);
     }
@@ -259,14 +252,7 @@ export class CoursePage {
       firstReminderMinutes: 15
     };
     for (const activity of this.displayedActi) {
-      this.calendar.createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      );
+      this.getEventWithOptions(activity, options);
     }
     const message = this.utilsService.getText('STUDY', 'MESSAGE3');
 
@@ -284,34 +270,25 @@ export class CoursePage {
       {course: this.course, year: this.year},
       {cssClass: 'modal-fullscreen'}
     );
-    myModal.onDidDismiss(data => {
-    });
+    myModal.onDidDismiss(data => {});
     myModal.present();
   }
 
   private getLabel(array: Activity[], i: number) {
-    return array[i].name +
-      ' ' +
-      array[i].start.getHours() +
-      ':' +
-      array[i].start.getUTCMinutes();
+    return array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes();
   }
 
   private getInitialOptions(segment: string) {
-    const title = this.utilsService.getText('COURSE', 'TITLE');
-    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
-    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
-    const apply = this.utilsService.getText('COURSE', 'APPLY');
     const options = {
-      title: title,
-      message: message,
+      title: this.utilsService.getText('COURSE', 'TITLE'),
+      message: this.utilsService.getText('COURSE', 'MESSAGE2'),
       inputs: [],
       buttons: [
         {
-          text: cancel
+          text: this.utilsService.getText('COURSE', 'CANCEL')
         },
         {
-          text: apply,
+          text: this.utilsService.getText('COURSE', 'APPLY'),
           handler: data => this.getHandler(segment, data)
         }
       ]
