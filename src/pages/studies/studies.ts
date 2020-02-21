@@ -121,27 +121,21 @@ export class StudiesPage {
     if (this.connService.isOnline()) {
       this.login().then(() => {
         if (this.status) {
-          this.studentService
-            .searchActivities()
-            .then(res => {
+          this.studentService.searchActivities().then(res => {
               const result: any = res;
               this.sigles = result.activities.activity;
               for (const sigle of this.sigles) {
                 this.activities.push({name: '', sigle: sigle});
               }
-            })
-            .catch(err => {
+            }).catch(() => {
               console.log('Error during load of course program');
             });
 
-          this.studentService
-            .getStatus()
-            .then(res => {
-              const result: any = res;
-              this.statusInsc = result[0].etatInscription;
-              this.prog = result[0].intitOffreComplet;
+          this.studentService.getStatus().then(res => {
+              this.statusInsc = res[0].etatInscription;
+              this.prog = res[0].intitOffreComplet;
             })
-            .catch(err => {
+            .catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -182,28 +176,21 @@ export class StudiesPage {
   }
 
   showPrompt() {
-    const addcourse = this.utilsService.getText('STUDY', 'ADDCOURSE');
-    const message = this.utilsService.getText('STUDY', 'MESSAGE');
-    const sigle = this.utilsService.getText('STUDY', 'SIGLE');
-    const cancel = this.utilsService.getText('STUDY', 'CANCEL');
-    const save = this.utilsService.getText('STUDY', 'SAVE');
     const prompt = this.alertCtrl.create({
-      title: addcourse,
-      message: message,
+      title: this.utilsService.getText('STUDY', 'ADDCOURSE'),
+      message: this.utilsService.getText('STUDY', 'MESSAGE'),
       inputs: [
         {
           name: 'acronym',
-          placeholder: sigle
+          placeholder: this.utilsService.getText('STUDY', 'SIGLE')
         }
       ],
       buttons: [
         {
-          text: cancel,
-          handler: data => {
-          }
+          text: this.utilsService.getText('STUDY', 'CANCEL'),
         },
         {
-          text: save,
+          text: this.utilsService.getText('STUDY', 'SAVE'),
           cssClass: 'save',
           handler: data => this.promptSaveHandler(data)
         }
