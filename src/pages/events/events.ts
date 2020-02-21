@@ -103,11 +103,10 @@ export class EventsPage {
     if (this.connService.isOnline()) {
       this.cache.removeItem('cache-event');
       this.loadEvents('cache-event');
-      refresher.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
     }
+    refresher.complete();
   }
 
   public onSearchInput() {
@@ -120,10 +119,7 @@ export class EventsPage {
 
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
-    const key = 'cache-event';
-    await this.cache
-      .getItem(key)
-      .then(data => {
+    await this.cache.getItem('cache-event').then(data => {
         this.utilsService.presentLoading();
         this.events = data.events;
         this.events.forEach(function (element) {
@@ -134,10 +130,9 @@ export class EventsPage {
         this.filters = data.categories;
         this.searching = false;
         this.updateDisplayedEvents();
-      })
-      .catch(() => {
+      }).catch(() => {
         console.log('Oh no! My data is expired or doesn\'t exist!');
-        this.loadEvents(key);
+        this.loadEvents('cache-event');
       });
   }
 
@@ -192,16 +187,14 @@ export class EventsPage {
       obj[week].push(item);
       return obj;
     }, {});
-    const eventsD = Object.keys(groups).map(function (key) {
+    return Object.keys(groups).map(function (key) {
       return {weeks: key, event: groups[key]};
     });
-    return eventsD;
   }
 
   getRangeWeek(week, year) {
     const date = new Date(year);
     date.setDate(date.getDate() - date.getDay() - 1);
-
     date.setDate(date.getDate() + 7 * (week - this.getWeek(date)));
     const rangeIsFrom = this.getRange(date);
 
@@ -216,9 +209,7 @@ export class EventsPage {
       this.eventsList.closeSlidingItems();
     }
     if (this.segment === 'all') {
-      this.displayedEvents = this.events.filter(item => {
-        return this.getFilterMethod(item);
-      });
+      this.displayedEvents = this.events.filter(item =>  this.getFilterMethod(item));
     } else if (this.segment === 'favorites') {
       const favEvents = [];
       this.events.forEach(item => {
@@ -266,16 +257,14 @@ export class EventsPage {
       message = res;
     });
 
-    this.calendar
-      .createEventWithOptions(
+    this.calendar.createEventWithOptions(
         itemData.title,
         itemData.location,
         null,
         itemData.startDate,
         itemData.endDate,
         options
-      )
-      .then(() => {
+      ).then(() => {
         const toast = this.toastCtrl.create({
           message: message,
           duration: 3000
@@ -292,11 +281,10 @@ export class EventsPage {
 
   private getRange(date: Date) {
     let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
-    range = range.replace(/-/g, '/');
-    return range;
+    return  range.replace(/-/g, '/');
   }
 
-  private getFilterMethod(item: EventItem): unknown {
+  private getFilterMethod(item: EventItem) {
     return (this.excludedFilters.indexOf(item.category) < 0 &&
       item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
       Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));

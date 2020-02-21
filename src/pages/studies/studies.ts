@@ -47,9 +47,8 @@ import {Wso2Service} from '../../providers/wso2-services/wso2-service';
   templateUrl: 'studies.html'
 })
 export class StudiesPage {
-  public people: any;
   public data: any;
-  segment = 'prog';
+  segment = 'cours';
   public listCourses: Course[];
   public course: Course;
   public title: any;
