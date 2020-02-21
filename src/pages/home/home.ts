@@ -45,7 +45,7 @@ export class HomePage {
   eventPage = this.getPageObject('Events');
   sportPage = this.getPageObject('Sports');
   studiesPage = this.getPageObject('Studies');
-  helpDeskPage = this.getPageObject('HELP');
+  helpDeskPage = this.getPageObject('Support', 'HELP');
   mapPage = this.getPageObject('Map');
   guindaillePage = this.getPageObject('Guindaille', 'PARTY');
   paramPage = this.getPageObject('Param');
