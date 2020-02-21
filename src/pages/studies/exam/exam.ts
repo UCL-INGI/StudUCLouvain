@@ -19,11 +19,11 @@
     along with StudUCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {UserService} from '../../../providers/utils-services/user-service';
+import { UserService } from '../../../providers/utils-services/user-service';
 
 @IonicPage()
 @Component({

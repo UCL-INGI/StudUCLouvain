@@ -1,9 +1,9 @@
-import {IonicPageModule} from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 
-import {NgModule} from '@angular/core';
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {SupportPage} from './support';
+import { SupportPage } from './support';
 
 @NgModule({
   declarations: [SupportPage],

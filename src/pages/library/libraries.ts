@@ -19,14 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
-import {CacheService} from 'ionic-cache';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { CacheService } from 'ionic-cache';
 
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {LibraryItem} from '../../app/entity/libraryItem';
-import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
-import {LibrariesService} from '../../providers/wso2-services/libraries-service';
+import { LibraryItem } from '../../app/entity/libraryItem';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { LibrariesService } from '../../providers/wso2-services/libraries-service';
 
 @IonicPage()
 @Component({

@@ -134,12 +134,14 @@ export class NavParamsMock {
 
 export class TranslateServiceMock {
   data = {};
+
   public get(key: any): any {
     return this.data[key];
   }
 }
 
-export class DeepLinkerMock { }
+export class DeepLinkerMock {
+}
 
 export class MenuMock {
   public static instance(): any {
@@ -228,6 +230,7 @@ export class LoadingMock extends BaseMock {
     return new LoadingMock();
   }
 }
+
 export class LoadingControllerMock {
   public static instance(loading?: LoadingMock): any {
     const instance = jasmine.createSpyObj('LoadingController', ['create']);
@@ -238,19 +241,24 @@ export class LoadingControllerMock {
 }
 
 export class UserServiceMock {
-  constructor() { }
+  constructor() {
+  }
+
   getCampus() {
     return 'LLN';
   }
 }
 
 export class Wso2ServiceMock {
-  constructor() { }
+  constructor() {
+  }
+
   getToken() {
     return 'XXXX';
   }
 }
 
 export class RssServiceMock {
-  constructor() { }
+  constructor() {
+  }
 }

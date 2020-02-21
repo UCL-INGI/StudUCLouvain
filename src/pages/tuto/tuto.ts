@@ -19,10 +19,10 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import {Component} from '@angular/core';
-import {SplashScreen} from '@ionic-native/splash-screen';
+import { Component } from '@angular/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @IonicPage()
 @Component({

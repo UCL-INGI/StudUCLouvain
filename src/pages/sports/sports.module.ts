@@ -1,10 +1,10 @@
-import {IonicPageModule} from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 
-import {NgModule} from '@angular/core';
-import {Calendar} from '@ionic-native/calendar';
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { Calendar } from '@ionic-native/calendar';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {SportsPage} from './sports';
+import { SportsPage } from './sports';
 
 @NgModule({
   declarations: [SportsPage],

@@ -19,10 +19,10 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {Events} from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
-import {Injectable} from '@angular/core';
-import {Storage} from '@ionic/storage';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserService {

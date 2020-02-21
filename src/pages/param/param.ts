@@ -18,14 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Component} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
-import {UserService} from '../../providers/utils-services/user-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- // This script increments patch number (mayor.minor.patch) but you can
+// This script increments patch number (mayor.minor.patch) but you can
 // choose to increment any other segment by modifying lines `45` to `53`.
 //
 // 1. Make sure you've installed *xml2js*: `$ npm install xml2js -D`

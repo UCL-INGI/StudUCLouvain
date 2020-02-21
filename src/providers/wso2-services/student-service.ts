@@ -22,10 +22,10 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {Wso2Service} from './wso2-service';
+import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class StudentService {

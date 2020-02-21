@@ -2,12 +2,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {wso2HeaderStudent} from '../../app/variables-config';
+import { wso2HeaderStudent } from '../../app/variables-config';
 
 /*
   Generated class for the Wso2ServiceProvider provider.

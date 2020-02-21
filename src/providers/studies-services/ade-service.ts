@@ -21,15 +21,15 @@
 
 import X2JS from 'x2js';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AdeService {
   AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
   AdeserviceConnection = 'function=connect&login=' + 'etudiant' + '&password=' + 'student';
   AdeServiceGetProjects = '&function=getProjects&detail=2';
-
+  AdeUrlWithSessionId = this.AdeserviceBaseUrl + 'sessionId=';
   constructor(public http: HttpClient) {
   }
 
@@ -44,36 +44,24 @@ export class AdeService {
   }
 
   httpOpenSession() {
-    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.load(encodedURL);
+    return this.load(this.AdeserviceBaseUrl + this.AdeserviceConnection);
   }
 
   httpGetProjects(sessionId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + this.AdeServiceGetProjects;
-    return this.load(encodedURL);
+    return this.load(this.AdeUrlWithSessionId + sessionId + this.AdeServiceGetProjects);
   }
 
   httpSetProject(sessionId: string, projectId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=setProject&projectId=' + projectId;
-    return this.load(encodedURL);
+    return this.load(this.AdeUrlWithSessionId + sessionId + '&function=setProject&projectId=' + projectId);
   }
 
   httpGetCourseId(sessionId: string, acronym: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=getResources&code=' + acronym;
-    return this.load(encodedURL);
+    return this.load(this.AdeUrlWithSessionId + sessionId + '&function=getResources&code=' + acronym);
   }
 
   httpGetActivity(sessionId: string, courseId: string) {
-    const encodedURL: string = this.AdeserviceBaseUrl
-      + 'sessionId=' + sessionId
-      + '&function=getActivities&resources=' + courseId
-      + '&detail=17';
-    return this.load(encodedURL);
+    return this.load(
+      this.AdeUrlWithSessionId + sessionId + '&function=getActivities&resources=' + courseId + '&detail=17'
+    );
   }
 }

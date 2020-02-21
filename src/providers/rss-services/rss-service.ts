@@ -24,8 +24,8 @@ import 'rxjs/add/operator/timeout';
 
 import X2JS from 'x2js';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RssService {

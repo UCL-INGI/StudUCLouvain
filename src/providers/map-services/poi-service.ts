@@ -21,106 +21,79 @@
 
 import 'rxjs/add/operator/map';
 
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {MapLocation} from '../../app/entity/mapLocation';
-import {UserService} from '../utils-services/user-service';
+import { MapLocation } from '../../app/entity/mapLocation';
+import { UserService } from '../utils-services/user-service';
 
 @Injectable()
 export class POIService {
 
   zones: any = [];
   url = '';
-  urlLLN = 'assets/data/resourcesLLN.json';
-  urlMons = 'assets/data/resourcesMons.json';
-  urlWol = 'assets/data/resourcesWoluwe.json';
+  prefix_path = 'assets/data/resources';
   old = '';
 
-  constructor(public http: HttpClient,
-              public user: UserService) {
+  constructor(public http: HttpClient, public user: UserService) {
     this.old = this.user.campus;
     this.update();
-
   }
 
-  /*Put the good campus for the user to display the good map with the good locations*/
   update() {
     const campus = this.user.campus;
-    const urls = {
-      'LLN': this.urlLLN,
-      'Woluwe': this.urlWol,
-      'Mons': this.urlMons
-    };
-    if (urls[campus]) {
-      this.url = urls[campus];
-    }
+    this.url = this.prefix_path + {
+      'LLN': 'LLN.json',
+      'Woluwe': 'Mons.json',
+      'Mons': 'Woluwe.json',
+      undefined: this.url
+    }[campus];
     if (campus !== this.old) {
       this.zones = [];
       this.old = campus;
     }
   }
 
-  /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
     if (this.zones.length === 0) {
       return new Promise(resolve => {
         this.http.get(this.url).map(res => res).subscribe(data => {
           const tmpZones = data['zones'];
-          const auditoiresLength = tmpZones.auditoires.length;
-          const locauxLength = tmpZones.locaux.length;
-          const bibliothequesLength = tmpZones.bibliotheques.length;
-          const sportsLength = tmpZones.sports.length;
-          const restauULength = tmpZones.restaurants_universitaires.length;
-          const servicesLength = tmpZones.services.length;
-          const parkingsLength = tmpZones.parkings.length;
-
-          // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
-          function compare(a, b) {
-            if (a.nom < b.nom) {
-              return -1;
-            }
-            if (a.nom > b.nom) {
-              return 1;
-            }
-            return 0;
-          }
-
           const newZone = {
             auditoires: {
-              list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
-              listChecked: Array(auditoiresLength).fill(false),
+              list: this.createMapLocations(tmpZones.auditoires),
+              listChecked: Array(tmpZones.auditoires.length).fill(false),
               showDetails: false
             },
             locaux: {
-              list: this.createMapLocations(tmpZones.locaux.sort(compare)),
-              listChecked: Array(locauxLength).fill(false),
+              list: this.createMapLocations(tmpZones.locaux),
+              listChecked: Array(tmpZones.locaux.length).fill(false),
               showDetails: false
             },
             bibliotheques: {
-              list: this.createMapLocations(tmpZones.bibliotheques.sort(compare)),
-              listChecked: Array(bibliothequesLength).fill(false),
+              list: this.createMapLocations(tmpZones.bibliotheques),
+              listChecked: Array(tmpZones.bibliotheques.length).fill(false),
               showDetails: false
             },
             sports: {
-              list: this.createMapLocations(tmpZones.sports.sort(compare)),
-              listChecked: Array(sportsLength).fill(false),
+              list: this.createMapLocations(tmpZones.sports),
+              listChecked: Array(tmpZones.sports.length).fill(false),
               showDetails: false
             },
             restaurants_universitaires: {
-              list: this.createMapLocations(tmpZones.restaurants_universitaires.sort(compare)),
-              listChecked: Array(restauULength).fill(false),
+              list: this.createMapLocations(tmpZones.restaurants_universitaires),
+              listChecked: Array(tmpZones.restaurants_universitaires.length).fill(false),
               showDetails: false
             },
             services: {
-              list: this.createMapLocations(tmpZones.services.sort(compare)),
-              listChecked: Array(servicesLength).fill(false),
+              list: this.createMapLocations(tmpZones.services),
+              listChecked: Array(tmpZones.services.length).fill(false),
               showDetails: false
             },
             parkings: {
-              list: this.createMapLocations(tmpZones.parkings.sort(compare)),
-              listChecked: Array(parkingsLength).fill(false),
+              list: this.createMapLocations(tmpZones.parkings),
+              listChecked: Array(tmpZones.parkings.length).fill(false),
               showDetails: false
             },
             icon: 'arrow-dropdown',
@@ -136,66 +109,22 @@ export class POIService {
     }
   }
 
-  /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
   private createMapLocations(list: any): Array<MapLocation> {
+    function compare(a, b) {
+      if (a.nom < b.nom) {
+        return -1;
+      } else if (a.nom > b.nom) {
+        return 1;
+      }
+      return 0;
+    }
+
     const locationsList: MapLocation[] = [];
-    for (const elem of list) {
-      const newLocation = new MapLocation(elem.nom,
-        elem.adresse,
-        elem.coord.lat,
-        elem.coord.lng,
-        elem.sigle);
-      locationsList.push(newLocation);
+    for (const elem of list.sort(compare)) {
+      locationsList.push(
+        new MapLocation(elem.nom, elem.adresse, elem.coord.lat, elem.coord.lng, elem.sigle)
+      );
     }
     return locationsList;
   }
-
-  /* private applyHaversine(locations, userLocation:any){
-
-     locations.map((location) => {
-
-       let placeLocation = {
-         lat: location.latitude,
-         lng: location.longitude
-       };
-
-       location.distance = this.getDistanceBetweenPoints(
-         userLocation,
-         placeLocation,
-         'miles'
-       ).toFixed(2);
-     });
-
-     return locations;
-   }*/
-
-  /* private getDistanceBetweenPoints(start, end, units){
-
-     let earthRadius = {
-       miles: 3958.8,
-       km: 6371
-     };
-
-     let R = earthRadius[units || 'miles'];
-     let lat1 = start.lat;
-     let lon1 = start.lng;
-     let lat2 = end.lat;
-     let lon2 = end.lng;
-
-     let dLat = this.toRad((lat2 - lat1));
-     let dLon = this.toRad((lon2 - lon1));
-     let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-     Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
-     Math.sin(dLon / 2) *
-     Math.sin(dLon / 2);
-     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-     let d = R * c;
-
-     return d;
-
-   }*/
-
-  /*private toRad(x){
-    return x * Math.PI / 180;
-  }*/
 }

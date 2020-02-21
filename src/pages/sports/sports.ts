@@ -33,15 +33,15 @@ import {
   ToastController
 } from 'ionic-angular';
 
-import {Component, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Calendar} from '@ionic-native/calendar';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Calendar } from '@ionic-native/calendar';
 
-import {SportItem} from '../../app/entity/sportItem';
-import {SportsService} from '../../providers/rss-services/sports-service';
-import {ConnectivityService} from '../../providers/utils-services/connectivity-service';
-import {UserService} from '../../providers/utils-services/user-service';
-import {UtilsService} from '../../providers/utils-services/utils-service';
+import { SportItem } from '../../app/entity/sportItem';
+import { SportsService } from '../../providers/rss-services/sports-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
 
 @IonicPage()
 @Component({
