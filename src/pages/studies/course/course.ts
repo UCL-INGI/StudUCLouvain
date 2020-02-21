@@ -275,28 +275,20 @@ export class CoursePage {
   }
 
   private getLabel(array: Activity[], i: number) {
-    return array[i].name +
-      ' ' +
-      array[i].start.getHours() +
-      ':' +
-      array[i].start.getUTCMinutes();
+    return array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes();
   }
 
   private getInitialOptions(segment: string) {
-    const title = this.utilsService.getText('COURSE', 'TITLE');
-    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
-    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
-    const apply = this.utilsService.getText('COURSE', 'APPLY');
     const options = {
-      title: title,
-      message: message,
+      title: this.utilsService.getText('COURSE', 'TITLE'),
+      message: this.utilsService.getText('COURSE', 'MESSAGE2'),
       inputs: [],
       buttons: [
         {
-          text: cancel
+          text: this.utilsService.getText('COURSE', 'CANCEL')
         },
         {
-          text: apply,
+          text: this.utilsService.getText('COURSE', 'APPLY'),
           handler: data => this.getHandler(segment, data)
         }
       ]
