@@ -109,10 +109,6 @@ export class EventsPage {
     refresher.complete();
   }
 
-  public onSearchInput() {
-    this.searching = true;
-  }
-
   public goToEventDetail(event: EventItem) {
     this.navCtrl.push('EventsDetailsPage', {event: event});
   }
