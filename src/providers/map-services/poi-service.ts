@@ -54,51 +54,29 @@ export class POIService {
     }
   }
 
+  private getZoneList(listZone) {
+    return {
+      list: this.createMapLocations(listZone),
+      listChecked: Array(listZone.length).fill(false),
+      showDetails: false
+    }
+  }
+
   public loadResources() {
     this.update();
     if (this.zones.length === 0) {
       return new Promise(resolve => {
         this.http.get(this.url).map(res => res).subscribe(data => {
-          const tmpZones = data['zones'];
-          const newZone = {
-            auditoires: {
-              list: this.createMapLocations(tmpZones.auditoires),
-              listChecked: Array(tmpZones.auditoires.length).fill(false),
-              showDetails: false
-            },
-            locaux: {
-              list: this.createMapLocations(tmpZones.locaux),
-              listChecked: Array(tmpZones.locaux.length).fill(false),
-              showDetails: false
-            },
-            bibliotheques: {
-              list: this.createMapLocations(tmpZones.bibliotheques),
-              listChecked: Array(tmpZones.bibliotheques.length).fill(false),
-              showDetails: false
-            },
-            sports: {
-              list: this.createMapLocations(tmpZones.sports),
-              listChecked: Array(tmpZones.sports.length).fill(false),
-              showDetails: false
-            },
-            restaurants_universitaires: {
-              list: this.createMapLocations(tmpZones.restaurants_universitaires),
-              listChecked: Array(tmpZones.restaurants_universitaires.length).fill(false),
-              showDetails: false
-            },
-            services: {
-              list: this.createMapLocations(tmpZones.services),
-              listChecked: Array(tmpZones.services.length).fill(false),
-              showDetails: false
-            },
-            parkings: {
-              list: this.createMapLocations(tmpZones.parkings),
-              listChecked: Array(tmpZones.parkings.length).fill(false),
-              showDetails: false
-            },
+          this.zones.push({
+            auditoires: this.getZoneList(data['zones'].auditoires),
+            locaux: this.getZoneList(data['zones'].locaux),
+            bibliotheques: this.getZoneList(data['zones'].bibliotheques),
+            sports: this.getZoneList(data['zones'].sports),
+            restaurants_universitaires: this.getZoneList(data['zones'].restaurants_universitaires),
+            services: this.getZoneList(data['zones'].services),
+            parkings: this.getZoneList(data['zones'].parkings),
             icon: 'arrow-dropdown',
-          };
-          this.zones.push(newZone);
+          });
           resolve(this.zones);
         });
       });
