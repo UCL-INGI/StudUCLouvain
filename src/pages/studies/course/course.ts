@@ -86,11 +86,10 @@ export class CoursePage {
 
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(data => {
-      const courseId = data;
-      this.courseService.getActivity(sessionId, courseId).then(activity => {
-        this.course.activities = activity
-          .sort((a1, a2) => a1.start.valueOf() - a2.start.valueOf())
-          .filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
+      this.courseService.getActivity(sessionId, data).then(activity => {
+        this.course.activities = activity.sort(
+          (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
+        ).filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
         this.displayedActi = this.course.activities;
         this.courseSorted.cm = this.course.activities.filter(
           acti => acti.type === 'Cours magistral'
@@ -107,11 +106,8 @@ export class CoursePage {
   }
 
   addToCalendar(slidingItem: ItemSliding, activity: Activity) {
-    const options: any = {
-      firstReminderMinutes: 15
-    };
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
-    this.getEventWithOptions(activity, options).then(() => {
+    this.getEventWithOptions(activity, {firstReminderMinutes: 15}).then(() => {
       const toast = this.toastCtrl.create({
         message: message,
         duration: 3000
@@ -130,29 +126,19 @@ export class CoursePage {
     const disclaimerAlert = this.alertCtrl.create({
       title: title,
       message: message,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => {
-          }
-        }
-      ]
+      buttons: [{
+        text: 'OK'
+      }]
     });
     disclaimerAlert.present();
   }
 
   updateDisplayedTP() {
     const toFilter = this.courseSorted.tp;
-    if (toFilter.length === 0) {
-      this.noTP = true;
-    } else {
-      this.noTP = false;
-    }
+    this.noTP = toFilter.length === 0;
     let toPush;
     if (this.slotTP !== 'no') {
-      toPush = toFilter.filter(
-        acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1
-      );
+      toPush = toFilter.filter(acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1);
     } else {
       toPush = this.courseSorted.tp;
     }
@@ -161,11 +147,7 @@ export class CoursePage {
 
   updateDisplayedCM() {
     const toFilter = this.courseSorted.cm;
-    if (toFilter.length === 0) {
-      this.noCM = true;
-    } else {
-      this.noCM = false;
-    }
+    this.noCM = toFilter.length === 0;
     let toPush: Array<Activity>;
     if (this.slotCM !== 'no') {
       toPush = toFilter.filter(acti => acti.name === this.slotCM);
@@ -180,11 +162,7 @@ export class CoursePage {
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
-    if (this.courseSorted.ex.length === 0) {
-      this.noEx = true;
-    } else {
-      this.noEx = false;
-    }
+    this.noEx = this.courseSorted.ex.length === 0;
   }
 
   showPrompt(segment: string) {
@@ -223,8 +201,7 @@ export class CoursePage {
     let slots = act.map(item => item.name).filter((value, index, self) => self.indexOf(value) === index);
     if (segment === 'TD') {
       slots = slots.filter(acti => acti.indexOf('_') !== -1);
-    }
-    if (segment === 'Cours magistral') {
+    } else if (segment === 'Cours magistral') {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
     const newAct: Activity[] = [];
@@ -236,14 +213,10 @@ export class CoursePage {
   }
 
   addCourseToCalendar() {
-    const options: any = {
-      firstReminderMinutes: 15
-    };
     for (const activity of this.displayedActi) {
-      this.getEventWithOptions(activity, options);
+      this.getEventWithOptions(activity, {firstReminderMinutes: 15});
     }
     const message = this.utilsService.getText('STUDY', 'MESSAGE3');
-
     const toast = this.toastCtrl.create({
       message: message,
       duration: 3000
@@ -258,14 +231,12 @@ export class CoursePage {
       {course: this.course, year: this.year},
       {cssClass: 'modal-fullscreen'}
     );
-    myModal.onDidDismiss(data => {
-    });
+    myModal.onDidDismiss(() => {});
     myModal.present();
   }
 
   private getEventWithOptions(activity: Activity, options: any) {
-    return this.calendar
-      .createEventWithOptions(
+    return this.calendar.createEventWithOptions(
         this.course.name + ' : ' + activity.type,
         activity.auditorium,
         null,

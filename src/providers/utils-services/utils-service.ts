@@ -18,7 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, ItemSliding, Loading, LoadingController, ToastController } from 'ionic-angular';
+import {
+  AlertController,
+  ItemSliding,
+  Loading,
+  LoadingController,
+  ToastController,
+  ViewController
+} from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -44,6 +51,7 @@ export class UtilsService {
     public alertCtrl: AlertController,
     public user: UserService,
     public toastCtrl: ToastController,
+    public viewCtrl: ViewController,
   ) {
   }
 
@@ -117,7 +125,7 @@ export class UtilsService {
   }
 
   getText(page: string, name: string) {
-    let text: string;
+    let text = '';
     this.translateService.get(page + '.' + name).subscribe((res: string) => {
       text = res;
     });
@@ -170,5 +178,12 @@ export class UtilsService {
       this.user.addFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
       this.favoriteAdded(slidingItem, page);
     }
+  }
+
+  applyFilters(cancel: boolean = false, categories, results, dateRange) {
+    const excludedFilters = cancel ? [] : categories.filter(c => !c.isChecked).map(c => c.name);
+    results.push(excludedFilters);
+    results.push(dateRange);
+    this.viewCtrl.dismiss(results);
   }
 }
