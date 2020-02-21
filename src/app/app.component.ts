@@ -19,7 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, IonicApp, LoadingController, MenuController, Nav, Platform } from 'ionic-angular';
+import { AlertController, IonicApp, MenuController, Nav, Platform } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
 import { Component, ViewChild } from '@angular/core';
@@ -32,8 +32,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HomePage } from '../pages/home/home';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
-
-// declare var TestFairy: any;
+import { Page } from "./entity/page";
 
 @Component({
   templateUrl: 'app.html'
@@ -45,33 +44,9 @@ export class MyApp {
   page: any;
   homePage;
   checked = false;
-  campusPages: Array<{
-    title: string;
-    component: any;
-    icon: any;
-    iosSchemaName: string;
-    androidPackageName: string;
-    appUrl: string;
-    httpUrl: string;
-  }>;
-  studiePages: Array<{
-    title: string;
-    component: any;
-    icon: any;
-    iosSchemaName: string;
-    androidPackageName: string;
-    appUrl: string;
-    httpUrl: string;
-  }>;
-  toolPages: Array<{
-    title: string;
-    component: any;
-    icon: any;
-    iosSchemaName: string;
-    androidPackageName: string;
-    appUrl: string;
-    httpUrl: string;
-  }>;
+  campusPages: Array<Page>;
+  studiePages: Array<Page>;
+  toolPages: Array<Page>;
 
   constructor(
     public platform: Platform,
@@ -83,7 +58,6 @@ export class MyApp {
     private alertCtrl: AlertController,
     private user: UserService,
     public translateService: TranslateService,
-    public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
     private wso2Service: Wso2Service,
     public cache: CacheService
@@ -116,22 +90,16 @@ export class MyApp {
   getPagesSection(titles: Array<string>, components: Array<string>, icons: Array<string>) {
     const pages = [];
     for (let i = 0; i < titles.length; i++) {
-      const page = {
-        title: 'MENU.' + titles[i],
-        component: components[i] + 'Page',
-        icon: './assets/img/' + icons[i] + '.png',
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null,
-        httpUrl: null
-      };
-      if (titles[i] === 'RESTAURANT') {
-        page.iosSchemaName = 'id1156050719';
-        page.androidPackageName = 'com.apptree.resto4u';
-        page.appUrl = 'apptreeresto4u://';
-        page.httpUrl = 'https://uclouvain.be/fr/decouvrir/resto-u';
-      }
-      pages.push(page);
+      const is_rest_page = titles[i] === 'RESTAURANT';
+      pages.push(new Page(
+        'MENU.' + titles[i],
+        components[i] + 'Page',
+        './assets/img/' + icons[i] + '.png',
+        is_rest_page ? 'id1156050719' : null,
+        is_rest_page ? 'com.apptree.resto4u' : null,
+        is_rest_page ? 'apptreeresto4u://' : null,
+        is_rest_page ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
+    ));
     }
     return pages;
   }
@@ -150,22 +118,16 @@ export class MyApp {
         this.ionicApp._overlayPortal.getActive();
       if (activePortal) {
         activePortal.dismiss();
-        return;
-      } else if (this.menu.isOpen()) {
+      }
+      if (this.menu.isOpen()) {
         this.menu.close();
-        return;
       }
-      if (this.nav.length() === 1) {
-        this.confirmExitApp();
-      } else {
-        this.nav.pop();
-      }
+      this.nav.length() === 1 ? this.confirmExitApp() : this.nav.pop();
     });
   }
 
   confirmExitApp() {
-    const page = this.nav.getActive().instance;
-    if (page instanceof HomePage) {
+    if (this.nav.getActive().instance instanceof HomePage) {
       if (!this.alertPresented) {
         this.alertPresented = true;
         const confirmAlert = this.alertCtrl.create({
@@ -193,13 +155,11 @@ export class MyApp {
     const disclaimerAlert = this.alertCtrl.create({
       title: 'Avertissement',
       message:
-        '<p>Version beta de l\'application Stud@UCLouvain.</p> <p>Cette version n\'est pas publique et est uniquement destinée à une phase de test.</p>',
-
+        '<p>Version beta de l\'application Stud@UCLouvain.</p> ' +
+        '<p>Cette version n\'est pas publique et est uniquement destinée à une phase de test.</p>',
       buttons: [
         {
-          text: 'OK',
-          handler: data => {
-          }
+          text: 'OK'
         }
       ]
     });
@@ -207,8 +167,7 @@ export class MyApp {
   }
 
   openRootPage(page) {
-    const activeVC = this.nav.getActive();
-    const test = activeVC.instance;
+    const test = this.nav.getActive().instance;
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
@@ -246,22 +205,17 @@ export class MyApp {
         const browser = this.iab.create(appUrl, '_system');
         browser.close();
       },
-      () => {
-        this.market.open(app);
-      }
+      () =>  this.market.open(app)
     );
   }
 
   private getPages() {
-    this.homePage = {
-      title: 'MENU.HOME',
-      component: 'HomePage',
-      icon: './assets/img/home.png',
-      iosSchemaName: null,
-      androidPackageName: null,
-      appUrl: null,
-      httpUrl: null
-    };
+    this.homePage = new Page(
+      'MENU.HOME',
+      'HomePage',
+      './assets/img/home.png',
+      null, null, null, null
+    );
 
     const campusTitles = ['NEWS', 'EVENTS', 'SPORTS'];
     const campusComp = ['News', 'Events', 'Sports'];
