@@ -70,13 +70,12 @@ export class SupportPage {
     this.utilsService.presentLoading();
     const options: Array<string> = [];
     const values: Array<string> = [];
-    if (this.lastname.length > 0) {
-      values.push(this.lastname);
-      options.push('lastname');
-    }
-    if (this.firstname.length > 0) {
-      values.push(this.firstname);
-      options.push('firstname');
+    for (const key of ['lastname', 'firstname']) {
+      const field = key === 'lastname' ? this.lastname : this.firstname;
+      if (key.length > 0) {
+        values.push(field);
+        options.push(key);
+      }
     }
     this.searchEmployees(options, values);
   }

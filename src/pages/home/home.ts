@@ -63,9 +63,7 @@ export class HomePage {
     public splashscreen: SplashScreen,
     private utilsService: UtilsService
   ) {
-    if (this.navParams.get('title') !== undefined) {
-      this.title = this.navParams.get('title');
-    }
+    this.title = this.navParams.get('title');
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
