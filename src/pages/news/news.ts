@@ -74,9 +74,7 @@ export class NewsPage {
     private cache: CacheService,
     private utilsService: UtilsService
   ) {
-    if (this.navParams.get('title') !== undefined) {
-      this.title = this.navParams.get('title');
-    }
+    this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
     this.facService.loadResources().then(data => {
       this.listFac = data;
