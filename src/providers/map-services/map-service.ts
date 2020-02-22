@@ -90,12 +90,16 @@ export class MapService {
       let [lat, lng, address, title] = [
         parseFloat(location.lat), parseFloat(location.lng), location.address, location.title
       ];
-      this.onDevice ?
-        this.addDeviceMarker(lat, lng, address, title) :
-        this.addBrowserMarker(lat, lng, '<p>' + address + '</p>', title);
+      this.addAppropriateDeviceMarker(lat, lng, address, title);
     } else if (this.onDevice) {
       marker.showInfoWindow();
     }
+  }
+
+  private addAppropriateDeviceMarker(lat, lng, address, title) {
+    this.onDevice ?
+      this.addDeviceMarker(lat, lng, address, title) :
+      this.addBrowserMarker(lat, lng, '<p>' + address + '</p>', title);
   }
 
   removeMarker(location: MapLocation) {
@@ -234,15 +238,8 @@ export class MapService {
         this.userLocation = new MapLocation(
           'Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS'
         );
-        const mapOptions = {
-          center: position.latLng,
-          zoom: 15,
-          mapTypeId: GoogleMapsMapTypeId.ROADMAP
-        };
-        const camPos: CameraPosition<LatLng> = {
-          target: position.latLng,
-          zoom: 15
-        };
+        const mapOptions = { center: position.latLng, zoom: 15, mapTypeId: GoogleMapsMapTypeId.ROADMAP };
+        const camPos: CameraPosition<LatLng> = { target: position.latLng, zoom: 15 };
         this.map = GoogleMaps.create(this.mapElement, mapOptions);
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
@@ -276,11 +273,7 @@ export class MapService {
   }
 
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
-    const markerOptions: MarkerOptions = {
-      position: new LatLng(lat, lng),
-      title: title,
-      snippet: address
-    };
+    const markerOptions: MarkerOptions = { position: new LatLng(lat, lng), title: title, snippet: address };
     this.map.addMarker(markerOptions).then((marker: Marker) => {
       marker.showInfoWindow();
       this.markers.push(marker);
@@ -289,8 +282,7 @@ export class MapService {
   }
 
   private getMarker(title: string): Marker {
-    const markers = this.onDevice ? this.markers : this.markersB;
-    for (const marker of markers) {
+    for (const marker of this.onDevice ? this.markers : this.markersB) {
       if (marker.getTitle() === title) {
         return marker;
       }
@@ -300,10 +292,7 @@ export class MapService {
   private setCenteredMarkerOnDevice(title: string, lat: number, lng: number) {
     for (const marker of this.markers) {
       if (marker.getTitle() === title) {
-        const camPos: CameraPosition<LatLng> = {
-          target: new LatLng(lat, lng),
-          zoom: 15
-        };
+        const camPos: CameraPosition<LatLng> = {target: new LatLng(lat, lng),  zoom: 15};
         this.map.moveCamera(camPos);
         break;
       }
