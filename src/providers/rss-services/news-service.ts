@@ -90,16 +90,14 @@ export class NewsService {
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       let trimmedDescription = '...';
-      if (item.description !== undefined) {
+      if (item.description) {
         trimmedDescription = item.description.length > this.maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
       this.shownNews++;
       const pubDate = this.createDateForNews(item.pubDate);
       const img = item.enclosure !== null ? item.enclosure._url : '';
       const newNewsItem = new NewsItem(
-        item.description || 'No description...',
-        item.link || 'No link',
-        item.title || 'No title',
+        item.description, item.link, item.title,
         img, trimmedDescription, false, item.guid, pubDate
       );
       this.news.push(newNewsItem);
