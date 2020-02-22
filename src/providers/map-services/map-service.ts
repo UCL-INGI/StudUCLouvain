@@ -29,8 +29,7 @@ import {
   GoogleMapsMapTypeId,
   LatLng,
   LocationService,
-  Marker,
-  MarkerOptions
+  Marker
 } from '@ionic-native/google-maps';
 
 import { MapLocation } from '../../app/entity/mapLocation';
@@ -85,13 +84,13 @@ export class MapService {
       let [lat, lng, address, title] = [
         parseFloat(location.lat), parseFloat(location.lng), location.address, location.title
       ];
-      this.addAppropriateDeviceMarker(lat, lng, address, title);
+      this.addAppropriateMarker(lat, lng, address, title);
     } else if (this.onDevice) {
       marker.showInfoWindow();
     }
   }
 
-  private addAppropriateDeviceMarker(lat, lng, address, title) {
+  private addAppropriateMarker(lat, lng, address, title) {
     this.onDevice ? this.addDeviceMarker(lat, lng, address, title) :
       this.addBrowserMarker(lat, lng, '<p>' + address + '</p>', title);
   }
@@ -239,14 +238,12 @@ export class MapService {
       map: this.map, animation: google.maps.Animation.DROP, position: new google.maps.LatLng(lat, lng), title: title
     });
     this.markersB.push(marker);
-    const infoWindow = new google.maps.InfoWindow({content: title + '\n' + content});
     google.maps.event.addListener(marker, 'click');
-    infoWindow.open(this.map, marker);
+    new google.maps.InfoWindow({content: title + '\n' + content}).open(this.map, marker);
   }
 
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
-    const markerOptions: MarkerOptions = { position: new LatLng(lat, lng), title: title, snippet: address };
-    this.map.addMarker(markerOptions).then((marker: Marker) => {
+    this.map.addMarker({ position: new LatLng(lat, lng), title: title, snippet: address }).then((marker: Marker) => {
       marker.showInfoWindow();
       this.markers.push(marker);
       this.setCenteredMarkerOnDevice(title, lat, lng);
