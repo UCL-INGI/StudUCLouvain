@@ -107,15 +107,28 @@ export class CoursePage {
 
   addToCalendar(slidingItem: ItemSliding, activity: Activity) {
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
-    this.getEventWithOptions(activity, {firstReminderMinutes: 15}).then(() => {
+    this.getEventWithOption(activity, message, slidingItem);
+    this.alert();
+  }
+
+  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
+    this.calendar.createEventWithOptions(
+        message,
+        activity.auditorium,
+        null,
+        activity.start,
+        activity.end,
+        {firstReminderMinutes: 15}
+      ).then(() => {
       const toast = this.toastCtrl.create({
         message: message,
         duration: 3000
       });
       toast.present();
-      slidingItem.close();
+      if (slidingItem) {
+        slidingItem.close();
+      }
     });
-    this.alert();
   }
 
   alert(all: boolean = false) {
@@ -192,8 +205,7 @@ export class CoursePage {
   }
 
   getSlots(segment: string) {
-    let act: Activity[] = this.course.activities;
-    act = act.filter(acti =>
+    let act = this.course.activities.filter(acti =>
       acti.type === segment ||
       (acti.type === 'TP' && segment === 'TD') ||
       (segment === 'Examen' && acti.isExam)
@@ -214,7 +226,7 @@ export class CoursePage {
 
   addCourseToCalendar() {
     for (const activity of this.displayedActi) {
-      this.getEventWithOptions(activity, {firstReminderMinutes: 15});
+      this.getEventWithOption(activity, this.course.name + ' : ' + activity.type);
     }
     const message = this.utilsService.getText('STUDY', 'MESSAGE3');
     const toast = this.toastCtrl.create({
@@ -233,17 +245,6 @@ export class CoursePage {
     );
     myModal.onDidDismiss(() => {});
     myModal.present();
-  }
-
-  private getEventWithOptions(activity: Activity, options: any) {
-    return this.calendar.createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      );
   }
 
   private getLabel(array: Activity[], i: number) {
