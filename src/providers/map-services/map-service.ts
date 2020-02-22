@@ -18,11 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-
-// This code is inspired from the great Josh Morony tutorials :
-// https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
-
 import { MenuController, Platform } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
@@ -197,11 +192,7 @@ export class MapService {
       this.userLocation = new MapLocation(
         'Campus Position', '', String(latLng.lat), String(latLng.lng), 'CAMPUSPOS'
       );
-      const mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: GoogleMapsMapTypeId.ROADMAP
-      };
+      const mapOptions = { center: latLng, zoom: 15, mapTypeId: GoogleMapsMapTypeId.ROADMAP };
       const camPos: CameraPosition<LatLng> = { target: latLng,  zoom: 5 };
       this.map = GoogleMaps.create(this.mapElement, mapOptions);
       console.log('Map created');
@@ -228,8 +219,9 @@ export class MapService {
         this.userLocation = new MapLocation(
           'Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS'
         );
-        const mapOptions = { center: position.latLng, zoom: 15, mapTypeId: GoogleMapsMapTypeId.ROADMAP };
-        this.map = GoogleMaps.create(this.mapElement, mapOptions);
+        this.map = GoogleMaps.create(
+          this.mapElement, { center: position.latLng, zoom: 15, mapTypeId: GoogleMapsMapTypeId.ROADMAP }
+          );
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
           this.map.moveCamera({ target: position.latLng, zoom: 15 });
@@ -244,16 +236,11 @@ export class MapService {
 
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
     const marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: new google.maps.LatLng(lat, lng),
-      title: title
+      map: this.map, animation: google.maps.Animation.DROP, position: new google.maps.LatLng(lat, lng), title: title
     });
     this.markersB.push(marker);
     const infoWindow = new google.maps.InfoWindow({content: title + '\n' + content});
-    google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
-    });
+    google.maps.event.addListener(marker, 'click');
     infoWindow.open(this.map, marker);
   }
 

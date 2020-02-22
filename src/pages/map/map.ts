@@ -60,12 +60,10 @@ export class MapPage {
   }
 
   ngAfterViewInit() {
-    const mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-    const zones = this.poilocations.loadResources();
     this.searching = true;
     Promise.all([
-      mapLoaded,
-      zones
+      this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement),
+      this.poilocations.loadResources()
     ]).then((result) => {
       this.searching = false;
       this.zones = result[1];
@@ -80,13 +78,8 @@ export class MapPage {
   }
 
   toggleDetails(data) {
-    if (data.showDetails) {
-      data.showDetails = false;
-      data.icon = 'arrow-dropdown';
-    } else {
-      data.showDetails = true;
-      data.icon = 'arrow-dropup';
-    }
+    data.showDetails = !data.showDetails;
+    data.icon = 'arrow-' + (data.showDetails ? 'dropwdown' : 'dropup');
   }
 
   toggleLocation(data, checkList, index) {
