@@ -128,37 +128,33 @@ export class NewsPage {
 
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
-      if (
-        this.segment === 'univ' ||
-        (this.segment === 'fac' &&
-          this.facsegment === 'news' &&
-          this.userS.hasFac())
-      ) {
-        if (this.segment === 'univ') {
-          const part = this.subsegment;
-          const key = part === 'P1' ? 'cache-P1' : part === 'P2' ? 'cache-P2' : 'cache-P3';
-          this.cache.removeItem(key);
-          this.loadNews(key);
-        } else {
-          this.loadNews();
-        }
-      }
-      refresher.complete();
+      this.refresh();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
+    }
+    refresher.complete();
+  }
+
+  private refresh() {
+    if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
+      let key: string;
+      if (this.segment === 'univ') {
+        key = this.getKeyUniv();
+        this.cache.removeItem(key);
+      }
+      this.loadNews();
     }
   }
 
-  facTabChange() {
+  private getKeyUniv() {
+    return this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
   }
 
   tabChanged() {
     this.resize();
     if (this.segment === 'univ') {
       this.cachedOrNot();
-    }
-    if (this.segment === 'fac') {
+    } else if (this.segment === 'fac') {
       this.fac = this.userS.fac;
       if (this.facsegment === 'news' && this.userS.hasFac()) {
         const links = this.findSite();
@@ -170,23 +166,18 @@ export class NewsPage {
   }
 
   async cachedOrNot() {
-    const part = this.subsegment;
     if (this.segment === 'univ') {
-      const key =
-        part === 'P1' ? 'cache-P1' : part === 'P2' ? 'cache-P2' : 'cache-P3';
-      await this.cache
-        .getItem(key)
-        .then(data => {
-          this.utilsService.presentLoading();
-          this.news = data.news;
-          this.shownNews = data.shownNews;
-          this.searching = false;
-          this.updateDisplayedNews();
-        })
-        .catch(() => {
-          console.log('Oh no! My data is expired or doesn\'t exist!');
-          this.loadNews(key);
-        });
+      const key = this.getKeyUniv();
+      await this.cache.getItem(key).then(data => {
+        this.utilsService.presentLoading();
+        this.news = data.news;
+        this.shownNews = data.shownNews;
+        this.searching = false;
+        this.updateDisplayedNews();
+      }).catch(() => {
+        console.log('Oh no! My data is expired or doesn\'t exist!');
+        this.loadNews(key);
+      });
     } else {
       this.loadNews();
     }
@@ -220,11 +211,8 @@ export class NewsPage {
 
   public updateDisplayedNews() {
     this.searching = true;
-    this.displayedNews = this.news;
     this.displayedNews = this.news.filter(item => {
-      return (
-        item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-      );
+      return item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews === 0;

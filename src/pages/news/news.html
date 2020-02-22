@@ -48,7 +48,7 @@
       {{'NEWS.SERVICE' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-segment (ionChange)="facTabChange()" *ngIf="segment==='fac'" [(ngModel)]="facsegment">
+  <ion-segment *ngIf="segment==='fac'" [(ngModel)]="facsegment">
     <ion-segment-button value="news">
       {{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong>
     </ion-segment-button>

@@ -109,24 +109,29 @@ export class SportsService {
     this.shownSports = 0;
     this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
-      const item = data[i];
-      const favorite = this.user.hasFavorite(item.guid);
-      if (item.activite) {
-        const cats = isSport ? this.allCategories : this.allCategoriesT;
-        if (cats.indexOf(item.activite) < 0) {
-          cats.push(item.activite);
-        }
-        cats.sort();
-        isSport ? this.allCategories = cats : this.allCategoriesT = cats;
-      }
-      isSport ? this.shownSports++ : this.shownTeams++;
-      const startDate = this.createDateForSport(item.date, item.hdebut);
-      const endDate = this.createDateForSport(item.date, item.hfin);
-      const jour = item.jour[1].toUpperCase() + item.jour.substr(2);
-      const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, jour, startDate,
-        false, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
+      this.getSportsDataForExtract(data, i, isSport);
+      const newSportItem = new SportItem(
+        data[i].activite, data[i].genre, data[i].lieu, data[i].salle,
+        data[i].jour[1].toUpperCase() + data[i].jour.substr(2),
+        this.createDateForSport(data[i].date, data[i].hdebut),
+        false, this.user.hasFavorite(data[i].guid),
+        this.createDateForSport(data[i].date, data[i].hfin),
+        data[i].type, data[i].online, data[i].remarque, data[i].active, data[i].activite.concat(data[i].date.toString())
+      );
       isSport ? this.sports.push(newSportItem) : this.teams.push(newSportItem);
     }
+  }
+
+  private getSportsDataForExtract(data: any, i: number, isSport: boolean) {
+    if (data[i].activite) {
+      const cats = isSport ? this.allCategories : this.allCategoriesT;
+      if (cats.indexOf(data[i].activite) < 0) {
+        cats.push(data[i].activite);
+      }
+      cats.sort();
+      isSport ? this.allCategories = cats : this.allCategoriesT = cats;
+    }
+    isSport ? this.shownSports++ : this.shownTeams++;
   }
 
   private createDateForSport(str: string, hour: string): Date {
