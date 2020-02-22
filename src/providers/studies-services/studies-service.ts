@@ -26,6 +26,8 @@ import { Injectable } from '@angular/core';
 
 import { AdeProject } from '../../app/entity/adeProject';
 import { AdeService } from './ade-service';
+import { ToastController } from "ionic-angular";
+import { UtilsService } from "../utils-services/utils-service";
 
 @Injectable()
 export class StudiesService {
@@ -35,7 +37,17 @@ export class StudiesService {
 
   constructor(
     public http: HttpClient,
-    public ade: AdeService) {
+    public ade: AdeService,
+    private toastCtrl: ToastController,
+    private utilsService: UtilsService
+  ) {}
+
+  toastCourse(textKey: string) {
+    return this.toastCtrl.create({
+      message: this.utilsService.getText('STUDY', textKey),
+      duration: 2000,
+      position: 'middle'
+    });
   }
 
   openSession() {
