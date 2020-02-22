@@ -98,8 +98,7 @@ export class StudiesPage {
   }
 
   toastBadCourse() {
-    const toast = this.studiesService.toastCourse('BADCOURSE');
-    toast.present();
+    this.studiesService.toastCourse('BADCOURSE').present();
   }
 
   loadActivities() {
@@ -154,7 +153,7 @@ export class StudiesPage {
   }
 
   showPrompt() {
-    const prompt = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: this.utilsService.getText('STUDY', 'ADDCOURSE'),
       message: this.utilsService.getText('STUDY', 'MESSAGE'),
       inputs: [
@@ -173,8 +172,7 @@ export class StudiesPage {
           handler: data => this.promptSaveHandler(data)
         }
       ]
-    });
-    prompt.present();
+    }).present();
   }
 
   toastAlreadyCourse() {
@@ -199,12 +197,11 @@ export class StudiesPage {
 
   addCourse(sigle: string, name: string) {
     this.saveCourse(name, sigle);
-    const toast = this.toastCtrl.create({
+    this.toastCtrl.create({
       message: 'Cours ajouté',
       duration: 1000,
       position: 'bottom'
-    });
-    toast.present();
+    }).present();
   }
 
   getCourses() {
@@ -233,12 +230,11 @@ export class StudiesPage {
   }
 
   unavailableAlert() {
-    const alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Indisponible',
       subTitle: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
-    });
-    alert.present();
+    }).present();
   }
 
   openExamPage() {
@@ -276,11 +272,7 @@ export class StudiesPage {
         already = true;
       }
     }
-    if (!already) {
-      this.checkExistAndAddOrToast(acro);
-    } else {
-      this.toastAlreadyCourse();
-    }
+    already ? this.toastAlreadyCourse() : this.checkExistAndAddOrToast(acro);
   }
 
   private checkExistAndAddOrToast(acro: any) {
