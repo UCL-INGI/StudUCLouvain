@@ -55,22 +55,11 @@ export class ModalInfoPage {
           this.closeModal();
           resolve(400);
         } else {
-          const {
-            cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue
-          } = this.assignInfosData(res);
+          const {cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue}
+            = this.assignInfosData(res);
           const response = {
-            cahierCharges: cahier,
-            offre: offres,
-            campus: campus,
-            entite: entite,
-            prof: teacher,
-            localisation: loca,
-            credit: credit,
-            programmeprerequis: progpre,
-            quadri: quadri,
-            resume: resume,
-            volume: volume,
-            langue: langue
+            cahierCharges: cahier, offre: offres, campus: campus, entite: entite, prof: teacher, localisation: loca,
+            credit: credit, programmeprerequis: progpre, quadri: quadri, resume: resume, volume: volume, langue: langue
           };
           resolve(response);
         }
