@@ -97,8 +97,7 @@ export class MapService {
   }
 
   private addAppropriateDeviceMarker(lat, lng, address, title) {
-    this.onDevice ?
-      this.addDeviceMarker(lat, lng, address, title) :
+    this.onDevice ? this.addDeviceMarker(lat, lng, address, title) :
       this.addBrowserMarker(lat, lng, '<p>' + address + '</p>', title);
   }
 
@@ -133,8 +132,6 @@ export class MapService {
           script.src = 'http://maps.google.com/maps/api/js?' + (this.apiKey ? this.apiKey + '&callback=mapInit' : 'callback=mapInit');
           document.body.appendChild(script);
         }
-      } else if (this.connectivityService.isOnline()) {
-        this._initBrowserMap(resolve, reject);
       } else {
         this.pleaseConnect(true);
       }
@@ -205,10 +202,7 @@ export class MapService {
         zoom: 15,
         mapTypeId: GoogleMapsMapTypeId.ROADMAP
       };
-      const camPos: CameraPosition<LatLng> = {
-        target: latLng,
-        zoom: 5
-      };
+      const camPos: CameraPosition<LatLng> = { target: latLng,  zoom: 5 };
       this.map = GoogleMaps.create(this.mapElement, mapOptions);
       console.log('Map created');
       this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
@@ -235,11 +229,10 @@ export class MapService {
           'Ma Position', '', String(position.latLng.lat), String(position.latLng.lng), 'MYPOS'
         );
         const mapOptions = { center: position.latLng, zoom: 15, mapTypeId: GoogleMapsMapTypeId.ROADMAP };
-        const camPos: CameraPosition<LatLng> = { target: position.latLng, zoom: 15 };
         this.map = GoogleMaps.create(this.mapElement, mapOptions);
         this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
-          this.map.moveCamera(camPos);
+          this.map.moveCamera({ target: position.latLng, zoom: 15 });
           resolve(true);
         });
       }, (error) => {
