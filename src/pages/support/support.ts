@@ -72,7 +72,7 @@ export class SupportPage {
     const values: Array<string> = [];
     for (const key of ['lastname', 'firstname']) {
       const field = key === 'lastname' ? this.lastname : this.firstname;
-      if (key.length > 0) {
+      if (field.length > 0) {
         values.push(field);
         options.push(key);
       }
