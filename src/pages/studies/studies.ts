@@ -98,11 +98,7 @@ export class StudiesPage {
   }
 
   toastBadCourse() {
-    const toast = this.toastCtrl.create({
-      message: this.utilsService.getText('STUDY', 'BADCOURSE'),
-      duration: 2000,
-      position: 'middle'
-    });
+    const toast = this.studiesService.toastCourse('BADCOURSE');
     toast.present();
   }
 
@@ -134,9 +130,7 @@ export class StudiesPage {
 
   openModalProject() {
     const myModal = this.modalCtrl.create('ModalProjectPage', {sessionId: this.sessionId});
-    myModal.onDidDismiss(data => {
-      this.project = data;
-    });
+    myModal.onDidDismiss(data => this.project = data);
     myModal.present();
   }
 
@@ -184,12 +178,7 @@ export class StudiesPage {
   }
 
   toastAlreadyCourse() {
-    const toast = this.toastCtrl.create({
-      message: this.utilsService.getText('STUDY', 'ALCOURSE'),
-      duration: 2000,
-      position: 'middle'
-    });
-
+    const toast = this.studiesService.toastCourse('ALCOURSE');
     toast.onDidDismiss(() => console.log('Dismissed toast'));
     toast.present();
   }
