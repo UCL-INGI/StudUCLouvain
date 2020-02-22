@@ -123,8 +123,8 @@ export class NewsPage {
     }
   }
 
-  removeFac(fac: string) {
-    this.userS.removeFac(fac);
+  removeFac() {
+    this.userS.removeFac();
     this.resize();
   }
 
