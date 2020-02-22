@@ -70,7 +70,7 @@ export class MapPage {
       this.searching = false;
       this.zones = result[1];
       this.filters = this.zones;
-      this.userLocation = this.mapService.getUserLocation();
+      this.userLocation = this.mapService.userLocation;
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
       if (result[0]) {
