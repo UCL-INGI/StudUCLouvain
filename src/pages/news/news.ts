@@ -139,11 +139,15 @@ export class NewsPage {
     if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
       let key: string;
       if (this.segment === 'univ') {
-        key = this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
+        key = this.getKeyUniv();
         this.cache.removeItem(key);
       }
       this.loadNews();
     }
+  }
+
+  private getKeyUniv() {
+    return this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
   }
 
   tabChanged() {
@@ -163,7 +167,7 @@ export class NewsPage {
 
   async cachedOrNot() {
     if (this.segment === 'univ') {
-      const key = this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
+      const key = this.getKeyUniv();
       await this.cache.getItem(key).then(data => {
         this.utilsService.presentLoading();
         this.news = data.news;
