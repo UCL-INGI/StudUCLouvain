@@ -84,20 +84,10 @@ export class UserService {
     return (this.fac.length > 0);
   }
 
-  hasSlotTP(acronym: string) {
+  hasSlot(acronym: string, isTP: boolean) {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      return this.slots[index].TP.length > 0;
-    } else {
-      return index > -1;
-    }
-
-  }
-
-  hasSlotCM(acronym: string) {
-    const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) {
-      return this.slots[index].CM.length > 0;
+      return  isTP ? this.slots[index].TP.length > 0 : this.slots[index].CM.length > 0;
     } else {
       return index > -1;
     }

@@ -35,6 +35,7 @@ import { Market } from '@ionic-native/market';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from './user-service';
+import { Page } from "../../app/entity/page";
 
 @Injectable()
 export class UtilsService {
@@ -139,6 +140,7 @@ export class UtilsService {
     });
     return values;
   }
+
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
     const page = isSport ? 'SPORTS' : 'EVENTS';
     const number = isSport ? 2 : 3;
@@ -192,5 +194,21 @@ export class UtilsService {
     results.push(excludedFilters);
     results.push(dateRange);
     this.viewCtrl.dismiss(results);
+  }
+
+  getPageObject(
+    component,
+    title: string = component.toUpperCase(),
+    iosSchemaName?: string, androidPackageName?: string, appUrl?: string, httpUrl?: string
+  ) {
+    return new Page(
+      'MENU.' + title,
+      component + 'Page',
+      null,
+      iosSchemaName ? iosSchemaName : null,
+      androidPackageName ? androidPackageName : null,
+      appUrl ? appUrl : null,
+      httpUrl ? httpUrl : null
+    );
   }
 }
