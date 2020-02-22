@@ -64,17 +64,19 @@ export class MapPage {
     Promise.all([
       this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement),
       this.poilocations.loadResources()
-    ]).then((result) => {
-      this.searching = false;
-      this.zones = result[1];
-      this.filters = this.zones;
-      this.userLocation = this.mapService.userLocation;
-      this.selectedLocation = this.userLocation;
-      this.showedLocations.push(this.selectedLocation);
-      if (result[0]) {
-        this.mapService.addMarker(this.selectedLocation);
-      }
-    });
+    ]).then((result) => this.initPromisesSucceed(result));
+  }
+
+  private initPromisesSucceed(result) {
+    this.searching = false;
+    this.zones = result[1];
+    this.filters = this.zones;
+    this.userLocation = this.mapService.userLocation;
+    this.selectedLocation = this.userLocation;
+    this.showedLocations.push(this.selectedLocation);
+    if (result[0]) {
+      this.mapService.addMarker(this.selectedLocation);
+    }
   }
 
   toggleDetails(data) {
@@ -103,9 +105,7 @@ export class MapPage {
   }
 
   onSelect(data: any) {
-    if (this.selectedLocation !== data) {
-      this.selectedLocation = data;
-    }
+    this.selectedLocation = data === this.selectedLocation ? this.selectedLocation : data;
     this.mapService.addMarker(this.selectedLocation);
   }
 }
