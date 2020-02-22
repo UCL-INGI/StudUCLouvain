@@ -64,9 +64,7 @@ export class MapPage {
     Promise.all([
       this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement),
       this.poilocations.loadResources()
-    ]).then((result) => {
-      this.initPromisesSucceed(result);
-    });
+    ]).then((result) => this.initPromisesSucceed(result));
   }
 
   private initPromisesSucceed(result) {
