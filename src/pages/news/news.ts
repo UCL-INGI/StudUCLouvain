@@ -128,22 +128,22 @@ export class NewsPage {
 
   public doRefresh(refresher) {
     if (this.connService.isOnline()) {
-      if (this.hasToRefresh()) {
-        let key: string;
-        if (this.segment === 'univ') {
-          key = this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
-          this.cache.removeItem(key);
-        }
-        this.loadNews();
-      }
+      this.refresh();
     } else {
       this.connService.presentConnectionAlert();
     }
     refresher.complete();
   }
 
-  private hasToRefresh() {
-    return this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac());
+  private refresh() {
+    if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
+      let key: string;
+      if (this.segment === 'univ') {
+        key = this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
+        this.cache.removeItem(key);
+      }
+      this.loadNews();
+    }
   }
 
   tabChanged() {
@@ -165,15 +165,15 @@ export class NewsPage {
     if (this.segment === 'univ') {
       const key = this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
       await this.cache.getItem(key).then(data => {
-          this.utilsService.presentLoading();
-          this.news = data.news;
-          this.shownNews = data.shownNews;
-          this.searching = false;
-          this.updateDisplayedNews();
-        }).catch(() => {
-          console.log('Oh no! My data is expired or doesn\'t exist!');
-          this.loadNews(key);
-        });
+        this.utilsService.presentLoading();
+        this.news = data.news;
+        this.shownNews = data.shownNews;
+        this.searching = false;
+        this.updateDisplayedNews();
+      }).catch(() => {
+        console.log('Oh no! My data is expired or doesn\'t exist!');
+        this.loadNews(key);
+      });
     } else {
       this.loadNews();
     }
