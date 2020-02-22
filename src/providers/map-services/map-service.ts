@@ -122,10 +122,6 @@ export class MapService {
     }
   }
 
-  getUserLocation(): MapLocation {
-    return this.userLocation;
-  }
-
   private loadBrowserGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
@@ -261,11 +257,7 @@ export class MapService {
       title: title
     });
     this.markersB.push(marker);
-    this.addBrowserInfoWindow(marker, title + '\n' + content);
-  }
-
-  private addBrowserInfoWindow(marker, content) {
-    const infoWindow = new google.maps.InfoWindow({content: content});
+    const infoWindow = new google.maps.InfoWindow({content: title + '\n' + content});
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
