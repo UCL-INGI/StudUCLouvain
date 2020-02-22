@@ -27,7 +27,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
-import { Page } from "../../app/entity/page";
 
 @IonicPage()
 @Component({
@@ -40,17 +39,23 @@ export class HomePage {
   title = 'Stud.UCLouvain';
   where = '';
 
-  libraryPage = this.getPageObject('Libraries', 'LIBRARY');
-  newsPage = this.getPageObject('News');
-  eventPage = this.getPageObject('Events');
-  sportPage = this.getPageObject('Sports');
-  studiesPage = this.getPageObject('Studies');
-  helpDeskPage = this.getPageObject('Support', 'HELP');
-  mapPage = this.getPageObject('Map');
-  guindaillePage = this.getPageObject('Guindaille', 'PARTY');
-  paramPage = this.getPageObject('Param');
-  restoPage = this.getPageObject('Restaurant', 'RESTAURANT', true);
-  mobilityPage = this.getPageObject('Mobility');
+  libraryPage = this.utilsService.getPageObject('Libraries', 'LIBRARY');
+  newsPage = this.utilsService.getPageObject('News');
+  eventPage = this.utilsService.getPageObject('Events');
+  sportPage = this.utilsService.getPageObject('Sports');
+  studiesPage = this.utilsService.getPageObject('Studies');
+  helpDeskPage = this.utilsService.getPageObject('Support', 'HELP');
+  mapPage = this.utilsService.getPageObject('Map');
+  guindaillePage = this.utilsService.getPageObject('Guindaille', 'PARTY');
+  paramPage = this.utilsService.getPageObject('Param');
+  restoPage = this.utilsService.getPageObject(
+    'Restaurant',
+    'RESTAURANT',
+    'id1156050719', 'com.apptree.resto4u',
+    'apptreeresto4u://', 'https://uclouvain.be/fr/decouvrir/resto-u'
+    )
+  ;
+  mobilityPage = this.utilsService.getPageObject('Mobility');
 
   constructor(
     public navParams: NavParams,
@@ -67,18 +72,6 @@ export class HomePage {
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
-  }
-
-  getPageObject(component: string, title: string = component.toUpperCase(), is_rest_page: boolean = false) {
-    return new Page(
-      'MENU.' + title,
-      component + 'Page',
-      null,
-      is_rest_page ? 'id1156050719' : null,
-      is_rest_page ? 'com.apptree.resto4u' : null,
-      is_rest_page ? 'apptreeresto4u://' : null,
-      is_rest_page ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
-    );
   }
 
   ionViewDidEnter() {

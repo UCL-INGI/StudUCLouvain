@@ -72,10 +72,10 @@ export class CoursePage {
   ) {
     this.courseSorted = {cm: [], tp: [], ex: []};
     const acro = this.course.acronym;
-    if (this.userS.hasSlotCM(acro)) {
+    if (this.userS.hasSlot(acro, false)) {
       this.slotCM = this.userS.getSlot(acro, false);
     }
-    if (this.userS.hasSlotTP(acro)) {
+    if (this.userS.hasSlot(acro, true)) {
       this.slotTP = this.userS.getSlot(acro, true);
     }
   }
