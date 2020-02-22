@@ -42,8 +42,6 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 })
 export class ParamPage {
   title: any;
-  shownGroup = null;
-  setting2 = 'Langue';
 
   constructor(
     public navCtrl: NavController,
@@ -57,59 +55,32 @@ export class ParamPage {
     this.title = this.navParams.get('title');
   }
 
-  /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
   campus_choice() {
-    const check = this.userS.campus;
-    let setting, message, save;
-    this.translateService.get('HOME.SETTING1').subscribe((res: string) => {
-      setting = res;
-    });
-    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    const settingsAlert = this.getSettingsAlert(setting, message, check, save);
-    settingsAlert.present();
+    const [setting, message, save] = this.utilsService.getTexts(
+      'HOME',
+      ['SETTING1', 'MESSAGE', 'SAVE']
+    );
+    this.getSettingsAlert(setting, message, this.userS.campus, save).present();
   }
 
-  /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
   language_choice() {
-    const check2 = this.translateService.currentLang;
-    let message2, en, fr, setting2, save: string;
-    this.translateService.get('HOME.SETTING2').subscribe((res: string) => {
-      setting2 = res;
-    });
-    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
-      message2 = res;
-    });
-    this.translateService.get('HOME.FR').subscribe((res: string) => {
-      fr = res;
-    });
-    this.translateService.get('HOME.EN').subscribe((res: string) => {
-      en = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    const languageAlert = this.alertCtrl.create({
+    const [message2, en, fr, setting2, save] = this.utilsService.getTexts(
+      'HOME',
+      ['SETTING2', 'MESSAGE2', 'FR', 'EN', 'SAVE']
+    );
+    this.alertCtrl.create({
       title: setting2,
       message: message2,
-      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
+      inputs: this.utilsService.getLanguageAlertInputs(fr, en, this.translateService.currentLang),
       buttons: [
         {
           text: save,
-          handler: data => {
-            this.languageChanged(data);
-          }
+          handler: data => this.languageChanged(data)
         }
       ]
-    });
-    languageAlert.present();
+    }).present();
   }
 
-  /*When the language change, translate the page with the applied language*/
   languageChanged(event: string) {
     this.userS.storage.set('lan', event);
     this.translateService.use(event);
@@ -127,9 +98,7 @@ export class ParamPage {
       buttons: [
         {
           text: save,
-          handler: data => {
-            this.userS.addCampus(data);
-          }
+          handler: data => this.userS.addCampus(data)
         }
       ]
     });
