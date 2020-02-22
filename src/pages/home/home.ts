@@ -68,7 +68,7 @@ export class HomePage {
     }
     this.app.setTitle(this.title);
     document.title = this.title;
-    // this.userS.removeCampus('');
+    // this.userS.addCampus('');
   }
 
   getPageObject(component: string, title: string = component.toUpperCase(), is_rest_page: boolean = false) {

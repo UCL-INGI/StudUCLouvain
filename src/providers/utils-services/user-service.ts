@@ -19,8 +19,6 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Events } from 'ionic-angular';
-
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
@@ -34,10 +32,7 @@ export class UserService {
   fac = '';
   disclaimer = false;
 
-  constructor(
-    public eventss: Events,
-    public storage: Storage
-  ) {
+  constructor(public storage: Storage) {
     // USE THIS LINE TO CLEAR THE STORAGE
     // storage.clear();
     this.getFavorites();
@@ -67,14 +62,10 @@ export class UserService {
     this.slots = this.getFromStorage('slots');
   }
 
-  getSlotCM(acronym: string) {
+  getSlot(acronym: string, isTP: boolean) {
     const index = this.slots.findIndex(item => item.course === acronym);
-    return index > -1 ? this.slots[index].CM : '';
-  }
-
-  getSlotTP(acronym: string) {
-    const index = this.slots.findIndex(item => item.course === acronym);
-    return index > -1 ? this.slots[index].TP : '';
+    const slot = isTP ? this.slots[index].TP : this.slots[index].CM;
+    return index > -1 ? slot : '';
   }
 
   hasFavorite(itemGuid: string) {
@@ -134,17 +125,12 @@ export class UserService {
     this.storage.set('campus', this.campus);
   }
 
-  removeCampus(campus: string) {
-    this.campus = '';
-    this.storage.set('campus', this.campus);
-  }
-
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac', this.fac);
   }
 
-  removeFac(fac: string) {
+  removeFac() {
     this.fac = '';
     this.storage.set('fac', this.fac);
   }
@@ -156,14 +142,6 @@ export class UserService {
     } else {
       const item = {course: acronym, TP: slot, CM: ''};
       this.slots.push(item);
-    }
-    this.storage.set('slots', this.slots);
-  }
-
-  removeSlot(acronym: string, isTP: boolean) {
-    const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) {
-      isTP ? this.slots[index].TP = '' : this.slots[index].CM = '';
     }
     this.storage.set('slots', this.slots);
   }
