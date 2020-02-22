@@ -82,35 +82,24 @@ export class StudiesPage {
     private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
-
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
     this.getCourses();
   }
 
   checkExist(sigle: string): Promise<any> {
-    let response: any;
     const year = this.project.name.split('-')[0];
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle, year).then((data: any) => {
         const exist = data !== 404 && data !== 500;
-        let nameFR = '';
-        let nameEN = '';
-        if (exist === true) {
-          const names = data.title;
-          nameFR = names;
-          nameEN = '';
-        }
-        response = {exist: exist, nameFR: nameFR, nameEN: nameEN};
-        resolve(response);
+        resolve({exist: exist, nameFR: exist ? data.title : '', nameEN: ''});
       });
     });
   }
 
   toastBadCourse() {
-    const msg = this.utilsService.getText('STUDY', 'BADCOURSE');
     const toast = this.toastCtrl.create({
-      message: msg,
+      message: this.utilsService.getText('STUDY', 'BADCOURSE'),
       duration: 2000,
       position: 'middle'
     });
@@ -121,21 +110,18 @@ export class StudiesPage {
     if (this.connService.isOnline()) {
       this.login().then(() => {
         if (this.status) {
-          this.studentService.searchActivities().then(res => {
-            const result: any = res;
-            this.sigles = result.activities.activity;
+          this.studentService.searchActivities().then((res: any) => {
+            this.sigles = res.activities.activity;
             for (const sigle of this.sigles) {
               this.activities.push({name: '', sigle: sigle});
             }
           }).catch(() => {
             console.log('Error during load of course program');
           });
-
           this.studentService.getStatus().then(res => {
             this.statusInsc = res[0].etatInscription;
             this.prog = res[0].intitOffreComplet;
-          })
-            .catch(() => {
+          }).catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -147,8 +133,7 @@ export class StudiesPage {
   }
 
   openModalProject() {
-    const obj = {sessionId: this.sessionId};
-    const myModal = this.modalCtrl.create('ModalProjectPage', obj);
+    const myModal = this.modalCtrl.create('ModalProjectPage', {sessionId: this.sessionId});
     myModal.onDidDismiss(data => {
       this.project = data;
     });
@@ -164,8 +149,7 @@ export class StudiesPage {
           if (this.project === null) {
             this.openModalProject();
           } else {
-            this.studiesService
-              .setProject(this.sessionId, this.project.id);
+            this.studiesService.setProject(this.sessionId, this.project.id);
           }
         });
       });
@@ -200,16 +184,13 @@ export class StudiesPage {
   }
 
   toastAlreadyCourse() {
-    const msg = this.utilsService.getText('STUDY', 'ALCOURSE');
     const toast = this.toastCtrl.create({
-      message: msg,
+      message: this.utilsService.getText('STUDY', 'ALCOURSE'),
       duration: 2000,
       position: 'middle'
     });
 
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
+    toast.onDidDismiss(() => console.log('Dismissed toast'));
     toast.present();
   }
 
@@ -238,18 +219,11 @@ export class StudiesPage {
   }
 
   getCourses() {
-    this.storage.get('listCourses').then(data => {
-      if (data == null) {
-        this.listCourses = [];
-      } else {
-        this.listCourses = data;
-      }
-    });
+    this.storage.get('listCourses').then(data => this.listCourses = data ? data : []);
   }
 
   saveCourse(name: string, tag: string) {
-    const course = new Course(name, tag, null);
-    this.listCourses.push(course);
+    this.listCourses.push(new Course(name, tag, null));
     this.storage.set('listCourses', this.listCourses);
   }
 
@@ -262,11 +236,10 @@ export class StudiesPage {
   }
 
   openCoursePage(course: Course) {
-    const year = this.project.name.split('-')[0];
     this.navCtrl.push('CoursePage', {
       course: course,
       sessionId: this.sessionId,
-      year: year
+      year: this.project.name.split('-')[0]
     });
   }
 
@@ -297,8 +270,7 @@ export class StudiesPage {
           this.error = this.utilsService.getText('STUDY', 'ERROR');
         }
         return error;
-      })
-        .subscribe(data => {
+      }).subscribe(data => {
           if (data != null) {
             this.status = data.toString();
             resolve(data);
