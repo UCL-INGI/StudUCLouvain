@@ -105,9 +105,7 @@ export class MapPage {
   }
 
   onSelect(data: any) {
-    if (this.selectedLocation !== data) {
-      this.selectedLocation = data;
-    }
+    this.selectedLocation = data === this.selectedLocation ? this.selectedLocation : data;
     this.mapService.addMarker(this.selectedLocation);
   }
 }
