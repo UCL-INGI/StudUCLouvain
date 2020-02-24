@@ -68,7 +68,7 @@
     <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
-        <img [src]="category.iconCategory">
+        <img alt="Event Category Icon" [src]="category.iconCategory">
       </ion-thumbnail>
       <ion-label>{{category.name}}</ion-label>
       <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>

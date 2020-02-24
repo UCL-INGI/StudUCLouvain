@@ -35,7 +35,7 @@
     <ion-card-content>
       <ion-row>
         <ion-col *ngIf="news.image !== undefined && news.image.length > 0" col-4>
-          <img src="{{news.image}}" style="float:left; margin-right: 5px;"/>
+          <img alt="News picture" src="{{news.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
           <p [innerHTML]="news.description" style="text-align: left;"></p>
