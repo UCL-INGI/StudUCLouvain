@@ -43,7 +43,7 @@ jobs:
         - npm install
         - ionic info
 
-      script: ionic cordova build --prod
+      script: ionic cordova build browser --prod
 
     - stage: "Build Android"
       language: android
