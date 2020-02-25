@@ -59,9 +59,10 @@
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^0.803.25",
     "@angular-devkit/build-optimizer": "^0.900.3",
     "@ionic/app-scripts": "^3.2.4",
-    "@types/jasmine": "^3.5.6",
+    "@types/jasmine": "^3.5.7",
     "typescript": "~2.6.2"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",
