@@ -8,7 +8,7 @@ dist: xenial
 
 jobs:
   include:
-    - stage: "Tests"
+    - stage: "Unit Test & Build PWA"
       name: "Unit Tests"
       language: node_js
 
