@@ -8,7 +8,7 @@ dist: xenial
 
 jobs:
   include:
-    - stage: "Tests"
+    - stage: "Unit Test and Build PWA"
       name: "Unit Tests"
       language: node_js
 
@@ -28,6 +28,22 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script: npm test
+
+    - name: "Build PWA"
+      language: node_js
+      node_js: "12.14.1"
+
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+
+      install:
+        - npm install -g ionic
+        - npm install
+        - ionic info
+
+      script: ionic build --prod
 
     - stage: "Build Android"
       language: android

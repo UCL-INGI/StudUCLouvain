@@ -25,7 +25,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img height="28" src="./assets/img/s.png"/>
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons end>
       <button (tap)="presentFilter()" ion-button>
@@ -64,7 +64,7 @@
 
         <ion-item>
           <ion-thumbnail item-left>
-            <img [src]="event.iconCategory">
+            <img alt="Event Category Picto" [src]="event.iconCategory">
           </ion-thumbnail>
           <button (tap)="goToEventDetail(event)" ion-item no-lines>
             <h3>{{event.title}}</h3>

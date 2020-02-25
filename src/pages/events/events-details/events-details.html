@@ -34,7 +34,7 @@
     <ion-card-content>
       <ion-row>
         <ion-col *ngIf="event.image !== undefined && event.image.length > 0" col-4>
-          <img src="{{event.image}}" style="float:left; margin-right: 5px;"/>
+          <img alt="Event Picture" src="{{event.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
           <p [innerHTML]="event.description" style="text-align: left;"></p>
