@@ -39,11 +39,11 @@ jobs:
         chrome: stable
 
       install:
-        - npm install -g ionic cordova@^9
+        - npm install -g ionic
         - npm install
         - ionic info
 
-      script: ionic cordova build browser --prod
+      script: ionic build --prod
 
     - stage: "Build Android"
       language: android
