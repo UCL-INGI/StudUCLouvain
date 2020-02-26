@@ -20,12 +20,42 @@ export class PlatformMock {
     return true;
   }
 
+  public doc(): HTMLDocument {
+    return document;
+  }
+
+  public getQueryParam() {
+    return true;
+  }
+
+  public registerBackButtonAction(fn: Function, priority?: number): Function {
+    return () => true;
+  }
+
   public win(): Window {
     return window;
   }
 
   public timeout(callback: any, timer: number): any {
     return setTimeout(callback, timer);
+  }
+
+  public registerListener(
+    ele: any,
+    eventName: string,
+    callback: any
+  ): Function {
+    return () => true;
+  }
+
+  public ready(): Promise<string> {
+    return new Promise(resolve => {
+      resolve('READY');
+    });
+  }
+
+  public raf(callback: any): number {
+    return 1;
   }
 }
 
@@ -108,11 +138,13 @@ export class LoadingControllerMock {
 export class UserServiceMock {
   constructor() {
   }
+
   getCampus() {
     return 'LLN';
   }
 
-  getStringData() {}
+  getStringData() {
+  }
 }
 
 export class Wso2ServiceMock {
@@ -125,99 +157,99 @@ export class Wso2ServiceMock {
 }
 
 export class MockCacheStorageService extends CacheStorageService {
-    constructor(a, b) {
-        super(a, b);
-    }
+  constructor(a, b) {
+    super(a, b);
+  }
 
-    public ready() {
-        return new Promise<LocalForage>((resolve) => {
-            resolve();
-        });
-    }
+  public ready() {
+    return new Promise<LocalForage>((resolve) => {
+      resolve();
+    });
+  }
 }
 
 
 export class MockCacheService {
 
-    constructor(_storage) {
-    }
+  constructor(_storage) {
+  }
 }
 
 export class ModalControllerMock extends ModalController {
-    create(component: any) {
-      return new Modal(null, null, null, null, null, null);
-    }
+  create(component: any) {
+    return new Modal(null, null, null, null, null, null);
+  }
 
-    dismiss() {
-        return new Promise<boolean>(() => {
-        });
-    }
+  dismiss() {
+    return new Promise<boolean>(() => {
+    });
+  }
 }
 
 export class ToastControllerMock extends ToastController {
-    create() {
-      return new Toast(null, null, null);
-    }
+  create() {
+    return new Toast(null, null, null);
+  }
 
-    dismiss() {
-        return new Promise<boolean>(() => {
-        });
-    }
+  dismiss() {
+    return new Promise<boolean>(() => {
+    });
+  }
 }
 
 export function newToastControllerMock() {
-    let app: App, conf: Config;
-    return new ToastControllerMock(app, conf);
+  let app: App, conf: Config;
+  return new ToastControllerMock(app, conf);
 }
 
 export function newModalControllerMock() {
-    let app: App, conf: Config, dl: DeepLinker;
-    return new ModalControllerMock(app, conf, dl);
+  let app: App, conf: Config, dl: DeepLinker;
+  return new ModalControllerMock(app, conf, dl);
 }
 
 export class ViewControllerMock extends ViewController {
-    dismiss() {
-        return new Promise<boolean>(() => {
-        });
-    }
+  dismiss() {
+    return new Promise<boolean>(() => {
+    });
+  }
 }
 
 export function newViewControllerMock() {
-    let app: App, conf: Config;
-    return new ViewControllerMock(app, conf);
+  let app: App, conf: Config;
+  return new ViewControllerMock(app, conf);
 }
 
 export class MockAlert {
-    public visible: boolean;
-    public header: string;
-    public message: string;
+  public visible: boolean;
+  public header: string;
+  public message: string;
 
-    constructor(props: any) {
-        Object.assign(this, props);
-        this.visible = false;
-    }
+  constructor(props: any) {
+    Object.assign(this, props);
+    this.visible = false;
+  }
 
-    present() {
-        this.visible = true;
-        return Promise.resolve();
-    }
+  present() {
+    this.visible = true;
+    return Promise.resolve();
+  }
 
-    dismiss() {
-        this.visible = false;
-        return Promise.resolve();
-    }
+  dismiss() {
+    this.visible = false;
+    return Promise.resolve();
+  }
 }
 
 export class MockAlertController {
-    public created: MockAlert[];
+  public created: MockAlert[];
 
-    constructor() {
-        this.created = [];
-    }
+  constructor() {
+    this.created = [];
+  }
 
-    create(props: any): Promise<any> {
-        const toRet = new MockAlert(props);
-        this.created.push(toRet);
-        return Promise.resolve(toRet);
-    }
+  create(props: any): Promise<any> {
+    const toRet = new MockAlert(props);
+    this.created.push(toRet);
+    return Promise.resolve(toRet);
+  }
 }
