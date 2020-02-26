@@ -3,7 +3,7 @@ import { AlertController, IonicModule, ModalController, NavController, NavParams
 import { async, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { NavParamsMock } from '../../../test-config/mocks-ionic';
+import { ModalControllerMock, NavParamsMock } from '../../../test-config/mocks-ionic';
 import { GuindaillePage } from './guindaille2-0';
 
 describe('Guindaille2-0', () => {
@@ -18,7 +18,7 @@ describe('Guindaille2-0', () => {
         NavController,
         {provide: NavParams, useClass: NavParamsMock},
         //{provide:TranslateService, useClass: TranslateServiceMock},
-        ModalController,
+        {provide: ModalController, useClass: ModalControllerMock},
         AlertController,
       ]
     })

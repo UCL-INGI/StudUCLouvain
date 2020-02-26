@@ -20,8 +20,36 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { IonicModule } from 'ionic-angular';
+import {
+  AlertController,
+  LoadingController,
+  ModalController,
+  NavController,
+  NavParams,
+  Platform,
+  ToastController,
+  ViewController
+} from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  LoadingControllerMock,
+  MockAlertController,
+  NavParamsMock,
+  newModalControllerMock,
+  newToastControllerMock,
+  newViewControllerMock,
+  PlatformMock,
+  UserServiceMock
+} from "../../../test-config/mocks-ionic";
+import { RepertoireService } from "../../providers/wso2-services/repertoire-service";
+import { Wso2Service } from "../../providers/wso2-services/wso2-service";
+import { ConnectivityService } from "../../providers/utils-services/connectivity-service";
+import { Network } from "@ionic-native/network";
+import { UtilsService } from "../../providers/utils-services/utils-service";
+import { Device } from "@ionic-native/device";
+import { AppAvailability } from "@ionic-native/app-availability";
+import { Market } from "@ionic-native/market";
+import { UserService } from "../../providers/utils-services/user-service";
 
 describe('Support Component', () => {
   let fixture;
@@ -32,12 +60,38 @@ describe('Support Component', () => {
       declarations: [SupportPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
-        IonicModule,
         TranslateModule.forRoot(),
         HttpClientTestingModule,
       ],
       providers: [
-        InAppBrowser
+        InAppBrowser,
+        NavController,
+        {provide: NavParams, useClass: NavParamsMock},
+        {
+          provide: ModalController, useFactory: () => {
+            return newModalControllerMock();
+          }
+        },
+        {provide: Platform, useClass: PlatformMock},
+        RepertoireService,
+        Wso2Service,
+        ConnectivityService,
+        Network,
+        {provide: AlertController, useClass: MockAlertController},
+        UtilsService,
+        {provide: LoadingController, useClass: LoadingControllerMock},
+        Device,
+        AppAvailability,
+        Market,
+        {provide: UserService, useClass: UserServiceMock},
+        {
+          provide: ToastController, useFactory: () => {
+            return newToastControllerMock();
+          }
+        },
+        {provide: ViewController, useFactory: () => {
+            return newViewControllerMock();
+          }},
       ]
     }).compileComponents();
   }));

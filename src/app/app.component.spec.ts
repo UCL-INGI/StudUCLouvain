@@ -31,6 +31,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
+  MockCacheStorageService,
   PlatformMock,
   SplashScreenMock,
   StatusBarMock,
@@ -40,6 +41,8 @@ import {
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { MyApp } from './app.component';
+import { CacheService } from "ionic-cache";
+import { CacheStorageService } from "ionic-cache/dist/cache-storage";
 
 class IonicAppMock {
 }
@@ -65,7 +68,13 @@ describe("MyApp Component", () => {
         InAppBrowser,
         Device,
         {provide: UserService, useClass: UserServiceMock},
-        {provide: Wso2Service, useClass: Wso2ServiceMock}
+        {provide: Wso2Service, useClass: Wso2ServiceMock},
+        CacheService,
+        {
+          provide: CacheStorageService, useFactory: () => {
+            return new MockCacheStorageService(null, null);
+          }
+        },
       ]
     });
   }));

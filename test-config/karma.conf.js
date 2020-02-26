@@ -1,59 +1,29 @@
-var webpackConfig = require('./webpack.test.js');
 
 module.exports = function (config) {
   var _config = {
     basePath: '../',
 
-    frameworks: ['jasmine'],
-
-    files: [{
-      pattern: './test-config/karma-test-shim.js',
-      watched: true
-    },
-      {
-        pattern: './src/assets/**/*',
-        watched: false,
-        included: false,
-        served: true,
-        nocache: false
-      }
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-firefox-launcher'),
+      require('karma-jasmine-html-reporter'),
+      require('karma-coverage-istanbul-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-spec-reporter')
     ],
-
-    proxies: {
-      '/assets/': '/base/src/assets/'
-    },
-
-    preprocessors: {
-      './test-config/karma-test-shim.js': ['webpack', 'sourcemap']
-    },
-
-    webpack: webpackConfig,
-
-    webpackMiddleware: {
-      stats: 'errors-only'
-    },
-
-    webpackServer: {
-      noInfo: true
-    },
-
-    browserConsoleLogOptions: {
-      level: 'log',
-      format: '%b %T: %m',
-      terminal: true
-    },
-
     coverageIstanbulReporter: {
-      reports: ['html', 'lcovonly'],
+      dir: require('path').join(__dirname, '../coverage'),
+      reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
 
-    reporters: config.coverage ? ['kjhtml', 'dots', 'coverage-istanbul'] : ['kjhtml', 'dots'],
+    reporters: ['spec', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
     singleRun: false
   };
 

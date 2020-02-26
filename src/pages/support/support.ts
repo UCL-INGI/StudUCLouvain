@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicPage, LoadingController, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -50,7 +50,6 @@ export class SupportPage {
   firstname = '';
   loading;
   segment = 'aide';
-  shownHelp = null;
 
   constructor(
     public navCtrl: NavController,
@@ -60,7 +59,6 @@ export class SupportPage {
     public platform: Platform,
     public repService: RepertoireService,
     public connService: ConnectivityService,
-    public loadingCtrl: LoadingController,
     private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');

@@ -1,5 +1,7 @@
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { App, Config, DeepLinker, Modal, ModalController, Toast, ToastController, ViewController } from "ionic-angular";
 
 export abstract class BaseMock {
   protected spyObj: any;
@@ -243,10 +245,16 @@ export class LoadingControllerMock {
 export class UserServiceMock {
   constructor() {
   }
-
+  storage = {
+    get() {
+      return new Promise(() => {});
+    }
+  };
   getCampus() {
     return 'LLN';
   }
+
+  getStringData() {}
 }
 
 export class Wso2ServiceMock {
@@ -261,4 +269,128 @@ export class Wso2ServiceMock {
 export class RssServiceMock {
   constructor() {
   }
+}
+
+export class MockCacheStorageService extends CacheStorageService {
+    constructor(a, b) {
+        super(a, b);
+    }
+
+    public ready() {
+        let promise: Promise<LocalForage>;
+        return new Promise<LocalForage>((resolve, reject) => {
+            resolve();
+        });
+    }
+}
+
+
+export class MockCacheService {
+    _storage: MockCacheStorageService;
+
+    constructor(_storage) {
+    }
+
+    getItem() {
+        return new Promise<any>((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    removeItem() {
+    }
+
+    saveItem() {
+    }
+}
+
+export function newMockCacheService() {
+    let _storage: MockCacheStorageService;
+    return new MockCacheService(_storage);
+}
+
+export class ModalControllerMock extends ModalController {
+    create(component: any) {
+      return new Modal(null, null, null, null, null, null);
+    }
+
+    dismiss() {
+        return new Promise<boolean>(() => {
+        });
+    }
+}
+
+export class ToastControllerMock extends ToastController {
+    create() {
+      return new Toast(null, null, null);
+    }
+
+    dismiss() {
+        return new Promise<boolean>(() => {
+        });
+    }
+}
+
+export function newToastControllerMock() {
+    let app: App, conf: Config;
+    return new ToastControllerMock(app, conf);
+}
+
+export function newModalControllerMock() {
+    let app: App, conf: Config, dl: DeepLinker;
+    return new ModalControllerMock(app, conf, dl);
+}
+
+export class ViewControllerMock extends ViewController {
+    dismiss() {
+        return new Promise<boolean>(() => {
+        });
+    }
+}
+
+export function newViewControllerMock() {
+    let app: App, conf: Config;
+    return new ViewControllerMock(app, conf);
+}
+
+export class MockAlert {
+    public visible: boolean;
+    public header: string;
+    public message: string;
+
+    constructor(props: any) {
+        Object.assign(this, props);
+        this.visible = false;
+    }
+
+    present() {
+        this.visible = true;
+        return Promise.resolve();
+    }
+
+    dismiss() {
+        this.visible = false;
+        return Promise.resolve();
+    }
+}
+
+export class MockAlertController {
+    public created: MockAlert[];
+
+    constructor() {
+        this.created = [];
+    }
+
+    create(props: any): Promise<any> {
+        const toRet = new MockAlert(props);
+        this.created.push(toRet);
+        return Promise.resolve(toRet);
+    }
+
+    getLast() {
+        if (!this.created.length) {
+            return null;
+        }
+        return this.created[this.created.length - 1];
+    }
 }
