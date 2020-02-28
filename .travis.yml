@@ -2,8 +2,6 @@ branches:
   only:
     - master
 
-dist: xenial
-
 jobs:
   include:
     - stage: "Unit Test and Build PWA"
