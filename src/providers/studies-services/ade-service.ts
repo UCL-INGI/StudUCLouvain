@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import X2JS from 'x2js';
+import * as X2JS from 'x2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
