@@ -16,8 +16,6 @@ jobs:
 
       services:
         - xvfb
-      addons:
-        chrome: stable
 
       install:
         - npm install -g ionic cordova@^9
@@ -33,11 +31,6 @@ jobs:
     - name: "Build PWA"
       language: node_js
       node_js: "12.14.1"
-
-      services:
-        - xvfb
-      addons:
-        chrome: stable
 
       install:
         - npm install -g ionic
