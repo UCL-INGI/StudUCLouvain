@@ -10,9 +10,12 @@ jobs:
   include:
     - stage: "Unit Test and Build PWA"
       name: "Unit Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=54dd0fdf61f7a1a570fe21458b847cc05f2f5e480d9a6679200b8e1e1222273c
       language: node_js
-
       node_js: "12.14.1"
+
       services:
         - xvfb
       addons:
