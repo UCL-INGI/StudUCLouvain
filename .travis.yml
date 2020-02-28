@@ -1,25 +1,22 @@
-sudo: false
-
 branches:
   only:
     - master
-
-dist: xenial
 
 jobs:
   include:
     - stage: "Unit Test and Build PWA"
       name: "Unit Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=54dd0fdf61f7a1a570fe21458b847cc05f2f5e480d9a6679200b8e1e1222273c
       language: node_js
-
       node_js: "12.14.1"
+
       services:
         - xvfb
-      addons:
-        chrome: stable
 
       install:
-        - npm install -g ionic cordova@^9
+        - npm install -g ionic cordova@^9 jasmine
         - npm install
         - ionic info
 
@@ -27,16 +24,11 @@ jobs:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
-      script: npm test
+      script: ng test
 
     - name: "Build PWA"
       language: node_js
       node_js: "12.14.1"
-
-      services:
-        - xvfb
-      addons:
-        chrome: stable
 
       install:
         - npm install -g ionic

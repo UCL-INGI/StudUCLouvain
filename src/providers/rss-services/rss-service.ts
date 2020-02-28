@@ -22,7 +22,7 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 
-import X2JS from 'x2js';
+import * as X2JS from 'x2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -36,9 +36,7 @@ export class RssService {
   }
 
   convertXmlToJson(xml): any {
-    const parser: any = new X2JS();
-    const json = parser.xml2js(xml);
-    return json;
+    return new X2JS().xml2js(xml);
   }
 
   load(url: string, isSport: boolean = false) {
