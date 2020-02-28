@@ -16,7 +16,7 @@ jobs:
         - xvfb
 
       install:
-        - npm install -g ionic cordova@^9
+        - npm install -g ionic cordova@^9 jasmine
         - npm install
         - ionic info
 
