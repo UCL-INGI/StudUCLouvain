@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons start>
-      <button (tap)="utilsService.applyFilters(true, categories, results, dateRange)"
+      <button (tap)="applyFilters(true, categories, results, dateRange)"
               ion-button>{{'SPORTS.CANCEL' | translate}}</button>
     </ion-buttons>
     <ion-row>
@@ -33,7 +33,7 @@
       </ion-col>
     </ion-row>
     <ion-buttons end>
-      <button (tap)="utilsService.applyFilters(false, categories, results, dateRange)" ion-button
+      <button (tap)="applyFilters(false, categories, results, dateRange)" ion-button
               strong>{{'SPORTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>

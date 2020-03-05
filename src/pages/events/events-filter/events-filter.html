@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar class="header" id="header">
     <ion-buttons start>
-      <button (click)="utilsService.applyFilters(true, categories, results, dateRange)"
+      <button (click)="applyFilters(true, categories, results, dateRange)"
               ion-button>{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
     <ion-row>
@@ -33,7 +33,7 @@
       </ion-col>
     </ion-row>
     <ion-buttons end>
-      <button (click)="utilsService.applyFilters(false, categories, results, dateRange)" ion-button
+      <button (click)="applyFilters(false, categories, results, dateRange)" ion-button
               strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>

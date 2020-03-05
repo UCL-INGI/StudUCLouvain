@@ -42,7 +42,7 @@ import { SettingsProvider } from "../providers/utils-services/settings-service";
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  selectedTheme: String;
+  selectedTheme: string;
   rootPage = ''; // = 'HomePage';
   alertPresented: any;
   page: any;

@@ -48,9 +48,9 @@
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
 <ion-menu [content]="studiesContent" id="studiesMenu" persistent=true side="right" type="overlay">
   <button></button>
-  <button (tap)="launch('http://www.uclouvain.be/')" ion-item> uclouvain.be</button>
-  <button (tap)="launch('https://moodleucl.uclouvain.be')" ion-item> Moodle ucl</button>
-  <button (tap)="openModalProject()" ion-item> {{'STUDY.CHANGEADE' | translate}} </button>
+  <button (click)="launch('http://www.uclouvain.be/')" ion-item> uclouvain.be</button>
+  <button (click)="launch('https://moodleucl.uclouvain.be')" ion-item> Moodle ucl</button>
+  <button (click)="openModalProject()" ion-item> {{'STUDY.CHANGEADE' | translate}} </button>
 </ion-menu>
 
 <ion-content #studiesContent [ngClass]="{'cours' : segment === 'cours'}" padding>
