@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.6.8",
+    "@angular-devkit/build-optimizer": "^0.900.3",
     "@ionic/app-scripts": "3.2.4",
     "@types/jasmine": "^3.5.6",
     "jasmine-spec-reporter": "^4.2.1",
