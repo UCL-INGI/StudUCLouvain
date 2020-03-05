@@ -221,12 +221,6 @@ export class EventsPage {
     this.utilsService.dismissLoading();
   }
 
-  private getFilterMethod(item: EventItem) {
-    return (this.excludedFilters.indexOf(item.category) < 0 &&
-      item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
-      Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
-  }
-
   presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
