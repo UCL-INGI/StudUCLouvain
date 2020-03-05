@@ -21,8 +21,15 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-    AlertController, App, IonicPage, ItemSliding, List, ModalController, NavController, NavParams,
-    ToastController
+  AlertController,
+  App,
+  IonicPage,
+  ItemSliding,
+  List,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
@@ -233,7 +240,7 @@ export class EventsPage {
     this.utilsService.dismissLoading();
   }
 
-  private getFilterMethod(item: EventItem): unknown {
+  private getFilterMethod(item: EventItem) {
     return (this.excludedFilters.indexOf(item.category) < 0 &&
       item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
       Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));

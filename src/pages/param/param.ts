@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    AlertController, IonicPage, ModalController, NavController, NavParams
-} from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -28,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -35,8 +34,8 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'param.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -44,8 +43,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 })
 export class ParamPage {
   title: any;
-  shownGroup = null;
-  setting2 = 'Langue';
+  selectedTheme: String;
 
   constructor(
     public navCtrl: NavController,
@@ -54,42 +52,36 @@ export class ParamPage {
     public userS: UserService,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
   }
 
-  /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
+  toggleAppTheme() {
+    if (this.selectedTheme === 'dark-theme') {
+      this.settings.setActiveTheme('light-theme');
+    } else {
+      this.settings.setActiveTheme('dark-theme');
+    }
+  }
+
   campus_choice() {
-    const check = this.userS.campus;
-    let setting, message, save;
-    this.translateService.get('HOME.SETTING1').subscribe((res: string) => {
-      setting = res;
-    });
-    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
-    const settingsAlert = this.getSettingsAlert(setting, message, check, save);
-    settingsAlert.present();
-  }
-
-  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
-    return this.alertCtrl.create({
-      title: setting,
-      message: message,
-      inputs: this.getSettingsInputs(check),
+    const settingsAlert = this.alertCtrl.create({
+      title: this.utilsService.getText('HOME', 'SETTING1'),
+      message: this.utilsService.getText('HOME', 'MESSAGE'),
+      inputs: this.getSettingsInputs(this.userS.campus),
       buttons: [
         {
-          text: save,
+          text: this.utilsService.getText('HOME', 'SAVE'),
           handler: data => {
             this.userS.addCampus(data);
           }
         }
       ]
     });
+    settingsAlert.present();
   }
 
   private getCampusChoiceInput(label: string, value: string, check: string) {
@@ -100,6 +92,7 @@ export class ParamPage {
       checked: check === value
     };
   }
+
   private getSettingsInputs(check: string) {
     return [
       this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
@@ -120,32 +113,14 @@ export class ParamPage {
     ];
   }
 
-  /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
   language_choice() {
-    const check2 = this.translateService.currentLang;
-    let message2, en, fr, setting2, save: string;
-    this.translateService.get('HOME.SETTING2').subscribe((res: string) => {
-      setting2 = res;
-    });
-    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {
-      message2 = res;
-    });
-    this.translateService.get('HOME.FR').subscribe((res: string) => {
-      fr = res;
-    });
-    this.translateService.get('HOME.EN').subscribe((res: string) => {
-      en = res;
-    });
-    this.translateService.get('HOME.SAVE').subscribe((res: string) => {
-      save = res;
-    });
     const languageAlert = this.alertCtrl.create({
-      title: setting2,
-      message: message2,
-      inputs: this.utilsService.getLanguageAlertInputs(fr, en, check2),
+      title: this.utilsService.getText('HOME', 'SETTING2'),
+      message: this.utilsService.getText('HOME', 'MESSAGE2'),
+      inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
       buttons: [
         {
-          text: save,
+          text: this.utilsService.getText('HOME', 'SAVE'),
           handler: data => {
             this.languageChanged(data);
           }
@@ -155,7 +130,6 @@ export class ParamPage {
     languageAlert.present();
   }
 
-  /*When the language change, translate the page with the applied language*/
   languageChanged(event: string) {
     this.userS.storage.set('lan', event);
     this.translateService.use(event);

@@ -19,9 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-    AlertController, IonicApp, LoadingController, MenuController, Nav, Platform
-} from 'ionic-angular';
+import { AlertController, IonicApp, MenuController, Nav, Platform } from 'ionic-angular';
 import { CacheService } from 'ionic-cache';
 
 import { Component, ViewChild } from '@angular/core';
@@ -34,6 +32,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HomePage } from '../pages/home/home';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { SettingsProvider } from "../providers/utils-services/settings-service";
 
 // declare var TestFairy: any;
 
@@ -42,6 +41,7 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  selectedTheme: String;
   rootPage = ''; // = 'HomePage';
   alertPresented: any;
   page: any;
@@ -85,12 +85,13 @@ export class MyApp {
     private alertCtrl: AlertController,
     private user: UserService,
     public translateService: TranslateService,
-    public loadingCtrl: LoadingController,
     private ionicApp: IonicApp,
     private wso2Service: Wso2Service,
-    public cache: CacheService
+    public cache: CacheService,
+    private settings: SettingsProvider
   ) {
     console.log('Startin App');
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.user.getStringData('campus');
     this.alertPresented = false;
     this.initializeApp();

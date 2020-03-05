@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    AlertController, ItemSliding, Loading, LoadingController, ToastController
-} from 'ionic-angular';
+import { AlertController, ItemSliding, Loading, LoadingController, ToastController } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -100,17 +98,17 @@ export class UtilsService {
         );
     }
 
-    getLanguageAlertInputs(fr, en, check2) {
+    getLanguageAlertInputs(check2) {
         return [
             {
                 type: 'radio',
-                label: fr,
+                label: this.getText('HOME', 'FR'),
                 value: 'fr',
                 checked: check2 === 'fr'
             },
             {
                 type: 'radio',
-                label: en,
+                label: this.getText('HOME', 'EN'),
                 value: 'en',
                 checked: check2 === 'en'
             }
