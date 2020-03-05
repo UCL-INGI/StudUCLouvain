@@ -53,7 +53,7 @@ export class HomePage {
     'RESTAURANT',
     'id1156050719', 'com.apptree.resto4u',
     'apptreeresto4u://', 'https://uclouvain.be/fr/decouvrir/resto-u'
-    )
+  )
   ;
   mobilityPage = this.utilsService.getPageObject('Mobility');
 

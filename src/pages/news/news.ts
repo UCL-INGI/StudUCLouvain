@@ -135,21 +135,6 @@ export class NewsPage {
     refresher.complete();
   }
 
-  private refresh() {
-    if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
-      let key: string;
-      if (this.segment === 'univ') {
-        key = this.getKeyUniv();
-        this.cache.removeItem(key);
-      }
-      this.loadNews();
-    }
-  }
-
-  private getKeyUniv() {
-    return this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
-  }
-
   tabChanged() {
     this.resize();
     if (this.segment === 'univ') {
@@ -222,5 +207,20 @@ export class NewsPage {
 
   public goToNewsDetail(news: NewsItem) {
     this.navCtrl.push('NewsDetailsPage', {news: news});
+  }
+
+  private refresh() {
+    if (this.segment === 'univ' || (this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac())) {
+      let key: string;
+      if (this.segment === 'univ') {
+        key = this.getKeyUniv();
+        this.cache.removeItem(key);
+      }
+      this.loadNews();
+    }
+  }
+
+  private getKeyUniv() {
+    return this.subsegment === 'P1' ? 'cache-P1' : this.subsegment === 'P2' ? 'cache-P2' : 'cache-P3';
   }
 }

@@ -111,26 +111,6 @@ export class CoursePage {
     this.alert();
   }
 
-  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
-    this.calendar.createEventWithOptions(
-        message,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        {firstReminderMinutes: 15}
-      ).then(() => {
-      const toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      });
-      toast.present();
-      if (slidingItem) {
-        slidingItem.close();
-      }
-    });
-  }
-
   alert(all: boolean = false) {
     const prefix = all ? 'COURSE' : 'STUDY';
     const msg_number = all ? '3' : '4';
@@ -243,8 +223,29 @@ export class CoursePage {
       {course: this.course, year: this.year},
       {cssClass: 'modal-fullscreen'}
     );
-    myModal.onDidDismiss(() => {});
+    myModal.onDidDismiss(() => {
+    });
     myModal.present();
+  }
+
+  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
+    this.calendar.createEventWithOptions(
+      message,
+      activity.auditorium,
+      null,
+      activity.start,
+      activity.end,
+      {firstReminderMinutes: 15}
+    ).then(() => {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
+      });
+      toast.present();
+      if (slidingItem) {
+        slidingItem.close();
+      }
+    });
   }
 
   private getLabel(array: Activity[], i: number) {

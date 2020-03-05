@@ -67,18 +67,6 @@ export class MapPage {
     ]).then((result) => this.initPromisesSucceed(result));
   }
 
-  private initPromisesSucceed(result) {
-    this.searching = false;
-    this.zones = result[1];
-    this.filters = this.zones;
-    this.userLocation = this.mapService.userLocation;
-    this.selectedLocation = this.userLocation;
-    this.showedLocations.push(this.selectedLocation);
-    if (result[0]) {
-      this.mapService.addMarker(this.selectedLocation);
-    }
-  }
-
   toggleDetails(data) {
     data.showDetails = !data.showDetails;
     data.icon = 'arrow-' + (data.showDetails ? 'dropwdown' : 'dropup');
@@ -107,5 +95,17 @@ export class MapPage {
   onSelect(data: any) {
     this.selectedLocation = data === this.selectedLocation ? this.selectedLocation : data;
     this.mapService.addMarker(this.selectedLocation);
+  }
+
+  private initPromisesSucceed(result) {
+    this.searching = false;
+    this.zones = result[1];
+    this.filters = this.zones;
+    this.userLocation = this.mapService.userLocation;
+    this.selectedLocation = this.userLocation;
+    this.showedLocations.push(this.selectedLocation);
+    if (result[0]) {
+      this.mapService.addMarker(this.selectedLocation);
+    }
   }
 }

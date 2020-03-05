@@ -64,7 +64,7 @@
 
         <ion-item>
           <ion-thumbnail item-left>
-            <img alt="Event Category Picto" [src]="event.iconCategory">
+            <img [src]="event.iconCategory" alt="Event Category Picto">
           </ion-thumbnail>
           <button (tap)="goToEventDetail(event)" ion-item no-lines>
             <h3>{{event.title}}</h3>

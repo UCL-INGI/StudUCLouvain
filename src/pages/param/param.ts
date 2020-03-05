@@ -84,6 +84,32 @@ export class ParamPage {
     settingsAlert.present();
   }
 
+  language_choice() {
+    const languageAlert = this.alertCtrl.create({
+      title: this.utilsService.getText('HOME', 'SETTING2'),
+      message: this.utilsService.getText('HOME', 'MESSAGE2'),
+      inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
+      buttons: [
+        {
+          text: this.utilsService.getText('HOME', 'SAVE'),
+          handler: data => {
+            this.languageChanged(data);
+          }
+        }
+      ]
+    });
+    languageAlert.present();
+  }
+
+  languageChanged(event: string) {
+    this.userS.storage.set('lan', event);
+    this.translateService.use(event);
+  }
+
+  openTuto() {
+    this.navCtrl.push('TutoPage');
+  }
+
   private getCampusChoiceInput(label: string, value: string, check: string) {
     return {
       type: 'radio',
@@ -111,31 +137,5 @@ export class ParamPage {
         disabled: true
       }
     ];
-  }
-
-  language_choice() {
-    const languageAlert = this.alertCtrl.create({
-      title: this.utilsService.getText('HOME', 'SETTING2'),
-      message: this.utilsService.getText('HOME', 'MESSAGE2'),
-      inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
-      buttons: [
-        {
-          text: this.utilsService.getText('HOME', 'SAVE'),
-          handler: data => {
-            this.languageChanged(data);
-          }
-        }
-      ]
-    });
-    languageAlert.present();
-  }
-
-  languageChanged(event: string) {
-    this.userS.storage.set('lan', event);
-    this.translateService.use(event);
-  }
-
-  openTuto() {
-    this.navCtrl.push('TutoPage');
   }
 }
