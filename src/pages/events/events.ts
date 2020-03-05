@@ -50,7 +50,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'events.html'
 })
 export class EventsPage {
-  @ViewChild('eventsList', { read: List }) eventsList: List;
+  @ViewChild('eventsList', {read: List}) eventsList: List;
 
   events: Array<EventItem> = [];
   searching: any = false;
@@ -103,42 +103,33 @@ export class EventsPage {
     if (this.connService.isOnline()) {
       this.cache.removeItem('cache-event');
       this.loadEvents('cache-event');
-      refresher.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
     }
-  }
-
-  public onSearchInput() {
-    this.searching = true;
+    refresher.complete();
   }
 
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.push('EventsDetailsPage', { event: event });
+    this.navCtrl.push('EventsDetailsPage', {event: event});
   }
 
   async cachedOrNot() {
     // this.cache.removeItem('cache-event');
-    const key = 'cache-event';
-    await this.cache
-      .getItem(key)
-      .then(data => {
-        this.utilsService.presentLoading();
-        this.events = data.events;
-        this.events.forEach(function (element) {
-          element.startDate = new Date(element.startDate);
-          element.endDate = new Date(element.endDate);
-        });
-        this.shownEvents = data.shownEvents;
-        this.filters = data.categories;
-        this.searching = false;
-        this.updateDisplayedEvents();
-      })
-      .catch(() => {
-        console.log('Oh no! My data is expired or doesn\'t exist!');
-        this.loadEvents(key);
+    await this.cache.getItem('cache-event').then(data => {
+      this.utilsService.presentLoading();
+      this.events = data.events;
+      this.events.forEach(function (element) {
+        element.startDate = new Date(element.startDate);
+        element.endDate = new Date(element.endDate);
       });
+      this.shownEvents = data.shownEvents;
+      this.filters = data.categories;
+      this.searching = false;
+      this.updateDisplayedEvents();
+    }).catch(() => {
+      console.log('Oh no! My data is expired or doesn\'t exist!');
+      this.loadEvents('cache-event');
+    });
   }
 
   public loadEvents(key?) {
@@ -192,28 +183,20 @@ export class EventsPage {
       obj[week].push(item);
       return obj;
     }, {});
-    const eventsD = Object.keys(groups).map(function (key) {
-      return { weeks: key, event: groups[key] };
+    return Object.keys(groups).map(function (key) {
+      return {weeks: key, event: groups[key]};
     });
-    return eventsD;
   }
 
   getRangeWeek(week, year) {
     const date = new Date(year);
     date.setDate(date.getDate() - date.getDay() - 1);
-
     date.setDate(date.getDate() + 7 * (week - this.getWeek(date)));
     const rangeIsFrom = this.getRange(date);
 
     date.setDate(date.getDate() + 6);
     const rangeIsTo = this.getRange(date);
-    return { from: rangeIsFrom, to: rangeIsTo };
-  }
-
-  private getRange(date: Date) {
-    let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
-    range = range.replace(/-/g, '/');
-    return range;
+    return {from: rangeIsFrom, to: rangeIsTo};
   }
 
   public updateDisplayedEvents() {
@@ -222,9 +205,7 @@ export class EventsPage {
       this.eventsList.closeSlidingItems();
     }
     if (this.segment === 'all') {
-      this.displayedEvents = this.events.filter(item => {
-        return this.getFilterMethod(item);
-      });
+      this.displayedEvents = this.events.filter(item => this.getFilterMethod(item));
     } else if (this.segment === 'favorites') {
       const favEvents = [];
       this.events.forEach(item => {
@@ -269,15 +250,6 @@ export class EventsPage {
     });
   }
 
-  private updateDateLimit() {
-    const today = new Date();
-    this.dateLimit = new Date(
-      today.getFullYear(),
-      today.getMonth() + this.dateRange,
-      today.getUTCDate() + 1
-    );
-  }
-
   public createEvent(slidingItem: ItemSliding, itemData: any): void {
     const options: any = {
       firstReminderMinutes: 15
@@ -287,27 +259,45 @@ export class EventsPage {
       message = res;
     });
 
-    this.calendar
-      .createEventWithOptions(
-        itemData.title,
-        itemData.location,
-        null,
-        itemData.startDate,
-        itemData.endDate,
-        options
-      )
-      .then(() => {
-        const toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        });
-        toast.present();
-        slidingItem.close();
+    this.calendar.createEventWithOptions(
+      itemData.title,
+      itemData.location,
+      null,
+      itemData.startDate,
+      itemData.endDate,
+      options
+    ).then(() => {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
       });
+      toast.present();
+      slidingItem.close();
+    });
   }
 
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
     this.utilsService.removeFavorite(slidingItem, itemData, title, false);
     this.updateDisplayedEvents();
+  }
+
+  private getRange(date: Date) {
+    let range = date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear();
+    return range.replace(/-/g, '/');
+  }
+
+  private getFilterMethod(item: EventItem) {
+    return (this.excludedFilters.indexOf(item.category) < 0 &&
+      item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 &&
+      Math.floor(item.startDate.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
+  }
+
+  private updateDateLimit() {
+    const today = new Date();
+    this.dateLimit = new Date(
+      today.getFullYear(),
+      today.getMonth() + this.dateRange,
+      today.getUTCDate() + 1
+    );
   }
 }

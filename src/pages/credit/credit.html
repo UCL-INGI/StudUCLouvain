@@ -22,10 +22,10 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="cred">
-    <button ion-button icon-only menuToggle>
+    <button icon-only ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title>{{title | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -37,9 +37,9 @@
     <p>{{'CREDIT.PROJET' | translate}}</p>
     <p [innerHTML]="'CREDIT.DEV' | translate"></p>
     <p>{{'CREDIT.DESIGN' | translate}}
-      <p>{{'CREDIT.LICENCE' | translate}} <a
-          (tap)="openURL('https://github.com/UCL-INGI/StudUCLouvain')">https://github.com/UCL-INGI/StudUCLouvain</a></p>
-      <p>{{'CREDIT.CONTRIB' | translate}} <a href="mailto:StudUCLouvain@UCLouvain.be"
-          target="_top">StudUCLouvain@UCLouvain.be</a></p>
+    <p>{{'CREDIT.LICENCE' | translate}} <a
+      (tap)="openURL('https://github.com/UCL-INGI/StudUCLouvain')">https://github.com/UCL-INGI/StudUCLouvain</a></p>
+    <p>{{'CREDIT.CONTRIB' | translate}} <a href="mailto:StudUCLouvain@UCLouvain.be"
+                                           target="_top">StudUCLouvain@UCLouvain.be</a></p>
   </div>
 </ion-content>

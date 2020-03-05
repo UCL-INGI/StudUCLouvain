@@ -35,12 +35,10 @@ export class SportsService {
   allCategoriesT: any = [];
   shownSports = 0;
   shownTeams = 0;
-
   url = '';
   urlT = '';
 
   constructor(public user: UserService, public rssService: RssService) {
-
   }
 
   update() {
@@ -48,23 +46,21 @@ export class SportsService {
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate=';
 
     const today: Date = new Date();
-    const end: Date = new Date();
-    end.setDate(today.getDate() + 6);
-
+    const end: Date = new Date(new Date().setDate(today.getDate() + 6));
     const todayString = dateToString(today);
     const endString = dateToString(end);
 
-    let site: string;
-    const campus = this.user.campus;
-    if (campus === 'LLN') { site = 'louv'; }
-    if (campus === 'Woluwe') { site = 'wol'; }
-    if (campus === 'Mons') { site = 'mons'; }
+    const site = {
+      'LLN': 'louv',
+      'Woluwe': 'wol',
+      'Mons': 'mons',
+      undefined: ''
+    }[this.user.campus];
 
     const restUrl = todayString + '&-enddate=' + endString + '&-site=';
-    const urlTemp = this.url + restUrl + site;
-    const urlTempT = this.urlT + restUrl + 'louv';
-    this.url = urlTemp;
-    this.urlT = urlTempT;
+    this.url = this.url + restUrl + site;
+    this.urlT = this.urlT + restUrl + 'louv';
+
     function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
@@ -100,10 +96,10 @@ export class SportsService {
       shownSports: this.shownSports,
       categories: this.allCategories
     } : {
-        teams: this.teams,
-        shownTeams: this.shownTeams,
-        categories: this.allCategoriesT
-      };
+      teams: this.teams,
+      shownTeams: this.shownTeams,
+      categories: this.allCategoriesT
+    };
   }
 
   private extractSports(data: any, isSport: boolean = true) {
@@ -113,34 +109,34 @@ export class SportsService {
     this.shownSports = 0;
     this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
-      const item = data[i];
-      const favorite = this.user.hasFavorite(item.guid);
-      if (item.activite) {
-        const cats = isSport ? this.allCategories : this.allCategoriesT;
-        if (cats.indexOf(item.activite) < 0) {
-          cats.push(item.activite);
-        }
-        cats.sort();
-        isSport ? this.allCategories = cats : this.allCategoriesT = cats;
-      }
-      isSport ? this.shownSports++ : this.shownTeams++;
-      const startDate = this.createDateForSport(item.date, item.hdebut);
-      const endDate = this.createDateForSport(item.date, item.hfin);
-      const jour = item.jour[1].toUpperCase() + item.jour.substr(2);
-      const newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, jour, startDate,
-        false, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
+      this.getSportsDataForExtract(data, i, isSport);
+      const newSportItem = new SportItem(
+        data[i].activite, data[i].genre, data[i].lieu, data[i].salle,
+        data[i].jour[1].toUpperCase() + data[i].jour.substr(2),
+        this.createDateForSport(data[i].date, data[i].hdebut),
+        false, this.user.hasFavorite(data[i].guid),
+        this.createDateForSport(data[i].date, data[i].hfin),
+        data[i].type, data[i].online, data[i].remarque, data[i].active, data[i].activite.concat(data[i].date.toString())
+      );
       isSport ? this.sports.push(newSportItem) : this.teams.push(newSportItem);
     }
+  }
+
+  private getSportsDataForExtract(data: any, i: number, isSport: boolean) {
+    if (data[i].activite) {
+      const cats = isSport ? this.allCategories : this.allCategoriesT;
+      if (cats.indexOf(data[i].activite) < 0) {
+        cats.push(data[i].activite);
+      }
+      cats.sort();
+      isSport ? this.allCategories = cats : this.allCategoriesT = cats;
+    }
+    isSport ? this.shownSports++ : this.shownTeams++;
   }
 
   private createDateForSport(str: string, hour: string): Date {
     const timeSplit = hour.split(':');
     const dateSplit = str.split('/');
-    const year = parseInt(dateSplit[2]);
-    const month = parseInt(dateSplit[1]) - 1;
-    const day = parseInt(dateSplit[0]);
-    const hours = parseInt(timeSplit[0]);
-    const minutes = parseInt(timeSplit[1]);
-    return new Date(year, month, day, hours, minutes);
+    return this.rssService.createDate(dateSplit, timeSplit);
   }
 }

@@ -12,4 +12,5 @@ import { EmployeeDetailsPage } from './employee-details';
     TranslateModule.forChild()
   ]
 })
-export class EmployeeDetailsPageModule { }
+export class EmployeeDetailsPageModule {
+}

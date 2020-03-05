@@ -34,7 +34,8 @@ export class TutoPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public splashscreen: SplashScreen
-  ) { }
+  ) {
+  }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad TutoPage');

@@ -38,7 +38,6 @@ export class ModalInfoPage {
 
   constructor(
     public navCtrl: NavController,
-
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studentService: StudentService
@@ -56,27 +55,20 @@ export class ModalInfoPage {
           this.closeModal();
           resolve(400);
         } else {
-          const {
-            cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue
-          } = this.assignInfosData(res);
+          const {cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue}
+            = this.assignInfosData(res);
           const response = {
-            cahierCharges: cahier,
-            offre: offres,
-            campus: campus,
-            entite: entite,
-            prof: teacher,
-            localisation: loca,
-            credit: credit,
-            programmeprerequis: progpre,
-            quadri: quadri,
-            resume: resume,
-            volume: volume,
-            langue: langue
+            cahierCharges: cahier, offre: offres, campus: campus, entite: entite, prof: teacher, localisation: loca,
+            credit: credit, programmeprerequis: progpre, quadri: quadri, resume: resume, volume: volume, langue: langue
           };
           resolve(response);
         }
       });
     });
+  }
+
+  closeModal() {
+    this.viewCtrl.dismiss();
   }
 
   private assignInfosData(res: any) {
@@ -92,7 +84,7 @@ export class ModalInfoPage {
     const quadri = res.quadrimester_text;
     // const resume = res.resumeCoursMap.entry[1].value;
     const resume = res.resumeCoursMap;
-    const volume = { vol1: '', vol2: '', vol1Coef: '', vol2Coef: '' };
+    const volume = {vol1: '', vol2: '', vol1Coef: '', vol2Coef: ''};
     for (const vol of res.components) {
       if (vol.type === 'LECTURING') {
         volume.vol1 = vol.hourly_volume_total_annual;
@@ -103,10 +95,6 @@ export class ModalInfoPage {
     if (res.cahierChargesExiste) {
       cahier = res.cahierChargesMap.entry[1].value;
     }
-    return { cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue };
-  }
-
-  closeModal() {
-    this.viewCtrl.dismiss();
+    return {cahier, offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, volume, langue};
   }
 }

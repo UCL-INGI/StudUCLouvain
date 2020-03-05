@@ -11,4 +11,5 @@ import { SportsPage } from './sports';
   imports: [IonicPageModule.forChild(SportsPage), TranslateModule.forChild()],
   providers: [Calendar]
 })
-export class SportsPageModule { }
+export class SportsPageModule {
+}

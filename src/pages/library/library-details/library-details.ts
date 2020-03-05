@@ -35,8 +35,8 @@ import { LibrariesService } from '../../../providers/wso2-services/libraries-ser
   templateUrl: 'library-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

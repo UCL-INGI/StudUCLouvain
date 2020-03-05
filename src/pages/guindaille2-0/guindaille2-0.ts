@@ -19,9 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-    AlertController, IonicPage, ModalController, NavController, NavParams
-} from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -33,8 +31,8 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'guindaille2-0.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -47,43 +45,43 @@ export class GuindaillePage {
 
   alt: string;
   altsub: string;
-  alterner = { title: '', subTitle: '', buttons: ['OK'] };
+  alterner = {title: '', subTitle: '', buttons: ['OK']};
 
   brt: string;
   brtsub: string;
-  bruit = { title: '', subTitle: '', buttons: ['OK'] };
+  bruit = {title: '', subTitle: '', buttons: ['OK']};
 
   wat: string;
   watsub: string;
-  eau = { title: '', subTitle: '', buttons: ['OK'] };
+  eau = {title: '', subTitle: '', buttons: ['OK']};
 
   where: string;
   wheresub: string;
-  ou = { title: '', subTitle: '', buttons: ['OK'] };
+  ou = {title: '', subTitle: '', buttons: ['OK']};
 
   can: string;
   cansub: string;
-  cans = { title: '', subTitle: '', buttons: ['OK'] };
+  cans = {title: '', subTitle: '', buttons: ['OK']};
 
   pres: string;
   pressub: string;
-  preservatif = { title: '', subTitle: '', buttons: ['OK'] };
+  preservatif = {title: '', subTitle: '', buttons: ['OK']};
 
   rac: string;
   racsub: string;
-  racompagner = { title: '', subTitle: '', buttons: ['OK'] };
+  racompagner = {title: '', subTitle: '', buttons: ['OK']};
 
   ur: string;
   ursub: string;
-  uriner = { title: '', subTitle: '', buttons: ['OK'] };
+  uriner = {title: '', subTitle: '', buttons: ['OK']};
 
   de: string;
   desub: string;
-  dehors = { title: '', subTitle: '', buttons: ['OK'] };
+  dehors = {title: '', subTitle: '', buttons: ['OK']};
 
   vio: string;
   viosub: string;
-  violence = { title: '', subTitle: '', buttons: ['OK'] };
+  violence = {title: '', subTitle: '', buttons: ['OK']};
 
   ttl1: string;
   efct1: string;
@@ -149,6 +147,11 @@ export class GuindaillePage {
     this.getSlides();
   }
 
+  showAlert(page) {
+    const alert = this.alertCtrl.create(page);
+    alert.present();
+  }
+
   private getSlides() {
     const ttls = [this.ttl1, this.ttl2, this.ttl3, this.ttl4, this.ttl5, this.ttl6];
     const efcts = [this.efct1, this.efct2, this.efct3, this.efct4, this.efct5, this.efct6];
@@ -192,10 +195,5 @@ export class GuindaillePage {
     });
     item.title = title;
     item.subTitle = pict;
-  }
-
-  showAlert(page) {
-    const alert = this.alertCtrl.create(page);
-    alert.present();
   }
 }

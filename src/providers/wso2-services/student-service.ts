@@ -43,7 +43,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           if (data['activities'] != null) {
-            resolve({ activities: data['activities'] });
+            resolve({activities: data['activities']});
           }
         });
     });

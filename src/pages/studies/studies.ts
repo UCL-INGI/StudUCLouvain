@@ -19,8 +19,14 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-    AlertController, IonicPage, MenuController, ModalController, NavController, NavParams, Platform,
-    ToastController
+  AlertController,
+  IonicPage,
+  MenuController,
+  ModalController,
+  NavController,
+  NavParams,
+  Platform,
+  ToastController
 } from 'ionic-angular';
 
 import { Component } from '@angular/core';
@@ -41,24 +47,23 @@ import { Wso2Service } from '../../providers/wso2-services/wso2-service';
   templateUrl: 'studies.html'
 })
 export class StudiesPage {
-  public people: any;
   public data: any;
-  segment = 'prog';
+  segment = 'cours';
   public listCourses: Course[];
   public course: Course;
   public title: any;
   public sessionId: string;
   public project: AdeProject = null;
-  private username = '';
-  private password = '';
   public error = '';
-  private status = '';
   sigles: any;
   activities: any = [];
   response: any;
   language;
   statusInsc = '';
   prog = '';
+  private username = '';
+  private password = '';
+  private status = '';
 
   constructor(
     public studiesService: StudiesService,
@@ -77,86 +82,41 @@ export class StudiesPage {
     private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
-
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
     this.getCourses();
   }
 
   checkExist(sigle: string): Promise<any> {
-    let response: any;
     const year = this.project.name.split('-')[0];
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle, year).then((data: any) => {
         const exist = data !== 404 && data !== 500;
-        let nameFR = '';
-        let nameEN = '';
-        if (exist === true) {
-          const names = data.title;
-          nameFR = names;
-          nameEN = '';
-        }
-        response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
-        resolve(response);
+        resolve({exist: exist, nameFR: exist ? data.title : '', nameEN: ''});
       });
     });
   }
 
   toastBadCourse() {
-    const msg = this.utilsService.getText('STUDY', 'BADCOURSE');
-    const toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    });
-    toast.present();
-  }
-
-  private login() {
-    this.error = '';
-    return new Promise(resolve => {
-      this.wso2Service.login(this.username, this.password).catch(error => {
-        if (error.status === 400) {
-          this.error = this.utilsService.getText('STUDY', 'BADLOG');
-        } else {
-          this.error = this.utilsService.getText('STUDY', 'ERROR');
-        }
-        return error;
-      })
-        .subscribe(data => {
-          if (data != null) {
-            this.status = data.toString();
-            resolve(data);
-          }
-        });
-    });
+    this.studiesService.toastCourse('BADCOURSE').present();
   }
 
   loadActivities() {
     if (this.connService.isOnline()) {
       this.login().then(() => {
         if (this.status) {
-          this.studentService
-            .searchActivities()
-            .then(res => {
-              const result: any = res;
-              this.sigles = result.activities.activity;
-              for (const sigle of this.sigles) {
-                this.activities.push({ name: '', sigle: sigle });
-              }
-            })
-            .catch(err => {
-              console.log('Error during load of course program');
-            });
-
-          this.studentService
-            .getStatus()
-            .then(res => {
-              const result: any = res;
-              this.statusInsc = result[0].etatInscription;
-              this.prog = result[0].intitOffreComplet;
-            })
-            .catch(err => {
+          this.studentService.searchActivities().then((res: any) => {
+            this.sigles = res.activities.activity;
+            for (const sigle of this.sigles) {
+              this.activities.push({name: '', sigle: sigle});
+            }
+          }).catch(() => {
+            console.log('Error during load of course program');
+          });
+          this.studentService.getStatus().then(res => {
+            this.statusInsc = res[0].etatInscription;
+            this.prog = res[0].intitOffreComplet;
+          }).catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -168,11 +128,8 @@ export class StudiesPage {
   }
 
   openModalProject() {
-    const obj = { sessionId: this.sessionId };
-    const myModal = this.modalCtrl.create('ModalProjectPage', obj);
-    myModal.onDidDismiss(data => {
-      this.project = data;
-    });
+    const myModal = this.modalCtrl.create('ModalProjectPage', {sessionId: this.sessionId});
+    myModal.onDidDismiss(data => this.project = data);
     myModal.present();
   }
 
@@ -185,8 +142,7 @@ export class StudiesPage {
           if (this.project === null) {
             this.openModalProject();
           } else {
-            this.studiesService
-              .setProject(this.sessionId, this.project.id);
+            this.studiesService.setProject(this.sessionId, this.project.id);
           }
         });
       });
@@ -197,37 +153,35 @@ export class StudiesPage {
   }
 
   showPrompt() {
-    const addcourse = this.utilsService.getText('STUDY', 'ADDCOURSE');
-    const message = this.utilsService.getText('STUDY', 'MESSAGE');
-    const sigle = this.utilsService.getText('STUDY', 'SIGLE');
-    const cancel = this.utilsService.getText('STUDY', 'CANCEL');
-    const save = this.utilsService.getText('STUDY', 'SAVE');
-    const prompt = this.alertCtrl.create({
-      title: addcourse,
-      message: message,
+    this.alertCtrl.create({
+      title: this.utilsService.getText('STUDY', 'ADDCOURSE'),
+      message: this.utilsService.getText('STUDY', 'MESSAGE'),
       inputs: [
         {
           name: 'acronym',
-          placeholder: sigle
+          placeholder: this.utilsService.getText('STUDY', 'SIGLE')
         }
       ],
       buttons: [
         {
-          text: cancel,
-          handler: data => { }
+          text: this.utilsService.getText('STUDY', 'CANCEL'),
         },
         {
-          text: save,
+          text: this.utilsService.getText('STUDY', 'SAVE'),
           cssClass: 'save',
           handler: data => this.promptSaveHandler(data)
         }
       ]
-    });
-    prompt.present();
+    }).present();
   }
 
-  private promptSaveHandler(data: any) {
-    const acro = data.acronym.toUpperCase();
+  toastAlreadyCourse() {
+    const toast = this.studiesService.toastCourse('ALCOURSE');
+    toast.onDidDismiss(() => console.log('Dismissed toast'));
+    toast.present();
+  }
+
+  addCourseFromProgram(acro: string) {
     let already = false;
     for (const item of this.listCourses) {
       if (item.acronym === acro) {
@@ -241,66 +195,21 @@ export class StudiesPage {
     }
   }
 
-  private checkExistAndAddOrToast(acro: any) {
-    this.checkExist(acro).then(check => {
-      if (check.exist) {
-        this.addCourse(acro, check.nameFR);
-      } else {
-        this.toastBadCourse();
-        this.showPrompt();
-      }
-    });
-  }
-
-  toastAlreadyCourse() {
-    const msg = this.utilsService.getText('STUDY', 'ALCOURSE');
-    const toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-    toast.present();
-  }
-
-  addCourseFromProgram(acro: string) {
-    let already = false;
-    for (const item of this.listCourses) {
-      if (item.acronym === acro) { already = true; }
-    }
-    if (!already) {
-      this.checkExistAndAddOrToast(acro);
-    } else {
-      this.toastAlreadyCourse();
-    }
-  }
-
   addCourse(sigle: string, name: string) {
     this.saveCourse(name, sigle);
-    const toast = this.toastCtrl.create({
+    this.toastCtrl.create({
       message: 'Cours ajouté',
       duration: 1000,
       position: 'bottom'
-    });
-    toast.present();
+    }).present();
   }
 
   getCourses() {
-    this.storage.get('listCourses').then(data => {
-      if (data == null) {
-        this.listCourses = [];
-      } else {
-        this.listCourses = data;
-      }
-    });
+    this.storage.get('listCourses').then(data => this.listCourses = data ? data : []);
   }
 
   saveCourse(name: string, tag: string) {
-    const course = new Course(name, tag, null);
-    this.listCourses.push(course);
+    this.listCourses.push(new Course(name, tag, null));
     this.storage.set('listCourses', this.listCourses);
   }
 
@@ -313,21 +222,19 @@ export class StudiesPage {
   }
 
   openCoursePage(course: Course) {
-    const year = this.project.name.split('-')[0];
     this.navCtrl.push('CoursePage', {
       course: course,
       sessionId: this.sessionId,
-      year: year
+      year: this.project.name.split('-')[0]
     });
   }
 
   unavailableAlert() {
-    const alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Indisponible',
       subTitle: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
-    });
-    alert.present();
+    }).present();
   }
 
   openExamPage() {
@@ -336,5 +243,46 @@ export class StudiesPage {
 
   launch(url) {
     this.iab.create(url, '_system');
+  }
+
+  private login() {
+    this.error = '';
+    return new Promise(resolve => {
+      this.wso2Service.login(this.username, this.password).catch(error => {
+        if (error.status === 400) {
+          this.error = this.utilsService.getText('STUDY', 'BADLOG');
+        } else {
+          this.error = this.utilsService.getText('STUDY', 'ERROR');
+        }
+        return error;
+      }).subscribe(data => {
+          if (data != null) {
+            this.status = data.toString();
+            resolve(data);
+          }
+        });
+    });
+  }
+
+  private promptSaveHandler(data: any) {
+    const acro = data.acronym.toUpperCase();
+    let already = false;
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) {
+        already = true;
+      }
+    }
+    already ? this.toastAlreadyCourse() : this.checkExistAndAddOrToast(acro);
+  }
+
+  private checkExistAndAddOrToast(acro: any) {
+    this.checkExist(acro).then(check => {
+      if (check.exist) {
+        this.addCourse(acro, check.nameFR);
+      } else {
+        this.toastBadCourse();
+        this.showPrompt();
+      }
+    });
   }
 }

@@ -34,8 +34,8 @@ import { RepertoireService } from '../../../providers/wso2-services/repertoire-s
   templateUrl: 'employee-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -68,7 +68,8 @@ export class EmployeeDetailsPage {
     }
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+  }
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {

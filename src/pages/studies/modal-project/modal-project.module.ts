@@ -12,4 +12,5 @@ import { ModalProjectPage } from './modal-project';
     TranslateModule.forChild()
   ]
 })
-export class ModalProjectPageModule { }
+export class ModalProjectPageModule {
+}

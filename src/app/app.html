@@ -19,23 +19,23 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<ion-menu id="mainMenu" [content]="content">
+<ion-menu [content]="content" id="mainMenu">
   <ion-content>
     <ion-list scroll=true>
-      <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
-        <div class="box"><img src={{p.icon}} width="35" height="35" /> <span>&nbsp; {{p.title | translate}}</span>
+      <button (click)="openRootPage(p)" *ngFor="let p of campusPages" ion-item>
+        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>
-      <button ion-item *ngFor="let p of studiePages" (click)="openRootPage(p)">
-        <div class="box"><img src={{p.icon}} width="35" height="35" /> <span>&nbsp; {{p.title | translate}}</span>
+      <button (click)="openRootPage(p)" *ngFor="let p of studiePages" ion-item>
+        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>
-      <button ion-item *ngFor="let p of toolPages" (click)="openRootPage(p)">
-        <div class="box"><img src={{p.icon}} width="35" height="35" /> <span>&nbsp; {{p.title | translate}}</span>
+      <button (click)="openRootPage(p)" *ngFor="let p of toolPages" ion-item>
+        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false" [class]="selectedTheme"></ion-nav>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false" [class]="selectedTheme"></ion-nav>

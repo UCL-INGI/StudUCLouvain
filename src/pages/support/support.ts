@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    IonicPage, LoadingController, ModalController, NavController, NavParams, Platform
-} from 'ionic-angular';
+import { IonicPage, LoadingController, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -37,8 +35,8 @@ import { RepertoireService } from '../../providers/wso2-services/repertoire-serv
   templateUrl: 'support.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0' })),
+      state('true', style({height: '45px'})),
+      state('false', style({height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -72,13 +70,12 @@ export class SupportPage {
     this.utilsService.presentLoading();
     const options: Array<string> = [];
     const values: Array<string> = [];
-    if (this.lastname.length > 0) {
-      values.push(this.lastname);
-      options.push('lastname');
-    }
-    if (this.firstname.length > 0) {
-      values.push(this.firstname);
-      options.push('firstname');
+    for (const key of ['lastname', 'firstname']) {
+      const field = key === 'lastname' ? this.lastname : this.firstname;
+      if (field.length > 0) {
+        values.push(field);
+        options.push(key);
+      }
     }
     this.searchEmployees(options, values);
   }
@@ -98,7 +95,7 @@ export class SupportPage {
   }
 
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push('EmployeeDetailsPage', { emp: emp });
+    this.navCtrl.push('EmployeeDetailsPage', {emp: emp});
   }
 
   public openURL(url: string) {

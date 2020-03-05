@@ -12,4 +12,5 @@ import { SportsFilterPage } from './sports-filter';
     TranslateModule.forChild()
   ]
 })
-export class SportsFilterPageModule { }
+export class SportsFilterPageModule {
+}

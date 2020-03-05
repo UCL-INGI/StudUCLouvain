@@ -24,29 +24,29 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center"><img alt="logo" height="40" src="./assets/img/logoSport.png"></ion-title>
     <ion-buttons end>
-      <button ion-button (tap)="presentFilter()">
+      <button (tap)="presentFilter()" ion-button>
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedSports()">
-    <ion-segment-button value="all" style="color: white;">
+  <ion-segment (ionChange)="updateDisplayedSports()" [(ngModel)]="segment">
+    <ion-segment-button style="color: white;" value="all">
       {{'SPORTS.ALL' | translate}}
     </ion-segment-button>
-    <ion-segment-button value="team" style="color: white;">
+    <ion-segment-button style="color: white;" value="team">
       {{'SPORTS.TEAM' | translate}}
     </ion-segment-button>
-    <ion-segment-button value="favorites" style="color: white;">
+    <ion-segment-button style="color: white;" value="favorites">
       {{'SPORTS.FAV' | translate}}
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
 <!--BODY-->
-<ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
+<ion-content [ngClass]="{'team' : segment == 'team'}" class="all">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
@@ -54,34 +54,36 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider *ngIf="item.name.length > 0" (tap)="utilsService.toggleGroup(item.jour)" text-center class="all"
-      [ngClass]="{'team' : segment == 'team'}">
+    <ion-item-divider (tap)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
+                      [ngClass]="{'team' : segment == 'team'}" class="all"
+                      text-center>
       {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
     </ion-item-divider>
 
     <ion-list *ngFor="let sport of item.name" [hidden]="!utilsService.isGroupShown(item.jour)">
 
       <ion-item-sliding #slidingItem [hidden]="sport.hidden">
-        <ion-item text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+        <ion-item [ngClass]="{'team' : segment == 'team'}" class="all" text-center>
           <h3>{{sport.sport}} {{sport.sexe}} {{sport.type}}</h3>
           <p class="text">{{sport.lieu}} - Salle : {{sport.salle}}</p>
           <p class="text">{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash;
             {{sport.hfin | date : 'H:mm'}}</p>
-          <p style="color:red;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
-          <p style="color:red;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
-          <p style="color:red;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
+          <p *ngIf="sport.online==1" style="color:red;">{{'SPORTS.ONLINE' | translate}}</p>
+          <p *ngIf="sport.remarque.length > 2" style="color:red;">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
+          <p *ngIf="sport.active==0" style="color:red;">{{'SPORTS.ANNULE' | translate}}</p>
         </ion-item>
 
         <ion-item-options side="right">
-          <button ion-button (tap)="addToCalendar(slidingItem, sport)" class="large-icon">
+          <button (tap)="addToCalendar(slidingItem, sport)" class="large-icon" ion-button>
             <ion-icon name='calendar'></ion-icon>
           </button>
-          <button ion-button (tap)="utilsService.addFavorite(slidingItem, sport, 'SPORTS')"
-            *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
+          <button (tap)="utilsService.addFavorite(slidingItem, sport, 'SPORTS')"
+                  *ngIf="segment === 'all' || segment === 'team'"
+                  class="large-icon" ion-button>
             <ion-icon name="star-outline"></ion-icon>
           </button>
-          <button ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')"
-            *ngIf="segment === 'favorites'" class="large-icon">
+          <button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+                  class="large-icon" ion-button>
             <ion-icon name='close'></ion-icon>
           </button>
         </ion-item-options>
@@ -92,13 +94,14 @@
 
   </ion-list>
 
-  <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching" class="all"
-    [ngClass]="{'team' : segment == 'team'}">
+  <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching"
+                   [ngClass]="{'team' : segment == 'team'}"
+                   class="all">
     {{'SPORTS.NOTHING' | translate}}
   </ion-list-header>
 </ion-content>
 
-<ion-footer text-center *ngIf="segment=='all' || segment=='team'">
+<ion-footer *ngIf="segment=='all' || segment=='team'" text-center>
   <ion-icon name='help-circle'></ion-icon>
   <p style="color:white">{{'SPORTS.SWIPE' | translate}}</p>
 </ion-footer>

@@ -42,7 +42,8 @@ export class ModalProjectPage {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public studiesService: StudiesService
-  ) { }
+  ) {
+  }
 
   /*Set the project and close de view of the modal*/
   closeModal(project: AdeProject) {

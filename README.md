@@ -38,12 +38,12 @@ npm -v
 
 * Install Ionic, cordova
     ```bash
-    $ npm install -g ionic cordova
+    $ npm install -g ionic cordova@^9
     ```
 * or update Ionic
     ```bash
     $ npm uninstall -g ionic cordova
-    $ npm install -g ionic cordova
+    $ npm install -g ionic cordova@^9
     ```
 * Install node_modules
     ```bash

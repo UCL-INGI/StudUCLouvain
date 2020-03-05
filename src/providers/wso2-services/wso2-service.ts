@@ -19,16 +19,15 @@ import { wso2HeaderStudent } from '../../app/variables-config';
 export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
-
+  headers: HttpHeaders;
   private token = '';
   private tokenStudent = '';
-  headers: HttpHeaders;
 
   constructor(public http: HttpClient) {
     this.getToken()
       .subscribe(
         data => {
-          this.headers = new HttpHeaders({ 'Authorization': this.token });
+          this.headers = new HttpHeaders({'Authorization': this.token});
           this.headers.append('Accept', 'application/json');
           // this.options = new RequestOptions({ headers: headers });
         });
@@ -37,7 +36,7 @@ export class Wso2Service {
   /*Load wso2 service*/
   load(url: string) {
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    return this.http.get(finalUrl, { headers: this.headers }).map(res => res)
+    return this.http.get(finalUrl, {headers: this.headers}).map(res => res)
       .catch((error) => {
         console.log(error.status);
         if (error.status === 401) {
@@ -51,7 +50,7 @@ export class Wso2Service {
 
   /*Retrieves the token*/
   getToken() {
-    const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
+    const headers = new HttpHeaders({'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     // let body = "grant_type=client_credentials";
@@ -60,7 +59,7 @@ export class Wso2Service {
     // this.optionsToken = new RequestOptions({headers: headers});
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
-    return this.http.post(finalUrl, body, { headers: headers })
+    return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
         this.token = 'Bearer ' + res['access_token'];
 
@@ -74,7 +73,7 @@ export class Wso2Service {
 
   /*Log in the user*/
   login(user: string, pass: string) {
-    const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
+    const headers = new HttpHeaders({'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     // let body = `grant_type=password&username=${user}&password=${pass}`;
@@ -83,7 +82,7 @@ export class Wso2Service {
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
 
-    return this.http.post(finalUrl, body, { headers: headers })
+    return this.http.post(finalUrl, body, {headers: headers})
       .map(res => {
         this.tokenStudent = 'Bearer ' + res['access_token'];
         return 'OK';
@@ -93,11 +92,11 @@ export class Wso2Service {
 
   /*Load the student*/
   loadStudent(url: string) {
-    const headers = new HttpHeaders({ 'Authorization': this.tokenStudent });
+    const headers = new HttpHeaders({'Authorization': this.tokenStudent});
     headers.append('Accept', 'application/json');
     // this.optionsStudent = new RequestOptions({ headers: headers });
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    return this.http.get(finalUrl, { headers: headers }).map(res => res);
+    return this.http.get(finalUrl, {headers: headers}).map(res => res);
   }
 
 }

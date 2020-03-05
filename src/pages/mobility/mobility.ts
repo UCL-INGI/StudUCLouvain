@@ -36,6 +36,7 @@ export class MobilityPage {
   carpoolingPage;
   busPage;
   trainPage;
+
   constructor(
     public nav: NavController,
     public market: Market,
@@ -44,35 +45,21 @@ export class MobilityPage {
     public utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
-    let titlecar: string;
-    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {
-      titlecar = res;
-    });
-
-    this.carpoolingPage = {
-      title: titlecar,
-      component: 'CarpoolingPage',
-      iosSchemaName: 'id1143545052',
-      androidPackageName: 'net.commuty.mobile',
-      appUrl: 'commutynet://',
-      httpUrl: 'https://app.commuty.net/sign-in'
-    };
-    this.busPage = {
-      title: 'NextRide',
-      component: 'BusPage',
-      iosSchemaName: 'id568042532',
-      androidPackageName: 'be.thomashermine.prochainbus',
-      appUrl: 'nextride://',
-      httpUrl: 'https://nextride.be/timetables'
-    };
-    this.trainPage = {
-      title: 'SNCB',
-      component: 'TrainPage',
-      iosSchemaName: 'id403212064',
-      androidPackageName: 'de.hafas.android.sncbnmbs',
-      appUrl: 'sncb://',
-      httpUrl:
-        'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx'
-    };
+    this.carpoolingPage = this.utilsService.getPageObject(
+      'Carpooling',
+      this.utilsService.getText('MOBI', 'COVOIT'),
+      'id1143545052', 'be.thomashermine.prochainbus',
+      'commutynet://', 'https://app.commuty.net/sign-in'
+    );
+    this.busPage = this.utilsService.getPageObject(
+      'Bus', 'NextRide',
+      'id568042532', 'net.commuty.mobile',
+      'nextride://', 'https://nextride.be/timetables'
+    );
+    this.carpoolingPage = this.utilsService.getPageObject(
+      'Train', 'SNCB',
+      'id403212064', 'e.hafas.android.sncbnmbs',
+      'sncb://', 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx'
+    );
   }
 }

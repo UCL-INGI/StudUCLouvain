@@ -28,6 +28,7 @@ import { Injectable } from '@angular/core';
 export class FacService {
   facultes: any = [];
   url = 'assets/data/fac.json';
+
   constructor(public http: HttpClient) {
 
   }

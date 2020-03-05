@@ -19,9 +19,7 @@
     along with StudUCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import {
-    IonicPage, ModalController, NavController, NavParams, ToastController
-} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Component } from '@angular/core';
 
@@ -39,7 +37,9 @@ export class ExamPage {
     public userS: UserService,
     public modalCtrl: ModalController,
     public navParams: NavParams
-  ) { }
+  ) {
+  }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+  }
 }

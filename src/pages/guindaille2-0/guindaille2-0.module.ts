@@ -12,4 +12,5 @@ import { GuindaillePage } from './guindaille2-0';
     TranslateModule.forChild()
   ]
 })
-export class GuindaillePageModule { }
+export class GuindaillePageModule {
+}

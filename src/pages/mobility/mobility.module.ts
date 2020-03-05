@@ -9,4 +9,5 @@ import { MobilityPage } from './mobility';
   declarations: [MobilityPage],
   imports: [IonicPageModule.forChild(MobilityPage), TranslateModule.forChild()]
 })
-export class MobilityPageModule { }
+export class MobilityPageModule {
+}

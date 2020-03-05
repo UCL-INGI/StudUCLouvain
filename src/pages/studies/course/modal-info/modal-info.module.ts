@@ -9,4 +9,5 @@ import { ModalInfoPage } from './modal-info';
   declarations: [ModalInfoPage],
   imports: [IonicPageModule.forChild(ModalInfoPage), TranslateModule.forChild()]
 })
-export class ModalInfoPageModule { }
+export class ModalInfoPageModule {
+}

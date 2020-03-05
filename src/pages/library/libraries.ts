@@ -68,7 +68,9 @@ export class LibrariesPage {
       this.libService.loadLibraries().then(res => {
         const result: any = res;
         this.libraries = result.libraries;
-        if (key) { this.cache.saveItem(key, this.libraries); }
+        if (key) {
+          this.cache.saveItem(key, this.libraries);
+        }
         this.searching = false;
       });
     } else {
@@ -79,7 +81,7 @@ export class LibrariesPage {
   }
 
   goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push('LibraryDetailsPage', { lib: lib });
+    this.navCtrl.push('LibraryDetailsPage', {lib: lib});
   }
 
   async cachedOrNot() {

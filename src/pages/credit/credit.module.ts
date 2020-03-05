@@ -9,4 +9,5 @@ import { CreditPage } from './credit';
   declarations: [CreditPage],
   imports: [IonicPageModule.forChild(CreditPage), TranslateModule.forChild()]
 })
-export class CreditPageModule { }
+export class CreditPageModule {
+}

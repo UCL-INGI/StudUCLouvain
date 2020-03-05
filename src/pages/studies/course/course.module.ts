@@ -11,4 +11,5 @@ import { CoursePage } from './course';
   imports: [IonicPageModule.forChild(CoursePage), TranslateModule.forChild()],
   providers: [Calendar]
 })
-export class CoursePageModule { }
+export class CoursePageModule {
+}

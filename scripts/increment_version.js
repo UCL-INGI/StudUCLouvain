@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- // This script increments patch number (mayor.minor.patch) but you can
+// This script increments patch number (mayor.minor.patch) but you can
 // choose to increment any other segment by modifying lines `45` to `53`.
 //
 // 1. Make sure you've installed *xml2js*: `$ npm install xml2js -D`
@@ -20,9 +20,9 @@ fs.readFile('config.xml', 'utf8', function (err, data) {
   var xml = data;
 
   // Parse XML to JS Obj
-  xml2js.parseString(xml, function (err, result) {
-    if (err) {
-      return console.log(err);
+  xml2js.parseString(xml, function (e, result) {
+    if (e) {
+      return console.log(e);
     }
 
     // Get version inside widget attributes or create it
@@ -59,12 +59,12 @@ fs.readFile('config.xml', 'utf8', function (err, data) {
 
     // Build XML from JS Obj
     var builder = new xml2js.Builder();
-    var xml = builder.buildObject(obj);
+    var xmlb = builder.buildObject(obj);
 
     // Write config.xml
-    fs.writeFile('config.xml', xml, function (err) {
-      if (err) {
-        return console.log(err);
+    fs.writeFile('config.xml', xmlb, function (er) {
+      if (er) {
+        return console.log(er);
       }
 
       console.log('Version incremented to %s', version);

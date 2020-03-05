@@ -9,4 +9,5 @@ import { ExamPage } from './exam';
   declarations: [ExamPage],
   imports: [IonicPageModule.forChild(ExamPage), TranslateModule.forChild()]
 })
-export class ExamPageModule { }
+export class ExamPageModule {
+}

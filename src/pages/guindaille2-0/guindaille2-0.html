@@ -22,20 +22,19 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="guindaille">
-    <img src="./assets/img/s.png" height="28" />
-    <!--<ion-title align="center">{{title | translate}}</ion-title>-->
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">
       <img alt="logo" height="40" src="./assets/img/guindaille/logo.png">
     </ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="segment" class="gelem gtext">
-    <ion-segment-button value="pict" style="color:white">
+    <ion-segment-button style="color:white" value="pict">
       {{'GUINDAILLE.PICTO' | translate}}
     </ion-segment-button>
-    <ion-segment-button value="effect" style="color:white">
+    <ion-segment-button style="color:white" value="effect">
       {{'GUINDAILLE.EFFECT' | translate}}
     </ion-segment-button>
-    <ion-segment-button value="help" style="color:white">
+    <ion-segment-button style="color:white" value="help">
       {{'GUINDAILLE.HELP' | translate}}
     </ion-segment-button>
   </ion-segment>
@@ -45,7 +44,7 @@
 <ion-content [ngClass]="{'guindailleHelp' : segment === 'help', 'guindaille' : segment !== 'help'}">
   <ng-container *ngIf="segment==='pict'" class="gelem">
     <ion-item-divider class="gelem">
-      <button ion-button round class="gbutton">
+      <button class="gbutton" ion-button round>
         <p class="gtext">{{'GUINDAILLE.PICTO' | translate}}</p>
       </button>
     </ion-item-divider>
@@ -53,55 +52,55 @@
     <ion-grid class="gelem" no-lines>
       <ion-row>
         <ion-col col-4>
-          <img alt="alterner" src="./assets/img/guindaille/alterner.png" align="middle" height="auto"
-            (tap)="showAlert(alterner)" />
+          <img (tap)="showAlert(alterner)" alt="alterner" height="auto"
+               src="./assets/img/guindaille/alterner.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="bruit" src="./assets/img/guindaille/Bruit-exterieur.png" align="middle" height="auto"
-            (tap)="showAlert(bruit)" />
+          <img (tap)="showAlert(bruit)" alt="bruit" height="auto"
+               src="./assets/img/guindaille/Bruit-exterieur.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="eau" src="./assets/img/guindaille/eau-gratuite.png" align="middle" height="auto"
-            (tap)="showAlert(eau)" />
+          <img (tap)="showAlert(eau)" alt="eau" height="auto"
+               src="./assets/img/guindaille/eau-gratuite.png"/>
         </ion-col>
       </ion-row>
 
 
       <ion-row>
         <ion-col col-4>
-          <img alt="ou" src="./assets/img/guindaille/jen-suis-ou.png" align="middle" height="auto"
-            (tap)="showAlert(ou)" />
+          <img (tap)="showAlert(ou)" alt="ou" height="auto"
+               src="./assets/img/guindaille/jen-suis-ou.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="cans" src="./assets/img/guindaille/no-cans-no-glass.png" align="middle" height="auto"
-            (tap)="showAlert(cans)" />
+          <img (tap)="showAlert(cans)" alt="cans" height="auto"
+               src="./assets/img/guindaille/no-cans-no-glass.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="preservatif" src="./assets/img/guindaille/preservatif-jy-pense.png" align="middle" height="auto"
-            (tap)="showAlert(preservatif)" />
+          <img (tap)="showAlert(preservatif)" alt="preservatif" height="auto"
+               src="./assets/img/guindaille/preservatif-jy-pense.png"/>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col col-4>
-          <img alt="racompagner" src="./assets/img/guindaille/racompagner.png" align="middle" height="auto"
-            (tap)="showAlert(racompagner)" />
+          <img (tap)="showAlert(racompagner)" alt="racompagner" height="auto"
+               src="./assets/img/guindaille/racompagner.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="uriner" src="./assets/img/guindaille/uriner-dans-le-pot.png" align="middle" height="auto"
-            (tap)="showAlert(uriner)" />
+          <img (tap)="showAlert(uriner)" alt="uriner" height="auto"
+               src="./assets/img/guindaille/uriner-dans-le-pot.png"/>
         </ion-col>
         <ion-col col-4>
-          <img alt="urinerD" src="./assets/img/guindaille/uriner-dehors.png" align="middle" height="auto"
-            (tap)="showAlert(dehors)" />
+          <img (tap)="showAlert(dehors)" alt="urinerD" height="auto"
+               src="./assets/img/guindaille/uriner-dehors.png"/>
         </ion-col>
       </ion-row>
 
 
       <ion-row>
         <ion-col col-4 offset-4>
-          <img alt="violence" src="./assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" align="center"
-            (tap)="showAlert(violence)" />
+          <img (tap)="showAlert(violence)" alt="violence"
+               src="./assets/img/guindaille/Violence-arrete-toi-avant.png"/>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -109,7 +108,7 @@
 
   <ng-container *ngIf="segment==='effect'" class="gelem">
     <ion-item-divider class="gelem" no-lines>
-      <button ion-button round class="gbutton">
+      <button class="gbutton" ion-button round>
         <p class="gtext">{{'GUINDAILLE.EFFECT' | translate}}</p>
       </button>
     </ion-item-divider>
@@ -117,7 +116,7 @@
     <ion-item class="gelem" no-lines>
       <ion-slides pager>
         <ion-slide *ngFor="let slide of slides">
-          <img [src]="slide.image" class="slide-image" (tap)="showAlert(slide)" />
+          <img (tap)="showAlert(slide)" [src]="slide.image" class="slide-image"/>
         </ion-slide>
       </ion-slides>
       <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
@@ -126,7 +125,7 @@
 
   <ng-container *ngIf="segment==='help'" class="gelem">
     <ion-item-divider class="gelem" no-lines>
-      <button ion-button round class="gbutton">
+      <button class="gbutton" ion-button round>
         <p class="gtext">{{'GUINDAILLE.HELP' | translate}}</p>
       </button>
     </ion-item-divider>
@@ -167,24 +166,23 @@
           <strong>{{'GUINDAILLE.HELP8' | translate}}</strong> {{'GUINDAILLE.HELP9' | translate}}<br>
           <br> {{'GUINDAILLE.HELP10' | translate}} <br>
         </p> <br>
-        <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
+        <h2><strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
         <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
         <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
-        <p style="text-align: left">
+        <ul style="text-align: left">
           <li>{{'GUINDAILLE.HELP14' | translate}}</li>
           <li>{{'GUINDAILLE.HELP15' | translate}}</li>
           <li>{{'GUINDAILLE.HELP16' | translate}}</li>
           <li>{{'GUINDAILLE.HELP17' | translate}}</li>
-        </p>
+        </ul>
       </div>
     </ion-item>
   </ng-container>
 
 
-
 </ion-content>
 
-<ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
+<ion-footer *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'" class="gfoot" text-center>
   <ion-icon name='help-circle'></ion-icon>
   <p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
 </ion-footer>

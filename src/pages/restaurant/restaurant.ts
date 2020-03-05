@@ -30,6 +30,7 @@ import { Component } from '@angular/core';
 })
 export class RestaurantPage {
   public title: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.title = this.navParams.get('title');
   }

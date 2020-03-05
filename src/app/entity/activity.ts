@@ -20,7 +20,6 @@
 */
 
 
-
 export class Activity {
   type: string;
   teachers: string;
@@ -32,7 +31,7 @@ export class Activity {
   name: string;
 
   constructor(type: string, teachers: string, students: string,
-    start: Date, end: Date, auditorium: string, isExam: boolean, name: string) {
+              start: Date, end: Date, auditorium: string, isExam: boolean, name: string) {
     this.type = type;
     this.teachers = teachers;
     this.students = students;

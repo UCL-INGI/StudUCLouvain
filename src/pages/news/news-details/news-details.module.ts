@@ -12,4 +12,5 @@ import { NewsDetailsPage } from './news-details';
     TranslateModule.forChild()
   ]
 })
-export class NewsDetailsPageModule { }
+export class NewsDetailsPageModule {
+}

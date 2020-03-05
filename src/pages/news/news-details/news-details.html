@@ -34,18 +34,18 @@
   <ion-card>
     <ion-card-content>
       <ion-row>
-        <ion-col col-4 *ngIf="news.image !== undefined && news.image.length > 0">
-          <img style="float:left; margin-right: 5px;" src="{{news.image}}" />
+        <ion-col *ngIf="news.image !== undefined && news.image.length > 0" col-4>
+          <img alt="News picture" src="{{news.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
-          <p style="text-align: left;" [innerHTML]="news.description"></p>
+          <p [innerHTML]="news.description" style="text-align: left;"></p>
         </ion-col>
       </ion-row>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(news.link)">
+        <button (click)="openPage(news.link)" clear icon-left ion-button small>
           <ion-icon name='share-alt'></ion-icon>
           {{'NEWS.SITE' | translate}}
         </button>

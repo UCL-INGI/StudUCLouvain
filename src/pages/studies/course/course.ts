@@ -19,8 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-    AlertController, IonicPage, ItemSliding, ModalController, NavController, NavParams,
-    ToastController
+  AlertController,
+  IonicPage,
+  ItemSliding,
+  ModalController,
+  NavController,
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 
 import { Component } from '@angular/core';
@@ -65,13 +70,13 @@ export class CoursePage {
     public navParams: NavParams,
     private utilsService: UtilsService
   ) {
-    this.courseSorted = { cm: [], tp: [], ex: [] };
+    this.courseSorted = {cm: [], tp: [], ex: []};
     const acro = this.course.acronym;
-    if (this.userS.hasSlotCM(acro)) {
-      this.slotCM = this.userS.getSlotCM(acro);
+    if (this.userS.hasSlot(acro, false)) {
+      this.slotCM = this.userS.getSlot(acro, false);
     }
-    if (this.userS.hasSlotTP(acro)) {
-      this.slotTP = this.userS.getSlotTP(acro);
+    if (this.userS.hasSlot(acro, true)) {
+      this.slotTP = this.userS.getSlot(acro, true);
     }
   }
 
@@ -81,11 +86,10 @@ export class CoursePage {
 
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(data => {
-      const courseId = data;
-      this.courseService.getActivity(sessionId, courseId).then(activity => {
-        this.course.activities = activity
-          .sort((a1, a2) => a1.start.valueOf() - a2.start.valueOf())
-          .filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
+      this.courseService.getActivity(sessionId, data).then(activity => {
+        this.course.activities = activity.sort(
+          (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
+        ).filter(activitie => activitie.end.valueOf() > Date.now().valueOf()); // display only activities finished after now time
         this.displayedActi = this.course.activities;
         this.courseSorted.cm = this.course.activities.filter(
           acti => acti.type === 'Cours magistral'
@@ -102,28 +106,29 @@ export class CoursePage {
   }
 
   addToCalendar(slidingItem: ItemSliding, activity: Activity) {
-    const options: any = {
-      firstReminderMinutes: 15
-    };
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
-    this.calendar
-      .createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
+    this.getEventWithOption(activity, message, slidingItem);
+    this.alert();
+  }
+
+  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
+    this.calendar.createEventWithOptions(
+        message,
         activity.auditorium,
         null,
         activity.start,
         activity.end,
-        options
-      )
-      .then(() => {
-        const toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        });
-        toast.present();
-        slidingItem.close();
+        {firstReminderMinutes: 15}
+      ).then(() => {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
       });
-    this.alert();
+      toast.present();
+      if (slidingItem) {
+        slidingItem.close();
+      }
+    });
   }
 
   alert(all: boolean = false) {
@@ -134,35 +139,34 @@ export class CoursePage {
     const disclaimerAlert = this.alertCtrl.create({
       title: title,
       message: message,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => { }
-        }
-      ]
+      buttons: [{
+        text: 'OK'
+      }]
     });
     disclaimerAlert.present();
   }
 
   updateDisplayedTP() {
     const toFilter = this.courseSorted.tp;
-    if (toFilter.length === 0) { this.noTP = true; } else { this.noTP = false; }
+    this.noTP = toFilter.length === 0;
     let toPush;
     if (this.slotTP !== 'no') {
-      toPush = toFilter.filter(
-        acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1
-      );
-    } else { toPush = this.courseSorted.tp; }
+      toPush = toFilter.filter(acti => acti.name === this.slotTP || acti.name.indexOf('-') > -1);
+    } else {
+      toPush = this.courseSorted.tp;
+    }
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   updateDisplayedCM() {
     const toFilter = this.courseSorted.cm;
-    if (toFilter.length === 0) { this.noCM = true; } else { this.noCM = false; }
+    this.noCM = toFilter.length === 0;
     let toPush: Array<Activity>;
     if (this.slotCM !== 'no') {
       toPush = toFilter.filter(acti => acti.name === this.slotCM);
-    } else { toPush = this.courseSorted.cm; }
+    } else {
+      toPush = this.courseSorted.cm;
+    }
     this.displayedActi = this.displayedActi.concat(toPush);
   }
 
@@ -171,23 +175,19 @@ export class CoursePage {
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
-    if (this.courseSorted.ex.length === 0) { this.noEx = true; } else { this.noEx = false; }
+    this.noEx = this.courseSorted.ex.length === 0;
   }
 
   showPrompt(segment: string) {
     const options = this.getInitialOptions(segment);
-    const aucun =
-      (this.slotTP === 'no' && segment === 'TD') ||
-      (this.slotCM === 'no' && segment === 'Cours magistral');
+    const aucun = (this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral');
     const array = this.getSlots(segment);
     for (let i = 0; i < array.length; i++) {
-      const slotChosen =
-        this.slotTP === array[i].name || this.slotCM === array[i].name;
+      const slotChosen = this.slotTP === array[i].name || this.slotCM === array[i].name;
       options.inputs.push({
         name: 'options',
         value: array[i].name,
-        label:
-          this.getLabel(array, i),
+        label: this.getLabel(array, i),
         type: 'radio',
         checked: slotChosen
       });
@@ -200,34 +200,68 @@ export class CoursePage {
         type: 'radio',
         checked: aucun
       });
+      this.alertCtrl.create(options).present();
     }
-    const prompt = this.alertCtrl.create(options);
-    if (options.inputs.length > 1) { prompt.present(); }
+  }
+
+  getSlots(segment: string) {
+    let act = this.course.activities.filter(acti =>
+      acti.type === segment ||
+      (acti.type === 'TP' && segment === 'TD') ||
+      (segment === 'Examen' && acti.isExam)
+    );
+    let slots = act.map(item => item.name).filter((value, index, self) => self.indexOf(value) === index);
+    if (segment === 'TD') {
+      slots = slots.filter(acti => acti.indexOf('_') !== -1);
+    } else if (segment === 'Cours magistral') {
+      slots = slots.filter(acti => acti.indexOf('-') !== -1);
+    }
+    const newAct: Activity[] = [];
+    for (let i = 0; i < slots.length; i++) {
+      const activity: Activity = act.find(acti => acti.name === slots[i]);
+      newAct.push(activity);
+    }
+    return newAct;
+  }
+
+  addCourseToCalendar() {
+    for (const activity of this.displayedActi) {
+      this.getEventWithOption(activity, this.course.name + ' : ' + activity.type);
+    }
+    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
+    const toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+    this.alert(true);
+  }
+
+  openModalInfo() {
+    const myModal = this.modalCtrl.create(
+      'ModalInfoPage',
+      {course: this.course, year: this.year},
+      {cssClass: 'modal-fullscreen'}
+    );
+    myModal.onDidDismiss(() => {});
+    myModal.present();
   }
 
   private getLabel(array: Activity[], i: number) {
-    return array[i].name +
-      ' ' +
-      array[i].start.getHours() +
-      ':' +
-      array[i].start.getUTCMinutes();
+    return array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes();
   }
 
   private getInitialOptions(segment: string) {
-    const title = this.utilsService.getText('COURSE', 'TITLE');
-    const message = this.utilsService.getText('COURSE', 'MESSAGE2');
-    const cancel = this.utilsService.getText('COURSE', 'CANCEL');
-    const apply = this.utilsService.getText('COURSE', 'APPLY');
     const options = {
-      title: title,
-      message: message,
+      title: this.utilsService.getText('COURSE', 'TITLE'),
+      message: this.utilsService.getText('COURSE', 'MESSAGE2'),
       inputs: [],
       buttons: [
         {
-          text: cancel
+          text: this.utilsService.getText('COURSE', 'CANCEL')
         },
         {
-          text: apply,
+          text: this.utilsService.getText('COURSE', 'APPLY'),
           handler: data => this.getHandler(segment, data)
         }
       ]
@@ -244,62 +278,5 @@ export class CoursePage {
       this.userS.addSlotTP(this.course.acronym, this.slotTP);
     }
     this.updateDisplayed();
-  }
-
-  getSlots(segment: string) {
-    let act: Activity[] = this.course.activities;
-    act = act.filter(
-      acti =>
-        acti.type === segment ||
-        (acti.type === 'TP' && segment === 'TD') ||
-        (segment === 'Examen' && acti.isExam)
-    );
-    let slots = act
-      .map(item => item.name)
-      .filter((value, index, self) => self.indexOf(value) === index);
-    if (segment === 'TD') { slots = slots.filter(acti => acti.indexOf('_') !== -1); }
-    if (segment === 'Cours magistral') {
-      slots = slots.filter(acti => acti.indexOf('-') !== -1);
-    }
-    const newAct: Activity[] = [];
-    for (let i = 0; i < slots.length; i++) {
-      const activity: Activity = act.find(acti => acti.name === slots[i]);
-      newAct.push(activity);
-    }
-    return newAct;
-  }
-
-  addCourseToCalendar() {
-    const options: any = {
-      firstReminderMinutes: 15
-    };
-    for (const activity of this.displayedActi) {
-      this.calendar.createEventWithOptions(
-        this.course.name + ' : ' + activity.type,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        options
-      );
-    }
-    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
-
-    const toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    });
-    toast.present();
-    this.alert(true);
-  }
-
-  openModalInfo() {
-    const myModal = this.modalCtrl.create(
-      'ModalInfoPage',
-      { course: this.course, year: this.year },
-      { cssClass: 'modal-fullscreen' }
-    );
-    myModal.onDidDismiss(data => { });
-    myModal.present();
   }
 }

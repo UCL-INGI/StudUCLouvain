@@ -26,10 +26,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged()">
+  <ion-segment (ionChange)="tabChanged()" [(ngModel)]="segment">
     <ion-segment-button value="univ">
       {{'NEWS.UNIF' | translate}}
     </ion-segment-button>
@@ -37,7 +37,7 @@
       {{'NEWS.FAC' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-segment [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
+  <ion-segment (ionChange)="cachedOrNot()" *ngIf="segment==='univ'" [(ngModel)]="subsegment">
     <ion-segment-button value="P1">
       {{'NEWS.STUDY' | translate}}
     </ion-segment-button>
@@ -48,7 +48,7 @@
       {{'NEWS.SERVICE' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-segment [(ngModel)]="facsegment" (ionChange)="facTabChange()" *ngIf="segment==='fac'">
+  <ion-segment *ngIf="segment==='fac'" [(ngModel)]="facsegment">
     <ion-segment-button value="news">
       {{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong>
     </ion-segment-button>
@@ -56,11 +56,11 @@
       {{'NEWS.VALVE' | translate}}
     </ion-segment-button>
   </ion-segment>
-  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" *ngIf="segment === 'univ'"></ion-searchbar>
+  <ion-searchbar *ngIf="segment === 'univ'" [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 </ion-header>
 
 <!--BODY-->
-<ion-content class="feed-list" #news>
+<ion-content #news class="feed-list">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
@@ -82,8 +82,9 @@
 
     <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
     <ion-item *ngIf="facsegment==='valve'" no-lines>
-      <button center ion-button clear small icon-left text-center
-        (tap)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
+      <button (tap)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')" center clear icon-left
+              ion-button small
+              text-center>
         <ion-icon name='share-alt'></ion-icon>
         {{'NEWS.MESVALVES' | translate}}
       </button>
@@ -98,13 +99,13 @@
           <h2 *ngIf="facsegment === 'news'"><strong>Faculté : {{userS.fac}}</strong></h2>
         </ion-col>
       </ion-row>
-      <button center ion-button clear small icon-left (tap)="openURL(site)"
-        *ngIf="site.length > 0 && facsegment ==='news'">
+      <button (tap)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'" center clear icon-left ion-button
+              small>
         <ion-icon name='share-alt'></ion-icon>
         {{'NEWS.WEB' | translate}}
       </button>
-      <p text-center *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'"><strong>Indisponible pour le
-          moment</strong></p>
+      <p *ngIf="site.length == 0 && rss.length == 0 && facsegment ==='news'" text-center><strong>Indisponible pour le
+        moment</strong></p>
 
 
     </ion-item>
@@ -114,7 +115,7 @@
   <ng-container *ngIf="segment==='univ' || (segment === 'fac' && facsegment === 'news' && userS.hasFac())">
     <ion-list #newsList [hidden]="shownNews === 0">
       <ion-item *ngFor="let item of displayedNews">
-        <button ion-item (tap)="goToNewsDetail(item)" no-lines>
+        <button (tap)="goToNewsDetail(item)" ion-item no-lines>
           <h3>{{item.title}}</h3>
           <p [innerHtml]="item.trimmedDescription"></p>
           <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>
@@ -127,8 +128,8 @@
   </ng-container>
 
   <!----------------- BUTTON TO CHANGE FAC ------------------------->
-  <ion-fab bottom right *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
-    <button ion-fab (tap)="removeFac(fac)">
+  <ion-fab *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()" bottom right>
+    <button (tap)="removeFac()" ion-fab>
       <ion-icon name="swap"></ion-icon>
     </button>
   </ion-fab>

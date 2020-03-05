@@ -1,5 +1,4 @@
-<!--
-
+/*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
     Date : July 2017
@@ -18,20 +17,33 @@
 
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
--->
-<!--EN-TETE-->
-<ion-header>
-</ion-header>
 
-<!--BODY-->
-<ion-content padding>
+export class Page {
+    title: string;
+    component: any;
+    icon: any;
+    iosSchemaName: string;
+    androidPackageName: string;
+    appUrl: string;
+    httpUrl: string;
 
-  <div text-center> {{'MODAL.PROJECT' | translate}} :</div>
-  <ion-list>
-    <button (click)="closeModal(project)" *ngFor="let project of projects" ion-item>
-      <button full ion-button> {{project.name}} </button>
-    </button>
-  </ion-list>
-
-</ion-content>
+  constructor(
+    title: string,
+    component: any,
+    icon: any,
+    iosSchemaName: string,
+    androidPackageName: string,
+    appUrl: string,
+    httpUrl: string,
+  ) {
+    this.title = title;
+    this.component = component;
+    this.icon = icon;
+    this.iosSchemaName = iosSchemaName;
+    this.androidPackageName = androidPackageName;
+    this.appUrl = appUrl;
+    this.httpUrl = httpUrl;
+  }
+}

@@ -11,4 +11,5 @@ import { EventsPage } from './events';
   imports: [IonicPageModule.forChild(EventsPage), TranslateModule.forChild()],
   providers: [Calendar]
 })
-export class EventsPageModule { }
+export class EventsPageModule {
+}

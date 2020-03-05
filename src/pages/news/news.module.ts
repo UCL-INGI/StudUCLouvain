@@ -9,4 +9,5 @@ import { NewsPage } from './news';
   declarations: [NewsPage],
   imports: [IonicPageModule.forChild(NewsPage), TranslateModule.forChild()]
 })
-export class NewsPageModule { }
+export class NewsPageModule {
+}

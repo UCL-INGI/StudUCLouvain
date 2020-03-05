@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-    ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform
-} from 'ionic-angular';
+import { ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -52,43 +50,38 @@ export class MapPage {
   temp2: any;
 
   constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController,
-    public mapService: MapService,
-    public platform: Platform,
-    public navParams: NavParams,
-    public poilocations: POIService) {
+              public modalCtrl: ModalController,
+              public actionSheetCtrl: ActionSheetController,
+              public mapService: MapService,
+              public platform: Platform,
+              public navParams: NavParams,
+              public poilocations: POIService) {
     this.title = this.navParams.get('title');
   }
 
   ngAfterViewInit() {
-    const mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-    const zones = this.poilocations.loadResources();
     this.searching = true;
     Promise.all([
-      mapLoaded,
-      zones
-    ]).then((result) => {
-      this.searching = false;
-      this.zones = result[1];
-      this.filters = this.zones;
-      this.userLocation = this.mapService.getUserLocation();
-      this.selectedLocation = this.userLocation;
-      this.showedLocations.push(this.selectedLocation);
-      if (result[0]) {
-        this.mapService.addMarker(this.selectedLocation);
-      }
-    });
+      this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement),
+      this.poilocations.loadResources()
+    ]).then((result) => this.initPromisesSucceed(result));
+  }
+
+  private initPromisesSucceed(result) {
+    this.searching = false;
+    this.zones = result[1];
+    this.filters = this.zones;
+    this.userLocation = this.mapService.userLocation;
+    this.selectedLocation = this.userLocation;
+    this.showedLocations.push(this.selectedLocation);
+    if (result[0]) {
+      this.mapService.addMarker(this.selectedLocation);
+    }
   }
 
   toggleDetails(data) {
-    if (data.showDetails) {
-      data.showDetails = false;
-      data.icon = 'arrow-dropdown';
-    } else {
-      data.showDetails = true;
-      data.icon = 'arrow-dropup';
-    }
+    data.showDetails = !data.showDetails;
+    data.icon = 'arrow-' + (data.showDetails ? 'dropwdown' : 'dropup');
   }
 
   toggleLocation(data, checkList, index) {
@@ -112,9 +105,7 @@ export class MapPage {
   }
 
   onSelect(data: any) {
-    if (this.selectedLocation !== data) {
-      this.selectedLocation = data;
-    }
+    this.selectedLocation = data === this.selectedLocation ? this.selectedLocation : data;
     this.mapService.addMarker(this.selectedLocation);
   }
 }

@@ -32,7 +32,8 @@ export class RssService {
   nbCalls = 0;
   callLimit = 30;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
   convertXmlToJson(xml): any {
     const parser: any = new X2JS();
@@ -42,10 +43,14 @@ export class RssService {
 
   load(url: string, isSport: boolean = false) {
     return new Promise((resolve, reject) => {
-      this.http.get(url, { responseType: 'text' }).timeout(5000)
+      this.http.get(url, {responseType: 'text'}).timeout(5000)
         .map(data => this.convertXmlToJson(data)).subscribe(result => {
           this.nbCalls++;
-          if (isSport) { result = result['xml']; } else { result = result['rss']['channel']; }
+          if (isSport) {
+            result = result['xml'];
+          } else {
+            result = result['rss']['channel'];
+          }
           if (result == null) {
             if (this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
@@ -57,9 +62,18 @@ export class RssService {
             resolve(result['item']);
           }
         },
-          err => {
-            reject(err);
-          });
+        err => {
+          reject(err);
+        });
     });
+  }
+
+  public createDate(dateSplit, timeSplit) {
+    const year = parseInt(dateSplit[2]);
+    const month = parseInt(dateSplit[1]) - 1;
+    const day = parseInt(dateSplit[0]);
+    const hours = parseInt(timeSplit[0]);
+    const minutes = parseInt(timeSplit[1]);
+    return new Date(year, month, day, hours, minutes);
   }
 }

@@ -39,9 +39,9 @@ export class NewsItem {
     guid: string,
     pubDate: Date
   ) {
-    this.description = description;
-    this.link = link;
-    this.title = title;
+    this.description = description || 'No description...';
+    this.link = link || 'No link';
+    this.title = title || 'No title';
     this.image = image;
     this.trimmedDescription = trimmedDescription;
     this.hidden = hidden;

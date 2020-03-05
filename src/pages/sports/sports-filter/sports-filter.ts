@@ -19,9 +19,10 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 
 import { Component } from '@angular/core';
+import { UtilsService } from "../../../providers/utils-services/utils-service";
 
 @IonicPage()
 @Component({
@@ -33,8 +34,7 @@ export class SportsFilterPage {
   dateRange: any;
   results: any = [];
 
-  constructor(public navParams: NavParams, public viewCtrl: ViewController) {
-    // passed in array of categories names that should be excluded (unchecked)
+  constructor(public navParams: NavParams, public utilsService: UtilsService) {
     const excludedFilters = this.navParams.get('excludedFilters');
     const filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');
@@ -46,35 +46,15 @@ export class SportsFilterPage {
     }
   }
 
-  /*Reset all of the toggles to be checked*/
   resetFilters() {
     this.categories.forEach(category => {
       category.isChecked = true;
     });
   }
 
-  /*Uncheck all sports from the filter*/
   uncheckAll() {
     this.categories.forEach(category => {
       category.isChecked = false;
     });
-  }
-
-  /*Pass back a new array of categories name to exclude*/
-  applyFilters() {
-    const excludedFilters = this.categories
-      .filter(c => !c.isChecked)
-      .map(c => c.name);
-    this.dismiss(excludedFilters);
-  }
-
-  /*Dismiss filter*/
-  dismiss(data?: any) {
-    if (typeof data === 'undefined') {
-      data = [];
-    }
-    this.results.push(data);
-    this.results.push(this.dateRange);
-    this.viewCtrl.dismiss(this.results);
   }
 }

@@ -67,7 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
+    CacheModule.forRoot({keyPrefix: 'UCL-cache'}),
     IonicStorageModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
@@ -81,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [MyApp],
   providers: [
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AppAvailability,
     ConnectivityService,
     CourseService,
@@ -112,4 +112,5 @@ export function HttpLoaderFactory(http: HttpClient) {
     Geolocation
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

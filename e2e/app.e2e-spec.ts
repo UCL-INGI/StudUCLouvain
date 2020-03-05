@@ -1,5 +1,6 @@
 import { Page } from './app.po';
-import { browser, by, element, protractor } from 'protractor';
+import { browser, by, element } from 'protractor';
+
 describe('App', () => {
   let page: Page;
 
@@ -23,9 +24,9 @@ describe('App', () => {
         done();
       });
     });
-  })
+  });
 
-  describe('Studies Page', () =>{
+  describe('Studies Page', () => {
     beforeEach(() => {
       page.navigateTo('/');
       browser.driver.sleep(2000);
@@ -34,22 +35,22 @@ describe('App', () => {
       browser.driver.sleep(2000);
     });
 
-    it('should have an error after bad password', () => { 
-        expect(browser.isElementPresent(element(by.id('error')))).not.toBeTruthy();
-        var actions = browser.actions();
-        actions.mouseMove(element(by.id('userField')));
-        actions.click();
-        actions.sendKeys("bdaubry");
-        actions.mouseMove(element(by.id('passwordField')));
-        actions.click();
-        actions.sendKeys("coucou");
+    it('should have an error after bad password', () => {
+      expect(browser.isElementPresent(element(by.id('error')))).not.toBeTruthy();
+      var actions = browser.actions();
+      actions.mouseMove(element(by.id('userField')));
+      actions.click();
+      actions.sendKeys("bdaubry");
+      actions.mouseMove(element(by.id('passwordField')));
+      actions.click();
+      actions.sendKeys("coucou");
 
-        actions.perform();
-        var login = element(by.id('login'));
-        login.click();
-        var error = element(by.id('error'));
-        expect(error.isDisplayed()).toBeTruthy();
-  });
+      actions.perform();
+      var login = element(by.id('login'));
+      login.click();
+      var error = element(by.id('error'));
+      expect(error.isDisplayed()).toBeTruthy();
+    });
 
     it('should display list of courses and open a modal', () => {
       var segment = element(by.name('cours'));
@@ -64,20 +65,20 @@ describe('App', () => {
       expect(alert.isDisplayed()).toBeTruthy();
 
       var actions = browser.actions();
-        actions.mouseMove(element(by.id('alert-input-0-0')));
-        actions.click();
-        actions.sendKeys("Trololol");
-        actions.mouseMove(element(by.id('alert-input-0-1')));
-        actions.click();
-        actions.sendKeys("LFSAB1101");
-        actions.perform();
-        var ok = element(by.className('save'));
-        ok.click();
-        var cours = element(by.css("ion-item-sliding"));
-        expect(cours.getText()).toContain('Trololol LFSAB1101');
+      actions.mouseMove(element(by.id('alert-input-0-0')));
+      actions.click();
+      actions.sendKeys("Trololol");
+      actions.mouseMove(element(by.id('alert-input-0-1')));
+      actions.click();
+      actions.sendKeys("LFSAB1101");
+      actions.perform();
+      var ok = element(by.className('save'));
+      ok.click();
+      var cours = element(by.css("ion-item-sliding"));
+      expect(cours.getText()).toContain('Trololol LFSAB1101');
     });
 
 
-});
+  });
 
-})
+});

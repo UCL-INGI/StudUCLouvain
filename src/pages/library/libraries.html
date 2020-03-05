@@ -23,10 +23,10 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-navbar color="bibli">
-    <button ion-button icon-only menuToggle>
+    <button icon-only ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img src="./assets/img/s.png" height="28" />
+    <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -42,7 +42,7 @@
   </div>
   <ion-list>
     <ion-item *ngFor="let lib of libraries">
-      <button ion-item (tap)="goToLibDetails(lib)" no-lines>
+      <button (tap)="goToLibDetails(lib)" ion-item no-lines>
         {{lib.name}}
       </button>
     </ion-item>
