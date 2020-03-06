@@ -26,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -42,6 +43,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 })
 export class ParamPage {
   title: any;
+  selectedTheme: String;
 
   constructor(
     public navCtrl: NavController,
@@ -50,35 +52,53 @@ export class ParamPage {
     public userS: UserService,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
+  }
+
+  toggleAppTheme() {
+    if (this.selectedTheme === 'dark-theme') {
+      this.settings.setActiveTheme('light-theme');
+    } else {
+      this.settings.setActiveTheme('dark-theme');
+    }
   }
 
   campus_choice() {
-    const [setting, message, save] = this.utilsService.getTexts(
-      'HOME',
-      ['SETTING1', 'MESSAGE', 'SAVE']
-    );
-    this.getSettingsAlert(setting, message, this.userS.campus, save).present();
+    const settingsAlert = this.alertCtrl.create({
+      title: this.utilsService.getText('HOME', 'SETTING1'),
+      message: this.utilsService.getText('HOME', 'MESSAGE'),
+      inputs: this.getSettingsInputs(this.userS.campus),
+      buttons: [
+        {
+          text: this.utilsService.getText('HOME', 'SAVE'),
+          handler: data => {
+            this.userS.addCampus(data);
+          }
+        }
+      ]
+    });
+    settingsAlert.present();
   }
 
   language_choice() {
-    const [message2, en, fr, setting2, save] = this.utilsService.getTexts(
-      'HOME',
-      ['SETTING2', 'MESSAGE2', 'FR', 'EN', 'SAVE']
-    );
-    this.alertCtrl.create({
-      title: setting2,
-      message: message2,
-      inputs: this.utilsService.getLanguageAlertInputs(fr, en, this.translateService.currentLang),
+    const languageAlert = this.alertCtrl.create({
+      title: this.utilsService.getText('HOME', 'SETTING2'),
+      message: this.utilsService.getText('HOME', 'MESSAGE2'),
+      inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
       buttons: [
         {
-          text: save,
-          handler: data => this.languageChanged(data)
+          text: this.utilsService.getText('HOME', 'SAVE'),
+          handler: data => {
+            this.languageChanged(data);
+          }
         }
       ]
-    }).present();
+    });
+    languageAlert.present();
   }
 
   languageChanged(event: string) {
@@ -88,20 +108,6 @@ export class ParamPage {
 
   openTuto() {
     this.navCtrl.push('TutoPage');
-  }
-
-  private getSettingsAlert(setting: any, message: any, check: string, save: any) {
-    return this.alertCtrl.create({
-      title: setting,
-      message: message,
-      inputs: this.getSettingsInputs(check),
-      buttons: [
-        {
-          text: save,
-          handler: data => this.userS.addCampus(data)
-        }
-      ]
-    });
   }
 
   private getCampusChoiceInput(label: string, value: string, check: string) {

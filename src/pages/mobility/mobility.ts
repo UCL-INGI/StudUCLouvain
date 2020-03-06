@@ -18,11 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 
 import { Component } from '@angular/core';
 import { Market } from '@ionic-native/market';
-import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../providers/utils-services/utils-service';
 
@@ -38,10 +37,8 @@ export class MobilityPage {
   trainPage;
 
   constructor(
-    public nav: NavController,
     public market: Market,
     public navParams: NavParams,
-    private translateService: TranslateService,
     public utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');

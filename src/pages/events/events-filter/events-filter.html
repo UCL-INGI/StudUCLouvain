@@ -22,7 +22,8 @@
 <ion-header>
   <ion-toolbar class="header" id="header">
     <ion-buttons start>
-      <button (click)="utilsService.applyFilters(true, categories, results, dateRange)" ion-button>{{'EVENTS.CANCEL' | translate}}</button>
+      <button (click)="applyFilters(true, categories, results, dateRange)"
+              ion-button>{{'EVENTS.CANCEL' | translate}}</button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,7 +33,8 @@
       </ion-col>
     </ion-row>
     <ion-buttons end>
-      <button (click)="utilsService.applyFilters(false, categories, results, dateRange)" ion-button strong>{{'EVENTS.APPLY' | translate}}</button>
+      <button (click)="applyFilters(false, categories, results, dateRange)" ion-button
+              strong>{{'EVENTS.APPLY' | translate}}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -68,7 +70,7 @@
     <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
-        <img alt="Event Category Icon" [src]="category.iconCategory">
+        <img [src]="category.iconCategory" alt="Event Category Icon"/>
       </ion-thumbnail>
       <ion-label>{{category.name}}</ion-label>
       <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>

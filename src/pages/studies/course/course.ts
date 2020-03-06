@@ -111,34 +111,12 @@ export class CoursePage {
     this.alert();
   }
 
-  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
-    this.calendar.createEventWithOptions(
-        message,
-        activity.auditorium,
-        null,
-        activity.start,
-        activity.end,
-        {firstReminderMinutes: 15}
-      ).then(() => {
-      const toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      });
-      toast.present();
-      if (slidingItem) {
-        slidingItem.close();
-      }
-    });
-  }
-
   alert(all: boolean = false) {
     const prefix = all ? 'COURSE' : 'STUDY';
     const msg_number = all ? '3' : '4';
-    const title = this.utilsService.getText(prefix, 'WARNING');
-    const message = this.utilsService.getText(prefix, 'MESSAGE' + msg_number);
     const disclaimerAlert = this.alertCtrl.create({
-      title: title,
-      message: message,
+      title: this.utilsService.getText(prefix, 'WARNING'),
+      message: this.utilsService.getText(prefix, 'MESSAGE' + msg_number),
       buttons: [{
         text: 'OK'
       }]
@@ -228,9 +206,8 @@ export class CoursePage {
     for (const activity of this.displayedActi) {
       this.getEventWithOption(activity, this.course.name + ' : ' + activity.type);
     }
-    const message = this.utilsService.getText('STUDY', 'MESSAGE3');
     const toast = this.toastCtrl.create({
-      message: message,
+      message: this.utilsService.getText('STUDY', 'MESSAGE3'),
       duration: 3000
     });
     toast.present();
@@ -243,8 +220,29 @@ export class CoursePage {
       {course: this.course, year: this.year},
       {cssClass: 'modal-fullscreen'}
     );
-    myModal.onDidDismiss(() => {});
+    myModal.onDidDismiss(() => {
+    });
     myModal.present();
+  }
+
+  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
+    this.calendar.createEventWithOptions(
+      message,
+      activity.auditorium,
+      null,
+      activity.start,
+      activity.end,
+      {firstReminderMinutes: 15}
+    ).then(() => {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
+      });
+      toast.present();
+      if (slidingItem) {
+        slidingItem.close();
+      }
+    });
   }
 
   private getLabel(array: Activity[], i: number) {

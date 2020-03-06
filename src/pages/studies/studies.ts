@@ -117,8 +117,8 @@ export class StudiesPage {
             this.statusInsc = res[0].etatInscription;
             this.prog = res[0].intitOffreComplet;
           }).catch(() => {
-              console.log('Error during load of inscription status');
-            });
+            console.log('Error during load of inscription status');
+          });
         }
       });
     } else {
@@ -256,11 +256,11 @@ export class StudiesPage {
         }
         return error;
       }).subscribe(data => {
-          if (data != null) {
-            this.status = data.toString();
-            resolve(data);
-          }
-        });
+        if (data != null) {
+          this.status = data.toString();
+          resolve(data);
+        }
+      });
     });
   }
 

@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 
 import { Component } from '@angular/core';
 import { UtilsService } from "../../../providers/utils-services/utils-service";
@@ -34,7 +34,7 @@ export class SportsFilterPage {
   dateRange: any;
   results: any = [];
 
-  constructor(public navParams: NavParams, public utilsService: UtilsService) {
+  constructor(public navParams: NavParams, public utilsService: UtilsService, public viewCtrl: ViewController) {
     const excludedFilters = this.navParams.get('excludedFilters');
     const filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');
@@ -56,5 +56,12 @@ export class SportsFilterPage {
     this.categories.forEach(category => {
       category.isChecked = false;
     });
+  }
+
+  applyFilters(cancel: boolean = false, categories, results, dateRange) {
+    const excludedFilters = cancel ? [] : categories.filter(c => !c.isChecked).map(c => c.name);
+    results.push(excludedFilters);
+    results.push(dateRange);
+    this.viewCtrl.dismiss(results);
   }
 }

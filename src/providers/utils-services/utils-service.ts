@@ -18,14 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-  AlertController,
-  ItemSliding,
-  Loading,
-  LoadingController,
-  ToastController,
-  ViewController
-} from 'ionic-angular';
+import { AlertController, ItemSliding, Loading, LoadingController, ToastController } from 'ionic-angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability';
@@ -52,8 +45,8 @@ export class UtilsService {
     public alertCtrl: AlertController,
     public user: UserService,
     public toastCtrl: ToastController,
-    public viewCtrl: ViewController,
   ) {
+    console.log("Starting Utils Provider");
   }
 
   presentLoading() {
@@ -108,17 +101,17 @@ export class UtilsService {
     );
   }
 
-  getLanguageAlertInputs(fr, en, check2) {
+  getLanguageAlertInputs(check2) {
     return [
       {
         type: 'radio',
-        label: fr,
+        label: this.getText('HOME', 'FR'),
         value: 'fr',
         checked: check2 === 'fr'
       },
       {
         type: 'radio',
-        label: en,
+        label: this.getText('HOME', 'EN'),
         value: 'en',
         checked: check2 === 'en'
       }
@@ -135,8 +128,10 @@ export class UtilsService {
 
   getTexts(page: string, keys: Array<string>) {
     let values = [];
-    this.translateService.get(keys.map(key => page + '.' + key)).subscribe(translations => {
-      values = translations.values();
+    this.translateService.get(keys.map(key => page + '.' + key)).subscribe((translations: any) => {
+      Object.keys(translations).forEach(key => {
+        values.push(translations[key]);
+      });
     });
     return values;
   }
@@ -144,18 +139,15 @@ export class UtilsService {
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
     const page = isSport ? 'SPORTS' : 'EVENTS';
     const number = isSport ? 2 : 3;
-    const message = this.getText(page, 'MESSAGEFAV' + number);
-    const cancel = this.getText(page, 'CANCEL');
-    const delet = this.getText(page, 'DEL');
     const alert = this.alertCtrl.create({
       title: title,
-      message: message,
+      message: this.getText(page, 'MESSAGEFAV' + number),
       buttons: [
         {
-          text: cancel
+          text: this.getText(page, 'CANCEL')
         },
         {
-          text: delet,
+          text:  this.getText(page, 'DEL'),
           handler: () => {
             slidingItem.close();
             this.user.removeFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
@@ -168,9 +160,8 @@ export class UtilsService {
 
   favoriteAdded(slidingItem: ItemSliding, page: string) {
     const key = page === 'EVENTS' ? 'MESSAGEFAV2' : 'FAVADD';
-    const message = this.getText(page, key);
     const toast = this.toastCtrl.create({
-      message: message,
+      message: this.getText(page, key),
       duration: 3000
     });
     toast.present();
@@ -187,13 +178,6 @@ export class UtilsService {
       this.user.addFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
       this.favoriteAdded(slidingItem, page);
     }
-  }
-
-  applyFilters(cancel: boolean = false, categories, results, dateRange) {
-    const excludedFilters = cancel ? [] : categories.filter(c => !c.isChecked).map(c => c.name);
-    results.push(excludedFilters);
-    results.push(dateRange);
-    this.viewCtrl.dismiss(results);
   }
 
   getPageObject(

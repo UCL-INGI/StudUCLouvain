@@ -24,6 +24,7 @@ export class Wso2Service {
   private tokenStudent = '';
 
   constructor(public http: HttpClient) {
+    console.log("Starting WSO2 Provider");
     this.getToken()
       .subscribe(
         data => {

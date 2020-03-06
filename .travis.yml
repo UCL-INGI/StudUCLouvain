@@ -28,6 +28,8 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script: npm test
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
     - name: "Build PWA"
       language: node_js
@@ -78,6 +80,3 @@ jobs:
         - ionic cordova platform add android
         - ionic info
       script: ionic cordova build android --prod
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

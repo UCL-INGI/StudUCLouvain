@@ -32,7 +32,7 @@ export class POIService {
 
   zones: any = [];
   url = '';
-  prefix_path = 'assets/data/resources';
+  prefix_path = 'assets/data/mapMarkers';
   old = '';
 
   constructor(public http: HttpClient, public user: UserService) {
