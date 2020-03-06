@@ -26,7 +26,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -43,7 +42,6 @@ import { SettingsProvider } from "../../providers/utils-services/settings-servic
 })
 export class ParamPage {
   title: any;
-  selectedTheme: String;
 
   constructor(
     public navCtrl: NavController,
@@ -52,19 +50,9 @@ export class ParamPage {
     public userS: UserService,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    private utilsService: UtilsService,
-    private settings: SettingsProvider
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
-    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
-  }
-
-  toggleAppTheme() {
-    if (this.selectedTheme === 'dark-theme') {
-      this.settings.setActiveTheme('light-theme');
-    } else {
-      this.settings.setActiveTheme('dark-theme');
-    }
   }
 
   campus_choice() {
