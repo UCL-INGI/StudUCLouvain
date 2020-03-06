@@ -36,9 +36,7 @@ export class RssService {
   }
 
   convertXmlToJson(xml): any {
-    const parser: any = new X2JS();
-    const json = parser.xml2js(xml);
-    return json;
+    return new X2JS().xml2js(xml);
   }
 
   load(url: string, isSport: boolean = false) {

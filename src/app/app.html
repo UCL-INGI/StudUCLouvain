@@ -21,16 +21,16 @@
 
 <ion-menu [content]="content" id="mainMenu">
   <ion-content>
-    <ion-list scroll=true>
-      <button (click)="openRootPage(p)" *ngFor="let p of campusPages" ion-item>
+    <ion-list>
+      <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
         <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>
-      <button (click)="openRootPage(p)" *ngFor="let p of studiePages" ion-item>
+      <button ion-item *ngFor="let p of studiePages" (click)="openRootPage(p)">
         <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>
-      <button (click)="openRootPage(p)" *ngFor="let p of toolPages" ion-item>
+      <button ion-item *ngFor="let p of toolPages" (click)="openRootPage(p)">
         <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
         </div>
       </button>

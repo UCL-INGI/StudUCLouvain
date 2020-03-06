@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, App, Content, FabContainer, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, App, Content, FabContainer, IonicPage, NavController } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -53,12 +53,11 @@ export class HomePage {
     'RESTAURANT',
     'id1156050719', 'com.apptree.resto4u',
     'apptreeresto4u://', 'https://uclouvain.be/fr/decouvrir/resto-u'
-    )
+  )
   ;
   mobilityPage = this.utilsService.getPageObject('Mobility');
 
   constructor(
-    public navParams: NavParams,
     public app: App,
     public userS: UserService,
     public nav: NavController,
@@ -68,7 +67,6 @@ export class HomePage {
     public splashscreen: SplashScreen,
     private utilsService: UtilsService
   ) {
-    this.title = this.navParams.get('title');
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
@@ -116,19 +114,19 @@ export class HomePage {
     alert.present();
   }
 
-  private getAlertEmergencyMsg(): string {
+  private getAlertEmergencyMsg() {
     const [
       msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9
     ] = this.utilsService.getTexts(
       'GUINDAILLE',
       ['HELP1', 'HELP2', 'HELP3', 'HELP4', 'HELP5', 'HELP6', 'HELP7', 'HELP8', 'HELP9', 'HELP18']
     );
-    return '<p><strong>' + msg1 + '</strong>: <br><font size="+1"><a href="tel:010472222">010 47 22 22</a></font></p>' +
-      '<p><strong>' + msg2 + '</strong>: <br><font size="+1"><a href="tel:010472424">010 47 24 24</a></font><br>ou' +
-      '<br><font size="+1">' + '<a href="tel:027649393">02 764 93 93</a></font><br>(Woluwe - St Gilles - Tournai)<br>' +
-      ' ou ' + '<br><font size="+1"><a href="tel:065323555">065 32 35 55</a></font> (Mons)</p>' +
+    return '<p><strong>' + msg1 + '</strong>: <br><a href="tel:010472222">010 47 22 22</a></p>' +
+      '<p><strong>' + msg2 + '</strong>: <br><a href="tel:010472424">010 47 24 24</a><br>ou' +
+      '<br>' + '<a href="tel:027649393">02 764 93 93</a><br>(Woluwe - St Gilles - Tournai)<br>' +
+      ' ou ' + '<br><a href="tel:065323555">065 32 35 55</a> (Mons)</p>' +
       '<p><strong>Contact:</strong><a href="mailto:security@uclouvain.be">security@uclouvain.be</a></p>' +
-      '<p><strong>' + out + ':</strong><font size="+1"><a href="tel:112">112</a></font></p><p><br>' + msg3 +
+      '<p><strong>' + out + ':</strong><a href="tel:112">112</a></p><p><br>' + msg3 +
       ' <br><br><strong>' + msg4 + '</strong> ' + msg5 + '<br><strong>' + msg6 + '</strong> ' + msg7 + '<br><strong>' +
       msg8 + '</strong> ' + msg9 + '<br>';
   }

@@ -33,6 +33,7 @@ export class UserService {
   disclaimer = false;
 
   constructor(public storage: Storage) {
+    console.log("Starting Uer Provider");
     // USE THIS LINE TO CLEAR THE STORAGE
     // storage.clear();
     this.getFavorites();

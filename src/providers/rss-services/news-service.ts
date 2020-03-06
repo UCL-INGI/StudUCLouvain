@@ -56,7 +56,8 @@ export class NewsService {
       } else if (error === 2) {
         console.log('Loading news : GET req timed out > limit, suppose no news to be displayed');
       } else {
-        console.log('Error loading news : ' + error);
+        console.log('Error loading news :');
+        console.log(error);
       }
       return {
         news: [],
