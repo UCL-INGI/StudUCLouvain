@@ -46,6 +46,7 @@ export class UtilsService {
     public user: UserService,
     public toastCtrl: ToastController,
   ) {
+    console.log("Starting Utils Provider");
   }
 
   presentLoading() {
@@ -127,8 +128,10 @@ export class UtilsService {
 
   getTexts(page: string, keys: Array<string>) {
     let values = [];
-    this.translateService.get(keys.map(key => page + '.' + key)).subscribe(translations => {
-      values = translations.values();
+    this.translateService.get(keys.map(key => page + '.' + key)).subscribe((translations: any) => {
+      Object.keys(translations).forEach(key => {
+        values.push(translations[key]);
+      });
     });
     return values;
   }

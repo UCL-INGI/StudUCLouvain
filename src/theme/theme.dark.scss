@@ -2,14 +2,28 @@
   ion-content {
     background-color: #090f2f;
     color: #fff;
+
+    ion-item-divider, ion-item {
+      background-color: #090f2f;
+      color: #fff;
+
+      ion-thumbnail {
+        background-color: white;
+      }
+    }
+
+    ion-label button {
+          background-color: #090f2f;
+      color: #fff;
+    }
+
+    span, ion-label, h3, p, strong {
+      color: white !important;
+    }
   }
 
   .toolbar-title {
     color: #fff;
   }
 
-  .header .toolbar-background {
-    border-color: #ff0fff;
-    background-color: #090f2f;
-  }
 }

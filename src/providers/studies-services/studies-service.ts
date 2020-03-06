@@ -52,14 +52,12 @@ export class StudiesService {
 
   openSession() {
     return new Promise<string>((resolve) => {
-      console.log('StudiesService openSession');
       this.ade.httpOpenSession().subscribe(data => resolve(data.session._id));
     });
   }
 
   getProjects(sessionId: string) {
     return new Promise((resolve) => {
-      console.log('Studiesservice getProjects');
       this.ade.httpGetProjects(sessionId).subscribe(data => resolve(this.extractAdeProjects(data)));
     });
   }

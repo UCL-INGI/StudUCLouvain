@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, App, Content, FabContainer, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, App, Content, FabContainer, IonicPage, NavController } from 'ionic-angular';
 
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -58,7 +58,6 @@ export class HomePage {
   mobilityPage = this.utilsService.getPageObject('Mobility');
 
   constructor(
-    public navParams: NavParams,
     public app: App,
     public userS: UserService,
     public nav: NavController,
@@ -68,7 +67,6 @@ export class HomePage {
     public splashscreen: SplashScreen,
     private utilsService: UtilsService
   ) {
-    this.title = this.navParams.get('title');
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
@@ -116,7 +114,7 @@ export class HomePage {
     alert.present();
   }
 
-  private getAlertEmergencyMsg(): string {
+  private getAlertEmergencyMsg() {
     const [
       msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9
     ] = this.utilsService.getTexts(

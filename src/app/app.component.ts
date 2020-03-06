@@ -73,7 +73,6 @@ export class MyApp {
     this.alertPresented = false;
     this.initializeApp();
     this.getPages();
-    console.log("YOLOOO", this.campusPages);
     platform.ready().then(() => {
       this.wso2Service.getToken();
       translateService.setDefaultLang('fr');
