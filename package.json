@@ -59,8 +59,8 @@
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.900.5",
-    "@angular-devkit/build-optimizer": "^0.900.3",
+    "@angular-devkit/build-angular": "0.0.10",
+    "@angular-devkit/build-optimizer": "^0.4.9",
     "@ionic/app-scripts": "^3.2.4",
     "@types/jasmine": "^3.5.6",
     "jasmine-spec-reporter": "^4.2.1",
@@ -72,7 +72,7 @@
     "karma-jasmine-html-reporter": "^1.5.2",
     "karma-spec-reporter": "0.0.32",
     "protractor": "^5.4.3",
-    "typescript": "~2.6.2"
+    "typescript": "^2.6.2"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",
   "cordova": {
