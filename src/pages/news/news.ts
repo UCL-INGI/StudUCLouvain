@@ -40,7 +40,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
   templateUrl: 'news.html'
 })
 export class NewsPage {
-  // url = 'assets/data/fac.json';
+  // url = 'assets/data/facultiesInformations.json';
 
   @ViewChild('newsList', {read: List}) newsList: List;
   @ViewChild('news') content: Content;

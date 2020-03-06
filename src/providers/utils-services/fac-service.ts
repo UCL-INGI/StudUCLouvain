@@ -27,7 +27,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FacService {
   facultes: any = [];
-  url = 'assets/data/fac.json';
+  url = 'assets/data/facultiesInformations.json';
 
   constructor(public http: HttpClient) {
 

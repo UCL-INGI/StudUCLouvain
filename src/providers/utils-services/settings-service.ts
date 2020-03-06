@@ -7,6 +7,7 @@ export class SettingsProvider {
 
   private theme: BehaviorSubject<string>;
   constructor() {
+    console.log("Starting Settings Provider");
     this.theme = new BehaviorSubject('light-theme');
   }
 
