@@ -139,18 +139,15 @@ export class UtilsService {
   removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
     const page = isSport ? 'SPORTS' : 'EVENTS';
     const number = isSport ? 2 : 3;
-    const message = this.getText(page, 'MESSAGEFAV' + number);
-    const cancel = this.getText(page, 'CANCEL');
-    const delet = this.getText(page, 'DEL');
     const alert = this.alertCtrl.create({
       title: title,
-      message: message,
+      message: this.getText(page, 'MESSAGEFAV' + number),
       buttons: [
         {
-          text: cancel
+          text: this.getText(page, 'CANCEL')
         },
         {
-          text: delet,
+          text:  this.getText(page, 'DEL'),
           handler: () => {
             slidingItem.close();
             this.user.removeFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
@@ -163,9 +160,8 @@ export class UtilsService {
 
   favoriteAdded(slidingItem: ItemSliding, page: string) {
     const key = page === 'EVENTS' ? 'MESSAGEFAV2' : 'FAVADD';
-    const message = this.getText(page, key);
     const toast = this.toastCtrl.create({
-      message: message,
+      message: this.getText(page, key),
       duration: 3000
     });
     toast.present();
