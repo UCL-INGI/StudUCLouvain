@@ -78,9 +78,6 @@ export class CoursePage {
     if (this.userS.hasSlot(acro, true)) {
       this.slotTP = this.userS.getSlot(acro, true);
     }
-  }
-
-  ionViewDidLoad() {
     this.getCourse(this.sessionId, this.course.acronym);
   }
 

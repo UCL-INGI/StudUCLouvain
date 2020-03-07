@@ -29,18 +29,27 @@ export class AdeService {
   AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
   AdeserviceConnection = 'function=connect&login=' + 'etudiant' + '&password=' + 'student';
   AdeServiceGetProjects = '&function=getProjects&detail=2';
-  AdeUrlWithSessionId = this.AdeserviceBaseUrl + 'sessionId=';
-  constructor(public http: HttpClient) {
-  }
+  AdeUrlWithSessionId = 'http://horaire.uclouvain.be/jsp/webapi?' + 'sessionId=';
 
-  convertXmlToJson(xml): any {
-    return new X2JS().xml2js(xml);
+  constructor(public http: HttpClient) {
   }
 
   load(url: string) {
     return this.http.get(url, {responseType: 'text'}).map(res => {
-      return this.convertXmlToJson(res);
+      return new X2JS().xml2js(res);
     });
+  }
+
+  httpGetCourseId(sessionId: string, acronym: string) {
+    return this.load(this.AdeUrlWithSessionId + sessionId + '&function=getResources&code=' + acronym);
+  }
+
+  get(isActivity: boolean, sessionId: string, acronym: string) {
+    if (isActivity) {
+      return this.httpGetActivity(sessionId, acronym);
+    } else {
+      return this.httpGetCourseId(sessionId, acronym);
+    }
   }
 
   httpOpenSession() {
@@ -53,10 +62,6 @@ export class AdeService {
 
   httpSetProject(sessionId: string, projectId: string) {
     return this.load(this.AdeUrlWithSessionId + sessionId + '&function=setProject&projectId=' + projectId);
-  }
-
-  httpGetCourseId(sessionId: string, acronym: string) {
-    return this.load(this.AdeUrlWithSessionId + sessionId + '&function=getResources&code=' + acronym);
   }
 
   httpGetActivity(sessionId: string, courseId: string) {

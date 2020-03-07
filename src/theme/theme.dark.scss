@@ -3,7 +3,7 @@
     background-color: #090f2f;
     color: #fff;
 
-    ion-item-divider, ion-item {
+    ion-item-divider, ion-item, ion-card {
       background-color: #090f2f;
       color: #fff;
 
@@ -13,11 +13,11 @@
     }
 
     ion-label button {
-          background-color: #090f2f;
+      background-color: #090f2f;
       color: #fff;
     }
 
-    span, ion-label, h3, p, strong {
+    span, ion-label, h3, h4, p, strong, ion-card-title {
       color: white !important;
     }
   }
@@ -26,4 +26,9 @@
     color: #fff;
   }
 
+  ion-header {
+    h4 {
+      color: white !important;
+    }
+  }
 }

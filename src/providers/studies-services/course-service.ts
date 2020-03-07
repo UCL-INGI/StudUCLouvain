@@ -41,10 +41,9 @@ export class CourseService {
   }
 
   getPromise(isActivity: boolean, sessionId, filterField) {
+    const extractMethod = isActivity ? this.extractActivity : this.extractCourseId;
     return new Promise<any>((resolve) => {
-      const getMethod = isActivity ? this.ade.httpGetActivity : this.ade.httpGetCourseId;
-      const extractMethod = isActivity ? this.extractActivity : this.extractCourseId;
-      getMethod(sessionId, filterField).subscribe(data => resolve(extractMethod(data)));
+      this.ade.get(isActivity, sessionId, filterField).subscribe(data => extractMethod(data));
     });
   }
 
@@ -58,7 +57,7 @@ export class CourseService {
     return this.getPromise(true, sessionId, courseId);
   }
 
-  extractActivity(data): Activity[] {
+  extractActivity(data) {
     let activities: Activity[] = [];
     if (data.activities !== undefined) {
       let activitiesList = data.activities.activity;
