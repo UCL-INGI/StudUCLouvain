@@ -35,8 +35,6 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { Page } from "./entity/page";
 import { SettingsProvider } from "../providers/utils-services/settings-service";
 
-// declare var TestFairy: any;
-
 @Component({
   templateUrl: 'app.html'
 })
