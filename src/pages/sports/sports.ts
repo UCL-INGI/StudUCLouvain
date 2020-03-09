@@ -42,6 +42,7 @@ import { SportsService } from '../../providers/rss-services/sports-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -71,6 +72,7 @@ export class SportsPage {
   campus: string;
   nosport: any = false;
   noteams: any = false;
+  selectedTheme: string;
 
   constructor(
     public alertCtrl: AlertController,
@@ -83,10 +85,12 @@ export class SportsPage {
     private calendar: Calendar,
     public connService: ConnectivityService,
     public navCtrl: NavController,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
   }
 
   ionViewDidLoad() {
@@ -240,7 +244,7 @@ export class SportsPage {
       excludedFilters: exclude,
       filters: cat,
       dateRange: this.dateRange
-    });
+    }, {'cssClass': this.selectedTheme});
     modal.present();
     modal.onWillDismiss((data: any[]) => {
       if (data) {

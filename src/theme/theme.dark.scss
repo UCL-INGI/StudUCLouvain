@@ -8,11 +8,11 @@
     }
   }
 
-  ion-content {
-    background-color: #090f2f;
+  ion-content:not(.guindaille, .guindailleHelp) {
+    background-color: #090f2f !important;
     color: #fff;
 
-    ion-item-divider, ion-item, ion-card, ion-list-header {
+    ion-item-divider, ion-item, ion-card, ion-list-header, ion-list {
       background-color: #090f2f;
       color: #fff;
 
@@ -42,7 +42,7 @@
   ion-header {
     background-color: #090f2f;
 
-    h4, span {
+    h4, span, ion-segment-button {
       color: white !important;
     }
 
@@ -64,10 +64,6 @@
   }
 
   ion-footer::before {
-    background-color: white;
-  }
-
-  ion-header::after {
     background-color: white;
   }
 }
