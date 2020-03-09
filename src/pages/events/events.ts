@@ -201,12 +201,10 @@ export class EventsPage {
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.displayedEventsD = this.changeArray(this.displayedEvents);
-    console.log(this.displayedEventsD);
     this.utilsService.dismissLoading();
   }
 
   presentFilter() {
-    console.log(this.selectedTheme);
     if (this.filters === undefined) {
       this.filters = [];
     }
