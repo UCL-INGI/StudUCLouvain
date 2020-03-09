@@ -40,8 +40,7 @@ export class StudentService {
     this.activities = [];
     const newUrl = this.url + 'activities';
     return new Promise(resolve => {
-      this.wso2Service.loadStudent(newUrl).subscribe(
-        data => {
+      this.wso2Service.loadStudent(newUrl).subscribe(data => {
           if (data['activities'] != null) {
             resolve({activities: data['activities']});
           }
@@ -51,15 +50,10 @@ export class StudentService {
 
   public checkCourse(sigle: string, year) {
     const newUrl = 'learningUnits/v1/' + year + '/' + sigle + '?lang=fr';
-    return new Promise(resolve => {
-      this.wso2Service.load(newUrl).subscribe(
-        (data: any) => {
+    return new Promise((resolve, reject)  => {
+      this.wso2Service.load(newUrl).subscribe(data => {
           resolve(data);
-        },
-        (err) => {
-          console.log(err);
-          resolve(err.status);
-        });
+        }, error => reject(error));
     });
   }
 

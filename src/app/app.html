@@ -19,7 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<ion-menu [content]="content" id="mainMenu">
+<ion-menu [content]="content" id="mainMenu" [class]="selectedTheme">
   <ion-content>
     <ion-list>
       <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
@@ -38,4 +38,4 @@
   </ion-content>
 </ion-menu>
 
-<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false" [class]="selectedTheme"></ion-nav>

@@ -26,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -42,6 +43,7 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 })
 export class ParamPage {
   title: any;
+  selectedTheme: string;
 
   constructor(
     public navCtrl: NavController,
@@ -50,9 +52,19 @@ export class ParamPage {
     public userS: UserService,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
+  }
+
+  toggleAppTheme() {
+    if (this.selectedTheme === 'dark-theme') {
+      this.settings.setActiveTheme('light-theme');
+    } else {
+      this.settings.setActiveTheme('dark-theme');
+    }
   }
 
   campus_choice() {
@@ -60,6 +72,7 @@ export class ParamPage {
       title: this.utilsService.getText('HOME', 'SETTING1'),
       message: this.utilsService.getText('HOME', 'MESSAGE'),
       inputs: this.getSettingsInputs(this.userS.campus),
+      cssClass: this.selectedTheme,
       buttons: [
         {
           text: this.utilsService.getText('HOME', 'SAVE'),
@@ -76,6 +89,7 @@ export class ParamPage {
     const languageAlert = this.alertCtrl.create({
       title: this.utilsService.getText('HOME', 'SETTING2'),
       message: this.utilsService.getText('HOME', 'MESSAGE2'),
+      cssClass: this.selectedTheme,
       inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
       buttons: [
         {

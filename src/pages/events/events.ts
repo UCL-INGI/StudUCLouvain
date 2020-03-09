@@ -21,7 +21,6 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-  AlertController,
   App,
   IonicPage,
   ItemSliding,
@@ -43,6 +42,7 @@ import { EventsService } from '../../providers/rss-services/events-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -64,14 +64,13 @@ export class EventsPage {
   displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
-
+  selectedTheme: string;
   now = new Date();
   year = this.now.getFullYear();
   noevents: any = false;
   displayedEventsD: any = [];
 
   constructor(
-    public alertCtrl: AlertController,
     public user: UserService,
     public app: App,
     private navCtrl: NavController,
@@ -83,10 +82,12 @@ export class EventsPage {
     public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
   }
 
   ionViewDidLoad() {
@@ -157,30 +158,13 @@ export class EventsPage {
     }
   }
 
-  getWeek(d: Date) {
-    const date = new Date(d.getTime());
-    date.setHours(0, 0, 0, 0);
-    // Thursday in current week decides the year.
-    date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-    // January 4 is always in week 1.
-    const week1 = new Date(date.getFullYear(), 0, 4);
-    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-    return (
-      1 +
-      Math.round(
-        ((date.getTime() - week1.getTime()) / 86400000 -
-          3 +
-          ((week1.getDay() + 6) % 7)) / 7
-      )
-    );
-  }
-
   changeArray(array: any) {
-    const weekMethod = this.getWeek;
     const groups = array.reduce(function (obj, item) {
-      const week = weekMethod(item.startDate);
-      obj[week] = obj[week] || [];
-      obj[week].push(item);
+      const diffSunday = 6 - new Date().getDay();
+      const diffDays = (item.startDate.getTime() - new Date().getTime()) / 86400000;
+      const index = Math.round((diffDays - diffSunday) / 7) + 1;
+      obj[index] = obj[index] || [];
+      obj[index].push(item);
       return obj;
     }, {});
     return Object.keys(groups).map(function (key) {
@@ -188,15 +172,12 @@ export class EventsPage {
     });
   }
 
-  getRangeWeek(week, year) {
-    const date = new Date(year);
-    date.setDate(date.getDate() - date.getDay() - 1);
-    date.setDate(date.getDate() + 7 * (week - this.getWeek(date)));
-    const rangeIsFrom = this.getRange(date);
-
-    date.setDate(date.getDate() + 6);
-    const rangeIsTo = this.getRange(date);
-    return {from: rangeIsFrom, to: rangeIsTo};
+  getRangeWeek(week) {
+    const from = new Date();
+    from.setDate(new Date().getDate() + week * 7 + 1 - new Date().getDay());
+    const to = new Date();
+    to.setDate(from.getDate() + 7);
+    return {from: this.getRange(from), to: this.getRange(to)};
   }
 
   public updateDisplayedEvents() {
@@ -225,11 +206,13 @@ export class EventsPage {
     if (this.filters === undefined) {
       this.filters = [];
     }
-    const modal = this.modalCtrl.create('EventsFilterPage', {
-      excludedFilters: this.excludedFilters,
-      filters: this.filters,
-      dateRange: this.dateRange
-    });
+    const modal = this.modalCtrl.create(
+      'EventsFilterPage', {
+        excludedFilters: this.excludedFilters,
+        filters: this.filters,
+        dateRange: this.dateRange,
+      }, {'cssClass': this.selectedTheme}
+    );
     modal.present();
     modal.onWillDismiss((data: any[]) => {
       if (data) {

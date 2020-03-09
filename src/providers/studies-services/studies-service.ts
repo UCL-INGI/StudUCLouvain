@@ -52,7 +52,7 @@ export class StudiesService {
 
   openSession() {
     return new Promise<string>((resolve) => {
-      this.ade.httpOpenSession().subscribe(data => resolve(data.session._id));
+      this.ade.httpOpenSession().subscribe((data: any) => resolve(data.session._id));
     });
   }
 

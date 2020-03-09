@@ -1,0 +1,69 @@
+.dark-theme {
+  div.alert-wrapper {
+    background-color: #090f2f;
+    color: #fff;
+
+    span, ion-label, h3, h4, p, strong, .alert-radio-label, .alert-message {
+      color: white !important;
+    }
+  }
+
+  ion-content:not(.guindaille, .guindailleHelp) {
+    background-color: #090f2f !important;
+    color: #fff;
+
+    ion-item-divider, ion-item, ion-card, ion-list-header, ion-list {
+      background-color: #090f2f;
+      color: #fff;
+
+      ion-thumbnail {
+        background-color: white;
+      }
+    }
+
+    ion-toggle button {
+      background-color: transparent !important;
+    }
+
+    ion-label button, ion-list button {
+      background-color: #090f2f;
+      color: #fff;
+    }
+
+    span, ion-label, h3, h4, p, strong, ion-card-title {
+      color: white !important;
+    }
+  }
+
+  .toolbar-title {
+    color: #fff;
+  }
+
+  ion-header {
+    background-color: #090f2f;
+
+    h4, span, ion-segment-button {
+      color: white !important;
+    }
+
+    ion-toolbar div.toolbar-background {
+      background-color: #090f2f !important;
+      color: #fff;
+    }
+  }
+
+  ion-footer {
+    ion-toolbar div {
+      background-color: #090f2f;
+      color: #fff;
+    }
+
+    p, ion-icon {
+      color: white;
+    }
+  }
+
+  ion-footer::before {
+    background-color: white;
+  }
+}

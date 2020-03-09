@@ -87,13 +87,13 @@ export class StudiesPage {
     this.getCourses();
   }
 
-  checkExist(sigle: string): Promise<any> {
+  checkExist(sigle: string) {
     const year = this.project.name.split('-')[0];
-    return new Promise(resolve => {
-      this.studentService.checkCourse(sigle, year).then((data: any) => {
+    return new Promise((resolve, reject) => {
+      return this.studentService.checkCourse(sigle, year).then((data: any) => {
         const exist = data !== 404 && data !== 500;
         resolve({exist: exist, nameFR: exist ? data.title : '', nameEN: ''});
-      });
+      }).catch(error => resolve(error));
     });
   }
 
@@ -276,13 +276,13 @@ export class StudiesPage {
   }
 
   private checkExistAndAddOrToast(acro: any) {
-    this.checkExist(acro).then(check => {
+    this.checkExist(acro).then((check: any) => {
       if (check.exist) {
         this.addCourse(acro, check.nameFR);
       } else {
         this.toastBadCourse();
         this.showPrompt();
       }
-    });
+    }).catch(err => {console.log(err);});
   }
 }

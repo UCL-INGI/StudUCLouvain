@@ -33,12 +33,14 @@ import { HomePage } from '../pages/home/home';
 import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { Page } from "./entity/page";
+import { SettingsProvider } from "../providers/utils-services/settings-service";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  selectedTheme: string;
   rootPage = ''; // = 'HomePage';
   alertPresented: any;
   page: any;
@@ -60,9 +62,11 @@ export class MyApp {
     public translateService: TranslateService,
     private ionicApp: IonicApp,
     private wso2Service: Wso2Service,
-    public cache: CacheService
+    public cache: CacheService,
+    private settings: SettingsProvider
   ) {
     console.log('Startin App');
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.user.getStringData('campus');
     this.alertPresented = false;
     this.initializeApp();
@@ -77,7 +81,7 @@ export class MyApp {
       cache.setOfflineInvalidate(false);
       // this.user.storage.set('first',null);
       this.user.storage.get('first').then(data => {
-        if (!data) {
+        if (data === null) {
           this.rootPage = 'TutoPage';
           this.user.storage.set('first', false);
         } else {

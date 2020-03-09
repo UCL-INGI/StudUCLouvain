@@ -71,7 +71,7 @@
     "karma-jasmine-html-reporter": "^1.5.2",
     "karma-spec-reporter": "0.0.32",
     "protractor": "^5.4.3",
-    "typescript": "^2.6.2"
+    "typescript": "~2.6.2"
   },
   "description": "Stud.UCLouvain : an app for UCLouvain students made by UCLouvain students",
   "cordova": {
