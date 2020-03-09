@@ -1,4 +1,13 @@
 .dark-theme {
+  div.alert-wrapper {
+    background-color: #090f2f;
+    color: #fff;
+
+    span, ion-label, h3, h4, p, strong, .alert-radio-label, .alert-message {
+      color: white !important;
+    }
+  }
+
   ion-content {
     background-color: #090f2f;
     color: #fff;
@@ -30,5 +39,12 @@
     h4 {
       color: white !important;
     }
+  }
+
+  ion-footer ion-toolbar div {
+    background-color: #090f2f;
+  }
+  ion-footer::before {
+    background-color: white;
   }
 }

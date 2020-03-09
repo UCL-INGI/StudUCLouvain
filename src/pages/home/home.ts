@@ -27,6 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -56,7 +57,7 @@ export class HomePage {
   )
   ;
   mobilityPage = this.utilsService.getPageObject('Mobility');
-
+  selectedTheme: string;
   constructor(
     public app: App,
     public userS: UserService,
@@ -65,8 +66,10 @@ export class HomePage {
     private alertCtrl: AlertController,
     public market: Market,
     public splashscreen: SplashScreen,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
@@ -104,7 +107,7 @@ export class HomePage {
     const alert = this.alertCtrl.create({
       title: this.utilsService.getText('HOME', 'URG'),
       message: this.getAlertEmergencyMsg(),
-      cssClass: 'emergency',
+      cssClass: 'emergency ' + this.selectedTheme,
       buttons: [
         {
           text: this.utilsService.getText('HOME', 'CLOSE')
@@ -116,7 +119,7 @@ export class HomePage {
 
   private getAlertEmergencyMsg() {
     const [
-      msg1, msg2, out, msg3, msg4, msg5, msg6, msg7, msg8, msg9
+      msg1, msg2, msg9, msg3, msg4, msg5, msg6, msg7, msg8, out
     ] = this.utilsService.getTexts(
       'GUINDAILLE',
       ['HELP1', 'HELP2', 'HELP3', 'HELP4', 'HELP5', 'HELP6', 'HELP7', 'HELP8', 'HELP9', 'HELP18']
@@ -126,8 +129,8 @@ export class HomePage {
       '<br>' + '<a href="tel:027649393">02 764 93 93</a><br>(Woluwe - St Gilles - Tournai)<br>' +
       ' ou ' + '<br><a href="tel:065323555">065 32 35 55</a> (Mons)</p>' +
       '<p><strong>Contact:</strong><a href="mailto:security@uclouvain.be">security@uclouvain.be</a></p>' +
-      '<p><strong>' + out + ':</strong><a href="tel:112">112</a></p><p><br>' + msg3 +
-      ' <br><br><strong>' + msg4 + '</strong> ' + msg5 + '<br><strong>' + msg6 + '</strong> ' + msg7 + '<br><strong>' +
-      msg8 + '</strong> ' + msg9 + '<br>';
+      '<p><strong>' + out + ':</strong><a href="tel:112">112</a></p><p><br><strong>' + msg9 + '</strong><br><strong>' +
+      msg3 + '</strong><br>' + msg4 + '<strong><br>' + msg5 + '</strong><br>' + msg6 + '<br><strong>' + msg7 +
+      '</strong><br>' + msg8;
   }
 }

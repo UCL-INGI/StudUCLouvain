@@ -43,7 +43,7 @@ import { SettingsProvider } from "../../providers/utils-services/settings-servic
 })
 export class ParamPage {
   title: any;
-  selectedTheme: String;
+  selectedTheme: string;
 
   constructor(
     public navCtrl: NavController,
@@ -72,6 +72,7 @@ export class ParamPage {
       title: this.utilsService.getText('HOME', 'SETTING1'),
       message: this.utilsService.getText('HOME', 'MESSAGE'),
       inputs: this.getSettingsInputs(this.userS.campus),
+      cssClass: this.selectedTheme,
       buttons: [
         {
           text: this.utilsService.getText('HOME', 'SAVE'),
@@ -88,6 +89,7 @@ export class ParamPage {
     const languageAlert = this.alertCtrl.create({
       title: this.utilsService.getText('HOME', 'SETTING2'),
       message: this.utilsService.getText('HOME', 'MESSAGE2'),
+      cssClass: this.selectedTheme,
       inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
       buttons: [
         {
