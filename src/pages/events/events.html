@@ -54,8 +54,8 @@
   <ion-list #eventsList *ngFor="let item of displayedEventsD" [hidden]="shownEvents === 0">
 
     <ion-item-divider (tap)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
-      <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks, year).from | date: 'dd/MM'}}
-      &mdash; {{getRangeWeek(item.weeks, year).to | date: 'dd/MM'}}] ({{item.event.length}})
+      <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks).from | date: 'dd/MM'}}
+      &mdash; {{getRangeWeek(item.weeks).to | date: 'dd/MM'}}] ({{item.event.length}})
     </ion-item-divider>
 
     <ion-list *ngFor="let event of item.event" [hidden]="!utilsService.isGroupShown(item.weeks)">
