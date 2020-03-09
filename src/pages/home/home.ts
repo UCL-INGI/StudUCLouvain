@@ -22,7 +22,6 @@ import { AlertController, App, Content, FabContainer, IonicPage, NavController }
 
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { UserService } from '../../providers/utils-services/user-service';
@@ -64,7 +63,6 @@ export class HomePage {
     public nav: NavController,
     private iab: InAppBrowser,
     private alertCtrl: AlertController,
-    public market: Market,
     public splashscreen: SplashScreen,
     private utilsService: UtilsService,
     private settings: SettingsProvider

@@ -21,7 +21,6 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-  AlertController,
   App,
   IonicPage,
   ItemSliding,
@@ -72,7 +71,6 @@ export class EventsPage {
   displayedEventsD: any = [];
 
   constructor(
-    public alertCtrl: AlertController,
     public user: UserService,
     public app: App,
     private navCtrl: NavController,

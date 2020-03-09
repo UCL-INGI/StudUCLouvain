@@ -22,7 +22,6 @@
 import 'rxjs/add/operator/debounceTime';
 
 import {
-  AlertController,
   App,
   IonicPage,
   ItemSliding,
@@ -75,7 +74,6 @@ export class SportsPage {
   selectedTheme: string;
 
   constructor(
-    public alertCtrl: AlertController,
     public app: App,
     public navParams: NavParams,
     public modalCtrl: ModalController,
