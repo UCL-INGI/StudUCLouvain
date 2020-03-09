@@ -43,6 +43,7 @@ import { EventsService } from '../../providers/rss-services/events-service';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
 @IonicPage()
 @Component({
@@ -64,7 +65,7 @@ export class EventsPage {
   displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
-
+selectedTheme: string;
   now = new Date();
   year = this.now.getFullYear();
   noevents: any = false;
@@ -83,10 +84,12 @@ export class EventsPage {
     public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private settings: SettingsProvider
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
   }
 
   ionViewDidLoad() {
@@ -222,14 +225,17 @@ export class EventsPage {
   }
 
   presentFilter() {
+    console.log(this.selectedTheme);
     if (this.filters === undefined) {
       this.filters = [];
     }
-    const modal = this.modalCtrl.create('EventsFilterPage', {
+    const modal = this.modalCtrl.create(
+      'EventsFilterPage', {
       excludedFilters: this.excludedFilters,
       filters: this.filters,
-      dateRange: this.dateRange
-    });
+      dateRange: this.dateRange,
+    }, { 'cssClass': this.selectedTheme }
+    );
     modal.present();
     modal.onWillDismiss((data: any[]) => {
       if (data) {

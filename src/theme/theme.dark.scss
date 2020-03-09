@@ -12,7 +12,7 @@
     background-color: #090f2f;
     color: #fff;
 
-    ion-item-divider, ion-item, ion-card, ion-list button {
+    ion-item-divider, ion-item, ion-card, ion-list-header {
       background-color: #090f2f;
       color: #fff;
 
@@ -21,7 +21,11 @@
       }
     }
 
-    ion-label button {
+    ion-toggle button {
+      background-color: transparent !important;
+    }
+
+    ion-label button, ion-list button {
       background-color: #090f2f;
       color: #fff;
     }
@@ -36,21 +40,34 @@
   }
 
   ion-header {
-    h4 {
+    background-color: #090f2f;
+
+    h4, span {
       color: white !important;
+    }
+
+    ion-toolbar div.toolbar-background {
+      background-color: #090f2f !important;
+      color: #fff;
     }
   }
 
   ion-footer {
     ion-toolbar div {
       background-color: #090f2f;
+      color: #fff;
     }
 
     p, ion-icon {
       color: white;
     }
   }
+
   ion-footer::before {
+    background-color: white;
+  }
+
+  ion-header::after {
     background-color: white;
   }
 }

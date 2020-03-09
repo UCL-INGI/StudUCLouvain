@@ -67,7 +67,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-list>
-    <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
+    <ion-list-header><strong>{{'EVENTS.CATEGORIES' | translate}}</strong></ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
         <img [src]="category.iconCategory" alt="Event Category Icon"/>
