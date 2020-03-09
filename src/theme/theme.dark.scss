@@ -12,7 +12,7 @@
     background-color: #090f2f;
     color: #fff;
 
-    ion-item-divider, ion-item, ion-card {
+    ion-item-divider, ion-item, ion-card, ion-list button {
       background-color: #090f2f;
       color: #fff;
 
@@ -41,8 +41,14 @@
     }
   }
 
-  ion-footer ion-toolbar div {
-    background-color: #090f2f;
+  ion-footer {
+    ion-toolbar div {
+      background-color: #090f2f;
+    }
+
+    p, ion-icon {
+      color: white;
+    }
   }
   ion-footer::before {
     background-color: white;
