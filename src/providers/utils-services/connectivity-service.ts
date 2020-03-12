@@ -19,11 +19,12 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, Platform } from 'ionic-angular';
+import { AlertController, Platform } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
-import { Network } from '@ionic-native/network';
+import { Network } from '@ionic-native/network/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from "./utils-service";
 
 declare var Connection;
 
@@ -36,11 +37,11 @@ export class ConnectivityService {
   constructor(public platform: Platform,
               private network: Network,
               private translateService: TranslateService,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              private utilsService: UtilsService) {
     this.onDevice = this.platform.is('cordova');
   }
 
-  /*Check if there is a connexion*/
   isOnline(): boolean {
     if (this.onDevice && this.network.type) {
       return this.network.type !== Connection.NONE;
@@ -49,37 +50,16 @@ export class ConnectivityService {
     }
   }
 
-  /*pop up an alert to say to the user to connect him to the internet*/
-  presentConnectionAlert() {
-    let title: string;
-    let message: string;
-    let close: string;
-    this.translateService.get('NET.TITLE').subscribe((res: string) => {
-      title = res;
+  async presentConnectionAlert() {
+    const alert = await this.alertCtrl.create({
+      header: this.utilsService.getText('NET', 'TITLE'),
+      subHeader: this.utilsService.getText('NET', 'CONNECT'),
+      buttons: [this.utilsService.getText('NET', 'CLOSE')]
     });
-    this.translateService.get('NET.CONNECT').subscribe((res: string) => {
-      message = res;
-    });
-    this.translateService.get('NET.CLOSE').subscribe((res: string) => {
-      close = res;
-    });
-    const alert = this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: [close]
-    });
-    alert.present();
+    return await alert.present();
   }
 
-  successCallback = (isAvailable) => {
-    this.available = isAvailable;
-    return isAvailable;
-  };
-
-  errorCallback = (e) => console.error(e);
-
   async isLocationEnabled() {
-    // await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
     return this.available;
   }
 }

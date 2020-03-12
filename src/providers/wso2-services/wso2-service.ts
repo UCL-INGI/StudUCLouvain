@@ -1,8 +1,6 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { throwError as observableThrowError } from 'rxjs';
 
-import { Observable } from 'rxjs/Observable';
+import { catchError, map } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -50,16 +48,16 @@ export class Wso2Service {
     // this.optionsToken = new RequestOptions({headers: headers});
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
-    return this.http.post(finalUrl, body, {headers: headers})
-      .map(res => {
+    return this.http.post(finalUrl, body, {headers: headers}).pipe(
+      map(res => {
         this.token = 'Bearer ' + res['access_token'];
 
         return 'OK';
-      })
-      .catch((error: any) => {
+      }),
+      catchError((error: any) => {
         console.log('Token error');
-        return Observable.throw(error);
-      });
+        return observableThrowError(error);
+      }),);
   }
 
   /*Log in the user*/
@@ -73,12 +71,12 @@ export class Wso2Service {
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
 
-    return this.http.post(finalUrl, body, {headers: headers})
-      .map(res => {
+    return this.http.post(finalUrl, body, {headers: headers}).pipe(
+      map(res => {
         this.tokenStudent = 'Bearer ' + res['access_token'];
         return 'OK';
-      })
-      .catch((error: any) => Observable.throw(error));
+      }),
+      catchError((error: any) => observableThrowError(error)),);
   }
 
   /*Load the student*/
@@ -87,7 +85,7 @@ export class Wso2Service {
     headers.append('Accept', 'application/json');
     // this.optionsStudent = new RequestOptions({ headers: headers });
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    return this.http.get(finalUrl, {headers: headers}).map(res => res);
+    return this.http.get(finalUrl, {headers: headers}).pipe(map(res => res));
   }
 
 }

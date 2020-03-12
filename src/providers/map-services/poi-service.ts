@@ -1,3 +1,10 @@
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { MapLocation } from '../../app/entity/mapLocation';
+import { UserService } from '../utils-services/user-service';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
@@ -18,14 +25,6 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import 'rxjs/add/operator/map';
-
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-import { MapLocation } from '../../app/entity/mapLocation';
-import { UserService } from '../utils-services/user-service';
 
 @Injectable()
 export class POIService {
@@ -66,7 +65,7 @@ export class POIService {
     this.update();
     if (this.zones.length === 0) {
       return new Promise(resolve => {
-        this.http.get(this.url).map(res => res).subscribe(data => {
+        this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
           this.zones.push({
             auditoires: this.getZoneList(data['zones'].auditoires),
             locaux: this.getZoneList(data['zones'].locaux),

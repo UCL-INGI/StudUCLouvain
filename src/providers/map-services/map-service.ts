@@ -18,10 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { MenuController, Platform } from 'ionic-angular';
+import { MenuController, Platform } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {
   CameraPosition,
   GoogleMaps,

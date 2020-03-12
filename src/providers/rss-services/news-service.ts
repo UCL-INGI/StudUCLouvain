@@ -19,7 +19,6 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/map';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

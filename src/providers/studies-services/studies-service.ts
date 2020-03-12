@@ -19,14 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/map';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AdeProject } from '../../app/entity/adeProject';
 import { AdeService } from './ade-service';
-import { ToastController } from "ionic-angular";
+import { ToastController } from "@ionic/angular";
 import { UtilsService } from "../utils-services/utils-service";
 
 @Injectable()

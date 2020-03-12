@@ -1,3 +1,7 @@
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
@@ -19,11 +23,6 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/map';
-
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
 @Injectable()
 export class FacService {
   facultes: any = [];
@@ -37,7 +36,7 @@ export class FacService {
   public loadResources() {
     if (this.facultes.length === 0) {
       return new Promise(resolve => {
-        this.http.get(this.url).map(res => res).subscribe(data => {
+        this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
           for (const sector of data['secteurs']) {
             this.facultes.push(sector);
           }

@@ -18,13 +18,13 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, ItemSliding, Loading, LoadingController, ToastController } from 'ionic-angular';
+import { AlertController, IonList, Loading, LoadingController, ToastController } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from './user-service';
@@ -52,7 +52,7 @@ export class UtilsService {
   presentLoading() {
     if (!this.loading) {
       this.loading = this.loadingCtrl.create({
-        content: 'Please wait...'
+        message: 'Please wait...'
       });
       this.loading.present();
     }
@@ -102,15 +102,18 @@ export class UtilsService {
   }
 
   getLanguageAlertInputs(check2) {
+    const type: any = "radio";
     return [
       {
-        type: 'radio',
+        name: 'radioFr',
+        type: type,
         label: this.getText('HOME', 'FR'),
         value: 'fr',
-        checked: check2 === 'fr'
+        checked: check2 === 'fr' || check2 === undefined
       },
       {
-        type: 'radio',
+        name: 'radioEn',
+        type: type,
         label: this.getText('HOME', 'EN'),
         value: 'en',
         checked: check2 === 'en'
@@ -136,11 +139,11 @@ export class UtilsService {
     return values;
   }
 
-  removeFavorite(slidingItem: ItemSliding, itemData: any, title: string, isSport: boolean) {
+  async removeFavorite(list: IonList, itemData: any, title: string, isSport: boolean) {
     const page = isSport ? 'SPORTS' : 'EVENTS';
     const number = isSport ? 2 : 3;
-    const alert = this.alertCtrl.create({
-      title: title,
+    const alert = await this.alertCtrl.create({
+      header: title,
       message: this.getText(page, 'MESSAGEFAV' + number),
       buttons: [
         {
@@ -149,34 +152,34 @@ export class UtilsService {
         {
           text:  this.getText(page, 'DEL'),
           handler: () => {
-            slidingItem.close();
+            list.closeSlidingItems();
             this.user.removeFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
           }
         }
       ]
     });
-    alert.present();
+    return await alert.present();
   }
 
-  favoriteAdded(slidingItem: ItemSliding, page: string) {
+  async favoriteAdded(list: IonList, page: string) {
     const key = page === 'EVENTS' ? 'MESSAGEFAV2' : 'FAVADD';
-    const toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: this.getText(page, key),
       duration: 3000
     });
-    toast.present();
-    slidingItem.close();
+    list.closeSlidingItems();
+    return await toast.present();
   }
 
-  addFavorite(slidingItem: ItemSliding, itemData: any, page: string) {
+  addFavorite(list: IonList, itemData: any, page: string) {
     const isSport = page === 'SPORTS';
     const hasFav = isSport ? this.user.hasFavoriteS(itemData.guid) : this.user.hasFavorite(itemData.guid);
     if (hasFav) {
       const message = this.getText(page, 'MESSAGEFAV');
-      this.removeFavorite(slidingItem, itemData, message, isSport);
+      this.removeFavorite(list, itemData, message, isSport);
     } else {
       this.user.addFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
-      this.favoriteAdded(slidingItem, page);
+      this.favoriteAdded(list, page);
     }
   }
 

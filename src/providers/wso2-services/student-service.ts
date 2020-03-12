@@ -19,8 +19,6 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
