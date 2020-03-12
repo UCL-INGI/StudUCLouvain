@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { NavController, NavParams, ToastController } from '@ionic/angular';
+import { NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -39,7 +39,6 @@ export class EventsDetailsPage {
     public navCtrl: NavController,
     public user: UserService,
     private translateService: TranslateService,
-    public toastCtrl: ToastController,
     private utilsService: UtilsService,
     navParams: NavParams
   ) {
@@ -52,14 +51,10 @@ export class EventsDetailsPage {
   }
 
   /*ADD EVENT TO FAVORITE*/
-  public async addFavorite(event: EventItem) {
+  public addFavorite(event: EventItem) {
     if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid, 'listEvents');
-      const toast = await this.toastCtrl.create({
-        message: this.utilsService.getText('EVENTS', 'MESSAGEFAV2'),
-        duration: 3000
-      });
-      return await toast.present();
+      return this.utilsService.presentToast(this.utilsService.getText('EVENTS', 'MESSAGEFAV2'))
     }
   }
 }

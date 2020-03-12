@@ -18,7 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, IonList, LoadingController, NavController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  IonItemSliding,
+  IonList,
+  LoadingController,
+  NavController,
+  ToastController
+} from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -209,5 +216,18 @@ export class UtilsService {
     };
     // FIXME: Improve
     this.navCtrl.navigateForward([page], navigationExtras);
+  }
+
+  async presentToast(message: string, slidingItem?: IonItemSliding) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'middle'
+    });
+    if (slidingItem !== undefined) {
+      await slidingItem.close();
+    }
+    // .then() ?
+    return await toast.present();
   }
 }

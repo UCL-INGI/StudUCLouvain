@@ -191,16 +191,12 @@ export class CoursePage {
     return newAct;
   }
 
-  async addCourseToCalendar() {
+  addCourseToCalendar() {
     for (const activity of this.displayedActi) {
       this.getEventWithOption(activity, this.course.name + ' : ' + activity.type);
     }
-    const toast = await this.toastCtrl.create({
-      message: this.utilsService.getText('STUDY', 'MESSAGE3'),
-      duration: 3000
-    });
     this.alert(true);
-    return await toast.present();
+    return this.utilsService.presentToast(this.utilsService.getText('STUDY', 'MESSAGE3'));
   }
 
   async openModalInfo() {
@@ -222,12 +218,8 @@ export class CoursePage {
       activity.start,
       activity.end,
       {firstReminderMinutes: 15}
-    ).then(async () => {
-      const toast = await this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      });
-      await toast.present();
+    ).then(() => {
+      return this.utilsService.presentToast(message);
     });
   }
 

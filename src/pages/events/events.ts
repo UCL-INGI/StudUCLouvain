@@ -1,5 +1,5 @@
 import { debounceTime } from 'rxjs/operators';
-import { IonList, ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
+import { IonList, ModalController, NavController, NavParams } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 
 import { Component, ViewChild } from '@angular/core';
@@ -66,7 +66,6 @@ export class EventsPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService: ConnectivityService,
     private translateService: TranslateService,
@@ -226,14 +225,7 @@ export class EventsPage {
       itemData.startDate,
       itemData.endDate,
       options
-    ).then(async () => {
-      const toast = await this.toastCtrl.create({
-        message: this.utilsService.getText('EVENTS', 'MESSAGE'),
-        duration: 3000
-      });
-      this.eventsList.closeSlidingItems();
-      await toast.present();
-    });
+    ).then(() => this.utilsService.presentToast(this.utilsService.getText('EVENTS', 'MESSAGE')));
   }
 
   removeFavorite(itemData: any, title: string) {
