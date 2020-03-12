@@ -115,7 +115,7 @@
   <ng-container *ngIf="segment==='univ' || (segment === 'fac' && facsegment === 'news' && userS.hasFac())">
     <ion-list #newsList [hidden]="shownNews === 0">
       <ion-item *ngFor="let item of displayedNews">
-        <button (tap)="goToNewsDetail(item)" ion-item no-lines>
+        <button (tap)="utilsService.goToDetail('NewsDetailsPage', item)" ion-item no-lines>
           <h3>{{item.title}}</h3>
           <p [innerHtml]="item.trimmedDescription"></p>
           <p>{{item.pubDate | date: 'dd/MM/yyyy'}}</p>

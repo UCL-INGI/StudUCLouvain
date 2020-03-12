@@ -13,7 +13,6 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
 import { SettingsProvider } from "../../providers/utils-services/settings-service";
-import { NavigationExtras } from "@angular/router";
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -98,15 +97,6 @@ export class EventsPage {
       this.connService.presentConnectionAlert();
     }
     refresher.complete();
-  }
-
-  public goToEventDetail(event: EventItem) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        items: event
-      }
-    };
-    this.navCtrl.navigateForward(['EventsDetailsPage'], navigationExtras);
   }
 
   async cachedOrNot() {

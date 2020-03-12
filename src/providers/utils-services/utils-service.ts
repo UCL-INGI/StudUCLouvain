@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, IonList, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, IonList, LoadingController, NavController, ToastController } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -29,6 +29,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from './user-service';
 import { Page } from "../../app/entity/page";
+import { NavigationExtras } from "@angular/router";
 
 @Injectable()
 export class UtilsService {
@@ -45,6 +46,7 @@ export class UtilsService {
     public alertCtrl: AlertController,
     public user: UserService,
     public toastCtrl: ToastController,
+    private navCtrl: NavController
   ) {
     console.log("Starting Utils Provider");
   }
@@ -150,7 +152,7 @@ export class UtilsService {
           text: this.getText(page, 'CANCEL')
         },
         {
-          text:  this.getText(page, 'DEL'),
+          text: this.getText(page, 'DEL'),
           handler: () => {
             list.closeSlidingItems();
             this.user.removeFavorite(itemData.guid, isSport ? 'listSports' : 'listEvents');
@@ -197,5 +199,15 @@ export class UtilsService {
       appUrl ? appUrl : null,
       httpUrl ? httpUrl : null
     );
+  }
+
+  goToDetail(item: any, page: string) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        items: item
+      }
+    };
+    // FIXME: Improve
+    this.navCtrl.navigateForward([page], navigationExtras);
   }
 }

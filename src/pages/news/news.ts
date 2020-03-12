@@ -12,7 +12,6 @@ import { ConnectivityService } from '../../providers/utils-services/connectivity
 import { FacService } from '../../providers/utils-services/fac-service';
 import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
-import { NavigationExtras } from "@angular/router";
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -192,15 +191,6 @@ export class NewsPage {
     this.nonews = this.shownNews === 0;
     this.searching = false;
     this.utilsService.dismissLoading();
-  }
-
-  public goToNewsDetail(news: NewsItem) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        items: news
-      }
-    };
-    this.navCtrl.navigateForward(['NewsDetailsPage'], navigationExtras);
   }
 
   private refresh() {
