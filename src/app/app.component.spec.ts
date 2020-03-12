@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, IonicApp, IonicModule, LoadingController, Nav, Platform } from 'ionic-angular';
+import { AlertController, IonicModule, LoadingController, Platform } from '@ionic/angular';
 
 import { async, TestBed } from '@angular/core/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -51,15 +51,13 @@ describe("MyApp Component", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MyApp],
-      imports: [IonicModule.forRoot(MyApp), TranslateModule.forRoot()],
+      imports: [IonicModule.forRoot(), TranslateModule.forRoot()],
       providers: [
         {provide: StatusBar, useClass: StatusBarMock},
         {provide: SplashScreen, useClass: SplashScreenMock},
         {provide: Platform, useClass: PlatformMock},
         AlertController,
         LoadingController,
-        {provide: IonicApp, useClass: IonicAppMock},
-        Nav,
         Market,
         AppAvailability,
         InAppBrowser,

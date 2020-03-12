@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, IonList, Loading, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, IonList, LoadingController, ToastController } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -32,7 +32,7 @@ import { Page } from "../../app/entity/page";
 
 @Injectable()
 export class UtilsService {
-  loading: Loading;
+  loading: any;
   shownGroup = null;
 
   constructor(

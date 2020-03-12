@@ -44,6 +44,7 @@ import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { Page } from "./entity/page";
 import { SettingsProvider } from "../providers/utils-services/settings-service";
 import { NavigationExtras, Router } from "@angular/router";
+import { UtilsService } from "../providers/utils-services/utils-service";
 
 @Component({
   templateUrl: 'app.html'
@@ -79,7 +80,8 @@ export class MyApp {
     private popoverCtrl: PopoverController,
     public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
-    private nav: NavController
+    private nav: NavController,
+    private utilsService: UtilsService
   ) {
     console.log('Startin App');
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
@@ -198,7 +200,7 @@ export class MyApp {
     this.menu.close();
     this.page = page;
     if (page.iosSchemaName != null && page.androidPackageName != null) {
-      this.launchExternalApp(page);
+      this.utilsService.launchExternalApp(page);
     } else {
       const navigationExtras: NavigationExtras = {
         state: {
@@ -207,27 +209,6 @@ export class MyApp {
       };
       this.nav.navigateForward([page.component], navigationExtras);
     }
-  }
-
-  launchExternalApp(page: any) {
-    let app: string;
-    let check: string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      check = page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      check = app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-    this.appAvailability.check(check).then(() => {
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => this.market.open(app)
-    );
   }
 
   private getPages() {

@@ -240,17 +240,14 @@ export class SportsPage {
     });
     await modal.onWillDismiss().then((data) => {
       if (data) {
-        const tmpRange = data[1];
-        if (tmpRange !== this.dateRange) {
-          this.dateRange = tmpRange;
+        if (data[1] !== this.dateRange) {
+          this.dateRange = data[1];
           this.updateDateLimit();
         }
-        const newExclude = data[0];
         if (this.segment === 'all') {
-          this.excludedFilters = newExclude;
-        }
-        if (this.segment === 'team') {
-          this.excludedFiltersT = newExclude;
+          this.excludedFilters = data[0];
+        } else if (this.segment === 'team') {
+          this.excludedFiltersT = data[0];
         }
         this.updateDisplayedSports();
       }

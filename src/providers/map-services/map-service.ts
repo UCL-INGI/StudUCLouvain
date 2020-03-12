@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { MenuController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -54,17 +54,11 @@ export class MapService {
   constructor(
     public connectivityService: ConnectivityService,
     private platform: Platform,
-    menuCtrl: MenuController,
     public userS: UserService,
     private geolocation: Geolocation
   ) {
     this.onDevice = this.platform.is('cordova');
     this.apiKey = jsApiKey;
-    const leftMenu = menuCtrl.get('left');
-    if (leftMenu) {
-      leftMenu.ionOpen.subscribe(() => this.setMapClickable(false));
-      leftMenu.ionClose.subscribe(() => this.setMapClickable(true));
-    }
   }
 
   init(mapElement: any, pleaseConnect: any) {
