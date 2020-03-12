@@ -75,17 +75,17 @@
         </ion-item>
 
         <ion-item-options>
-          <button (tap)="createEvent(slidingItem, event)" class="large-icon" ion-button outline>
+          <button (tap)="createEvent(event)" class="large-icon" ion-button outline>
             <ion-icon name='calendar'></ion-icon>
           </button>
 
-          <button (tap)="utilsService.addFavorite(slidingItem, event, 'EVENTS')" *ngIf="segment === 'all'"
+          <button (tap)="utilsService.addFavorite(eventsList, event, 'EVENTS')" *ngIf="segment === 'all'"
                   class="large-icon"
                   ion-button outline>
             <ion-icon name="star-outline"></ion-icon>
           </button>
 
-          <button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+          <button (tap)="removeFavorite(event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
                   class="large-icon" ion-button>
             <ion-icon name='close'></ion-icon>
           </button>

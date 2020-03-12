@@ -1,4 +1,4 @@
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { LibrariesPage } from './libraries';
 
 @NgModule({
   declarations: [LibrariesPage],
-  imports: [IonicPageModule.forChild(LibrariesPage), TranslateModule.forChild()]
+  imports: [IonicModule, TranslateModule.forChild()]
 })
 export class LibrariesPageModule {
 }

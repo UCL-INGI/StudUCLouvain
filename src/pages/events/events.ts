@@ -1,3 +1,20 @@
+import { debounceTime } from 'rxjs/operators';
+import { IonList, ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
+import { CacheService } from 'ionic-cache';
+
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Calendar } from '@ionic-native/calendar';
+import { TranslateService } from '@ngx-translate/core';
+
+import { EventItem } from '../../app/entity/eventItem';
+import { EventsService } from '../../providers/rss-services/events-service';
+import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
+import { UserService } from '../../providers/utils-services/user-service';
+import { UtilsService } from '../../providers/utils-services/utils-service';
+import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { NavigationExtras } from "@angular/router";
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -18,39 +35,13 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import 'rxjs/add/operator/debounceTime';
 
-import {
-  App,
-  IonicPage,
-  ItemSliding,
-  List,
-  ModalController,
-  NavController,
-  NavParams,
-  ToastController
-} from 'ionic-angular';
-import { CacheService } from 'ionic-cache';
-
-import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Calendar } from '@ionic-native/calendar';
-import { TranslateService } from '@ngx-translate/core';
-
-import { EventItem } from '../../app/entity/eventItem';
-import { EventsService } from '../../providers/rss-services/events-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
-
-@IonicPage()
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html'
 })
 export class EventsPage {
-  @ViewChild('eventsList', {read: List}) eventsList: List;
+  @ViewChild('eventsList', {read: IonList, static: false}) eventsList: IonList;
 
   events: Array<EventItem> = [];
   searching: any = false;
@@ -72,7 +63,6 @@ export class EventsPage {
 
   constructor(
     public user: UserService,
-    public app: App,
     private navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -91,10 +81,10 @@ export class EventsPage {
   }
 
   ionViewDidLoad() {
-    this.app.setTitle(this.title);
+    document.title = this.title;
     this.updateDateLimit();
     this.cachedOrNot();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
+    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
       this.searching = false;
       this.updateDisplayedEvents();
     });
@@ -111,7 +101,12 @@ export class EventsPage {
   }
 
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.push('EventsDetailsPage', {event: event});
+    const navigationExtras: NavigationExtras = {
+      state: {
+        items: event
+      }
+    };
+    this.navCtrl.navigateForward(['EventsDetailsPage'], navigationExtras);
   }
 
   async cachedOrNot() {
@@ -202,39 +197,37 @@ export class EventsPage {
     this.utilsService.dismissLoading();
   }
 
-  presentFilter() {
+  async presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
     }
-    const modal = this.modalCtrl.create(
-      'EventsFilterPage', {
+    const modal = await this.modalCtrl.create({
+      component: 'EventsFilterPage',
+      componentProps: {
         excludedFilters: this.excludedFilters,
         filters: this.filters,
         dateRange: this.dateRange,
-      }, {'cssClass': this.selectedTheme}
-    );
-    modal.present();
-    modal.onWillDismiss((data: any[]) => {
+      },
+      cssClass: this.selectedTheme
+    });
+    await modal.onWillDismiss().then((data) => {
       if (data) {
-        const tmpRange = data.pop();
+        const tmpRange = data[1];
         if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
-        this.excludedFilters = data.pop();
+        this.excludedFilters = data[0];
         this.updateDisplayedEvents();
       }
     });
+    return await modal.present();
   }
 
-  public createEvent(slidingItem: ItemSliding, itemData: any): void {
+  public createEvent(itemData: any): void {
     const options: any = {
       firstReminderMinutes: 15
     };
-    let message: string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
 
     this.calendar.createEventWithOptions(
       itemData.title,
@@ -243,18 +236,18 @@ export class EventsPage {
       itemData.startDate,
       itemData.endDate,
       options
-    ).then(() => {
-      const toast = this.toastCtrl.create({
-        message: message,
+    ).then(async () => {
+      const toast = await this.toastCtrl.create({
+        message: this.utilsService.getText('EVENTS', 'MESSAGE'),
         duration: 3000
       });
-      toast.present();
-      slidingItem.close();
+      this.eventsList.closeSlidingItems();
+      await toast.present();
     });
   }
 
-  removeFavorite(slidingItem: ItemSliding, itemData: any, title: string) {
-    this.utilsService.removeFavorite(slidingItem, itemData, title, false);
+  removeFavorite(itemData: any, title: string) {
+    this.utilsService.removeFavorite(this.eventsList, itemData, title, false);
     this.updateDisplayedEvents();
   }
 

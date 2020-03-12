@@ -19,13 +19,12 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
 import { NewsItem } from '../../../app/entity/newsItem';
 
-@IonicPage()
 @Component({
   selector: 'page-news-details',
   templateUrl: 'news-details.html'
@@ -37,7 +36,6 @@ export class NewsDetailsPage {
     this.news = navParams.get('news');
   }
 
-  /*Open the url for a news to see more details*/
   public openPage(url: string) {
     window.open(url, '_blank');
   }

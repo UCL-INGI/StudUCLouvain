@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -28,7 +28,6 @@ import { UserService } from '../../providers/utils-services/user-service';
 import { UtilsService } from '../../providers/utils-services/utils-service';
 import { SettingsProvider } from "../../providers/utils-services/settings-service";
 
-@IonicPage()
 @Component({
   selector: 'page-param',
   templateUrl: 'param.html',
@@ -67,9 +66,9 @@ export class ParamPage {
     }
   }
 
-  campus_choice() {
-    const settingsAlert = this.alertCtrl.create({
-      title: this.utilsService.getText('HOME', 'SETTING1'),
+  async campus_choice() {
+    const settingsAlert = await this.alertCtrl.create({
+      header: this.utilsService.getText('HOME', 'SETTING1'),
       message: this.utilsService.getText('HOME', 'MESSAGE'),
       inputs: this.getSettingsInputs(this.userS.campus),
       cssClass: this.selectedTheme,
@@ -82,12 +81,12 @@ export class ParamPage {
         }
       ]
     });
-    settingsAlert.present();
+    return await settingsAlert.present();
   }
 
-  language_choice() {
-    const languageAlert = this.alertCtrl.create({
-      title: this.utilsService.getText('HOME', 'SETTING2'),
+  async language_choice() {
+    const languageAlert = await this.alertCtrl.create({
+      header: this.utilsService.getText('HOME', 'SETTING2'),
       message: this.utilsService.getText('HOME', 'MESSAGE2'),
       cssClass: this.selectedTheme,
       inputs: this.utilsService.getLanguageAlertInputs(this.translateService.currentLang),
@@ -100,7 +99,7 @@ export class ParamPage {
         }
       ]
     });
-    languageAlert.present();
+    return await languageAlert.present();
   }
 
   languageChanged(event: string) {
@@ -109,12 +108,13 @@ export class ParamPage {
   }
 
   openTuto() {
-    this.navCtrl.push('TutoPage');
+    this.navCtrl.navigateForward(['TutoPage']);
   }
 
   private getCampusChoiceInput(label: string, value: string, check: string) {
+    const type: any = "radio";
     return {
-      type: 'radio',
+      type: type,
       label: label,
       value: value,
       checked: check === value
@@ -122,18 +122,19 @@ export class ParamPage {
   }
 
   private getSettingsInputs(check: string) {
+    const type: any = "radio";
     return [
       this.getCampusChoiceInput('Louvain-la-Neuve', 'LLN', check),
       this.getCampusChoiceInput('Woluwé', 'Woluwe', check),
       this.getCampusChoiceInput('Mons', 'Mons', check),
       {
-        type: 'radio',
+        type: type,
         label: 'Tournai',
         value: 'Tournai',
         disabled: true
       },
       {
-        type: 'radio',
+        type: type,
         label: 'St-Gilles',
         value: 'StG',
         disabled: true

@@ -19,6 +19,8 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+import { map } from 'rxjs/operators';
 import X2JS from 'x2js';
 
 import { HttpClient } from '@angular/common/http';
@@ -35,9 +37,9 @@ export class AdeService {
   }
 
   load(url: string) {
-    return this.http.get(url, {responseType: 'text'}).map(res => {
+    return this.http.get(url, {responseType: 'text'}).pipe(map(res => {
       return new X2JS().xml2js(res);
-    });
+    }));
   }
 
   httpGetCourseId(sessionId: string, acronym: string) {

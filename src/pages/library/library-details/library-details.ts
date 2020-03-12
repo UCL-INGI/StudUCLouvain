@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -29,7 +29,6 @@ import { ConnectivityService } from '../../../providers/utils-services/connectiv
 import { UtilsService } from '../../../providers/utils-services/utils-service';
 import { LibrariesService } from '../../../providers/wso2-services/libraries-service';
 
-@IonicPage()
 @Component({
   selector: 'page-library-details',
   templateUrl: 'library-details.html',

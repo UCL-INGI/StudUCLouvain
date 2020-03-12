@@ -19,15 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../../app/entity/eventItem';
 import { UserService } from '../../../providers/utils-services/user-service';
+import { UtilsService } from "../../../providers/utils-services/utils-service";
 
-@IonicPage()
 @Component({
   selector: 'page-events-details',
   templateUrl: 'events-details.html'
@@ -40,6 +40,7 @@ export class EventsDetailsPage {
     public user: UserService,
     private translateService: TranslateService,
     public toastCtrl: ToastController,
+    private utilsService: UtilsService,
     navParams: NavParams
   ) {
     this.event = navParams.get('event');
@@ -51,19 +52,14 @@ export class EventsDetailsPage {
   }
 
   /*ADD EVENT TO FAVORITE*/
-  public addFavorite(event: EventItem) {
-    let message: string;
-    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => {
-      message = res;
-    });
-
+  public async addFavorite(event: EventItem) {
     if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid, 'listEvents');
-      const toast = this.toastCtrl.create({
-        message: message,
+      const toast = await this.toastCtrl.create({
+        message: this.utilsService.getText('EVENTS', 'MESSAGEFAV2'),
         duration: 3000
       });
-      toast.present();
+      return await toast.present();
     }
   }
 }

@@ -19,11 +19,10 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
-@IonicPage()
 @Component({
   selector: 'page-restaurant',
   templateUrl: 'restaurant.html'

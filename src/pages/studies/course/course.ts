@@ -18,18 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import {
-  AlertController,
-  IonicPage,
-  ItemSliding,
-  ModalController,
-  NavController,
-  NavParams,
-  ToastController
-} from 'ionic-angular';
+import { AlertController, ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 
 import { Component } from '@angular/core';
-import { Calendar } from '@ionic-native/calendar';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 import { Activity } from '../../../app/entity/activity';
 import { Course } from '../../../app/entity/course';
@@ -37,7 +29,6 @@ import { CourseService } from '../../../providers/studies-services/course-servic
 import { UserService } from '../../../providers/utils-services/user-service';
 import { UtilsService } from '../../../providers/utils-services/utils-service';
 
-@IonicPage()
 @Component({
   selector: 'page-course',
   templateUrl: 'course.html'
@@ -102,23 +93,23 @@ export class CoursePage {
     });
   }
 
-  addToCalendar(slidingItem: ItemSliding, activity: Activity) {
+  addToCalendar(activity: Activity) {
     const message = this.utilsService.getText('COURSE', 'MESSAGE');
-    this.getEventWithOption(activity, message, slidingItem);
+    this.getEventWithOption(activity, message);
     this.alert();
   }
 
-  alert(all: boolean = false) {
+  async alert(all: boolean = false) {
     const prefix = all ? 'COURSE' : 'STUDY';
     const msg_number = all ? '3' : '4';
-    const disclaimerAlert = this.alertCtrl.create({
-      title: this.utilsService.getText(prefix, 'WARNING'),
+    const disclaimerAlert = await this.alertCtrl.create({
+      header: this.utilsService.getText(prefix, 'WARNING'),
       message: this.utilsService.getText(prefix, 'MESSAGE' + msg_number),
       buttons: [{
         text: 'OK'
       }]
     });
-    disclaimerAlert.present();
+    return await disclaimerAlert.present();
   }
 
   updateDisplayedTP() {
@@ -153,7 +144,7 @@ export class CoursePage {
     this.noEx = this.courseSorted.ex.length === 0;
   }
 
-  showPrompt(segment: string) {
+  async showPrompt(segment: string) {
     const options = this.getInitialOptions(segment);
     const aucun = (this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral');
     const array = this.getSlots(segment);
@@ -175,7 +166,8 @@ export class CoursePage {
         type: 'radio',
         checked: aucun
       });
-      this.alertCtrl.create(options).present();
+      const a = await this.alertCtrl.create(options);
+      return await a.present();
     }
   }
 
@@ -199,30 +191,30 @@ export class CoursePage {
     return newAct;
   }
 
-  addCourseToCalendar() {
+  async addCourseToCalendar() {
     for (const activity of this.displayedActi) {
       this.getEventWithOption(activity, this.course.name + ' : ' + activity.type);
     }
-    const toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: this.utilsService.getText('STUDY', 'MESSAGE3'),
       duration: 3000
     });
-    toast.present();
     this.alert(true);
+    return await toast.present();
   }
 
-  openModalInfo() {
-    const myModal = this.modalCtrl.create(
-      'ModalInfoPage',
-      {course: this.course, year: this.year},
-      {cssClass: 'modal-fullscreen'}
-    );
-    myModal.onDidDismiss(() => {
+  async openModalInfo() {
+    const myModal = await this.modalCtrl.create({
+      component: 'ModalInfoPage',
+      componentProps: {course: this.course, year: this.year},
+      cssClass: 'modal-fullscreen'
     });
-    myModal.present();
+    await myModal.onDidDismiss().then(() => {
+    });
+    return await myModal.present();
   }
 
-  private getEventWithOption(activity: Activity, message, slidingItem?: ItemSliding) {
+  private getEventWithOption(activity: Activity, message) {
     this.calendar.createEventWithOptions(
       message,
       activity.auditorium,
@@ -230,15 +222,12 @@ export class CoursePage {
       activity.start,
       activity.end,
       {firstReminderMinutes: 15}
-    ).then(() => {
-      const toast = this.toastCtrl.create({
+    ).then(async () => {
+      const toast = await this.toastCtrl.create({
         message: message,
         duration: 3000
       });
-      toast.present();
-      if (slidingItem) {
-        slidingItem.close();
-      }
+      await toast.present();
     });
   }
 

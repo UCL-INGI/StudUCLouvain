@@ -1,15 +1,17 @@
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { GuindaillePage } from './guindaille2-0';
+import { Guindaille20RoutingModule } from "./guindaille2-0-routing.module";
 
 @NgModule({
   declarations: [GuindaillePage],
   imports: [
-    IonicPageModule.forChild(GuindaillePage),
-    TranslateModule.forChild()
+    IonicModule,
+    TranslateModule.forChild(),
+    Guindaille20RoutingModule
   ]
 })
 export class GuindaillePageModule {

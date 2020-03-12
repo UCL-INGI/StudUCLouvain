@@ -19,7 +19,7 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,7 +28,7 @@ import { TutoPage } from './tuto';
 
 @NgModule({
   declarations: [TutoPage],
-  imports: [IonicPageModule.forChild(TutoPage), TranslateModule.forChild()]
+  imports: [IonicModule, TranslateModule.forChild()]
 })
 export class TutoPageModule {
 }
