@@ -4,7 +4,7 @@ import { CacheService } from 'ionic-cache';
 
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Calendar } from '@ionic-native/calendar';
+import { Calendar } from '@ionic-native/calendar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../app/entity/eventItem';

@@ -22,7 +22,7 @@ import { LoadingController, ModalController, NavController, NavParams, Platform 
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { EmployeeItem } from '../../app/entity/employeeItem';
 import { ConnectivityService } from '../../providers/utils-services/connectivity-service';

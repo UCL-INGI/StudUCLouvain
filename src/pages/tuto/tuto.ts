@@ -22,7 +22,7 @@
 import { NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'page-tuto',

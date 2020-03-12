@@ -4,7 +4,7 @@ import { CacheService } from 'ionic-cache';
 
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { NewsItem } from '../../app/entity/newsItem';
 import { NewsService } from '../../providers/rss-services/news-service';
