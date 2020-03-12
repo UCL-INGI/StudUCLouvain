@@ -25,7 +25,6 @@ import {
   ModalController,
   NavController,
   NavParams,
-  Platform,
   ToastController
 } from '@ionic/angular';
 
@@ -50,15 +49,12 @@ export class StudiesPage {
   public data: any;
   segment = 'cours';
   public listCourses: Course[];
-  public course: Course;
   public title: any;
   public sessionId: string;
   public project: AdeProject = null;
   public error = '';
   sigles: any;
   activities: any = [];
-  response: any;
-  language;
   statusInsc = '';
   prog = '';
   private username = '';
@@ -73,7 +69,6 @@ export class StudiesPage {
     public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
-    public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
@@ -89,7 +84,7 @@ export class StudiesPage {
 
   checkExist(sigle: string) {
     const year = this.project.name.split('-')[0];
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       return this.studentService.checkCourse(sigle, year).then((data: any) => {
         const exist = data !== 404 && data !== 500;
         resolve({exist: exist, nameFR: exist ? data.title : '', nameEN: ''});
@@ -111,15 +106,11 @@ export class StudiesPage {
             for (const sigle of this.sigles) {
               this.activities.push({name: '', sigle: sigle});
             }
-          }).catch(() => {
-            console.log('Error during load of course program');
-          });
+          }).catch(() => console.log('Error during load of course program'));
           this.studentService.getStatus().then(res => {
             this.statusInsc = res[0].etatInscription;
             this.prog = res[0].intitOffreComplet;
-          }).catch(() => {
-            console.log('Error during load of inscription status');
-          });
+          }).catch(() => console.log('Error during load of inscription status'));
         }
       });
     } else {
@@ -160,12 +151,10 @@ export class StudiesPage {
     const alert = await this.alertCtrl.create({
       header: this.utilsService.getText('STUDY', 'ADDCOURSE'),
       message: this.utilsService.getText('STUDY', 'MESSAGE'),
-      inputs: [
-        {
-          name: 'acronym',
-          placeholder: this.utilsService.getText('STUDY', 'SIGLE')
-        }
-      ],
+      inputs: [{
+        name: 'acronym',
+        placeholder: this.utilsService.getText('STUDY', 'SIGLE')
+      }],
       buttons: [
         {
           text: this.utilsService.getText('STUDY', 'CANCEL'),
@@ -193,11 +182,7 @@ export class StudiesPage {
         already = true;
       }
     }
-    if (!already) {
-      this.checkExistAndAddOrToast(acro);
-    } else {
-      this.toastAlreadyCourse();
-    }
+    already ? this.toastAlreadyCourse() : this.checkExistAndAddOrToast(acro);
   }
 
   async addCourse(sigle: string, name: string) {
@@ -259,11 +244,7 @@ export class StudiesPage {
     this.error = '';
     return new Promise(resolve => {
       this.wso2Service.login(this.username, this.password).pipe(catchError(error => {
-        if (error.status === 400) {
-          this.error = this.utilsService.getText('STUDY', 'BADLOG');
-        } else {
-          this.error = this.utilsService.getText('STUDY', 'ERROR');
-        }
+        this.error = this.utilsService.getText('STUDY', error.status === 400 ? 'BADLOG' : 'ERROR');
         return error;
       })).subscribe(data => {
         if (data != null) {
