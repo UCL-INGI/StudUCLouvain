@@ -44,6 +44,6 @@ export class TutoPage {
   }
 
   goToHome() {
-    this.navCtrl.setRoot('HomePage');
+    this.navCtrl.navigateForward(['/home']);
   }
 }

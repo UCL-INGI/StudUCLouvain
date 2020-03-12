@@ -16,7 +16,9 @@
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/app/main.ts",
-            "assets": [{
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
@@ -27,9 +29,14 @@
                 "output": "./svg"
               }
             ],
-            "styles": [{
+            "styles": [
+              {
                 "input": "src/theme/variables.scss"
-              }],
+              },
+              {
+                "input": "src/global.scss"
+              }
+            ],
             "scripts": []
           },
           "configurations": {
@@ -43,11 +50,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": false,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             },
             "ci": {
               "progress": false
@@ -80,7 +89,8 @@
             "karmaConfig": "test-config/karma.conf.js",
             "styles": [],
             "scripts": [],
-            "assets": [{
+            "assets": [
+              {
                 "glob": "favicon.ico",
                 "input": "src/",
                 "output": "/"
@@ -102,7 +112,12 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "ionic-cordova-build": {
@@ -151,7 +166,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

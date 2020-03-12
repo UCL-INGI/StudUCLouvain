@@ -43,6 +43,16 @@ $colors: (primary: #488aff,
   uclouvain: rgb(0, 33, 78),
   home: #002A6A);
 
+@each $color in $colors {
+  .ion-color-#{$color} {
+    --ion-color-base: var(--ion-color-#{$color}) !important;
+    --ion-color-base-rgb: var(--ion-color-#{$color}-rgb) !important;
+    --ion-color-contrast: var(--ion-color-#{$color}-contrast) !important;
+    --ion-color-contrast-rgb: var(--ion-color-#{$color}-contrast-rgb) !important;
+    --ion-color-shade: var(--ion-color-#{$color}-shade) !important;
+    --ion-color-tint: var(--ion-color-#{$color}-tint) !important;
+  }
+}
 
 // App iOS Variables
 // --------------------------------------------------
@@ -68,7 +78,7 @@ $content-ios-transition-background: transparent;
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+//@import "ionic.theme.default";
 
 
 // Ionicons
@@ -76,11 +86,11 @@ $content-ios-transition-background: transparent;
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
+//@import "ionic.ionicons";
 
 
 // Fonts
 // --------------------------------------------------
 
 //@import "roboto";
-@import "noto-sans";
+//@import "noto-sans";

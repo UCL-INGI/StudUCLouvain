@@ -56,13 +56,15 @@ import { StudentService } from '../providers/wso2-services/student-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { MyApp } from './app.component';
 import { SettingsProvider } from "../providers/utils-services/settings-service";
+import { HomePage } from "../pages/home/home";
+import { TutoPage } from "../pages/tuto/tuto";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [MyApp],
+  declarations: [MyApp, HomePage, TutoPage],
   exports: [TranslateModule],
   imports: [
     BrowserModule,
@@ -79,7 +81,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   bootstrap: [MyApp],
-  entryComponents: [MyApp],
   providers: [
     ErrorHandler,
     AppAvailability,
