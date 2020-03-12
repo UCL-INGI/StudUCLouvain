@@ -19,14 +19,23 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, IonicApp, MenuController, Nav, Platform } from 'ionic-angular';
+import {
+  ActionSheetController,
+  AlertController,
+  IonRouterOutlet,
+  MenuController,
+  ModalController,
+  NavController,
+  Platform,
+  PopoverController
+} from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 
-import { Component, ViewChild } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 import { HomePage } from '../pages/home/home';
@@ -34,12 +43,13 @@ import { UserService } from '../providers/utils-services/user-service';
 import { Wso2Service } from '../providers/wso2-services/wso2-service';
 import { Page } from "./entity/page";
 import { SettingsProvider } from "../providers/utils-services/settings-service";
+import { NavigationExtras, Router } from "@angular/router";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   selectedTheme: string;
   rootPage = ''; // = 'HomePage';
   alertPresented: any;
@@ -49,6 +59,8 @@ export class MyApp {
   campusPages: Array<Page>;
   studiePages: Array<Page>;
   toolPages: Array<Page>;
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
 
   constructor(
     public platform: Platform,
@@ -58,12 +70,16 @@ export class MyApp {
     private iab: InAppBrowser,
     private device: Device,
     private alertCtrl: AlertController,
+    private router: Router,
     private user: UserService,
     public translateService: TranslateService,
-    private ionicApp: IonicApp,
     private wso2Service: Wso2Service,
     public cache: CacheService,
-    private settings: SettingsProvider
+    private settings: SettingsProvider,
+    private popoverCtrl: PopoverController,
+    public modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private nav: NavController
   ) {
     console.log('Startin App');
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
@@ -103,7 +119,7 @@ export class MyApp {
         is_rest_page ? 'com.apptree.resto4u' : null,
         is_rest_page ? 'apptreeresto4u://' : null,
         is_rest_page ? 'https://uclouvain.be/fr/decouvrir/resto-u' : null
-    ));
+      ));
     }
     return pages;
   }
@@ -114,102 +130,103 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
     });
 
-    this.platform.registerBackButtonAction(() => {
-      const activePortal =
-        this.ionicApp._loadingPortal.getActive() ||
-        this.ionicApp._modalPortal.getActive() ||
-        this.ionicApp._toastPortal.getActive() ||
-        this.ionicApp._overlayPortal.getActive();
-      if (activePortal) {
-        activePortal.dismiss();
+    this.platform.backButton.subscribe(async () => {
+      this.getElementToClose(this.actionSheetCtrl);
+      this.getElementToClose(this.popoverCtrl);
+      this.getElementToClose(this.modalCtrl);
+      try {
+        const element = await this.menu.getOpen();
+        if (element) {
+          this.menu.close();
+        }
+      } catch (error) {
+        console.log(error);
       }
-      if (this.menu.isOpen()) {
-        this.menu.close();
-      }
-      this.nav.length() === 1 ? this.confirmExitApp() : this.nav.pop();
+      this.confirmExitApp();
     });
   }
 
-  confirmExitApp() {
-    if (this.nav.getActive().instance instanceof HomePage) {
-      if (!this.alertPresented) {
-        this.alertPresented = true;
-        const confirmAlert = this.alertCtrl.create({
-          title: 'Fermeture',
-          message: 'Désirez-vous quitter l\'application ?',
-          buttons: [
-            {
-              text: 'Annuler',
-              handler: () => this.alertPresented = false
-            },
-            {
-              text: 'Quitter',
-              handler: () => this.platform.exitApp()
-            }
-          ]
-        });
-        confirmAlert.present();
+  async getElementToClose(element: any) {
+    try {
+      const elem = await element.getTop();
+      if (elem) {
+        elem.dismiss();
+        return;
       }
-    } else {
-      this.openRootPage(this.homePage);
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  disclaimer() {
-    const disclaimerAlert = this.alertCtrl.create({
-      title: 'Avertissement',
-      message:
-        '<p>Version beta de l\'application Stud@UCLouvain.</p> ' +
-        '<p>Cette version n\'est pas publique et est uniquement destinée à une phase de test.</p>',
+  async confirmExitApp() {
+    this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+      if (outlet && outlet.canGoBack()) {
+        outlet.pop();
+      } else {
+        if (this.router.url === 'home') {
+          if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+            navigator['app'].exitApp(); //  work in ionic 4
+          } else {
+            this.exitToast();
+            this.lastTimeBackPress = new Date().getTime();
+          }
+        }
+      }
+    });
+  }
+
+  async exitToast() {
+    this.alertPresented = true;
+    const confirmAlert = await this.alertCtrl.create({
+      header: 'Fermeture',
+      message: 'Désirez-vous quitter l\'application ?',
       buttons: [
         {
-          text: 'OK'
+          text: 'Annuler',
+          handler: () => this.alertPresented = false
+        },
+        {
+          text: 'Quitter',
+          handler: () => navigator['app'].exitApp()
         }
       ]
     });
-    disclaimerAlert.present();
+    await confirmAlert.present();
   }
 
   openRootPage(page) {
-    const test = this.nav.getActive().instance;
-    // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
-    if (!(test instanceof HomePage && page === this.homePage)) {
-      if (page.iosSchemaName != null && page.androidPackageName != null) {
-        this.launchExternalApp(
-          page.iosSchemaName,
-          page.androidPackageName,
-          page.appUrl,
-          page.httpUrl
-        );
-      } else if (page !== this.homePage) {
-        if (this.nav.length() > 1) {
-          this.nav.pop();
+    if (page.iosSchemaName != null && page.androidPackageName != null) {
+      this.launchExternalApp(page);
+    } else {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          title: page.title,
         }
-        this.nav.push(page.component, {title: page.title});
-      }
+      };
+      this.nav.navigateForward([page.component], navigationExtras);
     }
   }
 
-  launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
+  launchExternalApp(page: any) {
     let app: string;
     let check: string;
     if (this.device.platform === 'iOS') {
-      app = iosSchemaName;
-      check = appUrl;
+      app = page.iosSchemaName;
+      check = page.appUrl;
     } else if (this.device.platform === 'Android') {
-      app = androidPackageName;
+      app = page.androidPackageName;
       check = app;
     } else {
-      const browser = this.iab.create(httpUrl, '_system');
+      const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
     this.appAvailability.check(check).then(() => {
-        const browser = this.iab.create(appUrl, '_system');
+        const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
       },
-      () =>  this.market.open(app)
+      () => this.market.open(app)
     );
   }
 

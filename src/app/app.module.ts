@@ -18,21 +18,21 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 import { CacheModule } from 'ionic-cache';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { Geolocation } from '@ionic-native/geolocation';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { Network } from '@ionic-native/network';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -66,7 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [TranslateModule],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(),
     CacheModule.forRoot({keyPrefix: 'UCL-cache'}),
     IonicStorageModule.forRoot(),
     HttpClientModule,
@@ -78,10 +78,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [MyApp],
   entryComponents: [MyApp],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ErrorHandler,
     AppAvailability,
     ConnectivityService,
     CourseService,
