@@ -22,13 +22,13 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="news">
+  <ion-toolbar color="news">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment (ionChange)="tabChanged()" [(ngModel)]="segment">
     <ion-segment-button value="univ">
       {{'NEWS.UNIF' | translate}}

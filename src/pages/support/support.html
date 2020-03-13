@@ -21,13 +21,13 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="support">
+  <ion-toolbar color="support">
     <button icon-only ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="aide">
       {{'HELP.SEGMENT2' | translate}}

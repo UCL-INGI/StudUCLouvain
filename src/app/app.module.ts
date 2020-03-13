@@ -58,6 +58,8 @@ import { MyApp } from './app.component';
 import { SettingsProvider } from "../providers/utils-services/settings-service";
 import { HomePage } from "../pages/home/home";
 import { TutoPage } from "../pages/tuto/tuto";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,6 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CacheModule.forRoot({keyPrefix: 'UCL-cache'}),
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    CommonModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

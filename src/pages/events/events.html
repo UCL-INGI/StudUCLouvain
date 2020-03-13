@@ -21,7 +21,7 @@
 
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="event">
+  <ion-toolbar color="event">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -32,7 +32,7 @@
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment (ionChange)="cachedOrNot()" [(ngModel)]="segment">
     <ion-segment-button value="all">
       {{'EVENTS.ALL' | translate}}

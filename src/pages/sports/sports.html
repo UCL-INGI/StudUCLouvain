@@ -20,7 +20,7 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="sport">
+  <ion-toolbar color="sport">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -31,7 +31,7 @@
         <ion-icon name="options"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment (ionChange)="updateDisplayedSports()" [(ngModel)]="segment">
     <ion-segment-button style="color: white;" value="all">
       {{'SPORTS.ALL' | translate}}

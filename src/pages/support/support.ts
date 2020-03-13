@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { LoadingController, ModalController, NavController, NavParams, Platform } from '@ionic/angular';
+import { ModalController, NavController, NavParams, Platform } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
@@ -50,7 +50,6 @@ export class SupportPage {
   firstname = '';
   loading;
   segment = 'aide';
-  shownHelp = null;
 
   constructor(
     public navCtrl: NavController,
@@ -60,7 +59,6 @@ export class SupportPage {
     public platform: Platform,
     public repService: RepertoireService,
     public connService: ConnectivityService,
-    public loadingCtrl: LoadingController,
     private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
@@ -82,23 +80,19 @@ export class SupportPage {
 
   searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {
-      this.repService.searchEmployees(options, values).then(res => {
-        const result: any = res;
-        this.employees = result.employees;
-        this.searching = true;
+      this.repService.searchEmployees(options, values).then((res: any) => {
+        this.employees = res.employees;
       });
     } else {
-      this.searching = false;
       this.connService.presentConnectionAlert();
     }
+    this.searching = false;
     this.utilsService.dismissLoading();
   }
 
   goToEmpDetails(emp: EmployeeItem) {
     const navigationExtras: NavigationExtras = {
-      state: {
-        emp: emp
-      }
+      state: {  emp: emp }
     };
     this.navCtrl.navigateForward('EmployeeDetailsPage', navigationExtras);
   }

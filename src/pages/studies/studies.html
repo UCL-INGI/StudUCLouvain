@@ -22,7 +22,7 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="uclouvain">
+  <ion-toolbar color="uclouvain">
     <button icon-only ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -31,7 +31,7 @@
     <button end icon-only ion-button menuToggle="studiesMenu">
       <ion-icon name="menu"></ion-icon>
     </button>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="prog">
       {{'STUDY.PROGRAM' | translate}}
@@ -46,7 +46,7 @@
 
 <!--BODY-->
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
-<ion-menu [content]="studiesContent" id="studiesMenu" persistent=true side="right" type="overlay">
+<ion-menu contentId="studiesContent" id="studiesMenu" persistent=true side="right" type="overlay">
   <button></button>
   <button (click)="launch('http://www.uclouvain.be/')" ion-item> uclouvain.be</button>
   <button (click)="launch('https://moodleucl.uclouvain.be')" ion-item> Moodle ucl</button>

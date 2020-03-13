@@ -6,6 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SportsPage } from './sports';
 import { SportsRoutingModule } from "./sports-routing.module";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [SportsPage],
@@ -13,6 +15,9 @@ import { SportsRoutingModule } from "./sports-routing.module";
     IonicModule,
     SportsRoutingModule,
     TranslateModule.forChild(),
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [Calendar]
 })

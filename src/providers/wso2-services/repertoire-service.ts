@@ -63,7 +63,7 @@ export class RepertoireService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({empDetails: emp});
+          resolve(emp);
         });
     });
   }

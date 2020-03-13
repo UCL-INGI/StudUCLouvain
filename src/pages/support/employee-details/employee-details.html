@@ -22,9 +22,9 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="support">
+  <ion-toolbar color="support">
     <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
@@ -45,9 +45,11 @@
 
     <ion-row padding text-wrap>
       <ion-list>
-        <ion-item *ngFor="let c of empDetails.contracts?.contract" style="text-transform:uppercase">
+        <ion-item *ngFor="let c of empDetails.contracts.contract" style="text-transform:uppercase">
           <p *ngIf="c.grade!=null">({{c.grade}})</p>
         </ion-item>
+      </ion-list>
+      <ion-list>
         <ion-item *ngFor="let emp of empDetails.departments.department">
           <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
             ({{emp.entity.acronym}})</p>

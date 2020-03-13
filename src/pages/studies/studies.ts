@@ -59,7 +59,7 @@ export class StudiesPage {
   prog = '';
   private username = '';
   private password = '';
-  private status = '';
+  status = '';
 
   constructor(
     public studiesService: StudiesService,
