@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar class="header" id="header">
-    <ion-buttons start>
-      <button (click)="applyFilters(true, categories, results, dateRange)"
-              ion-button>{{'EVENTS.CANCEL' | translate}}</button>
+    <ion-buttons slot="secondary">
+      <ion-button
+        (click)="applyFilters(true, categories, results, dateRange)">{{'EVENTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,42 +32,48 @@
         </ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end>
-      <button (click)="applyFilters(false, categories, results, dateRange)" ion-button
-              strong>{{'EVENTS.APPLY' | translate}}</button>
+    <ion-buttons slot="primary">
+      <ion-button (click)="applyFilters(false, categories, results, dateRange)"
+                  strong>{{'EVENTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="outer-content">
-  <ion-item>
-    <ion-label *ngIf="dateRange > 1" center>
+  <ion-item *ngIf="dateRange > 1">
+    <ion-label center>
       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
       {{'EVENTS.TIMEEVENTS3' | translate}}
     </ion-label>
-    <ion-label *ngIf="dateRange == 1" center>
+    <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
+    </ion-range>
+  </ion-item>
+  <ion-item *ngIf="dateRange == 1">
+    <ion-label center>
       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
     <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
     </ion-range>
   </ion-item>
   <ion-toolbar color="uclouvain">
-    <ion-buttons left>
-      <button (click)="uncheckAll()" end icon-right ion-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="uncheckAll()" slot="end">
         {{'EVENTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
-    <ion-buttons end>
-      <button (click)="resetFilters()" icon-right ion-button>
+    <ion-buttons slot="primary">
+      <ion-button (click)="resetFilters()" slot="end">
         {{'EVENTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-list>
-    <ion-list-header><strong>{{'EVENTS.CATEGORIES' | translate}}</strong></ion-list-header>
+    <ion-list-header>
+      <ion-label><strong>{{'EVENTS.CATEGORIES' | translate}}</strong></ion-label>
+    </ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
         <img [src]="category.iconCategory" alt="Event Category Icon"/>

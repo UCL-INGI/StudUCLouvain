@@ -1,13 +1,18 @@
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MobilityPage } from './mobility';
+import { MobilityRoutingModule } from "./mobility-routing.module";
 
 @NgModule({
   declarations: [MobilityPage],
-  imports: [IonicPageModule.forChild(MobilityPage), TranslateModule.forChild()]
+  imports: [
+    IonicModule,
+    TranslateModule.forChild(),
+    MobilityRoutingModule
+  ]
 })
 export class MobilityPageModule {
 }

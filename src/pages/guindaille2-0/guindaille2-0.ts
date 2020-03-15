@@ -19,13 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { AlertController, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from "../../services/utils-services/utils-service";
 
-@IonicPage()
 @Component({
   selector: 'page-guindaille2-0',
   templateUrl: 'guindaille2-0.html',
@@ -140,36 +140,28 @@ export class GuindaillePage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
     this.getPictograms();
     this.getSlides();
   }
 
-  showAlert(page) {
-    const alert = this.alertCtrl.create(page);
-    alert.present();
+  async showAlert(page) {
+    const alert = await this.alertCtrl.create(page).then();
+    return await alert.present();
   }
 
   private getSlides() {
     const ttls = [this.ttl1, this.ttl2, this.ttl3, this.ttl4, this.ttl5, this.ttl6];
     const efcts = [this.efct1, this.efct2, this.efct3, this.efct4, this.efct5, this.efct6];
     for (let i = 0; i < ttls.length; i++) {
-      this.getSlide(i, ttls[i], efcts[i]);
+      ttls[i] = this.utilsService.getText('GUINDAILLE', 'TITLEF' + i + 1);
+      efcts[i] = this.utilsService.getText('GUINDAILLE', 'EFFECT' + i + 1);
+      this.slides[i].title = ttls[i];
+      this.slides[i].subTitle = efcts[i];
     }
-  }
-
-  private getSlide(i: number, title: string, effect: string) {
-    const real_index = i + 1;
-    this.translateService.get('GUINDAILLE.TITLEF' + real_index).subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get('GUINDAILLE.EFFECT' + real_index).subscribe((res: string) => {
-      effect = res;
-    });
-    this.slides[i].title = title;
-    this.slides[i].subTitle = effect;
   }
 
   private getPictograms() {
@@ -181,19 +173,10 @@ export class GuindaillePage {
       this.alterner, this.bruit, this.eau, this.ou, this.cans, this.preservatif, this.racompagner, this.uriner, this.dehors, this.violence
     ];
     for (let i = 0; i < titles.length; i++) {
-      this.getPictogram(i, titles[i], pics[i], items[i]);
+      titles[i] = this.utilsService.getText('GUINDAILLE', 'TITLE' + i + 1);
+      pics[i] = this.utilsService.getText('GUINDAILLE', 'PIC' + i + 1);
+      items[i].title = titles[i];
+      items[i].subTitle = pics[i];
     }
-  }
-
-  private getPictogram(i: number, title: string, pict: string, item: any) {
-    const real_index = i + 1;
-    this.translateService.get('GUINDAILLE.TITLE' + real_index).subscribe((res: string) => {
-      title = res;
-    });
-    this.translateService.get('GUINDAILLE.PIC' + real_index).subscribe((res: string) => {
-      pict = res;
-    });
-    item.title = title;
-    item.subTitle = pict;
   }
 }

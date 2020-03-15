@@ -19,37 +19,30 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import 'rxjs/add/operator/debounceTime';
 
-import {
-  App,
-  IonicPage,
-  ItemSliding,
-  List,
-  ModalController,
-  NavController,
-  NavParams,
-  ToastController
-} from 'ionic-angular';
+import { debounceTime } from 'rxjs/operators';
+
+
+import { IonList, ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Calendar } from '@ionic-native/calendar';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 import { SportItem } from '../../app/entity/sportItem';
-import { SportsService } from '../../providers/rss-services/sports-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { SportsService } from '../../services/rss-services/sports-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { SettingsProvider } from "../../services/utils-services/settings-service";
+import { SportsFilterPage } from "./sports-filter/sports-filter";
 
-@IonicPage()
 @Component({
   selector: 'page-sports',
   templateUrl: 'sports.html'
 })
 export class SportsPage {
-  @ViewChild('sportsList', {read: List}) sportsList: List;
+  @ViewChild('sportsList', {read: IonList, static: false}) sportsList: IonList;
 
   sports: Array<SportItem> = [];
   teams: Array<SportItem> = [];
@@ -74,7 +67,6 @@ export class SportsPage {
   selectedTheme: string;
 
   constructor(
-    public app: App,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
@@ -92,11 +84,10 @@ export class SportsPage {
   }
 
   ionViewDidLoad() {
-    this.app.setTitle(this.title);
     this.updateDateLimit();
     this.utilsService.presentLoading();
     this.loadSports();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(() => {
+    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
       this.searching = false;
       this.updateDisplayedSports();
     });
@@ -188,7 +179,7 @@ export class SportsPage {
     this.modalFilter(exclude, cat);
   }
 
-  addToCalendar(slidingItem: ItemSliding, itemData: SportItem) {
+  addToCalendar(itemData: SportItem) {
     const options: any = {
       firstReminderMinutes: 30
     };
@@ -202,18 +193,18 @@ export class SportsPage {
         itemData.hfin,
         options
       )
-      .then(() => {
-        const toast = this.toastCtrl.create({
+      .then(async () => {
+        const toast = await this.toastCtrl.create({
           message: 'Sport créé',
           duration: 3000
         });
-        toast.present();
-        slidingItem.close();
+        this.sportsList.closeSlidingItems();
+        return await toast.present();
       });
   }
 
-  removeFavorite(slidingItem: ItemSliding, itemData: SportItem, title: string) {
-    this.utilsService.removeFavorite(slidingItem, itemData, title, true);
+  removeFavorite(itemData: SportItem, title: string) {
+    this.utilsService.removeFavorite(this.sportsList, itemData, title, true);
     this.updateDisplayedSports();
   }
 
@@ -237,30 +228,31 @@ export class SportsPage {
     });
   }
 
-  private modalFilter(exclude: any, cat: any) {
-    const modal = this.modalCtrl.create('SportsFilterPage', {
-      excludedFilters: exclude,
-      filters: cat,
-      dateRange: this.dateRange
-    }, {'cssClass': this.selectedTheme});
-    modal.present();
-    modal.onWillDismiss((data: any[]) => {
+  private async modalFilter(exclude: any, cat: any) {
+    const modal = await this.modalCtrl.create({
+      component: SportsFilterPage,
+      componentProps: {
+        excludedFilters: exclude,
+        filters: cat,
+        dateRange: this.dateRange,
+      },
+      cssClass: this.selectedTheme
+    });
+    await modal.onWillDismiss().then((data) => {
       if (data) {
-        const tmpRange = data.pop();
-        if (tmpRange !== this.dateRange) {
-          this.dateRange = tmpRange;
+        if (data[1] !== this.dateRange) {
+          this.dateRange = data[1];
           this.updateDateLimit();
         }
-        const newExclude = data.pop();
         if (this.segment === 'all') {
-          this.excludedFilters = newExclude;
-        }
-        if (this.segment === 'team') {
-          this.excludedFiltersT = newExclude;
+          this.excludedFilters = data[0];
+        } else if (this.segment === 'team') {
+          this.excludedFiltersT = data[0];
         }
         this.updateDisplayedSports();
       }
     });
+    return await modal.present();
   }
 
   private updateDateLimit() {

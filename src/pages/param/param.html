@@ -21,19 +21,19 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="setting">
-    <button icon-only ion-button menuToggle>
+  <ion-toolbar color="setting">
+    <ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content padding>
-  <button (tap)="language_choice()" block color="setting" ion-button round>{{'SETTING.LANGUE' | translate }}</button>
-  <button (tap)="campus_choice()" block color="setting" ion-button round>Campus</button>
-  <button (tap)="openTuto()" block color="setting" ion-button round>{{'SETTING.TUTO' | translate }}</button>
-  <button (tap)="toggleAppTheme()" block color="setting" ion-button round>Dark/Light mode</button>
+  <ion-button (click)="language_choice()" expand="block" color="setting" shape="round">{{'SETTING.LANGUE' | translate }}</ion-button>
+  <ion-button (click)="campus_choice()" expand="block" color="setting" shape="round">Campus</ion-button>
+  <ion-button (click)="openTuto()" expand="block" color="setting" shape="round">{{'SETTING.TUTO' | translate }}</ion-button>
+  <ion-button (click)="toggleAppTheme()" expand="block" color="setting" shape="round">Dark/Light mode</ion-button>
 </ion-content>

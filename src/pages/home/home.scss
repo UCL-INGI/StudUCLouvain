@@ -19,74 +19,71 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-home {
+.scroll-content {
+  margin-top: 56px;
+}
 
-  .scroll-content {
-    margin-top: 56px;
-  }
+.other {
+  background-color: transparent;
+}
 
-  .other {
-    background-color: transparent;
-  }
+b {
+  color: black;
+}
 
-  b {
-    color: black;
-  }
-
-  .fab {
-    contain: layout;
-  }
+.fab {
+  contain: layout;
+}
 
 
-  ion-grid {
-    height: 100%;
+ion-grid {
+  height: 100%;
 
-    ion-row.homeM {
-      height: 20vh;
+  ion-row.homeM {
+    height: 20vh;
 
-      img {
-        height: 16vh;
-      }
-
-      p {
-        margin-top: 0px;
-      }
-    }
-
-    ion-row.homeML {
-      height: 25vh;
-
-      img {
-        height: 18.75vh;
-      }
-
-      p {
-        margin-top: 0px;
-      }
-    }
-  }
-
-  @media all and (orientation: landscape) {
-    ion-row.homeM {
-      display: none
-    }
-
-    ion-row.ucl {
-      height: 18.75vh;
-    }
-  }
-
-  @media all and (orientation: portrait) {
-    ion-row.homeML {
-      display: none
-    }
-
-    ion-row.ucl {
+    img {
       height: 16vh;
     }
+
+    p {
+      margin-top: 0px;
+    }
   }
 
+  ion-row.homeML {
+    height: 25vh;
+
+    img {
+      height: 18.75vh;
+    }
+
+    p {
+      margin-top: 0px;
+    }
+  }
 }
+
+@media all and (orientation: landscape) {
+  ion-row.homeM {
+    display: none
+  }
+
+  ion-row.ucl {
+    height: 18.75vh;
+  }
+}
+
+@media all and (orientation: portrait) {
+  ion-row.homeML {
+    display: none
+  }
+
+  ion-row.ucl {
+    height: 16vh;
+  }
+}
+
 
 ion-footer ion-toolbar ion-row ion-col {
   width: 20vw !important;

@@ -19,16 +19,16 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 
 import { Component } from '@angular/core';
 
 import { LibraryItem } from '../../app/entity/libraryItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { LibrariesService } from '../../providers/wso2-services/libraries-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { LibrariesService } from '../../services/wso2-services/libraries-service';
+import { UtilsService } from "../../services/utils-services/utils-service";
 
-@IonicPage()
 @Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html'
@@ -44,7 +44,8 @@ export class LibrariesPage {
     public platform: Platform,
     public libService: LibrariesService,
     public connService: ConnectivityService,
-    private cache: CacheService
+    private cache: CacheService,
+    private utilsService: UtilsService,
   ) {
     this.title = this.navParams.get('title');
     this.cachedOrNot();
@@ -78,10 +79,6 @@ export class LibrariesPage {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
-  }
-
-  goToLibDetails(lib: LibraryItem) {
-    this.navCtrl.push('LibraryDetailsPage', {lib: lib});
   }
 
   async cachedOrNot() {

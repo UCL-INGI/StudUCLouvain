@@ -1,13 +1,21 @@
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { NewsPage } from './news';
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [NewsPage],
-  imports: [IonicPageModule.forChild(NewsPage), TranslateModule.forChild()]
+  imports: [
+    IonicModule,
+    TranslateModule.forChild(),
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class NewsPageModule {
 }

@@ -19,13 +19,12 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
-import { StudentService } from '../../../../providers/wso2-services/student-service';
+import { StudentService } from '../../../../services/wso2-services/student-service';
 
-@IonicPage()
 @Component({
   selector: 'page-modal-info',
   templateUrl: 'modal-info.html'
@@ -39,7 +38,7 @@ export class ModalInfoPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
     public studentService: StudentService
   ) {
     this.getInfo().then(data => {
@@ -68,7 +67,7 @@ export class ModalInfoPage {
   }
 
   closeModal() {
-    this.viewCtrl.dismiss();
+    this.modalCtrl.dismiss();
   }
 
   private assignInfosData(res: any) {

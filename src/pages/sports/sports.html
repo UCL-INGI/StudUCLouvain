@@ -20,27 +20,27 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="sport">
-    <button ion-button menuToggle>
+  <ion-toolbar color="sport">
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center"><img alt="logo" height="40" src="./assets/img/logoSport.png"></ion-title>
-    <ion-buttons end>
-      <button (tap)="presentFilter()" ion-button>
+    <ion-buttons slot="primary">
+      <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-segment (ionChange)="updateDisplayedSports()" [(ngModel)]="segment">
     <ion-segment-button style="color: white;" value="all">
-      {{'SPORTS.ALL' | translate}}
+      <ion-label>{{'SPORTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button style="color: white;" value="team">
-      {{'SPORTS.TEAM' | translate}}
+      <ion-label>{{'SPORTS.TEAM' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button style="color: white;" value="favorites">
-      {{'SPORTS.FAV' | translate}}
+      <ion-label>{{'SPORTS.FAV' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -54,16 +54,17 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider (tap)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
+    <ion-item-divider (click)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
                       [ngClass]="{'team' : segment == 'team'}" class="all"
                       text-center>
-      {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
+      <ion-label>{{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})</ion-label>
     </ion-item-divider>
 
     <ion-list *ngFor="let sport of item.name" [hidden]="!utilsService.isGroupShown(item.jour)">
 
       <ion-item-sliding #slidingItem [hidden]="sport.hidden">
         <ion-item [ngClass]="{'team' : segment == 'team'}" class="all" text-center>
+          <ion-label>
           <h3>{{sport.sport}} {{sport.sexe}} {{sport.type}}</h3>
           <p class="text">{{sport.lieu}} - Salle : {{sport.salle}}</p>
           <p class="text">{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash;
@@ -71,21 +72,22 @@
           <p *ngIf="sport.online==1" style="color:red;">{{'SPORTS.ONLINE' | translate}}</p>
           <p *ngIf="sport.remarque.length > 2" style="color:red;">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
           <p *ngIf="sport.active==0" style="color:red;">{{'SPORTS.ANNULE' | translate}}</p>
+          </ion-label>
         </ion-item>
 
-        <ion-item-options side="right">
-          <button (tap)="addToCalendar(slidingItem, sport)" class="large-icon" ion-button>
+        <ion-item-options side="end">
+          <ion-button (click)="addToCalendar(sport)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
-          </button>
-          <button (tap)="utilsService.addFavorite(slidingItem, sport, 'SPORTS')"
+          </ion-button>
+          <ion-button (click)="utilsService.addFavorite(sport, 'SPORTS')"
                   *ngIf="segment === 'all' || segment === 'team'"
-                  class="large-icon" ion-button>
-            <ion-icon name="star-outline"></ion-icon>
-          </button>
-          <button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'"
-                  class="large-icon" ion-button>
+                  class="large-icon">
+            <ion-icon name="star-outline="></ion-icon>
+          </ion-button>
+          <ion-button (click)="removeFavorite(sport, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+                  class="large-icon">
             <ion-icon name='close'></ion-icon>
-          </button>
+          </ion-button>
         </ion-item-options>
 
       </ion-item-sliding>
@@ -97,7 +99,7 @@
   <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching"
                    [ngClass]="{'team' : segment == 'team'}"
                    class="all">
-    {{'SPORTS.NOTHING' | translate}}
+    <ion-label>{{'SPORTS.NOTHING' | translate}}</ion-label>
   </ion-list-header>
 </ion-content>
 

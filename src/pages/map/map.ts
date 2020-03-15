@@ -18,25 +18,22 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { ActionSheetController, IonicPage, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
+import { ModalController, NavController, NavParams, Platform } from '@ionic/angular';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation';
 
 import { MapLocation } from '../../app/entity/mapLocation';
-import { MapService } from '../../providers/map-services/map-service';
-import { POIService } from '../../providers/map-services/poi-service';
+import { MapService } from '../../services/map-services/map-service';
+import { POIService } from '../../services/map-services/poi-service';
 
-@IonicPage()
 @Component({
   selector: 'page-map',
-  templateUrl: 'map.html',
-  providers: [Geolocation]
+  templateUrl: 'map.html'
 })
 export class MapPage {
 
-  @ViewChild('map') mapElement: ElementRef;
-  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+  @ViewChild('map', {static: false}) mapElement: ElementRef;
+  @ViewChild('pleaseConnect', {static: false}) pleaseConnect: ElementRef;
   showedLocations: MapLocation[] = [];
   zones: any;
   filters: any;
@@ -51,7 +48,6 @@ export class MapPage {
 
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
-              public actionSheetCtrl: ActionSheetController,
               public mapService: MapService,
               public platform: Platform,
               public navParams: NavParams,

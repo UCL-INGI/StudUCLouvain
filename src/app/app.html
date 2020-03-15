@@ -18,24 +18,32 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<ion-menu [content]="content" id="mainMenu" [class]="selectedTheme">
-  <ion-content>
-    <ion-list>
-      <button ion-item *ngFor="let p of campusPages" (click)="openRootPage(p)">
-        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
-        </div>
-      </button>
-      <button ion-item *ngFor="let p of studiePages" (click)="openRootPage(p)">
-        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
-        </div>
-      </button>
-      <button ion-item *ngFor="let p of toolPages" (click)="openRootPage(p)">
-        <div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
-        </div>
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-nav #content [root]="rootPage" swipeBackEnabled="false" [class]="selectedTheme"></ion-nav>
+<ion-app>
+  <ion-split-pane contentId="main-app">
+    <ion-menu contentId="main-app-menu" id="mainMenu" [class]="selectedTheme">
+      <ion-header>
+        <ion-toolbar class="ion-padding" color="home">
+          <img alt="icon" height="28" src="./assets/img/s.png"/>
+          <ion-title class="menu-title">Stud.UCLouvain</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content id="main-app-menu">
+        <ion-list>
+          <ion-item button *ngFor="let p of campusPages" (click)="openRootPage(p)">
+            <ion-label><div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
+            </div></ion-label>
+          </ion-item>
+          <ion-item button *ngFor="let p of studiePages" (click)="openRootPage(p)">
+            <ion-label><div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
+            </div></ion-label>
+          </ion-item>
+          <ion-item button *ngFor="let p of toolPages" (click)="openRootPage(p)">
+            <ion-label><div class="box"><img height="35" src={{p.icon}} width="35"/> <span>&nbsp; {{p.title | translate}}</span>
+            </div></ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-app"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

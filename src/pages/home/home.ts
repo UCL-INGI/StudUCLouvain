@@ -18,23 +18,23 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertController, App, Content, FabContainer, IonicPage, NavController } from 'ionic-angular';
+import { AlertController, IonContent, NavController } from '@ionic/angular';
 
 import { Component, ViewChild } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { SettingsProvider } from "../../services/utils-services/settings-service";
 
-@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'app-home',
+  templateUrl: 'home.html',
+  styleUrls: ['./home.scss'],
 })
 export class HomePage {
-  @ViewChild('home') content: Content;
+  @ViewChild('home', {static: false}) content: IonContent;
 
   title = 'Stud.UCLouvain';
   where = '';
@@ -58,7 +58,6 @@ export class HomePage {
   mobilityPage = this.utilsService.getPageObject('Mobility');
   selectedTheme: string;
   constructor(
-    public app: App,
     public userS: UserService,
     public nav: NavController,
     private iab: InAppBrowser,
@@ -68,13 +67,11 @@ export class HomePage {
     private settings: SettingsProvider
   ) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
-    this.app.setTitle(this.title);
     document.title = this.title;
     // this.userS.addCampus('');
   }
 
   ionViewDidEnter() {
-    this.app.setTitle(this.title);
     setTimeout(() => {
       this.splashscreen.hide();
     }, 1000);
@@ -88,22 +85,17 @@ export class HomePage {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsService.launchExternalApp(page);
     } else {
-      this.nav.push(page.component, {title: page.title});
+      this.nav.navigateForward(['/' + page.component]);
     }
-  }
-
-  public openURL(url: string, fab: FabContainer) {
-    this.iab.create(url, '_system');
-    fab.close();
   }
 
   public openUCL(url: string) {
     this.iab.create(url, '_system');
   }
 
-  emergency() {
-    const alert = this.alertCtrl.create({
-      title: this.utilsService.getText('HOME', 'URG'),
+  async emergency() {
+    const alert = await this.alertCtrl.create({
+      header: this.utilsService.getText('HOME', 'URG'),
       message: this.getAlertEmergencyMsg(),
       cssClass: 'emergency ' + this.selectedTheme,
       buttons: [
@@ -112,7 +104,7 @@ export class HomePage {
         }
       ]
     });
-    alert.present();
+    return await alert.present();
   }
 
   private getAlertEmergencyMsg() {

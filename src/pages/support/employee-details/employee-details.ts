@@ -19,16 +19,16 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 
 import { EmployeeItem } from '../../../app/entity/employeeItem';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
-import { RepertoireService } from '../../../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
+import { ActivatedRoute, Router } from "@angular/router";
 
-@IonicPage()
 @Component({
   selector: 'page-employee-details',
   templateUrl: 'employee-details.html',
@@ -43,7 +43,6 @@ import { RepertoireService } from '../../../providers/wso2-services/repertoire-s
 })
 export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
-  shownGroup = null;
   address: any;
   searching = false;
 
@@ -51,29 +50,28 @@ export class EmployeeDetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public repService: RepertoireService,
-    public connService: ConnectivityService
+    public connService: ConnectivityService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
-    this.empDetails = navParams.get('emp');
-    this.searching = true;
-    // Check if the connexion is Ok before search details pour an employee
-    if (this.connService.isOnline()) {
-      this.repService.loadEmpDetails(this.empDetails).then(res => {
-        const result: any = res;
-        this.empDetails = result.empDetails;
-        this.searching = false;
-      });
-    } else {
+    this.route.queryParams.subscribe(() => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.empDetails = this.router.getCurrentNavigation().extras.state.emp;
+      }
+      this.searching = true;
+      if (this.connService.isOnline()) {
+        this.repService.loadEmpDetails(this.empDetails).then((res: EmployeeItem) => {
+            this.empDetails = res;
+          }
+        );
+      } else {
+        this.connService.presentConnectionAlert();
+      }
       this.searching = false;
-      this.connService.presentConnectionAlert();
-    }
+    });
   }
 
-  ionViewDidLoad() {
-  }
-
-  /*Open page with some aditionnal information*/
   openPage(url: string) {
-    // InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

@@ -20,7 +20,7 @@
 */
 
 page-studies {
-  ion-navbar[hidebackbutton] button[menutoggle] {
+  ion-toolbar[hidebackbutton] button[menutoggle] {
     display: block !important;
   }
 

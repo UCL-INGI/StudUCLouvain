@@ -19,12 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-@IonicPage()
 @Component({
   selector: 'page-credit',
   templateUrl: 'credit.html'
@@ -38,7 +37,7 @@ export class CreditPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    private iab: InAppBrowser,
+    private iab: InAppBrowser
   ) {
     this.title = this.navParams.get('title');
   }

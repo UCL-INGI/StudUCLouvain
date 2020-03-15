@@ -20,13 +20,13 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="news" secondary>
+  <ion-toolbar color="news" secondary>
     <ion-row>
       <ion-col>
         <ion-title>{{news.title}}</ion-title>
       </ion-col>
     </ion-row>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
@@ -34,7 +34,7 @@
   <ion-card>
     <ion-card-content>
       <ion-row>
-        <ion-col *ngIf="news.image !== undefined && news.image.length > 0" col-4>
+        <ion-col *ngIf="news.image !== undefined && news.image.length > 0" size="4">
           <img alt="News picture" src="{{news.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
@@ -45,12 +45,11 @@
 
     <ion-row no-padding>
       <ion-col text-right>
-        <button (click)="openPage(news.link)" clear icon-left ion-button small>
+        <ion-button (click)="openPage(news.link)" fill="clear" slot="start" size="small">
           <ion-icon name='share-alt'></ion-icon>
           {{'NEWS.SITE' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
     </ion-row>
-
   </ion-card>
 </ion-content>

@@ -1,4 +1,4 @@
-import { AlertController, IonicModule, ModalController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicModule, ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { async, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';

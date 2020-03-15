@@ -19,14 +19,13 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
-import { EventsService } from '../../../providers/rss-services/events-service';
-import { UtilsService } from "../../../providers/utils-services/utils-service";
+import { EventsService } from '../../../services/rss-services/events-service';
+import { UtilsService } from "../../../services/utils-services/utils-service";
 
-@IonicPage()
 @Component({
   selector: 'page-events-filter',
   templateUrl: 'events-filter.html'
@@ -44,7 +43,7 @@ export class EventsFilterPage {
     public navParams: NavParams,
     private eventService: EventsService,
     public utilsService: UtilsService,
-        public viewCtrl: ViewController,
+    private modalCtrl: ModalController
   ) {
     const excludedFilters = this.navParams.get('excludedFilters');
     const filters = this.navParams.get('filters');
@@ -74,6 +73,6 @@ export class EventsFilterPage {
     const excludedFilters = cancel ? [] : categories.filter(c => !c.isChecked).map(c => c.name);
     results.push(excludedFilters);
     results.push(dateRange);
-    this.viewCtrl.dismiss(results);
+    this.modalCtrl.dismiss(results);
   }
 }

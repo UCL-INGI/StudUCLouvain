@@ -4,23 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Stud.UCLouvain</title>
+  <base href="/">
   <meta name="Description" content="StudUCLouvain an application for the student of UCLouvain">
-  <meta
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
-    name="viewport">
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover" name="viewport">
   <meta content="telephone=no" name="format-detection">
   <meta content="no" name="msapplication-tap-highlight">
 
-  <link rel="apple-touch-icon" href="assets/imgs/logo.png">
   <link href="assets/icon/favicon.ico" rel="icon" type="image/x-icon">
-  <link href="manifest.json" rel="manifest">
+  <!--  <link href="manifest.json" rel="manifest">-->
   <meta content="#4e8ef7" name="theme-color">
 
   <!-- cordova.js required for cordova apps -->
-  <script async src="cordova.js"></script>
+<!--  <script async src="cordova.js"></script>-->
 
   <!-- un-comment this code to enable service worker-->
-  <script async>
+  <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('service worker installed'))
@@ -30,21 +28,24 @@
 
   <link href="build/main.css" rel="stylesheet">
 
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
 </head>
 
 <body>
 
 <!-- Ionic's root component and where the app will load -->
-<ion-app></ion-app>
+<app-root></app-root>
 
 <!-- The polyfills js is generated during the build process -->
-<script src="build/polyfills.js"></script>
+<!--<script src="build/polyfills.js"></script>-->
 
 
 <!-- The bundle js is generated during the build process -->
-<script src="build/vendor.js"></script>
-<script src="build/main.js"></script>
+<!--<script src="build/vendor.js"></script>-->
+<!--<script src="build/main.js"></script>-->
 
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 <noscript>
   <h1>You must enable JavaScript to view this page.</h1>

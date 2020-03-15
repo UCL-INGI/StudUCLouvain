@@ -1,3 +1,18 @@
+import { debounceTime } from 'rxjs/operators';
+import { AlertController, IonContent, IonList, NavController, NavParams, Platform } from '@ionic/angular';
+import { CacheService } from 'ionic-cache';
+
+import { Component, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
+import { NewsItem } from '../../app/entity/newsItem';
+import { NewsService } from '../../services/rss-services/news-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { FacService } from '../../services/utils-services/fac-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -18,23 +33,7 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import 'rxjs/add/operator/debounceTime';
 
-import { AlertController, App, Content, IonicPage, List, NavController, NavParams, Platform } from 'ionic-angular';
-import { CacheService } from 'ionic-cache';
-
-import { Component, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-import { NewsItem } from '../../app/entity/newsItem';
-import { NewsService } from '../../providers/rss-services/news-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { FacService } from '../../providers/utils-services/fac-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-
-@IonicPage()
 @Component({
   selector: 'page-news',
   templateUrl: 'news.html'
@@ -42,8 +41,8 @@ import { UtilsService } from '../../providers/utils-services/utils-service';
 export class NewsPage {
   // url = 'assets/data/facultiesInformations.json';
 
-  @ViewChild('newsList', {read: List}) newsList: List;
-  @ViewChild('news') content: Content;
+  @ViewChild('newsList', {read: IonList, static: false}) newsList: IonList;
+  @ViewChild('news', {static: false}) content: IonContent;
   news: Array<NewsItem> = [];
   segment = 'univ';
   subsegment = 'P1';
@@ -64,7 +63,6 @@ export class NewsPage {
     public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public app: App,
     public userS: UserService,
     public newsService: NewsService,
     public connService: ConnectivityService,
@@ -81,17 +79,10 @@ export class NewsPage {
     });
   }
 
-  // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
-  resize() {
-    if (this.content) {
-      this.content.resize();
-    }
-  }
-
   ionViewDidLoad() {
-    this.app.setTitle(this.title);
+    document.title = this.title;
     this.cachedOrNot();
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
       this.searching = false;
       this.updateDisplayedNews();
     });
@@ -104,7 +95,6 @@ export class NewsPage {
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-    this.resize();
     const links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
@@ -123,7 +113,6 @@ export class NewsPage {
 
   removeFac() {
     this.userS.removeFac();
-    this.resize();
   }
 
   public doRefresh(refresher) {
@@ -136,7 +125,6 @@ export class NewsPage {
   }
 
   tabChanged() {
-    this.resize();
     if (this.segment === 'univ') {
       this.cachedOrNot();
     } else if (this.segment === 'fac') {
@@ -203,10 +191,6 @@ export class NewsPage {
     this.nonews = this.shownNews === 0;
     this.searching = false;
     this.utilsService.dismissLoading();
-  }
-
-  public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.push('NewsDetailsPage', {news: news});
   }
 
   private refresh() {

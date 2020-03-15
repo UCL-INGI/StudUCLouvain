@@ -20,70 +20,68 @@
 
 -->
 <!--EN-TETE-->
+<script src="../../../../StudUCLouvain_ionic-v4/src/app/home/home.page.ts"></script>
 <ion-header *ngIf="(userS.hasCampus() === true)">
-  <ion-navbar color="home">
+  <ion-toolbar color="home">
     <ion-title>
       <img alt="logo" height="40" src="./assets/img/header2.png">
     </ion-title>
-
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <!----------------------- FIRST LAUNCH : CHOICE OF CAMPUS --------------------------------->
-<ion-content #home align-self-center class="has-header has-subheader" text-center>
-  <ng-container *ngIf="(userS.hasCampus() === false)">
+<ion-content *ngIf="(userS.hasCampus() === false)">
     <p style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
-    <ion-list [(ngModel)]="where" class="other" radio-group>
-      <ion-item class="other" id="LLN">
-        <ion-label>Louvain-la-Neuve</ion-label>
-        <ion-radio checked value="LLN"></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>Woluwe</ion-label>
-        <ion-radio value="Woluwe"></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>Mons</ion-label>
-        <ion-radio value="Mons"></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>Tournai</ion-label>
-        <ion-radio disabled value="Tournai"></ion-radio>
-      </ion-item>
-      <ion-item class="other">
-        <ion-label>St-Gilles</ion-label>
-        <ion-radio disabled value="StGilles"></ion-radio>
-      </ion-item>
+    <ion-list class="other" ngDefaultControl>
+      <ion-radio-group [(ngModel)]="where">
+        <ion-item class="other" id="LLN">
+          <ion-label>Louvain-la-Neuve</ion-label>
+          <ion-radio checked value="LLN" slot="end"></ion-radio>
+        </ion-item>
+        <ion-item class="other">
+          <ion-label>Woluwe</ion-label>
+          <ion-radio value="Woluwe" slot="end"></ion-radio>
+        </ion-item>
+        <ion-item class="other">
+          <ion-label>Mons</ion-label>
+          <ion-radio value="Mons" slot="end"></ion-radio>
+        </ion-item>
+        <ion-item class="other">
+          <ion-label>Tournai</ion-label>
+          <ion-radio disabled value="Tournai" slot="end"></ion-radio>
+        </ion-item>
+        <ion-item class="other">
+          <ion-label>St-Gilles</ion-label>
+          <ion-radio disabled value="StGilles" slot="end"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
     </ion-list>
     <ion-row center>
       <ion-col text-center>
-        <button (tap)="updateCampus()" id="okbutton" ion-button round>{{'HOME.OK' | translate}}</button>
+        <ion-button (click)="updateCampus()" id="okbutton" shape="round">{{'HOME.OK' | translate}}</ion-button>
       </ion-col>
     </ion-row>
-  </ng-container>
-
+</ion-content>
   <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
-  <ng-container *ngIf="userS.hasCampus()" class="menuHome has-header has-subheader">
-
+<ion-content *ngIf="userS.hasCampus()" class="menuHome">
     <ion-grid #menuHome class="menuHome">
-
       <!----------------------------------------------------------GRID FOR PORTRAIT------------------------------------------------------------------------------->
       <ion-row class="homeM">
-        <ion-col col-4 id="study" text-center>
-          <img (tap)="changePage(studiesPage)" alt="etudes" src="./assets/img/études.png"/>
+        <ion-col size="4" id="study" text-center>
+          <img (click)="changePage(studiesPage)" alt="etudes" src="./assets/img/études.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.ETUDES' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(libraryPage)" alt="biblio" src="./assets/img/biblio.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(libraryPage)" alt="biblio" src="./assets/img/biblio.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.LIBRARY' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(helpDeskPage)" alt="aide" src="./assets/img/support.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(helpDeskPage)" alt="aide" src="./assets/img/support.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.HELP' | translate}}</span>
           </strong></p>
@@ -91,20 +89,20 @@
       </ion-row>
 
       <ion-row class="homeM">
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(newsPage)" alt="logo" src="./assets/img/news.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(newsPage)" alt="logo" src="./assets/img/news.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.NEWS' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(eventPage)" alt="louvinfo" src="./assets/img/event.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(eventPage)" alt="louvinfo" src="./assets/img/event.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.EVENTS' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(sportPage)" alt="sport" src="./assets/img/sport.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(sportPage)" alt="sport" src="./assets/img/sport.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.SPORTS' | translate}}</span>
           </strong></p>
@@ -112,20 +110,20 @@
       </ion-row>
 
       <ion-row class="homeM">
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(mapPage)" alt="carte" src="./assets/img/cartes.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(mapPage)" alt="carte" src="./assets/img/cartes.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.MAP' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(restoPage)" alt="resto" src="./assets/img/resto.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(restoPage)" alt="resto" src="./assets/img/resto.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.REST' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(mobilityPage)" alt="voiture" src="./assets/img/mobilité.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(mobilityPage)" alt="voiture" src="./assets/img/mobilité.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.MOBILITY' | translate}}</span>
           </strong></p>
@@ -133,20 +131,20 @@
       </ion-row>
 
       <ion-row class="homeM">
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(paramPage)" alt="param" src="./assets/img/setting.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(paramPage)" alt="param" src="./assets/img/setting.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.PARAM' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="changePage(guindaillePage)" alt="guindaille" src="./assets/img/g2.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="changePage(guindaillePage)" alt="guindaille" src="./assets/img/g2.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.PARTY' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-4 text-center>
-          <img (tap)="emergency()" alt="urgence" src="./assets/img/urgence.png"/>
+        <ion-col size="4" text-center>
+          <img (click)="emergency()" alt="urgence" src="./assets/img/urgence.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.URG' | translate}}</span>
           </strong></p>
@@ -156,26 +154,26 @@
 
       <!----------------------------------------------------------GRID FOR LANDSCAPE------------------------------------------------------------------------------->
       <ion-row class="homeML">
-        <ion-col col-3 id="study" text-center>
-          <img (tap)="changePage(studiesPage)" alt="etudes" src="./assets/img/études.png"/>
+        <ion-col size="3" id="study" text-center>
+          <img (click)="changePage(studiesPage)" alt="etudes" src="./assets/img/études.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.ETUDES' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(libraryPage)" alt="biblio" src="./assets/img/biblio.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(libraryPage)" alt="biblio" src="./assets/img/biblio.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.LIBRARY' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(helpDeskPage)" alt="aide" src="./assets/img/support.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(helpDeskPage)" alt="aide" src="./assets/img/support.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.HELP' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(newsPage)" alt="logo" src="./assets/img/news.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(newsPage)" alt="logo" src="./assets/img/news.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.NEWS' | translate}}</span>
           </strong></p>
@@ -183,26 +181,26 @@
       </ion-row>
 
       <ion-row class="homeML">
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(eventPage)" alt="louvinfo" src="./assets/img/event.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(eventPage)" alt="louvinfo" src="./assets/img/event.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.EVENTS' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(sportPage)" alt="sport" src="./assets/img/sport.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(sportPage)" alt="sport" src="./assets/img/sport.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.SPORTS' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(mapPage)" alt="carte" src="./assets/img/cartes.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(mapPage)" alt="carte" src="./assets/img/cartes.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.MAP' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(restoPage)" alt="resto" src="./assets/img/resto.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(restoPage)" alt="resto" src="./assets/img/resto.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.REST' | translate}}</span>
           </strong></p>
@@ -210,26 +208,26 @@
       </ion-row>
 
       <ion-row class="homeML">
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(mobilityPage)" alt="voiture" src="./assets/img/mobilité.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(mobilityPage)" alt="voiture" src="./assets/img/mobilité.png"/>
           <p><strong>
             <span style="color:#002D62">{{'HOME.MOBILITY' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(paramPage)" alt="param" src="./assets/img/setting.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(paramPage)" alt="param" src="./assets/img/setting.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.PARAM' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="changePage(guindaillePage)" alt="guindaille" src="./assets/img/g2.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="changePage(guindaillePage)" alt="guindaille" src="./assets/img/g2.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.PARTY' | translate}}</span>
           </strong></p>
         </ion-col>
-        <ion-col col-3 text-center>
-          <img (tap)="emergency()" alt="urgence" src="./assets/img/urgence.png"/>
+        <ion-col size="3" text-center>
+          <img (click)="emergency()" alt="urgence" src="./assets/img/urgence.png"/>
           <p><strong>
             <span style="color:#002D62">{{'MENU.URG' | translate}}</span>
           </strong></p>
@@ -237,13 +235,12 @@
       </ion-row>
 
       <ion-row class="ucl">
-        <ion-col align-self-center col-6 col-md-4 offset-3 offset-md-4 text-center>
-          <img (tap)="openUCL('http://www.uclouvain.be')" alt="uclouvain" class="five"
+        <ion-col align-self-center size="6" offset="3" size-md="md-4" offset-md="4" text-center>
+          <img (click)="openUCL('http://www.uclouvain.be')" alt="uclouvain" class="five"
                src="./assets/img/uclouvain.png"/>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-container>
 </ion-content>
 
 
@@ -252,32 +249,32 @@
   <ion-toolbar>
     <ion-row text-center>
       <ion-col>
-        <a clear href='https://www.facebook.com/UCLouvain/' ion-button rel="noopener noreferrer" small target="_blank">
+        <ion-button fill="clear" href='https://www.facebook.com/UCLouvain/' rel="noopener noreferrer" size="small" target="_blank">
           <ion-icon name="logo-facebook"></ion-icon>
-        </a>
+        </ion-button>
       </ion-col>
       <ion-col>
-        <a clear href='https://twitter.com/UCLouvain_be' ion-button rel="noopener noreferrer" small target="_blank">
+        <ion-button fill="clear" href='https://twitter.com/UCLouvain_be' rel="noopener noreferrer" size="small" target="_blank">
           <ion-icon name="logo-twitter"></ion-icon>
-        </a>
+        </ion-button>
       </ion-col>
       <ion-col>
-        <a clear href='https://www.linkedin.com/school/universite-catholique-de-louvain/' ion-button
+        <ion-button fill="clear" href='https://www.linkedin.com/school/universite-catholique-de-louvain/'
            rel="noopener noreferrer"
-           small target="_blank">
+           size="small" target="_blank">
           <ion-icon name="logo-linkedin"></ion-icon>
-        </a>
+        </ion-button>
       </ion-col>
       <ion-col>
-        <a clear href='https://www.instagram.com/uclouvain' ion-button rel="noopener noreferrer" small target="_blank">
+        <ion-button fill="clear" href='https://www.instagram.com/uclouvain' rel="noopener noreferrer" size="small" target="_blank">
           <ion-icon name="logo-instagram"></ion-icon>
-        </a>
+        </ion-button>
       </ion-col>
       <ion-col>
-        <a clear href='https://www.youtube.com/user/universitedelouvain' ion-button rel="noopener noreferrer" small
+        <ion-button fill="clear" href='https://www.youtube.com/user/universitedelouvain' rel="noopener noreferrer" size="small"
            target="_blank">
           <ion-icon name="logo-youtube"></ion-icon>
-        </a>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

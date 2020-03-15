@@ -19,15 +19,14 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../../app/entity/adeProject';
-import { StudiesService } from '../../../providers/studies-services/studies-service';
+import { StudiesService } from '../../../services/studies-services/studies-service';
 
-@IonicPage()
 @Component({
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html'
@@ -40,7 +39,7 @@ export class ModalProjectPage {
     public navCtrl: NavController,
     public storage: Storage,
     public navParams: NavParams,
-    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
     public studiesService: StudiesService
   ) {
   }
@@ -49,7 +48,7 @@ export class ModalProjectPage {
   closeModal(project: AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(data => {
       this.storage.set('adeProject', project);
-      this.viewCtrl.dismiss(project);
+      this.modalCtrl.dismiss(project);
     });
   }
 

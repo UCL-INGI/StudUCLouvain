@@ -26,8 +26,8 @@ export class EmployeeItem {
   email: string;
   departments: any;
   address: any;
-  businessContacts: Array<any>;
-  contracts: Array<any>;
+  businessContacts: {businessContact: any};
+  contracts: {contract: any};
   gender: string;
   photo_url: string;
 
@@ -38,8 +38,8 @@ export class EmployeeItem {
     email: string,
     departments: any,
     address?: any,
-    businessContacts?: Array<any>,
-    contracts?: Array<any>,
+    businessContacts?: {businessContact: any},
+    contracts?: {contract: any},
     gender?: string,
     photo_url?: string
   ) {

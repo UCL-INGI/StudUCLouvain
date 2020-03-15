@@ -19,7 +19,7 @@ jobs:
         chrome: stable
 
       install:
-        - npm install -g ionic cordova@^9
+        - npm install -g ionic cordova
         - npm install
         - ionic info
 
@@ -41,7 +41,7 @@ jobs:
         chrome: stable
 
       install:
-        - npm install -g ionic
+        - npm install -g ionic firebase-tools
         - npm install
         - ionic info
 
@@ -71,7 +71,7 @@ jobs:
 
       before_install: nvm install 12.14.1
       install:
-        - npm install -g ionic cordova@^9
+        - npm install -g ionic cordova
         - npm install
         - npm --version
         - node --version

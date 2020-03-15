@@ -18,18 +18,18 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicPage, LoadingController, ModalController, NavController, NavParams, Platform } from 'ionic-angular';
+import { ModalController, NavController, NavParams, Platform } from '@ionic/angular';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { EmployeeItem } from '../../app/entity/employeeItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { RepertoireService } from '../../services/wso2-services/repertoire-service';
+import { NavigationExtras } from "@angular/router";
 
-@IonicPage()
 @Component({
   selector: 'page-support',
   templateUrl: 'support.html',
@@ -50,7 +50,6 @@ export class SupportPage {
   firstname = '';
   loading;
   segment = 'aide';
-  shownHelp = null;
 
   constructor(
     public navCtrl: NavController,
@@ -60,7 +59,6 @@ export class SupportPage {
     public platform: Platform,
     public repService: RepertoireService,
     public connService: ConnectivityService,
-    public loadingCtrl: LoadingController,
     private utilsService: UtilsService
   ) {
     this.title = this.navParams.get('title');
@@ -82,20 +80,21 @@ export class SupportPage {
 
   searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {
-      this.repService.searchEmployees(options, values).then(res => {
-        const result: any = res;
-        this.employees = result.employees;
-        this.searching = true;
+      this.repService.searchEmployees(options, values).then((res: any) => {
+        this.employees = res.employees;
       });
     } else {
-      this.searching = false;
       this.connService.presentConnectionAlert();
     }
+    this.searching = false;
     this.utilsService.dismissLoading();
   }
 
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.push('EmployeeDetailsPage', {emp: emp});
+    const navigationExtras: NavigationExtras = {
+      state: {  emp: emp }
+    };
+    this.navCtrl.navigateForward('EmployeeDetailsPage', navigationExtras);
   }
 
   public openURL(url: string) {

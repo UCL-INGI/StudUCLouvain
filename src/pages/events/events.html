@@ -21,24 +21,24 @@
 
 <!--EN-TETE-->
 <ion-header>
-  <ion-navbar color="event">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <img alt="Icon" height="28" src="./assets/img/s.png"/>
-    <ion-title>{{title | translate}}</ion-title>
-    <ion-buttons end>
-      <button (tap)="presentFilter()" ion-button>
-        <ion-icon name="options"></ion-icon>
-      </button>
+  <ion-toolbar color="event">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <img alt="Events Icon" height="28" src="./assets/img/s.png"/>
     </ion-buttons>
-  </ion-navbar>
+    <ion-title>{{title | translate}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="presentFilter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-segment (ionChange)="cachedOrNot()" [(ngModel)]="segment">
     <ion-segment-button value="all">
-      {{'EVENTS.ALL' | translate}}
+      <ion-label>{{'EVENTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="favorites">
-      {{'EVENTS.FAV' | translate}}
+      <ion-label>{{'EVENTS.FAV' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -53,9 +53,11 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD" [hidden]="shownEvents === 0">
 
-    <ion-item-divider (tap)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
+    <ion-item-divider (click)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
+      <ion-label>
       <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks).from | date: 'dd/MM'}}
       &mdash; {{getRangeWeek(item.weeks).to | date: 'dd/MM'}}] ({{item.event.length}})
+      </ion-label>
     </ion-item-divider>
 
     <ion-list *ngFor="let event of item.event" [hidden]="!utilsService.isGroupShown(item.weeks)">
@@ -63,39 +65,38 @@
       <ion-item-sliding #slidingItem [hidden]="event.hidden">
 
         <ion-item>
-          <ion-thumbnail item-left>
+          <ion-label><ion-thumbnail item-left>
             <img [src]="event.iconCategory" alt="Event Category Picto">
-          </ion-thumbnail>
-          <button (tap)="goToEventDetail(event)" ion-item>
+          </ion-thumbnail></ion-label>
+          <ion-button (click)="utilsService.goToDetail('EventsDetailsPage', event)">
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
             <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-          </button>
+          </ion-button>
         </ion-item>
 
         <ion-item-options>
-          <button (tap)="createEvent(slidingItem, event)" class="large-icon" ion-button outline>
+          <ion-button (click)="createEvent(event)" class="large-icon" fill="outline">
             <ion-icon name='calendar'></ion-icon>
-          </button>
+          </ion-button>
 
-          <button (tap)="utilsService.addFavorite(slidingItem, event, 'EVENTS')" *ngIf="segment === 'all'"
-                  class="large-icon"
-                  ion-button outline>
-            <ion-icon name="star-outline"></ion-icon>
-          </button>
+          <ion-button (click)="utilsService.addFavorite(eventsList, event, 'EVENTS')" *ngIf="segment === 'all'"
+                  class="large-icon" fill="outline">
+            <ion-icon name="star-outline="></ion-icon>
+          </ion-button>
 
-          <button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
-                  class="large-icon" ion-button>
+          <ion-button (click)="removeFavorite(event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+                  class="large-icon">
             <ion-icon name='close'></ion-icon>
-          </button>
+          </ion-button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
   </ion-list>
 
   <ion-list-header *ngIf="(noevents && !searching)">
-    {{'EVENTS.NOTHING' | translate}}
+    <ion-label>{{'EVENTS.NOTHING' | translate}}</ion-label>
   </ion-list-header>
 </ion-content>
 

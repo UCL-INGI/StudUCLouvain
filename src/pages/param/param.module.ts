@@ -1,16 +1,17 @@
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
 
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-// import { Http } from '@angular/http';
 import { HttpLoaderFactory } from '../../app/app.module';
 import { ParamPage } from './param';
+import { SettingsRoutingModule } from "./param-routing.module";
 
 @NgModule({
   declarations: [ParamPage],
   imports: [
-    IonicPageModule.forChild(ParamPage),
+    IonicModule,
+    SettingsRoutingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

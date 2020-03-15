@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Daubry Benjamin & Marchesini Bruno
@@ -19,29 +20,27 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-  AlertController,
-  IonicPage,
-  MenuController,
-  ModalController,
-  NavController,
-  NavParams,
-  Platform,
-  ToastController
-} from 'ionic-angular';
+    AlertController,
+    MenuController,
+    ModalController,
+    NavController,
+    NavParams,
+    ToastController
+} from '@ionic/angular';
 
 import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../app/entity/adeProject';
 import { Course } from '../../app/entity/course';
-import { StudiesService } from '../../providers/studies-services/studies-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { StudentService } from '../../providers/wso2-services/student-service';
-import { Wso2Service } from '../../providers/wso2-services/wso2-service';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
+import { NavigationExtras } from "@angular/router";
 
-@IonicPage()
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html'
@@ -50,20 +49,17 @@ export class StudiesPage {
   public data: any;
   segment = 'cours';
   public listCourses: Course[];
-  public course: Course;
   public title: any;
   public sessionId: string;
   public project: AdeProject = null;
   public error = '';
   sigles: any;
   activities: any = [];
-  response: any;
-  language;
   statusInsc = '';
   prog = '';
   private username = '';
   private password = '';
-  private status = '';
+  status = '';
 
   constructor(
     public studiesService: StudiesService,
@@ -73,7 +69,6 @@ export class StudiesPage {
     public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
-    public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
@@ -89,7 +84,7 @@ export class StudiesPage {
 
   checkExist(sigle: string) {
     const year = this.project.name.split('-')[0];
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       return this.studentService.checkCourse(sigle, year).then((data: any) => {
         const exist = data !== 404 && data !== 500;
         resolve({exist: exist, nameFR: exist ? data.title : '', nameEN: ''});
@@ -97,8 +92,9 @@ export class StudiesPage {
     });
   }
 
-  toastBadCourse() {
-    this.studiesService.toastCourse('BADCOURSE').present();
+  async toastBadCourse() {
+    const toast = await this.studiesService.toastCourse('BADCOURSE');
+    return await toast.present();
   }
 
   loadActivities() {
@@ -110,15 +106,11 @@ export class StudiesPage {
             for (const sigle of this.sigles) {
               this.activities.push({name: '', sigle: sigle});
             }
-          }).catch(() => {
-            console.log('Error during load of course program');
-          });
+          }).catch(() => console.log('Error during load of course program'));
           this.studentService.getStatus().then(res => {
             this.statusInsc = res[0].etatInscription;
             this.prog = res[0].intitOffreComplet;
-          }).catch(() => {
-            console.log('Error during load of inscription status');
-          });
+          }).catch(() => console.log('Error during load of inscription status'));
         }
       });
     } else {
@@ -127,10 +119,13 @@ export class StudiesPage {
     }
   }
 
-  openModalProject() {
-    const myModal = this.modalCtrl.create('ModalProjectPage', {sessionId: this.sessionId});
-    myModal.onDidDismiss(data => this.project = data);
-    myModal.present();
+  async openModalProject() {
+    const myModal = await this.modalCtrl.create({
+      component: 'ModalProjectPage',
+      componentProps: {sessionId: this.sessionId}
+    });
+    await myModal.onDidDismiss().then(data => this.project = data.data);
+    return await myModal.present();
   }
 
   initializeSession() {
@@ -152,16 +147,14 @@ export class StudiesPage {
     }
   }
 
-  showPrompt() {
-    this.alertCtrl.create({
-      title: this.utilsService.getText('STUDY', 'ADDCOURSE'),
+  async showPrompt() {
+    const alert = await this.alertCtrl.create({
+      header: this.utilsService.getText('STUDY', 'ADDCOURSE'),
       message: this.utilsService.getText('STUDY', 'MESSAGE'),
-      inputs: [
-        {
-          name: 'acronym',
-          placeholder: this.utilsService.getText('STUDY', 'SIGLE')
-        }
-      ],
+      inputs: [{
+        name: 'acronym',
+        placeholder: this.utilsService.getText('STUDY', 'SIGLE')
+      }],
       buttons: [
         {
           text: this.utilsService.getText('STUDY', 'CANCEL'),
@@ -172,13 +165,14 @@ export class StudiesPage {
           handler: data => this.promptSaveHandler(data)
         }
       ]
-    }).present();
+    });
+    return await alert.present();
   }
 
-  toastAlreadyCourse() {
-    const toast = this.studiesService.toastCourse('ALCOURSE');
-    toast.onDidDismiss(() => console.log('Dismissed toast'));
-    toast.present();
+  async toastAlreadyCourse() {
+    const toast = await this.studiesService.toastCourse('ALCOURSE');
+    await toast.onDidDismiss().then(() => console.log('Dismissed toast'));
+    return await toast.present();
   }
 
   addCourseFromProgram(acro: string) {
@@ -188,20 +182,17 @@ export class StudiesPage {
         already = true;
       }
     }
-    if (!already) {
-      this.checkExistAndAddOrToast(acro);
-    } else {
-      this.toastAlreadyCourse();
-    }
+    already ? this.toastAlreadyCourse() : this.checkExistAndAddOrToast(acro);
   }
 
-  addCourse(sigle: string, name: string) {
+  async addCourse(sigle: string, name: string) {
     this.saveCourse(name, sigle);
-    this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: 'Cours ajouté',
       duration: 1000,
       position: 'bottom'
-    }).present();
+    });
+    return await toast.present();
   }
 
   getCourses() {
@@ -222,19 +213,23 @@ export class StudiesPage {
   }
 
   openCoursePage(course: Course) {
-    this.navCtrl.push('CoursePage', {
-      course: course,
-      sessionId: this.sessionId,
-      year: this.project.name.split('-')[0]
-    });
+    const navigationExtras: NavigationExtras = {
+      state: {
+        course: course,
+        sessionId: this.sessionId,
+        year: this.project.name.split('-')[0]
+      }
+    };
+    this.navCtrl.navigateForward('CoursePage', navigationExtras);
   }
 
-  unavailableAlert() {
-    this.alertCtrl.create({
-      title: 'Indisponible',
-      subTitle: 'Cette fonctionnalité n\'est pas encore disponible',
+  async unavailableAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Indisponible',
+      subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
-    }).present();
+    });
+    return await alert.present();
   }
 
   openExamPage() {
@@ -248,14 +243,10 @@ export class StudiesPage {
   private login() {
     this.error = '';
     return new Promise(resolve => {
-      this.wso2Service.login(this.username, this.password).catch(error => {
-        if (error.status === 400) {
-          this.error = this.utilsService.getText('STUDY', 'BADLOG');
-        } else {
-          this.error = this.utilsService.getText('STUDY', 'ERROR');
-        }
+      this.wso2Service.login(this.username, this.password).pipe(catchError(error => {
+        this.error = this.utilsService.getText('STUDY', error.status === 400 ? 'BADLOG' : 'ERROR');
         return error;
-      }).subscribe(data => {
+      })).subscribe(data => {
         if (data != null) {
           this.status = data.toString();
           resolve(data);
@@ -283,6 +274,8 @@ export class StudiesPage {
         this.toastBadCourse();
         this.showPrompt();
       }
-    }).catch(err => {console.log(err);});
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }

@@ -18,14 +18,13 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { IonicPage, NavParams } from 'ionic-angular';
+import { NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
-import { Market } from '@ionic-native/market';
+import { Market } from '@ionic-native/market/ngx';
 
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
 
-@IonicPage()
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
