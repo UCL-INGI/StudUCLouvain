@@ -19,19 +19,19 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'page-tuto',
-  templateUrl: 'tuto.html'
+  templateUrl: 'tuto.html',
+  styleUrls: ['./tuto.scss'],
 })
 export class TutoPage {
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     public splashscreen: SplashScreen
   ) {
   }

@@ -19,16 +19,15 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-tuto {
-  #slides {
-    background: map-get($colors, uclouvain) !important;
-  }
-
-  ion-slide img {
-    height: 50vh !important;
-  }
-
-  ion-slide p {
-    color: white;
-  }
+#slides {
+  background: var(--ion-color-uclouvain) !important;
 }
+
+ion-slide img {
+  height: 50vh !important;
+}
+
+ion-slide p {
+  color: white;
+}
+

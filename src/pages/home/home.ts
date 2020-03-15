@@ -24,13 +24,14 @@ import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { SettingsProvider } from "../../services/utils-services/settings-service";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  styleUrls: ['./home.scss'],
 })
 export class HomePage {
   @ViewChild('home', {static: false}) content: IonContent;
