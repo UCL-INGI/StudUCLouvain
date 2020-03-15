@@ -41,7 +41,7 @@ jobs:
         chrome: stable
 
       install:
-        - npm install -g ionic http-server
+        - npm install -g ionic firebase-tools
         - npm install
         - ionic info
 
