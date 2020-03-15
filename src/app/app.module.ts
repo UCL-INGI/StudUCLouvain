@@ -61,6 +61,9 @@ import { TutoPage } from "../pages/tuto/tuto";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from "./app-routing.module";
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+// import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -84,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true })
   ],
   bootstrap: [MyApp],
   providers: [
