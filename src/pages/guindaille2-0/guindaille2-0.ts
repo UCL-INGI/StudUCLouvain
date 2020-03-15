@@ -24,7 +24,7 @@ import { AlertController, ModalController, NavController, NavParams } from '@ion
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilsService } from "../../providers/utils-services/utils-service";
+import { UtilsService } from "../../services/utils-services/utils-service";
 
 @Component({
   selector: 'page-guindaille2-0',
