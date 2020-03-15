@@ -21,23 +21,23 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="support">
-    <button icon-only ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <img alt="Icon" height="28" src="./assets/img/s.png"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="support">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img height="28" src="./assets/img/s.png"/>
+        </ion-buttons>
+        <ion-title horizontal="center">{{title | translate}}</ion-title>
+    </ion-toolbar>
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="aide">
-      {{'HELP.SEGMENT2' | translate}}
+     <ion-label> {{'HELP.SEGMENT2' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="info">
-      {{'HELP.SEGMENT1' | translate}}
+      <ion-label>{{'HELP.SEGMENT1' | translate}}</ion-label>
     </ion-segment-button>
 
     <ion-segment-button value="tuto">
-      {{'HELP.SEGMENT3' | translate}}
+      <ion-label>{{'HELP.SEGMENT3' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -48,167 +48,156 @@
   <ng-container *ngIf="segment==='info'">
 
     <ion-item-divider (tap)="utilsService.toggleGroup('prob_app')">
-      {{'HELP.PROB' | translate}}
+      <ion-label>{{'HELP.PROB' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('prob_app')">
+      <ion-label>
       <div item-content>
         <p [innerHTML]="'HELP.TEXTP1' | translate"></p>
         <p><a href="mailto:studuclouvain@uclouvain.be">studuclouvain@uclouvain.be</a></p>
       </div>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('service_desk')">
-      {{'HELP.DESK' | translate}}
+      <ion-label>{{'HELP.DESK' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('service_desk')">
+      <ion-label>
       <div item-content>
         <p [innerHTML]="'HELP.TEXT1' | translate"></p>
         <p> {{'HELP.TEXT2' | translate}}</p>
         <p>{{'HELP.TEXT3' | translate}}</p>
         <p [innerHTML]="'HELP.TEXT4' | translate"></p>
       </div>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('smartcard')">
-      {{'HELP.CARD' | translate}}
+      <ion-label>{{'HELP.CARD' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('smartcard')">
+      <ion-label>
       <div item-content>
         <p>{{'HELP.TEXT5' | translate}}</p>
         <p [innerHTML]="'HELP.TEXT6' | translate"></p>
         <p><img alt="smartcard-recto" height="130" src="./assets/img/smartcard/smartcard-1.jpg" width="209"/>
           <img alt="smartcard-verso" height="129" src="./assets/img/smartcard/smartcard-2.jpg" width="209"/></p>
         <p [innerHTML]="'HELP.TEXT7' | translate"></p>
-        <button (tap)="openURL('https://uclouvain.be/fr/repertoires/entites/sper')"
-                ion-button>{{'HELP.TEXTBTN1' | translate}}</button>
+        <ion-button (tap)="openURL('https://uclouvain.be/fr/repertoires/entites/sper')">{{'HELP.TEXTBTN1' | translate}}</ion-button>
         .
         <p>{{'HELP.TEXT8' | translate}}
-          <button (tap)="openURL('http://www.uclouvain.be/inscription')"
-                  ion-button>{{'HELP.TEXTBTN2' | translate}}</button>
+          <ion-button (tap)="openURL('http://www.uclouvain.be/inscription')">{{'HELP.TEXTBTN2' | translate}}</ion-button>
           .
           <br/>{{'HELP.TEXT9' | translate}}
         </p>
         <p [innerHTML]="'HELP.TEXT10' | translate"></p>
-        <button (tap)="openURL('https://carte.uclouvain.be/carte/activation')"
-                ion-button>{{'HELP.TEXTBTN3' | translate}}</button>
+        <ion-button (tap)="openURL('https://carte.uclouvain.be/carte/activation')">{{'HELP.TEXTBTN3' | translate}}</ion-button>
         .
       </div>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('wifi')">
-      {{'HELP.WIFI' | translate}}
+      <ion-label>{{'HELP.WIFI' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('wifi')">
+      <ion-label>
       <div item-content>
         <p>{{'HELP.TEXT11' | translate}}</p>
         <h4 style="text-align: justify;">{{'HELP.TEXT12' | translate}}</h4>
         <p [innerHTML]="'HELP.TEXT13' | translate" style="text-align: justify;"></p>
         <h4 style="text-align: justify;">{{'HELP.TEXT14' | translate}}</h4>
         <p style="text-align: justify;">{{'HELP.TEXT15' | translate}}
-          <button (tap)="openURL('https://uclouvain.be/fr/decouvrir/wifi-eduroam.html')"
-                  ion-button>{{'HELP.TEXTBTN4' | translate}}</button>
+          <ion-button (tap)="openURL('https://uclouvain.be/fr/decouvrir/wifi-eduroam.html')">{{'HELP.TEXTBTN4' | translate}}</ion-button>
         </p>
         <h4 style="text-align: justify;">{{'HELP.TEXT16' | translate}}</h4>
         <p [innerHTML]="'HELP.TEXT17' | translate" style="text-align: justify;"></p>
         <p [innerHTML]="'HELP.TEXT18' | translate" style="text-align: justify;"></p>
-        <button
-          (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/eaabb465-8762-4e61-81fb-bf9ff97a3117/guide_rapide_config_WiFi_visiteurs.pdf?guest=true')"
-          ion-button>{{'HELP.GUIDE' | translate}}</button>
+        <ion-button
+          (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/eaabb465-8762-4e61-81fb-bf9ff97a3117/guide_rapide_config_WiFi_visiteurs.pdf?guest=true')">{{'HELP.GUIDE' | translate}}</ion-button>
         <br>
         <p>{{'HELP.TEXT19' | translate}}
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/e032a935-4cf5-41cd-91a8-228a8e611f89/guide_rapide_config_WiFi_etudiants.pdf?guest=true')"
-            ion-button>{{'HELP.GUIDE' | translate}}</button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/e032a935-4cf5-41cd-91a8-228a8e611f89/guide_rapide_config_WiFi_etudiants.pdf?guest=true')">{{'HELP.GUIDE' | translate}}</ion-button>
           <br>
 
           {{'HELP.TEXT20' | translate}}<br>
           - Windows Vista (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/2993993e-34b3-4273-bb7d-0cacd530c057/WiFi-WindowsVista-archives.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/2993993e-34b3-4273-bb7d-0cacd530c057/WiFi-WindowsVista-archives.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - Windows 7 : Windows 7 (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/4a246eb1-fdc8-44d4-bd2b-e0fc6927676a/UCL-Windows7.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/4a246eb1-fdc8-44d4-bd2b-e0fc6927676a/UCL-Windows7.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )
           {{'HELP.TEXT21' | translate}} (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/92b608b8-552d-421c-a24b-86928de16770/UCL-Windows7(alternative).pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/92b608b8-552d-421c-a24b-86928de16770/UCL-Windows7(alternative).pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - Windows 8 (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/025d5fd4-a5da-4e55-8a2b-bf169fa055c3/UCL-Windows8.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/025d5fd4-a5da-4e55-8a2b-bf169fa055c3/UCL-Windows8.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - {{'HELP.TEXT22' | translate}} (Windows) (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/733b2daa-1c9e-4ef2-b53d-e2ebf902e3dc/UCL-Windows8.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/733b2daa-1c9e-4ef2-b53d-e2ebf902e3dc/UCL-Windows8.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - Mac OS X : Tiger &amp; Panther (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/176331e0-74e6-4f08-83ac-70c540f14569/UCL-TigerPanther.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/176331e0-74e6-4f08-83ac-70c540f14569/UCL-TigerPanther.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           ),
           Léopard (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/60dabfc7-52a0-44ab-8649-66ea48909fef/UCL-TigerPanther.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/60dabfc7-52a0-44ab-8649-66ea48909fef/UCL-TigerPanther.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )
           {{'HELP.TEXT23' | translate}} (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/5318f676-6f33-4358-9c80-3381bd6f4699/UCL-TigerPanther.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/5318f676-6f33-4358-9c80-3381bd6f4699/UCL-TigerPanther.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - Linux : wpa_supplicant (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/bac993da-6d7f-45d4-9e47-4558044e9313/UCL-Linux_wpa_supplicant.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/bac993da-6d7f-45d4-9e47-4558044e9313/UCL-Linux_wpa_supplicant.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )
           {{'HELP.TEXT24' | translate}} Ubuntu (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/824d873b-bd79-49a0-9919-1373fd831c23/UCL-Ubuntu.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/824d873b-bd79-49a0-9919-1373fd831c23/UCL-Ubuntu.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - iPhone/iPad (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/efa8fa47-8ccd-4043-96bd-a8bb3903df32/UCL-iPodTouch.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/efa8fa47-8ccd-4043-96bd-a8bb3903df32/UCL-iPodTouch.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )<br>
           - Androîd (
-          <button
-            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/f855b037-b445-4f38-b344-a61dc0add440/UCL-Android.pdf?guest=true')"
-            ion-button>
+          <ion-button
+            (tap)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/f855b037-b445-4f38-b344-a61dc0add440/UCL-Android.pdf?guest=true')">
             pdf
-          </button>
+          </ion-button>
           )
         </p>
         <h4 style="text-align: justify;">{{'HELP.TEXT25' | translate}}</h4>
@@ -217,14 +206,14 @@
         <p [innerHTML]="'HELP.TEXT28' | translate" style="text-align: justify;"></p>
         <h4 style="text-align: justify;">{{'HELP.TEXT29' | translate}}</h4>
         <p style="text-align: justify;">
-          <button (tap)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')"
-                  ion-button>{{'HELP.TEXTBTN5' | translate}}</button>
+          <ion-button (tap)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')">{{'HELP.TEXTBTN5' | translate}}</ion-button>
         </p>
       </div>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('rep')" no-lines>
-      {{'HELP.REPERTOIRE' | translate}}
+      <ion-label>{{'HELP.REPERTOIRE' | translate}}<ion-label>
     </ion-item-divider>
 
     <ion-card [hidden]="!utilsService.isGroupShown('rep')">
@@ -241,15 +230,13 @@
         </ion-list>
         <ion-row center>
           <ion-col text-center>
-            <button (tap)="update()" ion-button round>{{'HELP.SEARCH' | translate}}</button>
+            <ion-button (tap)="update()" shape="round">{{'HELP.SEARCH' | translate}}</ion-button>
           </ion-col>
         </ion-row>
 
         <ion-list *ngIf="searching">
-          <ion-item *ngFor="let emp of employees">
-            <button (tap)="goToEmpDetails(emp)" ion-item no-lines>
-              {{emp.lastname}} {{emp.firstname}}
-            </button>
+          <ion-item *ngFor="let emp of employees" button (tap)="goToEmpDetails(emp)" no-lines>
+              <ion-label>{{emp.lastname}} {{emp.firstname}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>
@@ -259,10 +246,10 @@
   <!----------------SERVICES D AIDES ---------------------->
   <ng-container *ngIf="segment==='aide'">
     <h1><strong> {{'HELP.AIDE1' | translate}} </strong></h1>
-    <button (tap)="openURL('https://uclouvain.be/fr/etudier/aide')" clear icon-left ion-button small>
+    <ion-button (tap)="openURL('https://uclouvain.be/fr/etudier/aide')" fill="clear" slot="start" size="small">
       <ion-icon name='share-alt'></ion-icon>
       {{'HELP.WEB' | translate}}
-    </button>
+    </ion-button>
     <p>{{'HELP.AIDE2' | translate}}</p>
 
     <p>{{'HELP.AIDE3' | translate}}</p>
@@ -301,14 +288,15 @@
     </ion-card>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('socfi')">
-      <strong>{{'HELP.SOCFI' | translate}}</strong>
+      <ion-label><strong>{{'HELP.SOCFI' | translate}}</strong></ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('socfi')" text-wrap>
-      <button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')" clear icon-left ion-button small>
+      <ion-button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')" fill="clear" slot="start" size="small">
         <ion-icon name='share-alt'></ion-icon>
         {{'HELP.WEB' | translate}}
-      </button>
+      </ion-button>
+      <ion-label>
       <p>{{'HELP.AIDE12' | translate}}</p><br>
 
       <p [innerHTML]="'HELP.AIDE13' | translate"></p><br>
@@ -326,17 +314,19 @@
       <br>
 
       <p><strong>{{'HELP.AIDE20' | translate}}</strong></p>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('sante')">
-      <strong>{{'HELP.SANTE' | translate}}</strong>
+      <ion-label><strong>{{'HELP.SANTE' | translate}}</strong></ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('sante')" text-wrap>
-      <button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')" clear icon-left ion-button small>
+      <ion-button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')" fill="clear" slot="start" size="small">
         <ion-icon name='share-alt'></ion-icon>
         {{'HELP.WEB' | translate}}
-      </button>
+      </ion-button>
+      <ion-label>
       <p>{{'HELP.AIDE21' | translate}}</p><br>
       <p><strong>{{'HELP.AIDE22' | translate}}</strong></p>
       <p>{{'HELP.SANTE1' | translate}}</p><br>
@@ -352,38 +342,38 @@
       <p><strong>{{'HELP.AIDE24' | translate}}</strong></p>
       <p>{{'HELP.SANTE8' | translate}}</p><br>
       <p>{{'HELP.SANTE9' | translate}}</p>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (tap)="utilsService.toggleGroup('psyped')">
-      <strong>{{'HELP.PSYPED' | translate}}</strong>
+      <ion-label><strong>{{'HELP.PSYPED' | translate}}</strong></ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('psyped')" text-wrap>
-      <button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')" clear icon-left ion-button small>
+      <ion-button (tap)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')" fill="clear" slot="start" size="small">
         <ion-icon name='share-alt'></ion-icon>
         {{'HELP.WEB' | translate}}
-      </button>
+      </ion-button>
+      <ion-label>
       <p>{{'HELP.AIDE25' | translate}}</p><br>
       <p>{{'HELP.AIDE26' | translate}}</p><br>
       <p>{{'HELP.AIDE27' | translate}}</p><br>
       <p>{{'HELP.AIDE28' | translate}}</p>
+        </ion-label>
     </ion-item>
   </ng-container>
 
   <!----------------------------------------- TUTO ------------------------------------->
   <ng-container *ngIf="segment==='tuto'">
     <p style="text-align:center">
-      <button (tap)="openURL('https://www.youtube.com/watch?v=Mfy2y7mZ7-Y')"
-              ion-button>{{'HELP.TUTO3' | translate }}</button>
+      <ion-button (tap)="openURL('https://www.youtube.com/watch?v=Mfy2y7mZ7-Y')">{{'HELP.TUTO3' | translate }}</ion-button>
     </p>
     <h2 text-center><strong>{{'HELP.TUTOTITLE' | translate }}</strong></h2>
     <p style="text-align:center">
-      <button (tap)="openURL('https://www.youtube.com/watch?v=UVXpEP_0vnc')"
-              ion-button>{{'HELP.TUTO1' | translate }}</button>
+      <ion-button (tap)="openURL('https://www.youtube.com/watch?v=UVXpEP_0vnc')">{{'HELP.TUTO1' | translate }}</ion-button>
     </p>
     <p style="text-align:center">
-      <button (tap)="openURL('https://www.youtube.com/watch?v=k243CT-ylEU')"
-              ion-button>{{'HELP.TUTO2' | translate }}</button>
+      <ion-button (tap)="openURL('https://www.youtube.com/watch?v=k243CT-ylEU')">{{'HELP.TUTO2' | translate }}</ion-button>
     </p>
   </ng-container>
 

@@ -53,10 +53,10 @@
         <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
       </ion-col>
       <ion-col text-right>
-        <button (click)="openPage(libDetails.website)" *ngIf="libDetails.website" clear icon-left ion-button small>
+        <ion-button (click)="openPage(libDetails.website)" *ngIf="libDetails.website" fill="clear" slot="start" size="small">
           <ion-icon name='share-alt'></ion-icon>
           Website
-        </button>
+        </ion-button>
       </ion-col>
     </ion-row>
 
@@ -65,43 +65,51 @@
     </ion-row>
 
     <ion-item-divider (click)="utilsService.toggleGroup('opening_hours')">
-      {{'LIBRARY.HOUR' | translate}}
+      <ion-label>{{'LIBRARY.HOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('opening_hours')">
-      <p *ngFor="let timeSlot of libDetails.openingHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
+      <ion-label>
+        <p *ngFor="let timeSlot of libDetails.openingHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (click)="utilsService.toggleGroup('opening_examination_hours')">
-      {{'LIBRARY.EXAMHOUR' | translate}}
+      <ion-label>{{'LIBRARY.EXAMHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('opening_examination_hours')">
-      <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
+      <ion-label>
+        <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (click)="utilsService.toggleGroup('opening_summer_hours')">
-      {{'LIBRARY.SUMMERHOUR' | translate}}
+      <ion-label>{{'LIBRARY.SUMMERHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('opening_summer_hours')">
-      <p *ngFor="let timeSlot of libDetails.openingSummerHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
+      <ion-label>
+        <p *ngFor="let timeSlot of libDetails.openingSummerHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
+      </ion-label>
     </ion-item>
 
     <ion-item-divider (click)="utilsService.toggleGroup('closed_dates')">
-      {{'LIBRARY.CLOSED' | translate}}
+      <ion-label>{{'LIBRARY.CLOSED' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsService.isGroupShown('closed_dates')" text-wrap>
-      <p *ngFor="let cd of libDetails.closedDates">
-        {{cd.from}} - {{cd.to}} : {{cd.description}}
-      </p>
+      <ion-label>
+        <p *ngFor="let cd of libDetails.closedDates">
+          {{cd.from}} - {{cd.to}} : {{cd.description}}
+        </p>
+      </ion-label>
     </ion-item>
   </ion-card>
 </ion-content>

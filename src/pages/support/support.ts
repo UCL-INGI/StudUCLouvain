@@ -25,9 +25,9 @@ import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { EmployeeItem } from '../../app/entity/employeeItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { RepertoireService } from '../../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 import { NavigationExtras } from "@angular/router";
 
 @Component({

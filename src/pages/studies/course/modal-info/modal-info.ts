@@ -23,7 +23,7 @@ import { ModalController, NavController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
-import { StudentService } from '../../../../providers/wso2-services/student-service';
+import { StudentService } from '../../../../services/wso2-services/student-service';
 
 @Component({
   selector: 'page-modal-info',

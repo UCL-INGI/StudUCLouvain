@@ -25,8 +25,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 
 import { EmployeeItem } from '../../../app/entity/employeeItem';
-import { ConnectivityService } from '../../../providers/utils-services/connectivity-service';
-import { RepertoireService } from '../../../providers/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({

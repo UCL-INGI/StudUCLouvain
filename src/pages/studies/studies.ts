@@ -20,12 +20,12 @@ import { catchError } from 'rxjs/operators';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import {
-  AlertController,
-  MenuController,
-  ModalController,
-  NavController,
-  NavParams,
-  ToastController
+    AlertController,
+    MenuController,
+    ModalController,
+    NavController,
+    NavParams,
+    ToastController
 } from '@ionic/angular';
 
 import { Component } from '@angular/core';
@@ -34,11 +34,11 @@ import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../app/entity/adeProject';
 import { Course } from '../../app/entity/course';
-import { StudiesService } from '../../providers/studies-services/studies-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { StudentService } from '../../providers/wso2-services/student-service';
-import { Wso2Service } from '../../providers/wso2-services/wso2-service';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { NavigationExtras } from "@angular/router";
 
 @Component({

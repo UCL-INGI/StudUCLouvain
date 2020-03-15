@@ -23,9 +23,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="bibli">
-    <button icon-only ion-button menuToggle>
+    <ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-toolbar>
@@ -42,9 +42,11 @@
   </div>
   <ion-list>
     <ion-item *ngFor="let lib of libraries">
-      <button (tap)="utilsService.goToDetail('LibraryDetailsPage', lib)" ion-item no-lines>
-        {{lib.name}}
-      </button>
+      <ion-label>
+        <ion-button (tap)="utilsService.goToDetail('LibraryDetailsPage', lib)" no-lines>
+          {{lib.name}}
+        </ion-button>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

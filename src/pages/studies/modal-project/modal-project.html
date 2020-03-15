@@ -29,9 +29,9 @@
 
   <div text-center> {{'MODAL.PROJECT' | translate}} :</div>
   <ion-list>
-    <button (click)="closeModal(project)" *ngFor="let project of projects" ion-item>
-      <button full ion-button> {{project.name}} </button>
-    </button>
+    <ion-item button (click)="closeModal(project)" *ngFor="let project of projects">
+      <ion-label><ion-button expand="full"> {{project.name}} </ion-button></ion-label>
+    </ion-item>
   </ion-list>
 
 </ion-content>

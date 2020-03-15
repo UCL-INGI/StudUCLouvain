@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../../app/entity/adeProject';
-import { StudiesService } from '../../../providers/studies-services/studies-service';
+import { StudiesService } from '../../../services/studies-services/studies-service';
 
 @Component({
   selector: 'page-modal-project',

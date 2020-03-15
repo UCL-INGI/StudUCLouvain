@@ -22,10 +22,10 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-buttons end>
-    <button (tap)="closeModal()" end icon-only ion-button>
+  <ion-buttons slot="primary">
+    <ion-button (tap)="closeModal()" end icon-only>
       <ion-icon name="close"></ion-icon>
-    </button>
+    </ion-button>
   </ion-buttons>
 </ion-header>
 
@@ -54,6 +54,7 @@
         <ion-col><strong>Enseignants</strong></ion-col>
       </ion-row>
       <ion-item *ngIf="information?.prof">
+        <ion-label></ion-label>
         <ion-row *ngIf="information.prof.length >1">
           <ion-col *ngFor="let item of information?.prof">{{item.nom}} {{item.prenom}}</ion-col>
         </ion-row>
@@ -134,6 +135,7 @@
       <h2 class="break"><strong>Programmes le proposant </strong></h2>
 
       <ion-item *ngIf="information?.programmeprerequis && information.programmeprerequis.length > 1">
+        <ion-label></ion-label>
         <ion-row *ngFor="let item of information.programmeprerequis">
           <ion-col><strong style="white-space: pre-line;">{{item.intituleProgrammeCompletFr}}</strong></ion-col>
           <ion-col>{{item.sigleProgramme}}</ion-col>
@@ -141,6 +143,7 @@
         </ion-row>
       </ion-item>
       <ion-item *ngIf="!information?.programmeprerequis?.length">
+        <ion-label></ion-label>
         <ion-row>
           <ion-col><strong
             style="white-space: pre-line;">{{information?.programmeprerequis?.intituleProgrammeCompletFr}}</strong>

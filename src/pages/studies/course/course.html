@@ -23,27 +23,26 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="uclouvain">
-
     <ion-row>
       <ion-col>
         <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons (tap)="openModalInfo()" end>
-      <button end icon-only ion-button>
+    <ion-buttons (tap)="openModalInfo()" slot="primary">
+      <ion-button end icon-only>
         <ion-icon name="information-circle"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment (ionChange)="updateDisplayed()" [(ngModel)]="segment">
     <ion-segment-button value="Cours magistral">
-      {{'COURSE.CM' | translate}}
+      <ion-label>{{'COURSE.CM' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="TD">
-      {{'COURSE.TP' | translate}}
+      <ion-label>{{'COURSE.TP' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Examen">
-      {{'COURSE.EXAMEN' | translate}}
+      <ion-label>{{'COURSE.EXAMEN' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -54,41 +53,43 @@
     <ion-item-sliding #slidingItem *ngFor="let activity of displayedActi">
       <ion-item
         *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
+        <ion-label>
         <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
         <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
         <p>{{'COURSE.STUDENT' | translate}} :
-          <button (click)="utilsService.toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </button>
+          <ion-button (click)="utilsService.toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button>
         </p>
         <p [hidden]="!utilsService.isGroupShown(activity.start)" [innerHTML]="activity.students" style="display:inline">
         </p>
         <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
+      </ion-label>
       </ion-item>
 
-      <ion-item-options side="right">
-        <button (click)="addToCalendar(slidingItem, activity)" ion-button>
+      <ion-item-options side="end">
+        <ion-button (click)="addToCalendar(slidingItem, activity)">
           <ion-icon name="calendar"></ion-icon>
           {{'COURSE.CALENDAR' | translate}}
-        </button>
+        </ion-button>
       </ion-item-options>
     </ion-item-sliding>
 
   </ion-list>
   <ion-list-header
     *ngIf="(segment === 'TD' && noTP) || (segment === 'Cours magistral' && noCM) || (segment === 'Examen' && noEx)">
-    {{'COURSE.NO' | translate}}
+    <ion-label>{{'COURSE.NO' | translate}}</ion-label>
   </ion-list-header>
 
-  <ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" bottom right>
-    <button (tap)="showPrompt(segment)" ion-fab>
+  <ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (tap)="showPrompt(segment)">
       <ion-icon name="cut"></ion-icon>
-    </button>
+    </ion-fab-button>
   </ion-fab>
-  <ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" bottom left>
-    <button (tap)="addCourseToCalendar()" ion-fab>
+  <ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (tap)="addCourseToCalendar()">
       <ion-icon name="calendar"></ion-icon>
-    </button>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

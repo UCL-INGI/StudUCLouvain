@@ -25,9 +25,9 @@ import { CacheService } from 'ionic-cache';
 import { Component } from '@angular/core';
 
 import { LibraryItem } from '../../app/entity/libraryItem';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { LibrariesService } from '../../providers/wso2-services/libraries-service';
-import { UtilsService } from "../../providers/utils-services/utils-service";
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { LibrariesService } from '../../services/wso2-services/libraries-service';
+import { UtilsService } from "../../services/utils-services/utils-service";
 
 @Component({
   selector: 'page-libraries',

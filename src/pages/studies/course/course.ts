@@ -25,9 +25,9 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 
 import { Activity } from '../../../app/entity/activity';
 import { Course } from '../../../app/entity/course';
-import { CourseService } from '../../../providers/studies-services/course-service';
-import { UserService } from '../../../providers/utils-services/user-service';
-import { UtilsService } from '../../../providers/utils-services/utils-service';
+import { CourseService } from '../../../services/studies-services/course-service';
+import { UserService } from '../../../services/utils-services/user-service';
+import { UtilsService } from '../../../services/utils-services/utils-service';
 
 @Component({
   selector: 'page-course',
