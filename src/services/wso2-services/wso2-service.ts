@@ -23,11 +23,11 @@ export class Wso2Service {
 
   constructor(public http: HttpClient) {
     console.log("Starting WSO2 Provider");
-    this.getToken().subscribe(() => {
-          this.headers = new HttpHeaders({'Authorization': this.token});
-          this.headers.append('Accept', 'application/json');
-          // this.options = new RequestOptions({ headers: headers });
-        });
+    this.getToken().then(() => {
+      this.headers = new HttpHeaders({'Authorization': this.token});
+      this.headers.append('Accept', 'application/json');
+      // this.options = new RequestOptions({ headers: headers });
+    });
   }
 
   /*Load wso2 service*/
@@ -48,16 +48,15 @@ export class Wso2Service {
     // this.optionsToken = new RequestOptions({headers: headers});
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
-    return this.http.post(finalUrl, body, {headers: headers}).pipe(
-      map(res => {
+    return new Promise((resolve, reject) => {
+      this.http.post(finalUrl, body, {headers: headers}).subscribe(res => {
         this.token = 'Bearer ' + res['access_token'];
-
-        return 'OK';
-      }),
-      catchError((error: any) => {
+        resolve('OK');
+      }, error => {
         console.log('Token error');
-        return observableThrowError(error);
-      }),);
+        reject(error);
+      });
+    });
   }
 
   /*Log in the user*/
