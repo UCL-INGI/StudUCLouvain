@@ -23,7 +23,7 @@ import { NavParams } from '@ionic/angular';
 import { Component } from '@angular/core';
 import { Market } from '@ionic-native/market/ngx';
 
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
 
 @Component({
   selector: 'page-mobility',

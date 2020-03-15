@@ -23,8 +23,8 @@ import { ModalController, NavController, NavParams, Platform } from '@ionic/angu
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { MapLocation } from '../../app/entity/mapLocation';
-import { MapService } from '../../providers/map-services/map-service';
-import { POIService } from '../../providers/map-services/poi-service';
+import { MapService } from '../../services/map-services/map-service';
+import { POIService } from '../../services/map-services/poi-service';
 
 @Component({
   selector: 'page-map',
