@@ -13,7 +13,9 @@ import { wso2HeaderStudent } from '../../app/variables-config';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on services and Angular 2 DI.
 */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
@@ -44,14 +46,14 @@ export class Wso2Service {
     // this.optionsToken = new RequestOptions({headers: headers});
 
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
-    this.http.post(finalUrl, body, {headers: headers}).pipe(
+    return this.http.post(finalUrl, body, {headers: headers}).pipe(
       map(res => {
         this.token = 'Bearer ' + res['access_token'];
       })).subscribe(res => {
       return 'OK';
     }, error => {
       console.log('Token error');
-      error;
+      return error;
     });
   }
 

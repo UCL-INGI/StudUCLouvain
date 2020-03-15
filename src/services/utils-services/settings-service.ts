@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SettingsProvider {
 
   private theme: BehaviorSubject<string>;
