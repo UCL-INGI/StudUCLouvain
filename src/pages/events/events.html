@@ -28,7 +28,7 @@
     </ion-buttons>
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons slot="primary">
-      <ion-button (tap)="presentFilter()">
+      <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -53,7 +53,7 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD" [hidden]="shownEvents === 0">
 
-    <ion-item-divider (tap)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
+    <ion-item-divider (click)="utilsService.toggleGroup(item.weeks)" *ngIf="item.event.length > 0" text-center>
       <ion-label>
       <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks).from | date: 'dd/MM'}}
       &mdash; {{getRangeWeek(item.weeks).to | date: 'dd/MM'}}] ({{item.event.length}})
@@ -68,7 +68,7 @@
           <ion-label><ion-thumbnail item-left>
             <img [src]="event.iconCategory" alt="Event Category Picto">
           </ion-thumbnail></ion-label>
-          <ion-button (tap)="utilsService.goToDetail('EventsDetailsPage', event)">
+          <ion-button (click)="utilsService.goToDetail('EventsDetailsPage', event)">
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
@@ -77,16 +77,16 @@
         </ion-item>
 
         <ion-item-options>
-          <ion-button (tap)="createEvent(event)" class="large-icon" fill="outline">
+          <ion-button (click)="createEvent(event)" class="large-icon" fill="outline">
             <ion-icon name='calendar'></ion-icon>
           </ion-button>
 
-          <ion-button (tap)="utilsService.addFavorite(eventsList, event, 'EVENTS')" *ngIf="segment === 'all'"
+          <ion-button (click)="utilsService.addFavorite(eventsList, event, 'EVENTS')" *ngIf="segment === 'all'"
                   class="large-icon" fill="outline">
             <ion-icon name="star-outline="></ion-icon>
           </ion-button>
 
-          <ion-button (tap)="removeFavorite(event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+          <ion-button (click)="removeFavorite(event, 'Remove Favorite')" *ngIf="segment === 'favorites'"
                   class="large-icon">
             <ion-icon name='close'></ion-icon>
           </ion-button>

@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="secondary">
-      <ion-button (tap)="applyFilters(true, categories, results, dateRange)">{{'SPORTS.CANCEL' | translate}}</ion-button>
+      <ion-button (click)="applyFilters(true, categories, results, dateRange)">{{'SPORTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,7 +32,7 @@
       </ion-col>
     </ion-row>
     <ion-buttons slot="primary">
-      <ion-button (tap)="applyFilters(false, categories, results, dateRange)"
+      <ion-button (click)="applyFilters(false, categories, results, dateRange)"
               strong>{{'SPORTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -42,13 +42,13 @@
 <ion-content class="outer-content">
   <ion-toolbar color="uclouvain">
     <ion-buttons slot="start">
-      <ion-button (tap)="uncheckAll()" slot="end">
+      <ion-button (click)="uncheckAll()" slot="end">
         {{'SPORTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="primary">
-      <ion-button (tap)="resetFilters()" slot="end">
+      <ion-button (click)="resetFilters()" slot="end">
         {{'SPORTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
       </ion-button>

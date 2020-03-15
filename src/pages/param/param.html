@@ -32,8 +32,8 @@
 
 <!--BODY-->
 <ion-content padding>
-  <ion-button (tap)="language_choice()" expand="block" color="setting" shape="round">{{'SETTING.LANGUE' | translate }}</ion-button>
-  <ion-button (tap)="campus_choice()" expand="block" color="setting" shape="round">Campus</ion-button>
-  <ion-button (tap)="openTuto()" expand="block" color="setting" shape="round">{{'SETTING.TUTO' | translate }}</ion-button>
-  <ion-button (tap)="toggleAppTheme()" expand="block" color="setting" shape="round">Dark/Light mode</ion-button>
+  <ion-button (click)="language_choice()" expand="block" color="setting" shape="round">{{'SETTING.LANGUE' | translate }}</ion-button>
+  <ion-button (click)="campus_choice()" expand="block" color="setting" shape="round">Campus</ion-button>
+  <ion-button (click)="openTuto()" expand="block" color="setting" shape="round">{{'SETTING.TUTO' | translate }}</ion-button>
+  <ion-button (click)="toggleAppTheme()" expand="block" color="setting" shape="round">Dark/Light mode</ion-button>
 </ion-content>

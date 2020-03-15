@@ -54,15 +54,15 @@
     <ion-grid class="gelem" no-lines>
       <ion-row>
         <ion-col size="4">
-          <img (tap)="showAlert(alterner)" alt="alterner" height="auto"
+          <img (click)="showAlert(alterner)" alt="alterner" height="auto"
                src="./assets/img/guindaille/alterner.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(bruit)" alt="bruit" height="auto"
+          <img (click)="showAlert(bruit)" alt="bruit" height="auto"
                src="./assets/img/guindaille/Bruit-exterieur.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(eau)" alt="eau" height="auto"
+          <img (click)="showAlert(eau)" alt="eau" height="auto"
                src="./assets/img/guindaille/eau-gratuite.png"/>
         </ion-col>
       </ion-row>
@@ -70,30 +70,30 @@
 
       <ion-row>
         <ion-col size="4">
-          <img (tap)="showAlert(ou)" alt="ou" height="auto"
+          <img (click)="showAlert(ou)" alt="ou" height="auto"
                src="./assets/img/guindaille/jen-suis-ou.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(cans)" alt="cans" height="auto"
+          <img (click)="showAlert(cans)" alt="cans" height="auto"
                src="./assets/img/guindaille/no-cans-no-glass.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(preservatif)" alt="preservatif" height="auto"
+          <img (click)="showAlert(preservatif)" alt="preservatif" height="auto"
                src="./assets/img/guindaille/preservatif-jy-pense.png"/>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="4">
-          <img (tap)="showAlert(racompagner)" alt="racompagner" height="auto"
+          <img (click)="showAlert(racompagner)" alt="racompagner" height="auto"
                src="./assets/img/guindaille/racompagner.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(uriner)" alt="uriner" height="auto"
+          <img (click)="showAlert(uriner)" alt="uriner" height="auto"
                src="./assets/img/guindaille/uriner-dans-le-pot.png"/>
         </ion-col>
         <ion-col size="4">
-          <img (tap)="showAlert(dehors)" alt="urinerD" height="auto"
+          <img (click)="showAlert(dehors)" alt="urinerD" height="auto"
                src="./assets/img/guindaille/uriner-dehors.png"/>
         </ion-col>
       </ion-row>
@@ -101,7 +101,7 @@
 
       <ion-row>
         <ion-col size="4" offset="4">
-          <img (tap)="showAlert(violence)" alt="violence"
+          <img (click)="showAlert(violence)" alt="violence"
                src="./assets/img/guindaille/Violence-arrete-toi-avant.png"/>
         </ion-col>
       </ion-row>
@@ -120,7 +120,7 @@
     <ion-item class="gelem" no-lines>
       <ion-slides pager>
         <ion-slide *ngFor="let slide of slides">
-          <img (tap)="showAlert(slide)" [src]="slide.image" class="slide-image"/>
+          <img (click)="showAlert(slide)" [src]="slide.image" class="slide-image"/>
         </ion-slide>
       </ion-slides>
       <ion-label><p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p></ion-label>

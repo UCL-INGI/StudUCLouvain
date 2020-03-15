@@ -43,7 +43,7 @@
   <ion-list>
     <ion-item *ngFor="let lib of libraries">
       <ion-label>
-        <ion-button (tap)="utilsService.goToDetail('LibraryDetailsPage', lib)" no-lines>
+        <ion-button (click)="utilsService.goToDetail('LibraryDetailsPage', lib)" no-lines>
           {{lib.name}}
         </ion-button>
       </ion-label>

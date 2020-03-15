@@ -27,7 +27,7 @@
     <img alt="Icon" height="28" src="./assets/img/s.png"/>
     <ion-title align="center"><img alt="logo" height="40" src="./assets/img/logoSport.png"></ion-title>
     <ion-buttons slot="primary">
-      <ion-button (tap)="presentFilter()">
+      <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -54,7 +54,7 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider (tap)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
+    <ion-item-divider (click)="utilsService.toggleGroup(item.jour)" *ngIf="item.name.length > 0"
                       [ngClass]="{'team' : segment == 'team'}" class="all"
                       text-center>
       <ion-label>{{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})</ion-label>
@@ -76,15 +76,15 @@
         </ion-item>
 
         <ion-item-options side="end">
-          <ion-button (tap)="addToCalendar(sport)" class="large-icon">
+          <ion-button (click)="addToCalendar(sport)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
           </ion-button>
-          <ion-button (tap)="utilsService.addFavorite(sport, 'SPORTS')"
+          <ion-button (click)="utilsService.addFavorite(sport, 'SPORTS')"
                   *ngIf="segment === 'all' || segment === 'team'"
                   class="large-icon">
             <ion-icon name="star-outline="></ion-icon>
           </ion-button>
-          <ion-button (tap)="removeFavorite(sport, 'Remove Favorite')" *ngIf="segment === 'favorites'"
+          <ion-button (click)="removeFavorite(sport, 'Remove Favorite')" *ngIf="segment === 'favorites'"
                   class="large-icon">
             <ion-icon name='close'></ion-icon>
           </ion-button>
