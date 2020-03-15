@@ -92,7 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [MyApp],
   providers: [
-    ErrorHandler,
+    {provide: ErrorHandler, useClass: ErrorHandler},
     AppAvailability,
     ConnectivityService,
     CourseService,

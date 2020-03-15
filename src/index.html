@@ -10,24 +10,23 @@
   <meta content="telephone=no" name="format-detection">
   <meta content="no" name="msapplication-tap-highlight">
 
-  <link rel="apple-touch-icon" href="assets/imgs/logo.png">
   <link href="assets/icon/favicon.ico" rel="icon" type="image/x-icon">
-<!--  <link href="manifest.json" rel="manifest">-->
+  <!--  <link href="manifest.json" rel="manifest">-->
   <meta content="#4e8ef7" name="theme-color">
 
   <!-- cordova.js required for cordova apps -->
-  <script async="" src="cordova.js"></script>
+<!--  <script async src="cordova.js"></script>-->
 
   <!-- un-comment this code to enable service worker-->
-<!--  <script async>-->
-<!--    if ('serviceWorker' in navigator) {-->
-<!--      navigator.serviceWorker.register('service-worker.js')-->
-<!--        .then(() => console.log('service worker installed'))-->
-<!--        .catch(err => console.error('Error', err));-->
-<!--    }-->
-<!--  </script>-->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
+  </script>
 
-<!--  <link href="build/main.css" rel="stylesheet">-->
+  <link href="build/main.css" rel="stylesheet">
 
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
