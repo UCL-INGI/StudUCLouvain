@@ -58,12 +58,12 @@ export class UtilsService {
     console.log("Starting Utils Provider");
   }
 
-  presentLoading() {
+  async presentLoading() {
     if (!this.loading) {
-      this.loading = this.loadingCtrl.create({
+      this.loading = await this.loadingCtrl.create({
         message: 'Please wait...'
       });
-      this.loading.present();
+      return await this.loading.present();
     }
   }
 

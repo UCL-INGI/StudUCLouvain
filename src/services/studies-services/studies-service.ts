@@ -41,8 +41,8 @@ export class StudiesService {
     private utilsService: UtilsService
   ) {}
 
-  toastCourse(textKey: string) {
-    return this.toastCtrl.create({
+  async toastCourse(textKey: string) {
+    return await this.toastCtrl.create({
       message: this.utilsService.getText('STUDY', textKey),
       duration: 2000,
       position: 'middle'

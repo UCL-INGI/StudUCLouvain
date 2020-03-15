@@ -11,7 +11,7 @@ import { wso2HeaderStudent } from '../../app/variables-config';
   Generated class for the Wso2ServiceProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
+  for more info on services and Angular 2 DI.
 */
 @Injectable()
 export class Wso2Service {

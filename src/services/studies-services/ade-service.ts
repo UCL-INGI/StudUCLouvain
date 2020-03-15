@@ -21,7 +21,7 @@
 
 
 import { map } from 'rxjs/operators';
-import X2JS from 'x2js';
+import * as xml2js from 'xml2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -36,9 +36,22 @@ export class AdeService {
   constructor(public http: HttpClient) {
   }
 
+  convertXmlToJson(data: string): Object {
+    let res;
+    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
+      if (error) {
+        throw new Error(error);
+      } else {
+        res = result;
+      }
+    });
+    return res;
+  }
+
+
   load(url: string) {
     return this.http.get(url, {responseType: 'text'}).pipe(map(res => {
-      return new X2JS().xml2js(res);
+      return this.convertXmlToJson(res);
     }));
   }
 

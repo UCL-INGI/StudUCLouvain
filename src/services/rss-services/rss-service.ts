@@ -1,5 +1,5 @@
 import { map, timeout } from 'rxjs/operators';
-import X2JS from 'x2js';
+import * as xml2js from 'xml2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -33,8 +33,16 @@ export class RssService {
   constructor(public http: HttpClient) {
   }
 
-  convertXmlToJson(xml): any {
-    return new X2JS().xml2js(xml);
+  convertXmlToJson(data: string): Object {
+    let res;
+    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
+      if (error) {
+        throw new Error(error);
+      } else {
+        res = result;
+      }
+    });
+    return res;
   }
 
   load(url: string, isSport: boolean = false) {
