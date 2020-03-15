@@ -230,16 +230,14 @@ export class UtilsService {
     }
     return await toast.present();
   }
+
   convertXmlToJson(data: string): Object {
-    let res;
-    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
+    return xml2js.parseString(data, {explicitArray: false}, (error, result) => {
       if (error) {
         throw new Error(error);
-      } else {
-        res = result;
       }
+      return result;
     });
-    return res;
   }
 
 }
