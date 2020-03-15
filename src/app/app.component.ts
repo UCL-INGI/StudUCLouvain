@@ -81,7 +81,6 @@ export class MyApp {
     this.initializeApp();
     this.getPages();
     platform.ready().then(() => {
-      this.wso2Service.getToken();
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then(data => {
         translateService.use(data !== null ? data : 'fr');

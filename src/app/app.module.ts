@@ -59,7 +59,6 @@ import { SettingsProvider } from "../services/utils-services/settings-service";
 import { HomePage } from "../pages/home/home";
 import { TutoPage } from "../pages/tuto/tuto";
 import { FormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from "./app-routing.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -79,7 +78,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicStorageModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
-    CommonModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {

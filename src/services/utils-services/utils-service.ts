@@ -39,7 +39,9 @@ import { Page } from "../../app/entity/page";
 import { NavigationExtras } from "@angular/router";
 import * as xml2js from 'xml2js';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UtilsService {
   loading: any;
   shownGroup = null;

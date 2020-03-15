@@ -66,8 +66,10 @@ export class HomePage {
     private utilsService: UtilsService,
     private settings: SettingsProvider
   ) {
+        console.log("start home constructor", this.selectedTheme);
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     document.title = this.title;
+    console.log("end home constructor", this.selectedTheme);
     // this.userS.addCampus('');
   }
 
