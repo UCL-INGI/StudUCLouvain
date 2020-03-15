@@ -1,8 +1,8 @@
 import { map, timeout } from 'rxjs/operators';
-import * as xml2js from 'xml2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UtilsService } from "../utils-services/utils-service";
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -30,25 +30,13 @@ export class RssService {
   nbCalls = 0;
   callLimit = 30;
 
-  constructor(public http: HttpClient) {
-  }
-
-  convertXmlToJson(data: string): Object {
-    let res;
-    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
-      if (error) {
-        throw new Error(error);
-      } else {
-        res = result;
-      }
-    });
-    return res;
+  constructor(public http: HttpClient, private utilsService: UtilsService) {
   }
 
   load(url: string, isSport: boolean = false) {
     return new Promise((resolve, reject) => {
       this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
-        map(data => this.convertXmlToJson(data)),).subscribe(result => {
+        map(data => this.utilsService.convertXmlToJson(data)),).subscribe(result => {
           this.nbCalls++;
           if (isSport) {
             result = result['xml'];

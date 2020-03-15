@@ -19,12 +19,11 @@
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 import { map } from 'rxjs/operators';
-import * as xml2js from 'xml2js';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UtilsService } from "../utils-services/utils-service";
 
 @Injectable()
 export class AdeService {
@@ -33,25 +32,12 @@ export class AdeService {
   AdeServiceGetProjects = '&function=getProjects&detail=2';
   AdeUrlWithSessionId = 'http://horaire.uclouvain.be/jsp/webapi?' + 'sessionId=';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private utilsService: UtilsService) {
   }
-
-  convertXmlToJson(data: string): Object {
-    let res;
-    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
-      if (error) {
-        throw new Error(error);
-      } else {
-        res = result;
-      }
-    });
-    return res;
-  }
-
 
   load(url: string) {
     return this.http.get(url, {responseType: 'text'}).pipe(map(res => {
-      return this.convertXmlToJson(res);
+      return this.utilsService.convertXmlToJson(res);
     }));
   }
 

@@ -37,6 +37,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from './user-service';
 import { Page } from "../../app/entity/page";
 import { NavigationExtras } from "@angular/router";
+import * as xml2js from 'xml2js';
 
 @Injectable()
 export class UtilsService {
@@ -227,7 +228,18 @@ export class UtilsService {
     if (slidingItem !== undefined) {
       await slidingItem.close();
     }
-    // .then() ?
     return await toast.present();
   }
+  convertXmlToJson(data: string): Object {
+    let res;
+    xml2js.parseString(data, {explicitArray: false}, (error, result) => {
+      if (error) {
+        throw new Error(error);
+      } else {
+        res = result;
+      }
+    });
+    return res;
+  }
+
 }
