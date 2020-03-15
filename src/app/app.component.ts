@@ -32,10 +32,6 @@ import {
 import { CacheService } from 'ionic-cache';
 
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../services/utils-services/user-service';
@@ -52,7 +48,6 @@ import { UtilsService } from "../services/utils-services/utils-service";
 export class MyApp {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   selectedTheme: string;
-  rootPage = ''; // = 'HomePage';
   alertPresented: any;
   page: any;
   homePage;
@@ -66,10 +61,6 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public menu: MenuController,
-    public market: Market,
-    private appAvailability: AppAvailability,
-    private iab: InAppBrowser,
-    private device: Device,
     private alertCtrl: AlertController,
     private router: Router,
     private user: UserService,
