@@ -82,7 +82,7 @@ export class LibrariesService {
     if (data.mapLocation == null) {
       lib.mapLocation = new MapLocation(lib.name, '', '', '', '');
     } else {
-      lib.mapLocation = new MapLocation(lib.name, data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality, '', '', ''); // TODO update maplocation with lat lng code
+      lib.mapLocation = new MapLocation(lib.name, data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality, '', '', '');
     }
 
     this.getContactDatas(data, lib);

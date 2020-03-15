@@ -215,7 +215,6 @@ export class UtilsService {
         items: item
       }
     };
-    // FIXME: Improve
     this.navCtrl.navigateForward([page], navigationExtras);
   }
 
@@ -239,5 +238,4 @@ export class UtilsService {
       return result;
     });
   }
-
 }
