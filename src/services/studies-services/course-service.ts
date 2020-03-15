@@ -41,8 +41,8 @@ export class CourseService {
 
   getPromise(isActivity: boolean, sessionId, filterField) {
     const extractMethod = isActivity ? this.extractActivity : this.extractCourseId;
-    return new Promise<any>((resolve) => {
-      this.ade.get(isActivity, sessionId, filterField).subscribe(data => extractMethod(data));
+    return this.ade.get(isActivity, sessionId, filterField).then(data => {
+      return extractMethod(data);
     });
   }
 

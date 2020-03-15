@@ -29,7 +29,7 @@ import { UtilsService } from '../../services/utils-services/utils-service';
 import { SettingsProvider } from "../../services/utils-services/settings-service";
 
 @Component({
-  selector: 'page-home',
+  selector: 'app-home',
   templateUrl: 'home.html',
   styleUrls: ['./home.scss'],
 })
@@ -85,7 +85,7 @@ export class HomePage {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsService.launchExternalApp(page);
     } else {
-      this.nav.navigateForward([page.component]);
+      this.nav.navigateForward(['/' + page.component]);
     }
   }
 

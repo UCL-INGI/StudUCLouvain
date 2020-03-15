@@ -50,14 +50,12 @@ export class StudiesService {
   }
 
   openSession() {
-    return new Promise<string>((resolve) => {
-      this.ade.httpOpenSession().subscribe((data: any) => resolve(data.session._id));
-    });
+      return this.ade.httpOpenSession().then((data: any) => data.session._id);
   }
 
   getProjects(sessionId: string) {
     return new Promise((resolve) => {
-      this.ade.httpGetProjects(sessionId).subscribe(data => resolve(this.extractAdeProjects(data)));
+      this.ade.httpGetProjects(sessionId).then(data => this.extractAdeProjects(data));
     });
   }
 
@@ -81,7 +79,7 @@ export class StudiesService {
 
   setProject(sessionId: string, projectId: string) {
     return new Promise((resolve) => {
-      this.ade.httpSetProject(sessionId, projectId).subscribe(data => resolve(data));
+      this.ade.httpSetProject(sessionId, projectId).then(data => data);
     });
   }
 }
