@@ -36,9 +36,12 @@ export class AdeService {
   }
 
   load(url: string) {
-    return this.http.get(url, {responseType: 'text'}).pipe(map(res => {
-      return this.utilsService.convertXmlToJson(res);
-    }));
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {responseType: 'text'}).pipe(
+        map(res => this.utilsService.convertXmlToJson(res))).subscribe(result => {
+        resolve(result);
+      })
+    });
   }
 
   httpGetCourseId(sessionId: string, acronym: string) {
