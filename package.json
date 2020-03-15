@@ -54,8 +54,7 @@
     "ionicons": "^5.0.1",
     "rxjs": "^6.5.4",
     "sw-toolbox": "^3.6.0",
-    "webpack": "^4.42.0",
-    "x2js": "^3.4.0",
+    "timers": "^0.1.1",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
