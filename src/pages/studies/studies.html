@@ -114,7 +114,6 @@
         <ion-item-sliding #slidingItem>
           <ion-item>
             <ion-label>{{activity.sigle}}</ion-label>
-            <!-- - {{activity.name}}-->
           </ion-item>
           <ion-item-options>
             <ion-button (click)="addCourseFromProgram(activity.sigle)" class="large-icon" fill="outline">
@@ -125,10 +124,7 @@
       </ion-list>
       <p *ngIf="activities.length <= 0">{{'STUDY.NO' | translate}}</p>
     </ion-list>
-
   </ng-container>
-
-
 </ion-content>
 
 <!-------------------------------- BUTTON TO ADD COURSE ---------------------------------------------------->

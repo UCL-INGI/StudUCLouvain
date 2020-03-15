@@ -18,16 +18,27 @@
     You should have received a copy of the GNU General Public License
     along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#slides {
+ion-slides {
   background: var(--ion-color-uclouvain) !important;
-}
+  height: 100%;
 
-ion-slide img {
-  height: 50vh !important;
-}
+  ion-slide {
+    height: 100%;
 
-ion-slide p {
-  color: white;
-}
+    ion-row {
+      justify-content: center;
 
+      p {
+        color: white;
+      }
+
+      img {
+        height: 70vh;
+      }
+
+      .descr p {
+        height: 20vh;
+      }
+    }
+  }
+}
