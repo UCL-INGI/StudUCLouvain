@@ -112,7 +112,7 @@
       <ion-label>{{'MAP.SERV' | translate}}</ion-label>
     </ion-item-divider>
 
-    <ion-button *ngFor="let service of zone.services.list, let i=index" [hidden]="!zone.services.showDetails">
+    <ion-item *ngFor="let service of zone.services.list, let i=index" [hidden]="!zone.services.showDetails">
       <ion-label>
         <ion-button (tap)="toggleLocation(service, zone.services.listChecked, i)">
           <h3>{{service.title}}</h3>
