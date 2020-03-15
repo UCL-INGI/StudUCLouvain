@@ -37,8 +37,8 @@ import {
   UserServiceMock,
   Wso2ServiceMock
 } from '../../test-config/mocks-ionic';
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { UserService } from '../services/utils-services/user-service';
+import { Wso2Service } from '../services/wso2-services/wso2-service';
 import { MyApp } from './app.component';
 
 class IonicAppMock {

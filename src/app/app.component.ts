@@ -38,15 +38,15 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
-import { HomePage } from '../pages/home/home';
-import { UserService } from '../providers/utils-services/user-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { UserService } from '../services/utils-services/user-service';
+import { Wso2Service } from '../services/wso2-services/wso2-service';
 import { Page } from "./entity/page";
-import { SettingsProvider } from "../providers/utils-services/settings-service";
+import { SettingsProvider } from "../services/utils-services/settings-service";
 import { NavigationExtras, Router } from "@angular/router";
-import { UtilsService } from "../providers/utils-services/utils-service";
+import { UtilsService } from "../services/utils-services/utils-service";
 
 @Component({
+  selector: 'app-root',
   templateUrl: 'app.html'
 })
 export class MyApp {
@@ -98,12 +98,12 @@ export class MyApp {
       cache.setDefaultTTL(60 * 60 * 2);
       cache.setOfflineInvalidate(false);
       // this.user.storage.set('first',null);
-      this.user.storage.get('first').then(data => {
+      this.user.storage.get('first').then((data) => {
         if (data === null) {
-          this.rootPage = 'TutoPage';
+          this.nav.navigateForward('/tutos');
           this.user.storage.set('first', false);
         } else {
-          this.rootPage = 'HomePage';
+          this.nav.navigateForward('/');
         }
       });
     });

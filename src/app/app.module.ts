@@ -37,29 +37,30 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { MapService } from '../providers/map-services/map-service';
-import { POIService } from '../providers/map-services/poi-service';
-import { EventsService } from '../providers/rss-services/events-service';
-import { NewsService } from '../providers/rss-services/news-service';
-import { RssService } from '../providers/rss-services/rss-service';
-import { SportsService } from '../providers/rss-services/sports-service';
-import { AdeService } from '../providers/studies-services/ade-service';
-import { CourseService } from '../providers/studies-services/course-service';
-import { StudiesService } from '../providers/studies-services/studies-service';
-import { ConnectivityService } from '../providers/utils-services/connectivity-service';
-import { FacService } from '../providers/utils-services/fac-service';
-import { UserService } from '../providers/utils-services/user-service';
-import { UtilsService } from '../providers/utils-services/utils-service';
-import { LibrariesService } from '../providers/wso2-services/libraries-service';
-import { RepertoireService } from '../providers/wso2-services/repertoire-service';
-import { StudentService } from '../providers/wso2-services/student-service';
-import { Wso2Service } from '../providers/wso2-services/wso2-service';
+import { MapService } from '../services/map-services/map-service';
+import { POIService } from '../services/map-services/poi-service';
+import { EventsService } from '../services/rss-services/events-service';
+import { NewsService } from '../services/rss-services/news-service';
+import { RssService } from '../services/rss-services/rss-service';
+import { SportsService } from '../services/rss-services/sports-service';
+import { AdeService } from '../services/studies-services/ade-service';
+import { CourseService } from '../services/studies-services/course-service';
+import { StudiesService } from '../services/studies-services/studies-service';
+import { ConnectivityService } from '../services/utils-services/connectivity-service';
+import { FacService } from '../services/utils-services/fac-service';
+import { UserService } from '../services/utils-services/user-service';
+import { UtilsService } from '../services/utils-services/utils-service';
+import { LibrariesService } from '../services/wso2-services/libraries-service';
+import { RepertoireService } from '../services/wso2-services/repertoire-service';
+import { StudentService } from '../services/wso2-services/student-service';
+import { Wso2Service } from '../services/wso2-services/wso2-service';
 import { MyApp } from './app.component';
-import { SettingsProvider } from "../providers/utils-services/settings-service";
+import { SettingsProvider } from "../services/utils-services/settings-service";
 import { HomePage } from "../pages/home/home";
 import { TutoPage } from "../pages/tuto/tuto";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { AppRoutingModule } from "./app-routing.module";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CacheModule.forRoot({keyPrefix: 'UCL-cache'}),
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    AppRoutingModule,
     CommonModule,
     FormsModule,
     TranslateModule.forRoot({
