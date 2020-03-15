@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="event" secondary>
-    <button ion-button menuToggle>
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <ion-title>{{event.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -33,7 +33,7 @@
   <ion-card>
     <ion-card-content>
       <ion-row>
-        <ion-col *ngIf="event.image !== undefined && event.image.length > 0" col-4>
+        <ion-col *ngIf="event.image !== undefined && event.image.length > 0" size="4">
           <img alt="Event Picture" src="{{event.image}}" style="float:left; margin-right: 5px;"/>
         </ion-col>
         <ion-col>
@@ -43,18 +43,17 @@
     </ion-card-content>
     <ion-row no-padding>
       <ion-col text-right>
-        <button (click)="addFavorite(event)" clear icon-left ion-button small>
+        <ion-button (click)="addFavorite(event)" fill="clear" slot="start" size="small">
           <ion-icon name='star'></ion-icon>
           {{'EVENTS.FAV' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
       <ion-col text-right>
-        <button (click)="openPage(event.link)" clear icon-left ion-button small>
+        <ion-button (click)="openPage(event.link)" fill="clear" slot="start" size="small">
           <ion-icon name='share-alt'></ion-icon>
           {{'EVENTS.SITE' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
     </ion-row>
-
   </ion-card>
 </ion-content>

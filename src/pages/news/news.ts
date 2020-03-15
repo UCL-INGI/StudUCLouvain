@@ -7,11 +7,11 @@ import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { NewsItem } from '../../app/entity/newsItem';
-import { NewsService } from '../../providers/rss-services/news-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { FacService } from '../../providers/utils-services/fac-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
+import { NewsService } from '../../services/rss-services/news-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { FacService } from '../../services/utils-services/fac-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved

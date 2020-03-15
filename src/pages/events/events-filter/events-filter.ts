@@ -23,8 +23,8 @@ import { ModalController, NavParams } from '@ionic/angular';
 
 import { Component } from '@angular/core';
 
-import { EventsService } from '../../../providers/rss-services/events-service';
-import { UtilsService } from "../../../providers/utils-services/utils-service";
+import { EventsService } from '../../../services/rss-services/events-service';
+import { UtilsService } from "../../../services/utils-services/utils-service";
 
 @Component({
   selector: 'page-events-filter',

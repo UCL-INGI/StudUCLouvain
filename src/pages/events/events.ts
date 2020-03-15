@@ -8,11 +8,11 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../app/entity/eventItem';
-import { EventsService } from '../../providers/rss-services/events-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { EventsService } from '../../services/rss-services/events-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { SettingsProvider } from "../../services/utils-services/settings-service";
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -37,7 +37,8 @@ import { SettingsProvider } from "../../providers/utils-services/settings-servic
 
 @Component({
   selector: 'page-events',
-  templateUrl: 'events.html'
+  templateUrl: 'events.html',
+  styleUrls: ['./events.scss'],
 })
 export class EventsPage {
   @ViewChild('eventsList', {read: IonList, static: false}) eventsList: IonList;

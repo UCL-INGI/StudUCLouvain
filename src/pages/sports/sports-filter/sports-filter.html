@@ -21,9 +21,8 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar>
-    <ion-buttons start>
-      <button (tap)="applyFilters(true, categories, results, dateRange)"
-              ion-button>{{'SPORTS.CANCEL' | translate}}</button>
+    <ion-buttons slot="secondary">
+      <ion-button (tap)="applyFilters(true, categories, results, dateRange)">{{'SPORTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
     <ion-row>
       <ion-col>
@@ -32,39 +31,34 @@
         </ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end>
-      <button (tap)="applyFilters(false, categories, results, dateRange)" ion-button
-              strong>{{'SPORTS.APPLY' | translate}}</button>
+    <ion-buttons slot="primary">
+      <ion-button (tap)="applyFilters(false, categories, results, dateRange)"
+              strong>{{'SPORTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="outer-content">
-
   <ion-toolbar color="uclouvain">
-    <ion-buttons left>
-      <button (tap)="uncheckAll()" end icon-right ion-button>
+    <ion-buttons slot="start">
+      <ion-button (tap)="uncheckAll()" slot="end">
         {{'SPORTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
-    <ion-buttons end>
-      <button (tap)="resetFilters()" icon-right ion-button>
+    <ion-buttons slot="primary">
+      <ion-button (tap)="resetFilters()" slot="end">
         {{'SPORTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-list>
-    <ion-list-header>{{'SPORTS.SPORTS' | translate}}</ion-list-header>
-
+    <ion-list-header><ion-label>{{'SPORTS.SPORTS' | translate}}</ion-label></ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-label>{{category.name}}</ion-label>
       <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
     </ion-item>
-
   </ion-list>
-
-
 </ion-content>

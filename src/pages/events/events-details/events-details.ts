@@ -25,8 +25,8 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../../app/entity/eventItem';
-import { UserService } from '../../../providers/utils-services/user-service';
-import { UtilsService } from "../../../providers/utils-services/utils-service";
+import { UserService } from '../../../services/utils-services/user-service';
+import { UtilsService } from "../../../services/utils-services/utils-service";
 
 @Component({
   selector: 'page-events-details',

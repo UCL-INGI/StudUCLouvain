@@ -30,11 +30,11 @@ import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
 
 import { SportItem } from '../../app/entity/sportItem';
-import { SportsService } from '../../providers/rss-services/sports-service';
-import { ConnectivityService } from '../../providers/utils-services/connectivity-service';
-import { UserService } from '../../providers/utils-services/user-service';
-import { UtilsService } from '../../providers/utils-services/utils-service';
-import { SettingsProvider } from "../../providers/utils-services/settings-service";
+import { SportsService } from '../../services/rss-services/sports-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-service';
+import { SettingsProvider } from "../../services/utils-services/settings-service";
 import { SportsFilterPage } from "./sports-filter/sports-filter";
 
 @Component({
